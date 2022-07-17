@@ -302,13 +302,8 @@
 				DA28D7AC284FFD9500EA1B94 /* Host.storyboard in Resources */,
 				A1E3DDB32880EFC1008D7060 /* GameManagerCollectionViewCell.xib in Resources */,
 				DA28D797284FF9CE00EA1B94 /* Main.storyboard in Resources */,
-<<<<<<< HEAD
-
 				FC40F65C285AAC07003621B1 /* Dosis in Resources */,
-
-=======
 				FC40F65C285AAC07003621B1 /* Dosis in Resources */,
->>>>>>> aca43bef6dcaa72d7337a9ee7273f0f78ca68a94
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
