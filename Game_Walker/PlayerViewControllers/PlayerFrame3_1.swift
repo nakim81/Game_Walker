@@ -91,11 +91,7 @@ extension PlayerFrame3_1: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? IconCollectionViewCell else { return }
         
         cell.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-<<<<<<< HEAD
-        cell.layer.borderWidth = 1
-=======
         cell.layer.borderWidth = 5
->>>>>>> b63cdbd (changed)
         selectedIconName = cell.imageName
         
         collectionView.deselectItem(at: indexPath, animated: true)
