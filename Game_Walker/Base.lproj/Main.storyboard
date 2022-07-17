@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQ3-DA-Yqf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Typography 1" translatesAutoresizingMaskIntoConstraints="NO" id="h4J-RS-OY5">
+                                <rect key="frame" x="68" y="153" width="278" height="171"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-VN-j8k">
+                                <rect key="frame" x="72.5" y="440.5" width="269" height="292.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15D-kC-3Ti">
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="80.5"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="player button 2 1"/>
+                                        <connections>
+                                            <segue destination="4v7-Xy-ueZ" kind="show" id="W9i-6a-Acf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tL-zp-Xl0">
+                                        <rect key="frame" x="0.0" y="105.5" width="269" height="81"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="Referee button2 1"/>
+                                        <connections>
+                                            <segue destination="277-9Q-Dbb" kind="show" id="jeg-c1-e63"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHc-CG-zIU">
+                                        <rect key="frame" x="0.0" y="211.5" width="269" height="81"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="Host button 2 1"/>
+                                        <connections>
+                                            <action selector="hostButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="orM-m7-A1w"/>
+                                            <segue destination="GeJ-fL-EuW" kind="show" id="pte-cV-bqH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3tL-zp-Xl0" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="4nr-mF-TbD"/>
+                                    <constraint firstItem="fHc-CG-zIU" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="H4U-qd-FNz"/>
+                                    <constraint firstItem="15D-kC-3Ti" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="JfT-YR-kF2"/>
+                                    <constraint firstItem="3tL-zp-Xl0" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="XwE-RX-yle"/>
+                                    <constraint firstItem="15D-kC-3Ti" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="Zvw-2I-Rq2"/>
+                                    <constraint firstItem="fHc-CG-zIU" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="c3w-st-LfH"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="h4J-RS-OY5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.502" id="6C3-9A-NHV"/>
+                            <constraint firstItem="h4J-RS-OY5" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.671498" id="6Dc-wd-Zpa"/>
+                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.377751" id="BCA-BV-SGE"/>
+                            <constraint firstItem="h4J-RS-OY5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="H8A-i2-aq4"/>
+                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.649758" id="L7m-XJ-XkV"/>
+                            <constraint firstItem="h4J-RS-OY5" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.221271" id="VSP-jP-jeV"/>
+                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.235" id="aCd-9a-coZ"/>
+                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="r7i-kk-dIt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Nj-Y1-Ljk">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Xa0-E4-gir"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="playerButton" destination="15D-kC-3Ti" id="UOf-Su-nZP"/>
+                        <outlet property="refereeButton" destination="3tL-zp-Xl0" id="ret-EI-iAo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="928.98550724637687" y="97.767857142857139"/>
+        </scene>
+        <!--PlayerFrame1VC-->
+        <scene sceneID="zBc-QC-LMc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Player" referencedIdentifier="PlayerFrame1VC" id="4v7-Xy-ueZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="owN-Xm-MZ6"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngP-pW-X0M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1573.913043478261" y="-54.241071428571423"/>
+        </scene>
+        <!--RefereeFrame1VC-->
+        <scene sceneID="XXa-u5-14M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Referee" referencedIdentifier="RefereeFrame1VC" id="277-9Q-Dbb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8b4-SS-lYZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ld6-bL-EY5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1579.7101449275362" y="97.767857142857139"/>
+        </scene>
+        <!--HostFrame1VC-->
+        <scene sceneID="SlY-7I-0FL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Host" referencedIdentifier="HostFrame1VC" id="GeJ-fL-EuW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4wN-zn-wiQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6R5-Af-sHL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566.6666666666667" y="245.75892857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vjI-4E-hdx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LQ3-DA-Yqf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="back button 1" backIndicatorTransitionMaskImage="back button 1" id="yAx-GW-eKb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Wnp-nP-Fcb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Oc-I9-8l2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="97.767857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Host button 2 1" width="245" height="79"/>
+        <image name="Referee button2 1" width="245" height="79"/>
+        <image name="Typography 1" width="278" height="181"/>
+        <image name="back button 1" width="54" height="31"/>
+        <image name="player button 2 1" width="245" height="79"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
