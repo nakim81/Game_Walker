@@ -303,6 +303,9 @@
 				A1E3DDB32880EFC1008D7060 /* GameManagerCollectionViewCell.xib in Resources */,
 				DA28D797284FF9CE00EA1B94 /* Main.storyboard in Resources */,
 				FC40F65C285AAC07003621B1 /* Dosis in Resources */,
+
+				FC40F65C285AAC07003621B1 /* Dosis in Resources */,
+
 				FC40F65C285AAC07003621B1 /* Dosis in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
