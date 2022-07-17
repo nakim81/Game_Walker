@@ -8,13 +8,13 @@
 import Foundation
 
 struct Referee : Codable, Equatable {
-    var gamecode : String = ""
     var name : String = ""
+    var gamecode : String = ""
     var station : Station
     
     enum CodingKeys: String, CodingKey {
-        case gamecode
         case name
+        case gamecode
         case station
     }
     

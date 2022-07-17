@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5A9C93DAED6DBFAD5F7BCB4 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 567E1D0699F167A55A484AEF /* Pods_Game_Walker.framework */; };
 		A1D8CAC228811EEF005CCE0E /* StationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8CAC028811EEF005CCE0E /* StationTableViewCell.swift */; };
 		A1D8CAC328811EEF005CCE0E /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1D8CAC128811EEF005CCE0E /* StationTableViewCell.xib */; };
 		A1D8CAC728812201005CCE0E /* HostStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D8CAC628812201005CCE0E /* HostStationsViewController.swift */; };
@@ -40,7 +41,8 @@
 		FC2828D5285A93FA009BB87F /* PlayerFrame2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2828D4285A93FA009BB87F /* PlayerFrame2.swift */; };
 		FC4054AE285BFBC9000DD822 /* PlayerFrame3_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4054AD285BFBC9000DD822 /* PlayerFrame3_1.swift */; };
 		FC4054B0285BFBED000DD822 /* PlayerFrame3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4054AF285BFBED000DD822 /* PlayerFrame3_2.swift */; };
-		FC40F65C285AAC07003621B1 /* Dosis in Resources */ = {isa = PBXBuildFile; fileRef = FC5FE0CB285AA7B300446FC2 /* Dosis */; };
+		FC507EC6287CF0BD00555AD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC507EC5287CF0BD00555AD2 /* BaseViewController.swift */; };
+		FC507EC8287CF19A00555AD2 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC507EC7287CF19A00555AD2 /* UIViewController+Keyboard.swift */; };
 		FCCE97FA285D4EFB0010D4CB /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCE97F8285D4EFB0010D4CB /* IconCollectionViewCell.swift */; };
 		FCCE97FB285D4EFB0010D4CB /* IconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCE97F9285D4EFB0010D4CB /* IconCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -83,6 +85,8 @@
 		FC2828D4285A93FA009BB87F /* PlayerFrame2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFrame2.swift; sourceTree = "<group>"; };
 		FC4054AD285BFBC9000DD822 /* PlayerFrame3_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFrame3_1.swift; sourceTree = "<group>"; };
 		FC4054AF285BFBED000DD822 /* PlayerFrame3_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFrame3_2.swift; sourceTree = "<group>"; };
+		FC507EC5287CF0BD00555AD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		FC507EC7287CF19A00555AD2 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		FC5FE0CB285AA7B300446FC2 /* Dosis */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Dosis; sourceTree = "<group>"; };
 		FCCE97F8285D4EFB0010D4CB /* IconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCCE97F9285D4EFB0010D4CB /* IconCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				DA28D793284FF9CE00EA1B94 /* MainViewController.swift */,
+				FC507EC5287CF0BD00555AD2 /* BaseViewController.swift */,
+				FC507EC7287CF19A00555AD2 /* UIViewController+Keyboard.swift */,
 				DA28D7B3284FFEDE00EA1B94 /* PlayerViewControllers */,
 				DA28D7B4284FFEF100EA1B94 /* RefereeViewControllers */,
 				DABC1E7D286ADBDF00C75DC7 /* HostViewControllers */,
@@ -349,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC507EC8287CF19A00555AD2 /* UIViewController+Keyboard.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* DataUpdateListener.swift in Sources */,
 				DA28D794284FF9CE00EA1B94 /* MainViewController.swift in Sources */,
 				A1D8CAC728812201005CCE0E /* HostStationsViewController.swift in Sources */,
@@ -364,6 +371,7 @@
 				FC4054B0285BFBED000DD822 /* PlayerFrame3_2.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
+				FC507EC6287CF0BD00555AD2 /* BaseViewController.swift in Sources */,
 				FC4054AE285BFBC9000DD822 /* PlayerFrame3_1.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
