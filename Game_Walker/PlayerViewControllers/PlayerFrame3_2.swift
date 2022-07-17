@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class PlayerFrame3_2: UIViewController {
+class PlayerFrame3_2: BaseViewController {
     
     @IBOutlet weak var joinTeamButton: UIButton!
     

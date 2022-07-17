@@ -13,8 +13,8 @@ struct Referee : Codable, Equatable {
     var station : Station
     
     enum CodingKeys: String, CodingKey {
-        case gamecode
         case name
+        case gamecode
         case station
     }
     

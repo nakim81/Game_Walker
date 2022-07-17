@@ -6,13 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 struct Team : Codable, Equatable {
     var name : String = ""
     var players : [Player] = []
-    var points : Int
+    var points : Int = 0
     var currentStation : String
     var nextStation : String
+    var iconName: String
+    
+//    var teamIcon : UIImage
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -20,6 +24,7 @@ struct Team : Codable, Equatable {
         case points
         case currentStation
         case nextStation
+        case iconName
     }
     
     

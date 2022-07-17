@@ -10,6 +10,7 @@ import UIKit
 class IconCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageView: UIImageView!
+    var imageName: String?
     
     static let identifier = "IconCollectionViewCell"
 
@@ -17,8 +18,9 @@ class IconCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    public func configure(with image: UIImage) {
-        imageView.image = image
+    func setImage(with name: String) {
+        imageView.image = UIImage(named: name)
+        imageName = name
     }
     
     static func nib() -> UINib {
