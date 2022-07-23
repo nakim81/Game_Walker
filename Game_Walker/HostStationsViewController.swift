@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HostStationsViewController: UIViewController {
+class HostStationsViewController: BaseViewController {
     @IBOutlet weak var stationsTable: UITableView!
     
     var stationNameData = ["first station"]

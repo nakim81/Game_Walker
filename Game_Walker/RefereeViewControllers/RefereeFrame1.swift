@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereeFrame1: UIViewController {
+class RefereeFrame1: BaseViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
