@@ -20,6 +20,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         K.Database.delegates.append(self)
+        K.Database.setupRequest(gamecode: "880027", player: Player(gamecode: "880027", name: "Player1"), request: .addPlayer)
+        K.Database.setupRequest(gamecode: "880027", player: Player(gamecode: "880027", name: "Player2"), request: .addPlayer)
+
     }
     
     @IBAction func hostButtonPressed(_ sender: Any) {

@@ -59,14 +59,10 @@ class CreateTeamViewController: BaseViewController {
         }
 
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
-            let newTeam = Team(name: teamName, players: [], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
-            print(newTeam)
+            let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
-            print("testing: \(UserData.gamecode!)")
             K.Database.setupRequest(gamecode: UserData.gamecode!, player: nil, referee: nil, team: newTeam, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addTeam)
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: UserData.player, referee: nil, team: newTeam, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
             
-
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter team name to create your team")

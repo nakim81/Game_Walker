@@ -12,9 +12,7 @@ class JoinGameViewController: BaseViewController {
     
     
     @IBOutlet weak var gamecodeTextField: UITextField!
-    
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
@@ -57,11 +55,6 @@ class JoinGameViewController: BaseViewController {
 //MARK: - UIUpdate
 extension JoinGameViewController: DataUpdateListener {
     func onDataUpdate(_ host: Host) {
-        //host로 하고 싶은거 하셈
-//        scoreLabel.text = host.score
-//        nextPlaceLabel.text = host.nextPlaceLabel
-        print("Size of Players \(host.players.count)")
-        
     }
     
 }
