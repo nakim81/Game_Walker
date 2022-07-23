@@ -28,8 +28,6 @@ class JoinTeamViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
         K.Database.getHost(gamecode: UserData.gamecode!)
-//        K.Database.getTeams(sender: self) { [weak self] in self?.collectionView.reloadData()
-//        }
     }
 
 
