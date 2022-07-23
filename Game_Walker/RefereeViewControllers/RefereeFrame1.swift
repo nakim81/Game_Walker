@@ -18,6 +18,8 @@ class RefereeFrame1: UIViewController {
     
     var pvp : Bool = true
     
+    var name = ""
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
