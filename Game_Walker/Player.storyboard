@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Player Frame1-->
+        <!--Join Game View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="PlayerFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PlayerFrame1" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="JoinGameViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,7 +84,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-xD-iG8">
-                                <rect key="frame" x="111" y="782.33333333333337" width="206" height="73.333333333333371"/>
+                                <rect key="frame" x="111" y="715.33333333333337" width="206" height="73.666666666666629"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="next button 1" title=""/>
                                 <connections>
@@ -98,7 +98,7 @@
                             <constraint firstItem="wwH-xD-iG8" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="31t-Jd-dB6"/>
                             <constraint firstItem="JjS-oM-0t8" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.47" id="3sm-Db-aWK"/>
                             <constraint firstItem="JjS-oM-0t8" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.8" id="NLA-Jd-5x2"/>
-                            <constraint firstItem="wwH-xD-iG8" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="1.75" id="P12-XJ-cBN"/>
+                            <constraint firstItem="wwH-xD-iG8" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="1.607" id="P12-XJ-cBN"/>
                             <constraint firstItem="wwH-xD-iG8" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.0867971" id="TY1-dT-f3t"/>
                             <constraint firstItem="JjS-oM-0t8" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.75" id="YfA-sP-Xr1"/>
                             <constraint firstItem="wwH-xD-iG8" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.481884" id="Z8H-fe-9f1"/>
@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="27.536231884057973" y="60.267857142857139"/>
         </scene>
-        <!--Player Frame2-->
+        <!--Create Or Join Team View Controller-->
         <scene sceneID="tv5-wg-sWb">
             <objects>
-                <viewController id="MIX-tc-IL7" customClass="PlayerFrame2" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MIX-tc-IL7" customClass="CreateOrJoinTeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ec7-NK-4PD">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="1052" y="60"/>
         </scene>
-        <!--Player Frame31-->
+        <!--Create Team View Controller-->
         <scene sceneID="7w9-ek-YbT">
             <objects>
-                <viewController id="JIl-tV-nZg" customClass="PlayerFrame3_1" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JIl-tV-nZg" customClass="CreateTeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lJk-wI-xTI">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,7 +186,7 @@
                                 <rect key="frame" x="44.333333333333343" y="266.66666666666669" width="339.33333333333326" height="35.333333333333314"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
-                                <rect key="frame" x="122.66666666666667" y="772.66666666666663" width="182.66666666666663" height="57.666666666666629"/>
+                                <rect key="frame" x="122.66666666666667" y="707" width="182.66666666666663" height="58"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="create team button 2"/>
                                 <connections>
@@ -206,7 +206,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VHU-Jh-cZ0" customClass="IconCollectionViewCell" customModule="Game_Walker" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VHU-Jh-cZ0" customClass="TeamIconCollectionViewCell" customModule="Game_Walker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fBa-7q-F7Q">
@@ -223,7 +223,7 @@
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.427536" id="0LT-7C-7Jl"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.25" id="A4w-cf-qU6"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.7" id="F08-YR-dQe"/>
-                            <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.75" id="FhA-gc-rFK"/>
+                            <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.607" id="FhA-gc-rFK"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="GaV-iA-nR2"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0427873" id="Icu-Vr-6hD"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="QzN-w5-uCt"/>
@@ -253,41 +253,65 @@
             </objects>
             <point key="canvasLocation" x="2086.9565217391305" y="-194.19642857142856"/>
         </scene>
-        <!--Player Frame32-->
+        <!--Join Team View Controller-->
         <scene sceneID="RBR-sS-cKU">
             <objects>
-                <viewController id="QO4-di-gmo" customClass="PlayerFrame3_2" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QO4-di-gmo" customClass="JoinTeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9br-f4-Lh3">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Kg-HhG">
-                                <rect key="frame" x="122.66666666666667" y="772.66666666666663" width="182.66666666666663" height="57.666666666666629"/>
+                                <rect key="frame" x="122.66666666666667" y="707" width="182.66666666666663" height="58"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="join team button 1"/>
                                 <connections>
                                     <action selector="joinTeamButtonPressed:" destination="QO4-di-gmo" eventType="touchUpInside" id="mCO-fh-glg"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team 1" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-FA-dl0">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="choose your team 1" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-FA-dl0">
                                 <rect key="frame" x="91" y="85" width="246" height="35.333333333333343"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n1b-ak-Lxf">
+                                <rect key="frame" x="52" y="199" width="324" height="420"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="420" id="5rg-nD-Jlx"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="21Y-fg-sN0">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Q8f-mx-Mhz" customClass="TeamIconCollectionViewCell" customModule="Game_Walker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QHp-cH-7y3">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aLB-HE-1os"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="3rj-qb-44U"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.427536" id="Lo4-x9-yhH"/>
-                            <constraint firstItem="WJX-FA-dl0" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.0427873" id="MOV-yn-QwM"/>
-                            <constraint firstItem="WJX-FA-dl0" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="0.224" id="NWE-pe-O2V"/>
+                            <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="0.893" id="UZY-jF-Kth"/>
+                            <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="WNO-qW-pSV"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.0696822" id="fDy-JB-WFh"/>
-                            <constraint firstItem="WJX-FA-dl0" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="gEQ-jE-QnO"/>
-                            <constraint firstItem="WJX-FA-dl0" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.575" id="gUk-Y9-D81"/>
-                            <constraint firstItem="pMD-Kg-HhG" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="1.75" id="rrc-lp-e8q"/>
+                            <constraint firstItem="pMD-Kg-HhG" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="1.607" id="rrc-lp-e8q"/>
+                            <constraint firstItem="n1b-ak-Lxf" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.757" id="zjD-Lz-IDs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oMC-b6-HOG"/>
                     <connections>
+                        <outlet property="collectionView" destination="n1b-ak-Lxf" id="k9T-5Q-RDg"/>
                         <outlet property="joinTeamButton" destination="pMD-Kg-HhG" id="wfW-ax-EW7"/>
                         <segue destination="1Rp-53-rNI" kind="show" identifier="goToPF44" id="M4x-Iq-v4s"/>
                     </connections>
@@ -296,10 +320,10 @@
             </objects>
             <point key="canvasLocation" x="2085" y="568"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Player Tab Bar Controller-->
         <scene sceneID="7ne-qa-X0d">
             <objects>
-                <tabBarController id="1Rp-53-rNI" sceneMemberID="viewController">
+                <tabBarController id="1Rp-53-rNI" customClass="PlayerTabBarController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ofT-7e-qP1"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0QY-Di-RrS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -307,89 +331,54 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rMN-4Z-Axc" kind="relationship" relationship="viewControllers" id="Knu-Vh-igP"/>
-                        <segue destination="6UD-sz-hKM" kind="relationship" relationship="viewControllers" id="Ceu-7O-hjf"/>
-                        <segue destination="Gq4-bE-vMD" kind="relationship" relationship="viewControllers" id="OZo-Z0-bVK"/>
+                        <segue destination="Zkt-o5-gfj" kind="relationship" relationship="viewControllers" id="SK3-kU-CHz"/>
+                        <segue destination="dWY-v4-76s" kind="relationship" relationship="viewControllers" id="jbX-Ju-2oG"/>
+                        <segue destination="ynI-iC-04s" kind="relationship" relationship="viewControllers" id="66t-13-a5H"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63w-Rt-jrl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3345" y="112"/>
+            <point key="canvasLocation" x="3488" y="174"/>
         </scene>
-        <!--Player Frame41-->
+        <!--Team View Controller-->
         <scene sceneID="mR3-dm-hT8">
             <objects>
-                <viewController id="Zkt-o5-gfj" customClass="PlayerFrame4_1" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zkt-o5-gfj" customClass="TeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="32a-A9-NYs">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="members 1" translatesAutoresizingMaskIntoConstraints="NO" id="fbZ-Ba-269">
-                                <rect key="frame" x="30.666666666666671" y="92" width="217.33333333333331" height="58.666666666666657"/>
+                                <rect key="frame" x="30.666666666666671" y="80.333333333333329" width="217.33333333333331" height="61.333333333333329"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHS-ku-8NB">
-                                <rect key="frame" x="311.33333333333331" y="115.33333333333331" width="62" height="30"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="leave 1"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0745721" id="1zM-Ds-yoQ"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.507246" id="5D1-DJ-gLO"/>
-                            <constraint firstItem="fHS-ku-8NB" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0378973" id="94m-MT-PGG"/>
-                            <constraint firstItem="fHS-ku-8NB" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.29" id="Epe-eQ-PYf"/>
-                            <constraint firstItem="fHS-ku-8NB" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.144928" id="MM2-W1-9dX"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
-                            <constraint firstItem="fHS-ku-8NB" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="1.6" id="gHR-rG-6aA"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>
                     <navigationItem key="navigationItem" id="6mo-hl-SSu"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6064" y="-556"/>
+            <point key="canvasLocation" x="4581" y="-415"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="bJ7-YC-3Dx">
-            <objects>
-                <navigationController id="rMN-4Z-Axc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" id="vhQ-hw-dRM"/>
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" backIndicatorImage="back button 1" backIndicatorTransitionMaskImage="back button 1" id="Wca-LS-kHq">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="0.0"/>
-                        </textAttributes>
-                        <navigationBarAppearance key="compactAppearance">
-                            <barButtonItemAppearance key="backButtonAppearance">
-                                <barButtonItemStateAppearance key="normal"/>
-                                <barButtonItemStateAppearance key="highlighted"/>
-                                <barButtonItemStateAppearance key="disabled"/>
-                                <barButtonItemStateAppearance key="focused"/>
-                            </barButtonItemAppearance>
-                        </navigationBarAppearance>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Zkt-o5-gfj" kind="relationship" relationship="rootViewController" id="FMM-kd-IdG"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eoK-DC-FYD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4816" y="-556"/>
-        </scene>
-        <!--Player Frame42-->
+        <!--Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">
             <objects>
-                <viewController id="dWY-v4-76s" customClass="PlayerFrame4_2" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dWY-v4-76s" customClass="RankingViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xr2-qI-PVm">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="BDC-4Y-7gV">
-                                <rect key="frame" x="30" y="92" width="192.66666666666666" height="58.666666666666657"/>
+                                <rect key="frame" x="30" y="80.333333333333329" width="192.66666666666666" height="61.333333333333329"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qT9-g7-uz0"/>
@@ -401,86 +390,54 @@
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.45" id="hiH-ka-e9w"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
                     <navigationItem key="navigationItem" id="aTS-cS-zr8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81p-5w-qGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6064" y="168"/>
+            <point key="canvasLocation" x="5470" y="174"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="jMO-Vd-Zkt">
-            <objects>
-                <navigationController id="Gq4-bE-vMD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" id="rtI-ZE-6U2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HWA-4t-dSX">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ynI-iC-04s" kind="relationship" relationship="rootViewController" id="wTu-mk-OJ1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vVW-aS-t28" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4816" y="956"/>
-        </scene>
-        <!--Player Frame43-->
+        <!--Timer View Controller-->
         <scene sceneID="9Ql-4N-5bX">
             <objects>
-                <viewController id="ynI-iC-04s" customClass="PlayerFrame4_3" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ynI-iC-04s" customClass="TimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZ6-VQ-e23">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game info 2" translatesAutoresizingMaskIntoConstraints="NO" id="p8f-Sm-GaO">
-                                <rect key="frame" x="30.666666666666657" y="92" width="315" height="58.666666666666657"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer 1" translatesAutoresizingMaskIntoConstraints="NO" id="p8f-Sm-GaO">
+                                <rect key="frame" x="30.333333333333329" y="80.333333333333329" width="134" height="61.333333333333329"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BjG-Bb-y3L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="p8f-Sm-GaO" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" multiplier="0.88" id="FKr-O5-6kp"/>
+                            <constraint firstItem="p8f-Sm-GaO" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" multiplier="0.455" id="FKr-O5-6kp"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="0.27" id="YcH-FJ-ob4"/>
-                            <constraint firstItem="p8f-Sm-GaO" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.736" id="bAh-Z4-w2Y"/>
+                            <constraint firstItem="p8f-Sm-GaO" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.313" id="bAh-Z4-w2Y"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0745721" id="iho-Kl-I5F"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="dUb-JY-qbb"/>
                     <navigationItem key="navigationItem" id="qeT-WX-hQA"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHy-RL-qYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6065" y="956"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="w53-Z8-PFg">
-            <objects>
-                <navigationController id="6UD-sz-hKM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="score 2" id="erh-i9-YSR"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3I4-XA-jeK">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="dWY-v4-76s" kind="relationship" relationship="rootViewController" id="8eu-qe-wmm"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d2K-Pf-uae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4814" y="168"/>
+            <point key="canvasLocation" x="4580" y="723"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="29y-2J-Hks"/>
+        <segue reference="M4x-Iq-v4s"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="back button 1" width="54" height="31"/>
+        <image name="Timer 1" width="128" height="61"/>
         <image name="choose your team 1" width="237.66667175292969" height="35"/>
         <image name="choose your team icon 1" width="328" height="35"/>
         <image name="create team button 2" width="243.66667175292969" height="79"/>
         <image name="game code?" width="100" height="15"/>
-        <image name="game info 2" width="309.33334350585938" height="50"/>
         <image name="join team button 1" width="243.66667175292969" height="79"/>
-        <image name="leave 1" width="60" height="31"/>
         <image name="members 1" width="210" height="61"/>
         <image name="next button 1" width="175.33332824707031" height="57"/>
         <image name="ranking 1" width="187" height="61"/>

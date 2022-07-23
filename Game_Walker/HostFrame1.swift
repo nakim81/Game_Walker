@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HostFrame1 : UIViewController{
+class HostFrame1 : BaseViewController{
 
 
    

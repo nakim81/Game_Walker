@@ -1,17 +1,17 @@
 //
-//  BaseViewController.swift
+//  PlayerTabViewController.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 7/11/22.
+//  Created by Noah Kim on 7/18/22.
 //
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class PlayerTabBarController: UITabBarController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        
     }
     
     func configureNavBar() {
@@ -24,11 +24,5 @@ class BaseViewController: UIViewController {
     
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        present(alert, animated: true)
     }
 }

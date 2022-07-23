@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameManagerViewController: UIViewController {
+class GameManagerViewController: BaseViewController {
     
     var data = [
         ["1 2346", "Team 1", "ABCDEF"],
