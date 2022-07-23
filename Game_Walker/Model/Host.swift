@@ -236,6 +236,7 @@ struct Host: Codable {
         }
     }
     
+    //sorted by pvp, pve
     mutating func sortingStations(){
         stations.sort { $0.pvp && !$1.pvp}
     }
