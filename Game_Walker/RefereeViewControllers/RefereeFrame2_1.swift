@@ -22,11 +22,23 @@ class RefereeFrame2_1: UIViewController {
     
     @IBOutlet weak var nextgameButton: UIButton!
     
+    var round = 1
+    
+    var station : Station = Station()
+    
+    var index = 0
+    
+    var algorithm : [[String]] = []
+    
+    var teams : [Team] = []
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-       
+        roundLabel.text = "Round 1"
+        scoreButton.setImage(UIImage(named: station.teams[0].iconName), for: .normal)
+        teamnameLabel.text = station.teams[0].name
+        teamscoreLabel.text = String(station.teams[0].points)
+    
     }
     
     @IBAction func scoreButtonPressed(_ sender: UIButton) {
@@ -38,6 +50,31 @@ class RefereeFrame2_1: UIViewController {
     }
     
     @IBAction func nextgameButtonPressed(_ sender: UIButton) {
-        
+        round += 1
+        roundLabel.text = "Round " + "\(round)"
+        let integervariable = Int(algorithm[round][index]) ?? 0
+        scoreButton.setImage(UIImage(named: teams[integervariable].iconName), for: .normal)
+        teamnameLabel.text = teams[integervariable].name
+        teamscoreLabel.text = String(teams[integervariable].points)
+    }
+}
+
+//MARK: - UIUpdate
+extension RefereeFrame2_1: DataUpdateListener {
+    func onDataUpdate(_ host: Host) {
+        for referee in host.referees {
+            if referee.name == RefereeFrame1().name {
+                station = referee.station
+            }
+        }
+        for item in host.stations {
+            index += 1
+            if station == item {
+                break
+            }
+        }
+        teams = host.teams
+        algorithm = host.algorithm
+        print("ondataupdate: \(host.gamecode)")
     }
 }
