@@ -10,7 +10,7 @@ import UIKit
 class HostStationsViewController: BaseViewController {
     @IBOutlet weak var stationsTable: UITableView!
     
-    var stationNameData = ["first station"]
+    var stationArray = [Station]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +21,13 @@ class HostStationsViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    func addNewCell(with name: String) {
-        stationNameData.append(name)
-        stationsTable.reloadData()
-    }
+//    func addNewCell(with name: String) {
+//
+//        setupRequest(gamecode: K.gamecode, station: Station?, gameTime: Int?, movingTime: Int?, rounds : Int?, request: setupRequestType)
+//        stationNameData.append(name)
+//
+//    }
 }
 extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

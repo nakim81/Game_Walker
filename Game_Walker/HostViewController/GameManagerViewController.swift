@@ -17,6 +17,7 @@ class GameManagerViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.register(UINib(nibName: "GameManagerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GameManagerCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -35,4 +36,15 @@ extension GameManagerViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
+}
+
+extension GameManagerViewController: DataUpdateListener {
+    func onDataUpdate(_ host: Host) {
+        //host로 하고 싶은거 하셈
+//        scoreLabel.text = host.score
+//        nextPlaceLabel.text = host.nextPlaceLabel
+        print("Gamecode: \(host.gamecode)")
+        
+    }
+    
 }
