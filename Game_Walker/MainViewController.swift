@@ -23,6 +23,11 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hostButtonPressed(_ sender: Any) {
+        K.gamecode = String(Int.random(in: 100000 ... 999999))
+        let host = Host(gamecode: K.gamecode)
+        print(K.gamecode)
+        K.Database.updateHost(host)
+        K.Database.readHost(gamecode: K.gamecode, onListenerUpdate: listen(_:))
     }
     
     func listen(_ _ : [String : Any]){
