@@ -38,6 +38,7 @@ class JoinGameViewController: BaseViewController {
         if let gamecode: String = gamecodeTextField.text, let username: String = usernameTextField.text, !gamecode.isEmpty, !username.isEmpty {
             K.Database.readHost(gamecode: gamecode, onListenerUpdate: listen(_:))
             let newPlayer = Player(gamecode: gamecode, name: username)
+            UserData.gamecode = gamecode
             UserData.player = newPlayer
             K.Database.setupRequest(gamecode: newPlayer.gamecode, player: newPlayer, referee: nil, team: nil, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addPlayer)
 

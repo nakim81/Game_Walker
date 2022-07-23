@@ -20,7 +20,6 @@ class JoinTeamViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        teams = UserData.teams // K.Database.getTeams()
         let layout = UICollectionViewFlowLayout()
         collectionView.collectionViewLayout = layout
         
@@ -37,7 +36,7 @@ class JoinTeamViewController: BaseViewController {
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            K.Database.setupRequest(gamecode: "", player: UserData.player, referee: nil, team: teams[selectedIndex], station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
+            K.Database.setupRequest(gamecode: UserData.gamecode!, player: UserData.player, referee: nil, team: teams[selectedIndex], station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
 
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {
@@ -93,3 +92,11 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 80, height: 110)
     }
 }
+
+//MARK: - UIUpdate
+extension JoinTeamViewController: DataUpdateListener {
+    func onDataUpdate(_ host: Host) {
+        host.teams
+    }
+}
+
