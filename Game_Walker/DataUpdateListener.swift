@@ -10,5 +10,4 @@ import UIKit
 
 protocol DataUpdateListener {
     func onDataUpdate(_ host: Host)
-    
 }

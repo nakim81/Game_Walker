@@ -15,21 +15,21 @@ class JoinTeamViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var selectedIndex: Int?
-    private var teams: [Team] = []
+    var teams: [Team] = []
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = UICollectionViewFlowLayout()
-        collectionView.collectionViewLayout = layout
-        
+        K.Database.delegates.append(self)
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.allowsMultipleSelection = false
-        
+        K.Database.getHost(gamecode: UserData.gamecode!)
+//        K.Database.getTeams(sender: self) { [weak self] in self?.collectionView.reloadData()
+//        }
     }
 
 
@@ -96,7 +96,8 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - UIUpdate
 extension JoinTeamViewController: DataUpdateListener {
     func onDataUpdate(_ host: Host) {
-        host.teams
+        teams = host.teams
+        collectionView.reloadData()
     }
 }
 

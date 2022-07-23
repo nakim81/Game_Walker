@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6106B9682883EFD000BA3BB2 /* RefereeFrame3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106B9642883EFD000BA3BB2 /* RefereeFrame3_2.swift */; };
+		6106B9692883EFD000BA3BB2 /* RefereeFrame2_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106B9652883EFD000BA3BB2 /* RefereeFrame2_2.swift */; };
+		6106B96A2883EFD000BA3BB2 /* RefereeFrame3_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6106B9662883EFD000BA3BB2 /* RefereeFrame3_1.swift */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -64,6 +67,12 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		6106B9612883EFB900BA3BB2 /* RefereeFrame2_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame2_1.swift; sourceTree = "<group>"; };
+		6106B9632883EFD000BA3BB2 /* RefereeFrame3_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_3.swift; sourceTree = "<group>"; };
+		6106B9642883EFD000BA3BB2 /* RefereeFrame3_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_2.swift; sourceTree = "<group>"; };
+		6106B9652883EFD000BA3BB2 /* RefereeFrame2_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame2_2.swift; sourceTree = "<group>"; };
+		6106B9662883EFD000BA3BB2 /* RefereeFrame3_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_1.swift; sourceTree = "<group>"; };
+		DA13EB88285806DD00368CF8 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host.swift; sourceTree = "<group>"; };
 		DA13EB88285806DD00368CF8 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +195,11 @@
 		DA28D7A3284FFA9A00EA1B94 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA28D793284FF9CE00EA1B94 /* MainViewController.swift */,
+				FC507EC5287CF0BD00555AD2 /* BaseViewController.swift */,
+				FC507EC7287CF19A00555AD2 /* UIViewController+Keyboard.swift */,
+				DA28D7B3284FFEDE00EA1B94 /* PlayerViewControllers */,
+				DA28D7B4284FFEF100EA1B94 /* RefereeViewControllers */,
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
@@ -333,6 +347,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1C333C2883EC7300004836 /* Storyboard.storyboard in Resources */,
+				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
+				DA28D79C284FF9D300EA1B94 /* LaunchScreen.storyboard in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
@@ -396,11 +413,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC507EC8287CF19A00555AD2 /* UIViewController+Keyboard.swift in Sources */,
 				DABC1EB7288BAAC800C75DC7 /* GameManagerCollectionViewCell.swift in Sources */,
 				DABC1EBB288BAAC800C75DC7 /* AddStationViewController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* DataUpdateListener.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
+				FCCE97FA285D4EFB0010D4CB /* TeamIconCollectionViewCell.swift in Sources */,
+				FC2828D5285A93FA009BB87F /* CreateOrJoinTeamViewController.swift in Sources */,
+				6106B96A2883EFD000BA3BB2 /* RefereeFrame3_1.swift in Sources */,
+				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
+				FC166534285D277F00CABCE9 /* TeamViewController.swift in Sources */,
+				DA28D7AE284FFE9900EA1B94 /* JoinGameViewController.swift in Sources */,
+				FC4054B0285BFBED000DD822 /* JoinTeamViewController.swift in Sources */,
+				FCCE97FA285D4EFB0010D4CB /* TeamIconCollectionViewCell.swift in Sources */,
+				FC791B1728866DDA0028DCA8 /* PlayerTabBarController.swift in Sources */,
+				FC2828D5285A93FA009BB87F /* CreateOrJoinTeamViewController.swift in Sources */,
+				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
+				A1E3DDB52880F506008D7060 /* (null) in Sources */,
+				FC166534285D277F00CABCE9 /* TeamViewController.swift in Sources */,
+				DA28D7AE284FFE9900EA1B94 /* JoinGameViewController.swift in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				FC4054B0285BFBED000DD822 /* JoinTeamViewController.swift in Sources */,
 				DABC1EBE288BAAC800C75DC7 /* RefereeFrame3_1.swift in Sources */,
 				DABC1ECF288BAAC800C75DC7 /* TimerViewController.swift in Sources */,
 				DABC1ECB288BAAC800C75DC7 /* JoinTeamViewController.swift in Sources */,
@@ -431,6 +465,11 @@
 				DABC1ECC288BAAC800C75DC7 /* CreateOrJoinTeamViewController.swift in Sources */,
 				DABC1EC8288BAAC800C75DC7 /* RankingViewController.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
+				DA28D7B0284FFEB400EA1B94 /* RefereeFrame1.swift in Sources */,
+				FC166538285D27A600CABCE9 /* TimerViewController.swift in Sources */,
+				FC166536285D279800CABCE9 /* RankingViewController.swift in Sources */,
+				FC166538285D27A600CABCE9 /* TimerViewController.swift in Sources */,
+				FC166536285D279800CABCE9 /* RankingViewController.swift in Sources */,
 				DABC1EC7288BAAC800C75DC7 /* TeamViewController.swift in Sources */,
 				DABC1EC4288BAAC800C75DC7 /* RefereeFrame1.swift in Sources */,
 				DABC1ECA288BAAC800C75DC7 /* PlayerTabBarController.swift in Sources */,

@@ -41,21 +41,34 @@ struct K {
         }
         
 
-//        static func getHost(gamecode: String) {
-//            let docRef = db.collection("Server").document("Host : \(gamecode)")
-//            docRef.getDocument(as: Host.self) { result in
-//                switch result {
-//                case .success(let host):
-//                    for delegate in delegates {
-//                        delegate.onDataUpdate(host)
-//                    }
-//                case .failure(let error):
-//                    print("Error decoding host: \(error)")
-//                }
-//            }
-//        }
+        static func getHost(gamecode: String) {
+            let docRef = db.collection("Server").document("Game : \(gamecode)")
+            docRef.getDocument(as: Host.self) { result in
+                switch result {
+                case .success(let host):
+                    for delegate in delegates {
+                        delegate.onDataUpdate(host)
+                    }
+                case .failure(let error):
+                    print("Error decoding host: \(error)")
+                }
+            }
+        }
         
-        static func setupRequest(gamecode: String, player: Player?, referee: Referee?, team: Team?, station: Station?, gameTime: Int?, movingTime: Int?, rounds : Int?, request: setupRequestType) {
+        static func getTeams(sender: JoinTeamViewController, _ onSuccess: @escaping () -> Void) {
+            let docRef = db.collection("Server").document("Game : \(UserData.gamecode!)")
+            docRef.getDocument(as: Host.self) { result in
+                switch result {
+                case .success(let host):
+                    sender.teams = host.teams
+                    onSuccess()
+                case .failure(let error):
+                    print("Error decoding host: \(error)")
+                }
+            }
+        }
+        
+        static func setupRequest(gamecode: String, player: Player? = nil, referee: Referee? = nil, team: Team? = nil, station: Station? = nil, gameTime: Int? = nil, movingTime: Int? = nil, rounds : Int? = nil, request: setupRequestType) {
             let docRef = db.collection("Server").document("Game : \(gamecode)")
             var nextHost: Host?
             docRef.getDocument(as: Host.self) { result in
@@ -87,6 +100,7 @@ struct K {
                     case .timer:
                         nextHost.timer(gameTime!, movingTime!, rounds!)
                     }
+                    print(nextHost)
                     K.Database.updateHost(nextHost)
                     
                 case .failure(let error):
