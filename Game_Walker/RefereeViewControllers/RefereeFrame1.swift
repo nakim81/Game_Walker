@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereeFrame1: UIViewController {
+class RefereeFrame1: BaseViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     
@@ -17,6 +17,8 @@ class RefereeFrame1: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     
     var pvp : Bool = true
+    
+    var name = ""
     
     override func viewDidLoad() {
         
