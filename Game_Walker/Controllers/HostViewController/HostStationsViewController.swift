@@ -31,12 +31,12 @@ class HostStationsViewController: BaseViewController {
 }
 extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stationNameData.count
+        return stationArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = stationsTable.dequeueReusableCell(withIdentifier: "StationTableViewCell", for: indexPath) as? StationTableViewCell else {return UITableViewCell()}
-        let cellData = stationNameData[indexPath.row]
+        let cellData = stationArray[indexPath.row].name
         cell.configure(stationName: cellData)
         
         return cell
