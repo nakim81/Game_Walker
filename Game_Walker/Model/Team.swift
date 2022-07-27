@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 struct Team : Codable, Equatable {
+    var gamecode : String = ""
     var name : String = ""
     var players : [Player] = []
     var points : Int = 0
@@ -19,6 +20,7 @@ struct Team : Codable, Equatable {
 //    var teamIcon : UIImage
     
     enum CodingKeys: String, CodingKey {
+        case gamecode
         case name
         case players
         case points
@@ -26,7 +28,6 @@ struct Team : Codable, Equatable {
         case nextStation
         case iconName
     }
-    
     
     mutating func getPoints(points: Int) {
         self.points += points
