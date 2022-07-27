@@ -142,5 +142,11 @@ struct K {
             }
         }
         
+        static func createGame(_ gamecode: String) {
+            //gamecode validation through servers
+            let blank = [gamecode : String()]
+            db.collection("Servers").document("Gamecode : \(gamecode)").setData(blank)
+        }
+        
     }
 }

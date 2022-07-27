@@ -104,7 +104,7 @@ struct Host: Codable {
     
 //MARK: - Algorithm
     mutating func setAlgorithm(){
-        sortingStations()
+        sortStations()
         let columns = stations.count + countOfPVP
         algorithm = Array(repeating: Array(repeating: "-", count: columns), count: self.rounds)
         let size = teams.count
@@ -237,7 +237,7 @@ struct Host: Codable {
     }
     
     //sorted by pvp, pve
-    mutating func sortingStations(){
+    mutating func sortStations(){
         stations.sort { $0.pvp && !$1.pvp}
     }
     
