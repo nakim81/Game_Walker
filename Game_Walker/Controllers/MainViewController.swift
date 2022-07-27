@@ -17,15 +17,19 @@ class MainViewController: UIViewController {
     @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var hostButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        K.Database.delegates.append(self)
-        K.Database.setupRequest(gamecode: "880027", player: Player(gamecode: "880027", name: "Player1"), request: .addPlayer)
-        K.Database.setupRequest(gamecode: "880027", player: Player(gamecode: "880027", name: "Player2"), request: .addPlayer)
-
-    }
-    
-    @IBAction func hostButtonPressed(_ sender: Any) {
+       
+        let blank = Station()
+        let st = Station(name: "CatchMind", pvp: true, points: 50, place: "house", description: "win", teams: [])
+        
+        let test1 = Referee(gamecode: "123456", name: "Noah", stationName: blank.name)
+        let test2 = Referee(gamecode: "123456", name: "Paul", stationName: blank.name)
+        //R.addReferee("123456", test1)
+        //R.addReferee("123456", test2)
+        R.assignStation("123456", test2, st)
+        
     }
     
     func listen(_ _ : [String : Any]){
@@ -33,15 +37,4 @@ class MainViewController: UIViewController {
 
 }
 
-//MARK: - UIUpdate
-extension MainViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        //host로 하고 싶은거 하셈
-//        scoreLabel.text = host.score
-//        nextPlaceLabel.text = host.nextPlaceLabel
-        print("Gamecode: \(host.gamecode)")
-        
-    }
-    
-}
 

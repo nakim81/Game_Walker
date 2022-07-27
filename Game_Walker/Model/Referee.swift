@@ -7,24 +7,14 @@
 
 import Foundation
 
-struct Referee : Codable, Equatable {
-    var name : String = ""
-    var gamecode : String = ""
-    var station : Station
+struct Referee: Codable, Equatable {
+    var gamecode: String = ""
+    var name: String = ""
+    var stationName: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case name
         case gamecode
-        case station
-    }
-    
-    mutating func joinGame(name: String, gamecode : String) {
-        self.name = name
-        self.gamecode = gamecode
-    }
-    
-    mutating func givePoints(team: Team, points: Int) {
-        var temp = team
-        temp.points += points
+        case name
+        case stationName
     }
 }
