@@ -71,7 +71,7 @@ struct Host: Codable {
     
     mutating func joinTeam(_ joiner : Player, _ joinee : Team) {
         if let index = teams.firstIndex(of: joinee) {
-            teams[index].addPlayer(player: joiner)
+            //teams[index].addPlayer(player: joiner)
         }
     }
     

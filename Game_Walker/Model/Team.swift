@@ -16,8 +16,7 @@ struct Team : Codable, Equatable {
     var currentStation : String
     var nextStation : String
     var iconName: String
-    
-//    var teamIcon : UIImage
+
     
     enum CodingKeys: String, CodingKey {
         case gamecode
@@ -27,19 +26,5 @@ struct Team : Codable, Equatable {
         case currentStation
         case nextStation
         case iconName
-    }
-    
-    mutating func getPoints(points: Int) {
-        self.points += points
-    }
-    
-    mutating func addPlayer(player: Player) {
-        players.append(player)
-    }
-    
-    mutating func removePlayer(player: Player) {
-        if let index = self.players.firstIndex(of: player) {
-            players.remove(at: index)
-        }
     }
 }

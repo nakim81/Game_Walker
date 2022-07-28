@@ -27,3 +27,11 @@ protocol GetStation {
 protocol StationList {
     func listOfStations(_ stations: [Station])
 }
+
+protocol GetTeam {
+    func getTeam(_ team: Team)
+}
+
+protocol TeamList {
+    func listOfTeams(_ teams: [Team])
+}
