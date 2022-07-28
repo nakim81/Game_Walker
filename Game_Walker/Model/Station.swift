@@ -14,6 +14,7 @@ struct Station : Codable, Equatable {
     var place : String = ""
     var description : String = ""
     var teams : [Team] = []
+    var referee : String = ""
     
     enum CodingKeys: String, CodingKey {
         case name

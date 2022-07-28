@@ -320,6 +320,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="save 1"/>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -396,7 +399,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gamelocationTextfield" destination="0RL-II-XhM" id="H23-TU-iPZ"/>
                         <outlet property="gamenameTextfield" destination="yze-MK-05s" id="IZO-IP-ZQ3"/>
+                        <outlet property="gamepointsTextfield" destination="fW0-Ap-xmH" id="LTJ-gq-yqV"/>
+                        <outlet property="pveButton" destination="eF5-Aq-WGj" id="D33-pC-5un"/>
+                        <outlet property="pvpButton" destination="0sd-pw-gIC" id="55h-S3-eIl"/>
+                        <outlet property="refereeTextfield" destination="jdG-Xq-jNh" id="JU7-e2-MS6"/>
+                        <outlet property="rulesTextfield" destination="aDr-lH-bSQ" id="gh2-p1-MaC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-A4-yMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
