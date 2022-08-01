@@ -10,7 +10,7 @@ import UIKit
 
 class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var table: UITableView!
     var team: Team?
     var teams: [Int?] = []
     let data: [String] = ["Hi", "Hello", "Ni hao"]
@@ -31,7 +31,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let name = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
+        let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         cell.nameLabel.text = name
         
         return cell
