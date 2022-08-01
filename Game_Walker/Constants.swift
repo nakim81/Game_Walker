@@ -55,19 +55,6 @@ struct K {
             }
         }
         
-        static func getTeams(sender: JoinTeamViewController, _ onSuccess: @escaping () -> Void) {
-            let docRef = db.collection("Server").document("Game : \(UserData.gamecode!)")
-            docRef.getDocument(as: Host.self) { result in
-                switch result {
-                case .success(let host):
-                    sender.teams = host.teams
-                    onSuccess()
-                case .failure(let error):
-                    print("Error decoding host: \(error)")
-                }
-            }
-        }
-        
         static func setupRequest(gamecode: String, player: Player? = nil, referee: Referee? = nil, team: Team? = nil, station: Station? = nil, gameTime: Int? = nil, movingTime: Int? = nil, rounds : Int? = nil, request: setupRequestType) {
             let docRef = db.collection("Server").document("Game : \(gamecode)")
             var nextHost: Host?

@@ -39,6 +39,8 @@
 		DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EB2288BAAC800C75DC7 /* JoinGameViewController.swift */; };
 		DABC1ECE288BAAC800C75DC7 /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EB3288BAAC800C75DC7 /* CreateTeamViewController.swift */; };
 		DABC1ECF288BAAC800C75DC7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EB4288BAAC800C75DC7 /* TimerViewController.swift */; };
+		DABC1EEB288F3DC400C75DC7 /* Player_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */; };
+		DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */; };
 		DAC313272858619900BECF89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC313262858619900BECF89 /* Player.swift */; };
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
@@ -83,6 +85,8 @@
 		DABC1EB2288BAAC800C75DC7 /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		DABC1EB3288BAAC800C75DC7 /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		DABC1EB4288BAAC800C75DC7 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_Database.swift; sourceTree = "<group>"; };
+		DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee_Database.swift; sourceTree = "<group>"; };
 		DAC313262858619900BECF89 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Model/Player.swift; sourceTree = "<group>"; };
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				4332FA625A04330489170BE4 /* Pods */,
 				01C5611983B3CB1DBC626A36 /* Frameworks */,
 				FC036824288BC93500E4821D /* Recovered References */,
+				DABC1EE9288F337F00C75DC7 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +153,8 @@
 				DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */,
 				DA9662C2285AFA4700B66629 /* DataUpdateListener.swift */,
 				DA9662C0285AA39200B66629 /* Constants.swift */,
+				DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */,
+				DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */,
 				DA28D798284FF9D300EA1B94 /* Assets.xcassets */,
 				FC5FE0CB285AA7B300446FC2 /* Dosis */,
 				DA28D79D284FF9D300EA1B94 /* Info.plist */,
@@ -232,6 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				6106B9662883EFD000BA3BB2 /* RefereeFrame3_1.swift */,
+		DABC1EE9288F337F00C75DC7 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -363,18 +373,23 @@
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DABC1EBE288BAAC800C75DC7 /* RefereeFrame3_1.swift in Sources */,
+				A1E3DDB52880F506008D7060 /* (null) in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				DABC1ECF288BAAC800C75DC7 /* TimerViewController.swift in Sources */,
 				DABC1ECB288BAAC800C75DC7 /* JoinTeamViewController.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
-				DABC1EC5288BAAC800C75DC7 /* RefereeFrame2_2.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */,
 				DABC1EC3288BAAC800C75DC7 /* RefereeFrame3_2.swift in Sources */,
 				DABC1EC2288BAAC800C75DC7 /* RefereeFrame2_1.swift in Sources */,
+				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
+				DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DABC1EC9288BAAC800C75DC7 /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				DABC1EEB288F3DC400C75DC7 /* Player_Database.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
@@ -388,6 +403,7 @@
 				FC036822288BC15300E4821D /* TeamTableViewCell.swift in Sources */,
 				DABC1ECA288BAAC800C75DC7 /* PlayerTabBarController.swift in Sources */,
 				DABC1EC0288BAAC800C75DC7 /* RefereeFrame3_3.swift in Sources */,
+				DABC1ECA288BAAC800C75DC7 /* PlayerTabBarController.swift in Sources */,
 				DA9662C1285AA39200B66629 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,7 +533,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -548,7 +564,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
