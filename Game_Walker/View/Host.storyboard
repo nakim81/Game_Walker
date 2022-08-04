@@ -112,7 +112,6 @@
         <!--Host Stations View Controller-->
         <scene sceneID="SNx-G6-8FI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ODF-Pp-UBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="1L0-Oz-afr" customClass="HostStationsViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQk-vm-7Sx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -166,6 +165,7 @@
                         <outlet property="stationsTable" destination="LOv-V0-Zcn" id="a7g-jw-GRH"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ODF-Pp-UBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="467" y="-319"/>
         </scene>
