@@ -16,6 +16,7 @@
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
 		DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA28D798284FF9D300EA1B94 /* Assets.xcassets */; };
+		DA96397028A33CDA00853F05 /* Host_Modified.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96396F28A33CDA00853F05 /* Host_Modified.swift */; };
 		DA9662C1285AA39200B66629 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C0285AA39200B66629 /* Constants.swift */; };
 		DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C2285AFA4700B66629 /* Protocols.swift */; };
 		DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */; };
@@ -57,6 +58,7 @@
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DA28D798284FF9D300EA1B94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA96396F28A33CDA00853F05 /* Host_Modified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host_Modified.swift; sourceTree = "<group>"; };
 		DA9662C0285AA39200B66629 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DA9662C2285AFA4700B66629 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Player.storyboard; path = View/Player.storyboard; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				DA13EB88285806DD00368CF8 /* Host.swift */,
+				DA96396F28A33CDA00853F05 /* Host_Modified.swift */,
 				DAC3132C2858632100BECF89 /* Team.swift */,
 				DAC313262858619900BECF89 /* Player.swift */,
 				DAC3132A285862FB00BECF89 /* Referee.swift */,
@@ -355,6 +358,7 @@
 				DABC1ECB288BAAC800C75DC7 /* JoinTeamViewController.swift in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
+				DA96397028A33CDA00853F05 /* Host_Modified.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
 				DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */,

@@ -142,11 +142,32 @@ struct K {
             }
         }
         
-        static func createGame(_ gamecode: String) {
+        static func createGame(_ gamecode: String, _ host: Host2) {
             //gamecode validation through servers
-            let blank = [gamecode : String()]
-            db.collection("Servers").document("Gamecode : \(gamecode)").setData(blank)
+            do {
+                try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
+                print("Data sucessfully saved")
+            } catch let error {
+                print("Error writing to Firestore: \(error)")
+            }
         }
+        
+        static func setTimer(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int){
+            let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+            server.updateData([
+                "gameTime": gameTime,
+                "movingTime": movingTime,
+                "rounds": rounds
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+        
+        
         
     }
 }

@@ -38,31 +38,35 @@ struct Host: Codable {
         case blanked
     }
     
-  
+    //done
     mutating func addPlayer(_ newPlayer : Player) {
         players.append(newPlayer)
     }
     
+    //done
     mutating func removePlayer(_ oldPlayer : Player) {
         if let index = players.firstIndex(of: oldPlayer) {
                 players.remove(at: index)
         }
     }
     
+    //done
     mutating func addReferee(_ newReferee : Referee) {
         referees.append(newReferee)
     }
     
+    //done
     mutating func removeReferee(_ oldReferee : Referee) {
         if let index = referees.firstIndex(of: oldReferee) {
                 referees.remove(at: index)
         }
     }
     
+    //done
     mutating func makeTeam(_ newTeam : Team) {
         teams.append(newTeam)
     }
-    
+    //done
     mutating func removeTeam(_ oldTeam : Team) {
         if let index = teams.firstIndex(of: oldTeam) {
                 teams.remove(at: index)

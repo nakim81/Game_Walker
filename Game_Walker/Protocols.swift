@@ -28,6 +28,10 @@ protocol StationList {
     func listOfStations(_ stations: [Station])
 }
 
+protocol TeamUpdateListener {
+    func updateTeam(_ team: Team)
+}
+
 protocol GetTeam {
     func getTeam(_ team: Team)
 }
