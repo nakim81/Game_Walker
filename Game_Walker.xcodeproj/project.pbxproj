@@ -19,7 +19,6 @@
 		DA9662C1285AA39200B66629 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C0285AA39200B66629 /* Constants.swift */; };
 		DA9662C3285AFA4700B66629 /* DataUpdateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C2285AFA4700B66629 /* DataUpdateListener.swift */; };
 		DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */; };
-		DABC1E86288BA9CB00C75DC7 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E80288BA9CA00C75DC7 /* Storyboard.storyboard */; };
 		DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */; };
 		DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E82288BA9CA00C75DC7 /* Host.storyboard */; };
 		DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */; };
@@ -58,7 +57,6 @@
 		DA9662C0285AA39200B66629 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DA9662C2285AFA4700B66629 /* DataUpdateListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUpdateListener.swift; sourceTree = "<group>"; };
 		DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Player.storyboard; path = View/Player.storyboard; sourceTree = "<group>"; };
-		DABC1E80288BA9CA00C75DC7 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = View/Storyboard.storyboard; sourceTree = "<group>"; };
 		DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Referee.storyboard; path = View/Referee.storyboard; sourceTree = "<group>"; };
 		DABC1E82288BA9CA00C75DC7 /* Host.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Host.storyboard; path = View/Host.storyboard; sourceTree = "<group>"; };
 		DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = View/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				DABC1E84288BA9CB00C75DC7 /* Main.storyboard */,
 				DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */,
 				DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */,
-				DABC1E80288BA9CA00C75DC7 /* Storyboard.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -282,7 +279,6 @@
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
-				DABC1E86288BA9CB00C75DC7 /* Storyboard.storyboard in Resources */,
 				DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
 			);
