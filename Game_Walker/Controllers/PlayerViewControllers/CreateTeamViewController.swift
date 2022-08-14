@@ -88,7 +88,6 @@ extension CreateTeamViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
         cell.hideBorder()
         selectedIndex = nil
-        print("\(cell.getImageName()) deselected")
     }
 }
 
