@@ -33,11 +33,15 @@ class CreateTeamViewController: BaseViewController {
     private var selectedIndex : Int?
     
     override func viewDidLoad() {
+        T.delegates.append(self)
         super.viewDidLoad()
         teamNameTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         configureCollectionView()
+        T.readTeam(gamecode: UserData.gamecode, onListenerUpdate: listen(_ :))
     }
+    
+    func listen(_ _ : [String : Any]){}
     
     private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -50,14 +54,11 @@ class CreateTeamViewController: BaseViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        
         teamNameTextField.resignFirstResponder()
-        
         guard let selectedIconName = selectedIconName else {
             alert(title: "No Icon Selected", message: "Please select a team icon")
             return
         }
-
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
             let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
@@ -124,3 +125,5 @@ extension CreateTeamViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MARK: -

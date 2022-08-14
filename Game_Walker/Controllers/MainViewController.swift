@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //S.delegate_stationList = self
-        
        
 //        let blank = Station()
 //        let st1 = Station(name: "CatchMind", pvp: false, points: 50, place: "House", description: "Win", teamOrder: [])
@@ -32,12 +31,6 @@ class MainViewController: UIViewController {
         //S.addStation("123456", st2)
         //S.addStation("123456", st3)
         //S.getStation("123456", stName)
-
     }
-    
-    
-    func listen(_ _ : [String : Any]){
-    }
-
 }
 

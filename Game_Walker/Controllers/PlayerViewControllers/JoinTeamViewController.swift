@@ -20,14 +20,13 @@ class JoinTeamViewController: BaseViewController {
     
     
     override func viewDidLoad() {
+        T.delegates.append(self)
         super.viewDidLoad()
-        K.Database.delegates.append(self)
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
-        K.Database.getHost(gamecode: UserData.gamecode!)
     }
 
 
@@ -91,11 +90,6 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - UIUpdate
-extension JoinTeamViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        teams = host.teams
-        collectionView.reloadData()
-    }
-}
+//MARK: - TeamProtocols
+extension JoinTeamViewController: 
 
