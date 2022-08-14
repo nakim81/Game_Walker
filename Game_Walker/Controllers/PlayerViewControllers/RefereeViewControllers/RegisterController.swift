@@ -8,16 +8,12 @@
 import Foundation
 import UIKit
 
-class RefereeFrame1: BaseViewController {
+class RegisterController: BaseViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var gamecodeTextField: UITextField!
-    
     @IBOutlet weak var nextButton: UIButton!
-    
     var pvp : Bool = true
-    
     var name = ""
     
     override func viewDidLoad() {
@@ -28,10 +24,9 @@ class RefereeFrame1: BaseViewController {
         
     }
     
-
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
-            let newReferee = Referee(gamecode: gamecode, name: name, station: Station())
+            let newReferee = Referee(name: name, gamecode: gamecode, station: Station())
             K.Database.setupRequest(gamecode: newReferee.gamecode, player: nil, referee: newReferee, team: nil, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addReferee)
         }
         if pvp {
@@ -44,7 +39,7 @@ class RefereeFrame1: BaseViewController {
 }
 
 //MARK: - UIUpdate
-extension RefereeFrame1: DataUpdateListener {
+extension RegisterController: DataUpdateListener {
     func onDataUpdate(_ host: Host) {
         for referee in host.referees {
             if referee.name == usernameTextField.text && referee.gamecode == gamecodeTextField.text {
