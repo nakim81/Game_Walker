@@ -38,31 +38,35 @@ struct Host: Codable {
         case blanked
     }
     
-  
+    //done
     mutating func addPlayer(_ newPlayer : Player) {
         players.append(newPlayer)
     }
     
+    //done
     mutating func removePlayer(_ oldPlayer : Player) {
         if let index = players.firstIndex(of: oldPlayer) {
                 players.remove(at: index)
         }
     }
     
+    //done
     mutating func addReferee(_ newReferee : Referee) {
         referees.append(newReferee)
     }
     
+    //done
     mutating func removeReferee(_ oldReferee : Referee) {
         if let index = referees.firstIndex(of: oldReferee) {
                 referees.remove(at: index)
         }
     }
     
+    //done
     mutating func makeTeam(_ newTeam : Team) {
         teams.append(newTeam)
     }
-    
+    //done
     mutating func removeTeam(_ oldTeam : Team) {
         if let index = teams.firstIndex(of: oldTeam) {
                 teams.remove(at: index)
@@ -71,7 +75,7 @@ struct Host: Codable {
     
     mutating func joinTeam(_ joiner : Player, _ joinee : Team) {
         if let index = teams.firstIndex(of: joinee) {
-            teams[index].addPlayer(player: joiner)
+            //teams[index].addPlayer(player: joiner)
         }
     }
     
@@ -104,7 +108,7 @@ struct Host: Codable {
     
 //MARK: - Algorithm
     mutating func setAlgorithm(){
-        sortingStations()
+        sortStations()
         let columns = stations.count + countOfPVP
         algorithm = Array(repeating: Array(repeating: "-", count: columns), count: self.rounds)
         let size = teams.count
@@ -237,7 +241,7 @@ struct Host: Codable {
     }
     
     //sorted by pvp, pve
-    mutating func sortingStations(){
+    mutating func sortStations(){
         stations.sort { $0.pvp && !$1.pvp}
     }
     

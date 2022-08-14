@@ -8,7 +8,7 @@
 import Foundation
 
 class UserData {
+    static var gamecode: String?
     static var player: Player?
     static var team: Team?
-    static var gamecode: String?
 }
