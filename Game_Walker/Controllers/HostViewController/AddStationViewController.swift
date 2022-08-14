@@ -16,12 +16,5 @@ class AddStationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-    func addNewCell(with name: String) {
-        
-        setupRequest(gamecode: K.gamecode, station: Station?, gameTime: Int?, movingTime: Int?, rounds : Int?, request: setupRequestType)
-        stationNameData.append(name)
-        
-    }
 
 }

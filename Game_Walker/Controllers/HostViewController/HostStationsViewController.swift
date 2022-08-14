@@ -15,8 +15,6 @@ class HostStationsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         stationsTable.register(UINib(nibName:"StationTableViewCell",bundle:nil), forCellReuseIdentifier:"StationTableViewCell")
-        stationsTable.delegate = self
-        stationsTable.dataSource = self
     
         // Do any additional setup after loading the view.
     }
@@ -27,19 +25,15 @@ class HostStationsViewController: BaseViewController {
 //        setupRequest(gamecode: K.gamecode, station: Station?, gameTime: Int?, movingTime: Int?, rounds : Int?, request: setupRequestType)
 //        stationNameData.append(name)
 //
+////    }
+//}
+//extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
 //    }
-}
-extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stationNameData.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = stationsTable.dequeueReusableCell(withIdentifier: "StationTableViewCell", for: indexPath) as? StationTableViewCell else {return UITableViewCell()}
-        let cellData = stationNameData[indexPath.row]
-        cell.configure(stationName: cellData)
-        
-        return cell
-    }
-    
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//    }
+//
 }
