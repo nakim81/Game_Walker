@@ -8,8 +8,9 @@
 import UIKit
 
 class HostStationsViewController: BaseViewController {
-    @IBOutlet weak var stationsTable: UITableView!
+
     
+    @IBOutlet weak var stationsTable: UITableView!
     var stationArray = [Station]()
     
     override func viewDidLoad() {
@@ -20,6 +21,21 @@ class HostStationsViewController: BaseViewController {
     }
 
     
+}
+extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stationArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = stationsTable.dequeueReusableCell(withIdentifier: "StationTableViewCell", for: indexPath) as? StationTableViewCell else {return UITableViewCell()}
+        let cellData = stationArray[indexPath.row].name
+        cell.configure(stationName: cellData)
+        
+        return cell
+    }
+    
+
 //    func addNewCell(with name: String) {
 //
 //        setupRequest(gamecode: K.gamecode, station: Station?, gameTime: Int?, movingTime: Int?, rounds : Int?, request: setupRequestType)
@@ -36,4 +52,12 @@ class HostStationsViewController: BaseViewController {
 //
 //    }
 //
+
+}
+
+extension HostStationsViewController: DataUpdateListener {
+    func onDataUpdate(_ host: Host) {
+        stationArray = host.stations
+        stationsTable.reloadData()
+    }
 }

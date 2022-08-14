@@ -50,6 +50,7 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		6106B9662883EFD000BA3BB2 /* RefereeFrame3_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_1.swift; sourceTree = "<group>"; };
 		DA13EB88285806DD00368CF8 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +120,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A1C62CC22891270B0078C89E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				6106B9662883EFD000BA3BB2 /* RefereeFrame3_1.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		DA28D783284FF9CE00EA1B94 = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +135,7 @@
 				DA28D78D284FF9CE00EA1B94 /* Products */,
 				4332FA625A04330489170BE4 /* Pods */,
 				01C5611983B3CB1DBC626A36 /* Frameworks */,
-				DABC1EE9288F337F00C75DC7 /* Recovered References */,
+				A1C62CC22891270B0078C89E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,12 +353,16 @@
 			files = (
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
+				DABC1EB7288BAAC800C75DC7 /* GameManagerCollectionViewCell.swift in Sources */,
+				DABC1EBB288BAAC800C75DC7 /* AddStationViewController.swift in Sources */,
+				DA9662C3285AFA4700B66629 /* DataUpdateListener.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				DABC1EBE288BAAC800C75DC7 /* RefereeFrame3_1.swift in Sources */,
 				DABC1ECF288BAAC800C75DC7 /* TimerViewController.swift in Sources */,
 				DABC1ECB288BAAC800C75DC7 /* JoinTeamViewController.swift in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
@@ -504,7 +517,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
+				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -535,7 +548,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
+				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -18,7 +18,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="StationTableViewCell" customModule="Game_Walker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" customClass="StationTableViewCell" customModule="Game_Walker" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -33,9 +33,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="stationLabel" destination="6FH-Sa-Z9K" id="z8e-c5-BrT"/>
+                <outlet property="stationLabel" destination="6FH-Sa-Z9K" id="Qzs-SB-PJR"/>
             </connections>
-            <point key="canvasLocation" x="-265" y="168"/>
+            <point key="canvasLocation" x="42" y="141"/>
         </tableViewCell>
     </objects>
 </document>
