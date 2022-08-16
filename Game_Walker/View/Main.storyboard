@@ -44,7 +44,6 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="Host button 2 1"/>
                                         <connections>
-                                            <action selector="hostButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="orM-m7-A1w"/>
                                             <segue destination="GeJ-fL-EuW" kind="show" id="pte-cV-bqH"/>
                                         </connections>
                                     </button>
@@ -73,10 +72,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Nj-Y1-Ljk"/>
-                    <connections>
-                        <outlet property="playerButton" destination="15D-kC-3Ti" id="UOf-Su-nZP"/>
-                        <outlet property="refereeButton" destination="3tL-zp-Xl0" id="ret-EI-iAo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

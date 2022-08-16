@@ -20,8 +20,8 @@ struct T {
     static var delegates : [TeamUpdateListener] = []
     
 
-    static func readTeam(gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-        listener = db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
+    static func listenTeam(_ gamecode: String, _ team: Team, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+        listener = db.collection("\(gamecode) : Teams").document(team.name).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else { return }
             guard let data = document.data() else { return }
             let team = convertDataToTeam(data)

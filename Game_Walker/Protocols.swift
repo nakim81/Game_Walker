@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol DataUpdateListener {
-    func onDataUpdate(_ host: Host)
-}
-
 protocol GetReferee {
     func getReferee(_ referee: Referee)
 }
