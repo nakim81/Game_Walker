@@ -12,7 +12,6 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 class MainViewController: UIViewController {
-   
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -25,7 +25,7 @@ protocol StationList {
 }
 
 protocol TeamUpdateListener {
-    func updateTeam(_ team: Team)
+    func updateTeams(_ teams: [Team])
 }
 
 protocol GetTeam {
