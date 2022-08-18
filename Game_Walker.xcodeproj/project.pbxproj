@@ -25,11 +25,6 @@
 		DA4212D128A8B2F0000A395F /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C828A8B2F0000A395F /* AddStationViewController.swift */; };
 		DA4212D228A8B2F0000A395F /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C928A8B2F0000A395F /* HostCreateOrJoinViewController.swift */; };
 		DA4212D328A8B2F0000A395F /* GameManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212CA28A8B2F0000A395F /* GameManagerViewController.swift */; };
-		DA4212DA28A8B2FD000A395F /* RefereeFrame3_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212D528A8B2FD000A395F /* RefereeFrame3_3.swift */; };
-		DA4212DB28A8B2FD000A395F /* RefereeFrame2_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212D628A8B2FD000A395F /* RefereeFrame2_1.swift */; };
-		DA4212DC28A8B2FD000A395F /* RefereeFrame3_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212D728A8B2FD000A395F /* RefereeFrame3_2.swift */; };
-		DA4212DD28A8B2FD000A395F /* RefereeFrame1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212D828A8B2FD000A395F /* RefereeFrame1.swift */; };
-		DA4212DE28A8B2FD000A395F /* RefereeFrame2_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212D928A8B2FD000A395F /* RefereeFrame2_2.swift */; };
 		DA96397028A33CDA00853F05 /* Host_Modified.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96396F28A33CDA00853F05 /* Host_Modified.swift */; };
 		DA9662C1285AA39200B66629 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C0285AA39200B66629 /* Constants.swift */; };
 		DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9662C2285AFA4700B66629 /* Protocols.swift */; };
@@ -81,11 +76,6 @@
 		DA4212C828A8B2F0000A395F /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
 		DA4212C928A8B2F0000A395F /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		DA4212CA28A8B2F0000A395F /* GameManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerViewController.swift; sourceTree = "<group>"; };
-		DA4212D528A8B2FD000A395F /* RefereeFrame3_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_3.swift; sourceTree = "<group>"; };
-		DA4212D628A8B2FD000A395F /* RefereeFrame2_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame2_1.swift; sourceTree = "<group>"; };
-		DA4212D728A8B2FD000A395F /* RefereeFrame3_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame3_2.swift; sourceTree = "<group>"; };
-		DA4212D828A8B2FD000A395F /* RefereeFrame1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame1.swift; sourceTree = "<group>"; };
-		DA4212D928A8B2FD000A395F /* RefereeFrame2_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefereeFrame2_2.swift; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host_Modified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Host_Modified.swift; sourceTree = "<group>"; };
 		DA9662C0285AA39200B66629 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DA9662C2285AFA4700B66629 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -204,7 +194,6 @@
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
 				DABC1EAB288BAAC800C75DC7 /* PlayerViewControllers */,
-				DA4212D428A8B2FD000A395F /* RefereeViewControllers */,
 				DA4212C128A8B2F0000A395F /* HostViewController */,
 			);
 			name = Controllers;
@@ -239,43 +228,31 @@
 		DA4212C128A8B2F0000A395F /* HostViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DA4212C228A8B2F0000A395F /* StationTableViewCell.xib */,
+				DA4212C928A8B2F0000A395F /* HostCreateOrJoinViewController.swift */,
 				DA4212C328A8B2F0000A395F /* HostGameCodeViewController.swift */,
-				DA4212C428A8B2F0000A395F /* GameManagerCollectionViewCell.swift */,
 				DA4212C528A8B2F0000A395F /* HostStationsViewController.swift */,
-				DA4212C628A8B2F0000A395F /* GameManagerCollectionViewCell.xib */,
+				DA4212C228A8B2F0000A395F /* StationTableViewCell.xib */,
 				DA4212C728A8B2F0000A395F /* StationTableViewCell.swift */,
 				DA4212C828A8B2F0000A395F /* AddStationViewController.swift */,
-				DA4212C928A8B2F0000A395F /* HostCreateOrJoinViewController.swift */,
 				DA4212CA28A8B2F0000A395F /* GameManagerViewController.swift */,
+				DA4212C628A8B2F0000A395F /* GameManagerCollectionViewCell.xib */,
+				DA4212C428A8B2F0000A395F /* GameManagerCollectionViewCell.swift */,
 			);
 			name = HostViewController;
 			path = Controllers/HostViewController;
 			sourceTree = "<group>";
 		};
-		DA4212D428A8B2FD000A395F /* RefereeViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				DA4212D528A8B2FD000A395F /* RefereeFrame3_3.swift */,
-				DA4212D628A8B2FD000A395F /* RefereeFrame2_1.swift */,
-				DA4212D728A8B2FD000A395F /* RefereeFrame3_2.swift */,
-				DA4212D828A8B2FD000A395F /* RefereeFrame1.swift */,
-				DA4212D928A8B2FD000A395F /* RefereeFrame2_2.swift */,
-			);
-			path = RefereeViewControllers;
-			sourceTree = "<group>";
-		};
 		DABC1EAB288BAAC800C75DC7 /* PlayerViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DABC1EAC288BAAC800C75DC7 /* TeamViewController.swift */,
-				DABC1EAD288BAAC800C75DC7 /* RankingViewController.swift */,
+				DABC1EB2288BAAC800C75DC7 /* JoinGameViewController.swift */,
+				DABC1EB1288BAAC800C75DC7 /* CreateOrJoinTeamViewController.swift */,
+				DABC1EB3288BAAC800C75DC7 /* CreateTeamViewController.swift */,
+				DABC1EB0288BAAC800C75DC7 /* JoinTeamViewController.swift */,
 				DABC1EAE288BAAC800C75DC7 /* TeamIconCollectionViewCell.swift */,
 				DABC1EAF288BAAC800C75DC7 /* PlayerTabBarController.swift */,
-				DABC1EB0288BAAC800C75DC7 /* JoinTeamViewController.swift */,
-				DABC1EB1288BAAC800C75DC7 /* CreateOrJoinTeamViewController.swift */,
-				DABC1EB2288BAAC800C75DC7 /* JoinGameViewController.swift */,
-				DABC1EB3288BAAC800C75DC7 /* CreateTeamViewController.swift */,
+				DABC1EAC288BAAC800C75DC7 /* TeamViewController.swift */,
+				DABC1EAD288BAAC800C75DC7 /* RankingViewController.swift */,
 				DABC1EB4288BAAC800C75DC7 /* TimerViewController.swift */,
 			);
 			name = PlayerViewControllers;
@@ -405,7 +382,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA4212DE28A8B2FD000A395F /* RefereeFrame2_2.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				DA4212D028A8B2F0000A395F /* StationTableViewCell.swift in Sources */,
@@ -414,7 +390,6 @@
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
-				DA4212DD28A8B2FD000A395F /* RefereeFrame1.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				DABC1ECF288BAAC800C75DC7 /* TimerViewController.swift in Sources */,
@@ -426,12 +401,10 @@
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
 				DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
-				DA4212DC28A8B2FD000A395F /* RefereeFrame3_2.swift in Sources */,
 				DA4212CE28A8B2F0000A395F /* HostStationsViewController.swift in Sources */,
 				DA4212CC28A8B2F0000A395F /* HostGameCodeViewController.swift in Sources */,
 				DABC1EC9288BAAC800C75DC7 /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
-				DA4212DB28A8B2FD000A395F /* RefereeFrame2_1.swift in Sources */,
 				DA4212D228A8B2F0000A395F /* HostCreateOrJoinViewController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
@@ -446,7 +419,6 @@
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DABC1ECC288BAAC800C75DC7 /* CreateOrJoinTeamViewController.swift in Sources */,
 				DABC1EC8288BAAC800C75DC7 /* RankingViewController.swift in Sources */,
-				DA4212DA28A8B2FD000A395F /* RefereeFrame3_3.swift in Sources */,
 				DA4212D128A8B2F0000A395F /* AddStationViewController.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
 				DABC1EC7288BAAC800C75DC7 /* TeamViewController.swift in Sources */,
