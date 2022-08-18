@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Host2: Codable {
+struct Host: Codable {
     var gamecode : String = ""
     var gameTime : Int = 0
     var movingTime : Int = 0
