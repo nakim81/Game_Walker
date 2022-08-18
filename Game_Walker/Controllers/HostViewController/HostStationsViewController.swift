@@ -11,7 +11,7 @@ class HostStationsViewController: BaseViewController {
 
     
     @IBOutlet weak var stationsTable: UITableView!
-    var stationArray = [Station]()
+    var stationArray = [Station] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +55,10 @@ extension HostStationsViewController: UITableViewDelegate, UITableViewDataSource
 
 }
 
-extension HostStationsViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        stationArray = host.stations
+
+extension HostStationsViewController: StationList {
+    func listOfStations(_ stations: [Station]) {
+        stationArray = S.getStationList(UserData.gamecode!)
         stationsTable.reloadData()
     }
-}
-
-extension HostStationsViewController: Station_Database {
-    stationArray = S.getStationList()
 }
