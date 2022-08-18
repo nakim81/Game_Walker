@@ -61,3 +61,7 @@ extension HostStationsViewController: DataUpdateListener {
         stationsTable.reloadData()
     }
 }
+
+extension HostStationsViewController: Station_Database {
+    stationArray = S.getStationList()
+}

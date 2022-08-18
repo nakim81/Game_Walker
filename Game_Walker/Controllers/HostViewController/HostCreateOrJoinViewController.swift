@@ -12,6 +12,8 @@ class HostCreateOrJoinViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        T.delegates.append(self)
+        
     }
     
     func listen(_ _ : [String : Any]){
@@ -20,9 +22,9 @@ class HostCreateOrJoinViewController: BaseViewController {
 
     @IBAction func createButtonPressed(_ sender: UIButton) {
         var gc = String(Int.random(in: 100000 ... 999999))
-        let host = Host2(gamecode: K.gamecode)
-        print(K.gamecode)
-        K.Database.createGame(gc, host)
+        let host = Host(gamecode: gc)
+        H.createGame(gc, host)
+        UserData.gamecode = gc
         
     }
     
