@@ -45,6 +45,7 @@
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
+		FC34421528AB16D5008468A2 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34421428AB16D5008468A2 /* TeamTableViewCell.swift */; };
 		FCBFF1B828A8C17200925571 /* RefereeViewControllers in Resources */ = {isa = PBXBuildFile; fileRef = FCBFF1B728A8C17200925571 /* RefereeViewControllers */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
+		FC34421428AB16D5008468A2 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		FC5BDC0B28A8C35D005599DE /* StationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationTableViewCell.xib; sourceTree = "<group>"; };
 		FC5BDC0C28A8C35D005599DE /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
 		FC5BDC0D28A8C35D005599DE /* GameManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				DABC1EB3288BAAC800C75DC7 /* CreateTeamViewController.swift */,
 				DABC1EB0288BAAC800C75DC7 /* JoinTeamViewController.swift */,
 				DABC1EAE288BAAC800C75DC7 /* TeamIconCollectionViewCell.swift */,
+				FC34421428AB16D5008468A2 /* TeamTableViewCell.swift */,
 				DABC1EAF288BAAC800C75DC7 /* PlayerTabBarController.swift */,
 				DABC1EAC288BAAC800C75DC7 /* TeamViewController.swift */,
 				DABC1EAD288BAAC800C75DC7 /* RankingViewController.swift */,
@@ -390,6 +393,7 @@
 				DA96397028A33CDA00853F05 /* Host_Modified.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
+				FC34421528AB16D5008468A2 /* TeamTableViewCell.swift in Sources */,
 				DABC1ECD288BAAC800C75DC7 /* JoinGameViewController.swift in Sources */,
 				DA13EB89285806DD00368CF8 /* Host.swift in Sources */,
 				DABC1EC9288BAAC800C75DC7 /* TeamIconCollectionViewCell.swift in Sources */,
@@ -537,7 +541,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -552,7 +556,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -568,7 +572,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -583,7 +587,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

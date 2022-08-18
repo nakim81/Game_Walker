@@ -91,5 +91,15 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - TeamProtocols
-extension JoinTeamViewController: 
+extension JoinTeamViewController: TeamUpdateListener {
+    func updateTeam(_ team: Team) {
+        
+    }
+}
+
+extension JoinTeamViewController: TeamList {
+    func listOfTeams(_ teams: [Team]) {
+        self.teams = teams
+    }
+}
 

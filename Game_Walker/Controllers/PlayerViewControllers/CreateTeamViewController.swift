@@ -38,10 +38,9 @@ class CreateTeamViewController: BaseViewController {
         teamNameTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         configureCollectionView()
-        T.readTeam(gamecode: UserData.gamecode, onListenerUpdate: listen(_ :))
     }
     
-    func listen(_ _ : [String : Any]){}
+    private func listen(_ _ : [String : Any]){}
     
     private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -62,7 +61,7 @@ class CreateTeamViewController: BaseViewController {
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
             let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: nil, referee: nil, team: newTeam, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addTeam)
+            T.addTeam(UserData.gamecode!, newTeam)
             
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {
@@ -126,4 +125,9 @@ extension CreateTeamViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: -
+// MARK: - ReadTeam
+extension CreateTeamViewController: TeamUpdateListener {
+    func updateTeam(_ team: Team) {
+        
+    }
+}

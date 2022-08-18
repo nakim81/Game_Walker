@@ -74,8 +74,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="9Nj-Y1-Ljk"/>
                     <connections>
-                        <outlet property="playerButton" destination="15D-kC-3Ti" id="UOf-Su-nZP"/>
-                        <outlet property="refereeButton" destination="3tL-zp-Xl0" id="ret-EI-iAo"/>
+                        <outlet property="hostButton" destination="fHc-CG-zIU" id="lC1-tT-mhe"/>
+                        <outlet property="playerButton" destination="15D-kC-3Ti" id="bO3-gE-v9O"/>
+                        <outlet property="refreeButton" destination="3tL-zp-Xl0" id="y1n-uf-ePa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
