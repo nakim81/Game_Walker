@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol DataUpdateListener {
-    func onDataUpdate(_ host: Host)
-}
-
 protocol GetReferee {
     func getReferee(_ referee: Referee)
 }
@@ -29,7 +25,7 @@ protocol StationList {
 }
 
 protocol TeamUpdateListener {
-    func updateTeam(_ team: Team)
+    func updateTeams(_ teams: [Team])
 }
 
 protocol GetTeam {
