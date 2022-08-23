@@ -27,8 +27,7 @@ class HostGameCodeViewController: BaseViewController {
         if (gamecode.isEmpty) {
             alert(title: "No Input",message:"You haven't entered a code!")
         } else {
-            K.gamecode = tempgamecode
-            K.Database.readHost(gamecode: K.gamecode, onListenerUpdate: listen(_:))
+            UserData.gamecode = tempgamecode
             
         }
     }
@@ -39,10 +38,3 @@ extension HostGameCodeViewController: UITextFieldDelegate {
 
 }
 
-extension HostGameCodeViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-    }
-}
-
-func listen(_ _ : [String : Any]){
-}
