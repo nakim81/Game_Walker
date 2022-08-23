@@ -18,18 +18,10 @@ class StationsTableViewController: BaseViewController {
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.delegate = self
         stationTable.dataSource = self
+        S.delegate_stationList = self
+        S.getStationList(UserData.gamecode!)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -49,5 +41,13 @@ extension StationsTableViewController: UITableViewDataSource {
         return cell
     }
     
+    
+}
+
+extension StationsTableViewController: StationList {
+    func listOfStations(_ stations: [Station]) {
+        currentStations = stations
+        stationTable.reloadData()
+    }
     
 }

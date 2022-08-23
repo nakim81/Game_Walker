@@ -95,9 +95,11 @@ class AddStationViewController: BaseViewController {
             alert(title:"Game Type Not Specified", message: "Please select either PVP or PVE")
         }
         
-        let stationToAdd = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules, teams:[], referee: referee)
         
-        K.Database.setupRequest(gamecode: K.gamecode, station: stationToAdd, request: .addStation)
+        let ref = Referee(gamecode: UserData.gamecode!, name: referee, stationName: gamename, assigned: true)
+        let stationToAdd = Station(name:UserData.gamecode!, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules, referee: ref)
+        
+        S.addStation(gamecode: UserData.gamecode!, station: stationToAdd)
     }
     
 }
