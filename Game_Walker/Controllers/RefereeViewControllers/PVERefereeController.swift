@@ -55,22 +55,3 @@ extension PVERefereeController: GetStation {
         teamOrder = station.teamOrder
     }
 }
-//MARK: - UIUpdate
-extension PVERefereeController: GetReferee {
-    func getReferee(_ referee: Referee) {
-        if referee.na
-    }
-}
-//MARK: - UIUpdate
-extension PVERefereeController: GetStation {
-    func getStation(_ station: Station) {
-        stationName = station.name
-        teamOrder = station.teamOrder
-    }
-}
-//MARK: - UIUpdate
-extension PVERefereeController: GetTeam {
-    func getTeam(_ team: Team) {
-        teamOrder = 
-    }
-}

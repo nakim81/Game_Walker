@@ -241,6 +241,8 @@
 				DA42134828B47D5D000A395F /* RegisterController.swift */,
 				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
+				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
+				DA42134928B47D5D000A395F /* RulesViewController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
 				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
 				DA42134928B47D5D000A395F /* RulesViewController.swift */,
