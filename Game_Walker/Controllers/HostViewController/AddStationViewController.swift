@@ -99,7 +99,7 @@ class AddStationViewController: BaseViewController {
         let ref = Referee(gamecode: UserData.gamecode!, name: referee, stationName: gamename, assigned: true)
         let stationToAdd = Station(name:UserData.gamecode!, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules, referee: ref)
         
-        S.addStation(gamecode: UserData.gamecode!, station: stationToAdd)
+        S.addStation(UserData.gamecode!, stationToAdd)
     }
     
 }
