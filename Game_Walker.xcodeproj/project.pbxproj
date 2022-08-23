@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+
+		61097C7628A8D17200E68C01 /* PVPGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7028A8D17200E68C01 /* PVPGivePointsController.swift */; };
+		61097C7728A8D17200E68C01 /* PVERefereeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7128A8D17200E68C01 /* PVERefereeController.swift */; };
+		61097C7828A8D17200E68C01 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7228A8D17200E68C01 /* RegisterController.swift */; };
+		61097C7928A8D17200E68C01 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7328A8D17200E68C01 /* RulesViewController.swift */; };
+		61097C7A28A8D17200E68C01 /* PVPRefereeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7428A8D17200E68C01 /* PVPRefereeController.swift */; };
+		61097C7B28A8D17200E68C01 /* PVEGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61097C7528A8D17200E68C01 /* PVEGivePointsController.swift */; };
 		A145668228AEE76200C3E37B /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A145668028AEE76200C3E37B /* HostStationsTableViewCell.swift */; };
 		A145668328AEE76200C3E37B /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A145668128AEE76200C3E37B /* HostStationsTableViewCell.xib */; };
 		A19189FA28AEE39300AF94B2 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19189F928AEE39300AF94B2 /* StationsTableViewController.swift */; };
@@ -19,6 +26,8 @@
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
 		DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA28D798284FF9D300EA1B94 /* Assets.xcassets */; };
 		DA4212CC28A8B2F0000A395F /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C328A8B2F0000A395F /* HostGameCodeViewController.swift */; };
+		DA4212CE28A8B2F0000A395F /* HostStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C528A8B2F0000A395F /* HostStationsViewController.swift */; };
+		DA4212D028A8B2F0000A395F /* StationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C728A8B2F0000A395F /* StationTableViewCell.swift */; };
 		DA4212D128A8B2F0000A395F /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C828A8B2F0000A395F /* AddStationViewController.swift */; };
 		DA4212D228A8B2F0000A395F /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4212C928A8B2F0000A395F /* HostCreateOrJoinViewController.swift */; };
 		DA96397028A33CDA00853F05 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96396F28A33CDA00853F05 /* Host.swift */; };
@@ -57,6 +66,12 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		61097C7028A8D17200E68C01 /* PVPGivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVPGivePointsController.swift; sourceTree = "<group>"; };
+		61097C7128A8D17200E68C01 /* PVERefereeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVERefereeController.swift; sourceTree = "<group>"; };
+		61097C7228A8D17200E68C01 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		61097C7328A8D17200E68C01 /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		61097C7428A8D17200E68C01 /* PVPRefereeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVPRefereeController.swift; sourceTree = "<group>"; };
+		61097C7528A8D17200E68C01 /* PVEGivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVEGivePointsController.swift; sourceTree = "<group>"; };
 		A145668028AEE76200C3E37B /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
 		A145668128AEE76200C3E37B /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
 		A19189F928AEE39300AF94B2 /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +158,20 @@
 				E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		61097C6F28A8D17200E68C01 /* RefereeViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				61097C7228A8D17200E68C01 /* RegisterController.swift */,
+				61097C7128A8D17200E68C01 /* PVERefereeController.swift */,
+				61097C7428A8D17200E68C01 /* PVPRefereeController.swift */,
+				61097C7528A8D17200E68C01 /* PVEGivePointsController.swift */,
+				61097C7028A8D17200E68C01 /* PVPGivePointsController.swift */,
+				61097C7328A8D17200E68C01 /* RulesViewController.swift */,
+			);
+			name = RefereeViewControllers;
+			path = Controllers/PlayerViewControllers/RefereeViewControllers;
 			sourceTree = "<group>";
 		};
 		A1C62CC22891270B0078C89E /* Recovered References */ = {
@@ -414,10 +443,16 @@
 				FC7B96B828B46D12003A35C8 /* TeamViewController.swift in Sources */,
 				A19189FA28AEE39300AF94B2 /* StationsTableViewController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
+				61097C7728A8D17200E68C01 /* PVERefereeController.swift in Sources */,
+				DA4212D028A8B2F0000A395F /* StationTableViewCell.swift in Sources */,
 				FC7B96BE28B46D12003A35C8 /* TeamTableViewCell.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
+				61097C7928A8D17200E68C01 /* RulesViewController.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
+				A1E3DDB52880F506008D7060 /* (null) in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				61097C7A28A8D17200E68C01 /* PVPRefereeController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				FC7B96C028B46D12003A35C8 /* CreateTeamViewController.swift in Sources */,
@@ -442,6 +477,13 @@
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
 				FC7B96BB28B46D12003A35C8 /* PlayerTabBarController.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
+				61097C7828A8D17200E68C01 /* RegisterController.swift in Sources */,
+				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
+				DA4212D128A8B2F0000A395F /* AddStationViewController.swift in Sources */,
+				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
+				61097C7628A8D17200E68C01 /* PVPGivePointsController.swift in Sources */,
+				DA9662C1285AA39200B66629 /* Host_Database.swift in Sources */,
+				61097C7B28A8D17200E68C01 /* PVEGivePointsController.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DA4212D128A8B2F0000A395F /* AddStationViewController.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
