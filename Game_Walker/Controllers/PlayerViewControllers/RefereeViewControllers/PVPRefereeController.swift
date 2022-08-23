@@ -8,37 +8,24 @@
 import Foundation
 import UIKit
 
-class RefereeFrame2_2: UIViewController {
+class PVPRefereeController: UIViewController {
+    
     @IBOutlet weak var roundLabel: UILabel!
-    
     @IBOutlet weak var scoreButton1: UIButton!
-    
     @IBOutlet weak var teamnameLabel: UILabel!
-    
     @IBOutlet weak var scoreLabel1: UILabel!
-    
     @IBOutlet weak var scoreButton2: UIButton!
-    
     @IBOutlet weak var teamnameLabel2: UILabel!
-    
     @IBOutlet weak var scoreLabel2: UILabel!
-    
     @IBOutlet weak var ruleButton: UIButton!
-    
     @IBOutlet weak var nextgameButton: UIButton!
-    
     var round = 1
-    
-    var station : Station = Station()
-    
+    var stationName = ""
     var index = 0
+    var teamOrder : [Team] = []
     
-    var algorithm : [[String]] = []
-    
-    var teams : [Team] = []
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
@@ -60,30 +47,19 @@ class RefereeFrame2_2: UIViewController {
     @IBAction func nextGamePressed(_ sender: UIButton) {
         round += 1
         roundLabel.text = "Round " + "\(round)"
-        let integervariable = Int(algorithm[round][index]) ?? 0
-        scoreButton1.setImage(UIImage(named: teams[integervariable].iconName), for: .normal)
-        teamnameLabel.text = teams[integervariable].name
-        scoreLabel1.text = String(teams[integervariable].points)
-        scoreButton2.setImage(UIImage(named: teams[integervariable + 1].iconName), for: .normal)
-        teamnameLabel2.text = teams[integervariable + 1].name
-        scoreLabel2.text = String(teams[integervariable + 1].points)
+        index += 1
+        scoreButton1.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+        teamnameLabel.text = teamOrder[index].name
+        scoreLabel1.text = String(teamOrder[index].points)
+        scoreButton2.setImage(UIImage(named: teamOrder[index + 1].iconName), for: .normal)
+        teamnameLabel2.text = teamOrder[index + 1].name
+        scoreLabel2.text = String(teamOrder[index + 1].points)
     }
 }
 //MARK: - UIUpdate
-extension RefereeFrame2_2: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        for referee in host.referees {
-            if referee.name == RefereeFrame1().name {
-                station = referee.station
-            }
-        }
-        for item in host.stations {
-            index += 1
-            if station == item {
-                break
-            }
-        }
-        algorithm = host.algorithm
-        print("ondataupdate: \(host.gamecode)")
+extension PVPRefereeController: GetStation {
+    func getStation(_ station: Station) {
+        stationName = station.name
+        teamOrder = station.teamOrder
     }
 }
