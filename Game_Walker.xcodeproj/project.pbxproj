@@ -443,6 +443,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
+				DA42133828B46E70000A395F /* RefereeFrame2_1.swift in Sources */,
+				DA42134428B46E70000A395F /* GameManagerViewController.swift in Sources */,
+				DA42132D28B46E70000A395F /* TeamViewController.swift in Sources */,
+				A19189FA28AEE39300AF94B2 /* StationsTableViewController.swift in Sources */,
+				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
+				DA42133328B46E70000A395F /* TeamTableViewCell.swift in Sources */,
 
 				FC7B96B828B46D12003A35C8 /* TeamViewController.swift in Sources */,
 				A19189FA28AEE39300AF94B2 /* StationsTableViewController.swift in Sources */,
