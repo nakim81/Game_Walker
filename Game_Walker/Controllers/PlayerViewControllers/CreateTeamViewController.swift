@@ -33,7 +33,6 @@ class CreateTeamViewController: BaseViewController {
     private var selectedIndex : Int?
     
     override func viewDidLoad() {
-        T.delegates.append(self)
         super.viewDidLoad()
         teamNameTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
@@ -122,12 +121,5 @@ extension CreateTeamViewController: UITextFieldDelegate {
            createTeamButtonPressed(createTeamButton)
         }
         return true
-    }
-}
-
-// MARK: - ReadTeam
-extension CreateTeamViewController: TeamUpdateListener {
-    func updateTeam(_ team: Team) {
-        
     }
 }

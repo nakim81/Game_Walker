@@ -20,7 +20,6 @@ class JoinTeamViewController: BaseViewController {
     
     
     override func viewDidLoad() {
-        T.delegates.append(self)
         super.viewDidLoad()
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
@@ -33,7 +32,7 @@ class JoinTeamViewController: BaseViewController {
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: UserData.player, referee: nil, team: teams[selectedIndex], station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
+            T.joinTeam(UserData.gamecode!, teams[selectedIndex].name, UserData.player!)
 
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {
@@ -91,12 +90,6 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - TeamProtocols
-extension JoinTeamViewController: TeamUpdateListener {
-    func updateTeam(_ team: Team) {
-        
-    }
-}
-
 extension JoinTeamViewController: TeamList {
     func listOfTeams(_ teams: [Team]) {
         self.teams = teams
