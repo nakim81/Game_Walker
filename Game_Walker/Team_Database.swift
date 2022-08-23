@@ -19,14 +19,16 @@ struct T {
     static var delegate_getTeam: GetTeam?
     static var delegates : [TeamUpdateListener] = []
     
-
-    static func readTeam(gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-        listener = db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else { return }
-            guard let data = document.data() else { return }
-            let team = convertDataToTeam(data)
+    
+    static func listenTeams(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+         db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
+             guard let documents = querySnapshot?.documents else { return }
+             var teams: [Team] = []
+             for document in documents {
+                 teams.append(convertDataToTeam(document.data()))
+             }
             for delegate in delegates {
-                delegate.updateTeam(team)
+                delegate.updateTeams(teams)
             }
         }
     }
