@@ -42,8 +42,8 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Create game button 1"/>
                                 <connections>
-                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="byw-ge-8ur"/>
-                                    <segue destination="1L0-Oz-afr" kind="show" id="xeg-ta-exu"/>
+                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
+                                    <segue destination="1L0-Oz-afr" kind="show" id="wjt-AD-E3u"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-275" y="96"/>
+            <point key="canvasLocation" x="-275.36231884057975" y="95.758928571428569"/>
         </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">

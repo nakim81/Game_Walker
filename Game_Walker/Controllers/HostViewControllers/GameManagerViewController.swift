@@ -38,13 +38,13 @@ extension GameManagerViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
-extension GameManagerViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        //host로 하고 싶은거 하셈
-//        scoreLabel.text = host.score
-//        nextPlaceLabel.text = host.nextPlaceLabel
-        print("Gamecode: \(host.gamecode)")
-        
-    }
-    
-}
+//extension GameManagerViewController: DataUpdateListener {
+//    func onDataUpdate(_ host: Host) {
+//        //host로 하고 싶은거 하셈
+////        scoreLabel.text = host.score
+////        nextPlaceLabel.text = host.nextPlaceLabel
+//        print("Gamecode: \(host.gamecode)")
+//
+//    }
+//
+//}
