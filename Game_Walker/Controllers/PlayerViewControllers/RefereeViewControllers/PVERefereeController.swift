@@ -17,17 +17,16 @@ class PVERefereeController: UIViewController {
     @IBOutlet weak var ruleButton: UIButton!
     @IBOutlet weak var nextgameButton: UIButton!
     var round = 1
-    var station : Station = Station()
+    var stationName = ""
     var index = 0
-    var algorithm : [[String]] = []
-    var teams : [Team] = []
+    var teamOrder : [Team] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         roundLabel.text = "Round 1"
-        scoreButton.setImage(UIImage(named: station.teams[0].iconName), for: .normal)
-        teamnameLabel.text = station.teams[0].name
-        teamscoreLabel.text = String(station.teams[0].points)
+        scoreButton.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
+        teamnameLabel.text = teamOrder[0].name
+        teamscoreLabel.text = String(teamOrder[0].points)
     
     }
     
@@ -42,29 +41,17 @@ class PVERefereeController: UIViewController {
     @IBAction func nextgameButtonPressed(_ sender: UIButton) {
         round += 1
         roundLabel.text = "Round " + "\(round)"
-        let integervariable = Int(algorithm[round][index]) ?? 0
-        scoreButton.setImage(UIImage(named: teams[integervariable].iconName), for: .normal)
-        teamnameLabel.text = teams[integervariable].name
-        teamscoreLabel.text = String(teams[integervariable].points)
+        index += 1
+        scoreButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+        teamnameLabel.text = teamOrder[index].name
+        teamscoreLabel.text = String(teamOrder[index].points)
     }
 }
 
 //MARK: - UIUpdate
-extension PVERefereeController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        for referee in host.referees {
-            if referee.name == RegisterController().name {
-                station = referee.station
-            }
-        }
-        for item in host.stations {
-            index += 1
-            if station == item {
-                break
-            }
-        }
-        teams = host.teams
-        algorithm = host.algorithm
-        print("ondataupdate: \(host.gamecode)")
+extension PVERefereeController: GetStation {
+    func getStation(_ station: Station) {
+        stationName = station.name
+        teamOrder = station.teamOrder
     }
 }

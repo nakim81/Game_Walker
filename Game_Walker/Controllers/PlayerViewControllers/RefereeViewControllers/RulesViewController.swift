@@ -11,36 +11,32 @@ import UIKit
 class RulesViewController: UIViewController {
     
     @IBOutlet weak var gamenameLabel: UITextField!
-    
     @IBOutlet weak var gamepointsLabel: UITextField!
-    
     @IBOutlet weak var gamelocationLabel: UITextField!
-    
     @IBOutlet weak var rulesLabel: UITextField!
-    
-    var station : Station = Station()
+    var stationName = ""
+    var points = 0
+    var place = ""
+    var explanation = ""
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        gamenameLabel.text = station.name
-        gamepointsLabel.text = String(station.points)
-        gamelocationLabel.text = station.place
-        rulesLabel.text = station.description
+        gamenameLabel.text = stationName
+        gamepointsLabel.text = String(points)
+        gamelocationLabel.text = place
+        rulesLabel.text = explanation
         // Do any additional setup after loading the view.
         
     }
 }
 
 //MARK: - UIUpdate
-extension RulesViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        for referee in host.referees {
-            if referee.name == RegisterController().name {
-                station = referee.station
-            }
-        }
-        print("ondataupdate: \(host.gamecode)")
+extension RulesViewController: GetStation {
+    func getStation(_ station: Station) {
+        stationName = station.name
+        points = station.points
+        place = station.place
+        explanation = station.description
     }
 }
-
