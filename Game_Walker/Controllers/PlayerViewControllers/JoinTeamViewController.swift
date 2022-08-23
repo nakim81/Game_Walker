@@ -21,20 +21,18 @@ class JoinTeamViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        K.Database.delegates.append(self)
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
-        K.Database.getHost(gamecode: UserData.gamecode!)
     }
 
 
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: UserData.player, referee: nil, team: teams[selectedIndex], station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
+            T.joinTeam(UserData.gamecode!, teams[selectedIndex].name, UserData.player!)
 
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {
@@ -91,11 +89,10 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - UIUpdate
-extension JoinTeamViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        teams = host.teams
-        collectionView.reloadData()
+//MARK: - TeamProtocols
+extension JoinTeamViewController: TeamList {
+    func listOfTeams(_ teams: [Team]) {
+        self.teams = teams
     }
 }
 

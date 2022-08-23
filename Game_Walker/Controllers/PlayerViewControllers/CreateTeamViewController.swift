@@ -39,6 +39,8 @@ class CreateTeamViewController: BaseViewController {
         configureCollectionView()
     }
     
+    private func listen(_ _ : [String : Any]){}
+    
     private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
         collectionView.collectionViewLayout = layout
@@ -50,18 +52,15 @@ class CreateTeamViewController: BaseViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        
         teamNameTextField.resignFirstResponder()
-        
         guard let selectedIconName = selectedIconName else {
             alert(title: "No Icon Selected", message: "Please select a team icon")
             return
         }
-
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
             let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: nil, referee: nil, team: newTeam, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addTeam)
+            T.addTeam(UserData.gamecode!, newTeam)
             
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {

@@ -11,7 +11,12 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
+   
+    @IBOutlet weak var playerButton: UIButton!
+    @IBOutlet weak var refreeButton: UIButton!
+    @IBOutlet weak var hostButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
