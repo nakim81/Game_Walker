@@ -25,13 +25,8 @@ class RegisterController: BaseViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
-<<<<<<< Updated upstream
             let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
             R.addReferee(gamecode, newReferee)
-=======
-            let newReferee = Referee(gamecode: gamecode, name: name, stationName: "")
-            K.Database.setupRequest(gamecode: newReferee.gamecode, player: nil, referee: newReferee, team: nil, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addReferee)
->>>>>>> Stashed changes
         }
         if pvp {
             performSegue(withIdentifier: "goToPVP", sender: self)
