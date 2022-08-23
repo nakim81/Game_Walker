@@ -238,12 +238,12 @@
 		DA42134528B47D5D000A395F /* RefereeViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
-				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134828B47D5D000A395F /* RegisterController.swift */,
-				DA42134928B47D5D000A395F /* RulesViewController.swift */,
+				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
+				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
+				DA42134928B47D5D000A395F /* RulesViewController.swift */,
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
@@ -252,15 +252,15 @@
 		DA42137828B47DD4000A395F /* HostViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA42137F28B47DD4000A395F /* HostCreateOrJoinViewController.swift */,
 				DA42137928B47DD4000A395F /* HostGameCodeViewController.swift */,
-				DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */,
-				DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */,
 				DA42137C28B47DD4000A395F /* StationsTableViewController.swift */,
 				DA42137D28B47DD4000A395F /* HostStationsTableViewCell.xib */,
-				DA42137E28B47DD4000A395F /* AddStationViewController.swift */,
-				DA42137F28B47DD4000A395F /* HostCreateOrJoinViewController.swift */,
-				DA42138028B47DD4000A395F /* GameManagerViewController.swift */,
 				DA42138128B47DD4000A395F /* HostStationsTableViewCell.swift */,
+				DA42137E28B47DD4000A395F /* AddStationViewController.swift */,
+				DA42138028B47DD4000A395F /* GameManagerViewController.swift */,
+				DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */,
+				DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -269,15 +269,15 @@
 		DA42138B28B47EDA000A395F /* PlayerViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA42139328B47EDA000A395F /* JoinGameViewController.swift */,
+				DA42139128B47EDA000A395F /* CreateOrJoinTeamViewController.swift */,
+				DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */,
+				DA42139428B47EDA000A395F /* CreateTeamViewController.swift */,
+				DA42139028B47EDA000A395F /* JoinTeamViewController.swift */,
+				DA42139228B47EDA000A395F /* TeamTableViewCell.swift */,
+				DA42138F28B47EDA000A395F /* PlayerTabBarController.swift */,
 				DA42138C28B47EDA000A395F /* TeamViewController.swift */,
 				DA42138D28B47EDA000A395F /* RankingViewController.swift */,
-				DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */,
-				DA42138F28B47EDA000A395F /* PlayerTabBarController.swift */,
-				DA42139028B47EDA000A395F /* JoinTeamViewController.swift */,
-				DA42139128B47EDA000A395F /* CreateOrJoinTeamViewController.swift */,
-				DA42139228B47EDA000A395F /* TeamTableViewCell.swift */,
-				DA42139328B47EDA000A395F /* JoinGameViewController.swift */,
-				DA42139428B47EDA000A395F /* CreateTeamViewController.swift */,
 				DA42139528B47EDA000A395F /* TimerViewController.swift */,
 			);
 			name = PlayerViewControllers;
