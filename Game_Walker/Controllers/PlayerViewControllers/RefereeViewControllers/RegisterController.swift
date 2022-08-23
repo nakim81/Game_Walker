@@ -8,31 +8,25 @@
 import Foundation
 import UIKit
 
-class RefereeFrame1: BaseViewController {
+class RegisterController: BaseViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var gamecodeTextField: UITextField!
-    
     @IBOutlet weak var nextButton: UIButton!
-    
     var pvp : Bool = true
-    
-    var name = ""
+    var station_name = ""
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
         
     }
     
-
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
-            let newReferee = Referee(gamecode: gamecode, name: name, station: Station())
-            K.Database.setupRequest(gamecode: newReferee.gamecode, player: nil, referee: newReferee, team: nil, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addReferee)
+            let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
+            R.addReferee(gamecode, newReferee)
         }
         if pvp {
             performSegue(withIdentifier: "goToPVP", sender: self)
@@ -44,13 +38,16 @@ class RefereeFrame1: BaseViewController {
 }
 
 //MARK: - UIUpdate
-extension RefereeFrame1: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        for referee in host.referees {
-            if referee.name == usernameTextField.text && referee.gamecode == gamecodeTextField.text {
-                pvp = referee.station.pvp
-            }
+extension RegisterController: GetReferee {
+    func getReferee(_ referee: Referee) {
+        station_name = referee.stationName
+    }
+}
+//MARK: - UIUpdate
+extension RegisterController: GetStation {
+    func getStation(_ station: Station) {
+        if station_name == station.name {
+            pvp = station.pvp
         }
-        print("ondataupdate: \(host.gamecode)")
     }
 }
