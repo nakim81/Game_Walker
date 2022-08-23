@@ -10,58 +10,37 @@ import UIKit
 
 class JoinGameViewController: BaseViewController {
     
-    
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         self.hideKeyboardWhenTappedAround()
-        
         // Do any additional setup after loading the view.
-        K.Database.delegates.append(self)
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
     }
     
-
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        
         gamecodeTextField.resignFirstResponder()
         usernameTextField.resignFirstResponder()
-
         if let gamecode: String = gamecodeTextField.text, let username: String = usernameTextField.text, !gamecode.isEmpty, !username.isEmpty {
-            K.Database.readHost(gamecode: gamecode, onListenerUpdate: listen(_:))
             let newPlayer = Player(gamecode: gamecode, name: username)
             UserData.gamecode = gamecode
             UserData.player = newPlayer
-            K.Database.setupRequest(gamecode: newPlayer.gamecode, player: newPlayer, referee: nil, team: nil, station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .addPlayer)
+            P.addPlayer(gamecode, newPlayer)
 
             performSegue(withIdentifier: "goToPF2VC", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter all information to log in")
         }        
     }
-    
-    func listen(_ _ : [String : Any]){
-    }
 
-
-}
-
-//MARK: - UIUpdate
-extension JoinGameViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-    }
-    
 }
 
 // MARK: - UITextFieldDelegate
 extension JoinGameViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == gamecodeTextField {
             usernameTextField.becomeFirstResponder()
@@ -70,6 +49,5 @@ extension JoinGameViewController: UITextFieldDelegate {
         }
         return true
     }
-    
 }
 
