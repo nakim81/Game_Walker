@@ -13,7 +13,6 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var gamenameTextfield: UITextField!
     @IBOutlet weak var gamelocationTextfield: UITextField!
     @IBOutlet weak var gamepointsTextfield: UITextField!
-    @IBOutlet weak var refereeTextfield: UITextField!
     @IBOutlet weak var rulesTextfield: UITextField!
     
     @IBOutlet weak var pvpButton: UIButton!
@@ -27,7 +26,6 @@ class AddStationViewController: BaseViewController {
         gamenameTextfield.delegate = self
         gamelocationTextfield.delegate = self
         gamepointsTextfield.delegate = self
-        refereeTextfield.delegate = self
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
 
@@ -80,11 +78,6 @@ class AddStationViewController: BaseViewController {
             alert(title:"No Game Points",message:"Please set the game points.")
         } else {
             gamepoints = Int(gamepointsTextfield.text!)!
-        }
-        if (refereeTextfield.text!.isEmpty) {
-            alert(title:"No Referee Selected",message:"Please assign a referee.")
-        } else {
-            referee = refereeTextfield.text!
         }
         if (rulesTextfield.text!.isEmpty) {
             alert(title:"No Game Rules",message:"Please enter the game rules.")
