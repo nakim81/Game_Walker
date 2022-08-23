@@ -241,8 +241,6 @@
 				DA42134828B47D5D000A395F /* RegisterController.swift */,
 				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
-				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
-				DA42134928B47D5D000A395F /* RulesViewController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
 				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
 				DA42134928B47D5D000A395F /* RulesViewController.swift */,
@@ -583,7 +581,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -599,7 +597,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -615,7 +613,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -631,7 +629,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
