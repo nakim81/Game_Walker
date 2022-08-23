@@ -11,29 +11,10 @@ import UIKit
 
 class CreateOrJoinTeamViewController: BaseViewController {
     
-
     @IBOutlet weak var creatTeamButton: UIButton!
-    
-    
     @IBOutlet weak var joinTeamButton: UIButton!
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        
-    }
-    
-    @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        
-        
-        
-    }
-    
-    @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        
-        
-        
     }
 }

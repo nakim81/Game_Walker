@@ -19,14 +19,12 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+    
     }
     
     private func configureTableView() {
-        tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsMultipleSelection = false
-        tableView.clipsToBounds = false
+        table.delegate = self
+        table.dataSource = self
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,8 +36,16 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teams.count
+        return team!.players.count
     }
 }
+
+// MARK: - TeamProtocol
+extension TeamViewController: GetTeam {
+    func getTeam(_ team: Team) {
+        self.team = team
+    }
+}
+
 
 

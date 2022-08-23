@@ -375,7 +375,7 @@
                     <navigationItem key="navigationItem" id="6mo-hl-SSu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="vrd-Ze-eKQ" id="OCL-KO-ir7"/>
+                        <outlet property="table" destination="vrd-Ze-eKQ" id="2dK-sj-K7o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
