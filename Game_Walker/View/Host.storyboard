@@ -400,6 +400,7 @@
                                     <constraint firstItem="yze-MK-05s" firstAttribute="centerY" secondItem="NVH-N8-o2d" secondAttribute="centerY" id="sLn-Pc-rQi"/>
                                     <constraint firstItem="Dr0-Yh-9XK" firstAttribute="centerY" secondItem="l6w-xV-CKG" secondAttribute="centerY" id="tbG-kX-c6Z"/>
                                     <constraint firstItem="fW0-Ap-xmH" firstAttribute="height" secondItem="QBZ-DB-iAK" secondAttribute="height" id="tdh-sf-4QT"/>
+                                    <constraint firstItem="6Cu-cD-qoe" firstAttribute="width" secondItem="QBZ-DB-iAK" secondAttribute="width" id="tpg-OG-ign"/>
                                     <constraint firstItem="yze-MK-05s" firstAttribute="height" secondItem="NVH-N8-o2d" secondAttribute="height" id="wMv-jY-Bx8"/>
                                     <constraint firstItem="QBZ-DB-iAK" firstAttribute="centerX" secondItem="Dr0-Yh-9XK" secondAttribute="centerX" id="wk5-eD-Wl6"/>
                                     <constraint firstItem="Dr0-Yh-9XK" firstAttribute="width" secondItem="l6w-xV-CKG" secondAttribute="width" multiplier="0.9" id="xSP-ME-02H"/>
@@ -423,6 +424,7 @@
                         <outlet property="refereeButton" destination="HQY-JV-gHm" id="ujA-78-iCg"/>
                         <outlet property="refereeTableView" destination="4g9-re-gBK" id="Jdb-hy-17v"/>
                         <outlet property="rulesTextfield" destination="aDr-lH-bSQ" id="gh2-p1-MaC"/>
+                        <outlet property="saveButton" destination="mew-pS-Laf" id="Alo-AB-Ffa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-A4-yMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

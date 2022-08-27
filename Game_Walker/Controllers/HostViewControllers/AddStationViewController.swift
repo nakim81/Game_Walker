@@ -19,6 +19,7 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var pvpButton: UIButton!
     @IBOutlet weak var pveButton: UIButton!
     @IBOutlet weak var refereeButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     var pvpnotchosen = true
     var isPvp = false
@@ -27,6 +28,7 @@ class AddStationViewController: BaseViewController {
     var gamelocation = ""
     var gamepoints = 0
     var refereename = ""
+    var isdropped = false
     var rules = ""
     
     override func viewDidLoad() {
@@ -43,7 +45,6 @@ class AddStationViewController: BaseViewController {
         refereeTableView.isHidden = true
         
         self.hideKeyboardWhenTappedAround()
-        // Do any additional setup after loading the view.
     }
 
       
@@ -99,8 +100,28 @@ class AddStationViewController: BaseViewController {
     
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.3) {
-            self.refereeTableView.isHidden = false
+        dropRefereeList(dropped: isdropped)
+    }
+    
+    func dropRefereeList(dropped: Bool) {
+        if dropped {
+            UIView.animate(withDuration:0.3) {
+                self.refereeTableView.isHidden = true
+                self.isdropped = false
+                self.pvpButton.isEnabled = true
+                self.pveButton.isEnabled = true
+                self.rulesTextfield.isEnabled = true
+                self.saveButton.isEnabled = true
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.refereeTableView.isHidden = false
+                self.isdropped = true
+                self.pvpButton.isEnabled = false
+                self.pveButton.isEnabled = false
+                self.rulesTextfield.isEnabled = false
+                self.saveButton.isEnabled = false
+            }
         }
     }
     
