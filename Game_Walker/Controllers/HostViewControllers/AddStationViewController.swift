@@ -14,9 +14,11 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var gamelocationTextfield: UITextField!
     @IBOutlet weak var gamepointsTextfield: UITextField!
     @IBOutlet weak var rulesTextfield: UITextField!
+    @IBOutlet weak var refereeTableView: UITableView!
     
     @IBOutlet weak var pvpButton: UIButton!
     @IBOutlet weak var pveButton: UIButton!
+    @IBOutlet weak var refereeButton: UIButton!
     
     var pvpnotchosen = true
     var isPvp = false
@@ -34,7 +36,12 @@ class AddStationViewController: BaseViewController {
         gamepointsTextfield.delegate = self
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
-
+        
+        refereeTableView.delegate = self
+        refereeTableView.dataSource = self
+        refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
+        refereeTableView.isHidden = true
+        
         self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
@@ -90,9 +97,35 @@ class AddStationViewController: BaseViewController {
         S.addStation(UserData.gamecode!, stationToAdd)
     }
     
+    
+    @IBAction func refereeButtonPressed(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
+            self.refereeTableView.isHidden = false
+        }
+    }
+    
 }
 
 extension AddStationViewController: UITextFieldDelegate {
+    
+}
+
+extension AddStationViewController: UITableViewDelegate {
+    
+}
+
+extension AddStationViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return availableReferees.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
+        let curr_cellname = availableReferees[indexPath.row].name
+        cell.configureRefereeCell(refereeName: curr_cellname)
+        return cell
+    }
+    
     
 }
 
