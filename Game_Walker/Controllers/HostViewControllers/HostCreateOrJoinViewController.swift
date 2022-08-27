@@ -24,7 +24,7 @@ class HostCreateOrJoinViewController: BaseViewController {
         let host = Host(gamecode: gc)
         H.createGame(gc, host)
         UserData.gamecode = gc
-        print(UserData.gamecode)
+        print(UserData.gamecode!)
     }
     
 

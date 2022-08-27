@@ -20,6 +20,12 @@ class AddStationViewController: BaseViewController {
     
     var pvpnotchosen = true
     var isPvp = false
+    var availableReferees : [Referee] = []
+    var gamename = ""
+    var gamelocation = ""
+    var gamepoints = 0
+    var refereename = ""
+    var rules = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +39,7 @@ class AddStationViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
-    
-//    func addNewCell(with name: String) {
-//
-//    }
-//
-    
+      
     
     @IBAction func pvpChosen(_ sender: UIButton) {
         pvpnotchosen = false
@@ -59,11 +60,6 @@ class AddStationViewController: BaseViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        var gamename = ""
-        var gamelocation = ""
-        var gamepoints = 0
-        var referee = ""
-        var rules = ""
         if (gamenameTextfield.text!.isEmpty) {
             alert(title:"No Game Name",message:"Please enter the game name.")
         } else {
@@ -88,10 +84,9 @@ class AddStationViewController: BaseViewController {
             alert(title:"Game Type Not Specified", message: "Please select either PVP or PVE")
         }
         
-        
-        let ref = Referee(gamecode: UserData.gamecode!, name: referee, stationName: gamename, assigned: true)
-        let stationToAdd = Station(name:UserData.gamecode!, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules, referee: ref)
-        
+        let selectedReferee = Referee(gamecode:UserData.gamecode!, name: refereename, stationName: gamename,assigned: true)
+        R.assignStation(UserData.gamecode!, selectedReferee, gamename)
+        let stationToAdd = Station(name:UserData.gamecode!, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules)
         S.addStation(UserData.gamecode!, stationToAdd)
     }
     
@@ -99,4 +94,15 @@ class AddStationViewController: BaseViewController {
 
 extension AddStationViewController: UITextFieldDelegate {
     
+}
+
+
+extension AddStationViewController: RefereeList {
+    func listOfReferees(_ referees: [Referee]) {
+        for referee in referees {
+            if (!referee.assigned) {
+                availableReferees.append(referee)
+            }
+        }
+    }
 }
