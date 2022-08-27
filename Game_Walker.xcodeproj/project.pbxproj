@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */; };
+		A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -65,6 +67,8 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
+		A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -241,8 +245,6 @@
 				DA42134828B47D5D000A395F /* RegisterController.swift */,
 				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
-				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
-				DA42134928B47D5D000A395F /* RulesViewController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
 				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
 				DA42134928B47D5D000A395F /* RulesViewController.swift */,
@@ -260,6 +262,8 @@
 				DA42137D28B47DD4000A395F /* HostStationsTableViewCell.xib */,
 				DA42138128B47DD4000A395F /* HostStationsTableViewCell.swift */,
 				DA42137E28B47DD4000A395F /* AddStationViewController.swift */,
+				A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */,
+				A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */,
 				DA42138028B47DD4000A395F /* GameManagerViewController.swift */,
 				DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */,
 				DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */,
@@ -349,6 +353,7 @@
 				DA42138428B47DD4000A395F /* GameManagerCollectionViewCell.xib in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DA42138628B47DD4000A395F /* HostStationsTableViewCell.xib in Resources */,
+				A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
@@ -423,6 +428,7 @@
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				DA42138528B47DD4000A395F /* StationsTableViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
+				A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
