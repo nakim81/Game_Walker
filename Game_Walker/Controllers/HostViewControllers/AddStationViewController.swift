@@ -21,6 +21,8 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var refereeLabel: UILabel!
+    
     var pvpnotchosen = true
     var isPvp = false
     var availableReferees : [Referee] = []
@@ -44,11 +46,20 @@ class AddStationViewController: BaseViewController {
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.isHidden = true
         
+        checkReferee()
+        
         self.hideKeyboardWhenTappedAround()
     }
 
       
-    
+    func checkReferee() {
+        if refereename == "" {
+            refereeLabel.text = "Choose Referee"
+        } else{
+            refereeLabel.text = refereename
+        }
+        refereeLabel.font = UIFont(name:"Dosis", size: 20.0)
+    }
     @IBAction func pvpChosen(_ sender: UIButton) {
         pvpnotchosen = false
         if pveButton.currentBackgroundImage == UIImage(named:"pve selected 1") {
@@ -126,6 +137,7 @@ class AddStationViewController: BaseViewController {
     }
     
 }
+
 
 extension AddStationViewController: UITextFieldDelegate {
     

@@ -199,6 +199,18 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pop up long purple 1" translatesAutoresizingMaskIntoConstraints="NO" id="Dr0-Yh-9XK">
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
+                                        <rect key="frame" x="105.5" y="621.5" width="195" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="175:52" id="VeK-ka-nJC"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="save 1"/>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
+                                            <segue destination="1L0-Oz-afr" kind="show" id="Rcz-O1-KSj"/>
+                                        </connections>
+                                    </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game name 2" translatesAutoresizingMaskIntoConstraints="NO" id="B8E-DG-Un9" userLabel="Game Name">
                                         <rect key="frame" x="38.5" y="39.5" width="138.5" height="31"/>
                                         <constraints>
@@ -279,9 +291,8 @@
                                             </tableView>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="149" y="374.5" width="108" height="25.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
+                                        <rect key="frame" x="149" y="371" width="108" height="25.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -336,17 +347,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
-                                        <rect key="frame" x="105.5" y="621.5" width="195" height="58"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="175:52" id="VeK-ka-nJC"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="save 1"/>
-                                        <connections>
-                                            <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -359,6 +359,7 @@
                                     <constraint firstItem="QBZ-DB-iAK" firstAttribute="width" secondItem="0WW-P8-uwc" secondAttribute="width" id="Cyx-jf-lr3"/>
                                     <constraint firstItem="0RL-II-XhM" firstAttribute="height" secondItem="0WW-P8-uwc" secondAttribute="height" id="DMM-5j-2F6"/>
                                     <constraint firstItem="8bH-uz-8fJ" firstAttribute="top" secondItem="QBZ-DB-iAK" secondAttribute="bottom" constant="10" id="FBt-DZ-mnm"/>
+                                    <constraint firstItem="Ypb-us-q7L" firstAttribute="centerX" secondItem="HQY-JV-gHm" secondAttribute="centerX" id="FjT-sG-Wzn"/>
                                     <constraint firstItem="aDr-lH-bSQ" firstAttribute="centerX" secondItem="Dr0-Yh-9XK" secondAttribute="centerX" id="Fxe-aF-82s"/>
                                     <constraint firstItem="Xyp-z0-rTe" firstAttribute="top" secondItem="NVH-N8-o2d" secondAttribute="bottom" constant="10" id="J9o-BY-cUh"/>
                                     <constraint firstItem="VfM-m2-fKM" firstAttribute="leading" secondItem="Xyp-z0-rTe" secondAttribute="leading" id="KJT-yg-wuZ"/>
@@ -392,6 +393,7 @@
                                     <constraint firstItem="mew-pS-Laf" firstAttribute="top" secondItem="aDr-lH-bSQ" secondAttribute="bottom" constant="8" id="jjJ-Vk-IbR"/>
                                     <constraint firstItem="0RL-II-XhM" firstAttribute="centerX" secondItem="0WW-P8-uwc" secondAttribute="centerX" id="k3L-9E-VbO"/>
                                     <constraint firstAttribute="width" secondItem="l6w-xV-CKG" secondAttribute="height" multiplier="320:580" id="kMT-sI-AcP"/>
+                                    <constraint firstItem="Ypb-us-q7L" firstAttribute="centerY" secondItem="HQY-JV-gHm" secondAttribute="centerY" id="n3T-YZ-yGm"/>
                                     <constraint firstItem="0WW-P8-uwc" firstAttribute="width" secondItem="NVH-N8-o2d" secondAttribute="width" id="pEM-z3-b87"/>
                                     <constraint firstItem="Xyp-z0-rTe" firstAttribute="width" secondItem="B8E-DG-Un9" secondAttribute="width" multiplier="1.2" id="pLA-K3-AyL"/>
                                     <constraint firstItem="VfM-m2-fKM" firstAttribute="width" secondItem="Xyp-z0-rTe" secondAttribute="width" multiplier="0.88" id="rEq-uQ-6k6"/>
@@ -422,6 +424,7 @@
                         <outlet property="pveButton" destination="eF5-Aq-WGj" id="D33-pC-5un"/>
                         <outlet property="pvpButton" destination="0sd-pw-gIC" id="55h-S3-eIl"/>
                         <outlet property="refereeButton" destination="HQY-JV-gHm" id="ujA-78-iCg"/>
+                        <outlet property="refereeLabel" destination="Ypb-us-q7L" id="GWA-yM-QFo"/>
                         <outlet property="refereeTableView" destination="4g9-re-gBK" id="Jdb-hy-17v"/>
                         <outlet property="rulesTextfield" destination="aDr-lH-bSQ" id="gh2-p1-MaC"/>
                         <outlet property="saveButton" destination="mew-pS-Laf" id="Alo-AB-Ffa"/>
@@ -491,6 +494,9 @@
             <point key="canvasLocation" x="3372" y="96"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rcz-O1-KSj"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
         <image name="Join game button 1" width="244" height="79"/>
