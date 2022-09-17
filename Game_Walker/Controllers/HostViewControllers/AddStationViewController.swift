@@ -122,22 +122,23 @@ class AddStationViewController: BaseViewController {
             UIView.animate(withDuration:0.3) {
                 self.refereeTableView.isHidden = true
                 self.isdropped = false
-                self.pvpButton.isEnabled = true
-                self.pveButton.isEnabled = true
-                self.rulesTextfield.isEnabled = true
-                self.saveButton.isEnabled = true
+                self.pvpButton.isHidden = false
+                self.pveButton.isHidden = false
+                self.rulesTextfield.isHidden = false
+                self.saveButton.isHidden = false
             }
         } else {
             UIView.animate(withDuration: 0.3) {
                 self.refereeTableView.isHidden = false
                 self.isdropped = true
-                self.pvpButton.isEnabled = false
-                self.pveButton.isEnabled = false
-                self.rulesTextfield.isEnabled = false
-                self.saveButton.isEnabled = false
+                self.pvpButton.isHidden = true
+                self.pveButton.isHidden = true
+                self.rulesTextfield.isHidden = true
+                self.saveButton.isHidden = true
             }
         }
     }
+    
     
 }
 
@@ -146,13 +147,10 @@ extension AddStationViewController: UITextFieldDelegate {
 
 }
 
-extension AddStationViewController: UITableViewDelegate {
 
-}
 
-extension AddStationViewController: UITableViewDataSource {
+extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(availableReferees.count)
         return availableReferees.count
     }
     
@@ -160,12 +158,19 @@ extension AddStationViewController: UITableViewDataSource {
         let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
         let curr_cellname = availableReferees[indexPath.row].name
         cell.configureRefereeCell(refereeName: curr_cellname)
-        print(curr_cellname)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print(availableReferees[indexPath.row])
+        refereename = availableReferees[indexPath.row].name
+        print(refereename)
+        checkReferee()
+        dropRefereeList(dropped: isdropped)
+    }
     
 }
+
 
 
 extension AddStationViewController: RefereeList {
@@ -173,7 +178,7 @@ extension AddStationViewController: RefereeList {
         for referee in referees {
             if (!referee.assigned) {
                 availableReferees.append(referee)
-                print(availableReferees)
+//                print(availableReferees)
             }
         }
     }
