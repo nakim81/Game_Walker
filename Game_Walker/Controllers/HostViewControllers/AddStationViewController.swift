@@ -23,6 +23,8 @@ class AddStationViewController: BaseViewController {
     
     @IBOutlet weak var refereeLabel: UILabel!
     
+    weak var stationsTableViewController: StationsTableViewController?
+    
     var pvpnotchosen = true
     var isPvp = false
     var availableReferees : [Referee] = []
@@ -51,6 +53,11 @@ class AddStationViewController: BaseViewController {
         R.getRefereeList(UserData.gamecode!)
         
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let sender = sender as? StationsTableViewController else { return }
+        stationsTableViewController = sender
     }
 
       
@@ -107,8 +114,10 @@ class AddStationViewController: BaseViewController {
         
         let selectedReferee = Referee(gamecode:UserData.gamecode!, name: refereename, stationName: gamename,assigned: true)
         R.assignStation(UserData.gamecode!, selectedReferee, gamename)
-        let stationToAdd = Station(name:UserData.gamecode!, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules)
+        let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules)
         S.addStation(UserData.gamecode!, stationToAdd)
+        
+        stationsTableViewController?.reloadStationTable()
     }
     
     

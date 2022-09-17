@@ -22,6 +22,11 @@ class StationsTableViewController: BaseViewController {
         S.getStationList(UserData.gamecode!)
     }
     
+    func reloadStationTable() {
+        S.getStationList(UserData.gamecode!)
+        self.stationTable.reloadData()
+    }
+    
 
 }
 
@@ -47,7 +52,7 @@ extension StationsTableViewController: UITableViewDataSource {
 extension StationsTableViewController: StationList {
     func listOfStations(_ stations: [Station]) {
         currentStations = stations
-        stationTable.reloadData()
+        reloadStationTable()
     }
     
 }
