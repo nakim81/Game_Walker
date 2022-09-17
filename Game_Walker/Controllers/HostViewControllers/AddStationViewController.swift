@@ -47,6 +47,8 @@ class AddStationViewController: BaseViewController {
         refereeTableView.isHidden = true
         
         checkReferee()
+        R.delegate_refereeList = self
+        R.getRefereeList(UserData.gamecode!)
         
         self.hideKeyboardWhenTappedAround()
     }
@@ -112,6 +114,7 @@ class AddStationViewController: BaseViewController {
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
         dropRefereeList(dropped: isdropped)
+        self.refereeTableView.reloadData()
     }
     
     func dropRefereeList(dropped: Bool) {
@@ -140,15 +143,16 @@ class AddStationViewController: BaseViewController {
 
 
 extension AddStationViewController: UITextFieldDelegate {
-    
+
 }
 
 extension AddStationViewController: UITableViewDelegate {
-    
+
 }
 
 extension AddStationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(availableReferees.count)
         return availableReferees.count
     }
     
@@ -156,6 +160,7 @@ extension AddStationViewController: UITableViewDataSource {
         let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
         let curr_cellname = availableReferees[indexPath.row].name
         cell.configureRefereeCell(refereeName: curr_cellname)
+        print(curr_cellname)
         return cell
     }
     
@@ -168,6 +173,7 @@ extension AddStationViewController: RefereeList {
         for referee in referees {
             if (!referee.assigned) {
                 availableReferees.append(referee)
+                print(availableReferees)
             }
         }
     }

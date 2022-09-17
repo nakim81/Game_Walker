@@ -90,6 +90,9 @@
                                 <rect key="frame" x="107" y="724.5" width="200" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="join button 3"/>
+                                <connections>
+                                    <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="6jZ-bb-bpg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hB5-b1-9hu"/>
@@ -105,6 +108,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pm3-a2-OBC"/>
+                    <connections>
+                        <outlet property="gameCodeInput" destination="8bU-vL-2hU" id="qDq-Cq-kuv"/>
+                        <outlet property="joinButton" destination="U83-h1-qtH" id="QJZ-d3-vwc"/>
+                        <segue destination="1L0-Oz-afr" kind="show" identifier="HostJoinSegue" id="ba3-G3-TlT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmR-Da-uq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
