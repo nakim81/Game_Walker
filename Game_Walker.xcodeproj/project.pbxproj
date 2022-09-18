@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61FD379728D5B35200BE859E /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD379628D5B35200BE859E /* WaitingController.swift */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		61FD379628D5B35200BE859E /* WaitingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -239,10 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				DA42134828B47D5D000A395F /* RegisterController.swift */,
+				61FD379628D5B35200BE859E /* WaitingController.swift */,
 				DA42134728B47D5D000A395F /* PVERefereeController.swift */,
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
-				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
-				DA42134928B47D5D000A395F /* RulesViewController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
 				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
 				DA42134928B47D5D000A395F /* RulesViewController.swift */,
@@ -454,6 +455,7 @@
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
 				DA42134F28B47D5D000A395F /* RulesViewController.swift in Sources */,
+				61FD379728D5B35200BE859E /* WaitingController.swift in Sources */,
 				DA9662C1285AA39200B66629 /* Host_Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
