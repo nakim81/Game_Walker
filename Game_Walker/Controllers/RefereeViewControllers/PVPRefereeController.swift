@@ -27,7 +27,13 @@ class PVPRefereeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        roundLabel.text = "Round 1"
+        scoreButton1.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
+        teamnameLabel.text = teamOrder[0].name
+        scoreLabel1.text = String(teamOrder[0].points)
+        scoreButton2.setImage(UIImage(named: teamOrder[1].iconName), for: .normal)
+        teamnameLabel2.text = teamOrder[1].name
+        scoreLabel2.text = String(teamOrder[1].points)
         
     }
     
