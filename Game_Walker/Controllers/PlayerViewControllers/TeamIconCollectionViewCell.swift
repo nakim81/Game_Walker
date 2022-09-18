@@ -37,7 +37,6 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
         imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
@@ -50,18 +49,11 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
         imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         imageView.image = UIImage(named: imageName)
-//        teamNumberLabel.text = "Team \(teamNumber)"
-//        teamNumberLabel.font = UIFont(name: "Dosis-Bold", size: 13)
-//        teamNumberLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//        teamNumberLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 2).isActive = true
-//        teamNumberLabel.widthAnchor.constraint(equalToConstant: 34).isActive = true
-//        teamNumberLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         teamNameLabel.clipsToBounds = true
         teamNameLabel.textAlignment = .center
         teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -71,8 +63,6 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         teamNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         teamNameLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         teamNameLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
-        
-        
     }
     
     func setImage(with name: String) {

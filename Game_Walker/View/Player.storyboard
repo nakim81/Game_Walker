@@ -177,9 +177,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
                                 <rect key="frame" x="131.33333333333331" y="96.666666666666671" width="165.33333333333331" height="35.666666666666671"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
                                 <rect key="frame" x="88" y="143.33333333333334" width="252" height="80"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="0.0"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team icon 1" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-y0-gcK">
@@ -383,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4581" y="-415"/>
+            <point key="canvasLocation" x="4579.9065420560746" y="-415.33477321814257"/>
         </scene>
         <!--Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">
