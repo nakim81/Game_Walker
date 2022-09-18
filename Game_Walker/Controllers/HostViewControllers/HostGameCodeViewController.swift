@@ -13,22 +13,22 @@ class HostGameCodeViewController: BaseViewController {
     @IBOutlet weak var joinButton: UIButton!
     
     // This will be the game code entered by the user.
-    var gamecode = "";
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         gameCodeInput.delegate = self
+        gameCodeInput.textAlignment = NSTextAlignment.center
     }
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         let tempgamecode = gameCodeInput.text!
-        if (gamecode.isEmpty) {
+        if (tempgamecode.isEmpty) {
             alert(title: "No Input",message:"You haven't entered a code!")
         } else {
             UserData.gamecode = tempgamecode
-            
+            self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
         }
     }
     
