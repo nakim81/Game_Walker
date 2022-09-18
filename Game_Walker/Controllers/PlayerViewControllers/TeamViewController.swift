@@ -18,25 +18,36 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        T.delegate_getTeam = self
         configureTableView()
+        T.getTeam(UserData.gamecode!, UserData.team!.name)
     
     }
     
     private func configureTableView() {
         table.delegate = self
         table.dataSource = self
+        table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let name = data[indexPath.row]
         let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
-        cell.nameLabel.text = name
-        
+        cell.configureTableViewCell(name: team!.players[indexPath.row].name)
+        print(team!.players[indexPath.row])
         return cell
     }
     
+    private var cellColors = ["F28044","F0A761","FEC362","F0BB4C","E3CB92","FEA375"]
+    private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+        cell.contentView.backgroundColor = UIColor(named: cellColors[indexPath.row % cellColors.count])
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return team!.players.count
+        guard let team = team else {
+            return 0
+        }
+        print(team.players.count)
+        return team.players.count
     }
 }
 
@@ -44,6 +55,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 extension TeamViewController: GetTeam {
     func getTeam(_ team: Team) {
         self.team = team
+        self.table.reloadData()
     }
 }
 
