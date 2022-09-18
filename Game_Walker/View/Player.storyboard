@@ -129,8 +129,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="create team button 2"/>
                                 <connections>
-                                    <action selector="createTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="x9A-hO-OBa"/>
-                                    <segue destination="JIl-tV-nZg" kind="show" identifier="goToPF3_1VC" id="y3Y-iH-LpS"/>
+                                    <action selector="creatTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="vDf-Co-IWw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX2-Lc-Buy">
@@ -138,8 +137,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="join team button 1"/>
                                 <connections>
-                                    <action selector="joinTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="f8q-wC-BvO"/>
-                                    <segue destination="QO4-di-gmo" kind="show" identifier="goToPF3_2VC" id="6iJ-Vt-OCN"/>
+                                    <action selector="joinTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="OGX-ih-skl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -160,6 +158,8 @@
                     <connections>
                         <outlet property="creatTeamButton" destination="ktk-W4-AgV" id="Goi-Co-Ghr"/>
                         <outlet property="joinTeamButton" destination="JX2-Lc-Buy" id="dql-d5-uTk"/>
+                        <segue destination="JIl-tV-nZg" kind="show" identifier="goToPF3_1VC" id="tM0-u9-p7X"/>
+                        <segue destination="QO4-di-gmo" kind="show" identifier="goToPF3_2VC" id="4MI-aS-g5L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYk-9a-1qU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -177,9 +177,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
                                 <rect key="frame" x="131.33333333333331" y="96.666666666666671" width="165.33333333333331" height="35.666666666666671"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
                                 <rect key="frame" x="88" y="143.33333333333334" width="252" height="80"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="0.0"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team icon 1" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-y0-gcK">
@@ -269,9 +269,8 @@
                                     <action selector="joinTeamButtonPressed:" destination="QO4-di-gmo" eventType="touchUpInside" id="mCO-fh-glg"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="choose your team 1" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-FA-dl0">
-                                <rect key="frame" x="91" y="85" width="246" height="35.333333333333343"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team 1" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-FA-dl0">
+                                <rect key="frame" x="78" y="122.99999999999999" width="246" height="42.333333333333329"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n1b-ak-Lxf">
                                 <rect key="frame" x="52" y="199" width="324" height="420"/>
@@ -301,9 +300,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="3rj-qb-44U"/>
+                            <constraint firstItem="WJX-FA-dl0" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.051" id="5g1-84-nEo"/>
+                            <constraint firstItem="WJX-FA-dl0" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="0.315" id="L6h-BC-SNr"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.427536" id="Lo4-x9-yhH"/>
                             <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="0.893" id="UZY-jF-Kth"/>
                             <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="WNO-qW-pSV"/>
+                            <constraint firstItem="WJX-FA-dl0" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" multiplier="0.94" id="coQ-ZX-Wbc"/>
+                            <constraint firstItem="WJX-FA-dl0" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.574766" id="dzV-eJ-nlJ"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.0696822" id="fDy-JB-WFh"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="1.607" id="rrc-lp-e8q"/>
                             <constraint firstItem="n1b-ak-Lxf" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.757" id="zjD-Lz-IDs"/>
@@ -380,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4581" y="-415"/>
+            <point key="canvasLocation" x="4579.9065420560746" y="-415.33477321814257"/>
         </scene>
         <!--Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">

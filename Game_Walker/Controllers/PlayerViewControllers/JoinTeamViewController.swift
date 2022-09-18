@@ -15,25 +15,27 @@ class JoinTeamViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var selectedIndex: Int?
-    var teams: [Team] = []
+    private var teamList: [Team] = []
 
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        T.delegate_teamList = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
+        T.getTeamList(UserData.gamecode!)
     }
 
 
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            T.joinTeam(UserData.gamecode!, teams[selectedIndex].name, UserData.player!)
-
+            UserData.team = teamList[selectedIndex]
+            T.joinTeam(UserData.gamecode!, teamList[selectedIndex].name, UserData.player!)
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {
             alert(title: "No Icon Selected", message: "Please select a team icon")
@@ -69,14 +71,13 @@ extension JoinTeamViewController: UICollectionViewDelegate {
 extension JoinTeamViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teams.count
+        return teamList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamIconCollectionViewCell.identifier , for: indexPath) as! TeamIconCollectionViewCell
-        let team = teams[indexPath.item]
+        let team = teamList[indexPath.item]
         cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name)
-        //cell.setImage(with: iconImageNames[indexPath.item])
         return cell
     }
 }
@@ -92,7 +93,8 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - TeamProtocols
 extension JoinTeamViewController: TeamList {
     func listOfTeams(_ teams: [Team]) {
-        self.teams = teams
+        self.teamList = teams
+        self.collectionView?.reloadData()
     }
 }
 

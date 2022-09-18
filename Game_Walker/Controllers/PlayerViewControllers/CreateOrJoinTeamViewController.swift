@@ -17,4 +17,12 @@ class CreateOrJoinTeamViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToPF3_1VC", sender: self)
+    }
+    
+    @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToPF3_2VC", sender: self)
+    }
 }

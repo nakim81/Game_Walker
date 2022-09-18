@@ -61,7 +61,6 @@ class CreateTeamViewController: BaseViewController {
             let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
             T.addTeam(UserData.gamecode!, newTeam)
-            
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter team name to create your team")
@@ -100,7 +99,6 @@ extension CreateTeamViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamIconCollectionViewCell.identifier , for: indexPath) as! TeamIconCollectionViewCell
         cell.configureCreateTeamCell(iconImageNames[indexPath.item])
-        //cell.setImage(with: iconImageNames[indexPath.item])
         return cell
     }
 }
