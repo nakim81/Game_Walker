@@ -33,7 +33,7 @@
             <connections>
                 <outlet property="stationLabel" destination="cJ6-a7-auZ" id="ZO7-2R-tcj"/>
             </connections>
-            <point key="canvasLocation" x="306" y="139"/>
+            <point key="canvasLocation" x="305.79710144927537" y="138.61607142857142"/>
         </tableViewCell>
     </objects>
 </document>

@@ -503,6 +503,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="8x5-g0-ems"/>
         <segue reference="Rcz-O1-KSj"/>
     </inferredMetricsTieBreakers>
     <resources>
