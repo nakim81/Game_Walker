@@ -13,6 +13,7 @@
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1ECBC9828DFC85A0009B8A6 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */; };
 		AAF42DF835FA27BAEC58ABD8 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
@@ -71,6 +72,7 @@
 		61FD379628D5B35200BE859E /* WaitingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
+		A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				DA42137E28B47DD4000A395F /* AddStationViewController.swift */,
 				A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */,
 				A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */,
+				A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */,
 				DA42138028B47DD4000A395F /* GameManagerViewController.swift */,
 				DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */,
 				DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */,
@@ -464,6 +467,7 @@
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
 				DA42134F28B47D5D000A395F /* RulesViewController.swift in Sources */,
 				61FD379728D5B35200BE859E /* WaitingController.swift in Sources */,
+				A1ECBC9828DFC85A0009B8A6 /* SettingTimeHostViewController.swift in Sources */,
 				DA9662C1285AA39200B66629 /* Host_Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

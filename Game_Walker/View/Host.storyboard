@@ -116,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmR-Da-uq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="392"/>
+            <point key="canvasLocation" x="535" y="392"/>
         </scene>
         <!--Stations Table View Controller-->
         <scene sceneID="SNx-G6-8FI">
@@ -136,6 +136,9 @@
                                 <rect key="frame" x="119" y="730" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="Next button 1-1"/>
+                                <connections>
+                                    <segue destination="KzH-J8-5vd" kind="show" id="fjX-uf-Q5w"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
                                 <rect key="frame" x="41.5" y="290.5" width="331" height="128"/>
@@ -176,22 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODF-Pp-UBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="-319"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="vcg-bS-mHT">
-            <objects>
-                <viewController id="N33-rq-jWg" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="By4-DQ-Z3K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="csR-VC-n3D"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EFc-1W-tZd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2639" y="96"/>
+            <point key="canvasLocation" x="1429" y="-319"/>
         </scene>
         <!--Add Station View Controller-->
         <scene sceneID="2AO-mp-5gj">
@@ -440,7 +428,93 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-A4-yMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1208.6956521739132" y="-263.16964285714283"/>
+            <point key="canvasLocation" x="1429" y="-1053"/>
+        </scene>
+        <!--Setting Time Host View Controller-->
+        <scene sceneID="UFR-CJ-9bB">
+            <objects>
+                <viewController id="KzH-J8-5vd" customClass="SettingTimeHostViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sav-4G-tMH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer 1-1" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-mI-mS1" userLabel="Timer Label">
+                                <rect key="frame" x="31" y="98.5" width="145" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ARm-mI-mS1" secondAttribute="height" multiplier="128:61" id="h9O-yJ-KDG"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game time" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
+                                <rect key="frame" x="128.5" y="201.5" width="157" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="137.41:35" id="1OR-fC-KEp"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moving time" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
+                                <rect key="frame" x="120" y="372.5" width="174" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="162:35" id="wkB-x3-fMl"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
+                                <rect key="frame" x="73.5" y="247.5" width="267" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="220:70" id="89c-SK-TFL"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
+                                <rect key="frame" x="73.5" y="416" width="267" height="85.5"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
+                                <rect key="frame" x="73.5" y="585" width="267" height="85"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc">
+                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="Next button 1-1"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds 1" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
+                                <rect key="frame" x="153" y="541.5" width="108" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="100:35" id="gC4-9S-8sz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bbE-Tk-Afq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="0eT-1R-WV7"/>
+                            <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="1kq-uR-fZz"/>
+                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.42" id="7Ei-Sb-jhK"/>
+                            <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="7Vl-dN-eq0"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.3" id="7wF-Af-mbw"/>
+                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
+                            <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
+                            <constraint firstItem="EBr-2e-ORF" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.38" id="965-wH-TmJ"/>
+                            <constraint firstItem="Aa4-su-fJD" firstAttribute="top" secondItem="iZ1-Rk-GG3" secondAttribute="bottom" constant="6" id="DHE-c1-FDT"/>
+                            <constraint firstItem="EBr-2e-ORF" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.5" id="E4z-2c-n1q"/>
+                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.26" id="Ggb-pW-7AW"/>
+                            <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="H0X-BB-44s"/>
+                            <constraint firstItem="EBr-2e-ORF" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="LIg-K4-0ww"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.35" id="Odf-f2-WNn"/>
+                            <constraint firstItem="LEY-kG-BRL" firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="width" multiplier="1.7" id="P9Q-j8-J6P"/>
+                            <constraint firstItem="aJl-r6-JBT" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="R1b-yu-XHS"/>
+                            <constraint firstItem="aJl-r6-JBT" firstAttribute="top" secondItem="QMr-hQ-NGt" secondAttribute="bottom" constant="6" id="Yqr-DJ-bqP"/>
+                            <constraint firstItem="LEY-kG-BRL" firstAttribute="top" secondItem="EBr-2e-ORF" secondAttribute="bottom" constant="6" id="c9V-Tz-ljY"/>
+                            <constraint firstItem="Aa4-su-fJD" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="e4G-cg-TDm"/>
+                            <constraint firstItem="aJl-r6-JBT" firstAttribute="centerX" secondItem="QMr-hQ-NGt" secondAttribute="centerX" id="kMn-5j-c9B"/>
+                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
+                            <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="qN0-zW-RQi"/>
+                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="40" id="sUr-l5-ffx"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" multiplier="0.5" id="vJL-eS-9Is"/>
+                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="40" id="woH-Ma-7ol"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ojA-0m-lks"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2339" y="-319"/>
         </scene>
         <!--GameManagerViewController-->
         <scene sceneID="alU-c0-Oy8">
@@ -518,16 +592,21 @@
         <image name="game manager 1" width="329" height="60"/>
         <image name="game name 2" width="112.5" height="25"/>
         <image name="game points 2" width="122.5" height="25.5"/>
+        <image name="game time" width="137.5" height="35"/>
         <image name="info textbox white 1" width="280" height="40"/>
         <image name="join button 3" width="176" height="57"/>
+        <image name="moving time" width="162.5" height="35"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
+        <image name="rounds 1" width="101" height="35"/>
         <image name="rules 2" width="59" height="25.5"/>
         <image name="rules textboxwhite 1" width="280" height="89.5"/>
         <image name="save 1" width="176" height="57"/>
         <image name="stations 1" width="195" height="61"/>
         <image name="text box 1" width="244" height="79"/>
+        <image name="timer 1-1" width="128" height="61"/>
+        <image name="timer-time-box" width="221" height="70"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
