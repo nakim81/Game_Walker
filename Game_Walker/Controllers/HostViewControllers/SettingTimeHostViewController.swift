@@ -17,6 +17,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     var minutes: Int = 0
     var seconds: Int = 0
+    var pickertype = 0
     
     //UIPickerView inside of UIView container
     var gametimePickerView: UIView!
@@ -44,5 +45,12 @@ class SettingTimeHostViewController: BaseViewController {
         view.endEditing(true)
     }
     
+    func pickerDisappear() {
+        if (pickertype == 0) {
+            
+        } else {
+            
+        }
+    }
 
 }
