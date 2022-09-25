@@ -74,6 +74,25 @@ struct T {
         }
     }
     
+    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player){
+        let docRef = db.collection("\(gamecode) : Teams").document(teamName)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var team = convertDataToTeam(data)
+                if let index = team.players.firstIndex(of: player){
+                    team.players.remove(at: index)
+                }
+                //update team member
+                updateTeam(gamecode, team)
+            } else {
+                print("Team does not exist")
+            }
+        }
+    }
+    
+    
+    
     static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int){
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         docRef.getDocument { (document, error) in
