@@ -28,6 +28,7 @@ class PVPRefereeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         roundLabel.text = "Round 1"
+        print(teamOrder)
         scoreButton1.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
         teamnameLabel.text = teamOrder[0].name
         scoreLabel1.text = String(teamOrder[0].points)

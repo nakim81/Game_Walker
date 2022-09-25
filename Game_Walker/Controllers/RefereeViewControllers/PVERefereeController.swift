@@ -14,20 +14,43 @@ class PVERefereeController: UIViewController {
     @IBOutlet weak var scoreButton: UIButton!
     @IBOutlet weak var teamnameLabel: UILabel!
     @IBOutlet weak var teamscoreLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var ruleButton: UIButton!
     @IBOutlet weak var nextgameButton: UIButton!
     var round = 1
     var stationName = ""
     var index = 0
     var teamOrder : [Team] = []
+    var timer: Timer?
+    var seconds = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        runTimer()
         roundLabel.text = "Round 1"
         scoreButton.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
         teamnameLabel.text = teamOrder[0].name
         teamscoreLabel.text = String(teamOrder[0].points)
+        
+    }
+    func runTimer() {
+        //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(PVERefereeController.updateTimer)), userInfo: nil, repeats: true)
+    }
     
+    func updateTimer() {
+            if seconds < 1 {
+                //timer.invalidate()
+            } else {
+                seconds -= 1
+                timerLabel.text = timeString(time: TimeInterval(seconds))
+                timerLabel.text = String(seconds)
+            }
+    }
+    
+    func timeString(time:TimeInterval) -> String {
+            let minutes = Int(time) / 60 % 60
+            let seconds = Int(time) % 60
+            return String(format:"%02i:%02i", minutes, seconds)
     }
     
     @IBAction func scoreButtonPressed(_ sender: UIButton) {
@@ -51,7 +74,7 @@ class PVERefereeController: UIViewController {
 //MARK: - UIUpdate
 extension PVERefereeController: GetStation {
     func getStation(_ station: Station) {
-        stationName = station.name
-        teamOrder = station.teamOrder
+        self.stationName = station.name
+        self.teamOrder = station.teamOrder
     }
 }

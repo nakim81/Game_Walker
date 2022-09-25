@@ -13,8 +13,9 @@ class RegisterController: BaseViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    var pvp : Bool = true
+    var assigned : Bool = false
     var station_name = ""
+    var referee : Referee = Referee()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,31 +24,29 @@ class RegisterController: BaseViewController {
         
     }
     
+    func listen(_ _ : [String : Any]){
+    }
+    
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
             R.addReferee(gamecode, newReferee)
         }
-        if pvp {
-            performSegue(withIdentifier: "goToPVP", sender: self)
-        }
-        else {
-            performSegue(withIdentifier: "goToPVE", sender: self)
-        }
+        performSegue(withIdentifier: "goToWait", sender: self)
     }
 }
 
 //MARK: - UIUpdate
 extension RegisterController: GetReferee {
     func getReferee(_ referee: Referee) {
-        station_name = referee.stationName
+        assigned = referee.assigned
     }
 }
+
 //MARK: - UIUpdate
 extension RegisterController: GetStation {
     func getStation(_ station: Station) {
-        if station_name == station.name {
-            pvp = station.pvp
-        }
+        station_name = station.name
     }
 }
+
