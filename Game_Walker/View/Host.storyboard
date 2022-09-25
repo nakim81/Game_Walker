@@ -450,20 +450,84 @@
                                     <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="137.41:35" id="1OR-fC-KEp"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moving time" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="120" y="372.5" width="174" height="37.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="162:35" id="wkB-x3-fMl"/>
-                                </constraints>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
                                 <rect key="frame" x="73.5" y="247.5" width="267" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="220:70" id="89c-SK-TFL"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
+                                <rect key="frame" x="86.5" y="252" width="241" height="76.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
+                                        <rect key="frame" x="116" y="5" width="9" height="66"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
+                                        <rect key="frame" x="76.5" y="11.5" width="30" height="53.5"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
+                                        <rect key="frame" x="133.5" y="11" width="45" height="54"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerY" secondItem="id3-FJ-dYb" secondAttribute="centerY" id="JHQ-Wx-1Qr"/>
+                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="leading" secondItem="IZU-Z9-5GC" secondAttribute="leading" multiplier="1.15" id="NfW-XB-C7X"/>
+                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerX" secondItem="id3-FJ-dYb" secondAttribute="centerX" id="Pzo-mS-AIm"/>
+                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="Sji-VX-0b9"/>
+                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="mip-mT-svf"/>
+                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="trailing" secondItem="IZU-Z9-5GC" secondAttribute="trailing" multiplier="0.85" id="yx1-Kn-fnf"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moving time" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
+                                <rect key="frame" x="120" y="372.5" width="174" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="162:35" id="wkB-x3-fMl"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
                                 <rect key="frame" x="73.5" y="416" width="267" height="85.5"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
+                                <rect key="frame" x="86.5" y="420.5" width="241" height="76.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
+                                        <rect key="frame" x="116" y="5" width="9" height="66"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Game Minutes Label">
+                                        <rect key="frame" x="74" y="11" width="32.5" height="54"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Game Seconds Label">
+                                        <rect key="frame" x="133.5" y="11" width="45" height="54"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="trailing" secondItem="Wz5-gO-hPN" secondAttribute="trailing" multiplier="0.85" id="FFJ-h9-l61"/>
+                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerY" secondItem="sQu-MN-J2c" secondAttribute="centerY" id="JpU-cB-rF2"/>
+                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerX" secondItem="sQu-MN-J2c" secondAttribute="centerX" id="gp4-4D-NgI"/>
+                                    <constraint firstItem="F64-vA-BnX" firstAttribute="leading" secondItem="Wz5-gO-hPN" secondAttribute="leading" multiplier="1.15" id="iJe-9S-dhH"/>
+                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="upC-Yd-Qi4"/>
+                                    <constraint firstItem="F64-vA-BnX" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="wk1-j0-Nu6"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds 1" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
+                                <rect key="frame" x="153" y="541.5" width="108" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="100:35" id="gC4-9S-8sz"/>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
                                 <rect key="frame" x="73.5" y="585" width="267" height="85"/>
@@ -473,44 +537,61 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds 1" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="153" y="541.5" width="108" height="37.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="100:35" id="gC4-9S-8sz"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jl-KB-v2l" userLabel="Rounds Placeholder">
+                                <rect key="frame" x="190.5" y="600.5" width="33" height="54"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bbE-Tk-Afq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="0eT-1R-WV7"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="1kq-uR-fZz"/>
+                            <constraint firstItem="sQu-MN-J2c" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" multiplier="0.9" id="29t-bA-arN"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.42" id="7Ei-Sb-jhK"/>
+                            <constraint firstItem="sQu-MN-J2c" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="7Rb-BD-3Fo"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="7Vl-dN-eq0"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.3" id="7wF-Af-mbw"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
+                            <constraint firstItem="id3-FJ-dYb" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="0.9" id="8WH-dS-BUU"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
                             <constraint firstItem="EBr-2e-ORF" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.38" id="965-wH-TmJ"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="top" secondItem="iZ1-Rk-GG3" secondAttribute="bottom" constant="6" id="DHE-c1-FDT"/>
                             <constraint firstItem="EBr-2e-ORF" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.5" id="E4z-2c-n1q"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.26" id="Ggb-pW-7AW"/>
                             <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="H0X-BB-44s"/>
+                            <constraint firstItem="id3-FJ-dYb" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="JCh-av-1u2"/>
+                            <constraint firstItem="5Jl-KB-v2l" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="K2E-9Z-DNb"/>
                             <constraint firstItem="EBr-2e-ORF" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="LIg-K4-0ww"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.35" id="Odf-f2-WNn"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="width" multiplier="1.7" id="P9Q-j8-J6P"/>
+                            <constraint firstItem="sQu-MN-J2c" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" multiplier="0.9" id="QJz-im-5aX"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="R1b-yu-XHS"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="top" secondItem="QMr-hQ-NGt" secondAttribute="bottom" constant="6" id="Yqr-DJ-bqP"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="top" secondItem="EBr-2e-ORF" secondAttribute="bottom" constant="6" id="c9V-Tz-ljY"/>
+                            <constraint firstItem="id3-FJ-dYb" firstAttribute="centerY" secondItem="LEY-kG-BRL" secondAttribute="centerY" id="clP-mw-kjE"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="e4G-cg-TDm"/>
+                            <constraint firstItem="sQu-MN-J2c" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="e4r-9w-YXR"/>
+                            <constraint firstItem="id3-FJ-dYb" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" multiplier="0.9" id="ege-It-Sjg"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="centerX" secondItem="QMr-hQ-NGt" secondAttribute="centerX" id="kMn-5j-c9B"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="qN0-zW-RQi"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="40" id="sUr-l5-ffx"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" multiplier="0.5" id="vJL-eS-9Is"/>
+                            <constraint firstItem="5Jl-KB-v2l" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="w5O-Ml-2Ez"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="40" id="woH-Ma-7ol"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ojA-0m-lks"/>
+                    <connections>
+                        <outlet property="gameMinutesLabel" destination="jop-Sf-8Yj" id="eED-2X-etp"/>
+                        <outlet property="gameSecondsLabel" destination="Ko8-vf-QFy" id="G2n-ea-P38"/>
+                        <outlet property="movingMinutesLabel" destination="RFd-2O-0qr" id="5DQ-PQ-4M9"/>
+                        <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
+                        <outlet property="roundsLabel" destination="5Jl-KB-v2l" id="VbX-Du-NqF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -577,8 +658,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8x5-g0-ems"/>
-        <segue reference="Rcz-O1-KSj"/>
+        <segue reference="wjt-AD-E3u"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
@@ -605,6 +685,7 @@
         <image name="save 1" width="176" height="57"/>
         <image name="stations 1" width="195" height="61"/>
         <image name="text box 1" width="244" height="79"/>
+        <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>
         <image name="timer-time-box" width="221" height="70"/>
         <systemColor name="systemBackgroundColor">

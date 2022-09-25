@@ -6,24 +6,23 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SettingTimeHostViewController: UIViewController {
 
+    @IBOutlet weak var gameMinutesLabel: UILabel!
+    @IBOutlet weak var gameSecondsLabel: UILabel!
+    @IBOutlet weak var movingMinutesLabel: UILabel!
+    @IBOutlet weak var movingSecondsLabel: UILabel!
+    @IBOutlet weak var roundsLabel: UILabel!
+    
+    @State var minutes = 0
+    @State var seconds = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
