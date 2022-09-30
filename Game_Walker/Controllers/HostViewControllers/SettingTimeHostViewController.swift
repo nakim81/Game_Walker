@@ -37,20 +37,72 @@ class SettingTimeHostViewController: BaseViewController {
         toolBar.setItems([doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true
         
+        gametimePickerView = UIView(frame: CGRect(x:0, y: view.frame.height + 260, width: view.frame.width, height: 260))
+        view.addSubview(gametimePickerView)
         gametimePickerView.translatesAutoresizingMaskIntoConstraints = false
         
+        NSLayoutConstraint.activate([
+            gametimePickerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            gametimePickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 260),
+            gametimePickerView.heightAnchor.constraint(equalToConstant: 260)
+        ])
+        
+        gametimePickerView.backgroundColor = .white
+        
+        gametimePicker = UIPickerView(frame: CGRect(x: 0, y:0, width: view.frame.width, height: 260))
+        gametimePickerView.addSubview(gametimePicker)
+        
+        gametimePicker.isUserInteractionEnabled = true
+        gametimePickerView.addSubview(gametimePicker)
+        
+        gametimePicker.delegate = self
+        gametimePicker.dataSource = self
+        
+        
+        
     }
+    
+    @IBAction func gametimePressed(_ sender: UIButton) {
+        pickerAppear()
+    }
+    
     
     @objc func applyDone() {
         view.endEditing(true)
     }
     
+    func pickerAppear() {
+        if (pickertype == 0) {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.gametimePickerView.frame = CGRect(x:0, y: self.view.bounds.height - self.gametimePickerView.bounds.size.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.movetimePickerView.frame = CGRect(x:0, y: self.view.bounds.height - self.movetimePickerView.bounds.size.height, width: self.movetimePickerView.bounds.size.width, height: self.movetimePickerView.bounds.size.height)
+            })
+        }
+    }
+    
     func pickerDisappear() {
         if (pickertype == 0) {
-            
+            UIView.animate(withDuration: 0.3, animations:{
+                self.gametimePicker.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+            })
         } else {
-            
+            UIView.animate(withDuration: 0.3, animations:{
+                self.movetimePicker.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.movetimePickerView.bounds.size.width, height: self.movetimePickerView.bounds.size.height)})
         }
     }
 
+}
+
+
+extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 60
+    }
 }
