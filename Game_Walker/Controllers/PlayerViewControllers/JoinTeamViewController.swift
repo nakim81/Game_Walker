@@ -16,6 +16,8 @@ class JoinTeamViewController: BaseViewController {
     
     private var selectedIndex: Int?
     private var teamList: [Team] = []
+    //private lazy var player = userData.object(forKey: "player") as? Player
+    //private lazy var gamecode = userData.string(forKey: "gamecode")
 
     
     
@@ -35,6 +37,7 @@ class JoinTeamViewController: BaseViewController {
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
             UserData.team = teamList[selectedIndex]
+            //userData.set(teamList[selectedIndex], forKey: "team")
             T.joinTeam(UserData.gamecode!, teamList[selectedIndex].name, UserData.player!)
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {

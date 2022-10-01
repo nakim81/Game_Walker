@@ -13,7 +13,9 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var table: UITableView!
     var team: Team?
     var teams: [Int?] = []
-    let data: [String] = ["Hi", "Hello", "Ni hao"]
+    //let data: [String] = ["Hi", "Hello", "Ni hao"]
+    //private lazy var gamecode = userData.string(forKey: "gamecode")!
+    //private lazy var myTeam = userData.object(forKey: "team") as? Team
     
     
     override func viewDidLoad() {
@@ -35,6 +37,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         cell.configureTableViewCell(name: team!.players[indexPath.row].name)
         print(team!.players[indexPath.row])
         return cell
+        
     }
     
     private var cellColors = ["F28044","F0A761","FEC362","F0BB4C","E3CB92","FEA375"]

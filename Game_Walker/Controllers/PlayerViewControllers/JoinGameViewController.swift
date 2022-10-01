@@ -28,7 +28,9 @@ class JoinGameViewController: BaseViewController {
         if let gamecode: String = gamecodeTextField.text, let username: String = usernameTextField.text, !gamecode.isEmpty, !username.isEmpty {
             let newPlayer = Player(gamecode: gamecode, name: username)
             UserData.gamecode = gamecode
+            //userData.set(gamecode, forKey: "gamecode")
             UserData.player = newPlayer
+            //userData.set(newPlayer, forKey: "player")
             P.addPlayer(gamecode, newPlayer)
 
             performSegue(withIdentifier: "goToPF2VC", sender: self)
