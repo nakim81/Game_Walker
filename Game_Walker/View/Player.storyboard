@@ -355,10 +355,11 @@
                                 <rect key="frame" x="30.666666666666671" y="80.333333333333329" width="217.33333333333331" height="61.333333333333329"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="47" y="171" width="334" height="550"/>
+                                <rect key="frame" x="40.666666666666657" y="190.33333333333337" width="347" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="550" id="1im-lh-Ulm"/>
+                                    <constraint firstAttribute="height" constant="475" id="1im-lh-Ulm"/>
+                                    <constraint firstAttribute="width" constant="347" id="usG-w1-GVs"/>
                                 </constraints>
                             </tableView>
                         </subviews>
@@ -370,8 +371,7 @@
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="jag-WH-U88"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="1.084" id="qyz-91-rpR"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.78" id="x4p-aH-quN"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="1.04" id="qyz-91-rpR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>

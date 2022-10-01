@@ -66,7 +66,6 @@ extension JoinTeamViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
         cell.layer.borderWidth = 0
         selectedIndex = nil
-        print("\(cell.getImageName()) deselected")
     }
 }
 

@@ -13,6 +13,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var table: UITableView!
     var team: Team?
     var teams: [Int?] = []
+    let cellSpacingHeight: CGFloat = 3
     //let data: [String] = ["Hi", "Hello", "Ni hao"]
     //private lazy var gamecode = userData.string(forKey: "gamecode")!
     //private lazy var myTeam = userData.object(forKey: "team") as? Team
@@ -22,6 +23,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         T.delegate_getTeam = self
         configureTableView()
+        table.allowsSelection = false
         T.getTeam(UserData.gamecode!, UserData.team!.name)
     
     }
@@ -30,28 +32,37 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.delegate = self
         table.dataSource = self
         table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
+        table.backgroundColor = .white
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
-        cell.configureTableViewCell(name: team!.players[indexPath.row].name)
-        print(team!.players[indexPath.row])
+        cell.configureTableViewCell(name: team!.players[indexPath.section].name)
         return cell
         
     }
     
-    private var cellColors = ["F28044","F0A761","FEC362","F0BB4C","E3CB92","FEA375"]
-    private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
-        cell.contentView.backgroundColor = UIColor(named: cellColors[indexPath.row % cellColors.count])
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         guard let team = team else {
             return 0
         }
-        print(team.players.count)
         return team.players.count
-    }
+        }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return 1
+     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return cellSpacingHeight
+        }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor.clear
+            return headerView
+        }
+    
 }
 
 // MARK: - TeamProtocol
