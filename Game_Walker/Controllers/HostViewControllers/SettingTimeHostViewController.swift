@@ -15,8 +15,8 @@ class SettingTimeHostViewController: BaseViewController {
     @IBOutlet weak var movingSecondsLabel: UILabel!
     @IBOutlet weak var roundsLabel: UILabel!
     
-    var minutes: Int = 0
-    var seconds: Int = 0
+    var gameminutes: Int = 0
+    var gameseconds: Int = 0
     var pickertype = 0
     
     
@@ -75,6 +75,18 @@ class SettingTimeHostViewController: BaseViewController {
         self.view.endEditing(true)
         self.gametimePickerView.endEditing(true)
         pickerDisappear()
+        self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
+        self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds)
+    }
+    
+    func changeTimeToString(timeInteger : Int) -> String{
+        var timeString = ""
+        if (timeInteger < 10) {
+            timeString = "0" + String(timeInteger)
+        } else {
+            timeString = String(timeInteger)
+        }
+        return timeString
     }
     
     func pickerAppear() {
@@ -133,9 +145,9 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            minutes = row
+            gameminutes = row
         case 1:
-            seconds = row
+            gameseconds = row
         default:
             break
         }
