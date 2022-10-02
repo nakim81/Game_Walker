@@ -35,3 +35,7 @@ protocol GetTeam {
 protocol TeamList {
     func listOfTeams(_ teams: [Team])
 }
+
+protocol GetHost {
+    func getHost(_ host: Host)
+}

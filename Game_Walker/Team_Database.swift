@@ -121,7 +121,7 @@ struct T {
     }
     
     static func getTeamList(_ gamecode: String){
-        //Sorted by pvp, pve
+        //sort by points
         db.collection("\(gamecode) : Teams")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -133,6 +133,7 @@ struct T {
                         let team = convertDataToTeam(data)
                         teams.append(team)
                     }
+                    teams.sort{$0.points > $1.points}
                     delegate_teamList?.listOfTeams(teams)
                 }
         }
