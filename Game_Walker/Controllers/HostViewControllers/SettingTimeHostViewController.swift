@@ -20,6 +20,7 @@ class SettingTimeHostViewController: BaseViewController {
     var moveminutes: Int = 0
     var moveseconds: Int = 0
     var pickertype = 0
+    var rounds = 10
     
     
     //UIPickerView inside of UIView container
@@ -38,48 +39,6 @@ class SettingTimeHostViewController: BaseViewController {
     
     
     override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        gametimePickerView = UIView(frame: CGRect(x:0, y: view.frame.height + 260, width: view.frame.width, height: 260))
-//        movetimePickerView = UIView(frame: CGRect(x:0, y: view.frame.height + 260, width: view.frame.width, height: 260))
-//
-//        let gamedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
-//        gameToolBar.setItems([gamedoneButton], animated: true)
-//        gameToolBar.isUserInteractionEnabled = true
-//        gameToolBar.sizeToFit()
-//
-//        if (pickertype == 0) {
-//            currentPickerView = gametimePickerView
-//            currentPicker = gametimePicker
-//        } else {
-//            currentPickerView = movetimePickerView
-//            currentPicker = movetimePicker
-//        }
-//
-//        view.addSubview(currentPickerView)
-//        currentPickerView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([currentPickerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),        currentPickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 260), currentPickerView.heightAnchor.constraint(equalToConstant: 260)])
-//
-//        currentPickerView.backgroundColor = .white
-//
-//        currentPicker = UIPickerView(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.size.width, height: 260))
-//        currentPickerView.addSubview(currentPicker)
-//        currentPickerView.addSubview(gameToolBar)
-//        currentPicker.isUserInteractionEnabled = true
-//
-//        if (pickertype == 0) {
-//            gametimePicker = currentPicker
-//            gametimePickerView = currentPickerView
-//            gametimePicker.delegate = self
-//            gametimePicker.dataSource = self
-//        } else {
-//            movetimePicker = currentPicker
-//            movetimePickerView = currentPickerView
-//            movetimePicker.delegate = self
-//            movetimePicker.dataSource = self
-//            print("im in")
-//        }
 
         
         super.viewDidLoad()
@@ -195,6 +154,15 @@ class SettingTimeHostViewController: BaseViewController {
                 self.moveToolBar.removeFromSuperview()
             })
         }
+    }
+    
+    
+    @IBAction func nextButtonPressed(_ sender: UIButton) {
+        H.setTimer(UserData.gamecode!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), rounds)
+    }
+    
+    func timeConvert(min : Int, sec : Int) -> Int {
+        return (min * 60 + sec)
     }
     
 
