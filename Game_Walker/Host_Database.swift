@@ -41,7 +41,7 @@ struct H {
         }
     }
     
-    static func getTimer(_ gamecode: String){
+    static func getHost(_ gamecode: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
