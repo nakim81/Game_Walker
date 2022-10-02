@@ -62,6 +62,7 @@
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
+		FC1C86F628E8192C00A253E1 /* Dosis in Resources */ = {isa = PBXBuildFile; fileRef = FC5FE0CB285AA7B300446FC2 /* Dosis */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 /* End PBXBuildFile section */
 
@@ -353,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1C86F628E8192C00A253E1 /* Dosis in Resources */,
 				DA42138428B47DD4000A395F /* GameManagerCollectionViewCell.xib in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DA42138628B47DD4000A395F /* HostStationsTableViewCell.xib in Resources */,
@@ -609,7 +611,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker13";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -641,7 +643,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker13";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

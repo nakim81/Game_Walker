@@ -20,6 +20,9 @@ class CreateTeamViewController: BaseViewController {
          "iconNavyblue", "iconPurple", "iconPink",
     ]
     
+    //private lazy var player = userData.object(forKey: "player") as? Player
+    //private lazy var gamecode = userData.string(forKey: "gamecode")
+    
     private var selectedIconName : String? {
         get {
             if let selectedIndex = selectedIndex {
@@ -60,6 +63,7 @@ class CreateTeamViewController: BaseViewController {
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
             let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.team = newTeam
+            //userData.set(newTeam, forKey: "team")
             T.addTeam(UserData.gamecode!, newTeam)
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {

@@ -11,31 +11,68 @@ import UIKit
 class TeamTableViewCell: UITableViewCell {
     
     static let identifier = "TeamTableViewCell"
-    let nameLabel = UILabel()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Dosis-Bold.tft", size: 25)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let imageview: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "name box fill 1")
+        view.alpha = 0.5
+        return view
+    }()
+    
+    private lazy var containerView: UIView = {
+            let view = UIView()
+            view.backgroundColor = .clear
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.clipsToBounds = true
+            view.contentMode = .scaleAspectFill
+            return view
+        }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.addSubview(nameLabel)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
     }
 
     func configureTableViewCell(name: String) {
-        self.clipsToBounds = true
-        self.contentMode = .scaleAspectFill
-        self.translatesAutoresizingMaskIntoConstraints = true
+        contentView.addSubview(containerView)
+        containerView.addSubview(imageview)
+        containerView.addSubview(nameLabel)
 
-        self.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        self.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        self.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        nameLabel.clipsToBounds = true
-        nameLabel.textAlignment = .center
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: 330),
+            containerView.heightAnchor.constraint(equalToConstant: 50),
+            
+            nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            nameLabel.widthAnchor.constraint(equalToConstant: 203),
+            nameLabel.heightAnchor.constraint(equalToConstant: 19),
+            
+            imageview.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
+            imageview.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            imageview.widthAnchor.constraint(equalToConstant: 328),
+            imageview.heightAnchor.constraint(equalToConstant: 47)
+        ])
         nameLabel.text = name
-        nameLabel.font = UIFont(name: "Dosis-Bold", size: 25)
-        nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 23).isActive = true
+    
     }
 
         required init?(coder: NSCoder) {
