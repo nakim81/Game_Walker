@@ -19,6 +19,7 @@ class SettingTimeHostViewController: BaseViewController {
     var seconds: Int = 0
     var pickertype = 0
     
+    
     //UIPickerView inside of UIView container
     var gametimePickerView: UIView!
     var gametimePicker: UIPickerView!
@@ -26,16 +27,18 @@ class SettingTimeHostViewController: BaseViewController {
     var movetimePicker: UIPickerView!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 30))
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
         
         toolBar.setItems([doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true
+        
         
         gametimePickerView = UIView(frame: CGRect(x:0, y: view.frame.height + 260, width: view.frame.width, height: 260))
         view.addSubview(gametimePickerView)
@@ -51,10 +54,9 @@ class SettingTimeHostViewController: BaseViewController {
         
         gametimePicker = UIPickerView(frame: CGRect(x: 0, y:0, width: view.frame.width, height: 260))
         gametimePickerView.addSubview(gametimePicker)
+        gametimePickerView.addSubview(toolBar)
         
         gametimePicker.isUserInteractionEnabled = true
-        gametimePickerView.addSubview(gametimePicker)
-        
         gametimePicker.delegate = self
         gametimePicker.dataSource = self
         
@@ -69,6 +71,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     @objc func applyDone() {
         view.endEditing(true)
+        pickerDisappear()
     }
     
     func pickerAppear() {
@@ -93,6 +96,7 @@ class SettingTimeHostViewController: BaseViewController {
                 self.movetimePicker.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.movetimePickerView.bounds.size.width, height: self.movetimePickerView.bounds.size.height)})
         }
     }
+    
 
 }
 
@@ -103,6 +107,31 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 60
+        return 61
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return pickerView.frame.size.width/2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return "\(row)  minutes"
+        case 1:
+            return "\(row)  seconds"
+        default:
+            return ""
+        }    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            minutes = row
+        case 1:
+            seconds = row
+        default:
+            break
+        }
     }
 }
