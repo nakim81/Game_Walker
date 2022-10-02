@@ -26,14 +26,15 @@ class SettingTimeHostViewController: BaseViewController {
     var movetimePickerView: UIView!
     var movetimePicker: UIPickerView!
     
+    var toolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
+
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
         toolBar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
         
         toolBar.setItems([doneButton], animated: true)
@@ -52,7 +53,7 @@ class SettingTimeHostViewController: BaseViewController {
         
         gametimePickerView.backgroundColor = .white
         
-        gametimePicker = UIPickerView(frame: CGRect(x: 0, y:0, width: view.frame.width, height: 260))
+        gametimePicker = UIPickerView(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.size.width, height: 260))
         gametimePickerView.addSubview(gametimePicker)
         gametimePickerView.addSubview(toolBar)
         
@@ -65,12 +66,14 @@ class SettingTimeHostViewController: BaseViewController {
     }
     
     @IBAction func gametimePressed(_ sender: UIButton) {
+
         pickerAppear()
     }
     
     
     @objc func applyDone() {
-        view.endEditing(true)
+        self.view.endEditing(true)
+        self.gametimePickerView.endEditing(true)
         pickerDisappear()
     }
     
@@ -78,6 +81,8 @@ class SettingTimeHostViewController: BaseViewController {
         if (pickertype == 0) {
             UIView.animate(withDuration: 0.3, animations: {
                 self.gametimePickerView.frame = CGRect(x:0, y: self.view.bounds.height - self.gametimePickerView.bounds.size.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+                self.gametimePickerView.addSubview(self.toolBar)
+               
             })
         } else {
             UIView.animate(withDuration: 0.3, animations: {
@@ -89,11 +94,12 @@ class SettingTimeHostViewController: BaseViewController {
     func pickerDisappear() {
         if (pickertype == 0) {
             UIView.animate(withDuration: 0.3, animations:{
-                self.gametimePicker.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+                self.gametimePickerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+                self.toolBar.removeFromSuperview()
             })
         } else {
             UIView.animate(withDuration: 0.3, animations:{
-                self.movetimePicker.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.movetimePickerView.bounds.size.width, height: self.movetimePickerView.bounds.size.height)})
+                self.movetimePickerView.frame = CGRect(x: 0, y: self.view.bounds.height, width: self.movetimePickerView.bounds.size.width, height: 0)})
         }
     }
     
