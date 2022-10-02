@@ -74,6 +74,25 @@ struct T {
         }
     }
     
+    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player){
+        let docRef = db.collection("\(gamecode) : Teams").document(teamName)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var team = convertDataToTeam(data)
+                if let index = team.players.firstIndex(of: player){
+                    team.players.remove(at: index)
+                }
+                //update team member
+                updateTeam(gamecode, team)
+            } else {
+                print("Team does not exist")
+            }
+        }
+    }
+    
+    
+    
     static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int){
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         docRef.getDocument { (document, error) in
@@ -102,7 +121,7 @@ struct T {
     }
     
     static func getTeamList(_ gamecode: String){
-        //Sorted by pvp, pve
+        //sort by points
         db.collection("\(gamecode) : Teams")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -114,6 +133,7 @@ struct T {
                         let team = convertDataToTeam(data)
                         teams.append(team)
                     }
+                    teams.sort{$0.points > $1.points}
                     delegate_teamList?.listOfTeams(teams)
                 }
         }
