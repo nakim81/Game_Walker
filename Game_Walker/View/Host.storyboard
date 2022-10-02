@@ -288,7 +288,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="149" y="371" width="108" height="25.5"/>
+                                        <rect key="frame" x="139.5" y="372" width="127.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -463,13 +463,13 @@
                                         <rect key="frame" x="116" y="5" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="59.5" y="13.5" width="47" height="49"/>
+                                        <rect key="frame" x="61.5" y="11.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="133.5" y="13.5" width="47" height="49"/>
+                                        <rect key="frame" x="133.5" y="11.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -507,18 +507,25 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
                                         <rect key="frame" x="116" y="5" width="9" height="66"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="59.5" y="13.5" width="47" height="49"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
+                                        <rect key="frame" x="61.5" y="11.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="133.5" y="13.5" width="47" height="49"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
+                                        <rect key="frame" x="133.5" y="11.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
+                                        <rect key="frame" x="-13" y="-4.5" width="267" height="85.5"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -545,7 +552,7 @@
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jl-KB-v2l" userLabel="Rounds Placeholder">
-                                <rect key="frame" x="183.5" y="603" width="47" height="49"/>
+                                <rect key="frame" x="191" y="601" width="32.5" height="53.5"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -554,6 +561,7 @@
                         <viewLayoutGuide key="safeArea" id="bbE-Tk-Afq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="RKr-I9-Cod" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="0X3-tc-6rv"/>
                             <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="0eT-1R-WV7"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="1kq-uR-fZz"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" multiplier="0.9" id="29t-bA-arN"/>
@@ -590,9 +598,12 @@
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="qN0-zW-RQi"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="40" id="sUr-l5-ffx"/>
+                            <constraint firstItem="RKr-I9-Cod" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="tjb-Aa-mRV"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" multiplier="0.5" id="vJL-eS-9Is"/>
                             <constraint firstItem="5Jl-KB-v2l" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="w5O-Ml-2Ez"/>
+                            <constraint firstItem="RKr-I9-Cod" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="wjy-hF-HeF"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="40" id="woH-Ma-7ol"/>
+                            <constraint firstItem="RKr-I9-Cod" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="yyl-dg-mrh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ojA-0m-lks"/>
