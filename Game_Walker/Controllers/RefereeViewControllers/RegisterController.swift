@@ -15,7 +15,9 @@ class RegisterController: BaseViewController {
     @IBOutlet weak var nextButton: UIButton!
     var assigned : Bool = false
     var station_name = ""
-    var referee : Referee = Referee()
+    var gamecode_save = ""
+    var referee_name = ""
+    //var referee : Referee?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,10 @@ class RegisterController: BaseViewController {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
             R.addReferee(gamecode, newReferee)
+            //self.referee = newReferee
+            RefereeData.gamecode_save = gamecode
+            RefereeData.referee_name = name
+            RefereeData.referee = newReferee
         }
         performSegue(withIdentifier: "goToWait", sender: self)
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61570AA228E8F7720060F66C /* RefereeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61570AA128E8F7720060F66C /* RefereeData.swift */; };
 		61FD379728D5B35200BE859E /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD379628D5B35200BE859E /* WaitingController.swift */; };
 		A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */; };
 		A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		61570AA128E8F7720060F66C /* RefereeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeData.swift; sourceTree = "<group>"; };
 		61FD379628D5B35200BE859E /* WaitingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				DAC3132A285862FB00BECF89 /* Referee.swift */,
 				DAC31328285862EF00BECF89 /* Station.swift */,
 				FC1D68F0288B97C500C529DA /* UserData.swift */,
+				61570AA128E8F7720060F66C /* RefereeData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
+				61570AA228E8F7720060F66C /* RefereeData.swift in Sources */,
 				DA42138228B47DD4000A395F /* HostGameCodeViewController.swift in Sources */,
 				DA42135028B47D5D000A395F /* PVPRefereeController.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,

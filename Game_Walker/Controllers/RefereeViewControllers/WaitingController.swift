@@ -17,6 +17,7 @@ class WaitingController: BaseViewController {
     var station_name = ""
     var timer: Timer?
     var currentIndex: Int = 0
+    var RegisterController: RegisterController?
     let waitingImagesArray = ["waiting 2.png", "waiting 1.png", "waiting. 1.png"]
 
     func startTimer() {
@@ -24,16 +25,35 @@ class WaitingController: BaseViewController {
             self.timer = timer
 
         } else {
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] timer in
+                //let RegisterController = Game_Walker.RegisterController()
+                //let WaitingController = WaitingController()
+                //WaitingController.RegisterController = RegisterController
+                R.getReferee(RefereeData.gamecode_save, RefereeData.referee_name)
+                //print(RefereeData.gamecode_save)
+                //print(RefereeData.referee_name)
+                //self.getReferee(RefereeData.referee!)
                 if self.currentIndex == 2 {
                     self.currentIndex = 0
                 }
                 else {
                     self.currentIndex = self.currentIndex + 1
                 }
-                print(self.assigned)
-                print(self.station_name)
+                //print(RefereeData.assigned)
+                //print(RefereeData.station_name)
                 self.WaitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
+                if RefereeData.assigned {
+                    //S.getStation(RefereeData.gamecode_save, RefereeData.station_name)
+                    //if (RefereeData.station_name != "") {
+                        stopTimer()
+                        if RefereeData.pvp_check {
+                            performSegue(withIdentifier: "goToPVP", sender: self)
+                        }
+                        else {
+                            performSegue(withIdentifier: "goToPVE", sender: self)
+                        }
+                    //}
+                }
             }
         }
     }
@@ -45,7 +65,8 @@ class WaitingController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        R.getReferee("123456", "Dummy")
+        R.delegate_getReferee = self
+        S.delegate_getStation = self
         startTimer()
         if assigned && (station_name != "") {
             stopTimer()
@@ -61,14 +82,17 @@ class WaitingController: BaseViewController {
 //MARK: - UIUpdate
 extension WaitingController: GetReferee {
     func getReferee(_ referee: Referee) {
-        self.assigned = referee.assigned
+        //print(referee.assigned)
+        RefereeData.assigned = referee.assigned
+        RefereeData.station_name = referee.stationName
+        //print(RefereeData.assigned)
     }
 }
 
 //MARK: - UIUpdate
 extension WaitingController: GetStation {
     func getStation(_ station: Station) {
-        self.station_name = station.name
-        self.pvp_check = station.pvp
+        RefereeData.station_name = station.name
+        RefereeData.pvp_check = station.pvp
     }
 }

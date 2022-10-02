@@ -88,7 +88,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="next button 1"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="next button 1"/>
+                                    <backgroundConfiguration key="background" image="join button 2"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hE4-lp-FXr"/>
@@ -180,39 +180,40 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-T8-Azg">
-                                <rect key="frame" x="74" y="156.5" width="266" height="321"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
-                                <connections>
-                                    <action selector="scoreButtonPressed:" destination="4vK-pl-gaJ" eventType="touchUpInside" id="J0A-KL-jXS"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWh-pu-WBu">
-                                <rect key="frame" x="74.5" y="426" width="265" height="144.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVb-O6-bJY">
+                                <rect key="frame" x="87" y="199" width="240" height="327"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-T8-Azg">
+                                        <rect key="frame" x="30" y="18" width="180" height="176.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
+                                        <connections>
+                                            <action selector="scoreButtonPressed:" destination="4vK-pl-gaJ" eventType="touchUpInside" id="J0A-KL-jXS"/>
+                                        </connections>
+                                    </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="64a-JO-bp6">
-                                        <rect key="frame" x="86" y="-19" width="93" height="81.5"/>
+                                        <rect key="frame" x="62.5" y="193.5" width="115" height="38"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yBg-IW-7Wg">
-                                        <rect key="frame" x="86.5" y="23.5" width="92" height="54"/>
+                                        <rect key="frame" x="2.5" y="227" width="235" height="36"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="ABCDEF">
+                                            <fragment content="I am air">
                                                 <attributes>
                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" metaFont="system" size="20"/>
+                                                    <font key="NSFont" size="25" name="Dosis-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-SZ-3Go">
-                                        <rect key="frame" x="86" y="68" width="93" height="66.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-SZ-3Go">
+                                        <rect key="frame" x="43" y="268" width="154" height="52.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="100">
                                                 <attributes>
-                                                    <font key="NSFont" metaFont="system" size="50"/>
+                                                    <font key="NSFont" size="50" name="Dosis-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -221,38 +222,42 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="height" secondItem="TWh-pu-WBu" secondAttribute="height" multiplier="0.375" id="Dgr-IL-8Ft"/>
-                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="width" secondItem="TWh-pu-WBu" secondAttribute="width" multiplier="0.35" id="Ej1-xX-C7f"/>
-                                    <constraint firstItem="64a-JO-bp6" firstAttribute="height" secondItem="TWh-pu-WBu" secondAttribute="height" multiplier="0.5625" id="Lry-nE-fa5"/>
-                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="centerY" secondItem="TWh-pu-WBu" secondAttribute="centerY" multiplier="0.7" id="V2b-pb-4Lh"/>
-                                    <constraint firstItem="64a-JO-bp6" firstAttribute="width" secondItem="TWh-pu-WBu" secondAttribute="width" multiplier="0.35" id="VaF-PC-r2B"/>
-                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="centerY" secondItem="TWh-pu-WBu" secondAttribute="centerY" multiplier="1.4" id="X4d-3r-cqZ"/>
-                                    <constraint firstItem="64a-JO-bp6" firstAttribute="centerY" secondItem="TWh-pu-WBu" secondAttribute="centerY" multiplier="0.3" id="aJT-Eu-3Y7"/>
-                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="centerX" secondItem="TWh-pu-WBu" secondAttribute="centerX" id="e59-fs-tnp"/>
-                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="height" secondItem="TWh-pu-WBu" secondAttribute="height" multiplier="0.460938" id="feH-qo-lju"/>
-                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="centerX" secondItem="TWh-pu-WBu" secondAttribute="centerX" id="nB8-0s-x56"/>
-                                    <constraint firstItem="64a-JO-bp6" firstAttribute="centerX" secondItem="TWh-pu-WBu" secondAttribute="centerX" id="pyi-OI-0zQ"/>
-                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="width" secondItem="TWh-pu-WBu" secondAttribute="width" multiplier="0.345833" id="ua2-cZ-UHS"/>
+                                    <constraint firstItem="64a-JO-bp6" firstAttribute="centerY" secondItem="tVb-O6-bJY" secondAttribute="centerY" multiplier="1.3" id="4ue-co-rA7"/>
+                                    <constraint firstItem="iuD-T8-Azg" firstAttribute="centerY" secondItem="tVb-O6-bJY" secondAttribute="centerY" multiplier="0.65" id="5DA-ca-Mm3"/>
+                                    <constraint firstItem="iuD-T8-Azg" firstAttribute="centerX" secondItem="tVb-O6-bJY" secondAttribute="centerX" id="JgO-Gc-FyH"/>
+                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="height" secondItem="tVb-O6-bJY" secondAttribute="height" multiplier="0.16" id="Sxm-dF-f0c"/>
+                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="width" secondItem="tVb-O6-bJY" secondAttribute="width" multiplier="0.979167" id="UON-46-0gW"/>
+                                    <constraint firstItem="64a-JO-bp6" firstAttribute="height" secondItem="tVb-O6-bJY" secondAttribute="height" multiplier="0.115" id="UlQ-tr-WYj"/>
+                                    <constraint firstItem="iuD-T8-Azg" firstAttribute="width" secondItem="tVb-O6-bJY" secondAttribute="width" multiplier="0.75" id="XJp-ny-8Z8"/>
+                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="centerX" secondItem="tVb-O6-bJY" secondAttribute="centerX" id="Xwd-j6-PDG"/>
+                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="height" secondItem="tVb-O6-bJY" secondAttribute="height" multiplier="0.11" id="ajl-Mp-kk1"/>
+                                    <constraint firstItem="iuD-T8-Azg" firstAttribute="height" secondItem="tVb-O6-bJY" secondAttribute="height" multiplier="0.54" id="cP1-s9-dFv"/>
+                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="centerY" secondItem="tVb-O6-bJY" secondAttribute="centerY" multiplier="1.8" id="hkc-Kq-eLN"/>
+                                    <constraint firstItem="yBg-IW-7Wg" firstAttribute="centerY" secondItem="tVb-O6-bJY" secondAttribute="centerY" multiplier="1.5" id="hlb-Pe-TqB"/>
+                                    <constraint firstItem="64a-JO-bp6" firstAttribute="centerX" secondItem="tVb-O6-bJY" secondAttribute="centerX" id="rMu-ZU-t2t"/>
+                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="centerX" secondItem="tVb-O6-bJY" secondAttribute="centerX" id="sSw-CA-LML"/>
+                                    <constraint firstItem="Sve-SZ-3Go" firstAttribute="width" secondItem="tVb-O6-bJY" secondAttribute="width" multiplier="0.64" id="twt-gp-UIF"/>
+                                    <constraint firstItem="64a-JO-bp6" firstAttribute="width" secondItem="tVb-O6-bJY" secondAttribute="width" multiplier="0.48" id="ze7-ZU-KQD"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-N9-45t">
-                                <rect key="frame" x="165.5" y="578.5" width="83" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="118" y="552" width="178" height="73.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8j1-5s-Npb">
                                 <rect key="frame" x="106.5" y="644" width="201.5" height="71"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="rule button 1" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Game info button 2" title=""/>
                                 <connections>
-                                    <action selector="ruleButtonPressed:" destination="4vK-pl-gaJ" eventType="touchUpInside" id="fU1-oS-va1"/>
+                                    <action selector="ruleButtonPressed:" destination="4vK-pl-gaJ" eventType="touchUpInside" id="gmo-d4-DG2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I02-a7-kzt">
-                                <rect key="frame" x="74" y="670.5" width="266" height="245"/>
+                                <rect key="frame" x="74" y="752" width="266" height="81.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="next game 1" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Next game button 2" title=""/>
                                 <connections>
                                     <action selector="nextgameButtonPressed:" destination="4vK-pl-gaJ" eventType="touchUpInside" id="HwY-8E-xhS"/>
                                 </connections>
@@ -261,34 +266,31 @@
                         <viewLayoutGuide key="safeArea" id="ZGe-Bo-Qn2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TWh-pu-WBu" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.64" id="0uV-nB-qg9"/>
-                            <constraint firstItem="RdW-N9-45t" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.2" id="1bR-ec-0fT"/>
-                            <constraint firstItem="I02-a7-kzt" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.299511" id="2fd-7t-uSO"/>
+                            <constraint firstItem="RdW-N9-45t" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.43" id="1bR-ec-0fT"/>
+                            <constraint firstItem="I02-a7-kzt" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.1" id="2fd-7t-uSO"/>
                             <constraint firstItem="RdW-N9-45t" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.3" id="7Bg-5l-KoO"/>
-                            <constraint firstItem="iuD-T8-Azg" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.392371" id="BHV-KY-Cwm"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="0.3" id="D0E-7h-Azi"/>
-                            <constraint firstItem="TWh-pu-WBu" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.177112" id="DW8-Qm-2Qd"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.113987" id="GLH-gb-kXX"/>
-                            <constraint firstItem="iuD-T8-Azg" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.642667" id="HCX-8P-gzm"/>
                             <constraint firstItem="I02-a7-kzt" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.642512" id="IZU-q0-Ebz"/>
                             <constraint firstItem="I02-a7-kzt" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="P2Q-rC-r3x"/>
-                            <constraint firstItem="iuD-T8-Azg" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="0.7" id="V6j-77-Znv"/>
                             <constraint firstItem="RdW-N9-45t" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="XG6-Mx-FOJ"/>
                             <constraint firstItem="I02-a7-kzt" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.75" id="clg-Yr-H7h"/>
-                            <constraint firstItem="iuD-T8-Azg" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="d8y-HT-jgn"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.663111" id="dxn-rf-BMu"/>
-                            <constraint firstItem="TWh-pu-WBu" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="e8w-Eg-0kr"/>
+                            <constraint firstItem="tVb-O6-bJY" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="eXZ-ui-KtB"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="hkj-CP-oTv"/>
                             <constraint firstItem="8j1-5s-Npb" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.486715" id="iKy-Xx-rgY"/>
                             <constraint firstItem="8j1-5s-Npb" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.5" id="pxm-hF-nrn"/>
+                            <constraint firstItem="tVb-O6-bJY" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="0.8" id="q2k-4G-Z2b"/>
                             <constraint firstItem="8j1-5s-Npb" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="u6n-tv-H4K"/>
-                            <constraint firstItem="TWh-pu-WBu" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.1" id="uPV-kS-Sll"/>
+                            <constraint firstItem="tVb-O6-bJY" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.57971" id="vcU-hk-HFB"/>
                             <constraint firstItem="8j1-5s-Npb" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.0867971" id="xI2-fD-djZ"/>
-                            <constraint firstItem="RdW-N9-45t" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.0256724" id="xY0-eq-mK4"/>
+                            <constraint firstItem="RdW-N9-45t" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.09" id="xY0-eq-mK4"/>
+                            <constraint firstItem="tVb-O6-bJY" firstAttribute="height" secondItem="ZGe-Bo-Qn2" secondAttribute="height" multiplier="0.4" id="yvz-Vv-efo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6ve-Tb-mVa"/>
                     <connections>
+                        <outlet property="borderView" destination="tVb-O6-bJY" id="6kF-YN-wLz"/>
                         <outlet property="nextgameButton" destination="I02-a7-kzt" id="c4D-Ie-2Df"/>
                         <outlet property="roundLabel" destination="peX-so-fSX" id="5Wv-de-zW3"/>
                         <outlet property="ruleButton" destination="8j1-5s-Npb" id="mkd-Ha-CCm"/>
@@ -296,7 +298,7 @@
                         <outlet property="teamnameLabel" destination="yBg-IW-7Wg" id="gSa-p6-QTM"/>
                         <outlet property="teamscoreLabel" destination="Sve-SZ-3Go" id="Knf-rp-3Bc"/>
                         <outlet property="timerLabel" destination="RdW-N9-45t" id="nMz-5s-PJr"/>
-                        <segue destination="mAO-zd-khf" kind="presentation" modalPresentationStyle="fullScreen" id="V4I-n7-so6"/>
+                        <segue destination="mAO-zd-khf" kind="presentation" identifier="goToPVERule" modalPresentationStyle="fullScreen" id="V4I-n7-so6"/>
                         <segue destination="EwB-o7-p0J" kind="presentation" modalPresentationStyle="fullScreen" id="8Ie-W6-3NO"/>
                     </connections>
                 </viewController>
@@ -1012,7 +1014,9 @@
         <segue reference="V4I-n7-so6"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Game info button 2" width="176" height="57"/>
         <image name="IMG_6244" width="211" height="274"/>
+        <image name="Next game button 2" width="176" height="57"/>
         <image name="Team 1" width="64" height="19"/>
         <image name="White! confirm button 1" width="176" height="57"/>
         <image name="game 1" width="311" height="146.5"/>
@@ -1022,6 +1026,7 @@
         <image name="game name 1" width="157.5" height="35"/>
         <image name="game points 1 (3)" width="171" height="35.5"/>
         <image name="info textbox 4" width="328" height="47"/>
+        <image name="join button 2" width="176" height="57"/>
         <image name="next button 1" width="175.5" height="57"/>
         <image name="next game 1" width="176" height="57"/>
         <image name="rule button 1" width="177.5" height="57"/>
