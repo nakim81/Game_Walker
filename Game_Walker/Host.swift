@@ -8,14 +8,21 @@
 import Foundation
 
 struct Host: Codable {
-    var gamecode : String = ""
-    var gameTime : Int = 0
-    var movingTime : Int = 0
-    var rounds : Int = 0
-    var algorithm : [[String]] = []
-    var duplicated : [[Int]] = []
-    var doubled : [[Int]] = []
-    var blanked : [[Int]] = []
+    //game info
+    var gamecode: String = ""
+    var gameTime: Int = 0
+    var movingTime: Int = 0
+    var rounds: Int = 0
+    //algorithm
+    var algorithm: [[String]] = []
+    var duplicated: [[Int]] = []
+    var doubled: [[Int]] = []
+    var blanked: [[Int]] = []
+    //game control
+    var scoreboard: Bool = true
+    var pause: Bool = false
+    var announcment: [String] = []
+    
     
     enum CodingKeys: String, CodingKey {
         case gamecode
@@ -26,6 +33,9 @@ struct Host: Codable {
         case duplicated
         case doubled
         case blanked
+        case scoreboard
+        case pause
+        case announcment
     }
     
     
