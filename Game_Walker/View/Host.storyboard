@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -634,54 +633,60 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
                                 <rect key="frame" x="23.5" y="80.5" width="222" height="61"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m">
-                                <rect key="frame" x="107" y="799" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Start game button"/>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
-                                <rect key="frame" x="74" y="149" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
+                                <rect key="frame" x="61.5" y="239.5" width="291" height="34.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1oU-Mo-QnG" secondAttribute="height" multiplier="291:35" id="Qhv-4t-XC8"/>
+                                </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rounds line frame-1" translatesAutoresizingMaskIntoConstraints="NO" id="XgC-X4-Jvo">
-                                <rect key="frame" x="87" y="285" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds line frame" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-Bf-esF">
+                                <rect key="frame" x="26.5" y="284" width="35" height="291"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ggU-Bf-esF" secondAttribute="height" multiplier="35:291" id="zQR-i4-tR8"/>
+                                </constraints>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
-                                <rect key="frame" x="87" y="480" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
+                                <rect key="frame" x="61.5" y="284" width="291" height="291"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="m6H-bD-wNG" secondAttribute="height" multiplier="1:1" id="184-WR-Lrv"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0xY-Rr-skn">
-                                        <rect key="frame" x="56" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Vsh-h9-Up9">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
+                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="Start game button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h99-ko-w7n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="centerX" secondItem="1oU-Mo-QnG" secondAttribute="centerX" id="0Av-qE-a9Q"/>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="1oU-Mo-QnG" secondAttribute="bottom" constant="10" id="0Cf-bE-db0"/>
+                            <constraint firstItem="1oU-Mo-QnG" firstAttribute="width" secondItem="h99-ko-w7n" secondAttribute="width" multiplier="0.7" constant="1" id="4S7-nn-7B8"/>
+                            <constraint firstItem="1oU-Mo-QnG" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="55C-It-CRq"/>
+                            <constraint firstItem="1oU-Mo-QnG" firstAttribute="top" secondItem="xFP-8B-6Yp" secondAttribute="bottom" constant="98" id="BTM-mO-brc"/>
+                            <constraint firstItem="ggU-Bf-esF" firstAttribute="centerY" secondItem="m6H-bD-wNG" secondAttribute="centerY" id="Ck3-BI-9u5"/>
+                            <constraint firstItem="h99-ko-w7n" firstAttribute="bottom" secondItem="6s2-dh-Y7m" secondAttribute="bottom" constant="55" id="EyG-tp-nYx"/>
+                            <constraint firstItem="6s2-dh-Y7m" firstAttribute="centerX" secondItem="m6H-bD-wNG" secondAttribute="centerX" id="Iaj-Iw-qiN"/>
+                            <constraint firstItem="ggU-Bf-esF" firstAttribute="height" secondItem="m6H-bD-wNG" secondAttribute="height" id="VTL-y7-2ih"/>
                             <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" multiplier="0.25" id="ZFx-6k-605"/>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="ggU-Bf-esF" secondAttribute="trailing" id="Zx1-4T-uFr"/>
                             <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" multiplier="0.65" id="sMH-Oz-juF"/>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="width" secondItem="1oU-Mo-QnG" secondAttribute="width" id="xHU-f6-Bih"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1QZ-hO-XSj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3250" y="-300"/>
+            <point key="canvasLocation" x="3245" y="-319"/>
         </scene>
         <!--GameManagerViewController-->
         <scene sceneID="alU-c0-Oy8">
@@ -768,7 +773,7 @@
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
         <image name="rounds 1" width="101" height="35"/>
-        <image name="rounds line frame-1" width="292.5" height="35"/>
+        <image name="rounds line frame" width="35" height="292.5"/>
         <image name="rules 2" width="59" height="25.5"/>
         <image name="rules textboxwhite 1" width="280" height="89.5"/>
         <image name="save 1" width="176" height="57"/>
