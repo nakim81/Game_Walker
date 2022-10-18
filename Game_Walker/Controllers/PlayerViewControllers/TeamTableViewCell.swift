@@ -17,7 +17,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold.tft", size: 25)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.numberOfLines = 0
         return label
     }()
