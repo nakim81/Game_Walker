@@ -64,7 +64,7 @@ class TeamTableViewCell: UITableViewCell {
             nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
             nameLabel.widthAnchor.constraint(equalToConstant: 203),
-            nameLabel.heightAnchor.constraint(equalToConstant: 19),
+            nameLabel.heightAnchor.constraint(equalToConstant: 27),
             
             imageview.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
             imageview.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),

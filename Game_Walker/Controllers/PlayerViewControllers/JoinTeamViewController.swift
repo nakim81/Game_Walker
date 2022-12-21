@@ -38,10 +38,14 @@ class JoinTeamViewController: BaseViewController {
         if let selectedIndex = selectedIndex {
             UserData.team = teamList[selectedIndex]
             //userData.set(teamList[selectedIndex], forKey: "team")
-            T.joinTeam(UserData.gamecode!, teamList[selectedIndex].name, UserData.player!)
-            performSegue(withIdentifier: "goToPF44", sender: self)
+            if (UserData.team!.players.contains(UserData.player!)){
+                performSegue(withIdentifier: "goToPF44", sender: self)
+            } else {
+                T.joinTeam(UserData.gamecode!, teamList[selectedIndex].name, UserData.player!)
+                performSegue(withIdentifier: "goToPF44", sender: self)
+            }
         } else {
-            alert(title: "No Icon Selected", message: "Please select a team icon")
+            alert(title: "No Team Selected", message: "Please select your team")
             return
         }
     }

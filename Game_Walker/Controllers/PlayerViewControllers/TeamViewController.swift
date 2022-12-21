@@ -23,9 +23,13 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         T.delegate_getTeam = self
         configureTableView()
-        table.allowsSelection = false
         T.getTeam(UserData.gamecode!, UserData.team!.name)
+        table.reloadData()
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        table.reloadData()
     }
     
     private func configureTableView() {
@@ -33,6 +37,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.dataSource = self
         table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
         table.backgroundColor = .white
+        table.allowsSelection = false
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
