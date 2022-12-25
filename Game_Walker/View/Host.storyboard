@@ -625,7 +625,7 @@
         <!--Algorithm View Controller-->
         <scene sceneID="scy-qe-gvo">
             <objects>
-                <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" sceneMemberID="viewController">
+                <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -683,6 +683,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
+                    <connections>
+                        <outlet property="collectionView" destination="m6H-bD-wNG" id="Mcl-iI-C22"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1QZ-hO-XSj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

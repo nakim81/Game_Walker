@@ -12,8 +12,10 @@
 		A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */; };
 		A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
+		A1DF10A529133A4D0071E5F5 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DF10A429133A4D0071E5F5 /* AlgorithmViewController.swift */; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1EBA6902958049C00228501 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA68F2958049C00228501 /* AlgorithmCollectionViewCell.swift */; };
 		A1ECBC9828DFC85A0009B8A6 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */; };
 		AAF42DF835FA27BAEC58ABD8 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
@@ -75,6 +77,8 @@
 		61FD379628D5B35200BE859E /* WaitingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
+		A1DF10A429133A4D0071E5F5 /* AlgorithmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmViewController.swift; sourceTree = "<group>"; };
+		A1EBA68F2958049C00228501 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +278,8 @@
 				A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */,
 				A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */,
 				A1ECBC9728DFC85A0009B8A6 /* SettingTimeHostViewController.swift */,
+				A1DF10A429133A4D0071E5F5 /* AlgorithmViewController.swift */,
+				A1EBA68F2958049C00228501 /* AlgorithmCollectionViewCell.swift */,
 				DA42138028B47DD4000A395F /* GameManagerViewController.swift */,
 				DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */,
 				DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */,
@@ -427,6 +433,7 @@
 			files = (
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
 				61570AA228E8F7720060F66C /* RefereeData.swift in Sources */,
+				A1EBA6902958049C00228501 /* AlgorithmCollectionViewCell.swift in Sources */,
 				DA42138228B47DD4000A395F /* HostGameCodeViewController.swift in Sources */,
 				DA42135028B47D5D000A395F /* PVPRefereeController.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
@@ -441,6 +448,7 @@
 				DA42138528B47DD4000A395F /* StationsTableViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
 				A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */,
+				A1DF10A529133A4D0071E5F5 /* AlgorithmViewController.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
