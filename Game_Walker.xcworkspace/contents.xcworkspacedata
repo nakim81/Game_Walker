@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Game_Walker/Controllers/HostViewControllers/AlgorithmCollectionViewCell.swift">
+   </FileRef>
+   <FileRef
       location = "group:Game_Walker.xcodeproj">
    </FileRef>
    <FileRef

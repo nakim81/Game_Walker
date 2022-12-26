@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -439,7 +438,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer 1-1" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-mI-mS1" userLabel="Timer Label">
-                                <rect key="frame" x="31" y="98.5" width="145" height="69"/>
+                                <rect key="frame" x="31" y="76" width="145" height="69.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ARm-mI-mS1" secondAttribute="height" multiplier="128:61" id="h9O-yJ-KDG"/>
                                 </constraints>
@@ -552,6 +551,7 @@
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
+                                    <segue destination="uLg-Pv-BMT" kind="show" id="ggl-dg-6vL"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="rounds text field">
@@ -570,7 +570,7 @@
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.42" id="7Ei-Sb-jhK"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="7Rb-BD-3Fo"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="7Vl-dN-eq0"/>
-                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.3" id="7wF-Af-mbw"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.25" id="7wF-Af-mbw"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="0.9" id="8WH-dS-BUU"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
@@ -621,6 +621,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2339" y="-319"/>
+        </scene>
+        <!--Algorithm View Controller-->
+        <scene sceneID="scy-qe-gvo">
+            <objects>
+                <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
+                                <rect key="frame" x="23.5" y="80.5" width="222" height="61"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
+                                <rect key="frame" x="53.5" y="239.5" width="293" height="36.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rounds line frame" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-Bf-esF">
+                                <rect key="frame" x="26.5" y="268" width="35" height="306.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="cy9-VK-BJG">
+                                <rect key="frame" x="61" y="275" width="291" height="291"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
+                                        <rect key="frame" x="0.0" y="0.0" width="292" height="336"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="m6H-bD-wNG" secondAttribute="trailing" constant="12.5" id="Kp9-zo-oXb"/>
+                                    <constraint firstAttribute="bottom" secondItem="m6H-bD-wNG" secondAttribute="bottom" id="PXN-la-dyx"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="cy9-VK-BJG" secondAttribute="leading" id="Xsz-1o-6Jr"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="TtO-gM-xsu" secondAttribute="top" id="hhm-Si-eU8"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="TtO-gM-xsu"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="7cj-Cz-6Bz"/>
+                                <connections>
+                                    <outlet property="delegate" destination="VXH-El-S6Q" id="Bsf-cy-ehd"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
+                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="Start game button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h99-ko-w7n"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="h99-ko-w7n" firstAttribute="bottom" secondItem="6s2-dh-Y7m" secondAttribute="bottom" constant="55" id="EyG-tp-nYx"/>
+                            <constraint firstItem="6s2-dh-Y7m" firstAttribute="centerX" secondItem="m6H-bD-wNG" secondAttribute="centerX" id="PNW-l9-8DA"/>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" id="RNU-sT-skU"/>
+                            <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" multiplier="0.65" id="aNv-hh-r5y"/>
+                            <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" multiplier="0.25" id="eM4-ZU-vxj"/>
+                            <constraint firstItem="m6H-bD-wNG" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="lN4-tX-REU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
+                    <connections>
+                        <outlet property="collectionView" destination="m6H-bD-wNG" id="Mcl-iI-C22"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1QZ-hO-XSj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245" y="-319"/>
         </scene>
         <!--GameManagerViewController-->
         <scene sceneID="alU-c0-Oy8">
@@ -679,17 +751,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nkn-NQ-QrU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3372" y="96"/>
+            <point key="canvasLocation" x="4239" y="-319"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rcz-O1-KSj"/>
+        <segue reference="ba3-G3-TlT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
         <image name="Join game button 1" width="244" height="79"/>
         <image name="Next button 1-1" width="176" height="57"/>
+        <image name="Start game button" width="176" height="57"/>
         <image name="add button 1" width="325" height="46.5"/>
+        <image name="algorithm 1" width="221.5" height="61"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
         <image name="end game" width="207" height="50"/>
         <image name="game code?" width="100" height="15"/>
@@ -705,10 +779,12 @@
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
         <image name="rounds 1" width="101" height="35"/>
+        <image name="rounds line frame" width="35" height="292.5"/>
         <image name="rules 2" width="59" height="25.5"/>
         <image name="rules textboxwhite 1" width="280" height="89.5"/>
         <image name="save 1" width="176" height="57"/>
         <image name="stations 1" width="195" height="61"/>
+        <image name="stations line frame" width="293" height="35"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>

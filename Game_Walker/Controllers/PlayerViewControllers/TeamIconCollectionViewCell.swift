@@ -58,7 +58,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         teamNameLabel.textAlignment = .center
         teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
         teamNameLabel.text = teamName
-        teamNameLabel.font = UIFont(name: "Dosis-Bold", size: 10)
+        teamNameLabel.font = UIFont(name: "Dosis-Regular", size: 15)
         teamNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         teamNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         teamNameLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
