@@ -8,7 +8,15 @@
 import Foundation
 
 class UserData {
-    static func writeUserData(_ player: Player, _ key: String){
+    
+    static func writeGamecode(_ gamecode: Int, _ key: String){
+        UserDefaults.standard.set(gamecode, forKey: key)
+    }
+    static func readGamecode(_ gamecode: Int, _ key: String){
+        UserDefaults.standard.data(forKey: key)
+    }
+    
+    static func writePlayer(_ player: Player, _ key: String){
         do{
             let encoder = JSONEncoder()
             let data = try encoder.encode(player)
@@ -19,7 +27,7 @@ class UserData {
         }
     }
     
-    static func readUserData(_ key: String) -> Player? {
+    static func readPlayer(_ key: String) -> Player? {
         if let data = UserDefaults.standard.data(forKey: key) {
             do {
                 let decoder = JSONDecoder()
@@ -32,7 +40,7 @@ class UserData {
         return nil
     }
     
-    static func writeUserData(_ team: Team, _ key: String){
+    static func writeTeam(_ team: Team, _ key: String){
         do{
             let encoder = JSONEncoder()
             let data = try encoder.encode(team)
@@ -43,7 +51,7 @@ class UserData {
         }
     }
     
-    static func readUserData(_ key: String) -> Team? {
+    static func readTeam(_ key: String) -> Team? {
         if let data = UserDefaults.standard.data(forKey: key) {
             do {
                 let decoder = JSONDecoder()
@@ -51,6 +59,30 @@ class UserData {
                 return team
             } catch {
                 print("Unable to Decode Team (\(error))")
+            }
+        }
+        return nil
+    }
+    
+    static func writeReferee(_ referee: Referee, _ key: String){
+        do{
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(referee)
+            UserDefaults.standard.set(data, forKey: key)
+        }
+        catch{
+            print("Unable to Encode Referee (\(error))")
+        }
+    }
+    
+    static func readReferee(_ key: String) -> Referee? {
+        if let data = UserDefaults.standard.data(forKey: key) {
+            do {
+                let decoder = JSONDecoder()
+                let referee = try decoder.decode(Referee.self, from: data)
+                return referee
+            } catch {
+                print("Unable to Decode Referee (\(error))")
             }
         }
         return nil
