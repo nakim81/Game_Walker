@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -255,7 +254,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I02-a7-kzt">
-                                <rect key="frame" x="74" y="752" width="266" height="81.5"/>
+                                <rect key="frame" x="74" y="720" width="266" height="82"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Next game button 2" title=""/>
                                 <connections>
@@ -274,7 +273,7 @@
                             <constraint firstItem="I02-a7-kzt" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.642512" id="IZU-q0-Ebz"/>
                             <constraint firstItem="I02-a7-kzt" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="P2Q-rC-r3x"/>
                             <constraint firstItem="RdW-N9-45t" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="XG6-Mx-FOJ"/>
-                            <constraint firstItem="I02-a7-kzt" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.75" id="clg-Yr-H7h"/>
+                            <constraint firstItem="I02-a7-kzt" firstAttribute="centerY" secondItem="ZGe-Bo-Qn2" secondAttribute="centerY" multiplier="1.68" id="clg-Yr-H7h"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="width" secondItem="ZGe-Bo-Qn2" secondAttribute="width" multiplier="0.663111" id="dxn-rf-BMu"/>
                             <constraint firstItem="tVb-O6-bJY" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="eXZ-ui-KtB"/>
                             <constraint firstItem="peX-so-fSX" firstAttribute="centerX" secondItem="ZGe-Bo-Qn2" secondAttribute="centerX" id="hkj-CP-oTv"/>
@@ -315,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bj0-cZ-pY8">
-                                <rect key="frame" x="21.5" y="96" width="371" height="80"/>
+                                <rect key="frame" x="69.5" y="89.5" width="275" height="93"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Round 3">
                                         <attributes>
@@ -444,37 +443,49 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="px4-UP-9ha">
                                 <rect key="frame" x="106" y="644" width="202" height="71"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="rule button 1" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Game info button 2" title=""/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t4p-hl-PrP">
-                                <rect key="frame" x="107" y="757.5" width="200" height="71"/>
+                                <rect key="frame" x="107" y="725.5" width="200" height="71"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="next game 1" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Next game button 2" title=""/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIR-70-NHN">
+                                <rect key="frame" x="118" y="552" width="178" height="73.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fve-QH-Ubm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="t4p-hl-PrP" firstAttribute="centerX" secondItem="Fve-QH-Ubm" secondAttribute="centerX" id="38i-jE-oa3"/>
                             <constraint firstItem="px4-UP-9ha" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.0867971" id="4nJ-oT-dQD"/>
-                            <constraint firstItem="Bj0-cZ-pY8" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="0.896" id="7qn-3R-HbE"/>
+                            <constraint firstItem="Bj0-cZ-pY8" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="0.66311" id="7qn-3R-HbE"/>
                             <constraint firstItem="Bj0-cZ-pY8" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="0.3" id="8Bu-7J-VUx"/>
                             <constraint firstItem="px4-UP-9ha" firstAttribute="centerX" secondItem="Fve-QH-Ubm" secondAttribute="centerX" id="8Jl-Oo-Xjd"/>
+                            <constraint firstItem="mIR-70-NHN" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="0.43" id="C3c-TS-pyW"/>
                             <constraint firstItem="t4p-hl-PrP" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="0.483092" id="DQL-Gh-krl"/>
                             <constraint firstItem="vHh-VE-zqK" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="1.15942" id="DqV-Il-KtM"/>
+                            <constraint firstItem="mIR-70-NHN" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="1.3" id="R5h-18-Si8"/>
+                            <constraint firstItem="mIR-70-NHN" firstAttribute="centerX" secondItem="Fve-QH-Ubm" secondAttribute="centerX" id="Wf0-Ri-aCB"/>
                             <constraint firstItem="Bj0-cZ-pY8" firstAttribute="centerX" secondItem="Fve-QH-Ubm" secondAttribute="centerX" id="Ywv-5G-dEa"/>
                             <constraint firstItem="vHh-VE-zqK" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.156479" id="ZFA-Rj-yin"/>
                             <constraint firstItem="t4p-hl-PrP" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.0867971" id="ZpB-IF-9im"/>
                             <constraint firstItem="vHh-VE-zqK" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="0.8" id="b8s-1q-Bz5"/>
-                            <constraint firstItem="Bj0-cZ-pY8" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.0974513" id="f6S-Q3-djP"/>
+                            <constraint firstItem="Bj0-cZ-pY8" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.113987" id="f6S-Q3-djP"/>
                             <constraint firstItem="px4-UP-9ha" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="1.5" id="iHK-t1-so9"/>
-                            <constraint firstItem="t4p-hl-PrP" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="1.75" id="wDD-SW-dOl"/>
+                            <constraint firstItem="mIR-70-NHN" firstAttribute="height" secondItem="Fve-QH-Ubm" secondAttribute="height" multiplier="0.09" id="qTX-xy-uvr"/>
+                            <constraint firstItem="t4p-hl-PrP" firstAttribute="centerY" secondItem="Fve-QH-Ubm" secondAttribute="centerY" multiplier="1.68" id="wDD-SW-dOl"/>
                             <constraint firstItem="vHh-VE-zqK" firstAttribute="centerX" secondItem="Fve-QH-Ubm" secondAttribute="centerX" id="xlR-6q-sGV"/>
                             <constraint firstItem="px4-UP-9ha" firstAttribute="width" secondItem="Fve-QH-Ubm" secondAttribute="width" multiplier="0.487923" id="zn3-vp-cef"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mes-M6-Pir"/>
                     <connections>
+                        <outlet property="borderView1" destination="12u-aC-DcA" id="cT8-zR-lGW"/>
+                        <outlet property="borderView2" destination="Qmb-SM-pzL" id="Yq4-UW-gFe"/>
                         <outlet property="nextgameButton" destination="t4p-hl-PrP" id="BP8-Lo-QVE"/>
                         <outlet property="roundLabel" destination="Bj0-cZ-pY8" id="GB0-T0-9fJ"/>
                         <outlet property="ruleButton" destination="px4-UP-9ha" id="8zT-s6-Kka"/>
@@ -484,6 +495,7 @@
                         <outlet property="scoreLabel2" destination="MCs-mh-3Dx" id="mU0-iv-E0R"/>
                         <outlet property="teamnameLabel" destination="Unm-aX-VVb" id="1hG-he-een"/>
                         <outlet property="teamnameLabel2" destination="fdh-Xz-GNj" id="v56-ce-U49"/>
+                        <outlet property="timerLabel" destination="mIR-70-NHN" id="p6z-ED-JUc"/>
                         <segue destination="mAO-zd-khf" kind="presentation" modalPresentationStyle="fullScreen" id="K4e-Qd-Vjz"/>
                         <segue destination="zdv-pk-eEo" kind="presentation" modalPresentationStyle="fullScreen" id="EJx-Ly-ODe"/>
                     </connections>
@@ -491,6 +503,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMx-N0-xXh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1569" y="604"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fr4-mJ-QRE">
+            <objects>
+                <viewController id="oap-1p-LNQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wsF-wg-h8L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pop up screen 1" translatesAutoresizingMaskIntoConstraints="NO" id="ZTR-d0-91M">
+                                <rect key="frame" x="42.5" y="220" width="338" height="338"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="white!give points 1" translatesAutoresizingMaskIntoConstraints="NO" id="V1z-WK-izo">
+                                <rect key="frame" x="87" y="237" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7dt-w1-Eds" customClass="GMStepper" customModule="Game_Walker" customModuleProvider="target">
+                                <rect key="frame" x="87" y="448" width="240" height="0.0"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="buttonsBackgroundColor">
+                                        <color key="value" systemColor="systemGreenColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="labelBackgroundColor">
+                                        <color key="value" systemColor="systemGreenColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaM-pU-hqB">
+                                <rect key="frame" x="112" y="450" width="200" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="confirm button 1 (3)"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NC4-Ya-j61"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veh-Wh-Q4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4798.5507246376819" y="130.58035714285714"/>
         </scene>
         <!--Give Points Controller-->
         <scene sceneID="HJQ-uR-tH8">
@@ -1011,7 +1067,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V4I-n7-so6"/>
+        <segue reference="K4e-Qd-Vjz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game info button 2" width="176" height="57"/>
@@ -1019,6 +1075,7 @@
         <image name="Next game button 2" width="176" height="57"/>
         <image name="Team 1" width="64" height="19"/>
         <image name="White! confirm button 1" width="176" height="57"/>
+        <image name="confirm button 1 (3)" width="176" height="57"/>
         <image name="game 1" width="311" height="146.5"/>
         <image name="game code?" width="100" height="15"/>
         <image name="game info 1" width="229.5" height="61"/>
@@ -1029,6 +1086,7 @@
         <image name="join button 2" width="176" height="57"/>
         <image name="next button 1" width="175.5" height="57"/>
         <image name="next game 1" width="176" height="57"/>
+        <image name="pop up screen 1" width="338" height="338"/>
         <image name="rule button 1" width="177.5" height="57"/>
         <image name="rules 1" width="82" height="35.5"/>
         <image name="rules textbox 1" width="328" height="104.5"/>
