@@ -39,6 +39,7 @@ struct T {
             if let document = document, document.exists {
                 do {
                     try db.collection("\(gamecode) : Teams").document("\(team.name)").setData(from: team)
+                    
                     print("Team sucessfully saved")
                 } catch let error {
                     print("Error writing to Firestore: \(error)")

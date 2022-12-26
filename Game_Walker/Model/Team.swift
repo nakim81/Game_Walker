@@ -11,6 +11,7 @@ import UIKit
 struct Team : Codable, Equatable {
     var gamecode : String = ""
     var name : String = ""
+    var number: Int = 0
     var players : [Player] = []
     var points : Int = 0
     var currentStation : String
@@ -21,6 +22,7 @@ struct Team : Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case gamecode
         case name
+        case number
         case players
         case points
         case currentStation
