@@ -24,10 +24,17 @@ class PVERefereeController: UIViewController {
     var teamOrder : [Team] = []
     var timer: Timer?
     var seconds = 3600
+    var time = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //S.getStation(RefereeData.gamecode_save, RefereeData.station_name)
+        H.delegate_getHost = self
+        H.getHost(RefereeData.gamecode_save)
+        S.delegate_getStation = self
+        var team1 = Team(gamecode: RefereeData.gamecode_save, name: "Air", players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "")
+        var newStation = Station(name: "testing", pvp: true, points: 10, place: "", description: "", teamOrder: [team1])
+        S.addStation(RefereeData.gamecode_save, newStation)
+        S.getStation(RefereeData.gamecode_save, "testing")
         roundLabel.text = "Round 1"
         //scoreButton.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
         //teamnameLabel.text = teamOrder[0].name
@@ -38,31 +45,26 @@ class PVERefereeController: UIViewController {
         let myColor : UIColor = UIColor(red: 0.16, green: 0.82, blue: 0.44, alpha: 1.00)
         borderView.layer.borderColor = myColor.cgColor
         borderView.layer.borderWidth = 4.0
-        timerLabel.text = "60 : 00"
+        timerLabel.text = ""
         runTimer()
     }
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(PVERefereeController.updateTimer)), userInfo: nil, repeats: true)
-        print("too hard")
     }
     
     @objc func updateTimer() {
             if seconds < 1 {
-                //print("Why Why Why")
                 self.timer?.invalidate()
             } else {
                 seconds -= 1
                 timerLabel.text = timeString(time: TimeInterval(seconds))
-                //timerLabel.text = String(seconds)
             }
     }
     
     func timeString(time:TimeInterval) -> String {
             let minutes = Int(time) / 60 % 60
-            print(minutes)
             let seconds = Int(time) % 60
-            print(seconds)
             return String(format:"%02i : %02i", minutes, seconds)
     }
     
@@ -78,9 +80,12 @@ class PVERefereeController: UIViewController {
         round += 1
         roundLabel.text = "Round " + "\(round)"
         index += 1
-        scoreButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
-        teamnameLabel.text = teamOrder[index].name
-        teamscoreLabel.text = String(teamOrder[index].points)
+        //scoreButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+        //teamnameLabel.text = teamOrder[index].name
+        //teamscoreLabel.text = String(teamOrder[index].points)
+        scoreButton.setImage(UIImage(named: "iconBear"), for: .normal)
+        teamnameLabel.text = "GameWin"
+        teamscoreLabel.text = String(1000)
     }
 }
 
@@ -89,5 +94,12 @@ extension PVERefereeController: GetStation {
     func getStation(_ station: Station) {
         self.stationName = station.name
         self.teamOrder = station.teamOrder
+    }
+}
+//MARK: - UIUpdate
+extension PVERefereeController: GetHost {
+    func getHost(_ host: Host) {
+        print(host.gameTime)
+        self.seconds = host.gameTime
     }
 }
