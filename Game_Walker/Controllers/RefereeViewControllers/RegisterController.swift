@@ -17,7 +17,6 @@ class RegisterController: BaseViewController {
     var station_name = ""
     var gamecode_save = ""
     var referee_name = ""
-    //var referee : Referee?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +32,6 @@ class RegisterController: BaseViewController {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
             R.addReferee(gamecode, newReferee)
-            //self.referee = newReferee
             RefereeData.gamecode_save = gamecode
             RefereeData.referee_name = name
             RefereeData.referee = newReferee

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		61570AA228E8F7720060F66C /* RefereeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61570AA128E8F7720060F66C /* RefereeData.swift */; };
+		618FD0E628F2870C0093EFEE /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD0E528F2870C0093EFEE /* GivePointsController.swift */; };
+		618FD0E828F287290093EFEE /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD0E728F287290093EFEE /* MessageController.swift */; };
 		61FD379728D5B35200BE859E /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD379628D5B35200BE859E /* WaitingController.swift */; };
 		A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */; };
 		A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */; };
@@ -78,6 +80,8 @@
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		61570AA128E8F7720060F66C /* RefereeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeData.swift; sourceTree = "<group>"; };
+		618FD0E528F2870C0093EFEE /* GivePointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GivePointsController.swift; sourceTree = "<group>"; };
+		618FD0E728F287290093EFEE /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		61FD379628D5B35200BE859E /* WaitingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
@@ -268,7 +272,9 @@
 				DA42134A28B47D5D000A395F /* PVPRefereeController.swift */,
 				DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */,
 				DA42134628B47D5D000A395F /* PVPGivePointsController.swift */,
+				618FD0E528F2870C0093EFEE /* GivePointsController.swift */,
 				DA42134928B47D5D000A395F /* RulesViewController.swift */,
+				618FD0E728F287290093EFEE /* MessageController.swift */,
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
@@ -460,6 +466,7 @@
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
 				61570AA228E8F7720060F66C /* RefereeData.swift in Sources */,
 				DA42138228B47DD4000A395F /* HostGameCodeViewController.swift in Sources */,
+				618FD0E628F2870C0093EFEE /* GivePointsController.swift in Sources */,
 				DA42135028B47D5D000A395F /* PVPRefereeController.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
@@ -467,6 +474,7 @@
 				DA42134E28B47D5D000A395F /* RegisterController.swift in Sources */,
 				DA42138A28B47DD4000A395F /* HostStationsTableViewCell.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
+				618FD0E828F287290093EFEE /* MessageController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
