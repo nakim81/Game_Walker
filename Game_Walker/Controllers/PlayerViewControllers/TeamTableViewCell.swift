@@ -17,7 +17,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold.tft", size: 25)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.numberOfLines = 0
         return label
     }()
@@ -64,7 +64,7 @@ class TeamTableViewCell: UITableViewCell {
             nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
             nameLabel.widthAnchor.constraint(equalToConstant: 203),
-            nameLabel.heightAnchor.constraint(equalToConstant: 19),
+            nameLabel.heightAnchor.constraint(equalToConstant: 27),
             
             imageview.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
             imageview.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
