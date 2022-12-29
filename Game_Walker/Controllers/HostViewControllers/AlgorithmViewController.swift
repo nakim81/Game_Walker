@@ -8,9 +8,9 @@
 import UIKit
 
 class AlgorithmViewController: BaseViewController {
-    
+    var curr_gamecode = String(data: UserDefaults.standard.data(forKey: "gamecodestring")!, encoding: .utf8)!
     @IBOutlet weak var collectionView: UICollectionView!
-    var stationsnum = S.getStationList(UserData.gamecode!).count
+    var stationsnum = S.getStationList(curr_gamecode).count
 //var roundsnum = H.getHost(UserData.gamecode!).rounds
     
     override func viewDidLoad() {
