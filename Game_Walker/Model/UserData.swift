@@ -9,10 +9,10 @@ import Foundation
 
 class UserData {
     
-    static func writeGamecode(_ gamecode: Int, _ key: String){
+    static func writeGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
     }
-    static func readGamecode(_ gamecode: Int, _ key: String){
+    static func readGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.data(forKey: key)
     }
     
