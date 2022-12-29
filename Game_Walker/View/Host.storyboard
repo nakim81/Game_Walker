@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-A4-yMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1429" y="-1053"/>
+            <point key="canvasLocation" x="1429" y="-1122"/>
         </scene>
         <!--Setting Time Host View Controller-->
         <scene sceneID="UFR-CJ-9bB">
@@ -755,7 +755,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="Rcz-O1-KSj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>

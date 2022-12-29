@@ -10,7 +10,7 @@ import UIKit
 class AlgorithmViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    //var stationsnum = S.getStationList(UserData.gamecode!)
+    var stationsnum = S.getStationList(UserData.gamecode!).count
 //var roundsnum = H.getHost(UserData.gamecode!).rounds
     
     override func viewDidLoad() {
