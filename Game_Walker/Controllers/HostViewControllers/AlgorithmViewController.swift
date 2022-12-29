@@ -46,8 +46,8 @@ extension AlgorithmViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell else { return UICollectionViewCell() }
 
-        let team = teamList[indexPath.item]
-        cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name)
+        let num_team = teamList[indexPath.item].number
+        cell.configureAlgorithmCell(imageName: <#T##String#>)
         return cell
     }
     
