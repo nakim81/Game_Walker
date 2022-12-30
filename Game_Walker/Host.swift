@@ -13,6 +13,7 @@ struct Host: Codable {
     var gameTime: Int = 0
     var movingTime: Int = 0
     var rounds: Int = 0
+    var teams: Int = 0
     //algorithm
     var algorithm: [[String]] = []
     var duplicated: [[Int]] = []
@@ -30,6 +31,7 @@ struct Host: Codable {
         case gameTime
         case movingTime
         case rounds
+        case teams
         case algorithm
         case duplicated
         case doubled
