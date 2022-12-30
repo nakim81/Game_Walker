@@ -13,6 +13,7 @@ class AlgorithmViewController: BaseViewController {
     var stationList: [Station] = []
     var teamList: [Team] = []
     var host: Host?
+    var teamnums :[Int] = []
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -53,7 +54,8 @@ extension AlgorithmViewController: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell else { return UICollectionViewCell() }
 
         let num_team = teamList[indexPath.item].number
-        cell.configureAlgorithmCell(imageName:)
+        
+        cell.configureAlgorithmCell(teamIndex: <#T##Int#>, teamnums: teamnums)
         return cell
     }
     

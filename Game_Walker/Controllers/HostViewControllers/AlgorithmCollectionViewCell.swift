@@ -9,7 +9,7 @@ import UIKit
 
 class AlgorithmCollectionViewCell: UICollectionViewCell {
     
-    func configureAlgorithmCell(imageName: String) {
+    func configureAlgorithmCell(teamIndex: Int, teamnums: Array<Int>) {
         
     }
 }
