@@ -40,14 +40,20 @@ extension AlgorithmViewController: UICollectionViewDelegate{
 
 extension AlgorithmViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teamList.count * host!.rounds
+        var num_cells = stationList.count * host!.rounds
+        if (num_cells < 64) {
+            num_cells = 64
+            return num_cells
+        } else {
+            return stationList.count * host!.rounds
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell else { return UICollectionViewCell() }
 
         let num_team = teamList[indexPath.item].number
-        cell.configureAlgorithmCell(imageName: <#T##String#>)
+        cell.configureAlgorithmCell(imageName:)
         return cell
     }
     
