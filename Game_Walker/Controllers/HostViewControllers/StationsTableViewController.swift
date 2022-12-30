@@ -10,7 +10,8 @@ import UIKit
 class StationsTableViewController: BaseViewController {
     
     var currentStations: [Station] = []
-
+    //private var curr_gamecode = UserData.readGamecode("gamecodestring")
+    var curr_gamecode = String(data: UserDefaults.standard.data(forKey: "gamecodestring")!, encoding: .utf8)!
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +20,11 @@ class StationsTableViewController: BaseViewController {
         stationTable.delegate = self
         stationTable.dataSource = self
         S.delegate_stationList = self
-        S.getStationList(UserData.gamecode!)
+        S.getStationList(curr_gamecode)
     }
     
     func reloadStationTable() {
-        S.getStationList(UserData.gamecode!)
+        S.getStationList(curr_gamecode)
         self.stationTable.reloadData()
     }
     
