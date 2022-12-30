@@ -14,7 +14,7 @@ import SwiftUI
 
 struct T {
     static let db = Firestore.firestore()
-    static var listener : ListenerRegistration?
+//    static var listener : ListenerRegistration?
     static var delegate_teamList: TeamList?
     static var delegate_getTeam: GetTeam?
     static var delegates : [TeamUpdateListener] = []
@@ -37,13 +37,7 @@ struct T {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                do {
-                    try db.collection("\(gamecode) : Teams").document("\(team.name)").setData(from: team)
-                    
-                    print("Team sucessfully saved")
-                } catch let error {
-                    print("Error writing to Firestore: \(error)")
-                }
+                updateTeam(gamecode, team)
             } else {
                 print("Gamecode does not exist")
             }
