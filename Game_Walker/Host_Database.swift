@@ -15,6 +15,19 @@ import SwiftUI
 struct H {
     static let db = Firestore.firestore()
     static var delegate_getHost: GetHost?
+    static var delegates : [HostUpdateListener] = []
+    
+    static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+         db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
+                 guard let document = documentSnapshot else { return }
+                 guard let data = document.data() else { return }
+                 var host = convertDataToHost(data)
+                 for delegate in delegates {
+                     delegate.updateHost(host)
+                 }
+            }
+    }
+    
 
     static func createGame(_ gamecode: String, _ host: Host) {
         //gamecode validation through servers
@@ -41,6 +54,64 @@ struct H {
         }
     }
     
+    static func pause_resume_Game(_ gamecode: String){
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        docRef.getDocument {(document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var host = convertDataToHost(data)
+                host.paused = !host.paused
+                updateHost(gamecode, host)
+            } else {
+                print("Host does not exist")
+            }
+        }
+    }
+    
+    static func addAnnouncement(_ gamecode: String, _ announcement: String){
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        docRef.getDocument {(document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var host = convertDataToHost(data)
+                host.announcments.append(announcement)
+                updateHost(gamecode, host)
+            } else {
+                print("Host does not exist")
+            }
+        }
+    }
+    
+    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index : Int){
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        docRef.getDocument {(document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var host = convertDataToHost(data)
+                host.announcments[index] = announcement
+                updateHost(gamecode, host)
+            } else {
+                print("Host does not exist")
+            }
+        }
+    }
+    
+    static func removeAnnouncement(_ gamecode: String, _ index : Int){
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        docRef.getDocument {(document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var host = convertDataToHost(data)
+                host.announcments.remove(at: index)
+                updateHost(gamecode, host)
+            } else {
+                print("Host does not exist")
+            }
+        }
+    }
+    
+    
+    
     static func getHost(_ gamecode: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         docRef.getDocument { (document, error) in
@@ -51,6 +122,15 @@ struct H {
             } else {
                 print("Host does not exist")
             }
+        }
+    }
+    
+    static func updateHost(_ gamecode: String, _ host: Host){
+        do {
+            try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
+            print("Data sucessfully saved")
+        } catch let error {
+            print("Error writing to Firestore: \(error)")
         }
     }
     

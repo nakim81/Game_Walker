@@ -2,7 +2,7 @@
 //  UserData.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 7/20/22.
+//  Created by Paul on 7/20/22.
 //
 
 import Foundation
@@ -12,8 +12,9 @@ class UserData {
     static func writeGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
     }
-    static func readGamecode(_ gamecode: String, _ key: String){
-        UserDefaults.standard.data(forKey: key)
+
+    static func readGamecode(_ gamecode: String, _ key: String) -> String? {
+        return UserDefaults.standard.string(forKey: key)
     }
     
     static func writePlayer(_ player: Player, _ key: String){

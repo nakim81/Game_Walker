@@ -36,6 +36,10 @@ protocol TeamList {
     func listOfTeams(_ teams: [Team])
 }
 
+protocol HostUpdateListener {
+    func updateHost(_ host: Host)
+}
+
 protocol GetHost {
     func getHost(_ host: Host)
 }

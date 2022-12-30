@@ -19,9 +19,10 @@ struct Host: Codable {
     var doubled: [[Int]] = []
     var blanked: [[Int]] = []
     //game control
-    var scoreboard: Bool = true
-    var pause: Bool = false
-    var announcment: [String] = []
+    var show_scoreboard: Bool = true
+    var paused: Bool = false
+    var announcements: [String] = []
+    
     
     
     enum CodingKeys: String, CodingKey {
@@ -33,9 +34,9 @@ struct Host: Codable {
         case duplicated
         case doubled
         case blanked
-        case scoreboard
-        case pause
-        case announcment
+        case show_scoreboard
+        case paused
+        case announcements
     }
     
     
