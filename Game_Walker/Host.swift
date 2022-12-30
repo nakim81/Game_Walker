@@ -21,7 +21,7 @@ struct Host: Codable {
     //game control
     var show_scoreboard: Bool = true
     var paused: Bool = false
-    var announcments: [String] = []
+    var announcements: [String] = []
     
     
     
@@ -36,7 +36,7 @@ struct Host: Codable {
         case blanked
         case show_scoreboard
         case paused
-        case announcments
+        case announcements
     }
     
     
