@@ -8,13 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		61570AA228E8F7720060F66C /* RefereeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61570AA128E8F7720060F66C /* RefereeData.swift */; };
-		618FD0E628F2870C0093EFEE /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD0E528F2870C0093EFEE /* GivePointsController.swift */; };
-		618FD0E828F287290093EFEE /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD0E728F287290093EFEE /* MessageController.swift */; };
-		61FD379728D5B35200BE859E /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD379628D5B35200BE859E /* WaitingController.swift */; };
-		A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5D2C28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift */; };
-		A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11D5D2D28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
-		A1DF10A529133A4D0071E5F5 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DF10A429133A4D0071E5F5 /* AlgorithmViewController.swift */; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1EBA692295DBF0E00228501 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA691295DBF0E00228501 /* AlgorithmCollectionViewCell.swift */; };
@@ -24,21 +18,6 @@
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
 		DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA28D798284FF9D300EA1B94 /* Assets.xcassets */; };
-		DA42134C28B47D5D000A395F /* PVPGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134628B47D5D000A395F /* PVPGivePointsController.swift */; };
-		DA42134D28B47D5D000A395F /* PVERefereeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134728B47D5D000A395F /* PVERefereeController.swift */; };
-		DA42134E28B47D5D000A395F /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134828B47D5D000A395F /* RegisterController.swift */; };
-		DA42134F28B47D5D000A395F /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134928B47D5D000A395F /* RulesViewController.swift */; };
-		DA42135028B47D5D000A395F /* PVPRefereeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134A28B47D5D000A395F /* PVPRefereeController.swift */; };
-		DA42135128B47D5D000A395F /* PVEGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */; };
-		DA42138228B47DD4000A395F /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42137928B47DD4000A395F /* HostGameCodeViewController.swift */; };
-		DA42138328B47DD4000A395F /* GameManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */; };
-		DA42138428B47DD4000A395F /* GameManagerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */; };
-		DA42138528B47DD4000A395F /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42137C28B47DD4000A395F /* StationsTableViewController.swift */; };
-		DA42138628B47DD4000A395F /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA42137D28B47DD4000A395F /* HostStationsTableViewCell.xib */; };
-		DA42138728B47DD4000A395F /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42137E28B47DD4000A395F /* AddStationViewController.swift */; };
-		DA42138828B47DD4000A395F /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42137F28B47DD4000A395F /* HostCreateOrJoinViewController.swift */; };
-		DA42138928B47DD4000A395F /* GameManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138028B47DD4000A395F /* GameManagerViewController.swift */; };
-		DA42138A28B47DD4000A395F /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138128B47DD4000A395F /* HostStationsTableViewCell.swift */; };
 		DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138C28B47EDA000A395F /* TeamViewController.swift */; };
 		DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138D28B47EDA000A395F /* RankingViewController.swift */; };
 		DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */; };
@@ -96,21 +75,6 @@
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DA28D798284FF9D300EA1B94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA42134628B47D5D000A395F /* PVPGivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVPGivePointsController.swift; sourceTree = "<group>"; };
-		DA42134728B47D5D000A395F /* PVERefereeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVERefereeController.swift; sourceTree = "<group>"; };
-		DA42134828B47D5D000A395F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
-		DA42134928B47D5D000A395F /* RulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
-		DA42134A28B47D5D000A395F /* PVPRefereeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVPRefereeController.swift; sourceTree = "<group>"; };
-		DA42134B28B47D5D000A395F /* PVEGivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PVEGivePointsController.swift; sourceTree = "<group>"; };
-		DA42137928B47DD4000A395F /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
-		DA42137A28B47DD4000A395F /* GameManagerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerCollectionViewCell.swift; sourceTree = "<group>"; };
-		DA42137B28B47DD4000A395F /* GameManagerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameManagerCollectionViewCell.xib; sourceTree = "<group>"; };
-		DA42137C28B47DD4000A395F /* StationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
-		DA42137D28B47DD4000A395F /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
-		DA42137E28B47DD4000A395F /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
-		DA42137F28B47DD4000A395F /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
-		DA42138028B47DD4000A395F /* GameManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerViewController.swift; sourceTree = "<group>"; };
-		DA42138128B47DD4000A395F /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
 		DA42138C28B47EDA000A395F /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		DA42138D28B47EDA000A395F /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -235,8 +199,6 @@
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
-				DA42134528B47D5D000A395F /* RefereeViewControllers */,
-				DA42137828B47DD4000A395F /* HostViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -398,11 +360,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA42138428B47DD4000A395F /* GameManagerCollectionViewCell.xib in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
-				DA42138628B47DD4000A395F /* HostStationsTableViewCell.xib in Resources */,
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
-				A11D5D2F28BACCEF00AE5FFE /* StationRefereeTableViewCell.xib in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */,
@@ -477,51 +436,35 @@
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
-				DA42134E28B47D5D000A395F /* RegisterController.swift in Sources */,
-				DA42138A28B47DD4000A395F /* HostStationsTableViewCell.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
-				618FD0E828F287290093EFEE /* MessageController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
-				DA42138528B47DD4000A395F /* StationsTableViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
-				A11D5D2E28BACCEF00AE5FFE /* StationRefereeTableViewCell.swift in Sources */,
-				A1DF10A529133A4D0071E5F5 /* AlgorithmViewController.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
-				DA42134C28B47D5D000A395F /* PVPGivePointsController.swift in Sources */,
 				DA96397028A33CDA00853F05 /* Host.swift in Sources */,
-				DA42138928B47DD4000A395F /* GameManagerViewController.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
-				DA42135128B47D5D000A395F /* PVEGivePointsController.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
-				DA42138828B47DD4000A395F /* HostCreateOrJoinViewController.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
-				DA42138328B47DD4000A395F /* GameManagerCollectionViewCell.swift in Sources */,
 				DABC1EEB288F3DC400C75DC7 /* Player_Database.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
-				DA42134D28B47D5D000A395F /* PVERefereeController.swift in Sources */,
-				DA42138728B47DD4000A395F /* AddStationViewController.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				A1EBA692295DBF0E00228501 /* AlgorithmCollectionViewCell.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
-				DA42134F28B47D5D000A395F /* RulesViewController.swift in Sources */,
-				61FD379728D5B35200BE859E /* WaitingController.swift in Sources */,
-				A1ECBC9828DFC85A0009B8A6 /* SettingTimeHostViewController.swift in Sources */,
 				DA9662C1285AA39200B66629 /* Host_Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

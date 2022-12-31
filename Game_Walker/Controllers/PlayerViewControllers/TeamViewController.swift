@@ -11,25 +11,18 @@ import UIKit
 class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
-    var team: Team?
-    var teams: [Int?] = []
-    let cellSpacingHeight: CGFloat = 3
-    //let data: [String] = ["Hi", "Hello", "Ni hao"]
-    //private lazy var gamecode = userData.string(forKey: "gamecode")!
-    //private lazy var myTeam = userData.object(forKey: "team") as? Team
+    private var team: Team?
+    private var teams: [Int?] = []
+    private let cellSpacingHeight: CGFloat = 3
+    private var gameCode = UserData.readPlayer("player")?.gamecode
+    private var teamName = UserData.readTeam("team")?.name
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
         configureTableView()
-        T.getTeam(UserData.gamecode!, UserData.team!.name)
-        table.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        table.reloadData()
+        T.getTeam(gameCode!, teamName!)
     }
     
     private func configureTableView() {
@@ -38,6 +31,9 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
         table.backgroundColor = .white
         table.allowsSelection = false
+        DispatchQueue.main.async{
+            self.table.reloadData()
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +70,6 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 extension TeamViewController: GetTeam {
     func getTeam(_ team: Team) {
         self.team = team
-        self.table.reloadData()
     }
 }
 
