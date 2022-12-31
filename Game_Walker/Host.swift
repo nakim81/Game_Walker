@@ -13,15 +13,17 @@ struct Host: Codable {
     var gameTime: Int = 0
     var movingTime: Int = 0
     var rounds: Int = 0
+    var teams: Int = 0
     //algorithm
     var algorithm: [[String]] = []
     var duplicated: [[Int]] = []
     var doubled: [[Int]] = []
     var blanked: [[Int]] = []
     //game control
-    var scoreboard: Bool = true
-    var pause: Bool = false
-    var announcment: [String] = []
+    var show_scoreboard: Bool = true
+    var paused: Bool = false
+    var announcements: [String] = []
+    
     
     
     enum CodingKeys: String, CodingKey {
@@ -29,13 +31,14 @@ struct Host: Codable {
         case gameTime
         case movingTime
         case rounds
+        case teams
         case algorithm
         case duplicated
         case doubled
         case blanked
-        case scoreboard
-        case pause
-        case announcment
+        case show_scoreboard
+        case paused
+        case announcements
     }
     
     
