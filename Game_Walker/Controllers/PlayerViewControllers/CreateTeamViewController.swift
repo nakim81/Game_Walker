@@ -13,6 +13,8 @@ class CreateTeamViewController: BaseViewController {
     @IBOutlet weak var teamNameTextField: UITextField!
     @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    private var currentPlayer = UserData.readPlayer("player")
+    private var gameCode = UserDefaults.standard.string(forKey: "gamecode")!
     
     private let iconImageNames : [String] = [
          "iconBoy", "iconBear", "iconGirl", "iconBunny", "iconCherry", "iconDaisy", "iconpeas", "iconPlant", "iconAir",
@@ -61,10 +63,9 @@ class CreateTeamViewController: BaseViewController {
             return
         }
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
-            let newTeam = Team(name: teamName, players: [UserData.player!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
-            UserData.team = newTeam
-            //userData.set(newTeam, forKey: "team")
-            T.addTeam(UserData.gamecode!, newTeam)
+            let newTeam = Team(name: teamName, players: [currentPlayer!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
+            UserData.writeTeam(newTeam, "team")
+            T.addTeam(gameCode, newTeam)
             performSegue(withIdentifier: "goToTPF4", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter team name to create your team")

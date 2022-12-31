@@ -28,10 +28,9 @@ class JoinGameViewController: BaseViewController {
         usernameTextField.resignFirstResponder()
         if let gamecode: String = gamecodeTextField.text, let username: String = usernameTextField.text, !gamecode.isEmpty, !username.isEmpty {
             let newPlayer = Player(gamecode: gamecode, name: username)
+            UserData.writePlayer(newPlayer, "player")
             UserData.gamecode = gamecode
-            //userData.set(gamecode, forKey: "gamecode")
-            UserData.player = newPlayer
-            //userData.set(newPlayer, forKey: "player")
+            UserDefaults.standard.set(gamecode, forKey: "gamecode")
             P.addPlayer(gamecode, newPlayer)
             
 

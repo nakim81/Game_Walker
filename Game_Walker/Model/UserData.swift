@@ -8,6 +8,7 @@
 import Foundation
 
 class UserData {
+    static var gamecode : String = ""
     
     static func writeGamecode(_ gamecode: Int, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
