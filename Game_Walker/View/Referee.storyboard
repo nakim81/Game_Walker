@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,16 +23,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AOq-eE-Ep7">
-                                <rect key="frame" x="47" y="134" width="320" height="366"/>
+                                <rect key="frame" x="47" y="136.5" width="320" height="364"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-Gh-99w">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="182"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code?" translatesAutoresizingMaskIntoConstraints="NO" id="R2P-Hb-2ch">
-                                                <rect key="frame" x="34.5" y="30" width="251" height="32"/>
+                                                <rect key="frame" x="34.5" y="29.5" width="251" height="32"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="4M3-nc-0rD">
-                                                <rect key="frame" x="38.5" y="88.5" width="243" height="79.5"/>
+                                                <rect key="frame" x="38.5" y="88" width="243" height="79"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -49,13 +50,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ede-ac-NpO">
-                                        <rect key="frame" x="0.0" y="183" width="320" height="183"/>
+                                        <rect key="frame" x="0.0" y="182" width="320" height="182"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user name_ 2" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-cB-HGA">
-                                                <rect key="frame" x="56" y="9.5" width="208" height="54.5"/>
+                                                <rect key="frame" x="56" y="9" width="208" height="54.5"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="username" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-sD-k2a">
-                                                <rect key="frame" x="38.5" y="79.5" width="243" height="79"/>
+                                                <rect key="frame" x="38.5" y="79" width="243" height="79"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -83,7 +84,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mt-aS-C4U">
-                                <rect key="frame" x="145" y="768" width="124" height="49.5"/>
+                                <rect key="frame" x="145" y="772" width="124" height="48.5"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="next button 1"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -127,13 +128,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Unz-TM-jgm">
-                                <rect key="frame" x="51.5" y="351.5" width="311" height="203.5"/>
+                                <rect key="frame" x="51.5" y="353.5" width="311" height="203"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="game 1" translatesAutoresizingMaskIntoConstraints="NO" id="NBH-4W-MxT">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="146.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" image="game 1" translatesAutoresizingMaskIntoConstraints="NO" id="NBH-4W-MxT">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="146"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting 2" translatesAutoresizingMaskIntoConstraints="NO" id="aiB-fy-qcp">
-                                        <rect key="frame" x="0.0" y="146.5" width="311" height="57"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="waiting 2" translatesAutoresizingMaskIntoConstraints="NO" id="aiB-fy-qcp">
+                                        <rect key="frame" x="0.0" y="146" width="311" height="57"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -167,7 +168,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="peX-so-fSX">
-                                <rect key="frame" x="69.5" y="89.5" width="275" height="93"/>
+                                <rect key="frame" x="69.5" y="90" width="275" height="93"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Round 3">
                                         <attributes>
@@ -180,10 +181,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVb-O6-bJY">
-                                <rect key="frame" x="87" y="199" width="240" height="327"/>
+                                <rect key="frame" x="87" y="201" width="240" height="326"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-T8-Azg">
-                                        <rect key="frame" x="30" y="18" width="180" height="176.5"/>
+                                        <rect key="frame" x="30" y="18" width="180" height="176"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                                         <connections>
@@ -191,15 +192,15 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="64a-JO-bp6">
-                                        <rect key="frame" x="62.5" y="193.5" width="115" height="38"/>
+                                        <rect key="frame" x="62.5" y="193" width="115" height="37.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yBg-IW-7Wg">
-                                        <rect key="frame" x="2.5" y="227" width="235" height="36"/>
+                                        <rect key="frame" x="2.5" y="226.5" width="235" height="36"/>
                                         <attributedString key="attributedText">
                                             <fragment content="I am air">
                                                 <attributes>
                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="25" name="Dosis-Regular"/>
+                                                    <font key="NSFont" metaFont="system" size="25"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -207,11 +208,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sve-SZ-3Go">
-                                        <rect key="frame" x="43" y="268" width="154" height="52.5"/>
+                                        <rect key="frame" x="43" y="267" width="154" height="52.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="100">
                                                 <attributes>
-                                                    <font key="NSFont" size="50" name="Dosis-Regular"/>
+                                                    <font key="NSFont" metaFont="system" size="50"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -240,13 +241,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-N9-45t">
-                                <rect key="frame" x="118" y="552" width="178" height="73.5"/>
+                                <rect key="frame" x="118" y="555" width="178" height="73"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8j1-5s-Npb">
-                                <rect key="frame" x="106.5" y="644" width="201.5" height="71"/>
+                                <rect key="frame" x="106.5" y="647" width="201.5" height="71"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Game info button 2" title=""/>
                                 <connections>
@@ -254,7 +255,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I02-a7-kzt">
-                                <rect key="frame" x="74" y="720" width="266" height="82"/>
+                                <rect key="frame" x="74" y="723.5" width="266" height="81.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Next game button 2" title=""/>
                                 <connections>
@@ -314,7 +315,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bj0-cZ-pY8">
-                                <rect key="frame" x="69.5" y="89.5" width="275" height="93"/>
+                                <rect key="frame" x="69.5" y="90" width="275" height="93"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Round 3">
                                         <attributes>
@@ -327,27 +328,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHh-VE-zqK">
-                                <rect key="frame" x="-33" y="298.5" width="480" height="128"/>
+                                <rect key="frame" x="-33" y="300.5" width="480" height="127"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12u-aC-DcA">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="127"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTT-PN-yJ2">
-                                                <rect key="frame" x="42.5" y="-52" width="203" height="232"/>
+                                                <rect key="frame" x="42.5" y="-52" width="203" height="231"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="1cD-J8-8vS">
-                                                <rect key="frame" x="108" y="124" width="72" height="72"/>
+                                                <rect key="frame" x="108" y="123" width="72" height="72"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Unm-aX-VVb">
-                                                <rect key="frame" x="111.5" y="169" width="65" height="20.5"/>
+                                                <rect key="frame" x="111.5" y="168" width="65" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gys-ky-RTY">
-                                                <rect key="frame" x="96" y="204.5" width="96" height="38.5"/>
+                                                <rect key="frame" x="96" y="203.5" width="96" height="38.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="100">
                                                         <attributes>
@@ -381,24 +382,24 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qmb-SM-pzL">
-                                        <rect key="frame" x="240" y="0.0" width="240" height="128"/>
+                                        <rect key="frame" x="240" y="0.0" width="240" height="127"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-Aj-cGi">
-                                                <rect key="frame" x="4.5" y="-62" width="183" height="252"/>
+                                                <rect key="frame" x="4.5" y="-62" width="183" height="251"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="qX5-jL-vNd">
-                                                <rect key="frame" x="60" y="124" width="72" height="72"/>
+                                                <rect key="frame" x="60" y="123" width="72" height="72"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fdh-Xz-GNj">
-                                                <rect key="frame" x="63.5" y="169" width="65" height="20.5"/>
+                                                <rect key="frame" x="63.5" y="168" width="65" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MCs-mh-3Dx">
-                                                <rect key="frame" x="48" y="204.5" width="96" height="38.5"/>
+                                                <rect key="frame" x="48" y="203.5" width="96" height="38.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="100">
                                                         <attributes>
@@ -441,17 +442,17 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="px4-UP-9ha">
-                                <rect key="frame" x="106" y="644" width="202" height="71"/>
+                                <rect key="frame" x="106" y="647" width="202" height="71"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Game info button 2" title=""/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t4p-hl-PrP">
-                                <rect key="frame" x="107" y="725.5" width="200" height="71"/>
+                                <rect key="frame" x="107" y="729" width="200" height="70.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Next game button 2" title=""/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIR-70-NHN">
-                                <rect key="frame" x="118" y="552" width="178" height="73.5"/>
+                                <rect key="frame" x="118" y="555" width="178" height="73"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -557,7 +558,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Sa-QY-zA5">
-                                <rect key="frame" x="69.5" y="89.5" width="275" height="93"/>
+                                <rect key="frame" x="69.5" y="90" width="275" height="93"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Round 3">
                                         <attributes>
@@ -570,15 +571,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijh-0w-Mzb">
-                                <rect key="frame" x="74" y="156.5" width="266" height="321"/>
+                                <rect key="frame" x="74" y="159" width="266" height="319"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-ey-NzC">
-                                <rect key="frame" x="74.5" y="426" width="265" height="144.5"/>
+                                <rect key="frame" x="74.5" y="428.5" width="265" height="144"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="jbV-aq-iem">
-                                        <rect key="frame" x="86" y="-19" width="93" height="81.5"/>
+                                        <rect key="frame" x="86" y="-19" width="93" height="81"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="39O-HR-moh">
                                         <rect key="frame" x="86.5" y="23.5" width="92" height="54"/>
@@ -594,7 +595,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zP1-A3-s7B">
-                                        <rect key="frame" x="86" y="68" width="93" height="66.5"/>
+                                        <rect key="frame" x="86" y="67.5" width="93" height="66.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="100">
                                                 <attributes>
@@ -622,24 +623,24 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPE-u2-g4n">
-                                <rect key="frame" x="106.5" y="644" width="201.5" height="71"/>
+                                <rect key="frame" x="106.5" y="647" width="201.5" height="71"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="rule button 1" title=""/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDf-jD-AQs">
-                                <rect key="frame" x="74" y="670.5" width="266" height="245"/>
+                                <rect key="frame" x="74" y="674.5" width="266" height="243.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="next game 1" title=""/>
                             </button>
                             <stackView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8VE-T3-teS">
-                                <rect key="frame" x="87" y="328" width="240" height="250"/>
+                                <rect key="frame" x="87" y="329" width="240" height="252"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white!give points 1" translatesAutoresizingMaskIntoConstraints="NO" id="JRC-5a-qB5">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="63"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsg-DN-Peu" customClass="GMStepper" customModule="GMStepper">
-                                        <rect key="frame" x="0.0" y="62.5" width="240" height="125"/>
+                                        <rect key="frame" x="0.0" y="63" width="240" height="126"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="buttonsBackgroundColor">
@@ -651,7 +652,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsU-6d-yxc">
-                                        <rect key="frame" x="0.0" y="187.5" width="240" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="189" width="240" height="63"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="White! confirm button 1"/>
@@ -714,7 +715,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VOU-vN-x1Q">
-                                <rect key="frame" x="21.5" y="96" width="371" height="80"/>
+                                <rect key="frame" x="21.5" y="97" width="371" height="79"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Round 3">
                                         <attributes>
@@ -727,27 +728,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lwg-ke-QRK">
-                                <rect key="frame" x="-33" y="298.5" width="480" height="128"/>
+                                <rect key="frame" x="-33" y="300.5" width="480" height="127"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk7-h6-hhk">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="127"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFX-6p-ohD">
-                                                <rect key="frame" x="42.5" y="-52" width="203" height="232"/>
+                                                <rect key="frame" x="42.5" y="-52" width="203" height="231"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="6uF-Ex-Mfh">
-                                                <rect key="frame" x="108" y="124" width="72" height="72"/>
+                                                <rect key="frame" x="108" y="123" width="72" height="72"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-HY-y0U">
-                                                <rect key="frame" x="111.5" y="169" width="65" height="20.5"/>
+                                                <rect key="frame" x="111.5" y="168" width="65" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lzs-UE-QdB">
-                                                <rect key="frame" x="96" y="204.5" width="96" height="38.5"/>
+                                                <rect key="frame" x="96" y="203.5" width="96" height="38.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="100">
                                                         <attributes>
@@ -781,24 +782,24 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xMw-zQ-CzN">
-                                        <rect key="frame" x="240" y="0.0" width="240" height="128"/>
+                                        <rect key="frame" x="240" y="0.0" width="240" height="127"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iP3-JA-JzA">
-                                                <rect key="frame" x="4.5" y="-62" width="183" height="252"/>
+                                                <rect key="frame" x="4.5" y="-62" width="183" height="251"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="IMG_6244" title=""/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team 1" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-vd-Sf9">
-                                                <rect key="frame" x="60" y="124" width="72" height="72"/>
+                                                <rect key="frame" x="60" y="123" width="72" height="72"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cWN-rE-n5V">
-                                                <rect key="frame" x="63.5" y="169" width="65" height="20.5"/>
+                                                <rect key="frame" x="63.5" y="168" width="65" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="G3J-Op-aHQ">
-                                                <rect key="frame" x="48" y="204.5" width="96" height="38.5"/>
+                                                <rect key="frame" x="48" y="203.5" width="96" height="38.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="100">
                                                         <attributes>
@@ -841,24 +842,24 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0g-oP-x5d">
-                                <rect key="frame" x="106" y="644" width="202" height="71"/>
+                                <rect key="frame" x="106" y="647" width="202" height="71"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="rule button 1" title=""/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyv-se-34M">
-                                <rect key="frame" x="107" y="757.5" width="200" height="71"/>
+                                <rect key="frame" x="107" y="761" width="200" height="70.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="next game 1" title=""/>
                             </button>
                             <stackView opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dgl-u2-pcf">
-                                <rect key="frame" x="75.5" y="328" width="263" height="250"/>
+                                <rect key="frame" x="75.5" y="329" width="263" height="252"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white!give points 1" translatesAutoresizingMaskIntoConstraints="NO" id="DuX-0V-qx2">
-                                        <rect key="frame" x="0.0" y="0.0" width="263" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="263" height="63"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3my-nS-skS" customClass="GMStepper" customModule="GMStepper">
-                                        <rect key="frame" x="0.0" y="62.5" width="263" height="125"/>
+                                        <rect key="frame" x="0.0" y="63" width="263" height="126"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="buttonsBackgroundColor">
@@ -870,7 +871,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgC-wc-8Q2">
-                                        <rect key="frame" x="0.0" y="187.5" width="263" height="62.5"/>
+                                        <rect key="frame" x="0.0" y="189" width="263" height="63"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="White! confirm button 1"/>
@@ -929,16 +930,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="398-qT-RXv">
-                                <rect key="frame" x="20.5" y="166.5" width="373" height="573"/>
+                                <rect key="frame" x="20.5" y="170" width="373" height="570"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ke-lP-8eJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="143.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="142.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game name 1" translatesAutoresizingMaskIntoConstraints="NO" id="myw-98-Q11">
-                                                <rect key="frame" x="0.0" y="14.5" width="196" height="43"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="196" height="42.5"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="info textbox 4" translatesAutoresizingMaskIntoConstraints="NO" id="JQj-TC-B62">
-                                                <rect key="frame" x="0.0" y="61" width="373" height="50"/>
+                                                <rect key="frame" x="0.0" y="60.5" width="373" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -956,15 +957,15 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8N-t4-wAg">
-                                        <rect key="frame" x="0.0" y="143.5" width="373" height="143"/>
+                                        <rect key="frame" x="0.0" y="142.5" width="373" height="142.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="info textbox 4" translatesAutoresizingMaskIntoConstraints="NO" id="JLW-Ty-cer">
-                                                <rect key="frame" x="0.0" y="60.5" width="373" height="50.5"/>
+                                                <rect key="frame" x="0.0" y="60.5" width="373" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game points 1 (3)" translatesAutoresizingMaskIntoConstraints="NO" id="hI6-1S-aZx">
-                                                <rect key="frame" x="0.0" y="14" width="205" height="43"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="205" height="42.5"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -980,15 +981,15 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdf-dC-dFE">
-                                        <rect key="frame" x="0.0" y="286.5" width="373" height="143"/>
+                                        <rect key="frame" x="0.0" y="285" width="373" height="142.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="info textbox 4" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-pT-HiF">
-                                                <rect key="frame" x="0.0" y="61" width="373" height="50"/>
+                                                <rect key="frame" x="0.0" y="60.5" width="373" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game location 1" translatesAutoresizingMaskIntoConstraints="NO" id="QZ5-gG-n1S">
-                                                <rect key="frame" x="0.0" y="18" width="224" height="43"/>
+                                                <rect key="frame" x="0.0" y="18" width="224" height="42.5"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1004,13 +1005,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="InA-sI-oVS">
-                                        <rect key="frame" x="0.0" y="429.5" width="373" height="143.5"/>
+                                        <rect key="frame" x="0.0" y="427.5" width="373" height="142.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rules 1" translatesAutoresizingMaskIntoConstraints="NO" id="dPc-81-PcA">
-                                                <rect key="frame" x="-46.5" y="3.5" width="186.5" height="43"/>
+                                                <rect key="frame" x="-46.5" y="3.5" width="186.5" height="42.5"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="rules textbox 1" translatesAutoresizingMaskIntoConstraints="NO" id="AUB-vW-R1Z">
-                                                <rect key="frame" x="0.0" y="43" width="373" height="143"/>
+                                                <rect key="frame" x="0.0" y="42.5" width="373" height="142.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -1044,7 +1045,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game info 1" translatesAutoresizingMaskIntoConstraints="NO" id="gcz-vp-olc">
-                                <rect key="frame" x="18.5" y="49.5" width="240" height="128"/>
+                                <rect key="frame" x="18.5" y="50" width="240" height="127.5"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nwA-q0-rNI"/>
