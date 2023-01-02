@@ -74,7 +74,7 @@ struct H {
             if let document = document, document.exists {
                 guard let data = document.data() else {return}
                 var host = convertDataToHost(data)
-                host.announcments.append(announcement)
+                host.announcements.append(announcement)
                 updateHost(gamecode, host)
             } else {
                 print("Host does not exist")
@@ -88,7 +88,7 @@ struct H {
             if let document = document, document.exists {
                 guard let data = document.data() else {return}
                 var host = convertDataToHost(data)
-                host.announcments[index] = announcement
+                host.announcements[index] = announcement
                 updateHost(gamecode, host)
             } else {
                 print("Host does not exist")
@@ -102,7 +102,7 @@ struct H {
             if let document = document, document.exists {
                 guard let data = document.data() else {return}
                 var host = convertDataToHost(data)
-                host.announcments.remove(at: index)
+                host.announcements.remove(at: index)
                 updateHost(gamecode, host)
             } else {
                 print("Host does not exist")
