@@ -42,12 +42,10 @@ extension AlgorithmViewController: UICollectionViewDelegate{
 
 extension AlgorithmViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var num_cells = stationList.count * host!.rounds
-        if (num_cells < 64) {
-            num_cells = 64
-            return num_cells
+        if ((host!.rounds < 8) && (host!.teams < 8)) {
+            return 8
         } else {
-            return stationList.count * host!.rounds
+            return grid[section].count
         }
     }
     
