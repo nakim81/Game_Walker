@@ -12,7 +12,7 @@ class TeamTableViewCell: UITableViewCell {
     
     static let identifier = "TeamTableViewCell"
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
         label.textAlignment = .center
@@ -22,7 +22,7 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let imageview: UIImageView = {
+    private let backGroundView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -41,6 +41,34 @@ class TeamTableViewCell: UITableViewCell {
             return view
         }()
     
+    private var teamIconImage: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var teamNameLabel: UILabel = {
+       let label = UILabel()
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var scoreLabel: UILabel = {
+       let label = UILabel()
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Dosis-Bold", size: 25)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -50,9 +78,9 @@ class TeamTableViewCell: UITableViewCell {
         
     }
 
-    func configureTableViewCell(name: String) {
+    func configureTeamTableViewCell(name: String) {
         contentView.addSubview(containerView)
-        containerView.addSubview(imageview)
+        containerView.addSubview(backGroundView)
         containerView.addSubview(nameLabel)
 
         NSLayoutConstraint.activate([
@@ -66,13 +94,45 @@ class TeamTableViewCell: UITableViewCell {
             nameLabel.widthAnchor.constraint(equalToConstant: 203),
             nameLabel.heightAnchor.constraint(equalToConstant: 27),
             
-            imageview.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
-            imageview.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            imageview.widthAnchor.constraint(equalToConstant: 328),
-            imageview.heightAnchor.constraint(equalToConstant: 47)
+            backGroundView.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
+            backGroundView.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            backGroundView.widthAnchor.constraint(equalToConstant: 328),
+            backGroundView.heightAnchor.constraint(equalToConstant: 47)
         ])
         nameLabel.text = name
     
+    }
+    
+    func configureRankTableViewCell(imageName: String, teamName: String, points: Int) {
+        contentView.addSubview(containerView)
+        containerView.addSubview(teamIconImage)
+        containerView.addSubview(teamNameLabel)
+        containerView.addSubview(scoreLabel)
+        
+        teamIconImage.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: -120).isActive = true
+        teamIconImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        teamIconImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        teamIconImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        teamIconImage.image = UIImage(named: imageName)
+        
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: 330),
+            containerView.heightAnchor.constraint(equalToConstant: 80),
+            
+            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
+            teamNameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            teamNameLabel.widthAnchor.constraint(equalToConstant: 130),
+            teamNameLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            scoreLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 95),
+            scoreLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 100),
+            scoreLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        teamNameLabel.text = teamName
+        scoreLabel.text = String(points)
     }
 
         required init?(coder: NSCoder) {

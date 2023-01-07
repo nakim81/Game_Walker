@@ -12,7 +12,6 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var table: UITableView!
     private var team: Team?
-    private var teams: [Int?] = []
     private let cellSpacingHeight: CGFloat = 3
     private var gameCode = UserData.readPlayer("player")?.gamecode
     private var teamName = UserData.readTeam("team")?.name
@@ -38,7 +37,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
-        cell.configureTableViewCell(name: team!.players[indexPath.section].name)
+        cell.configureTeamTableViewCell(name: team!.players[indexPath.section].name)
         return cell
         
     }
