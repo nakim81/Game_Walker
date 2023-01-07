@@ -67,10 +67,10 @@ extension AlgorithmViewController: UICollectionViewDataSource{
         if (column == 8) {
             rowcount += 1
         }
-        cell.configureAlgorithmCell(teamIndex: <#T##Int#>, teamnums: teamnums)
+            cell.configureAlgorithmCell(cellteamnum:grid[row][column])
         return cell
         }
-    
+        return UICollectionViewCell();
     }
 }
 

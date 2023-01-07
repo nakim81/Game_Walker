@@ -9,7 +9,7 @@ import UIKit
 
 class AlgorithmCollectionViewCell: UICollectionViewCell {
     
-    func configureAlgorithmCell(teamIndex: Int, teamnums: Array<Int>) {
-        
+    func configureAlgorithmCell(cellteamnum:Int) {
+//        cell.charLabel.text = cellteamnum
     }
 }
