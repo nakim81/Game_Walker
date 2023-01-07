@@ -15,6 +15,7 @@ class AlgorithmViewController: BaseViewController {
     var host: Host?
 //    var teamnums :[Int] = []
     var grid: [[Int]] = []
+    var rowcount : Int =  0
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,7 +32,6 @@ class AlgorithmViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
 
 
 }
@@ -41,6 +41,11 @@ extension AlgorithmViewController: UICollectionViewDelegate{
 }
 
 extension AlgorithmViewController: UICollectionViewDataSource{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int{
+        return grid.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if ((host!.rounds < 8) && (host!.teams < 8)) {
             return 8
@@ -50,21 +55,23 @@ extension AlgorithmViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell else { return UICollectionViewCell() }
-
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell, let columns = grid.first?.count {
+            let item = indexPath.item
+            let row : Int = rowcount
+            let column : Int = Int(CGFloat(item).truncatingRemainder(dividingBy: CGFloat(columns)))
+//        else { return UICollectionViewCell() }
 //        let num_team = teamList[indexPath.item].number
-        let num_team = host!.teams
-        var num_cols = stationList.count
-        var num_rows = host!.rounds
-        if (num_team < 8) {
-            num_cols = 8
-            num_rows = 8
+//        let num_team = host!.teams
+//        var num_cols = stationList.count
+//        var num_rows = host!.rounds
+        if (column == 8) {
+            rowcount += 1
         }
         cell.configureAlgorithmCell(teamIndex: <#T##Int#>, teamnums: teamnums)
         return cell
+        }
+    
     }
-    
-    
 }
 
 extension AlgorithmViewController: StationList {
@@ -75,13 +82,13 @@ extension AlgorithmViewController: StationList {
     
 }
 
-extension AlgorithmViewController: TeamList {
-    
-    func listOfTeams(_ teams: [Team]) {
-        self.teamList = teams
-        self.collectionView?.reloadData()
-    }
-}
+//extension AlgorithmViewController: TeamList {
+//
+//    func listOfTeams(_ teams: [Team]) {
+//        self.teamList = teams
+//        self.collectionView?.reloadData()
+//    }
+//}
 
 extension AlgorithmViewController: GetHost {
     func getHost(_ host: Host) {
