@@ -66,7 +66,11 @@ class CreateTeamViewController: BaseViewController {
             let newTeam = Team(name: teamName, players: [currentPlayer!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.writeTeam(newTeam, "team")
             T.addTeam(gameCode, newTeam)
-            performSegue(withIdentifier: "goToTPF4", sender: self)
+            T.joinTeam(gameCode, newTeam.name, currentPlayer!)
+            Task {
+                try await Task.sleep(nanoseconds: 500_000_000)
+                performSegue(withIdentifier: "goToTPF4", sender: self)
+            }
         } else {
             alert(title: "Woops", message: "Please enter team name to create your team")
         }

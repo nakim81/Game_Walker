@@ -38,7 +38,10 @@ class JoinTeamViewController: BaseViewController {
         if let selectedIndex = selectedIndex {
             UserData.writeTeam(teamList[selectedIndex], "team")
             T.joinTeam(UserData.gamecode, teamList[selectedIndex].name, currentPlayer)
-            performSegue(withIdentifier: "goToPF44", sender: self)
+            Task {
+                try await Task.sleep(nanoseconds: 250_000_000)
+                performSegue(withIdentifier: "goToPF44", sender: self)
+            }
         } else {
             alert(title: "No Team Selected", message: "Please select your team")
             return

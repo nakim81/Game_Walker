@@ -53,6 +53,8 @@
 		FC1AE25A28E976DE00D8C9D9 /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */; };
 		FC1AE25B28E976DE00D8C9D9 /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25428E976DE00D8C9D9 /* Dosis-Light.ttf */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
+		FC49EE41296AE62A00D00D57 /* HostViewControllers in Resources */ = {isa = PBXBuildFile; fileRef = FC49EE40296AE62900D00D57 /* HostViewControllers */; };
+		FCC275B0296AE6CB0081BF6E /* RefereeViewControllers in Resources */ = {isa = PBXBuildFile; fileRef = FCC275AF296AE6CB0081BF6E /* RefereeViewControllers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,8 @@
 		FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
 		FC1AE25428E976DE00D8C9D9 /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
+		FC49EE40296AE62900D00D57 /* HostViewControllers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = HostViewControllers; path = Controllers/HostViewControllers; sourceTree = "<group>"; };
+		FCC275AF296AE6CB0081BF6E /* RefereeViewControllers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RefereeViewControllers; path = Controllers/RefereeViewControllers; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +193,8 @@
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
+				FCC275AF296AE6CB0081BF6E /* RefereeViewControllers */,
+				FC49EE40296AE62900D00D57 /* HostViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -319,10 +325,12 @@
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				FC1AE25828E976DE00D8C9D9 /* Dosis-Bold.ttf in Resources */,
+				FCC275B0296AE6CB0081BF6E /* RefereeViewControllers in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				FC1AE25B28E976DE00D8C9D9 /* Dosis-Light.ttf in Resources */,
 				DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */,
+				FC49EE41296AE62A00D00D57 /* HostViewControllers in Resources */,
 				FC1AE25A28E976DE00D8C9D9 /* Dosis-SemiBold.ttf in Resources */,
 				FC1AE25728E976DE00D8C9D9 /* Dosis-ExtraBold.ttf in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,

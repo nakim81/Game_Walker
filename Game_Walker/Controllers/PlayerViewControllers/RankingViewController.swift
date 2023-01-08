@@ -30,9 +30,7 @@ class RankingViewController: BaseViewController, UITableViewDelegate, UITableVie
         leaderBoard.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
-        DispatchQueue.main.async{
-            self.leaderBoard.reloadData()
-        }
+        leaderBoard.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

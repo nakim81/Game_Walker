@@ -194,11 +194,8 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-Td-471">
-                                <rect key="frame" x="64.333333333333343" y="346.66666666666674" width="299.33333333333326" height="360"/>
+                                <rect key="frame" x="64.333333333333343" y="314.66666666666669" width="299.33333333333326" height="360.00000000000006"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="360" id="bCr-ny-fpd"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7Kk-TS-KKy">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -226,9 +223,10 @@
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.607" id="FhA-gc-rFK"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="GaV-iA-nR2"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0427873" id="Icu-Vr-6hD"/>
+                            <constraint firstItem="aTU-Td-471" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.437956" id="OLY-jR-M36"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="QzN-w5-uCt"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0696822" id="RwY-9z-6Kz"/>
-                            <constraint firstItem="aTU-Td-471" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.15" id="SGS-Ry-u5T"/>
+                            <constraint firstItem="aTU-Td-471" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.08" id="SGS-Ry-u5T"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.4" id="ShN-ZC-vyo"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="UsN-XE-nVK"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0427873" id="WE6-RN-wCU"/>
@@ -275,9 +273,6 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n1b-ak-Lxf">
                                 <rect key="frame" x="52" y="199" width="324" height="420"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="420" id="5rg-nD-Jlx"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="21Y-fg-sN0">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -305,6 +300,7 @@
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.427536" id="Lo4-x9-yhH"/>
                             <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerY" secondItem="aLB-HE-1os" secondAttribute="centerY" multiplier="0.893" id="UZY-jF-Kth"/>
                             <constraint firstItem="n1b-ak-Lxf" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" id="WNO-qW-pSV"/>
+                            <constraint firstItem="n1b-ak-Lxf" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.510949" id="alJ-sm-ukF"/>
                             <constraint firstItem="WJX-FA-dl0" firstAttribute="centerX" secondItem="aLB-HE-1os" secondAttribute="centerX" multiplier="0.94" id="coQ-ZX-Wbc"/>
                             <constraint firstItem="WJX-FA-dl0" firstAttribute="width" secondItem="aLB-HE-1os" secondAttribute="width" multiplier="0.574766" id="dzV-eJ-nlJ"/>
                             <constraint firstItem="pMD-Kg-HhG" firstAttribute="height" secondItem="aLB-HE-1os" secondAttribute="height" multiplier="0.0696822" id="fDy-JB-WFh"/>
@@ -355,12 +351,8 @@
                                 <rect key="frame" x="30.666666666666671" y="80" width="217.33333333333331" height="61.333333333333343"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="40.666666666666657" y="189" width="347" height="475"/>
+                                <rect key="frame" x="40.666666666666657" y="150" width="347" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="475" id="1im-lh-Ulm"/>
-                                    <constraint firstAttribute="width" constant="347" id="usG-w1-GVs"/>
-                                </constraints>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
@@ -368,10 +360,12 @@
                         <constraints>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0745721" id="1zM-Ds-yoQ"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.507246" id="5D1-DJ-gLO"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.810748" id="CC9-x8-ioI"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.634146" id="WeU-ic-fbf"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="jag-WH-U88"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="1.04" id="qyz-91-rpR"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" id="qyz-91-rpR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>
@@ -397,12 +391,8 @@
                                 <rect key="frame" x="30" y="80" width="192.66666666666666" height="61.333333333333343"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
-                                <rect key="frame" x="36.666666666666657" y="185.66666666666663" width="355" height="490"/>
+                                <rect key="frame" x="36.666666666666657" y="150" width="355" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="355" id="PMy-Cf-e0z"/>
-                                    <constraint firstAttribute="height" constant="490" id="SIX-wA-8Sy"/>
-                                </constraints>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qT9-g7-uz0"/>
@@ -411,9 +401,11 @@
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" id="8k9-Ut-RfQ"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.27" id="8x6-Hb-s0V"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0745721" id="B9d-c9-cuK"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.829439" id="F9a-eD-U9z"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.634146" id="Je0-WM-88q"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="0.59" id="Zf9-wO-SWd"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.45" id="hiH-ka-e9w"/>
-                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="1.05" id="jM2-Ba-iXf"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" id="jM2-Ba-iXf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
@@ -438,19 +430,51 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer 1" translatesAutoresizingMaskIntoConstraints="NO" id="p8f-Sm-GaO">
                                 <rect key="frame" x="30.333333333333329" y="80" width="134" height="61.333333333333343"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xni-rl-bjf">
+                                <rect key="frame" x="126.66666666666669" y="482.66666666666674" width="175" height="60"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="game info button 4"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="gameInfoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="Ktk-4e-S5D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-gX-yty">
+                                <rect key="frame" x="126.66666666666669" y="585" width="175" height="60"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="Next game button 1"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextGameButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="UPF-XF-prI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BjG-Bb-y3L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Frx-gX-yty" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.5" id="0by-72-GS7"/>
+                            <constraint firstItem="Frx-gX-yty" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.408879" id="1ar-UH-0eA"/>
+                            <constraint firstItem="xni-rl-bjf" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.25" id="7wt-C8-Alz"/>
+                            <constraint firstItem="Frx-gX-yty" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="DK0-Vi-baP"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" multiplier="0.455" id="FKr-O5-6kp"/>
+                            <constraint firstItem="xni-rl-bjf" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="G3r-jC-gSe"/>
+                            <constraint firstItem="Frx-gX-yty" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="SB1-yP-bPD"/>
+                            <constraint firstItem="xni-rl-bjf" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.408879" id="UZK-Xp-ha5"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="0.27" id="YcH-FJ-ob4"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.313" id="bAh-Z4-w2Y"/>
                             <constraint firstItem="p8f-Sm-GaO" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0745721" id="iho-Kl-I5F"/>
+                            <constraint firstItem="xni-rl-bjf" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="urL-df-aQm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="dUb-JY-qbb"/>
                     <navigationItem key="navigationItem" id="qeT-WX-hQA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="gameInfoButton" destination="xni-rl-bjf" id="qXc-RA-GNw"/>
+                        <outlet property="nextGameButton" destination="Frx-gX-yty" id="aey-u2-y5H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHy-RL-qYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -461,11 +485,13 @@
         <segue reference="29y-2J-Hks"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Next game button 1" width="176" height="57"/>
         <image name="Timer 1" width="128" height="61"/>
         <image name="choose your team 1" width="237.66667175292969" height="35"/>
         <image name="choose your team icon 1" width="328" height="35"/>
         <image name="create team button 2" width="243.66667175292969" height="79"/>
         <image name="game code?" width="100" height="15"/>
+        <image name="game info button 4" width="169.66667175292969" height="55"/>
         <image name="join team button 1" width="243.66667175292969" height="79"/>
         <image name="members 1" width="210" height="61"/>
         <image name="next button 1" width="175.33332824707031" height="57"/>

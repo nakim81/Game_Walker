@@ -28,11 +28,9 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.delegate = self
         table.dataSource = self
         table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
-        table.backgroundColor = .white
+        table.backgroundColor = .clear
         table.allowsSelection = false
-        DispatchQueue.main.async{
-            self.table.reloadData()
-        }
+        table.separatorStyle = .none
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,6 +67,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 extension TeamViewController: GetTeam {
     func getTeam(_ team: Team) {
         self.team = team
+        table.reloadData()
     }
 }
 
