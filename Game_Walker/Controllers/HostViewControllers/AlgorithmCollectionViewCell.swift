@@ -2,14 +2,14 @@
 //  AlgorithmCollectionViewCell.swift
 //  Game_Walker
 //
-//  Created by Jin Kim on 12/29/22.
+//  Created by Jin Kim on 1/11/23.
 //
 
 import UIKit
 
 class AlgorithmCollectionViewCell: UICollectionViewCell {
-    
+
     func configureAlgorithmCell(cellteamnum:Int) {
-//        cell.charLabel.text = cellteamnum
     }
+
 }
