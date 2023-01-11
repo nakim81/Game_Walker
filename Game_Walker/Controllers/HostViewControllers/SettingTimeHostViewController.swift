@@ -9,18 +9,23 @@ import UIKit
 
 class SettingTimeHostViewController: BaseViewController {
 
+    
     @IBOutlet weak var gameMinutesLabel: UILabel!
     @IBOutlet weak var gameSecondsLabel: UILabel!
     @IBOutlet weak var movingMinutesLabel: UILabel!
     @IBOutlet weak var movingSecondsLabel: UILabel!
     @IBOutlet weak var roundsTextField: UITextField!
+    @IBOutlet weak var teamcountTextField: UITextField!
     
+    var host: Host?
     var gameminutes: Int = 0
     var gameseconds: Int = 0
     var moveminutes: Int = 0
     var moveseconds: Int = 0
+    var teamcount: Int = 0
     var pickertype = 0
-    var rounds = "10"
+    var rounds : Int = 10
+    
     
     
     //UIPickerView inside of UIView container
@@ -42,9 +47,12 @@ class SettingTimeHostViewController: BaseViewController {
 
         
         super.viewDidLoad()
+        H.delegate_getHost = self
         
         roundsTextField.keyboardType = .numberPad
         roundsTextField.delegate = self
+        teamcountTextField.keyboardType = .numberPad
+        teamcountTextField.delegate = self
         
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
@@ -161,8 +169,9 @@ class SettingTimeHostViewController: BaseViewController {
     
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        rounds = roundsTextField.text!
-        H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds)!)
+        rounds = Int(roundsTextField.text!)!
+        teamcount = Int(teamcountTextField.text!)!
+        H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), rounds)
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {
@@ -174,6 +183,7 @@ class SettingTimeHostViewController: BaseViewController {
 
 
 extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -218,5 +228,10 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
             }
         }
 
+    }
+}
+extension SettingTimeHostViewController: GetHost {
+    func getHost(_ host: Host) {
+        self.host = host
     }
 }

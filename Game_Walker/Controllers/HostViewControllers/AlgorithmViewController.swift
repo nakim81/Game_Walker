@@ -9,7 +9,7 @@ import UIKit
 
 class AlgorithmViewController: BaseViewController {
     
-    var curr_gamecode = String(data: UserDefaults.standard.data(forKey: "gamecodestring")!, encoding: .utf8)!
+    var curr_gamecode = UserData.gamecode
     var stationList: [Station] = []
 //    var teamList: [Team] = []
     var host: Host?
