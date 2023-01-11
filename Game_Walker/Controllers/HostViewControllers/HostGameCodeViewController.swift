@@ -27,8 +27,8 @@ class HostGameCodeViewController: BaseViewController {
         if (tempgamecode.isEmpty) {
             alert(title: "No Input",message:"You haven't entered a code!")
         } else {
-            //UserData.readGamecode("gamecodestring")
-            UserDefaults.standard.data(forKey: "gamecodestring")
+            UserData.readGamecode("gamecodestring")
+//            UserDefaults.standard.data(forKey: "gamecodestring")
             self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
         }
     }
