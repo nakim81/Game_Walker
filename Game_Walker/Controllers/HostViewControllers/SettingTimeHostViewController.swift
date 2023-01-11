@@ -162,7 +162,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         rounds = roundsTextField.text!
-        H.setTimer(UserData.gamecode!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds)!)
+        H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds)!)
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {

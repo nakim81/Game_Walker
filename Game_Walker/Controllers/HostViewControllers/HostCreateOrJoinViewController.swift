@@ -23,7 +23,11 @@ class HostCreateOrJoinViewController: BaseViewController {
         let gc = String(Int.random(in: 100000 ... 999999))
         let host = Host(gamecode: gc)
         H.createGame(gc, host)
+        UserData.gamecode = gc
         UserData.writeGamecode(gc, "gamecodestring")
+        
+        
+
 //        UserDefaults.standard.set(gc, forKey: "gamecodestring")
     }
     
