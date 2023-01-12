@@ -13,7 +13,7 @@ class WaitingController: BaseViewController {
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
     var assigned : Bool = false
-    var pvp_check : Bool = true
+    var pvp_check : Bool = false
     var station_name = ""
     var timer: Timer?
     var currentIndex: Int = 0
@@ -26,7 +26,7 @@ class WaitingController: BaseViewController {
 
         } else {
             Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] timer in
-                R.getReferee(UserData.readReferee("Referee")!.gamecode, UserData.readReferee("Referee")!.name)
+                R.getReferee(UserData.readGamecode("gamecode")!, UserData.readReferee("Referee")!.name)
                 //S.getStation(UserData.readReferee("Referee")!.gamecode, UserData.readReferee("Referee")!.stationName)
                 if self.currentIndex == 2 {
                     self.currentIndex = 0
@@ -39,10 +39,10 @@ class WaitingController: BaseViewController {
                     //if (UserData.readReferee("Referee")!.stationName != "") {
                         stopTimer()
                     if self.pvp_check {
-                            print("history")
                             performSegue(withIdentifier: "goToPVP", sender: self)
                         }
                         else {
+                            
                             performSegue(withIdentifier: "goToPVE", sender: self)
                         }
                     //}
