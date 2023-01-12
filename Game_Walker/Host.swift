@@ -20,7 +20,7 @@ struct Host: Codable {
     var doubled: [[Int]] = []
     var blanked: [[Int]] = []
     //game control
-    var show_scoreboard: Bool = true
+    var showScoreboard: Bool = true
     var paused: Bool = false
     var announcements: [String] = []
     
@@ -36,7 +36,7 @@ struct Host: Codable {
         case duplicated
         case doubled
         case blanked
-        case show_scoreboard
+        case showScoreboard
         case paused
         case announcements
     }
