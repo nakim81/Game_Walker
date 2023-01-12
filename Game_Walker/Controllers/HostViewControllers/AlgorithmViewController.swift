@@ -29,9 +29,11 @@ class AlgorithmViewController: BaseViewController {
 //        T.delegate_teamList = self
 //        T.getTeamList(curr_gamecode)
         H.delegate_getHost = self
+//        H.getHost(UserData.readGamecode("gamecodestring")!)
+        H.getHost("162811")
+    
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         createGrid()
     }
     
@@ -134,7 +136,9 @@ extension AlgorithmViewController: StationList {
 
 extension AlgorithmViewController: GetHost {
     func getHost(_ host: Host) {
+        print("algorithm protocol")
         self.host = host
         self.collectionView?.reloadData()
+        
     }
 }
