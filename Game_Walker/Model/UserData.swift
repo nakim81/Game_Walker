@@ -7,14 +7,12 @@
 
 import Foundation
 
-class UserData {
-    static var gamecode : String = ""
-    
+class UserData {    
     static func writeGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
     }
 
-    static func readGamecode(_ gamecode: String, _ key: String) -> String? {
+    static func readGamecode(_ key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }
     

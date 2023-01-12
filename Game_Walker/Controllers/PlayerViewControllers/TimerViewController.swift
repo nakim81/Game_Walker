@@ -32,8 +32,12 @@ class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
+<<<<<<< HEAD
         H.getHost(gameCode)
         configureTimerLabel()
+=======
+//        H.getHost(RefereeData.gamecode_save)
+>>>>>>> 0c2aaf30e8623abededb1bd20956616a4cf0665b
         runTimer()
     }
     

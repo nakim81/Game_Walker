@@ -21,7 +21,7 @@ struct H {
          db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
                  guard let document = documentSnapshot else { return }
                  guard let data = document.data() else { return }
-                 var host = convertDataToHost(data)
+                 let host = convertDataToHost(data)
                  for delegate in delegates {
                      delegate.updateHost(host)
                  }
