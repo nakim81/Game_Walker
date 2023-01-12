@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 class MainViewController: BaseViewController {
    
     @IBOutlet weak var playerButton: UIButton!
-    @IBOutlet weak var refreeButton: UIButton!
+    @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var hostButton: UIButton!
     @IBOutlet weak var Test: UIButton!
     override func viewDidLoad() {

@@ -23,6 +23,7 @@ class RegisterController: BaseViewController {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
             R.addReferee(gamecode, newReferee)
+            UserData.writeGamecode(gamecode, "gamecode")
             UserData.writeReferee(newReferee, "Referee")
         }
         performSegue(withIdentifier: "goToWait", sender: self)
