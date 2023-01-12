@@ -13,7 +13,7 @@ class WaitingController: BaseViewController {
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
     var assigned : Bool = false
-    var pvp_check : Bool = false
+    var pvp_check : Bool = true
     var station_name = ""
     var timer: Timer?
     var currentIndex: Int = 0
@@ -26,7 +26,8 @@ class WaitingController: BaseViewController {
 
         } else {
             Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] timer in
-                R.getReferee(RefereeData.gamecode_save, RefereeData.referee_name)
+                R.getReferee(UserData.readReferee("Referee")!.gamecode, UserData.readReferee("Referee")!.name)
+                //S.getStation(UserData.readReferee("Referee")!.gamecode, UserData.readReferee("Referee")!.stationName)
                 if self.currentIndex == 2 {
                     self.currentIndex = 0
                 }
@@ -34,11 +35,11 @@ class WaitingController: BaseViewController {
                     self.currentIndex = self.currentIndex + 1
                 }
                 self.WaitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-                if RefereeData.assigned {
-                    //S.getStation(RefereeData.gamecode_save, RefereeData.station_name)
-                    //if (RefereeData.station_name != "") {
+                if self.assigned {
+                    //if (UserData.readReferee("Referee")!.stationName != "") {
                         stopTimer()
-                        if RefereeData.pvp_check {
+                    if self.pvp_check {
+                            print("history")
                             performSegue(withIdentifier: "goToPVP", sender: self)
                         }
                         else {
@@ -65,16 +66,15 @@ class WaitingController: BaseViewController {
 //MARK: - UIUpdate
 extension WaitingController: GetReferee {
     func getReferee(_ referee: Referee) {
-        RefereeData.assigned = referee.assigned
-        RefereeData.station_name = referee.stationName
+        self.assigned = referee.assigned
+        self.station_name = referee.stationName
     }
 }
 
 //MARK: - UIUpdate
 extension WaitingController: GetStation {
     func getStation(_ station: Station) {
-        RefereeData.station_name = station.name
-        RefereeData.pvp_check = station.pvp
-        print(RefereeData.pvp_check)
+        self.station_name = station.name
+        self.pvp_check = station.pvp
     }
 }
