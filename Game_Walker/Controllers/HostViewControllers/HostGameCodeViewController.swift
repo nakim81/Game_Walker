@@ -28,7 +28,7 @@ class HostGameCodeViewController: BaseViewController {
             alert(title: "No Input",message:"You haven't entered a code!")
         } else {
             UserData.writeGamecode(tempgamecode, "gamecodestring")
-            UserData.gamecode = tempgamecode
+ //           UserData.gamecode = tempgamecode
 //            let gc = UserData.readGamecode("gamecodestring")!
 //            UserData.gamecode = gc
 //            UserDefaults.standard.data(forKey: "gamecodestring")
