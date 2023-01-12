@@ -80,6 +80,7 @@ struct T {
                 }
                 //update team member
                 updateTeam(gamecode, team)
+                print("Successfully left the team")
             } else {
                 print("Team does not exist")
             }

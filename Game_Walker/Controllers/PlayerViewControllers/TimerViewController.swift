@@ -8,10 +8,15 @@
 import Foundation
 import UIKit
 
-class TimerViewController: BaseViewController {
+class TimerViewController: UIViewController {
     
     @IBOutlet weak var gameInfoButton: UIButton!
     @IBOutlet weak var nextGameButton: UIButton!
+    private var timer: Timer?
+    private var seconds = 3600
+    private var time = 0
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
@@ -24,31 +29,13 @@ class TimerViewController: BaseViewController {
         label.layer.cornerRadius = 130
         return label
     }()
-    private var timer: Timer?
-    private var seconds = 3600
-    private var time = 0
-    private var gameCode: String = UserData.readPlayer("player")!.gamecode
     
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
-<<<<<<< HEAD
         H.getHost(gameCode)
         configureTimerLabel()
-=======
-//        H.getHost(RefereeData.gamecode_save)
->>>>>>> 0c2aaf30e8623abededb1bd20956616a4cf0665b
         runTimer()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {

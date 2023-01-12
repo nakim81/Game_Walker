@@ -354,16 +354,31 @@
                                 <rect key="frame" x="40.666666666666657" y="150" width="347" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdP-DM-uNL">
+                                <rect key="frame" x="30.666666666666671" y="50" width="60" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" image="leave 1"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="leaveButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="Apb-M3-Xan"/>
+                                    <segue destination="MIX-tc-IL7" kind="show" identifier="returntoCorJ" id="KAQ-jp-596"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0745721" id="1zM-Ds-yoQ"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.507246" id="5D1-DJ-gLO"/>
+                            <constraint firstItem="qdP-DM-uNL" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.140187" id="AFU-hd-rmF"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.810748" id="CC9-x8-ioI"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.634146" id="WeU-ic-fbf"/>
+                            <constraint firstItem="qdP-DM-uNL" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="ZwR-9C-rKf"/>
+                            <constraint firstItem="qdP-DM-uNL" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.284" id="aMs-iQ-M7C"/>
+                            <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0378049" id="ak0-Nc-oww"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="jag-WH-U88"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" id="qyz-91-rpR"/>
                         </constraints>
@@ -372,6 +387,7 @@
                     <navigationItem key="navigationItem" id="6mo-hl-SSu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="leaveButton" destination="qdP-DM-uNL" id="DXO-uU-QqS"/>
                         <outlet property="table" destination="vrd-Ze-eKQ" id="2dK-sj-K7o"/>
                     </connections>
                 </viewController>
@@ -498,7 +514,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="M4x-Iq-v4s"/>
+        <segue reference="29y-2J-Hks"/>
+        <segue reference="KAQ-jp-596"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Next game button 1" width="176" height="57"/>
@@ -509,6 +526,7 @@
         <image name="game code?" width="100" height="15"/>
         <image name="game info button 4" width="169.66667175292969" height="55"/>
         <image name="join team button 1" width="243.66667175292969" height="79"/>
+        <image name="leave 1" width="60" height="31"/>
         <image name="members 1" width="210" height="61"/>
         <image name="next button 1" width="175.33332824707031" height="57"/>
         <image name="ranking 1" width="187" height="61"/>

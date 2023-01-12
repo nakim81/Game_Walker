@@ -8,29 +8,20 @@
 import Foundation
 import UIKit
 
-class RankingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var leaderBoard: UITableView!
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
-    private var currentPlayer: Player = UserData.readPlayer("player")!
+    private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_teamList = self
         configureTableView()
-        T.getTeamList(currentPlayer.gamecode)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        T.getTeamList(gameCode)
     }
     
     private func configureTableView() {
