@@ -9,7 +9,7 @@ import UIKit
 
 class AlgorithmViewController: BaseViewController {
     
-    var curr_gamecode = UserData.gamecode
+//    var curr_gamecode = UserData.gamecode
     var stationList: [Station] = []
 //    var teamList: [Team] = []
     var host: Host?
@@ -25,7 +25,7 @@ class AlgorithmViewController: BaseViewController {
         super.viewDidLoad()
         
         S.delegate_stationList = self
-        S.getStationList(curr_gamecode)
+ //       S.getStationList(curr_gamecode)
 //        T.delegate_teamList = self
 //        T.getTeamList(curr_gamecode)
         H.delegate_getHost = self
