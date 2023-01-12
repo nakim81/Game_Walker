@@ -438,6 +438,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="gameInfoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="Ktk-4e-S5D"/>
+                                    <segue destination="PCf-yA-ip9" kind="presentation" identifier="popGameInfo" id="Fom-J3-kjW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-gX-yty">
@@ -478,11 +479,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHy-RL-qYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4580" y="723"/>
+            <point key="canvasLocation" x="4580" y="901"/>
+        </scene>
+        <!--Game Info View Controller-->
+        <scene sceneID="hNc-Jy-ZXC">
+            <objects>
+                <viewController id="PCf-yA-ip9" customClass="GameInfoViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5za-Pk-EOk">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="869"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Nr1-Tu-Lhe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rWw-T5-xW9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5469" y="901"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="29y-2J-Hks"/>
+        <segue reference="M4x-Iq-v4s"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Next game button 1" width="176" height="57"/>

@@ -15,8 +15,7 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     private let cellSpacingHeight: CGFloat = 3
     private var gameCode = UserData.readPlayer("player")?.gamecode
     private var teamName = UserData.readTeam("team")?.name
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
@@ -60,7 +59,6 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             headerView.backgroundColor = UIColor.clear
             return headerView
         }
-    
 }
 
 // MARK: - TeamProtocol

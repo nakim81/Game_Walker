@@ -8,12 +8,10 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    //let userData = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavBar()
-        
+        configureNavBar()        
     }
     
     func configureNavBar() {

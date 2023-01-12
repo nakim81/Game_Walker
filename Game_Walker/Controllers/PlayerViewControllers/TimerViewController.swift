@@ -37,10 +37,24 @@ class TimerViewController: BaseViewController {
         runTimer()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
+        
     }
+    
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
+        
     }
+    
     func configureTimerLabel(){
         self.view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
@@ -57,13 +71,13 @@ class TimerViewController: BaseViewController {
     }
        
     @objc func updateTimer() {
-           if seconds < 1 {
-               self.timer?.invalidate()
-           } else {
-               seconds -= 1
-               timerLabel.text = timeString(time: TimeInterval(seconds))
-           }
-   }
+        if seconds < 1 {
+           self.timer?.invalidate()
+        } else {
+           seconds -= 1
+           timerLabel.text = timeString(time: TimeInterval(seconds))
+        }
+    }
    
    func timeString(time:TimeInterval) -> String {
            let minutes = Int(time) / 60 % 60
