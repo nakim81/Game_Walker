@@ -14,7 +14,7 @@ class UserData {
         UserDefaults.standard.set(gamecode, forKey: key)
     }
 
-    static func readGamecode(_ gamecode: String, _ key: String) -> String? {
+    static func readGamecode(_ key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }
     
