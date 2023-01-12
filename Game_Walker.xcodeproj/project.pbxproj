@@ -14,7 +14,6 @@
 		6159252A29694A0600BC6D7F /* PVPRefereeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252329694A0600BC6D7F /* PVPRefereeController.swift */; };
 		6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252429694A0600BC6D7F /* WaitingController.swift */; };
 		6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252529694A0600BC6D7F /* GivePointsController.swift */; };
-		61570AA228E8F7720060F66C /* RefereeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61570AA128E8F7720060F66C /* RefereeData.swift */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
