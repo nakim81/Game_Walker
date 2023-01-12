@@ -35,7 +35,10 @@
                 <constraint firstItem="Y0Y-52-SN2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="U7v-hW-b4h"/>
                 <constraint firstAttribute="bottom" secondItem="Y0Y-52-SN2" secondAttribute="bottom" id="nrA-uZ-t0t"/>
             </constraints>
-            <point key="canvasLocation" x="137.68115942028987" y="71.651785714285708"/>
+            <connections>
+                <outlet property="teamnumLabel" destination="2fa-Rq-hu6" id="EAT-5i-Wb7"/>
+            </connections>
+            <point key="canvasLocation" x="-29" y="80"/>
         </collectionViewCell>
     </objects>
     <resources>

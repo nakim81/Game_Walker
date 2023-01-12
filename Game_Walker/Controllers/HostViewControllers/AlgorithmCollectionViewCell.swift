@@ -9,7 +9,8 @@ import UIKit
 
 class AlgorithmCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var teamnumLabel: UILabel!
     func configureAlgorithmCell(cellteamnum:Int) {
+        teamnumLabel.text = String(cellteamnum)
     }
-
 }
