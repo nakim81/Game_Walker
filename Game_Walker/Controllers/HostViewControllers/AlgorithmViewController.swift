@@ -9,14 +9,16 @@ import UIKit
 
 class AlgorithmViewController: BaseViewController {
     
-    var curr_gamecode = UserData.gamecode
+
     var stationList: [Station] = []
 //    var teamList: [Team] = []
-    var host: Host?
+    var host: Host!
 //    var teamnums :[Int] = []
     var grid: [[Int]] = []
     var rowcount : Int =  0
     var smallerthaneight : Bool = false
+    
+    var num_teams : Int = 0
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -25,12 +27,12 @@ class AlgorithmViewController: BaseViewController {
         super.viewDidLoad()
         
         S.delegate_stationList = self
-        S.getStationList(curr_gamecode)
+        S.getStationList(UserData.readGamecode("gamecodestring")!)
 //        T.delegate_teamList = self
 //        T.getTeamList(curr_gamecode)
         H.delegate_getHost = self
-//        H.getHost(UserData.readGamecode("gamecodestring")!)
-        H.getHost("162811")
+        H.getHost(UserData.readGamecode("gamecodestring")!)
+//        H.getHost("705154")
     
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -38,7 +40,6 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func createGrid() {
-        var num_teams = host!.teams
         var num_stations = stationList.count
         var t_lessthan_eight = false
         var s_lessthan_eight = false
@@ -138,7 +139,9 @@ extension AlgorithmViewController: GetHost {
     func getHost(_ host: Host) {
         print("algorithm protocol")
         self.host = host
+        self.num_teams = host.teams
         self.collectionView?.reloadData()
+    
         
     }
 }

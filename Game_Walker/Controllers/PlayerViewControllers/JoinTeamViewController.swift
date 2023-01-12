@@ -37,7 +37,7 @@ class JoinTeamViewController: BaseViewController {
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
             UserData.writeTeam(teamList[selectedIndex], "team")
-            T.joinTeam(UserData.gamecode, teamList[selectedIndex].name, currentPlayer)
+            T.joinTeam(UserData.readGamecode("gamecodestring")!, teamList[selectedIndex].name, currentPlayer)
             performSegue(withIdentifier: "goToPF44", sender: self)
         } else {
             alert(title: "No Team Selected", message: "Please select your team")
