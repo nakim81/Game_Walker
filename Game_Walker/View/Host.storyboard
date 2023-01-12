@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -445,22 +444,22 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game time" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
-                                <rect key="frame" x="128.5" y="201.5" width="157" height="40"/>
+                                <rect key="frame" x="128.5" y="113" width="157" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="137.41:35" id="1OR-fC-KEp"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
-                                <rect key="frame" x="73.5" y="247.5" width="267" height="85"/>
+                                <rect key="frame" x="73.5" y="159" width="267" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="220:70" id="89c-SK-TFL"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                <rect key="frame" x="86.5" y="252" width="241" height="76.5"/>
+                                <rect key="frame" x="86.5" y="163" width="241" height="77"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
-                                        <rect key="frame" x="116" y="5" width="9" height="66"/>
+                                        <rect key="frame" x="116" y="5.5" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
                                         <rect key="frame" x="61.5" y="11.5" width="45" height="53.5"/>
@@ -475,7 +474,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
-                                        <rect key="frame" x="-13" y="-4.5" width="267" height="85"/>
+                                        <rect key="frame" x="-13" y="-4" width="267" height="85"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
@@ -493,16 +492,16 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moving time" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="120" y="372.5" width="174" height="37.5"/>
+                                <rect key="frame" x="120" y="264" width="174" height="37.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="162:35" id="wkB-x3-fMl"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
-                                <rect key="frame" x="73.5" y="416" width="267" height="85.5"/>
+                                <rect key="frame" x="73.5" y="307.5" width="267" height="85"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                <rect key="frame" x="86.5" y="420.5" width="241" height="76.5"/>
+                                <rect key="frame" x="86.5" y="312" width="241" height="76.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
                                         <rect key="frame" x="116" y="5" width="9" height="66"/>
@@ -520,7 +519,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
-                                        <rect key="frame" x="-13" y="-4.5" width="267" height="85.5"/>
+                                        <rect key="frame" x="-13" y="-4.5" width="267" height="85"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
@@ -538,13 +537,13 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds 1" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="153" y="541.5" width="108" height="37.5"/>
+                                <rect key="frame" x="153" y="412.5" width="108" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="100:35" id="gC4-9S-8sz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
-                                <rect key="frame" x="73.5" y="585" width="267" height="85"/>
+                                <rect key="frame" x="73.5" y="456.5" width="267" height="85"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
                                 <rect key="frame" x="119" y="730" width="176" height="57"/>
@@ -555,8 +554,24 @@
                                     <segue destination="uLg-Pv-BMT" kind="show" id="ggl-dg-6vL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="rounds text field">
-                                <rect key="frame" x="202.5" y="593.5" width="9" height="68"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
+                                <rect key="frame" x="86.5" y="460.5" width="241" height="76.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting 1" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-bV-YWp" userLabel="Team Count label">
+                                <rect key="frame" x="145" y="561.5" width="124" height="34.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WYz-bV-YWp" secondAttribute="height" multiplier="100:28" id="sJQ-7T-Ic5"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Vix-LA-Y4c" userLabel="Team Count box">
+                                <rect key="frame" x="73.5" y="602" width="267" height="85.5"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
+                                <rect key="frame" x="86.5" y="606.5" width="241" height="76.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -566,6 +581,7 @@
                         <constraints>
                             <constraint firstItem="RKr-I9-Cod" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="0X3-tc-6rv"/>
                             <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="0eT-1R-WV7"/>
+                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="1bN-aM-mTR"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="1kq-uR-fZz"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" multiplier="0.9" id="29t-bA-arN"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.42" id="7Ei-Sb-jhK"/>
@@ -576,17 +592,23 @@
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="0.9" id="8WH-dS-BUU"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
                             <constraint firstItem="EBr-2e-ORF" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.38" id="965-wH-TmJ"/>
+                            <constraint firstItem="fc8-so-AwG" firstAttribute="height" secondItem="Vix-LA-Y4c" secondAttribute="height" multiplier="0.9" id="9NM-t9-J5E"/>
+                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="width" secondItem="aJl-r6-JBT" secondAttribute="width" multiplier="0.9" id="BCn-aX-fc7"/>
                             <constraint firstItem="XV6-dh-1tR" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="BMh-DJ-7b1"/>
+                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="top" secondItem="WYz-bV-YWp" secondAttribute="bottom" constant="6" id="CBv-IP-Hi3"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="top" secondItem="iZ1-Rk-GG3" secondAttribute="bottom" constant="6" id="DHE-c1-FDT"/>
                             <constraint firstItem="XV6-dh-1tR" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="Dpd-Go-ZnN"/>
-                            <constraint firstItem="EBr-2e-ORF" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.5" id="E4z-2c-n1q"/>
+                            <constraint firstItem="EBr-2e-ORF" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.3" id="E4z-2c-n1q"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.26" id="Ggb-pW-7AW"/>
                             <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="H0X-BB-44s"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="JCh-av-1u2"/>
                             <constraint firstItem="EBr-2e-ORF" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="LIg-K4-0ww"/>
                             <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="Lk0-Gi-XA6"/>
+                            <constraint firstItem="WYz-bV-YWp" firstAttribute="width" secondItem="bbE-Tk-Afq" secondAttribute="width" multiplier="0.3" id="MbA-wC-7a0"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.35" id="Odf-f2-WNn"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="width" multiplier="1.7" id="P9Q-j8-J6P"/>
+                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerY" secondItem="Vix-LA-Y4c" secondAttribute="centerY" id="PHZ-OR-Doa"/>
+                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="PiO-fT-rkZ"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" multiplier="0.9" id="QJz-im-5aX"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="R1b-yu-XHS"/>
                             <constraint firstItem="XV6-dh-1tR" firstAttribute="centerY" secondItem="LEY-kG-BRL" secondAttribute="centerY" id="Ugh-6t-PbA"/>
@@ -596,17 +618,22 @@
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="e4G-cg-TDm"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="e4r-9w-YXR"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" multiplier="0.9" id="ege-It-Sjg"/>
-                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="height" secondItem="aJl-r6-JBT" secondAttribute="height" multiplier="0.8" id="fPV-3l-Kum"/>
+                            <constraint firstItem="WYz-bV-YWp" firstAttribute="top" secondItem="aJl-r6-JBT" secondAttribute="bottom" constant="20" id="fBY-9u-IEg"/>
+                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="height" secondItem="aJl-r6-JBT" secondAttribute="height" multiplier="0.9" id="fPV-3l-Kum"/>
                             <constraint firstItem="XV6-dh-1tR" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="itd-Cy-3uN"/>
+                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerX" secondItem="Vix-LA-Y4c" secondAttribute="centerX" id="j6u-uo-4Wg"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="centerX" secondItem="QMr-hQ-NGt" secondAttribute="centerX" id="kMn-5j-c9B"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
+                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="kfK-18-HW2"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="qN0-zW-RQi"/>
-                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="40" id="sUr-l5-ffx"/>
+                            <constraint firstItem="fc8-so-AwG" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="0.9" id="ruE-69-iIn"/>
+                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="20" id="sUr-l5-ffx"/>
                             <constraint firstItem="RKr-I9-Cod" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="tjb-Aa-mRV"/>
                             <constraint firstItem="ARm-mI-mS1" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" multiplier="0.5" id="vJL-eS-9Is"/>
                             <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="wgT-gd-33E"/>
                             <constraint firstItem="RKr-I9-Cod" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="wjy-hF-HeF"/>
-                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="40" id="woH-Ma-7ol"/>
+                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="20" id="woH-Ma-7ol"/>
+                            <constraint firstItem="WYz-bV-YWp" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="yFX-W8-1yb"/>
                             <constraint firstItem="RKr-I9-Cod" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="yyl-dg-mrh"/>
                         </constraints>
                     </view>
@@ -617,6 +644,7 @@
                         <outlet property="movingMinutesLabel" destination="RFd-2O-0qr" id="5DQ-PQ-4M9"/>
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
+                        <outlet property="teamcountTextField" destination="fc8-so-AwG" id="2It-gy-vHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -634,13 +662,19 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
                                 <rect key="frame" x="23.5" y="80.5" width="222" height="61"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
-                                <rect key="frame" x="53.5" y="239.5" width="293" height="36.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
+                                <rect key="frame" x="61" y="239" width="291" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="JZL-sj-7Eq"/>
+                                    <constraint firstAttribute="width" constant="291" id="LG1-Mc-v5Y"/>
+                                </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rounds line frame" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-Bf-esF">
-                                <rect key="frame" x="26.5" y="268" width="35" height="306.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds line frame" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-Bf-esF">
+                                <rect key="frame" x="26" y="275" width="35" height="291"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="GoU-YR-dhr"/>
+                                    <constraint firstAttribute="height" constant="291" id="Lce-s0-Yq3"/>
+                                </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="cy9-VK-BJG">
                                 <rect key="frame" x="61" y="275" width="291" height="291"/>
@@ -654,16 +688,7 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="LiS-ax-J1x">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="347-t1-SyF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                 </subviews>
                                 <constraints>
@@ -688,11 +713,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h99-ko-w7n" firstAttribute="bottom" secondItem="6s2-dh-Y7m" secondAttribute="bottom" constant="55" id="EyG-tp-nYx"/>
+                            <constraint firstItem="1oU-Mo-QnG" firstAttribute="centerX" secondItem="cy9-VK-BJG" secondAttribute="centerX" id="GiJ-P0-piz"/>
                             <constraint firstItem="6s2-dh-Y7m" firstAttribute="centerX" secondItem="m6H-bD-wNG" secondAttribute="centerX" id="PNW-l9-8DA"/>
                             <constraint firstItem="m6H-bD-wNG" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" id="RNU-sT-skU"/>
+                            <constraint firstItem="cy9-VK-BJG" firstAttribute="top" secondItem="1oU-Mo-QnG" secondAttribute="bottom" constant="1" id="X80-mf-y31"/>
                             <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" multiplier="0.65" id="aNv-hh-r5y"/>
                             <constraint firstItem="xFP-8B-6Yp" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" multiplier="0.25" id="eM4-ZU-vxj"/>
+                            <constraint firstItem="ggU-Bf-esF" firstAttribute="centerY" secondItem="cy9-VK-BJG" secondAttribute="centerY" id="kOC-cw-fwt"/>
                             <constraint firstItem="m6H-bD-wNG" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="lN4-tX-REU"/>
+                            <constraint firstItem="ggU-Bf-esF" firstAttribute="leading" secondItem="cy9-VK-BJG" secondAttribute="leading" constant="-35" id="rg4-Tk-C1g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
@@ -765,7 +794,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="Rcz-O1-KSj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
@@ -799,6 +828,7 @@
         <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>
         <image name="timer-time-box" width="221" height="70"/>
+        <image name="waiting 1" width="186.5" height="57"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
