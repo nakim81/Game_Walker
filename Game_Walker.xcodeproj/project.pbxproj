@@ -8,9 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		61570AA228E8F7720060F66C /* RefereeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61570AA128E8F7720060F66C /* RefereeData.swift */; };
+		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
+		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
+		A1EBA6A4296F21DF00228501 /* GameManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */; };
+		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
+		A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */; };
+		A1EBA6A7296F21DF00228501 /* GameManagerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */; };
+		A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */; };
+		A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */; };
+		A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */; };
+		A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69D296F21DF00228501 /* AddStationViewController.swift */; };
+		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
+		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
+		A1EBA6AE296F21DF00228501 /* GameManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A0296F21DF00228501 /* GameManagerViewController.swift */; };
+		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
 		AAF42DF835FA27BAEC58ABD8 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
@@ -59,6 +74,21 @@
 		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		61570AA128E8F7720060F66C /* RefereeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeData.swift; sourceTree = "<group>"; };
+		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
+		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
+		A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
+		A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmViewController.swift; sourceTree = "<group>"; };
+		A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameManagerCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
+		A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
+		A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
+		A1EBA69D296F21DF00228501 /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
+		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
+		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
+		A1EBA6A0296F21DF00228501 /* GameManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerViewController.swift; sourceTree = "<group>"; };
+		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +171,29 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		A1EBA693296F21DF00228501 /* HostViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */,
+				A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */,
+				A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */,
+				A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */,
+				A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */,
+				A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */,
+				A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */,
+				A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */,
+				A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */,
+				A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */,
+				A1EBA69D296F21DF00228501 /* AddStationViewController.swift */,
+				A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */,
+				A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */,
+				A1EBA6A0296F21DF00228501 /* GameManagerViewController.swift */,
+				A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */,
+			);
+			name = HostViewControllers;
+			path = Controllers/HostViewControllers;
+			sourceTree = "<group>";
+		};
 		DA28D783284FF9CE00EA1B94 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +241,7 @@
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
+				A1EBA693296F21DF00228501 /* HostViewControllers */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
 			);
 			name = Controllers;
@@ -314,18 +368,22 @@
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
+				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
+				A1EBA6A7296F21DF00228501 /* GameManagerCollectionViewCell.xib in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				FC1AE25828E976DE00D8C9D9 /* Dosis-Bold.ttf in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
+				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				FC1AE25B28E976DE00D8C9D9 /* Dosis-Light.ttf in Resources */,
 				DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */,
 				FC1AE25A28E976DE00D8C9D9 /* Dosis-SemiBold.ttf in Resources */,
 				FC1AE25728E976DE00D8C9D9 /* Dosis-ExtraBold.ttf in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
+				A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */,
 				FC1AE25928E976DE00D8C9D9 /* Dosis-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,8 +437,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
+				A1EBA6A4296F21DF00228501 /* GameManagerCollectionViewCell.swift in Sources */,
 				61570AA228E8F7720060F66C /* RefereeData.swift in Sources */,
+				A1EBA6AE296F21DF00228501 /* GameManagerViewController.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
@@ -394,6 +455,8 @@
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
+				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
+				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
 				DA96397028A33CDA00853F05 /* Host.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
@@ -404,11 +467,17 @@
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
+				A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */,
+				A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */,
 				DABC1EEB288F3DC400C75DC7 /* Player_Database.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
+				A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */,
+				A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */,
+				A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,
