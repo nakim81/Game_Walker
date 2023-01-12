@@ -275,8 +275,8 @@
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
-				6159251E29694A0600BC6D7F /* RefereeViewControllers */,
-				A1EBA693296F21DF00228501 /* HostViewControllers */,
+				FCC275AF296AE6CB0081BF6E /* RefereeViewControllers */,
+				FC49EE40296AE62900D00D57 /* HostViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
