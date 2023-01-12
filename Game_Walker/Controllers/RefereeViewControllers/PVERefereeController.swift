@@ -25,16 +25,20 @@ class PVERefereeController: UIViewController {
     var timer: Timer?
     var seconds = 3600
     var time = 0
+    var team1 : Team?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
-        H.getHost(RefereeData.gamecode_save)
+        H.getHost(UserData.readReferee("Referee")!.gamecode)
+        //var testingHost = Host(gamecode: UserData.readReferee("Referee")!.gamecode, gameTime: 2000, movingTime: 10, rounds: 10, teams: 10, algorithm: [], duplicated: [], doubled: [], blanked: [], show_scoreboard: false, paused: false, announcements: [])
+        //H.createGame(UserData.readReferee("Referee")!.gamecode, testingHost)
+        //H.getHost(UserData.readReferee("Referee")!.gamecode)
         S.delegate_getStation = self
-        var team1 = Team(gamecode: RefereeData.gamecode_save, name: "Air", players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "")
+        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "")
         var newStation = Station(name: "testing", pvp: true, points: 10, place: "", description: "", teamOrder: [team1])
-        S.addStation(RefereeData.gamecode_save, newStation)
-        S.getStation(RefereeData.gamecode_save, "testing")
+        S.addStation(UserData.readReferee("Referee")!.gamecode, newStation)
+        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         roundLabel.text = "Round 1"
         //scoreButton.setImage(UIImage(named: teamOrder[0].iconName), for: .normal)
         //teamnameLabel.text = teamOrder[0].name
@@ -45,7 +49,7 @@ class PVERefereeController: UIViewController {
         let myColor : UIColor = UIColor(red: 0.16, green: 0.82, blue: 0.44, alpha: 1.00)
         borderView.layer.borderColor = myColor.cgColor
         borderView.layer.borderWidth = 4.0
-        timerLabel.text = ""
+        timerLabel.text = "60:00"
         runTimer()
     }
     
@@ -64,12 +68,14 @@ class PVERefereeController: UIViewController {
     
     func timeString(time:TimeInterval) -> String {
             let minutes = Int(time) / 60 % 60
+            print(minutes)
             let seconds = Int(time) % 60
             return String(format:"%02i : %02i", minutes, seconds)
     }
     
     @IBAction func scoreButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToPVEScore", sender: self)
+        UserData.writeTeam(team1!, "points")
+        performSegue(withIdentifier: "givePoints", sender: self)
     }
     
     @IBAction func ruleButtonPressed(_ sender: UIButton) {
@@ -86,6 +92,8 @@ class PVERefereeController: UIViewController {
         scoreButton.setImage(UIImage(named: "iconBear"), for: .normal)
         teamnameLabel.text = "GameWin"
         teamscoreLabel.text = String(1000)
+        timerLabel.text = "60:00"
+        
     }
 }
 
@@ -99,7 +107,6 @@ extension PVERefereeController: GetStation {
 //MARK: - UIUpdate
 extension PVERefereeController: GetHost {
     func getHost(_ host: Host) {
-        print(host.gameTime)
-        self.seconds = host.gameTime
+        //self.seconds = host.gameTime
     }
 }

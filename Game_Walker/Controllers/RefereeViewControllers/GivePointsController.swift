@@ -9,13 +9,18 @@ import Foundation
 import UIKit
 
 class GivePointsController: UIViewController {
+    @IBOutlet weak var GMStepper: GMStepper!
+    var points: Int?
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    @IBAction func confirmButtonPressed(_ sender: UIButton) {
+        T.givePoints(UserData.readReferee("Referee")!.gamecode, UserData.readTeam("points")!.name, Int(GMStepper.value))
+    }
 }
 
+//MARK: - GMStepper
 @IBDesignable public class GMStepper: UIControl {
 
     /// Current value of the stepper. Defaults to 0.
@@ -76,16 +81,16 @@ class GivePointsController: UIViewController {
     }
 
     /// Text on the left button. Be sure that it fits in the button. Defaults to "−".
-    @objc @IBInspectable public var leftButtonImage: UIImage = UIImage(named: "-") {
+    @objc @IBInspectable public var leftButtonText: String = "−" {
         didSet {
-            leftButton.setImage(UIImage(named: "-"), for: .normal)
+            leftButton.setTitle(leftButtonText, for: .normal)
         }
     }
 
     /// Text on the right button. Be sure that it fits in the button. Defaults to "+".
-    @objc @IBInspectable public var rightButtonText: UIImage = UIImage(named: "+") {
+    @objc @IBInspectable public var rightButtonText: String = "+" {
         didSet {
-            rightButton.setImage(UIImage(named: "+"), for: .normal)
+            rightButton.setTitle(rightButtonText, for: .normal)
         }
     }
 
@@ -363,6 +368,75 @@ class GivePointsController: UIViewController {
 //    }()
 }
 
+// MARK: Pan Gesture
+extension GMStepper {
+    @objc func handlePan(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            leftButton.isEnabled = false
+            rightButton.isEnabled = false
+        case .changed:
+            let translation = gesture.translation(in: label)
+            gesture.setTranslation(CGPoint.zero, in: label)
+
+            let slidingRight = gesture.velocity(in: label).x > 0
+            let slidingLeft = gesture.velocity(in: label).x < 0
+
+            // Move the label with pan
+            if slidingRight {
+                label.center.x = min(labelMaximumCenterX, label.center.x + translation.x)
+            } else if slidingLeft {
+                label.center.x = max(labelMinimumCenterX, label.center.x + translation.x)
+            }
+
+            // When the label hits the edges, increase/decrease value and change button backgrounds
+            if label.center.x == labelMaximumCenterX {
+                // If not hit the right edge before, increase the value and start the timer. If already hit the edge, do nothing. Timer will handle it.
+                if panState != .HitRightEdge {
+                    stepperState = .ShouldIncrease
+                    panState = .HitRightEdge
+                }
+                
+                animateLimitHitIfNeeded()
+            } else if label.center.x == labelMinimumCenterX {
+                if panState != .HitLeftEdge {
+                    stepperState = .ShouldDecrease
+                    panState = .HitLeftEdge
+                }
+
+                animateLimitHitIfNeeded()
+            } else {
+                panState = .Stable
+                stepperState = .Stable
+                resetTimer()
+
+                self.rightButton.backgroundColor = self.buttonsBackgroundColor
+                self.leftButton.backgroundColor = self.buttonsBackgroundColor
+            }
+        case .ended, .cancelled, .failed:
+            reset()
+        default:
+            break
+        }
+    }
+
+    @objc func reset() {
+        panState = .Stable
+        stepperState = .Stable
+        resetTimer()
+
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
+        label.isUserInteractionEnabled = true
+
+        UIView.animate(withDuration: self.labelSlideDuration, animations: {
+            self.label.center = self.labelOriginalCenter
+            self.rightButton.backgroundColor = self.buttonsBackgroundColor
+            self.leftButton.backgroundColor = self.buttonsBackgroundColor
+        })
+    }
+}
+
 // MARK: Button Events
 extension GMStepper {
     @objc func leftButtonTouchDown(button: UIButton) {
@@ -394,6 +468,44 @@ extension GMStepper {
 
     @objc func buttonTouchUp(button: UIButton) {
         reset()
+    }
+}
+
+// MARK: Animations
+extension GMStepper {
+
+    func animateSlideLeft() {
+        UIView.animate(withDuration: labelSlideDuration) {
+            self.label.center.x -= self.labelSlideLength
+        }
+    }
+
+    func animateSlideRight() {
+        UIView.animate(withDuration: labelSlideDuration) {
+            self.label.center.x += self.labelSlideLength
+        }
+    }
+
+    func animateToOriginalPosition() {
+        if self.label.center != self.labelOriginalCenter {
+            UIView.animate(withDuration: labelSlideDuration) {
+                self.label.center = self.labelOriginalCenter
+            }
+        }
+    }
+
+    func animateLimitHitIfNeeded() {
+        if value == minimumValue {
+            animateLimitHitForButton(button: leftButton)
+        } else if value == maximumValue {
+            animateLimitHitForButton(button: rightButton)
+        }
+    }
+
+    func animateLimitHitForButton(button: UIButton){
+        UIView.animate(withDuration: limitHitAnimationDuration) {
+            button.backgroundColor = self.limitHitAnimationColor
+        }
     }
 }
 
