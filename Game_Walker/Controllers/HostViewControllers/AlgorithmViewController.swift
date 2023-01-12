@@ -9,7 +9,6 @@ import UIKit
 
 class AlgorithmViewController: BaseViewController {
     
-
     var stationList: [Station] = []
 //    var teamList: [Team] = []
     var host: Host!
@@ -28,6 +27,7 @@ class AlgorithmViewController: BaseViewController {
         
         S.delegate_stationList = self
         S.getStationList(UserData.readGamecode("gamecodestring")!)
+
 //        T.delegate_teamList = self
 //        T.getTeamList(curr_gamecode)
         H.delegate_getHost = self

@@ -30,7 +30,7 @@ class PVERefereeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
-        H.getHost(UserData.readReferee("Referee")!.gamecode)
+        H.getHost(UserData.readGamecode("gamecode")!)
         //var testingHost = Host(gamecode: UserData.readReferee("Referee")!.gamecode, gameTime: 2000, movingTime: 10, rounds: 10, teams: 10, algorithm: [], duplicated: [], doubled: [], blanked: [], show_scoreboard: false, paused: false, announcements: [])
         //H.createGame(UserData.readReferee("Referee")!.gamecode, testingHost)
         //H.getHost(UserData.readReferee("Referee")!.gamecode)
@@ -107,6 +107,7 @@ extension PVERefereeController: GetStation {
 //MARK: - UIUpdate
 extension PVERefereeController: GetHost {
     func getHost(_ host: Host) {
-        //self.seconds = host.gameTime
+        print(host.gameTime)
+        self.seconds = host.gameTime
     }
 }
