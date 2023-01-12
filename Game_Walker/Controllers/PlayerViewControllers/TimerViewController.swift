@@ -26,7 +26,6 @@ class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
-        //H.getHost(RefereeData.gamecode_save)
         runTimer()
     }
     
