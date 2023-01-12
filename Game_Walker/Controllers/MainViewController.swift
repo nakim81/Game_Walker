@@ -21,6 +21,14 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func TestPressed(_ sender: UIButton) {
         let newPlayerA = Player(gamecode: "371764", name: "A")
         let newPlayerB = Player(gamecode: "371764", name: "B")

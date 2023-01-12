@@ -16,10 +16,8 @@ class JoinTeamViewController: BaseViewController {
     
     private var selectedIndex: Int?
     private var teamList: [Team] = []
-    private var currentPlayer: Player = UserData.readPlayer("player")!
-    //private lazy var gamecode = userData.string(forKey: "gamecode")
-
-    
+    private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +27,7 @@ class JoinTeamViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
-        T.getTeamList(currentPlayer.gamecode)
+        T.getTeamList(gameCode)
     }
 
 
@@ -37,8 +35,11 @@ class JoinTeamViewController: BaseViewController {
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
             UserData.writeTeam(teamList[selectedIndex], "team")
- //           T.joinTeam(UserData.gamecode, teamList[selectedIndex].name, currentPlayer)
-            performSegue(withIdentifier: "goToPF44", sender: self)
+            T.joinTeam(gameCode, teamList[selectedIndex].name, currentPlayer)
+            Task {
+                try await Task.sleep(nanoseconds: 250_000_000)
+                performSegue(withIdentifier: "goToPF44", sender: self)
+            }
         } else {
             alert(title: "No Team Selected", message: "Please select your team")
             return

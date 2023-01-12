@@ -8,36 +8,53 @@
 import Foundation
 import UIKit
 
-class TimerViewController: BaseViewController {
+class TimerViewController: UIViewController {
+    
+    @IBOutlet weak var gameInfoButton: UIButton!
+    @IBOutlet weak var nextGameButton: UIButton!
+    private var timer: Timer?
+    private var seconds = 3600
+    private var time = 0
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.font = UIFont(name: "Dosis-Regular", size: 55)
         label.numberOfLines = 0
+        label.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        label.layer.borderWidth = 4
+        label.layer.cornerRadius = 130
         return label
     }()
-    var timer: Timer?
-    var seconds = 3600
-    var time = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         H.delegate_getHost = self
+        H.getHost(gameCode)
+        configureTimerLabel()
         runTimer()
+    }
+    
+    @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func nextGameButtonPressed(_ sender: UIButton) {
+        
     }
     
     func configureTimerLabel(){
         self.view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 160),
+            timerLabel.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 200),
             timerLabel.widthAnchor.constraint(equalToConstant: 260),
             timerLabel.heightAnchor.constraint(equalToConstant: 260)
         ])
-        timerLabel.text = ""
+        timerLabel.text = "00 : 00"
     }
     
     func runTimer() {
@@ -45,13 +62,13 @@ class TimerViewController: BaseViewController {
     }
        
     @objc func updateTimer() {
-           if seconds < 1 {
-               self.timer?.invalidate()
-           } else {
-               seconds -= 1
-               timerLabel.text = timeString(time: TimeInterval(seconds))
-           }
-   }
+        if seconds < 1 {
+           self.timer?.invalidate()
+        } else {
+           seconds -= 1
+           timerLabel.text = timeString(time: TimeInterval(seconds))
+        }
+    }
    
    func timeString(time:TimeInterval) -> String {
            let minutes = Int(time) / 60 % 60

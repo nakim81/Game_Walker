@@ -16,10 +16,6 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "IconCollectionViewCell"
     
-    enum CellType {
-        case createTeam, joinTeam
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -51,8 +47,9 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1).isActive = true
         imageView.image = UIImage(named: imageName)
         teamNameLabel.clipsToBounds = true
         teamNameLabel.textAlignment = .center
@@ -61,13 +58,9 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         teamNameLabel.font = UIFont(name: "Dosis-Regular", size: 15)
         teamNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         teamNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
-        teamNameLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        teamNameLabel.heightAnchor.constraint(equalToConstant: 13).isActive = true
-    }
-    
-    func setImage(with name: String) {
-        imageView.image = UIImage(named: name)
-        imageName = name
+        teamNameLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 2).isActive = true
+        teamNameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: -2).isActive = true
+        teamNameLabel.heightAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
     }
     
     func showBorder() {
@@ -79,9 +72,4 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     func hideBorder() {
         borderView.layer.borderWidth = 0
     }
-    
-    func getImageName() -> String {
-        return imageName ?? ""
-    }
-
 }

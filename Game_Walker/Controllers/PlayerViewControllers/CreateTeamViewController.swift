@@ -13,17 +13,14 @@ class CreateTeamViewController: BaseViewController {
     @IBOutlet weak var teamNameTextField: UITextField!
     @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    private var currentPlayer = UserData.readPlayer("player")
-    private var gameCode = UserDefaults.standard.string(forKey: "gamecode")!
+    private var currentPlayer = UserData.readPlayer("player") ?? Player()
+    private var gameCode = UserData.readGamecode("gamecode") ?? ""
     
     private let iconImageNames : [String] = [
-         "iconBoy", "iconBear", "iconGirl", "iconBunny", "iconCherry", "iconDaisy", "iconpeas", "iconPlant", "iconAir",
+         "iconBoy", "iconBear", "iconJam-min", "iconGeum-jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
          "iconDust", "iconFire", "iconWater", "iconRed", "iconOrance", "iconYellow", "iconGreen", "iconBlue",
          "iconNavyblue", "iconPurple", "iconPink",
     ]
-    
-    //private lazy var player = userData.object(forKey: "player") as? Player
-    //private lazy var gamecode = userData.string(forKey: "gamecode")
     
     private var selectedIconName : String? {
         get {
@@ -63,10 +60,14 @@ class CreateTeamViewController: BaseViewController {
             return
         }
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
-            let newTeam = Team(name: teamName, players: [currentPlayer!], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
+            let newTeam = Team(name: teamName, players: [currentPlayer], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.writeTeam(newTeam, "team")
             T.addTeam(gameCode, newTeam)
-            performSegue(withIdentifier: "goToTPF4", sender: self)
+            T.joinTeam(gameCode, newTeam.name, currentPlayer)
+            Task {
+                try await Task.sleep(nanoseconds: 500_000_000)
+                performSegue(withIdentifier: "goToTPF4", sender: self)
+            }
         } else {
             alert(title: "Woops", message: "Please enter team name to create your team")
         }
