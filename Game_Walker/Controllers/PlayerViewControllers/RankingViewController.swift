@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-class RankingViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var leaderBoard: UITableView!
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
-    private var currentPlayer: Player = UserData.readPlayer("player")!
+    private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         T.delegate_teamList = self
         configureTableView()
-        T.getTeamList(currentPlayer.gamecode)
+        T.getTeamList(gameCode)
     }
     
     private func configureTableView() {
@@ -30,9 +30,7 @@ class RankingViewController: BaseViewController, UITableViewDelegate, UITableVie
         leaderBoard.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
-        DispatchQueue.main.async{
-            self.leaderBoard.reloadData()
-        }
+        leaderBoard.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

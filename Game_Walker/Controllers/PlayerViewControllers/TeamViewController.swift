@@ -8,31 +8,48 @@
 import Foundation
 import UIKit
 
-class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var leaveButton: UIButton!
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
-    private var gameCode = UserData.readPlayer("player")?.gamecode
-    private var teamName = UserData.readTeam("team")?.name
-    
-    
+    private var currentPlayer = UserData.readPlayer("player") ?? Player()
+    private var gameCode = UserData.readGamecode("gamecode") ?? ""
+    private var teamName = UserData.readTeam("team")?.name ?? ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
         configureTableView()
-        T.getTeam(gameCode!, teamName!)
+        T.getTeam(gameCode, teamName)
     }
     
     private func configureTableView() {
         table.delegate = self
         table.dataSource = self
         table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
-        table.backgroundColor = .white
+        table.backgroundColor = .clear
         table.allowsSelection = false
-        DispatchQueue.main.async{
-            self.table.reloadData()
-        }
+        table.separatorStyle = .none
+    }
+    @IBAction func leaveButtonPressed(_ sender: UIButton) {
+        alert(title: "니 팀 버려?", message: "Do you really want to leave your team?", sender: sender)
+    }
+    
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func alert(title: String, message: String, sender: UIButton) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
+        let action = UIAlertAction(title: "Leave", style: .default, handler: {action in
+            T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
+            self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
+        })
+        alert.addAction(action)
+        present(alert, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,13 +79,13 @@ class TeamViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             headerView.backgroundColor = UIColor.clear
             return headerView
         }
-    
 }
 
 // MARK: - TeamProtocol
 extension TeamViewController: GetTeam {
     func getTeam(_ team: Team) {
         self.team = team
+        table.reloadData()
     }
 }
 
