@@ -396,19 +396,32 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="BDC-4Y-7gV">
                                 <rect key="frame" x="30" y="80" width="192.66666666666666" height="61.333333333333343"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
+                                <rect key="frame" x="36.666666666666657" y="185.66666666666663" width="355" height="490"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="355" id="PMy-Cf-e0z"/>
+                                    <constraint firstAttribute="height" constant="490" id="SIX-wA-8Sy"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qT9-g7-uz0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" id="8k9-Ut-RfQ"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.27" id="8x6-Hb-s0V"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0745721" id="B9d-c9-cuK"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="0.59" id="Zf9-wO-SWd"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.45" id="hiH-ka-e9w"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="1.05" id="jM2-Ba-iXf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
                     <navigationItem key="navigationItem" id="aTS-cS-zr8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="leaderBoard" destination="QR7-Tt-ih6" id="9Kv-UU-h0e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81p-5w-qGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
