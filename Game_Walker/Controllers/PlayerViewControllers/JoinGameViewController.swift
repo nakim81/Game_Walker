@@ -13,10 +13,8 @@ class JoinGameViewController: BaseViewController {
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    private var teamList: [Team] = []
     
     override func viewDidLoad() {
-        T.delegate_teamList = self
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         gamecodeTextField.delegate = self
@@ -31,8 +29,6 @@ class JoinGameViewController: BaseViewController {
             UserData.writePlayer(newPlayer, "player")
             UserData.writeGamecode(gamecode, "gamecode")
             P.addPlayer(gamecode, newPlayer)
-            
-
             performSegue(withIdentifier: "goToPF2VC", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter all information to log in")
@@ -52,10 +48,3 @@ extension JoinGameViewController: UITextFieldDelegate {
         return true
     }
 }
-//MARK: - TeamProtocols
-extension JoinGameViewController: TeamList {
-    func listOfTeams(_ teams: [Team]) {
-        self.teamList = teams
-    }
-}
-

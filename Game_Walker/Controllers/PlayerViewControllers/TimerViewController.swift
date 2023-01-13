@@ -15,7 +15,15 @@ class TimerViewController: UIViewController {
     private var timer: Timer?
     private var seconds = 3600
     private var time = 0
+    
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private var stationName: String = UserData.readTeam("team")?.currentStation ?? ""
+    
+    private var gameName: String?
+    private var gameLocation: String?
+    private var gamePoints: String?
+    private var refereeName: String?
+    private var gameRule: String?
     
     private let timerLabel: UILabel = {
         let label = UILabel()
@@ -32,6 +40,8 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        S.delegate_getStation = self
+        S.getStation(gameCode, stationName)
         H.delegate_getHost = self
         H.getHost(gameCode)
         configureTimerLabel()
@@ -39,7 +49,7 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        
+        showPopUp("Tetris", "Noah's Macbook Air", "100", "Tetris GOAT Noah", "Try your best to beat Tetris GOAT Noah")
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
@@ -78,9 +88,31 @@ class TimerViewController: UIViewController {
     
 }
 //MARK: - UIUpdate
-extension TimerViewController: GetHost {
+extension TimerViewController: GetHost, GetStation {
     func getHost(_ host: Host) {
         print(host.gameTime)
         self.seconds = host.gameTime
+    }
+    
+    func getStation(_ station: Station) {
+        self.gameName = station.name
+        self.gameLocation = station.place
+        self.gamePoints = String(station.points)
+        self.refereeName = ""
+        self.gameRule = station.description
+    }
+}
+// MARK: - PopUpScreen
+extension UIViewController {
+    func showPopUp(_ gameName: String? = nil, _ gameLocation: String? = nil, _ gamePoitns: String? = nil, _ refereeName: String? = nil, _ gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = GameInfoViewController(gameName: gameName ?? "", gameLocation: gameLocation ?? "", gamePoints: gamePoitns ?? "", refereeName: refereeName ?? "", gameRule: gameRule ?? "")
+        showPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+    }
+    
+    private func showPopUp(popUpViewController: GameInfoViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewController.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewController.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewController, animated: false, completion: nil)
     }
 }
