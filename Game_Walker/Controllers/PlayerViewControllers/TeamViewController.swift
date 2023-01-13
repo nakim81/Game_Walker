@@ -44,7 +44,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     func alert(title: String, message: String, sender: UIButton) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
-        let action = UIAlertAction(title: "Leave", style: .default, handler: {action in
+        let action = UIAlertAction(title: "Leave", style: .default, handler: { [self]action in
             T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
             self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
         })

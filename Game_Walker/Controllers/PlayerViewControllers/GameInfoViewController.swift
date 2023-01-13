@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+class GameInfoViewController: BaseViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
