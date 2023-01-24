@@ -57,7 +57,7 @@
 		DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E84288BA9CB00C75DC7 /* Main.storyboard */; };
 		DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */; };
 		DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */; };
-		DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */; };
+		DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */; };
 		DABC1EEB288F3DC400C75DC7 /* Player_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */; };
 		DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */; };
 		DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1EEE28911F8100C75DC7 /* Team_Database.swift */; };
@@ -128,7 +128,7 @@
 		DABC1E84288BA9CB00C75DC7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = View/Main.storyboard; sourceTree = "<group>"; };
 		DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/BaseViewController.swift; sourceTree = "<group>"; };
 		DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
-		DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Keyboard.swift"; path = "Controllers/UIViewController+Keyboard.swift"; sourceTree = "<group>"; };
+		DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Extensions.swift"; path = "Controllers/UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_Database.swift; sourceTree = "<group>"; };
 		DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee_Database.swift; sourceTree = "<group>"; };
 		DABC1EEE28911F8100C75DC7 /* Team_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_Database.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 			children = (
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
-				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Keyboard.swift */,
+				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
 				6159251E29694A0600BC6D7F /* RefereeViewControllers */,
 				A1EBA693296F21DF00228501 /* HostViewControllers */,
@@ -498,9 +498,9 @@
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,
-				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
+				DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
-				DABC1E90288BAA8B00C75DC7 /* UIViewController+Keyboard.swift in Sources */,
+				DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */,

@@ -16,6 +16,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private let refreshController: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,20 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
+        leaderBoard.refreshControl = refreshController
+        settingRefreshControl()
+    }
+    
+    private func settingRefreshControl() {
+        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
+        refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+    }
+    
+    @objc func refreshFunction() {
+        T.getTeamList(gameCode)
+        refreshController.endRefreshing()
+        leaderBoard.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,6 +77,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 extension RankingViewController: TeamList {
     func listOfTeams(_ teams: [Team]) {
         self.teamList = teams
-        self.leaderBoard?.reloadData()
+        leaderBoard.reloadData()
     }
 }

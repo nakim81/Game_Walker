@@ -17,6 +17,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var teamName = UserData.readTeam("team")?.name ?? ""
+    private let refreshController : UIRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         table.backgroundColor = .clear
         table.allowsSelection = false
         table.separatorStyle = .none
+        table.refreshControl = refreshController
+        settingRefreshControl()
+        
     }
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
         alert(title: "니 팀 버려?", message: "Do you really want to leave your team?", sender: sender)
@@ -50,6 +54,18 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
         alert.addAction(action)
         present(alert, animated: true)
+    }
+    
+    private func settingRefreshControl() {
+        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
+        refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+    }
+    
+    @objc func refreshFunction() {
+        T.getTeam(gameCode, teamName)
+        refreshController.endRefreshing()
+        table.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
