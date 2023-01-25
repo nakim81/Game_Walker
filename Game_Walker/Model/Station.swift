@@ -12,6 +12,7 @@ struct Station: Codable, Equatable {
     var pvp: Bool = true
     var points: Int = 0
     var place: String = ""
+    var referee: Referee?
     var description: String = ""
     var teamOrder: [Team] = []
     
@@ -20,6 +21,7 @@ struct Station: Codable, Equatable {
         case pvp
         case points
         case place
+        case referee
         case description
         case teamOrder
     }
