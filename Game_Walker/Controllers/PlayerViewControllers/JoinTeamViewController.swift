@@ -18,19 +18,36 @@ class JoinTeamViewController: BaseViewController {
     private var teamList: [Team] = []
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private let refreshController: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_teamList = self
+        configureCollectionView()
+        T.getTeamList(gameCode)
+    }
+    
+    private func configureCollectionView() {
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
-        T.getTeamList(gameCode)
+        collectionView.refreshControl = refreshController
+        settingRefreshControl()
     }
 
-
+    private func settingRefreshControl() {
+        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
+        refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+    }
+    
+    @objc func refreshFunction() {
+        T.getTeamList(gameCode)
+        refreshController.endRefreshing()
+        collectionView.reloadData()
+    }
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
