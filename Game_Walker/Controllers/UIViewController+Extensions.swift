@@ -19,15 +19,28 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    func showPopUp(_ gameName: String? = nil, _ gameLocation: String? = nil, _ gamePoitns: String? = nil, _ refereeName: String? = nil, _ gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, refereeName: String? = nil, gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = GameInfoViewController(gameName: gameName ?? "", gameLocation: gameLocation ?? "", gamePoints: gamePoitns ?? "", refereeName: refereeName ?? "", gameRule: gameRule ?? "")
-        showPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+        showGameInfoPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
-    private func showPopUp(popUpViewController: GameInfoViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+    private func showGameInfoPopUp(popUpViewController: GameInfoViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
         popUpViewController.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
             popUpViewController.dismiss(animated: false, completion: actionCompletion)
         }
         present(popUpViewController, animated: false, completion: nil)
+    }
+    
+    func showMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = MessageViewController()
+        showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+        
+    }
+    
+    private func showMessagePopUp(popUpViewcontroller: MessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewcontroller, animated: false, completion: nil)
     }
 }

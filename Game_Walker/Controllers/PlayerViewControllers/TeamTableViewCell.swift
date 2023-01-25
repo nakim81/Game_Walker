@@ -33,13 +33,13 @@ class TeamTableViewCell: UITableViewCell {
     }()
     
     private lazy var containerView: UIView = {
-            let view = UIView()
-            view.backgroundColor = .clear
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.clipsToBounds = true
-            view.contentMode = .scaleAspectFill
-            return view
-        }()
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
     
     private var teamIconImage: UIImageView = {
         let view = UIImageView()
@@ -82,7 +82,6 @@ class TeamTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
 
     func configureTeamTableViewCell(name: String) {

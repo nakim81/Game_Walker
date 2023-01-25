@@ -31,42 +31,36 @@ class GameInfoViewController: UIViewController {
     private lazy var  gameInfoLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "game info_white 2")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
     private lazy var gameNameLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "game name 2")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
     private lazy var gameLocationLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "game location 2")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
     private lazy var gamePointsLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "game points 2")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
     private lazy var refereeNameLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Referee 1")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
     private lazy var gameRuleLabel: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "rules 2")
-        //imageView.frame = CGRect(x: 0, y: 0, width: 191, height: 53)
         return imageView
     }()
     
@@ -167,7 +161,6 @@ class GameInfoViewController: UIViewController {
         // layer
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-        //button.frame = CGRect(x: 0, y: 0, width: 170, height: 50)
 
         button.addAction(for: .touchUpInside) { _ in
             completion?()
@@ -217,7 +210,6 @@ class GameInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        //addSubviews()
         makeConstraints()
     }
 
@@ -237,21 +229,6 @@ class GameInfoViewController: UIViewController {
         containerView.addSubview(buttonView)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
-
-//    private func addSubviews() {
-//        self.view.addSubview(gameInfoLabel)
-//        self.view.addSubview(gameNameLabel)
-//        self.view.addSubview(gameNameLabel1)
-//        self.view.addSubview(gameLocationLabel)
-//        self.view.addSubview(gameLocationLabel1)
-//        self.view.addSubview(gamePointsLabel)
-//        self.view.addSubview(gamePointsLabel1)
-//        self.view.addSubview(refereeNameLabel)
-//        self.view.addSubview(refereeNameLabel1)
-//        self.view.addSubview(gameRuleLabel)
-//        self.view.addSubview(gameRuleLabel1)
-//        self.view.addSubview(buttonView)
-//    }
 
     private func makeConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -338,13 +315,13 @@ class GameInfoViewController: UIViewController {
             gameRuleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             gameRuleLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gameRuleLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22.0),
+            gameRuleLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -22.0),
             gameRuleLabel1.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor, constant: 5.0),
             gameRuleLabel1.heightAnchor.constraint(equalTo: gameRuleLabel1.widthAnchor, multiplier: 0.25),
             gameRuleLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1.0),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 1.0),
+            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1.0),
             buttonView.topAnchor.constraint(equalTo: gameRuleLabel1.bottomAnchor, constant: 10.0),
             buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5.0),
             buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.27),

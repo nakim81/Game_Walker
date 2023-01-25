@@ -12,6 +12,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var announcementButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
+    private var messages: [String]?
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
@@ -22,8 +25,10 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
+        H.delegate_getHost = self
         configureTableView()
         T.getTeam(gameCode, teamName)
+        H.getHost(gameCode)
     }
     
     private func configureTableView() {
@@ -35,10 +40,16 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         table.separatorStyle = .none
         table.refreshControl = refreshController
         settingRefreshControl()
-        
     }
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
         alert(title: "니 팀 버려?", message: "Do you really want to leave your team?", sender: sender)
+    }
+    
+    @IBAction func announcementButtonPressed(_ sender: UIButton) {
+        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+    }
+    
+    @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
     @objc func onBackPressed() {
@@ -72,7 +83,6 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         cell.configureTeamTableViewCell(name: team!.players[indexPath.section].name)
         return cell
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,7 +90,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 0
         }
         return team.players.count
-        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return 1
@@ -98,10 +108,14 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 // MARK: - TeamProtocol
-extension TeamViewController: GetTeam {
+extension TeamViewController: GetTeam, GetHost {
     func getTeam(_ team: Team) {
         self.team = team
         table.reloadData()
+    }
+    
+    func getHost(_ host: Host) {
+        self.messages = host.announcements
     }
 }
 

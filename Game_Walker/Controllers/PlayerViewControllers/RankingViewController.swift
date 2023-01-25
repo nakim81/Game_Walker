@@ -11,6 +11,9 @@ import UIKit
 class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var leaderBoard: UITableView!
+    @IBOutlet weak var announcementButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
+    private var messages: [String]?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
@@ -21,8 +24,17 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_teamList = self
+        H.delegate_getHost = self
         configureTableView()
         T.getTeamList(gameCode)
+        H.getHost(gameCode)
+    }
+    
+    @IBAction func announcementButtonPressed(_ sender: UIButton) {
+        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+    }
+    
+    @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
     private func configureTableView() {
@@ -74,9 +86,13 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 }
 // MARK: - TeamProtocol
-extension RankingViewController: TeamList {
+extension RankingViewController: TeamList, GetHost {
     func listOfTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
+    }
+    
+    func getHost(_ host: Host) {
+        self.messages = host.announcements
     }
 }
