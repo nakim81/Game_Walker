@@ -76,6 +76,7 @@
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
+		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,7 @@
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 				6159252529694A0600BC6D7F /* GivePointsController.swift */,
 				6159252229694A0600BC6D7F /* RulesViewController.swift */,
 				6159251F29694A0600BC6D7F /* MessageController.swift */,
+				FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */,
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
@@ -478,6 +481,7 @@
 				6159252629694A0600BC6D7F /* MessageController.swift in Sources */,
 				A1EBA6A4296F21DF00228501 /* GameManagerCollectionViewCell.swift in Sources */,
 				A1EBA6AE296F21DF00228501 /* GameManagerViewController.swift in Sources */,
+				FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,

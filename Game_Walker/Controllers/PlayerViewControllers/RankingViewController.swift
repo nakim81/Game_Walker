@@ -75,15 +75,14 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
      }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return cellSpacingHeight
-        }
+        return cellSpacingHeight
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.clear
-            return headerView
-        }
-    
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
 }
 // MARK: - TeamProtocol
 extension RankingViewController: TeamList, GetHost {
