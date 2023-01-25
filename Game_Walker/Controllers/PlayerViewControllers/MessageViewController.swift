@@ -13,92 +13,6 @@ class MessageViewController: UIViewController {
     private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
     private var messages: [String]?
     private let cellSpacingHeight: CGFloat = 3
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureTableView()
-        setUpViews()
-        makeConstraints()
-    }
-    
-    convenience init(messages: [String]) {
-        self.init()
-        /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
-        self.messages = messages
-        self.modalPresentationStyle = .overFullScreen
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
-            self?.containerView.transform = .identity
-            self?.containerView.isHidden = false
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        // curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
-            self?.containerView.transform = .identity
-            self?.containerView.isHidden = true
-        }
-    }
-    
-    private func configureTableView() {
-        messageTableView.delegate = self
-        messageTableView.dataSource = self
-        messageTableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.identifier)
-        messageTableView.backgroundColor = .clear
-        messageTableView.allowsSelection = false
-        messageTableView.separatorStyle = .none
-    }
-    
-    private func setUpViews() {
-        self.view.addSubview(containerView)
-        containerView.addSubview(messageLabel)
-        containerView.addSubview(messageTableView)
-        containerView.addSubview(buttonView)
-    }
-    
-    private func makeConstraints() {
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageTableView.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 210),
-            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -210),
-            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 60),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -60),
-            messageLabel.bottomAnchor.constraint(equalTo: messageTableView.topAnchor, constant: 8),
-            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.23),
-            messageLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            
-            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10),
-            messageTableView.bottomAnchor.constraint(equalTo: buttonView.topAnchor, constant: 8),
-            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
-            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.536),
-            messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            
-            buttonView.topAnchor.constraint(equalTo: messageTableView.bottomAnchor, constant: 8),
-            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1),
-            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -1),
-            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.27),
-            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
-        ])
-    }
     
     private let messageTableView: UITableView = {
         let tableview = UITableView()
@@ -151,11 +65,97 @@ class MessageViewController: UIViewController {
         }
         buttonView.addSubview(button)
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 80),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -80),
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.3),
+            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 90),
+            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -90),
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.4),
             button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
+        ])
+    }
+    
+    convenience init(messages: [String]) {
+        self.init()
+        /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
+        self.messages = messages
+        self.modalPresentationStyle = .overFullScreen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+            self?.containerView.transform = .identity
+            self?.containerView.isHidden = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
+            self?.containerView.transform = .identity
+            self?.containerView.isHidden = true
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTableView()
+        setUpViews()
+        makeConstraints()
+    }    
+    
+    private func configureTableView() {
+        messageTableView.delegate = self
+        messageTableView.dataSource = self
+        messageTableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.identifier)
+        messageTableView.backgroundColor = .clear
+        messageTableView.allowsSelection = false
+        messageTableView.separatorStyle = .none
+    }
+    
+    private func setUpViews() {
+        self.view.addSubview(containerView)
+        containerView.addSubview(messageLabel)
+        containerView.addSubview(messageTableView)
+        containerView.addSubview(buttonView)
+        self.view.backgroundColor = .black.withAlphaComponent(0.2)
+    }
+    
+    private func makeConstraints() {
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageTableView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 210),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -210),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 80),
+            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -80),
+            messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.23),
+            messageLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
+            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
+            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 5),
+            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.55),
+            messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            buttonView.topAnchor.constraint(equalTo: messageTableView.bottomAnchor, constant: 15),
+            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1),
+            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1),
+            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5),
+            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.27),
+            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
 }
@@ -164,7 +164,7 @@ class MessageViewController: UIViewController {
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
-        cell.configureTableViewCell(name: "Announcement\(indexPath)")
+        cell.configureTableViewCell(name: "Announcement\(messages![indexPath.section])")
         return cell
     }
 
@@ -180,7 +180,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
      }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

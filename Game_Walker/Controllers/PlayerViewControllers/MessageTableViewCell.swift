@@ -28,9 +28,10 @@ class MessageTableViewCell: UITableViewCell {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
+        label.clipsToBounds = true
         return label
     }()
     
@@ -42,14 +43,18 @@ class MessageTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 285),
-            containerView.heightAnchor.constraint(equalToConstant: 45),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.143),
             
-            messageNameLabel.widthAnchor.constraint(equalToConstant: 280),
-            messageNameLabel.heightAnchor.constraint(equalToConstant: 40),
+            messageNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            messageNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            messageNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            messageNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             messageNameLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             messageNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
+        messageNameLabel.text = name
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
