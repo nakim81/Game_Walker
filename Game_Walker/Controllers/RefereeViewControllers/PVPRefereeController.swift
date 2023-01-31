@@ -68,7 +68,7 @@ class PVPRefereeController: UIViewController {
     }
     
     func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(PVERefereeController.updateTimer)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(RefereePVPController.updateTimer)), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
