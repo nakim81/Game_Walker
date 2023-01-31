@@ -13,10 +13,15 @@ class GivePointsController: UIViewController {
     var points: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        GMStepper.frame = CGRect(x: 0, y: 0, width: 265, height: 134)
+        GMStepper.buttonsBackgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
+        GMStepper.buttonsFont = UIFont(name: "Dosis-Regular", size: 100) ?? UIFont(name: "AvenirNext-Bold", size: 20.0)!
+        GMStepper.labelBackgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
+        GMStepper.labelFont = UIFont(name: "Dosis-Bold", size: 100) ?? UIFont(name: "AvenirNext-Bold", size: 25.0)!
     }
     @IBAction func confirmButtonPressed(_ sender: UIButton) {
         T.givePoints(UserData.readReferee("Referee")!.gamecode, UserData.readTeam("points")!.name, Int(GMStepper.value))
+        
     }
 }
 

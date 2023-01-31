@@ -12,40 +12,36 @@ class WaitingController: BaseViewController {
 
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
-    var assigned : Bool = false
-    var pvp_check : Bool = false
-    var station_name = ""
+    var pvp : Bool = false
     var timer: Timer?
     var currentIndex: Int = 0
-    var RegisterController: RegisterController?
     let waitingImagesArray = ["waiting 2.png", "waiting 1.png", "waiting. 1.png"]
 
     func startTimer() {
         if let timer = timer {
             self.timer = timer
-
         } else {
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] timer in
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] timer in
                 R.getReferee(UserData.readGamecode("gamecode")!, UserData.readReferee("Referee")!.name)
-                //S.getStation(UserData.readReferee("Referee")!.gamecode, UserData.readReferee("Referee")!.stationName)
                 if self.currentIndex == 2 {
                     self.currentIndex = 0
+                    R.assignStation(UserData.readGamecode("gamecode")!, UserData.readReferee("Referee")!, "testing")
+                    S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
                 }
                 else {
                     self.currentIndex = self.currentIndex + 1
                 }
                 self.WaitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-                if self.assigned {
-                    //if (UserData.readReferee("Referee")!.stationName != "") {
-                        stopTimer()
-                    if self.pvp_check {
+                R.getReferee(UserData.readGamecode("gamecode")!, UserData.readReferee("Referee")!.name)
+                if UserData.readReferee("Referee")!.assigned {
+                    stopTimer()
+                    if self.pvp {
                             performSegue(withIdentifier: "goToPVP", sender: self)
                         }
                         else {
                             
                             performSegue(withIdentifier: "goToPVE", sender: self)
                         }
-                    //}
                 }
             }
         }
@@ -60,21 +56,26 @@ class WaitingController: BaseViewController {
         super.viewDidLoad()
         R.delegate_getReferee = self
         S.delegate_getStation = self
+        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 1, players: [], points: 10, currentStation: "testing", nextStation: "", iconName: "iconAir")
+        var team2 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Bear", number: 2, players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "iconBear")
+        var team3 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 3, players: [], points: 30, currentStation: "testing", nextStation: "", iconName: "iconBlue")
+        var team4 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 4, players: [], points: 40, currentStation: "testing", nextStation: "", iconName: "iconBoy")
+        var newStation1 = Station(name: "testing", pvp: false, points: 10, place: "", description: "", teamOrder: [team1, team2, team3, team4])
+        S.addStation(UserData.readReferee("Referee")!.gamecode, newStation1)
         startTimer()
     }
 }
 //MARK: - UIUpdate
 extension WaitingController: GetReferee {
     func getReferee(_ referee: Referee) {
-        self.assigned = referee.assigned
-        self.station_name = referee.stationName
+        let newReferee = Referee(gamecode: UserData.readReferee("Referee")!.gamecode, name: UserData.readReferee("Referee")!.name, stationName: referee.stationName, assigned: referee.assigned)
+        UserData.writeReferee(newReferee, "Referee")
     }
 }
-
 //MARK: - UIUpdate
 extension WaitingController: GetStation {
     func getStation(_ station: Station) {
-        self.station_name = station.name
-        self.pvp_check = station.pvp
+        self.pvp = station.pvp
     }
 }
+
