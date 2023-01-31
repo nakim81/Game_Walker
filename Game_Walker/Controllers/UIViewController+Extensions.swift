@@ -44,12 +44,23 @@ extension UIViewController {
     }
     
     func showMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = MessageViewController()
+        let popUpViewController = MessageViewController(messages: messages ?? [])
         showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
-        
     }
     
     private func showMessagePopUp(popUpViewcontroller: MessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewcontroller, animated: false, completion: nil)
+    }
+    
+    func showAnnouncementPopUp(announcement: String = "", _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = AnnouncementViewController(announcement: announcement)
+        showAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+    }
+    
+    private func showAnnouncementPopUp(popUpViewcontroller: AnnouncementViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
         popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
             popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
         }

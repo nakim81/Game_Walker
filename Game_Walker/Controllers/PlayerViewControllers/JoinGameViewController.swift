@@ -19,6 +19,9 @@ class JoinGameViewController: BaseViewController {
         self.hideKeyboardWhenTappedAround()
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
+        H.delegates.append(self)
+        T.delegates.append(self)
+        gamecodeTextField.keyboardType = .asciiCapableNumberPad
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
@@ -29,12 +32,16 @@ class JoinGameViewController: BaseViewController {
             UserData.writePlayer(newPlayer, "player")
             UserData.writeGamecode(gamecode, "gamecode")
             P.addPlayer(gamecode, newPlayer)
+            H.listenHost(gamecode, onListenerUpdate: listen(_:))
+            T.listenTeams(gamecode, onListenerUpdate: listen(_:))
             performSegue(withIdentifier: "goToPF2VC", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter all information to log in")
         }        
     }
 
+    func listen(_ _ : [String : Any]){
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -46,5 +53,16 @@ extension JoinGameViewController: UITextFieldDelegate {
             nextButtonPressed(nextButton)
         }
         return true
+    }
+}
+
+// MARK: - listener
+extension JoinGameViewController: HostUpdateListener, TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
+        
+    }
+    
+    func updateHost(_ host: Host) {
+        
     }
 }

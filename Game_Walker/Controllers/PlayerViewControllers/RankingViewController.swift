@@ -23,15 +23,19 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        T.delegate_teamList = self
+        T.delegates.append(self)
         H.delegate_getHost = self
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
-        T.getTeamList(gameCode)
         H.getHost(gameCode)
     }
     
+    func listen(_ _ : [String : Any]){
+    }
+    
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+        H.getHost(gameCode)
+        showMessagePopUp(messages: messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -44,22 +48,8 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
-        leaderBoard.refreshControl = refreshController
-        settingRefreshControl()
     }
-    
-    private func settingRefreshControl() {
-        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
-        refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
-    }
-    
-    @objc func refreshFunction() {
-        T.getTeamList(gameCode)
-        refreshController.endRefreshing()
-        leaderBoard.reloadData()
-    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         cell.configureRankTableViewCell(imageName: teamList[indexPath.section].iconName, teamName: teamList[indexPath.section].name, points: teamList[indexPath.section].points)
@@ -85,8 +75,8 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 }
 // MARK: - TeamProtocol
-extension RankingViewController: TeamList, GetHost {
-    func listOfTeams(_ teams: [Team]) {
+extension RankingViewController: TeamUpdateListener, GetHost {
+    func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
     }

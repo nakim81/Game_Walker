@@ -11,46 +11,45 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
     
     static let identifier = "MessageTableViewCell"
+
+    lazy var messageNameLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
-        view.contentMode = .scaleAspectFill
         return view
-    }()
-    
-    private lazy var messageNameLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-        label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
-        label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
-        label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        label.numberOfLines = 0
-        label.clipsToBounds = true
-        return label
     }()
     
     func configureTableViewCell(name: String) {
         contentView.addSubview(containerView)
         containerView.addSubview(messageNameLabel)
+        
+        contentView.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
+        
+        containerView.backgroundColor = .clear
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+//        containerView.layer.borderWidth = 3
+//        containerView.layer.cornerRadius = 5
+        
+        messageNameLabel.backgroundColor = .clear
+        messageNameLabel.textAlignment = .center
+        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 20)
+        messageNameLabel.textColor = .white
+        messageNameLabel.numberOfLines = 0
         messageNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageNameLabel.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.143),
+            containerView.widthAnchor.constraint(equalToConstant: 280),
+            containerView.heightAnchor.constraint(equalToConstant: 40),
+            containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            containerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            messageNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            messageNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            messageNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            messageNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            messageNameLabel.widthAnchor.constraint(equalTo: containerView.layoutMarginsGuide.widthAnchor),
+            messageNameLabel.heightAnchor.constraint(equalTo: containerView.layoutMarginsGuide.heightAnchor),
             messageNameLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             messageNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
@@ -66,9 +65,6 @@ class MessageTableViewCell: UITableViewCell {
     }
 
     required init?(coder aDecoder: NSCoder) {
-
         fatalError("init(coder:) has not been implemented")
-
     }
-    
 }
