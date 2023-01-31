@@ -11,6 +11,7 @@ import UIKit
 class CreateTeamViewController: BaseViewController {
     
     @IBOutlet weak var teamNameTextField: UITextField!
+    @IBOutlet weak var teamNumberTextField: UITextField!
     @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
@@ -36,6 +37,7 @@ class CreateTeamViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        teamNameTextField.delegate = self
         teamNameTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         configureCollectionView()
@@ -63,9 +65,9 @@ class CreateTeamViewController: BaseViewController {
             let newTeam = Team(name: teamName, players: [currentPlayer], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.writeTeam(newTeam, "team")
             T.addTeam(gameCode, newTeam)
-            T.joinTeam(gameCode, newTeam.name, currentPlayer)
             Task {
                 try await Task.sleep(nanoseconds: 500_000_000)
+                T.joinTeam(gameCode, newTeam.name, currentPlayer)
                 performSegue(withIdentifier: "goToTPF4", sender: self)
             }
         } else {
@@ -121,8 +123,10 @@ extension CreateTeamViewController: UICollectionViewDelegateFlowLayout {
 extension CreateTeamViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == teamNameTextField && selectedIndex != nil {
-           createTeamButtonPressed(createTeamButton)
+        if textField == teamNameTextField {
+            teamNumberTextField.becomeFirstResponder()
+        } else if textField == teamNumberTextField {
+            createTeamButtonPressed(createTeamButton)
         }
         return true
     }

@@ -66,6 +66,7 @@
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
+		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */; };
 		FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE24F28E976DE00D8C9D9 /* Dosis-ExtraLight.ttf */; };
 		FC1AE25728E976DE00D8C9D9 /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25028E976DE00D8C9D9 /* Dosis-ExtraBold.ttf */; };
@@ -141,6 +142,7 @@
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
+		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		FC1AE24F28E976DE00D8C9D9 /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
 		FC1AE25028E976DE00D8C9D9 /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */,
 				FC3CF4012980BCAE00645204 /* MessageViewController.swift */,
 				FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */,
+				FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */,
 			);
 			name = PlayerViewControllers;
 			path = Controllers/PlayerViewControllers;
@@ -486,6 +489,7 @@
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
+				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,

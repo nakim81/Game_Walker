@@ -14,6 +14,8 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var leaveButton: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    
+    static var selectedIndexList: [IndexPath] = []
     private var messages: [String]?
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
@@ -46,7 +48,8 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+        H.getHost(gameCode)
+        showMessagePopUp(messages: messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {

@@ -17,9 +17,10 @@ class TimerViewController: UIViewController {
     
     private var messages: [String] = []
     
-    private var timer: Timer?
-    private var seconds = 3600
-    private var time = 0
+    private var timer = Timer()
+    private var seconds: Int = 0
+    private var time: Int?
+    private var isPaused = true
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var stationName: String = UserData.readTeam("team")?.currentStation ?? ""
@@ -53,14 +54,31 @@ class TimerViewController: UIViewController {
         super.viewDidLoad()
         S.delegate_getStation = self
         S.getStation(gameCode, stationName)
-        H.delegate_getHost = self
-        H.getHost(gameCode)
-        configureTimerLabel()
-        runTimer()
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        Task {
+            try await Task.sleep(nanoseconds: 280_000_000)
+            print(seconds)
+            configureTimerLabel()
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if strongSelf.seconds < 1 {
+                timer.invalidate()
+            }
+            if !strongSelf.isPaused {
+                strongSelf.seconds -= 1
+                let minute = strongSelf.seconds/60
+                let second = strongSelf.seconds % 60
+                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+            }
+        }
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        showGameInfoPopUp(gameName: "Tetris", gameLocation: "Noah's Macbook Air", gamePoitns: "100", refereeName: "Tetris GOAT Noah", gameRule: "Try your best to beat Tetris GOAT Noah")
+        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: "Tetris GOAT Noah", gameRule: gameRule)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
@@ -68,7 +86,8 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+        H.getHost(gameCode)
+        showMessagePopUp(messages: messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -82,34 +101,23 @@ class TimerViewController: UIViewController {
             timerLabel.widthAnchor.constraint(equalToConstant: 260),
             timerLabel.heightAnchor.constraint(equalToConstant: 260)
         ])
-        timerLabel.text = "00 : 00"
+        let minute = seconds/60
+        let second = seconds % 60
+        timerLabel.text = String(format:"%02i : %02i", minute, second)
     }
     
-    func runTimer() {
-           timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
+    func listen(_ _ : [String : Any]){
     }
-       
-    @objc func updateTimer() {
-        if seconds < 1 {
-           self.timer?.invalidate()
-        } else {
-           seconds -= 1
-           timerLabel.text = timeString(time: TimeInterval(seconds))
-        }
-    }
-   
-   func timeString(time:TimeInterval) -> String {
-           let minutes = Int(time) / 60 % 60
-           let seconds = Int(time) % 60
-           return String(format:"%02i : %02i", minutes, seconds)
-   }
-    
 }
 //MARK: - UIUpdate
-extension TimerViewController: GetHost, GetStation {
-    func getHost(_ host: Host) {
+extension TimerViewController: GetStation, HostUpdateListener {
+    func updateHost(_ host: Host) {
         self.seconds = host.gameTime
         self.messages = host.announcements
+        self.isPaused = host.paused
+        let minute = seconds / 60
+        let second = seconds % 60
+        timerLabel.text = String(format:"%02i : %02i", minute, second)
     }
     
     func getStation(_ station: Station) {
@@ -119,4 +127,5 @@ extension TimerViewController: GetHost, GetStation {
         self.refereeName = ""
         self.gameRule = station.description
     }
+    
 }
