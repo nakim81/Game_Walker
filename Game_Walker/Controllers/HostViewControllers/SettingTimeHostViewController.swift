@@ -175,8 +175,8 @@ class SettingTimeHostViewController: BaseViewController {
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
             H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds) ?? 0)
-            //performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
-            performSegue(withIdentifier: "TempSegue", sender: self)
+            performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
+            //performSegue(withIdentifier: "TempSegue", sender: self)
         } else {
             alert(title: "Woops", message: "Please enter all information to set timer")
         }

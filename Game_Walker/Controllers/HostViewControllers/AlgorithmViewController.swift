@@ -14,11 +14,12 @@ class AlgorithmViewController: BaseViewController {
 //    var teamList: [Team] = []
     var host: Host!
 //    var teamnums :[Int] = []
-    var grid: [[Int]] = []
+    var grid: [[Int]] = [[Int]]()
     var rowcount : Int =  0
     var smallerthaneight : Bool = false
-    
+    var num_rounds : Int = 0
     var num_teams : Int = 0
+    var columncount : Int = 0
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -49,7 +50,15 @@ class AlgorithmViewController: BaseViewController {
         var s_lessthan_eight = false
         var t_zeros = 0
         var s_zeros = 0
-        
+        var r_lessthan_eight = false
+        var r_zeros = 0
+        if (num_stations < num_teams) {
+            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
+        }
+        if (num_teams < num_stations) {
+            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
+        }
+
         if (num_teams < 8) {
             t_zeros = 8 - num_teams
             t_lessthan_eight = true
@@ -60,7 +69,16 @@ class AlgorithmViewController: BaseViewController {
             s_lessthan_eight = true
             num_stations = 8
         }
-        
+        columncount = max(num_teams, num_stations)
+//        if (r_zero)
+//        var curr_row = [Int]()
+//        curr_row.append("C1")
+        for r in 0...(num_rounds - 1) {
+            let curr_row = [Int]()
+            for t in 0...(columncount - 1) {
+                curr_row.append(t)
+            }
+        }
 //        let team_counter = 0
 //        let station_counter = 0
 //        for s in 0...(num_stations - 1){
@@ -140,6 +158,7 @@ extension AlgorithmViewController: GetHost {
         print("algorithm protocol")
         self.host = host
         self.num_teams = host.teams
+        self.num_rounds = host.rounds
         self.collectionView?.reloadData()
     
         

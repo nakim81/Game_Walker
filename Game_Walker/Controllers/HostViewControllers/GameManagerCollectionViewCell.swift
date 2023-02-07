@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-class GameManagerCollectionViewCell: UICollectionViewCell {
+ class GameManagerCollectionViewCell: UICollectionViewCell {
     private var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
