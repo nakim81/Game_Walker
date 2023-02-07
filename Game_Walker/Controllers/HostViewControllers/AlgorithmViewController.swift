@@ -74,10 +74,12 @@ class AlgorithmViewController: BaseViewController {
 //        var curr_row = [Int]()
 //        curr_row.append("C1")
         for r in 0...(num_rounds - 1) {
-            let curr_row = [Int]()
+            var curr_row = [Int]()
             for t in 0...(columncount - 1) {
-                curr_row.append(t)
+                curr_row.append((t + (r + 1))%columncount)
             }
+            grid.append(curr_row)
+            curr_row.removeAll()
         }
 //        let team_counter = 0
 //        let station_counter = 0
