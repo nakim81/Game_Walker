@@ -9,6 +9,7 @@ import UIKit
 
 class AlgorithmViewController: BaseViewController {
     
+    @IBOutlet weak var startGameButton: UIButton!
     var stationList: [Station] = []
 //    var teamList: [Team] = []
     var host: Host!
@@ -39,6 +40,9 @@ class AlgorithmViewController: BaseViewController {
         createGrid()
     }
     
+    @IBAction func startGameButtonPressed(_ sender: UIButton) {
+        alert2(title: "", message: "Everything set?")
+    }
     func createGrid() {
         var num_stations = stationList.count
         var t_lessthan_eight = false
@@ -59,29 +63,25 @@ class AlgorithmViewController: BaseViewController {
         
 //        let team_counter = 0
 //        let station_counter = 0
-        for s in 0...(num_stations - 1){
-            for t in 1...num_teams{
-                if (s_lessthan_eight && (s >= num_stations - s_zeros)) {
-                    grid[s].append(0)
-                } else {
-                    if (t_lessthan_eight && (t > num_teams - t_zeros)) {
-                        grid[s].append(0)
-                    }
-                    grid[s].append(t)
-                }
-                print(grid)
-            }
-        }
+//        for s in 0...(num_stations - 1){
+//            for t in 1...num_teams{
+//                if (s_lessthan_eight && (s >= num_stations - s_zeros)) {
+//                    grid[s].append(0)
+//                } else {
+//                    if (t_lessthan_eight && (t > num_teams - t_zeros)) {
+//                        grid[s].append(0)
+//                    }
+//                    grid[s].append(t)
+//                }
+//                print(grid)
+//            }
+//        }
     }
 
 
 }
 
-extension AlgorithmViewController: UICollectionViewDelegate{
-    
-}
-
-extension AlgorithmViewController: UICollectionViewDataSource{
+extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int{
         return grid.count
@@ -97,7 +97,7 @@ extension AlgorithmViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlgorithmCollectionViewCell", for: indexPath) as? AlgorithmCollectionViewCell, let columns = grid.first?.count {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell, let columns = grid.first?.count {
             if smallerthaneight {
                 let columns = 8
             }

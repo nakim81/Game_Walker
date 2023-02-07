@@ -26,7 +26,6 @@
 		A1EBA6A4296F21DF00228501 /* GameManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */; };
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
 		A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */; };
-		A1EBA6A7296F21DF00228501 /* GameManagerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */; };
 		A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */; };
 		A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */; };
 		A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */; };
@@ -82,6 +81,10 @@
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
+		FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */; };
+		FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */; };
+		FCF6FB48298A9FC700473FCE /* HostTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB47298A9FC700473FCE /* HostTabBarController.swift */; };
+		FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,7 +106,6 @@
 		A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
 		A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmViewController.swift; sourceTree = "<group>"; };
-		A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameManagerCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
 		A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
@@ -161,6 +163,10 @@
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
+		FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingViewcontroller.swift; sourceTree = "<group>"; };
+		FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTimerViewController.swift; sourceTree = "<group>"; };
+		FCF6FB47298A9FC700473FCE /* HostTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTabBarController.swift; sourceTree = "<group>"; };
+		FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,21 +227,24 @@
 		A1EBA693296F21DF00228501 /* HostViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */,
 				A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */,
-				A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */,
 				A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */,
 				A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */,
 				A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */,
 				A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */,
-				A1EBA699296F21DF00228501 /* GameManagerCollectionViewCell.xib */,
 				A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */,
 				A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */,
 				A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */,
 				A1EBA69D296F21DF00228501 /* AddStationViewController.swift */,
-				A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */,
 				A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */,
-				A1EBA6A0296F21DF00228501 /* GameManagerViewController.swift */,
 				A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */,
+				FCF6FB47298A9FC700473FCE /* HostTabBarController.swift */,
+				A1EBA696296F21DF00228501 /* GameManagerCollectionViewCell.swift */,
+				A1EBA6A0296F21DF00228501 /* GameManagerViewController.swift */,
+				FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */,
+				FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */,
+				FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -420,7 +429,6 @@
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
-				A1EBA6A7296F21DF00228501 /* GameManagerCollectionViewCell.xib in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
@@ -496,6 +504,7 @@
 				FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
+				FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */,
 				61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
@@ -504,6 +513,7 @@
 				61E5094F2988D8BB00F37E79 /* RefereePVPController.swift in Sources */,
 				61E5094D2988D8A400F37E79 /* RefereeTabBarPVPController.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
+				FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */,
 				61E50949298891B800F37E79 /* RefereePVEController.swift in Sources */,
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
@@ -513,6 +523,7 @@
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				6159252A29694A0600BC6D7F /* PVPRefereeController.swift in Sources */,
+				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
@@ -543,6 +554,7 @@
 				A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */,
 				A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */,
 				A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */,
+				FCF6FB48298A9FC700473FCE /* HostTabBarController.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,
 				DAC3132D2858632100BECF89 /* Team.swift in Sources */,

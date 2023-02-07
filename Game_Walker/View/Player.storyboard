@@ -174,54 +174,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="869"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js1-MN-dbY">
-                                <rect key="frame" x="79.333333333333343" y="394.33333333333331" width="269.33333333333326" height="127.66666666666669"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
-                                        <rect key="frame" x="45.666666666666686" y="28.000000000000004" width="178" height="33.333333333333343"/>
-                                    </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
-                                        <rect key="frame" x="18.333333333333357" y="74.666666666666686" width="232.66666666666663" height="41.666666666666657"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="o71-xb-Yzf" firstAttribute="centerX" secondItem="Js1-MN-dbY" secondAttribute="centerX" id="BV5-w2-vjd"/>
-                                    <constraint firstItem="eq1-L3-5lr" firstAttribute="width" secondItem="Js1-MN-dbY" secondAttribute="width" multiplier="0.863014" id="D97-7Y-KbS"/>
-                                    <constraint firstItem="eq1-L3-5lr" firstAttribute="centerY" secondItem="Js1-MN-dbY" secondAttribute="centerY" multiplier="1.5" id="KX4-7e-pdF"/>
-                                    <constraint firstItem="o71-xb-Yzf" firstAttribute="centerY" secondItem="Js1-MN-dbY" secondAttribute="centerY" multiplier="0.7" id="Lgq-Uy-4bv"/>
-                                    <constraint firstItem="o71-xb-Yzf" firstAttribute="width" secondItem="Js1-MN-dbY" secondAttribute="width" multiplier="0.659817" id="PuE-N3-x1A"/>
-                                    <constraint firstItem="eq1-L3-5lr" firstAttribute="centerX" secondItem="Js1-MN-dbY" secondAttribute="centerX" id="dkL-2c-8aA"/>
-                                    <constraint firstItem="eq1-L3-5lr" firstAttribute="height" secondItem="Js1-MN-dbY" secondAttribute="height" multiplier="0.326711" id="osT-yH-VD9"/>
-                                    <constraint firstItem="o71-xb-Yzf" firstAttribute="height" secondItem="Js1-MN-dbY" secondAttribute="height" multiplier="0.261194" id="znM-DX-gPX"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qab-jn-Kbh">
-                                <rect key="frame" x="79" y="302" width="269.33333333333337" height="263.33333333333331"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team number_ 2" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-Cg-dpa">
-                                        <rect key="frame" x="28" y="16" width="190" height="35"/>
-                                    </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team number is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-VR-hmI">
-                                        <rect key="frame" x="19.666666666666671" y="65.333333333333329" width="206.33333333333331" height="43.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="hLd-VR-hmI" firstAttribute="width" secondItem="qab-jn-Kbh" secondAttribute="width" multiplier="0.839572" id="3h2-hk-toP"/>
-                                    <constraint firstItem="wcS-Cg-dpa" firstAttribute="height" secondItem="qab-jn-Kbh" secondAttribute="height" multiplier="0.261194" id="6zZ-1W-hh4"/>
-                                    <constraint firstItem="hLd-VR-hmI" firstAttribute="centerY" secondItem="qab-jn-Kbh" secondAttribute="centerY" multiplier="1.3" id="MKS-Ui-O9P"/>
-                                    <constraint firstItem="wcS-Cg-dpa" firstAttribute="centerY" secondItem="qab-jn-Kbh" secondAttribute="centerY" multiplier="0.5" id="Ssb-BK-dI7"/>
-                                    <constraint firstItem="wcS-Cg-dpa" firstAttribute="centerX" secondItem="qab-jn-Kbh" secondAttribute="centerX" id="WGm-8e-ZA5"/>
-                                    <constraint firstItem="hLd-VR-hmI" firstAttribute="height" secondItem="qab-jn-Kbh" secondAttribute="height" multiplier="0.326711" id="djN-db-L91"/>
-                                    <constraint firstItem="wcS-Cg-dpa" firstAttribute="width" secondItem="qab-jn-Kbh" secondAttribute="width" multiplier="0.772727" id="uix-nz-Zs9"/>
-                                    <constraint firstItem="hLd-VR-hmI" firstAttribute="centerX" secondItem="qab-jn-Kbh" secondAttribute="centerX" id="vea-BS-UWI"/>
-                                </constraints>
-                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
+                                <rect key="frame" x="139" y="120" width="150" height="35"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
+                                <rect key="frame" x="87.666666666666671" y="164.33333333333334" width="252.66666666666663" height="47"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team number_ 2" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-Cg-dpa">
+                                <rect key="frame" x="125" y="250.33333333333337" width="178" height="35"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team number is..." textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-VR-hmI">
+                                <rect key="frame" x="87.666666666666671" y="291.66666666666669" width="252.66666666666663" height="47"/>
+                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team icon 1" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-y0-gcK">
                                 <rect key="frame" x="70.666666666666657" y="390" width="286.66666666666674" height="35.333333333333314"/>
                             </imageView>
@@ -258,21 +226,33 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.427536" id="0LT-7C-7Jl"/>
-                            <constraint firstItem="Js1-MN-dbY" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" id="0sR-61-eGo"/>
-                            <constraint firstItem="Js1-MN-dbY" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.155312" id="Bsc-hF-ZMG"/>
+                            <constraint firstItem="eq1-L3-5lr" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="78j-PS-xu0"/>
+                            <constraint firstItem="wcS-Cg-dpa" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.585" id="7DB-2b-12p"/>
+                            <constraint firstItem="wcS-Cg-dpa" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="7SY-Yy-e8R"/>
+                            <constraint firstItem="hLd-VR-hmI" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.688" id="7oi-x7-uqm"/>
+                            <constraint firstItem="eq1-L3-5lr" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.59" id="9p5-hg-lQY"/>
+                            <constraint firstItem="eq1-L3-5lr" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.057" id="BqX-xH-Nck"/>
+                            <constraint firstItem="hLd-VR-hmI" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.59" id="ChI-TN-gs8"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.63" id="F08-YR-dQe"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.607" id="FhA-gc-rFK"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.265" id="OLY-jR-M36"/>
+                            <constraint firstItem="eq1-L3-5lr" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.41" id="OeG-dm-Ei0"/>
+                            <constraint firstItem="wcS-Cg-dpa" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0425791" id="PML-UN-QRU"/>
+                            <constraint firstItem="o71-xb-Yzf" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0425791" id="PPZ-6B-rgA"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="QzN-w5-uCt"/>
-                            <constraint firstItem="Js1-MN-dbY" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.629283" id="RWV-T9-1tt"/>
+                            <constraint firstItem="o71-xb-Yzf" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.35" id="RPI-mz-fFi"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0696822" id="RwY-9z-6Kz"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.2" id="SGS-Ry-u5T"/>
+                            <constraint firstItem="hLd-VR-hmI" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.057" id="UYo-F9-20p"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="UsN-XE-nVK"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0427873" id="WE6-RN-wCU"/>
+                            <constraint firstItem="hLd-VR-hmI" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="h6W-1i-qf0"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.67" id="hCO-bV-oLH"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.89" id="hHK-aM-Ta0"/>
+                            <constraint firstItem="o71-xb-Yzf" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.3" id="lp0-TA-vHa"/>
+                            <constraint firstItem="o71-xb-Yzf" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="mHL-6M-ye6"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="qOb-1H-GII"/>
-                            <constraint firstItem="Js1-MN-dbY" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="w5w-hf-plv"/>
+                            <constraint firstItem="wcS-Cg-dpa" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.416" id="zfp-wT-KST"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ALf-Ey-C7I"/>
@@ -416,7 +396,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaC-ZZ-TQ6">
                                         <rect key="frame" x="40.333333333333314" y="0.0" width="34.666666666666657" height="39"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="설정 아이콘"/>
                                         <connections>
                                             <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="Z2H-Al-VJe"/>
                                         </connections>
@@ -482,7 +462,7 @@
                                 <rect key="frame" x="30" y="80" width="192.66666666666666" height="61.333333333333343"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
-                                <rect key="frame" x="36.666666666666657" y="150" width="355" height="520"/>
+                                <rect key="frame" x="36.666666666666657" y="170.66666666666663" width="355" height="520"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZ6-J9-loV">
@@ -500,7 +480,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YlO-hs-2KM">
                                         <rect key="frame" x="40.333333333333314" y="0.0" width="34.666666666666657" height="39"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="설정 아이콘"/>
                                         <connections>
                                             <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="9hC-Lc-FlO"/>
                                             <action selector="settingButtonPressed:" destination="dWY-v4-76s" eventType="touchUpInside" id="agV-Cy-Ede"/>
@@ -534,7 +514,7 @@
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0475" id="XPu-hZ-Wm9"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="0.59" id="Zf9-wO-SWd"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.45" id="hiH-ka-e9w"/>
-                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" id="jM2-Ba-iXf"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="1.05" id="jM2-Ba-iXf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
@@ -596,7 +576,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1g-cc-IIE">
                                         <rect key="frame" x="40.333333333333314" y="0.0" width="34.666666666666657" height="39"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="설정 아이콘"/>
                                         <connections>
                                             <action selector="settingButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="4Zk-Dq-wc1"/>
                                             <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="LGi-aj-dPY"/>
@@ -671,13 +651,13 @@
         <image name="next button 1" width="175.33332824707031" height="57"/>
         <image name="ranking 1" width="187" height="61"/>
         <image name="score 2" width="84" height="112"/>
-        <image name="setting" width="53.666667938232422" height="40"/>
         <image name="team member icon 1" width="84" height="112"/>
         <image name="team name 1" width="160" height="35"/>
         <image name="team number_ 2" width="190" height="35"/>
         <image name="text box 1" width="243.66667175292969" height="79"/>
         <image name="timer icon 1" width="85" height="112"/>
         <image name="user name_ 2" width="155.66667175292969" height="35"/>
+        <image name="설정 아이콘" width="54" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

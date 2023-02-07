@@ -61,8 +61,8 @@ class CreateTeamViewController: BaseViewController {
             alert(title: "No Icon Selected", message: "Please select a team icon")
             return
         }
-        if let teamName: String = teamNameTextField.text, !teamName.isEmpty {
-            let newTeam = Team(name: teamName, players: [currentPlayer], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
+        if let teamName: String = teamNameTextField.text, !teamName.isEmpty, let teamNumber: String = teamNumberTextField.text, !teamNumber.isEmpty {
+            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
             UserData.writeTeam(newTeam, "team")
             T.addTeam(gameCode, newTeam)
             Task {
