@@ -13,7 +13,6 @@ class RefereePVEController: UIViewController {
     @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var iconscoreButton: UIButton!
     var stationName = ""
     var seconds : Int?
     var timer : Timer?
@@ -26,13 +25,11 @@ class RefereePVEController: UIViewController {
         S.delegate_getStation = self
         S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         H.getHost(UserData.readGamecode("gamecode")!)
+        self.team = self.teamOrder[index]
         super.viewDidLoad()
-        //
-        iconscoreButton.setImage(UIImage(named: "iconAir"), for: .normal)
-        self.view.bringSubviewToFront(iconscoreButton)
-        //
         self.view.addSubview(roundLabel)
         self.view.addSubview(borderView)
+        self.view.addSubview(iconButton)
         self.view.addSubview(teamNumber)
         self.view.addSubview(teamName)
         self.view.addSubview(timerLabel)
@@ -42,6 +39,11 @@ class RefereePVEController: UIViewController {
         borderView.heightAnchor.constraint(equalToConstant: 306).isActive = true
         borderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         borderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 187).isActive = true
+        iconButton.translatesAutoresizingMaskIntoConstraints = false
+        iconButton.widthAnchor.constraint(equalToConstant: 175).isActive = true
+        iconButton.heightAnchor.constraint(equalToConstant: 175).isActive = true
+        iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 200).isActive = true
         teamNumber.translatesAutoresizingMaskIntoConstraints = false
         teamNumber.widthAnchor.constraint(equalToConstant: 115).isActive = true
         teamNumber.heightAnchor.constraint(equalToConstant: 38).isActive = true
@@ -77,7 +79,6 @@ class RefereePVEController: UIViewController {
         var border = UIView()
         border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
         border.center = view.center
-        view.addSubview(iconscoreButton)
         view.addSubview(border)
         view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
         border.layer.borderWidth = 5
@@ -85,18 +86,12 @@ class RefereePVEController: UIViewController {
         return view
     }()
     
-    private lazy var iconView: UIImageView = {
-        var view = UIImageView()
-        view.frame = CGRect(x: 0, y: 0, width: 211, height: 306)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        return view
+    private lazy var iconButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
     }()
     
     private lazy var teamNumber: UILabel = {
@@ -152,7 +147,6 @@ class RefereePVEController: UIViewController {
         return view
     }()
     
-    
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(RefereePVEController.updateTimer)), userInfo: nil, repeats: true)
     }
@@ -164,6 +158,7 @@ class RefereePVEController: UIViewController {
             teamName.text = teamOrder[index].name
             roundLabel.text = "Round " + "\(index + 1)"
             scoreLabel.text = "\(teamOrder[index].points)"
+            iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
             seconds = 10
         } else {
             seconds! -= 1
@@ -178,8 +173,7 @@ class RefereePVEController: UIViewController {
     }
     
     @IBAction func stationinfoButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "givePoints", sender: self)
-        //showRefereeGameInfoPopUp()
+        showRefereeGameInfoPopUp(gameRule: "You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy.")
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
@@ -189,12 +183,11 @@ class RefereePVEController: UIViewController {
     @IBAction func settingsButtonPressed(_ sender: Any) {
         
     }
-    
-    @IBAction func iconscoreButtonPressed(_ sender: Any) {
+        
+    @objc func buttonTapped() {
         UserData.writeTeam(team!, "points")
-        performSegue(withIdentifier: "givePoints", sender: self)
+        performSegue(withIdentifier: "givePointsPVE", sender: self)
     }
-    
 }
 
 //MARK: - UIUpdate

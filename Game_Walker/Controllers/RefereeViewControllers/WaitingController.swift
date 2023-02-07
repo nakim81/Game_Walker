@@ -12,7 +12,7 @@ class WaitingController: BaseViewController {
 
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
-    var pvp : Bool = false
+    var pvp : Bool = true
     var timer: Timer?
     var currentIndex: Int = 0
     let waitingImagesArray = ["waiting 2.png", "waiting 1.png", "waiting. 1.png"]
@@ -34,34 +34,30 @@ class WaitingController: BaseViewController {
                 self.WaitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
                 R.getReferee(UserData.readGamecode("gamecode")!, UserData.readReferee("Referee")!.name)
                 if UserData.readReferee("Referee")!.assigned {
-                    stopTimer()
+                    timer.invalidate()
                     if self.pvp {
                             performSegue(withIdentifier: "goToPVP", sender: self)
                         }
                         else {
-                            
+                            //Example//
+                            var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 1, players: [], points: 10, currentStation: "testing", nextStation: "", iconName: "iconAir")
+                            var team2 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Bear", number: 2, players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "iconBear")
+                            var team3 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 3, players: [], points: 30, currentStation: "testing", nextStation: "", iconName: "iconBlue")
+                            var team4 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 4, players: [], points: 40, currentStation: "testing", nextStation: "", iconName: "iconBoy")
+                            var newStation1 = Station(name: "testing", pvp: false, points: 10, place: "", description: "", teamOrder: [team1, team2, team3, team4])
+                            S.addStation(UserData.readReferee("Referee")!.gamecode, newStation1)
+                            //
                             performSegue(withIdentifier: "goToPVE", sender: self)
                         }
                 }
             }
         }
     }
-
-    func stopTimer() {
-        self.timer?.invalidate()
-        self.timer = nil
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         R.delegate_getReferee = self
         S.delegate_getStation = self
-        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 1, players: [], points: 10, currentStation: "testing", nextStation: "", iconName: "iconAir")
-        var team2 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Bear", number: 2, players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "iconBear")
-        var team3 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 3, players: [], points: 30, currentStation: "testing", nextStation: "", iconName: "iconBlue")
-        var team4 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 4, players: [], points: 40, currentStation: "testing", nextStation: "", iconName: "iconBoy")
-        var newStation1 = Station(name: "testing", pvp: false, points: 10, place: "", description: "", teamOrder: [team1, team2, team3, team4])
-        S.addStation(UserData.readReferee("Referee")!.gamecode, newStation1)
         startTimer()
     }
 }
