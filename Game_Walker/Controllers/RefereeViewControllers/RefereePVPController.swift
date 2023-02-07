@@ -10,51 +10,113 @@ import UIKit
 
 class RefereePVPController: UIViewController {
     
-    @IBOutlet weak var leftscoreButton: UIButton!
-    @IBOutlet weak var rightscoreButton: UIButton!
     @IBOutlet weak var stationinfoButton: UIButton!
     
-    var round = 1
     var stationName = ""
     var index = 0
-    var teamOrder : [Team] = []
+    var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Girl", number: 1, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconGirl"), Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Boy", number: 2, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconBoy")]
     var timer: Timer?
-    var seconds = 3600
-    var time = 0
-    var team1 : Team?
-    var team2 : Team?
+    var seconds : Int?
+    var teamA : Team?
+    var teamB : Team?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         H.delegate_getHost = self
+        S.delegate_getStation = self
+        H.getHost(UserData.readGamecode("gamecode")!)
+        self.teamA = self.teamOrder[index]
+        self.teamB = self.teamOrder[index+1]
         
-        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", players: [], points: 20, currentStation: "testing", nextStation: "", iconName: "")
+        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", players: [], points: 20, currentStation: "testing2", nextStation: "", iconName: "")
         var team2 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Bear", players: [], points: 20, currentStation: "testing2", nextStation: "", iconName: "")
-        var newStation = Station(name: "testing", pvp: true, points: 20, place: "", description: "", teamOrder: [team1])
-        var newStation2 = Station(name: "testing2", pvp: true, points: 20, place: "", description: "", teamOrder: [team2])
+        var team3 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Fire", number: 3, players: [], points: 30, currentStation: "testing2", nextStation: "", iconName: "iconFire")
+        var team4 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Panda", number: 4, players: [], points: 40, currentStation: "testing2", nextStation: "", iconName: "iconPanda")
+        var newStation2 = Station(name: "testing2", pvp: true, points: 20, place: "", description: "", teamOrder: [team1, team2, team3, team4])
         
-        S.addStation(UserData.readReferee("Referee")!.gamecode, newStation)
-        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         S.addStation(UserData.readReferee("Referee")!.gamecode, newStation2)
+        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing2")
         
-        leftborderView.translatesAutoresizingMaskIntoConstraints = false
-        leftborderView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        leftborderView.heightAnchor.constraint(equalToConstant: 231.61).isActive = true
-        leftborderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 23).isActive = true
-        leftborderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
-        
-        rightborderView.translatesAutoresizingMaskIntoConstraints = false
-        rightborderView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        rightborderView.heightAnchor.constraint(equalToConstant: 231.61).isActive = true
-        rightborderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 23).isActive = true
-        rightborderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
+        super.viewDidLoad()
+        self.view.addSubview(roundLabel)
+        self.view.addSubview(leftcontainerView)
+        self.view.addSubview(lefticonButton)
+        self.view.addSubview(leftteamNumber)
+        self.view.addSubview(leftteamName)
+        self.view.addSubview(leftscoreLabel)
+        self.view.addSubview(rightcontainerView)
+        self.view.addSubview(righticonButton)
+        self.view.addSubview(rightteamNumber)
+        self.view.addSubview(rightteamName)
+        self.view.addSubview(timerLabel)
+        self.view.addSubview(rightscoreLabel)
 
+            
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
         roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
         roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 151).isActive = true
         
+        leftcontainerView.translatesAutoresizingMaskIntoConstraints = false
+        leftcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
+        leftcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
+        leftcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 23).isActive = true
+        leftcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
+        
+        lefticonButton.translatesAutoresizingMaskIntoConstraints = false
+        lefticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
+        lefticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
+        lefticonButton.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+        lefticonButton.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 5).isActive = true
+        
+        leftteamNumber.translatesAutoresizingMaskIntoConstraints = false
+        leftteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
+        leftteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+        leftteamNumber.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+        leftteamNumber.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 145.51).isActive = true
+        
+        leftteamName.translatesAutoresizingMaskIntoConstraints = false
+        leftteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
+        leftteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+        leftteamName.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+        leftteamName.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 167.46).isActive = true
+        
+        leftscoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
+        leftscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
+        leftscoreLabel.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+        leftscoreLabel.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 191.88).isActive = true
+        
+        rightcontainerView.translatesAutoresizingMaskIntoConstraints = false
+        rightcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
+        rightcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
+        rightcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 199).isActive = true
+        rightcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
+        
+        righticonButton.translatesAutoresizingMaskIntoConstraints = false
+        righticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
+        righticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
+        righticonButton.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+        righticonButton.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 5).isActive = true
+        
+        rightteamNumber.translatesAutoresizingMaskIntoConstraints = false
+        rightteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
+        rightteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+        rightteamNumber.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+        rightteamNumber.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 145.51).isActive = true
+        
+        rightteamName.translatesAutoresizingMaskIntoConstraints = false
+        rightteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
+        rightteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+        rightteamName.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+        rightteamName.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 167.46).isActive = true
+        
+        rightscoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
+        rightscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
+        rightscoreLabel.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+        rightscoreLabel.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 191.88).isActive = true
+
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
         timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
         timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
@@ -65,7 +127,7 @@ class RefereePVPController: UIViewController {
         
     }
     
-    private lazy var leftborderView: UIView = {
+    private lazy var leftcontainerView: UIView = {
         var view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
         view.backgroundColor = .white
@@ -79,12 +141,21 @@ class RefereePVPController: UIViewController {
         return border
     }()
     
+    private lazy var lefticonButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+        button.addTarget(self, action: #selector(leftbuttonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    
     private lazy var leftteamNumber: UILabel = {
         var view = UILabel()
         view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
         view.backgroundColor = .white
         view.textColor = .black
-        view.font = UIFont(name: "Dosis-SemiBold", size: 25)
+        view.font = UIFont(name: "Dosis-SemiBold", size: 15)
         view.textAlignment = .center
         view.text = "Team " + "\(self.teamOrder[index].number)"
         return view
@@ -95,13 +166,24 @@ class RefereePVPController: UIViewController {
         view.frame = CGRect(x: 0, y: 0, width: 174, height: 38)
         view.backgroundColor = .white
         view.textColor = .black
-        view.font = UIFont(name: "Dosis-Regular", size: 25)
+        view.font = UIFont(name: "Dosis-Regular", size: 15)
         view.textAlignment = .center
         view.text = teamOrder[index].name
         return view
     }()
     
-    private lazy var rightborderView: UIView = {
+    private lazy var leftscoreLabel: UILabel = {
+        var view = UILabel()
+        view.frame = CGRect(x: 0, y: 0, width: 150, height: 53)
+        view.backgroundColor = .white
+        view.textColor = .black
+        view.font = UIFont(name: "Dosis-Bold", size: 35)
+        view.textAlignment = .center
+        view.text = "\(teamOrder[index].points)"
+        return view
+    }()
+    
+    private lazy var rightcontainerView: UIView = {
         var view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
         view.backgroundColor = .white
@@ -115,14 +197,22 @@ class RefereePVPController: UIViewController {
         return border
     }()
     
+    private lazy var righticonButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: teamOrder[index+1].iconName), for: .normal)
+        button.addTarget(self, action: #selector(rightbuttonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var rightteamNumber: UILabel = {
         var view = UILabel()
         view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
         view.backgroundColor = .white
         view.textColor = .black
-        view.font = UIFont(name: "Dosis-SemiBold", size: 25)
+        view.font = UIFont(name: "Dosis-SemiBold", size: 15)
         view.textAlignment = .center
-        view.text = "Team " + "\(self.teamOrder[index].number)"
+        view.text = "Team " + "\(self.teamOrder[index+1].number)"
         return view
     }()
     
@@ -131,9 +221,20 @@ class RefereePVPController: UIViewController {
         view.frame = CGRect(x: 0, y: 0, width: 174, height: 38)
         view.backgroundColor = .white
         view.textColor = .black
-        view.font = UIFont(name: "Dosis-Regular", size: 25)
+        view.font = UIFont(name: "Dosis-Regular", size: 15)
         view.textAlignment = .center
         view.text = teamOrder[index+1].name
+        return view
+    }()
+    
+    private lazy var rightscoreLabel: UILabel = {
+        var view = UILabel()
+        view.frame = CGRect(x: 0, y: 0, width: 150, height: 53)
+        view.backgroundColor = .white
+        view.textColor = .black
+        view.font = UIFont(name: "Dosis-Bold", size: 35)
+        view.textAlignment = .center
+        view.text = "\(teamOrder[index+1].points)"
         return view
     }()
     
@@ -162,17 +263,21 @@ class RefereePVPController: UIViewController {
     }
     
     @objc func updateTimer() {
-            if seconds < 1 {
+            if seconds! < 1 {
+                H.getHost(UserData.readGamecode("gamecode")!)
                 index += 2
+                lefticonButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
                 leftteamNumber.text = "Team " + "\(self.teamOrder[index].number)"
                 leftteamName.text = teamOrder[index].name
-                rightteamNumber.text = "Team " + "\(self.teamOrder[index + 2].number)"
-                rightteamName.text = teamOrder[index + 2].name
+                leftscoreLabel.text = "\(teamOrder[index].points)"
+                righticonButton.setImage(UIImage(named: teamOrder[index + 1].iconName), for: .normal)
+                rightteamNumber.text = "Team " + "\(self.teamOrder[index + 1].number)"
+                rightteamName.text = teamOrder[index + 1].name
+                rightscoreLabel.text = "\(teamOrder[index + 1].points)"
                 roundLabel.text = "Round " + "\(index + 1)"
-                //scoreLabel.text = "\(teamOrder[index].points)"
             } else {
-                seconds -= 1
-                timerLabel.text = timeString(time: TimeInterval(seconds))
+                seconds! -= 1
+                timerLabel.text = timeString(time: TimeInterval(seconds!))
             }
     }
     
@@ -182,18 +287,19 @@ class RefereePVPController: UIViewController {
             return String(format:"%02i : %02i", minutes, seconds)
     }
     
-    @IBAction func leftscoreButtonPressed(_ sender: UIButton) {
-        UserData.writeTeam(team1!, "points")
-        performSegue(withIdentifier: "givePoints", sender: self)
+    @objc func leftbuttonTapped() {
+        UserData.writeTeam(teamA!, "points")
+        performSegue(withIdentifier: "givePointsPVP", sender: self)
     }
     
-    @IBAction func rightscoreButtonPressed(_ sender: UIButton) {
-        UserData.writeTeam(team2!, "points")
-        performSegue(withIdentifier: "givePoints", sender: self)
+    @objc func rightbuttonTapped() {
+        UserData.writeTeam(teamB!, "points")
+        performSegue(withIdentifier: "givePointsPVP", sender: self)
     }
     
     @IBAction func stationinfoButtonPressed(_ sender: UIButton) {
-        showRefereeGameInfoPopUp()
+        performSegue(withIdentifier: "HostTesting", sender: self)
+        //showRefereeGameInfoPopUp()
     }
     
 }
@@ -208,6 +314,6 @@ extension RefereePVPController: GetStation {
 //MARK: - UIUpdate
 extension RefereePVPController: GetHost {
     func getHost(_ host: Host) {
-        self.time = host.gameTime
+        self.seconds = host.gameTime
     }
 }
