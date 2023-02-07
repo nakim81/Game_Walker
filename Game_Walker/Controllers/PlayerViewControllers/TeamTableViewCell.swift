@@ -17,7 +17,17 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let teamNumLabel: UILabel = {
+        let label = UILabel()
+        label.clipsToBounds = true
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 0
         return label
     }()
@@ -54,7 +64,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.numberOfLines = 0
         return label
     }()
@@ -64,7 +74,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 25)
+        label.font = UIFont(name: "Dosis-Bold", size: 20)
         label.numberOfLines = 0
         return label
     }()
@@ -109,12 +119,13 @@ class TeamTableViewCell: UITableViewCell {
     
     }
     
-    func configureRankTableViewCell(imageName: String, teamName: String, points: Int) {
+    func configureRankTableViewCell(imageName: String, teamNum: String, teamName: String, points: Int) {
         contentView.addSubview(containerView)
         containerView.addSubview(teamIconImage)
         containerView.addSubview(teamNameLabel)
         containerView.addSubview(scoreLabel)
         containerView.addSubview(borderView)
+        containerView.addSubview(teamNumLabel)
         
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
@@ -122,14 +133,19 @@ class TeamTableViewCell: UITableViewCell {
             containerView.widthAnchor.constraint(equalToConstant: 330),
             containerView.heightAnchor.constraint(equalToConstant: 100),
             
-            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
+            teamNumLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
+            teamNumLabel.leadingAnchor.constraint(equalTo: teamIconImage.layoutMarginsGuide.trailingAnchor, constant: 5),
+            teamNumLabel.trailingAnchor.constraint(equalTo: teamNameLabel.leadingAnchor),
+            teamNumLabel.heightAnchor.constraint(equalToConstant: 23),
+            
+            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 20),
             teamNameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            teamNameLabel.widthAnchor.constraint(equalToConstant: 130),
-            teamNameLabel.heightAnchor.constraint(equalToConstant: 20),
+            teamNameLabel.widthAnchor.constraint(equalToConstant: 100),
+            teamNameLabel.heightAnchor.constraint(equalToConstant: 25),
             
             scoreLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 95),
             scoreLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 100),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 70),
             scoreLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
         
@@ -139,6 +155,7 @@ class TeamTableViewCell: UITableViewCell {
         teamIconImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
         teamIconImage.image = UIImage(named: imageName)
         teamNameLabel.text = teamName
+        teamNumLabel.text = teamNum
         scoreLabel.text = String(points)
     }
 

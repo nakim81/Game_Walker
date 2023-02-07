@@ -40,7 +40,7 @@ class RefereeRankingPVEViewController: UIViewController, UITableViewDelegate, UI
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
-        leaderBoard.register(TeamTableViewCell.self, forCellReuseIdentifier: RefereeTeamTableViewCell.identifier)
+        leaderBoard.register(RefereeTeamTableViewCell.self, forCellReuseIdentifier: RefereeTeamTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none

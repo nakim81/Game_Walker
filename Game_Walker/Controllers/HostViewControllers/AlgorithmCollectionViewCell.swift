@@ -9,7 +9,11 @@ import UIKit
 
 class AlgorithmCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var algorithmCellBox: UIImageView!
     @IBOutlet weak var teamnumLabel: UILabel!
+    
+    static let identifier = "AlgorithmCollectionViewCell"
+    
     func configureAlgorithmCell(cellteamnum:Int) {
         teamnumLabel.text = String(cellteamnum)
     }

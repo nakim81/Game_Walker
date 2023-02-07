@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,18 +23,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf7-AC-7yj">
-                                <rect key="frame" x="83" y="553.5" width="248" height="71"/>
+                                <rect key="frame" x="83" y="556" width="248" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cf7-AC-7yj" secondAttribute="height" multiplier="3.5:1" id="szy-uf-51D"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Join game button 1"/>
                                 <connections>
-                                    <segue destination="4gK-PM-WO8" kind="show" id="HOz-gn-nq5"/>
+                                    <action selector="joinButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ssN-9B-Ii4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjH-HA-b1K" userLabel="CreateButton">
-                                <rect key="frame" x="83" y="281.5" width="248" height="71"/>
+                                <rect key="frame" x="83" y="283" width="248" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fjH-HA-b1K" secondAttribute="height" multiplier="3.5:1" id="MLO-JZ-zd0"/>
                                 </constraints>
@@ -41,7 +42,6 @@
                                 <state key="normal" backgroundImage="Create game button 1"/>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
-                                    <segue destination="1L0-Oz-afr" kind="show" id="wjt-AD-E3u"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -56,17 +56,22 @@
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="vm6-B7-U1w"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="joinButton" destination="cf7-AC-7yj" id="SOQ-le-voL"/>
+                        <segue destination="4gK-PM-WO8" kind="show" identifier="HostGamecodeSegue" id="AVX-s8-MVB"/>
+                        <segue destination="1L0-Oz-afr" kind="show" identifier="CreateGameSegue" id="Yeq-Vg-rew"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-275.36231884057975" y="95.758928571428569"/>
+            <point key="canvasLocation" x="-275" y="49"/>
         </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
             <objects>
                 <viewController id="4gK-PM-WO8" customClass="HostGameCodeViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eY5-V3-TIK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code?" translatesAutoresizingMaskIntoConstraints="NO" id="ust-Tq-mj7">
@@ -122,7 +127,7 @@
             <objects>
                 <viewController id="1L0-Oz-afr" customClass="StationsTableViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQk-vm-7Sx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations 1" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-tB-jas" userLabel="Stations">
@@ -132,11 +137,11 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
-                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="Next button 1-1"/>
                                 <connections>
-                                    <segue destination="KzH-J8-5vd" kind="show" id="fjX-uf-Q5w"/>
+                                    <segue destination="KzH-J8-5vd" kind="show" identifier="SettingTimerSegue" id="fjX-uf-Q5w"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
@@ -185,7 +190,7 @@
             <objects>
                 <viewController id="EDq-oM-bgK" customClass="AddStationViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8R1-oH-TTM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l6w-xV-CKG">
@@ -434,14 +439,11 @@
             <objects>
                 <viewController id="KzH-J8-5vd" customClass="SettingTimeHostViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sav-4G-tMH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer 1-1" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-mI-mS1" userLabel="Timer Label">
-                                <rect key="frame" x="31" y="76" width="145" height="69.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ARm-mI-mS1" secondAttribute="height" multiplier="128:61" id="h9O-yJ-KDG"/>
-                                </constraints>
+                                <rect key="frame" x="31" y="49" width="145" height="61"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game time" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
                                 <rect key="frame" x="128.5" y="113" width="157" height="40"/>
@@ -546,12 +548,11 @@
                                 <rect key="frame" x="73.5" y="456.5" width="267" height="85"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
-                                    <segue destination="uLg-Pv-BMT" kind="show" id="ggl-dg-6vL"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
@@ -587,7 +588,7 @@
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.42" id="7Ei-Sb-jhK"/>
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="7Rb-BD-3Fo"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="7Vl-dN-eq0"/>
-                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.25" id="7wF-Af-mbw"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.18" id="7wF-Af-mbw"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="0.9" id="8WH-dS-BUU"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
@@ -625,6 +626,7 @@
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="centerX" secondItem="QMr-hQ-NGt" secondAttribute="centerX" id="kMn-5j-c9B"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
                             <constraint firstItem="Vix-LA-Y4c" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="kfK-18-HW2"/>
+                            <constraint firstItem="ARm-mI-mS1" firstAttribute="height" secondItem="Sav-4G-tMH" secondAttribute="height" multiplier="0.0727924" id="pid-ty-bdg"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="qN0-zW-RQi"/>
                             <constraint firstItem="fc8-so-AwG" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="0.9" id="ruE-69-iIn"/>
                             <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="20" id="sUr-l5-ffx"/>
@@ -645,18 +647,20 @@
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
                         <outlet property="teamcountTextField" destination="fc8-so-AwG" id="2It-gy-vHo"/>
+                        <segue destination="uLg-Pv-BMT" kind="show" identifier="SetAlgorithmSegue" id="BEL-Vp-hrL"/>
+                        <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2339" y="-319"/>
+            <point key="canvasLocation" x="2404" y="-319"/>
         </scene>
         <!--Algorithm View Controller-->
         <scene sceneID="scy-qe-gvo">
             <objects>
                 <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
@@ -704,9 +708,12 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
-                                <rect key="frame" x="119" y="730" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Start game button"/>
+                                <connections>
+                                    <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="ZQP-FP-JUJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h99-ko-w7n"/>
@@ -727,32 +734,28 @@
                     <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
                     <connections>
                         <outlet property="collectionView" destination="m6H-bD-wNG" id="Mcl-iI-C22"/>
+                        <outlet property="startGameButton" destination="6s2-dh-Y7m" id="U3L-wq-9Vw"/>
+                        <segue destination="iWj-Yx-nuv" kind="show" identifier="ManageGameSegue" id="6Td-1F-5ho"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1QZ-hO-XSj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3245" y="-319"/>
+            <point key="canvasLocation" x="3320" y="-788"/>
         </scene>
         <!--GameManagerViewController-->
         <scene sceneID="alU-c0-Oy8">
             <objects>
                 <viewController title="GameManagerViewController" id="T3Q-kb-Y2i" customClass="GameManagerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u27-nY-rNM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game manager 1" translatesAutoresizingMaskIntoConstraints="NO" id="QIc-jh-Bk4">
-                                <rect key="frame" x="41.5" y="124" width="331" height="66"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="QIc-jh-Bk4" secondAttribute="height" multiplier="5:1" id="WMn-DW-Fe7"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game manager 2" translatesAutoresizingMaskIntoConstraints="NO" id="QIc-jh-Bk4">
+                                <rect key="frame" x="37.5" y="88.5" width="339" height="60"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NUu-Bk-1jH">
-                                <rect key="frame" x="62" y="240" width="290" height="429.5"/>
+                                <rect key="frame" x="62" y="199.5" width="290" height="429.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="NUu-Bk-1jH" secondAttribute="height" multiplier="270:400" id="AhK-my-ALS"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jEk-Yg-5o2">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -762,52 +765,162 @@
                                 <cells/>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJr-xm-Wm1">
-                                <rect key="frame" x="103.5" y="789.5" width="207" height="50"/>
+                                <rect key="frame" x="103.5" y="665.5" width="207" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oHU-3X-iWv"/>
                                     <constraint firstAttribute="width" constant="207" id="tcq-qh-wto"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="end game"/>
+                                <connections>
+                                    <action selector="endButtonDragged:" destination="T3Q-kb-Y2i" eventType="touchUpInside" id="U6E-xD-gku"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ai6-HR-gnE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QIc-jh-Bk4" firstAttribute="centerX" secondItem="Ai6-HR-gnE" secondAttribute="centerX" id="BLc-uA-RzK"/>
+                            <constraint firstItem="QIc-jh-Bk4" firstAttribute="height" secondItem="Ai6-HR-gnE" secondAttribute="height" multiplier="0.0760456" id="D6V-hH-J3c"/>
+                            <constraint firstItem="NUu-Bk-1jH" firstAttribute="width" secondItem="Ai6-HR-gnE" secondAttribute="width" multiplier="0.700483" id="ExF-Z9-nhS"/>
+                            <constraint firstItem="QIc-jh-Bk4" firstAttribute="centerY" secondItem="Ai6-HR-gnE" secondAttribute="centerY" multiplier="0.3" id="MWh-7R-UHA"/>
                             <constraint firstItem="VJr-xm-Wm1" firstAttribute="centerX" secondItem="Ai6-HR-gnE" secondAttribute="centerX" id="PhE-FP-lB3"/>
                             <constraint firstItem="NUu-Bk-1jH" firstAttribute="centerX" secondItem="Ai6-HR-gnE" secondAttribute="centerX" id="WVq-Vw-Up7"/>
-                            <constraint firstItem="QIc-jh-Bk4" firstAttribute="top" secondItem="Ai6-HR-gnE" secondAttribute="top" constant="80" id="bDT-cb-nuR"/>
-                            <constraint firstItem="QIc-jh-Bk4" firstAttribute="width" secondItem="u27-nY-rNM" secondAttribute="width" multiplier="0.8" id="mKX-gH-yVP"/>
-                            <constraint firstItem="NUu-Bk-1jH" firstAttribute="top" secondItem="QIc-jh-Bk4" secondAttribute="bottom" constant="50" id="olW-FJ-rSp"/>
-                            <constraint firstItem="NUu-Bk-1jH" firstAttribute="width" secondItem="u27-nY-rNM" secondAttribute="width" multiplier="0.7" id="rbt-fh-6vo"/>
-                            <constraint firstItem="VJr-xm-Wm1" firstAttribute="top" secondItem="NUu-Bk-1jH" secondAttribute="bottom" constant="120" id="rxV-1r-ONR"/>
+                            <constraint firstItem="QIc-jh-Bk4" firstAttribute="width" secondItem="Ai6-HR-gnE" secondAttribute="width" multiplier="0.818841" id="flf-Zk-lDS"/>
+                            <constraint firstItem="NUu-Bk-1jH" firstAttribute="height" secondItem="Ai6-HR-gnE" secondAttribute="height" multiplier="0.54436" id="g94-Yd-hTS"/>
+                            <constraint firstItem="NUu-Bk-1jH" firstAttribute="centerY" secondItem="Ai6-HR-gnE" secondAttribute="centerY" multiplier="1.05" id="gYs-wm-7K6"/>
+                            <constraint firstItem="VJr-xm-Wm1" firstAttribute="centerY" secondItem="Ai6-HR-gnE" secondAttribute="centerY" multiplier="1.75" id="uaO-W0-m3N"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="6Se-Po-fJk"/>
                     <connections>
                         <outlet property="collectionView" destination="NUu-Bk-1jH" id="7Lt-YW-JV3"/>
+                        <outlet property="endButton" destination="VJr-xm-Wm1" id="fOJ-ZZ-7fq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nkn-NQ-QrU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4239" y="-319"/>
+            <point key="canvasLocation" x="5190" y="-1122"/>
+        </scene>
+        <!--Host Timer View Controller-->
+        <scene sceneID="wco-y0-K7R">
+            <objects>
+                <viewController id="XpD-HK-1hf" customClass="HostTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a7a-eq-zES">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer 1" translatesAutoresizingMaskIntoConstraints="NO" id="S0z-Qo-01x">
+                                <rect key="frame" x="27" y="76" width="134" height="61"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NaI-KP-VEh">
+                                <rect key="frame" x="162" y="517" width="90" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Polygon 1"/>
+                                <connections>
+                                    <action selector="pauseOrPlayButtonPressed:" destination="XpD-HK-1hf" eventType="touchUpInside" id="hbX-py-8Yf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="s6r-8J-ljp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S0z-Qo-01x" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.323671" id="2k3-da-EVb"/>
+                            <constraint firstItem="NaI-KP-VEh" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="1.38" id="2nc-Da-IIa"/>
+                            <constraint firstItem="S0z-Qo-01x" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0777355" id="4j5-vp-tRu"/>
+                            <constraint firstItem="NaI-KP-VEh" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.217391" id="76u-U3-smL"/>
+                            <constraint firstItem="NaI-KP-VEh" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" id="Fj4-ax-dMG"/>
+                            <constraint firstItem="S0z-Qo-01x" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" multiplier="0.455" id="Ja4-a2-WGa"/>
+                            <constraint firstItem="S0z-Qo-01x" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="0.27" id="vsm-2C-ga2"/>
+                            <constraint firstItem="NaI-KP-VEh" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0697085" id="wCm-b4-lux"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="zS1-ab-lZI"/>
+                    <connections>
+                        <outlet property="pauseOrPlayButton" destination="NaI-KP-VEh" id="WSS-oX-zDp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kiu-WL-Pfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5190" y="530"/>
+        </scene>
+        <!--Host Ranking Viewcontroller-->
+        <scene sceneID="iWW-qw-fZX">
+            <objects>
+                <viewController id="L51-9x-cCC" customClass="HostRankingViewcontroller" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8nu-hd-YkZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="VCg-rd-HS9">
+                                <rect key="frame" x="26" y="76" width="192.5" height="61"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F4M-EA-8mT">
+                                <rect key="frame" x="29.5" y="154" width="355" height="520"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tgv-Dy-rrr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VCg-rd-HS9" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" multiplier="0.59" id="454-UW-BLX"/>
+                            <constraint firstItem="VCg-rd-HS9" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.465378" id="4Q9-Qm-hlU"/>
+                            <constraint firstItem="VCg-rd-HS9" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.0777355" id="90o-Bt-cnn"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.857488" id="ELI-5y-dNp"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" id="ZwM-qw-uk8"/>
+                            <constraint firstItem="VCg-rd-HS9" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="0.27" id="gqo-Xu-fg5"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.659062" id="lX4-Y3-EX8"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="1.05" id="xOm-O0-Kjg"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="f0y-wr-zc8"/>
+                    <connections>
+                        <outlet property="leaderBoard" destination="F4M-EA-8mT" id="Lg0-8l-mCC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afc-mH-dDd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5190" y="-319"/>
+        </scene>
+        <!--Host Tab Bar Controller-->
+        <scene sceneID="nh8-B6-gQg">
+            <objects>
+                <tabBarController id="iWj-Yx-nuv" customClass="HostTabBarController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="E6a-lZ-TVw"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZTp-WJ-0au">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="T3Q-kb-Y2i" kind="relationship" relationship="viewControllers" id="AIt-bi-AwJ"/>
+                        <segue destination="L51-9x-cCC" kind="relationship" relationship="viewControllers" id="4Td-vv-q2P"/>
+                        <segue destination="XpD-HK-1hf" kind="relationship" relationship="viewControllers" id="11C-Bu-5wH"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QWO-7q-OST" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4172" y="-319"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="OK4-sB-gpM"/>
+        <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
         <image name="Join game button 1" width="244" height="79"/>
         <image name="Next button 1-1" width="176" height="57"/>
+        <image name="Polygon 1" width="36.5" height="64"/>
         <image name="Start game button" width="176" height="57"/>
+        <image name="Timer 1" width="128" height="61"/>
         <image name="add button 1" width="325" height="46.5"/>
         <image name="algorithm 1" width="221.5" height="61"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
         <image name="end game" width="207" height="50"/>
         <image name="game code?" width="100" height="15"/>
         <image name="game location 2" width="138.5" height="25"/>
-        <image name="game manager 1" width="329" height="60"/>
+        <image name="game manager 2" width="338.5" height="60"/>
         <image name="game name 2" width="112.5" height="25"/>
         <image name="game points 2" width="122.5" height="25.5"/>
         <image name="game time" width="137.5" height="35"/>
@@ -817,16 +930,20 @@
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
+        <image name="ranking 1" width="187" height="61"/>
         <image name="rounds 1" width="101" height="35"/>
         <image name="rounds line frame" width="35" height="292.5"/>
         <image name="rules 2" width="59" height="25.5"/>
         <image name="rules textboxwhite 1" width="280" height="89.5"/>
         <image name="save 1" width="176" height="57"/>
+        <image name="score 2" width="84" height="112"/>
         <image name="stations 1" width="195" height="61"/>
         <image name="stations line frame" width="293" height="35"/>
+        <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>
+        <image name="timer icon 1" width="85" height="112"/>
         <image name="timer-time-box" width="221" height="70"/>
         <image name="waiting 1" width="186.5" height="57"/>
         <systemColor name="systemBackgroundColor">

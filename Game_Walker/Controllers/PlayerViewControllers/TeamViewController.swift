@@ -16,13 +16,16 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var settingButton: UIButton!
     
     static var selectedIndexList: [IndexPath] = []
-    private var messages: [String]?
+    static var messages: [String]?
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
+    
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +47,12 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         settingRefreshControl()
     }
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
-        alert(title: "니 팀 버려?", message: "Do you really want to leave your team?", sender: sender)
+        alert(title: "", message: "Do you really want to leave your team?", sender: sender)
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
         H.getHost(gameCode)
-        showMessagePopUp(messages: messages)
+        showMessagePopUp(messages: TeamViewController.messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -118,7 +121,12 @@ extension TeamViewController: GetTeam, GetHost {
     }
     
     func getHost(_ host: Host) {
-        self.messages = host.announcements
+        TeamViewController.messages = host.announcements
+        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+            announcementButton.setImage(unreadSome, for: .normal)
+        } else {
+            announcementButton.setImage(readAll, for: .normal)
+        }
     }
 }
 
