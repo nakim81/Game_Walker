@@ -96,7 +96,8 @@ extension JoinTeamViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamIconCollectionViewCell.identifier , for: indexPath) as! TeamIconCollectionViewCell
         let team = teamList[indexPath.item]
-        cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name)
+        let teamNum = String(team.number)
+        cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name, teamNum: "Team \(teamNum)")
         return cell
     }
 }
@@ -105,7 +106,7 @@ extension JoinTeamViewController: UICollectionViewDataSource {
 extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 110)
+        return CGSize(width: 80, height: 130)
     }
 }
 

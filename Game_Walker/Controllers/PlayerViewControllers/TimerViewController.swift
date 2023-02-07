@@ -15,7 +15,8 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     
-    private var messages: [String] = []
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
     
     private var timer = Timer()
     private var seconds: Int = 0
@@ -53,7 +54,7 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         S.delegate_getStation = self
-        S.getStation(gameCode, stationName)
+        //S.getStation(gameCode, stationName)
         H.delegates.append(self)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         Task {
@@ -87,17 +88,25 @@ class TimerViewController: UIViewController {
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
         H.getHost(gameCode)
-        showMessagePopUp(messages: messages)
+        showMessagePopUp(messages: TeamViewController.messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
+    }
+    
+    func configureAnnouncementbuttonImage(){
+        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+            announcementButton.setImage(unreadSome, for: .normal)
+        } else {
+            announcementButton.setImage(readAll, for: .normal)
+        }
     }
     
     func configureTimerLabel(){
         self.view.addSubview(timerLabel)
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerLabel.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 200),
+            timerLabel.centerYAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerYAnchor, constant: -120),
             timerLabel.widthAnchor.constraint(equalToConstant: 260),
             timerLabel.heightAnchor.constraint(equalToConstant: 260)
         ])
@@ -113,11 +122,12 @@ class TimerViewController: UIViewController {
 extension TimerViewController: GetStation, HostUpdateListener {
     func updateHost(_ host: Host) {
         self.seconds = host.gameTime
-        self.messages = host.announcements
+        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+            announcementButton.setImage(unreadSome, for: .normal)
+        } else {
+            announcementButton.setImage(readAll, for: .normal)
+        }
         self.isPaused = host.paused
-        let minute = seconds / 60
-        let second = seconds % 60
-        timerLabel.text = String(format:"%02i : %02i", minute, second)
     }
     
     func getStation(_ station: Station) {
@@ -127,5 +137,4 @@ extension TimerViewController: GetStation, HostUpdateListener {
         self.refereeName = ""
         self.gameRule = station.description
     }
-    
 }

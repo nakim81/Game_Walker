@@ -1,41 +1,38 @@
 //
-//  PlayerFrame4_2.swift
+//  HostRankingViewcontroller.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 6/17/22.
+//  Created by Noah Kim on 2/1/23.
 //
 
 import Foundation
 import UIKit
 
-class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HostRankingViewcontroller: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var leaderBoard: UITableView!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
+    private var messages: [String]?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
-    private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
-    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private var gameCode: String = UserData.readGamecode("gamecodestring") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
-    private let readAll = UIImage(named: "announcement")
-    private let unreadSome = UIImage(named: "unreadMessage")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegates.append(self)
-        H.delegates.append(self)
+        H.delegate_getHost = self
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
+        H.getHost(gameCode)
     }
     
     func listen(_ _ : [String : Any]){
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.messages)
+        H.getHost(gameCode)
+        showMessagePopUp(messages: messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -44,14 +41,14 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
-        leaderBoard.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
+        leaderBoard.register(HostRankingTableViewCell.self, forCellReuseIdentifier: HostRankingTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
+        let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = String(teamList[indexPath.section].number)
         cell.configureRankTableViewCell(imageName: teamList[indexPath.section].iconName, teamNum: "Team \(teamNum)", teamName: teamList[indexPath.section].name, points: teamList[indexPath.section].points)
         return cell
@@ -76,18 +73,13 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 }
 // MARK: - TeamProtocol
-extension RankingViewController: TeamUpdateListener, HostUpdateListener {
-    func updateHost(_ host: Host) {
-        TeamViewController.messages = host.announcements
-        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
-            announcementButton.setImage(unreadSome, for: .normal)
-        } else {
-            announcementButton.setImage(readAll, for: .normal)
-        }
-    }
-    
+extension HostRankingViewcontroller: TeamUpdateListener, GetHost {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
+    }
+    
+    func getHost(_ host: Host) {
+        self.messages = host.announcements
     }
 }
