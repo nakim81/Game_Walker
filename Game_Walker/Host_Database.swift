@@ -39,12 +39,13 @@ struct H {
         }
     }
     
-    static func setTimer(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int){
+    static func setTimer(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int){
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         server.updateData([
             "gameTime": gameTime,
             "movingTime": movingTime,
-            "rounds": rounds
+            "rounds": rounds,
+            "teams": teams
         ]) { err in
             if let err = err {
                 print("Error updating document: \(err)")
