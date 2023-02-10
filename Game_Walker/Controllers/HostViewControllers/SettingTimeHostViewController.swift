@@ -48,6 +48,7 @@ class SettingTimeHostViewController: BaseViewController {
         
         super.viewDidLoad()
         H.delegate_getHost = self
+        self.hideKeyboardWhenTappedAround()
         
         roundsTextField.keyboardType = .numberPad
         roundsTextField.textAlignment = .center
@@ -174,9 +175,10 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.resignFirstResponder()
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
-            H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds) ?? 0)
-            host?.teams = Int(teamcount)!
-            host?.rounds = Int(rounds)!
+            H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds) ?? 0,
+                       Int(teamcount)!)
+//            host?.teams = Int(teamcount)!
+//            host?.rounds = Int(rounds)!
             performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
             //performSegue(withIdentifier: "TempSegue", sender: self)
         } else {
