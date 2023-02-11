@@ -49,6 +49,7 @@ class AddStationViewController: BaseViewController {
         refereeTableView.isHidden = true
         
         checkReferee()
+        setPaddings()
         R.delegate_refereeList = self
         R.getRefereeList(UserData.readGamecode("gamecodestring")!)
         
@@ -69,6 +70,15 @@ class AddStationViewController: BaseViewController {
         }
         refereeLabel.font = UIFont(name:"Dosis", size: 20.0)
     }
+    
+    func setPaddings() {
+        let padding: CGFloat = 10.0
+        gamenameTextfield.setPadding(left: padding, right: padding)
+        gamelocationTextfield.setPadding(left: padding, right: padding)
+        gamepointsTextfield.setPadding(left: padding, right: padding)
+        rulesTextfield.setPadding(left: padding, right: padding)
+    }
+    
     @IBAction func pvpChosen(_ sender: UIButton) {
         pvpnotchosen = false
         if pveButton.currentBackgroundImage == UIImage(named:"pve selected 1") {
@@ -192,3 +202,5 @@ extension AddStationViewController: RefereeList {
         }
     }
 }
+
+
