@@ -13,8 +13,8 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var gamenameTextfield: UITextField!
     @IBOutlet weak var gamelocationTextfield: UITextField!
     @IBOutlet weak var gamepointsTextfield: UITextField!
-    @IBOutlet weak var rulesTextfield: UITextField!
-    @IBOutlet weak var refereeTableView: UITableView!
+    @IBOutlet weak var rulesTextfield: UITextView!
+//    @IBOutlet weak var refereeTableView: UITableView!
     
     @IBOutlet weak var pvpButton: UIButton!
     @IBOutlet weak var pveButton: UIButton!
@@ -35,6 +35,8 @@ class AddStationViewController: BaseViewController {
     var isdropped = false
     var rules = ""
     
+    let transparentView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         gamenameTextfield.delegate = self
@@ -43,10 +45,10 @@ class AddStationViewController: BaseViewController {
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
         
-        refereeTableView.delegate = self
-        refereeTableView.dataSource = self
-        refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
-        refereeTableView.isHidden = true
+//        refereeTableView.delegate = self
+//        refereeTableView.dataSource = self
+//        refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
+//        refereeTableView.isHidden = true
         
         checkReferee()
         setPaddings()
@@ -61,7 +63,27 @@ class AddStationViewController: BaseViewController {
         stationsTableViewController = sender
     }
 
-      
+    func addTransparentView() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        transparentView.frame = window?.frame ?? self.view.frame
+        self.view.addSubview(transparentView)
+        
+        transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        
+        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+        transparentView.addGestureRecognizer(tapgesture)
+        transparentView.alpha = 0
+        
+        //create anmiation
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {self.transparentView.alpha = 0.5}, completion: nil)
+         
+    }
+    
+    @objc func removeTransparentView() {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {self.transparentView.alpha = 0.5}, completion: nil)
+    }
+    
     func checkReferee() {
         if refereename == "" {
             refereeLabel.text = "Choose Referee"
@@ -76,7 +98,7 @@ class AddStationViewController: BaseViewController {
         gamenameTextfield.setPadding(left: padding, right: padding)
         gamelocationTextfield.setPadding(left: padding, right: padding)
         gamepointsTextfield.setPadding(left: padding, right: padding)
-        rulesTextfield.setPadding(left: padding, right: padding)
+        rulesTextfield.textContainerInset = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
     }
     
     @IBAction func pvpChosen(_ sender: UIButton) {
@@ -133,13 +155,14 @@ class AddStationViewController: BaseViewController {
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
         dropRefereeList(dropped: isdropped)
-        self.refereeTableView.reloadData()
+//        self.refereeTableView.reloadData()
+        addTransparentView() 
     }
     
     func dropRefereeList(dropped: Bool) {
         if dropped {
             UIView.animate(withDuration:0.3) {
-                self.refereeTableView.isHidden = true
+//                self.refereeTableView.isHidden = true
                 self.isdropped = false
                 self.pvpButton.isHidden = false
                 self.pveButton.isHidden = false
@@ -148,7 +171,7 @@ class AddStationViewController: BaseViewController {
             }
         } else {
             UIView.animate(withDuration: 0.3) {
-                self.refereeTableView.isHidden = false
+//                self.refereeTableView.isHidden = false
                 self.isdropped = true
                 self.pvpButton.isHidden = true
                 self.pveButton.isHidden = true
@@ -166,29 +189,32 @@ extension AddStationViewController: UITextFieldDelegate {
 
 }
 
-
-
-extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableReferees.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
-        let curr_cellname = availableReferees[indexPath.row].name
-        cell.configureRefereeCell(refereeName: curr_cellname)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(availableReferees[indexPath.row])
-        refereename = availableReferees[indexPath.row].name
-        print(refereename)
-        checkReferee()
-        dropRefereeList(dropped: isdropped)
-    }
+extension AddStationViewController: UITextViewDelegate {
     
 }
+
+//
+//extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return availableReferees.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
+//        let curr_cellname = availableReferees[indexPath.row].name
+//        cell.configureRefereeCell(refereeName: curr_cellname)
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        print(availableReferees[indexPath.row])
+//        refereename = availableReferees[indexPath.row].name
+//        print(refereename)
+//        checkReferee()
+//        dropRefereeList(dropped: isdropped)
+//    }
+//
+//}
 
 
 
