@@ -36,6 +36,7 @@ class AddStationViewController: BaseViewController {
     var rules = ""
     
     let transparentView = UIView()
+    let refereeTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +64,17 @@ class AddStationViewController: BaseViewController {
         stationsTableViewController = sender
     }
 
-    func addTransparentView() {
+    func addTransparentView(frames : CGRect) {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let window = windowScene?.windows.first
         transparentView.frame = window?.frame ?? self.view.frame
         self.view.addSubview(transparentView)
+        
+        //adding table view when button pressed
+        refereeTableView.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: 0 )
+        self.view.addSubview(refereeTableView)
+        refereeTableView.layer.cornerRadius = 5
+        
         
         transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         
@@ -76,12 +83,18 @@ class AddStationViewController: BaseViewController {
         transparentView.alpha = 0
         
         //create anmiation
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {self.transparentView.alpha = 0.5}, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0.5
+            self.refereeTableView.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height, width: frames.width, height: self.refereeButton.frame.height * 6)
+        }, completion: nil)
          
     }
     
     @objc func removeTransparentView() {
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {self.transparentView.alpha = 0.5}, completion: nil)
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0
+            self.refereeTableView.frame = CGRect(x: self.refereeButton.frame.origin.x, y: self.refereeButton.frame.origin.y + self.refereeButton.frame.height, width: self.refereeButton.frame.width, height: 0)
+        }, completion: nil)
     }
     
     func checkReferee() {
@@ -156,7 +169,7 @@ class AddStationViewController: BaseViewController {
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
         dropRefereeList(dropped: isdropped)
 //        self.refereeTableView.reloadData()
-        addTransparentView() 
+        addTransparentView(frames: refereeButton.frame)
     }
     
     func dropRefereeList(dropped: Bool) {
