@@ -12,6 +12,11 @@
 		6159252829694A0600BC6D7F /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252129694A0600BC6D7F /* RegisterController.swift */; };
 		6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252429694A0600BC6D7F /* WaitingController.swift */; };
 		6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252529694A0600BC6D7F /* GivePointsController.swift */; };
+		61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */; };
+		61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */; };
+		61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */; };
+		61C33E2F299B25BC00A512E5 /* RefereeAnnouncementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */; };
+		61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */; };
 		61E509472988901800F37E79 /* RefereeTabBarPVEController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509462988901800F37E79 /* RefereeTabBarPVEController.swift */; };
 		61E50949298891B800F37E79 /* RefereePVEController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E50948298891B800F37E79 /* RefereePVEController.swift */; };
 		61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5094A2988C8E300F37E79 /* RefereeRankingPVEViewController.swift */; };
@@ -96,6 +101,11 @@
 		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		6159252429694A0600BC6D7F /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		6159252529694A0600BC6D7F /* GivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivePointsController.swift; sourceTree = "<group>"; };
+		61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingViewPVPController.swift; sourceTree = "<group>"; };
+		61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageViewController.swift; sourceTree = "<group>"; };
+		61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageTableViewCell.swift; sourceTree = "<group>"; };
+		61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeAnnouncementController.swift; sourceTree = "<group>"; };
+		61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenController.swift; sourceTree = "<group>"; };
 		61E509462988901800F37E79 /* RefereeTabBarPVEController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTabBarPVEController.swift; sourceTree = "<group>"; };
 		61E50948298891B800F37E79 /* RefereePVEController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereePVEController.swift; sourceTree = "<group>"; };
 		61E5094A2988C8E300F37E79 /* RefereeRankingPVEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingPVEViewController.swift; sourceTree = "<group>"; };
@@ -210,11 +220,16 @@
 				61E5094E2988D8BB00F37E79 /* RefereePVPController.swift */,
 				61E50948298891B800F37E79 /* RefereePVEController.swift */,
 				61E5094A2988C8E300F37E79 /* RefereeRankingPVEViewController.swift */,
+				61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */,
 				61E509522988D91400F37E79 /* RefereeTeamTableViewCell.swift */,
 				6159252529694A0600BC6D7F /* GivePointsController.swift */,
+				FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */,
+				61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */,
+				61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */,
+				61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */,
 				6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */,
 				6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */,
-				FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */,
+				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
@@ -432,7 +447,6 @@
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
-				A1EBA6A7296F21DF00228501 /* GameManagerCollectionViewCell.xib in Resources */,
 				FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
@@ -501,6 +515,7 @@
 			files = (
 				61E509532988D91400F37E79 /* RefereeTeamTableViewCell.swift in Sources */,
 				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
+				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
 				A1EBA6A4296F21DF00228501 /* GameManagerCollectionViewCell.swift in Sources */,
 				A1EBA6AE296F21DF00228501 /* GameManagerViewController.swift in Sources */,
@@ -510,6 +525,7 @@
 				FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */,
 				61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
+				61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */,
 				DA9662C3285AFA4700B66629 /* Protocols.swift in Sources */,
 				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
 				61E5094F2988D8BB00F37E79 /* RefereePVPController.swift in Sources */,
@@ -524,8 +540,8 @@
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
-				6159252A29694A0600BC6D7F /* PVPRefereeController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
+				61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
@@ -533,6 +549,7 @@
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
+				61C33E2F299B25BC00A512E5 /* RefereeAnnouncementController.swift in Sources */,
 				DA96397028A33CDA00853F05 /* Host.swift in Sources */,
 				FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
@@ -542,6 +559,7 @@
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */,
+				61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
 				A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */,

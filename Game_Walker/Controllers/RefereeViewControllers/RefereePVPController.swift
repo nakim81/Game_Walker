@@ -11,9 +11,12 @@ import UIKit
 class RefereePVPController: UIViewController {
     
     @IBOutlet weak var stationinfoButton: UIButton!
+    @IBOutlet weak var annnouncementButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     
     var stationName = ""
     var index = 0
+    var round = 1
     var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Girl", number: 1, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconGirl"), Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Boy", number: 2, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconBoy")]
     var timer: Timer?
     var seconds : Int?
@@ -23,19 +26,11 @@ class RefereePVPController: UIViewController {
     override func viewDidLoad() {
         H.delegate_getHost = self
         S.delegate_getStation = self
+        T.delegate_getTeam = self
         H.getHost(UserData.readGamecode("gamecode")!)
         self.teamA = self.teamOrder[index]
         self.teamB = self.teamOrder[index+1]
-        
-        var team1 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", players: [], points: 20, currentStation: "testing2", nextStation: "", iconName: "")
-        var team2 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Bear", players: [], points: 20, currentStation: "testing2", nextStation: "", iconName: "")
-        var team3 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Fire", number: 3, players: [], points: 30, currentStation: "testing2", nextStation: "", iconName: "iconFire")
-        var team4 = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Panda", number: 4, players: [], points: 40, currentStation: "testing2", nextStation: "", iconName: "iconPanda")
-        var newStation2 = Station(name: "testing2", pvp: true, points: 20, place: "", description: "", teamOrder: [team1, team2, team3, team4])
-        
-        S.addStation(UserData.readReferee("Referee")!.gamecode, newStation2)
         S.getStation(UserData.readReferee("Referee")!.gamecode, "testing2")
-        
         super.viewDidLoad()
         self.view.addSubview(roundLabel)
         self.view.addSubview(leftcontainerView)
@@ -245,7 +240,7 @@ class RefereePVPController: UIViewController {
         view.textColor = .black
         view.font = UIFont(name: "Dosis-SemiBold", size: 45)
         view.textAlignment = .center
-        view.text = "Round " + "\(index + 1)"
+        view.text = "Round " + "\(round)"
         return view
     }()
     
@@ -265,6 +260,8 @@ class RefereePVPController: UIViewController {
     @objc func updateTimer() {
             if seconds! < 1 {
                 H.getHost(UserData.readGamecode("gamecode")!)
+                T.getTeam(UserData.readGamecode("gamecode")!, UserData.readTeam("points")!.name)
+                round += 1
                 index += 2
                 lefticonButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
                 leftteamNumber.text = "Team " + "\(self.teamOrder[index].number)"
@@ -274,9 +271,10 @@ class RefereePVPController: UIViewController {
                 rightteamNumber.text = "Team " + "\(self.teamOrder[index + 1].number)"
                 rightteamName.text = teamOrder[index + 1].name
                 rightscoreLabel.text = "\(teamOrder[index + 1].points)"
-                roundLabel.text = "Round " + "\(index + 1)"
+                roundLabel.text = "Round " + "\(round)"
             } else {
                 seconds! -= 1
+                T.getTeam(UserData.readGamecode("gamecode")!, UserData.readTeam("points")!.name)
                 timerLabel.text = timeString(time: TimeInterval(seconds!))
             }
     }
@@ -298,8 +296,15 @@ class RefereePVPController: UIViewController {
     }
     
     @IBAction func stationinfoButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "HostTesting", sender: self)
-        //showRefereeGameInfoPopUp()
+        showRefereeGameInfoPopUp()
+    }
+    
+    @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
+        showRefereeMessagePopUp()
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        
     }
     
 }
@@ -315,5 +320,16 @@ extension RefereePVPController: GetStation {
 extension RefereePVPController: GetHost {
     func getHost(_ host: Host) {
         self.seconds = host.gameTime
+    }
+}
+//MARK: - UIUpdate
+extension RefereePVPController: GetTeam {
+    func getTeam(_ team: Team) {
+        if team.name == leftteamName.text {
+            leftscoreLabel.text = "\(team.points)"
+        }
+        else {
+            rightscoreLabel.text = "\(team.points)"
+        }
     }
 }

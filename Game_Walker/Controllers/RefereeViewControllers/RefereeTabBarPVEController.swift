@@ -8,7 +8,6 @@
 import UIKit
 
 class RefereeTabBarPVEController: UITabBarController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
