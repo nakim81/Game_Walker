@@ -22,7 +22,7 @@ class GivePointsController: UIViewController {
     }
     @IBAction func confirmButtonPressed(_ sender: UIButton) {
         T.givePoints(UserData.readReferee("Referee")!.gamecode, UserData.readTeam("points")!.name, Int(GMStepper.value))
-        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

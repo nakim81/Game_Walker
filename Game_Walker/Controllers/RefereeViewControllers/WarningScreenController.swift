@@ -85,7 +85,7 @@ class WarningScreenController : UIViewController {
     }()
     
     @objc func yesbuttonTapped() {
-        exit(-1)
+        //performSegue(withIdentifier: "", sender: self)
     }
     
     @objc func nobuttonTapped() {

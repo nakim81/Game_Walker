@@ -23,6 +23,7 @@ class RefereePVEController: UIViewController {
     override func viewDidLoad() {
         H.delegate_getHost = self
         S.delegate_getStation = self
+        T.delegate_getTeam = self
         S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         H.getHost(UserData.readGamecode("gamecode")!)
         self.team = self.teamOrder[index]
@@ -154,15 +155,17 @@ class RefereePVEController: UIViewController {
     @objc func updateTimer() {
         if seconds! < 1 {
             index += 1
+            H.getHost(UserData.readGamecode("gamecode")!)
+            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
             teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
             teamName.text = teamOrder[index].name
             roundLabel.text = "Round " + "\(index + 1)"
-            scoreLabel.text = "\(teamOrder[index].points)"
             iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
-            seconds = 10
         } else {
             seconds! -= 1
             timerLabel.text = timeString(time: TimeInterval(seconds!))
+            print(self.teamOrder[index].name)
+            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
         }
     }
     
@@ -177,7 +180,7 @@ class RefereePVEController: UIViewController {
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
-        
+        showRefereeMessagePopUp()
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
@@ -201,5 +204,11 @@ extension RefereePVEController: GetStation {
 extension RefereePVEController: GetHost {
     func getHost(_ host: Host) {
         self.seconds = host.gameTime
+    }
+}
+//MARK: - UIUpdate
+extension RefereePVEController: GetTeam {
+    func getTeam(_ team: Team) {
+        scoreLabel.text = "\(team.points)"
     }
 }
