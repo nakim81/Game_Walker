@@ -71,7 +71,7 @@ class HostTimerViewController: UIViewController {
             timer.invalidate()
             isPaused = true
             H.pause_resume_Game(gameCode)
-            H.setTimer(gameCode, seconds, moveSeconds, rounds ?? 0)
+//            H.setTimer(gameCode, seconds, moveSeconds, rounds ?? 0)
         }
     }
     func configureTimerLabel(){

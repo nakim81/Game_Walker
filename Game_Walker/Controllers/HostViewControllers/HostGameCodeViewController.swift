@@ -22,8 +22,9 @@ class HostGameCodeViewController: BaseViewController {
         // Do any additional setup after loading the view.
         gameCodeInput.delegate = self
         gameCodeInput.textAlignment = NSTextAlignment.center
-        
+        gameCodeInput.keyboardType = .asciiCapableNumberPad
         H.delegate_getHost = self
+        self.hideKeyboardWhenTappedAround()
     }
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
