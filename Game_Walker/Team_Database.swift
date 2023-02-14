@@ -130,6 +130,7 @@ struct T {
                         let team = convertDataToTeam(data)
                         teams.append(team)
                     }
+                    teams.sort{$0.number > $1.number}
                     teams.sort{$0.points > $1.points}
                     delegate_teamList?.listOfTeams(teams)
                 }
