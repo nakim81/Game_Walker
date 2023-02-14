@@ -15,7 +15,17 @@ class CreateOrJoinTeamViewController: BaseViewController {
     @IBOutlet weak var joinTeamButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        configureNavItem()
+    }
+    
+    func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(CreateOrJoinTeamViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToJoinGameVC", sender: self)
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {

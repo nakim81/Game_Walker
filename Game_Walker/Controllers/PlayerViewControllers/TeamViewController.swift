@@ -24,16 +24,34 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
+    private var timer = Timer()
+    static var read: Bool = true
+    
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
-        H.delegate_getHost = self
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
         T.getTeam(gameCode, teamName)
-        H.getHost(gameCode)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+                TeamViewController.read = false
+                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+            } else {
+                TeamViewController.read = true
+                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+            }
+        }
+    }
+    
+    func listen(_ _ : [String : Any]){
     }
     
     private func configureTableView() {
@@ -51,7 +69,6 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        H.getHost(gameCode)
         showMessagePopUp(messages: TeamViewController.messages)
     }
     
@@ -64,12 +81,12 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func alert(title: String, message: String, sender: UIButton) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
-        let action = UIAlertAction(title: "Leave", style: .default, handler: { [self]action in
+        let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
             self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
         })
         alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
@@ -114,19 +131,19 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 // MARK: - TeamProtocol
-extension TeamViewController: GetTeam, GetHost {
-    func getTeam(_ team: Team) {
-        self.team = team
-        table.reloadData()
-    }
-    
-    func getHost(_ host: Host) {
+extension TeamViewController: GetTeam, HostUpdateListener {
+    func updateHost(_ host: Host) {
         TeamViewController.messages = host.announcements
         if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
-            announcementButton.setImage(unreadSome, for: .normal)
+            TeamViewController.read = false
         } else {
             announcementButton.setImage(readAll, for: .normal)
         }
+    }
+    
+    func getTeam(_ team: Team) {
+        self.team = team
+        table.reloadData()
     }
 }
 

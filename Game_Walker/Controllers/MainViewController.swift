@@ -27,9 +27,6 @@ class MainViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
-
-    
 }
 
 
