@@ -22,6 +22,18 @@ class JoinGameViewController: BaseViewController {
         H.delegates.append(self)
         T.delegates.append(self)
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
+        configureNavItem()
+        
+    }
+    
+    func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(CreateOrJoinTeamViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "ToMainVC", sender: self)
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {

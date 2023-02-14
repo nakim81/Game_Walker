@@ -19,6 +19,7 @@ class TimerViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private var timer = Timer()
+    private var timer2: Timer?
     private var seconds: Int = 0
     private var time: Int?
     private var isPaused = true
@@ -74,6 +75,11 @@ class TimerViewController: UIViewController {
                 let minute = strongSelf.seconds/60
                 let second = strongSelf.seconds % 60
                 strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+            }
+            if TeamViewController.read {
+                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+            } else {
+                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
             }
         }
     }

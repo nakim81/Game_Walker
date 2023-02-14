@@ -21,14 +21,23 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
+    private var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegates.append(self)
-        H.delegates.append(self)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if TeamViewController.read {
+                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+            } else {
+                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+            }
+        }
     }
     
     func listen(_ _ : [String : Any]){
@@ -76,16 +85,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 }
 // MARK: - TeamProtocol
-extension RankingViewController: TeamUpdateListener, HostUpdateListener {
-    func updateHost(_ host: Host) {
-        TeamViewController.messages = host.announcements
-        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
-            announcementButton.setImage(unreadSome, for: .normal)
-        } else {
-            announcementButton.setImage(readAll, for: .normal)
-        }
-    }
-    
+extension RankingViewController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
