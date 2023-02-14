@@ -227,7 +227,6 @@
 				61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */,
 				61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */,
 				61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */,
-				6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */,
 				6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */,
 				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 			);
@@ -263,6 +262,7 @@
 				FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */,
 				FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */,
 				FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */,
+				6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
