@@ -8,9 +8,10 @@
 import UIKit
 
 class StationRefereeTableViewCell: UITableViewCell {
-    @IBOutlet weak var refereeLabel: UILabel!
+
+    @IBOutlet weak var refereenameLabel: UILabel!
     
     func configureRefereeCell(refereeName: String) {
-        refereeLabel.text = refereeName
+        refereenameLabel.text = refereeName
     }
 }

@@ -46,8 +46,13 @@ class AddStationViewController: BaseViewController {
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
         
-//        refereeTableView.delegate = self
-//        refereeTableView.dataSource = self
+        refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
+        refereeTableView.delegate = self
+        refereeTableView.dataSource = self
+        
+
+    
+        
         checkReferee()
         setPaddings()
         R.delegate_refereeList = self
@@ -62,10 +67,7 @@ class AddStationViewController: BaseViewController {
     }
 
     func addRefereeTable() {
-        
-//        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-//        let window = windowScene?.windows.first
-//        transparentView.frame = window?.frame ?? self.view.frame
+
         transparentView.frame = self.view.frame
         self.view.addSubview(transparentView)
         self.view.addSubview(refereeTableView)
@@ -81,6 +83,7 @@ class AddStationViewController: BaseViewController {
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.transparentView.alpha = 0.5
             self.refereeTableView.alpha = 0.8
+            
             self.giveConstraints()
         }, completion: nil)
          
@@ -96,6 +99,9 @@ class AddStationViewController: BaseViewController {
             refereeTableView.widthAnchor.constraint(equalTo: refereeButton.widthAnchor),
             refereeTableView.heightAnchor.constraint(equalTo: refereeButton.heightAnchor, multiplier: 6)
         ])
+//        refereeTableView.layer.borderColor = .init(red: 25, green: 225, blue: 15, alpha: 1)
+//        refereeTableView.layer.borderWidth = 4
+//        refereeTableView.layer.cornerRadius = 15
     }
     
     @objc func removeRefereeTable() {
@@ -190,27 +196,6 @@ class AddStationViewController: BaseViewController {
         }
     }
     
-//    func dropRefereeList(dropped: Bool) {
-//        if dropped {
-//            UIView.animate(withDuration:0.3) {
-////                self.refereeTableView.isHidden = true
-//                self.isdropped = false
-//                self.pvpButton.isHidden = false
-//                self.pveButton.isHidden = false
-//                self.rulesTextfield.isHidden = false
-//                self.saveButton.isHidden = false
-//            }
-//        } else {
-//            UIView.animate(withDuration: 0.3) {
-////                self.refereeTableView.isHidden = false
-//                self.isdropped = true
-//                self.pvpButton.isHidden = true
-//                self.pveButton.isHidden = true
-//                self.rulesTextfield.isHidden = true
-//                self.saveButton.isHidden = true
-//            }
-//        }
-//    }
     
     
 }
@@ -224,28 +209,29 @@ extension AddStationViewController: UITextViewDelegate {
     
 }
 
-//
-//extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return availableReferees.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
-//        let curr_cellname = availableReferees[indexPath.row].name
-//        cell.configureRefereeCell(refereeName: curr_cellname)
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        print(availableReferees[indexPath.row])
-//        refereename = availableReferees[indexPath.row].name
+
+extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return availableReferees.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
+        let curr_cellname = availableReferees[indexPath.row].name
+        cell.configureRefereeCell(refereeName: curr_cellname)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print(availableReferees[indexPath.row])
+        refereename = availableReferees[indexPath.row].name
 //        print(refereename)
-//        checkReferee()
-//        dropRefereeList(dropped: isdropped)
-//    }
-//
-//}
+        checkReferee()
+        refereeButton.setTitle(refereename, for: .normal)
+        removeRefereeTable()
+    }
+
+}
 
 
 
@@ -254,7 +240,7 @@ extension AddStationViewController: RefereeList {
         for referee in referees {
             if (!referee.assigned) {
                 availableReferees.append(referee)
-//                print(availableReferees)
+                print(availableReferees)
             }
         }
     }
