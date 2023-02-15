@@ -207,7 +207,7 @@
                                         <state key="normal" backgroundImage="save 1"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
-                                            <segue destination="1L0-Oz-afr" kind="show" id="Rcz-O1-KSj"/>
+                                            <segue destination="1L0-Oz-afr" kind="showDetail" id="Rcz-O1-KSj"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game name 2" translatesAutoresizingMaskIntoConstraints="NO" id="B8E-DG-Un9" userLabel="Game Name">
@@ -226,7 +226,7 @@
                                         <rect key="frame" x="38.5" y="72.5" width="329" height="47"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game location 2" translatesAutoresizingMaskIntoConstraints="NO" id="Xyp-z0-rTe" userLabel="Game Location">
@@ -239,7 +239,7 @@
                                         <rect key="frame" x="38.5" y="169.5" width="329" height="47"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info textbox white 1" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-P8-uwc" userLabel="Game Location Text">
@@ -258,7 +258,7 @@
                                         <rect key="frame" x="38.5" y="266.5" width="329" height="47"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info textbox white 1" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-DB-iAK" userLabel="Game Points Text">
