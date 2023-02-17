@@ -24,6 +24,8 @@ class HostGameCodeViewController: BaseViewController {
         gameCodeInput.textAlignment = NSTextAlignment.center
         gameCodeInput.keyboardType = .asciiCapableNumberPad
         H.delegate_getHost = self
+        gameCodeInput.placeholder = "game code #"
+        
         self.hideKeyboardWhenTappedAround()
     }
     
