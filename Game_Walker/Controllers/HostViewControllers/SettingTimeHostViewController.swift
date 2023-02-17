@@ -18,13 +18,15 @@ class SettingTimeHostViewController: BaseViewController {
     @IBOutlet weak var teamcountTextField: UITextField!
     
     var host: Host?
-    var gameminutes: Int = 0
-    var gameseconds: Int = 0
-    var moveminutes: Int = 0
-    var moveseconds: Int = 0
+    var gameminutes: Int?
+    var gameseconds: Int?
+    var moveminutes: Int?
+    var moveseconds: Int?
     var teamcount: Int = 0
     var pickertype = 0
     var rounds : Int = 10
+    
+    private var gamecode = UserData.readGamecode("gamecodestring")!
     
     
     
@@ -122,13 +124,13 @@ class SettingTimeHostViewController: BaseViewController {
         self.view.endEditing(true)
         self.gametimePickerView.endEditing(true)
         pickerDisappear()
-        self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
-        self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds)
+        self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes ?? 0)
+        self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds ?? 0)
         
         self.movetimePickerView.endEditing(true)
         pickerDisappear()
-        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
-        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds)
+        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes ?? 0)
+        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds ?? 0)
     }
     
     func changeTimeToString(timeInteger : Int) -> String{
@@ -175,21 +177,27 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.resignFirstResponder()
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
-            H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds) ?? 0,
+            H.setTimer(gamecode, timeConvert(min:gameminutes ?? 0, sec:gameseconds ?? 0 ), timeConvert(min:moveminutes ?? 0, sec:moveseconds ?? 0), Int(rounds) ?? 0,
                        Int(teamcount)!)
 //            host?.teams = Int(teamcount)!
 //            host?.rounds = Int(rounds)!
+            print(rounds, teamcount)
             performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
             //performSegue(withIdentifier: "TempSegue", sender: self)
+            
         } else {
             alert(title: "Woops", message: "Please enter all information to set timer")
         }
+        
+        H.listenHost(gamecode, onListenerUpdate: listen(_:))
+        T.listenTeams(gamecode, onListenerUpdate: listen(_:))
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {
         return (min * 60 + sec)
     }
-    
+    func listen(_ _ : [String : Any]){
+    }
 
 }
 
@@ -245,5 +253,15 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
 extension SettingTimeHostViewController: GetHost {
     func getHost(_ host: Host) {
         self.host = host
+    }
+}
+
+extension SettingTimeHostViewController: HostUpdateListener, TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
+        
+    }
+    
+    func updateHost(_ host: Host) {
+        
     }
 }
