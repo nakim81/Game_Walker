@@ -18,10 +18,13 @@ class HostCreateOrJoinViewController: BaseViewController {
 
     @IBAction func createButtonPressed(_ sender: UIButton) {
         let gc = String(Int.random(in: 100000 ... 999999))
-        let host = Host(gamecode: "705154")
+//        let host = Host(gamecode: "705154")
+        let host = Host(gamecode: gc)
         H.createGame(gc, host)
         UserData.writeGamecode("705154", "gamecodestring")
+//        UserData.writeGamecode(gc, "gamecodestring")
         T.listenTeams("705154", onListenerUpdate: listen(_:))
+//        T.listenTeams(gc, onListenerUpdate: listen(_:))
         performSegue(withIdentifier: "CreateGameSegue", sender: self)
     }
     

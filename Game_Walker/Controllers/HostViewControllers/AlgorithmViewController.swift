@@ -11,9 +11,6 @@ class AlgorithmViewController: BaseViewController {
     
     @IBOutlet weak var startGameButton: UIButton!
     var stationList: [Station] = []
-//    var teamList: [Team] = []
-//    var host: Host!
-//    var teamnums :[Int] = []
     var grid: [[Int]] = [[Int]]()
     var totalrow : Int =  0
     var totalcolumn : Int = 0
@@ -125,7 +122,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         if (column == columns) {
             totalrow += 1
         }
-            cell.configureAlgorithmCell(cellteamnum:grid[row][column])
+//            cell.configureAlgorithmCell(cellteamnum:grid[row][column])
         return cell
         }
         return UICollectionViewCell();
@@ -147,9 +144,9 @@ extension AlgorithmViewController: GetHost {
         print("algorithm protocol")
         self.num_teams = host.teams
         self.num_rounds = host.rounds
-        self.collectionView?.reloadData()
         print("number of teams : ",self.num_teams)
         print("number of rounds : ", self.num_rounds)
+        self.collectionView?.reloadData()
         
     }
 }
