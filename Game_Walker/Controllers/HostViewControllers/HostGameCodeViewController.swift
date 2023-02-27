@@ -12,7 +12,9 @@ class HostGameCodeViewController: BaseViewController {
     @IBOutlet weak var gameCodeInput: UITextField!
     @IBOutlet weak var joinButton: UIButton!
     
-    var host : Host?
+    private var storedgamecode = UserData.readGamecode("gamecodestring")
+    private var gamecode = UserData.readGamecode("gamecodestring")
+//    var host : Host?
     
     // This will be the game code entered by the user.
     
@@ -23,20 +25,26 @@ class HostGameCodeViewController: BaseViewController {
         gameCodeInput.delegate = self
         gameCodeInput.textAlignment = NSTextAlignment.center
         gameCodeInput.keyboardType = .asciiCapableNumberPad
-        H.delegate_getHost = self
-        gameCodeInput.placeholder = "game code #"
-        
+//        H.delegate_getHost = self
+
+        gameCodeInput.placeholder = storedgamecode
         self.hideKeyboardWhenTappedAround()
     }
     
+    func setGameCode() {
+        let gameCodeText = gameCodeInput.text
+        if (gameCodeText != storedgamecode) {
+            gamecode = gameCodeText
+        }
+    }
+    
     @IBAction func joinButtonPressed(_ sender: UIButton) {
-//        let tempgamecode = gameCodeInput.text!
-        let tempgamecode = UserData.readGamecode("gamecodestring")
-
-        if tempgamecode!.isEmpty {
-            alert(title: "No Input",message:"You haven't entered a code!")
+        setGameCode()
+        if storedgamecode!.isEmpty {
+            alert(title: "No Input",message:"You never created a game!")
         } else {
-            H.getHost(tempgamecode!)
+            UserData.writeGamecode(gamecode!, "gamecodestring")
+//            H.getHost(storedgamecode!)
             self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
         }
     }
@@ -47,9 +55,9 @@ extension HostGameCodeViewController: UITextFieldDelegate {
 
 }
 
-extension HostGameCodeViewController: GetHost {
-    func getHost(_ host: Host) {
-        self.host = host
-        print("host protocol: could get host")
-    }
-}
+//extension HostGameCodeViewController: GetHost {
+//    func getHost(_ host: Host) {
+//        self.host = host
+//        print("host protocol: could get host")
+//    }
+//}

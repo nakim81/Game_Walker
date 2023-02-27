@@ -21,14 +21,15 @@ class HostCreateOrJoinViewController: BaseViewController {
 //        let host = Host(gamecode: "705154")
         let host = Host(gamecode: gc)
         H.createGame(gc, host)
-        UserData.writeGamecode("705154", "gamecodestring")
-//        UserData.writeGamecode(gc, "gamecodestring")
-        T.listenTeams("705154", onListenerUpdate: listen(_:))
-//        T.listenTeams(gc, onListenerUpdate: listen(_:))
+//        UserData.writeGamecode("705154", "gamecodestring")
+        UserData.writeGamecode(gc, "gamecodestring")
+//        T.listenTeams("705154", onListenerUpdate: listen(_:))
+        T.listenTeams(gc, onListenerUpdate: listen(_:))
         performSegue(withIdentifier: "CreateGameSegue", sender: self)
     }
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
+
         if UserData.readGamecode("gamecodestring") != nil {
             performSegue(withIdentifier: "HostGamecodeSegue", sender: self)
         } else {
