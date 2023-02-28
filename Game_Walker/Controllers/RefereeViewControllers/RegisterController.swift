@@ -17,6 +17,7 @@ class RegisterController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        gamecodeTextField.keyboardType = .asciiCapableNumberPad
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {

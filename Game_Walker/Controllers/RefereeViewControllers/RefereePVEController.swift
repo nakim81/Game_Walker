@@ -24,10 +24,13 @@ class RefereePVEController: UIViewController {
         H.delegate_getHost = self
         S.delegate_getStation = self
         T.delegate_getTeam = self
+        T.delegates.append(self)
         S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         H.getHost(UserData.readGamecode("gamecode")!)
+        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
         self.team = self.teamOrder[index]
         super.viewDidLoad()
+        
         self.view.addSubview(roundLabel)
         self.view.addSubview(borderView)
         self.view.addSubview(iconButton)
@@ -35,6 +38,7 @@ class RefereePVEController: UIViewController {
         self.view.addSubview(teamName)
         self.view.addSubview(timerLabel)
         self.view.addSubview(scoreLabel)
+        
         borderView.translatesAutoresizingMaskIntoConstraints = false
         borderView.widthAnchor.constraint(equalToConstant: 211).isActive = true
         borderView.heightAnchor.constraint(equalToConstant: 306).isActive = true
@@ -156,15 +160,14 @@ class RefereePVEController: UIViewController {
         if seconds! < 1 {
             index += 1
             H.getHost(UserData.readGamecode("gamecode")!)
-            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
             teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
             teamName.text = teamOrder[index].name
             roundLabel.text = "Round " + "\(index + 1)"
             iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
         } else {
             seconds! -= 1
             timerLabel.text = timeString(time: TimeInterval(seconds!))
-            print(self.teamOrder[index].name)
             T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
         }
     }
@@ -191,6 +194,10 @@ class RefereePVEController: UIViewController {
         UserData.writeTeam(team!, "points")
         performSegue(withIdentifier: "givePointsPVE", sender: self)
     }
+    
+    func listen(_ _ : [String : Any]){
+    }
+    
 }
 
 //MARK: - UIUpdate
@@ -210,5 +217,10 @@ extension RefereePVEController: GetHost {
 extension RefereePVEController: GetTeam {
     func getTeam(_ team: Team) {
         scoreLabel.text = "\(team.points)"
+    }
+}
+// MARK: - listener
+extension RefereePVEController: TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
     }
 }
