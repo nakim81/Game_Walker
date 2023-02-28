@@ -1,45 +1,25 @@
 //
-//  TeamTableViewCell.swift
+//  AwardTableViewCell.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 7/22/22.
+//  Created by Noah Kim on 2/20/23.
 //
 
 import Foundation
 import UIKit
 
-class TeamTableViewCell: UITableViewCell {
+class AwardTableViewCell: UITableViewCell {
     
-    static let identifier = "TeamTableViewCell"
-    
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
-        label.numberOfLines = 0
-        return label
-    }()
+    static let identifier = "AwardTableViewCell"
     
     private let teamNumLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 18)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
         label.numberOfLines = 0
         return label
-    }()
-    
-    private let backGroundView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "name box fill 1")
-        view.alpha = 0.5
-        return view
     }()
     
     private lazy var containerView: UIView = {
@@ -64,7 +44,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
+        label.font = UIFont(name: "Dosis-Regular", size: 13)
         label.numberOfLines = 0
         return label
     }()
@@ -72,17 +52,17 @@ class TeamTableViewCell: UITableViewCell {
     private var scoreLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
-        label.textAlignment = .center
+        label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 20)
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 0
         return label
     }()
 
     public let borderView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 85, width: 330, height: 2))
+        let view = UIView(frame: CGRect(x: 0, y: 85, width: 255, height: 2))
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        view.layer.borderColor = UIColor(red: 0.98, green: 0.204, blue: 0, alpha: 1).cgColor
         return view
     }()
     
@@ -94,30 +74,6 @@ class TeamTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
 
-    func configureTeamTableViewCell(name: String) {
-        contentView.addSubview(containerView)
-        containerView.addSubview(backGroundView)
-        containerView.addSubview(nameLabel)
-
-        NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 330),
-            containerView.heightAnchor.constraint(equalToConstant: 50),
-            
-            nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            nameLabel.widthAnchor.constraint(equalToConstant: 203),
-            nameLabel.heightAnchor.constraint(equalToConstant: 27),
-            
-            backGroundView.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
-            backGroundView.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            backGroundView.widthAnchor.constraint(equalToConstant: 328),
-            backGroundView.heightAnchor.constraint(equalToConstant: 47)
-        ])
-        nameLabel.text = name
-    
-    }
     
     func configureRankTableViewCell(imageName: String, teamNum: String, teamName: String, points: Int) {
         contentView.addSubview(containerView)
@@ -130,26 +86,27 @@ class TeamTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 330),
+            containerView.widthAnchor.constraint(equalToConstant: 270),
             containerView.heightAnchor.constraint(equalToConstant: 100),
             
             teamNumLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            teamNumLabel.leadingAnchor.constraint(equalTo: teamIconImage.layoutMarginsGuide.trailingAnchor, constant: 5),
-            teamNumLabel.trailingAnchor.constraint(equalTo: teamNameLabel.leadingAnchor),
-            teamNumLabel.heightAnchor.constraint(equalToConstant: 23),
+            teamNumLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: teamIconImage.layoutMarginsGuide.trailingAnchor, multiplier: 1),
+            teamNumLabel.widthAnchor.constraint(equalToConstant: 65),
+            teamNumLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 20),
+            teamNameLabel.leadingAnchor.constraint(equalTo: teamNumLabel.layoutMarginsGuide.trailingAnchor, constant: 15),
+            teamNameLabel.trailingAnchor.constraint(equalTo: scoreLabel.layoutMarginsGuide.leadingAnchor, constant: -15),
+            teamNameLabel.widthAnchor.constraint(equalToConstant: 85),
             teamNameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            teamNameLabel.widthAnchor.constraint(equalToConstant: 100),
             teamNameLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            scoreLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 95),
+            scoreLabel.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor, constant: 0),
             scoreLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 70),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 35),
             scoreLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
         
-        teamIconImage.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: -120).isActive = true
+        teamIconImage.leadingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.leadingAnchor).isActive = true
         teamIconImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         teamIconImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
         teamIconImage.heightAnchor.constraint(equalToConstant: 60).isActive = true

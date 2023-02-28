@@ -11,7 +11,7 @@ import UIKit
 class MessageViewController: UIViewController {
     
     private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-    private var messages: [String]? = ["Hi", "Hello", "Good morning"]
+    private var messages: [String]?
     private let cellSpacingHeight: CGFloat = 0
     
     private let messageTableView: UITableView = {
@@ -65,9 +65,10 @@ class MessageViewController: UIViewController {
         }
         buttonView.addSubview(button)
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 100),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -100),
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.4),
+            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 50),
+            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -50),
+            button.topAnchor.constraint(equalTo: buttonView.topAnchor, constant: 30),
+            button.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor, constant: -45),
             button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
         ])
@@ -149,14 +150,13 @@ class MessageViewController: UIViewController {
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.75),
+            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.65),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             buttonView.topAnchor.constraint(equalTo: messageTableView.bottomAnchor, constant: 15),
-            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1),
             buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5),
-            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.2),
+            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
@@ -173,10 +173,12 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.layer.borderColor = UIColor.lightText.cgColor
             cell.layer.cornerRadius = 10
             cell.messageNameLabel.textColor = UIColor.lightText
+            cell.selectionStyle = .none
         } else {
             cell.layer.borderWidth = 3
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.cornerRadius = 10
+            cell.selectionStyle = .none
         }
         return cell
     }
@@ -204,9 +206,12 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let messages = messages {
-            TeamViewController.selectedIndexList.append(indexPath)
+            if !TeamViewController.selectedIndexList.contains(indexPath) {
+                TeamViewController.selectedIndexList.append(indexPath)
+            }
             let announcementText = messages[indexPath.section]
             showAnnouncementPopUp(announcement: announcementText)
+            messageTableView.deselectRow(at: indexPath, animated: true)
             messageTableView.reloadRows(at: TeamViewController.selectedIndexList, with: .none)
         }
     }

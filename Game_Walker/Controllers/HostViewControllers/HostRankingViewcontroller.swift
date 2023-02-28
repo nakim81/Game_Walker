@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HostRankingViewcontroller: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HostRankingViewcontroller: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     private var messages: [String]?
@@ -43,14 +43,19 @@ class HostRankingViewcontroller: UIViewController, UITableViewDelegate, UITableV
         leaderBoard.dataSource = self
         leaderBoard.register(HostRankingTableViewCell.self, forCellReuseIdentifier: HostRankingTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
-        leaderBoard.allowsSelection = false
+        leaderBoard.allowsSelection = true
         leaderBoard.separatorStyle = .none
+        leaderBoard.allowsMultipleSelection = false
     }
-
+}
+// MARK: - tableView
+extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = String(teamList[indexPath.section].number)
-        cell.configureRankTableViewCell(imageName: teamList[indexPath.section].iconName, teamNum: "Team \(teamNum)", teamName: teamList[indexPath.section].name, points: teamList[indexPath.section].points)
+        let team = teamList[indexPath.section]
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: team.points)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -70,6 +75,15 @@ class HostRankingViewcontroller: UIViewController, UITableViewDelegate, UITableV
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.section)
+        let team = teamList[indexPath.section]
+        let svc = HostGivePointsController(team: team, gameCode: self.gameCode)
+        svc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        self.present(svc, animated: true)
+        leaderBoard.deselectRow(at: indexPath, animated: true)
     }
 }
 // MARK: - TeamProtocol

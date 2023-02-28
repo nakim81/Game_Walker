@@ -75,6 +75,7 @@
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
+		FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */; };
 		FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */; };
 		FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE24F28E976DE00D8C9D9 /* Dosis-ExtraLight.ttf */; };
 		FC1AE25728E976DE00D8C9D9 /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25028E976DE00D8C9D9 /* Dosis-ExtraBold.ttf */; };
@@ -83,6 +84,8 @@
 		FC1AE25A28E976DE00D8C9D9 /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */; };
 		FC1AE25B28E976DE00D8C9D9 /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE25428E976DE00D8C9D9 /* Dosis-Light.ttf */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
+		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
+		FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC21701F29A319BB00FD5F66 /* Award.storyboard */; };
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
@@ -163,6 +166,7 @@
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		FC1AE24F28E976DE00D8C9D9 /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
 		FC1AE25028E976DE00D8C9D9 /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 		FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
 		FC1AE25428E976DE00D8C9D9 /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
+		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
+		FC21701F29A319BB00FD5F66 /* Award.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Award.storyboard; sourceTree = "<group>"; };
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
@@ -318,6 +324,7 @@
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
 				6159251E29694A0600BC6D7F /* RefereeViewControllers */,
 				A1EBA693296F21DF00228501 /* HostViewControllers */,
+				FC21701C29A3195300FD5F66 /* AwardViewController */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -343,6 +350,7 @@
 				DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */,
 				DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */,
 				DABC1E82288BA9CA00C75DC7 /* Host.storyboard */,
+				FC21701F29A319BB00FD5F66 /* Award.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -381,6 +389,15 @@
 				FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		FC21701C29A3195300FD5F66 /* AwardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FC21701D29A3198B00FD5F66 /* AwardViewController.swift */,
+				FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */,
+			);
+			path = AwardViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +469,7 @@
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				FC1AE25828E976DE00D8C9D9 /* Dosis-Bold.ttf in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
+				FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */,
 				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				FC1AE25B28E976DE00D8C9D9 /* Dosis-Light.ttf in Resources */,
@@ -523,6 +541,7 @@
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */,
+				FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */,
 				61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */,
 				DABC1EF128911FA900C75DC7 /* Station_Database.swift in Sources */,
 				61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */,
@@ -555,6 +574,7 @@
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				6149DB6029921B5600DD4DC2 /* WarningScreenController.swift in Sources */,
 				DABC1EED2890CEDB00C75DC7 /* Referee_Database.swift in Sources */,
+				FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */,
 				61E509472988901800F37E79 /* RefereeTabBarPVEController.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,

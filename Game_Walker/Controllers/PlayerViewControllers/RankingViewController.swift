@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RankingViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
@@ -58,7 +58,9 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
     }
-
+}
+// MARK: - tableView
+extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         let teamNum = String(teamList[indexPath.section].number)

@@ -41,7 +41,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let strongSelf = self else {
                 return
             }
-            if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+            if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
                 TeamViewController.read = false
                 strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
             } else {
@@ -134,7 +134,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
 extension TeamViewController: GetTeam, HostUpdateListener {
     func updateHost(_ host: Host) {
         TeamViewController.messages = host.announcements
-        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
+        if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
             TeamViewController.read = false
         } else {
             announcementButton.setImage(readAll, for: .normal)

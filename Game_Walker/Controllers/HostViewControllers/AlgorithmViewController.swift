@@ -73,14 +73,14 @@ class AlgorithmViewController: BaseViewController {
 //        if (r_zero)
 //        var curr_row = [Int]()
 //        curr_row.append("C1")
-        for r in 0...(num_rounds - 1) {
-            var curr_row = [Int]()
-            for t in 0...(columncount - 1) {
-                curr_row.append((t + (r + 1))%columncount)
-            }
-            grid.append(curr_row)
-            curr_row.removeAll()
-        }
+//        for r in 0...(num_rounds - 1) {
+//            var curr_row = [Int]()
+//            for t in 0...(columncount - 1) {
+//                curr_row.append((t + (r + 1))%columncount)
+//            }
+//            grid.append(curr_row)
+//            curr_row.removeAll()
+//        }
 //        let team_counter = 0
 //        let station_counter = 0
 //        for s in 0...(num_stations - 1){

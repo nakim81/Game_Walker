@@ -10,11 +10,27 @@ import UIKit
 import GMStepper
 
 class HostGivePointsController : UIViewController {
-    var currentstationName = ""
-    var currentPoints = 0
+    
+    var currentStationName: String
+    var currentPoints: Int
+    let gameCode: String
+    let team: Team
+    
+    init(team: Team, gameCode: String) {
+        self.team = team
+        self.currentStationName = team.currentStation
+        self.currentPoints = team.points
+        self.gameCode = gameCode
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        //self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.view.addSubview(containerView)
         self.view.addSubview(currentstationLabel)
         self.view.addSubview(currentpointsLabel)
@@ -75,7 +91,7 @@ class HostGivePointsController : UIViewController {
         view.textColor = .white
         view.font = UIFont(name: "Dosis-SemiBold", size: 20)
         view.textAlignment = .center
-        view.text = "Current station: " + currentstationName
+        view.text = "Current station: " + currentStationName
         return view
     }()
     
@@ -122,14 +138,7 @@ class HostGivePointsController : UIViewController {
     }()
     
     @objc func buttonTapped() {
-        //T.givePoints(UserData.readGamecode(), , Int(stepper.value))
-        //performSegue(withIdentifier: "", sender: self)
-    }
-}
-//MARK: - UIUpdate
-extension HostGivePointsController: GetTeam {
-    func getTeam(_ team: Team) {
-        self.currentstationName = team.currentStation
-        self.currentPoints = team.points
+        T.givePoints(gameCode, team.name, Int(stepper.value))
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
