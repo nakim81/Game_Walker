@@ -27,6 +27,8 @@ class RefereePVPController: UIViewController {
         H.delegate_getHost = self
         S.delegate_getStation = self
         T.delegate_getTeam = self
+        T.delegates.append(self)
+        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
         H.getHost(UserData.readGamecode("gamecode")!)
         self.teamA = self.teamOrder[index]
         self.teamB = self.teamOrder[index+1]
@@ -45,7 +47,6 @@ class RefereePVPController: UIViewController {
         self.view.addSubview(timerLabel)
         self.view.addSubview(rightscoreLabel)
 
-            
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
         roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
@@ -307,6 +308,10 @@ class RefereePVPController: UIViewController {
         
     }
     
+    func listen(_ _ : [String : Any]){
+    }
+    
+    
 }
 
 //MARK: - UIUpdate
@@ -333,3 +338,9 @@ extension RefereePVPController: GetTeam {
         }
     }
 }
+// MARK: - listener
+extension RefereePVPController: TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
+    }
+}
+

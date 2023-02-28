@@ -12,7 +12,7 @@ class WaitingController: BaseViewController {
 
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
-    var pvp = true
+    var pvp = false
     var timer: Timer?
     var currentIndex: Int = 0
     let waitingImagesArray = ["waiting 2.png", "waiting 1.png", "waiting. 1.png"]

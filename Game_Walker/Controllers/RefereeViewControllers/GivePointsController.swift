@@ -63,7 +63,7 @@ class GivePointsController: UIViewController {
     }
 
     /// Maximum value. Must be more than minimumValue. Defaults to 100.
-    @objc @IBInspectable public var maximumValue: Double = 100 {
+    @objc @IBInspectable public var maximumValue: Double = 1000 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
         }
@@ -215,6 +215,8 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpInside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
+        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.leftButtonPress))
+        button.addGestureRecognizer(longGestureRecognizer)
         return button
     }()
 
@@ -228,6 +230,8 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpInside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
+        let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.rightButtonPress))
+        button.addGestureRecognizer(longGestureRecognizer)
         return button
     }()
 
@@ -241,9 +245,7 @@ class GivePointsController: UIViewController {
         label.layer.cornerRadius = self.labelCornerRadius
         label.layer.masksToBounds = true
         label.isUserInteractionEnabled = true
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(GMStepper.handlePan))
-        panRecognizer.maximumNumberOfTouches = 1
-        label.addGestureRecognizer(panRecognizer)
+        
         return label
     }()
 
@@ -257,7 +259,7 @@ class GivePointsController: UIViewController {
     var panState = LabelPanState.Stable
 
     enum StepperState {
-        case Stable, ShouldIncrease, ShouldDecrease
+        case Stable, ShouldIncrease, MoreIncrease, ShouldDecrease, MoreDecrease
     }
     var stepperState = StepperState.Stable {
         didSet {
@@ -345,12 +347,19 @@ class GivePointsController: UIViewController {
         labelMinimumCenterX = label.center.x - labelSlideLength
         labelOriginalCenter = label.center
     }
-
+    //Here
     func updateValue() {
         if stepperState == .ShouldIncrease {
             value += stepValue
-        } else if stepperState == .ShouldDecrease {
+        }
+        if stepperState == .ShouldDecrease {
             value -= stepValue
+        }
+        if stepperState == .MoreIncrease {
+            value += stepValue * 10
+        }
+        if stepperState == .MoreDecrease {
+            value -= stepValue * 10
         }
     }
     
@@ -360,73 +369,46 @@ class GivePointsController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    /// Useful closure for logging the timer interval. You can call this in the timer handler to test the autorepeat option. Not used in the current implementation.
-//    lazy var printTimerGaps: () -> () = {
-//        var prevTime: CFAbsoluteTime?
-//
-//        return { _ in
-//            var now = CFAbsoluteTimeGetCurrent()
-//            if let prevTime = prevTime {
-//                print(now - prevTime)
-//            }
-//            prevTime = now
-//        }
-//    }()
 }
 
-// MARK: Pan Gesture
+
+
+// MARK: Press Gesture
 extension GMStepper {
-    @objc func handlePan(gesture: UIPanGestureRecognizer) {
+    @objc func handlePress(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
             leftButton.isEnabled = false
             rightButton.isEnabled = false
+            // Start a timer when long press begins
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: true)
         case .changed:
-            let translation = gesture.translation(in: label)
-            gesture.setTranslation(CGPoint.zero, in: label)
-
-            let slidingRight = gesture.velocity(in: label).x > 0
-            let slidingLeft = gesture.velocity(in: label).x < 0
-
-            // Move the label with pan
-            if slidingRight {
-                label.center.x = min(labelMaximumCenterX, label.center.x + translation.x)
-            } else if slidingLeft {
-                label.center.x = max(labelMinimumCenterX, label.center.x + translation.x)
-            }
-
-            // When the label hits the edges, increase/decrease value and change button backgrounds
-            if label.center.x == labelMaximumCenterX {
-                // If not hit the right edge before, increase the value and start the timer. If already hit the edge, do nothing. Timer will handle it.
-                if panState != .HitRightEdge {
-                    stepperState = .ShouldIncrease
-                    panState = .HitRightEdge
-                }
-                
-                animateLimitHitIfNeeded()
-            } else if label.center.x == labelMinimumCenterX {
-                if panState != .HitLeftEdge {
-                    stepperState = .ShouldDecrease
-                    panState = .HitLeftEdge
-                }
-
-                animateLimitHitIfNeeded()
-            } else {
-                panState = .Stable
-                stepperState = .Stable
-                resetTimer()
-
-                self.rightButton.backgroundColor = self.buttonsBackgroundColor
-                self.leftButton.backgroundColor = self.buttonsBackgroundColor
-            }
+            // Do nothing while the gesture is being changed
+            break
         case .ended, .cancelled, .failed:
+            // Invalidate the timer when the gesture ends, is cancelled or fails
+            timer?.invalidate()
+            timer = nil
             reset()
         default:
             break
         }
     }
 
+    @objc func handleTimer() {
+        // When the timer fires, increase or decrease the value based on the current stepper state and animate the label accordingly
+        switch stepperState {
+        case .ShouldIncrease:
+            animateLimitHitIfNeeded()
+        case .ShouldDecrease:
+            animateLimitHitIfNeeded()
+        default:
+            break
+        }
+    }
+
     @objc func reset() {
+        // Reset the stepper state, pan state, and timer when the gesture ends, is cancelled or fails
         panState = .Stable
         stepperState = .Stable
         resetTimer()
@@ -441,7 +423,14 @@ extension GMStepper {
             self.leftButton.backgroundColor = self.buttonsBackgroundColor
         })
     }
+
+    func resetTimer() {
+        // Invalidate the timer and set it to nil
+        timer?.invalidate()
+        timer = nil
+    }
 }
+
 
 // MARK: Button Events
 extension GMStepper {
@@ -458,6 +447,20 @@ extension GMStepper {
         }
 
     }
+    
+    @objc func leftButtonPress(button: UIButton) {
+        rightButton.isEnabled = false
+        label.isUserInteractionEnabled = false
+        resetTimer()
+
+        if value == minimumValue {
+            animateLimitHitIfNeeded()
+        } else {
+            stepperState = .MoreDecrease
+            animateSlideLeft()
+        }
+
+    }
 
     @objc func rightButtonTouchDown(button: UIButton) {
         leftButton.isEnabled = false
@@ -468,6 +471,19 @@ extension GMStepper {
             animateLimitHitIfNeeded()
         } else {
             stepperState = .ShouldIncrease
+            animateSlideRight()
+        }
+    }
+    
+    @objc func rightButtonPress(button: UIButton) {
+        leftButton.isEnabled = false
+        label.isUserInteractionEnabled = false
+        resetTimer()
+
+        if value == maximumValue {
+            animateLimitHitIfNeeded()
+        } else {
+            stepperState = .MoreIncrease
             animateSlideRight()
         }
     }
@@ -527,14 +543,6 @@ extension GMStepper {
 
     func scheduleTimer() {
         timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(GMStepper.handleTimerFire), userInfo: nil, repeats: true)
-    }
-
-    func resetTimer() {
-        if let timer = timer {
-            timer.invalidate()
-            self.timer = nil
-            timerFireCount = 0
-        }
     }
 }
 
