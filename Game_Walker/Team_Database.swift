@@ -27,6 +27,7 @@ struct T {
              for document in documents {
                  teams.append(convertDataToTeam(document.data()))
              }
+             teams.sort{$0.number > $1.number}
              teams.sort{$0.points > $1.points}
             for delegate in delegates {
                 delegate.updateTeams(teams)

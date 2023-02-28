@@ -10,8 +10,9 @@ import UIKit
 class StationsTableViewController: BaseViewController {
     
     var currentStations: [Station] = []
-    //private var curr_gamecode = UserData.readGamecode("gamecodestring")
+
     var curr_gamecode = UserData.readGamecode("gamecodestring")
+    
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class StationsTableViewController: BaseViewController {
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.delegate = self
         stationTable.dataSource = self
+        stationTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         S.delegate_stationList = self
         S.getStationList(curr_gamecode!)
     }
@@ -44,6 +46,7 @@ extension StationsTableViewController: UITableViewDataSource {
         let cell = stationTable.dequeueReusableCell(withIdentifier: "HostStationsTableViewCell", for: indexPath) as! HostStationsTableViewCell
         let curr_cellname = currentStations[indexPath.row].name
         cell.configureStationCell(stationName: curr_cellname)
+        cell.backgroundView = UIImageView(image: UIImage(named: "cell-with-transparent"))
         return cell
     }
     

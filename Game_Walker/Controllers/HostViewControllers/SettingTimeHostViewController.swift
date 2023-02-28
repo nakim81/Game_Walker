@@ -17,14 +17,17 @@ class SettingTimeHostViewController: BaseViewController {
     @IBOutlet weak var roundsTextField: UITextField!
     @IBOutlet weak var teamcountTextField: UITextField!
     
-    var host: Host?
-    var gameminutes: Int = 0
+//    var host: Host?
+//    var team: Team?
+    var gameminutes: Int = 20
     var gameseconds: Int = 0
-    var moveminutes: Int = 0
+    var moveminutes: Int = 10
     var moveseconds: Int = 0
     var teamcount: Int = 0
     var pickertype = 0
     var rounds : Int = 10
+    
+    private var gamecode = UserData.readGamecode("gamecodestring")!
     
     
     
@@ -47,7 +50,7 @@ class SettingTimeHostViewController: BaseViewController {
 
         
         super.viewDidLoad()
-        H.delegate_getHost = self
+
         self.hideKeyboardWhenTappedAround()
         
         roundsTextField.keyboardType = .numberPad
@@ -56,6 +59,9 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.keyboardType = .numberPad
         teamcountTextField.textAlignment = .center
         teamcountTextField.delegate = self
+        
+        gameMinutesLabel.text = String(gameminutes)
+        movingMinutesLabel.text = String(moveminutes)
         
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
@@ -122,13 +128,13 @@ class SettingTimeHostViewController: BaseViewController {
         self.view.endEditing(true)
         self.gametimePickerView.endEditing(true)
         pickerDisappear()
-        self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
-        self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds)
+        self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes )
+        self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds )
         
         self.movetimePickerView.endEditing(true)
         pickerDisappear()
-        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
-        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds)
+        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes )
+        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds )
     }
     
     func changeTimeToString(timeInteger : Int) -> String{
@@ -175,21 +181,30 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.resignFirstResponder()
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
-            H.setTimer(UserData.readGamecode("gamecodestring")!, timeConvert(min:gameminutes, sec:gameseconds), timeConvert(min:moveminutes, sec:moveseconds), Int(rounds) ?? 0,
-                       Int(teamcount)!)
-//            host?.teams = Int(teamcount)!
-//            host?.rounds = Int(rounds)!
+//            H.setTimer(gamecode, 110, 120, 13, 14)
+            H.setTimer(gamecode,
+                       timeConvert(min:gameminutes , sec:gameseconds ),
+                       timeConvert(min:moveminutes , sec:moveseconds ),
+                       Int(rounds) ?? 0,
+                       Int(teamcount) ?? 0)
+
+            print("ROUNDS AND TEAMCOUNT: ",rounds, teamcount)
             performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
-            //performSegue(withIdentifier: "TempSegue", sender: self)
+//            performSegue(withIdentifier: "TempSegue", sender: self)
+            
         } else {
             alert(title: "Woops", message: "Please enter all information to set timer")
         }
+        
+        H.listenHost(gamecode, onListenerUpdate: listen(_:))
+        T.listenTeams(gamecode, onListenerUpdate: listen(_:))
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {
         return (min * 60 + sec)
     }
-    
+    func listen(_ _ : [String : Any]){
+    }
 
 }
 
@@ -242,8 +257,18 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
 
     }
 }
-extension SettingTimeHostViewController: GetHost {
-    func getHost(_ host: Host) {
-        self.host = host
+//extension SettingTimeHostViewController: GetHost {
+//    func getHost(_ host: Host) {
+//        self.host = host
+//    }
+//}
+
+extension SettingTimeHostViewController: HostUpdateListener, TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
+    }
+
+    
+    func updateHost(_ host: Host) {
+
     }
 }
