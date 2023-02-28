@@ -12,8 +12,8 @@ class HostGameCodeViewController: BaseViewController {
     @IBOutlet weak var gameCodeInput: UITextField!
     @IBOutlet weak var joinButton: UIButton!
     
-    private var storedgamecode = UserData.readGamecode("gamecodestring")
-    private var gamecode = UserData.readGamecode("gamecodestring")
+    private var storedgamecode = UserData.readGamecode("gamecode")
+    private var gamecode = UserData.readGamecode("gamecode")
     
     private var usestoredcode = true
 //    var host : Host?
@@ -51,7 +51,7 @@ class HostGameCodeViewController: BaseViewController {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
-                UserData.writeGamecode(gamecode!, "gamecodestring")
+                UserData.writeGamecode(gamecode!, "gamecode)
             }
 
 //            H.getHost(storedgamecode!)

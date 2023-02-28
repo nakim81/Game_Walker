@@ -11,7 +11,7 @@ class StationsTableViewController: BaseViewController {
     
     var currentStations: [Station] = []
 
-    var curr_gamecode = UserData.readGamecode("gamecodestring")
+    var curr_gamecode = UserData.readGamecode("gamecode")
     
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {

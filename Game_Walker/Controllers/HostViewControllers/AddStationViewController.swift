@@ -56,7 +56,7 @@ class AddStationViewController: BaseViewController {
         checkReferee()
         setPaddings()
         R.delegate_refereeList = self
-        R.getRefereeList(UserData.readGamecode("gamecodestring")!)
+        R.getRefereeList(UserData.readGamecode("gamecode")!)
         
         self.hideKeyboardWhenTappedAround()
     }
@@ -175,10 +175,10 @@ class AddStationViewController: BaseViewController {
             alert(title:"Game Type Not Specified", message: "Please select either PVP or PVE")
         }
         
-        let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecodestring")!, name: refereename, stationName: gamename,assigned: true)
-        R.assignStation(UserData.readGamecode("gamecodestring")!, selectedReferee, gamename)
+        let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename,assigned: true)
+        R.assignStation(UserData.readGamecode("gamecode")!, selectedReferee, gamename)
         let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules)
-        S.addStation(UserData.readGamecode("gamecodestring")!, stationToAdd)
+        S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
         
         stationsTableViewController?.reloadStationTable()
     }
