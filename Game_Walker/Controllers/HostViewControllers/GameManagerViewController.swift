@@ -17,7 +17,7 @@ class GameManagerViewController: UIViewController {
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     private var teamList: [Team] = []
-    private let gameCode = UserData.readGamecode("gamecodestring") ?? ""
+    private let gameCode = UserData.readGamecode("gamecode") ?? ""
     private var selectedIndex: Int?
     private let refreshController: UIRefreshControl = UIRefreshControl()
     

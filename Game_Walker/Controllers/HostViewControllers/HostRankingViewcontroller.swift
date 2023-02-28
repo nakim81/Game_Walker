@@ -15,7 +15,7 @@ class HostRankingViewcontroller: UIViewController {
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
-    private var gameCode: String = UserData.readGamecode("gamecodestring") ?? ""
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {

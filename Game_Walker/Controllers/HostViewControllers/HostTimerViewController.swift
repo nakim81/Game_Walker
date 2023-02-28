@@ -21,7 +21,7 @@ class HostTimerViewController: UIViewController {
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
     
-    private var gameCode: String = UserData.readGamecode("gamecodestring") ?? ""
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     
     private let timerLabel: UILabel = {
         let label = UILabel()

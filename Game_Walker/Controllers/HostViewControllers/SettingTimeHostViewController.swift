@@ -27,7 +27,7 @@ class SettingTimeHostViewController: BaseViewController {
     var pickertype = 0
     var rounds : Int = 10
     
-    private var gamecode = UserData.readGamecode("gamecodestring")!
+    private var gamecode = UserData.readGamecode("gamecode")!
     
     
     

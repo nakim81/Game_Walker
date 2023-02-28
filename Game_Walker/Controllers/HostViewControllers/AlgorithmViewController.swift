@@ -22,7 +22,7 @@ class AlgorithmViewController: BaseViewController {
     var num_teams : Int = 0
     var num_stations : Int = 0
     
-    private var gamecode = UserData.readGamecode("gamecodestring")!
+    private var gamecode = UserData.readGamecode("gamecode")!
     
     @IBOutlet weak var collectionView: UICollectionView!
 
