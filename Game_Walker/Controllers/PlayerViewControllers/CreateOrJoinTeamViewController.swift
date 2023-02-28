@@ -24,6 +24,14 @@ class CreateOrJoinTeamViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    @IBOutlet weak var testButton: UIButton!
+    @IBAction func testBtnPressed(_ sender: UIButton) {
+        Task {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            performSegue(withIdentifier: "ToAwardVC", sender: self)
+        }
+    }
+    
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToJoinGameVC", sender: self)
     }
