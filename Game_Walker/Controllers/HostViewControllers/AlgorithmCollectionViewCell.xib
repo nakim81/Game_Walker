@@ -39,7 +39,7 @@
                 <outlet property="algorithmCellBox" destination="Y0Y-52-SN2" id="pD2-HX-kJV"/>
                 <outlet property="teamnumLabel" destination="2fa-Rq-hu6" id="EAT-5i-Wb7"/>
             </connections>
-            <point key="canvasLocation" x="-29" y="80"/>
+            <point key="canvasLocation" x="-30.434782608695656" y="79.6875"/>
         </collectionViewCell>
     </objects>
     <resources>
