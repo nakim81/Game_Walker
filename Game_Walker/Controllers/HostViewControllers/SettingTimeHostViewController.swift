@@ -60,6 +60,9 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.textAlignment = .center
         teamcountTextField.delegate = self
         
+        gameMinutesLabel.text = String(gameminutes)
+        movingMinutesLabel.text = String(moveminutes)
+        
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
         let gamedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))

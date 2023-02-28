@@ -14,6 +14,8 @@ class HostGameCodeViewController: BaseViewController {
     
     private var storedgamecode = UserData.readGamecode("gamecodestring")
     private var gamecode = UserData.readGamecode("gamecodestring")
+    
+    private var usestoredcode = true
 //    var host : Host?
     
     // This will be the game code entered by the user.
@@ -33,8 +35,13 @@ class HostGameCodeViewController: BaseViewController {
     
     func setGameCode() {
         let gameCodeText = gameCodeInput.text
-        if (gameCodeText != storedgamecode) {
+
+        if (gameCodeText != storedgamecode && gameCodeText != "") {
             gamecode = gameCodeText
+            usestoredcode = false
+        } else {
+            gamecode = storedgamecode
+            usestoredcode = true
         }
     }
     
@@ -43,7 +50,10 @@ class HostGameCodeViewController: BaseViewController {
         if storedgamecode!.isEmpty {
             alert(title: "No Input",message:"You never created a game!")
         } else {
-            UserData.writeGamecode(gamecode!, "gamecodestring")
+            if (!usestoredcode) {
+                UserData.writeGamecode(gamecode!, "gamecodestring")
+            }
+
 //            H.getHost(storedgamecode!)
             self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
         }
