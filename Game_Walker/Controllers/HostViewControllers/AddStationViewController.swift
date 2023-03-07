@@ -181,6 +181,7 @@ class AddStationViewController: BaseViewController {
         S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
         
         stationsTableViewController?.reloadStationTable()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
