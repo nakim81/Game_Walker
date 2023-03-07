@@ -52,6 +52,16 @@ class TimerViewController: UIViewController {
         return label
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
+        if TeamViewController.read {
+            self.announcementButton.setImage(readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         S.delegate_getStation = self
@@ -63,29 +73,35 @@ class TimerViewController: UIViewController {
             print(seconds)
             configureTimerLabel()
         }
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            if strongSelf.seconds < 1 {
-                timer.invalidate()
-            }
-            if !strongSelf.isPaused {
-                strongSelf.seconds -= 1
-                let minute = strongSelf.seconds/60
-                let second = strongSelf.seconds % 60
-                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-            }
-            if TeamViewController.read {
-                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
-            } else {
-                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-            }
+//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+//            guard let strongSelf = self else { return }
+//            if strongSelf.seconds < 1 {
+//                timer.invalidate()
+//            }
+//            if !strongSelf.isPaused {
+//                strongSelf.seconds -= 1
+//                let minute = strongSelf.seconds/60
+//                let second = strongSelf.seconds % 60
+//                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+//            }
+//        }
+        runTimer()
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+            return
+        }
+        print("read\(isRead)")
+        if isRead {
+            self.announcementButton.setImage(self.readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(self.unreadSome, for: .normal)
         }
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: "Tetris GOAT Noah", gameRule: gameRule)
+        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
@@ -116,9 +132,30 @@ class TimerViewController: UIViewController {
             timerLabel.widthAnchor.constraint(equalToConstant: 260),
             timerLabel.heightAnchor.constraint(equalToConstant: 260)
         ])
-        let minute = seconds/60
-        let second = seconds % 60
-        timerLabel.text = String(format:"%02i : %02i", minute, second)
+    }
+    
+    func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(TimerViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        if isPaused {
+            timer.invalidate()
+        } else {
+            
+        }
+        if seconds < 1 {
+            
+        } else {
+            seconds -= 1
+            timerLabel.text = timeString(time: TimeInterval(seconds))
+        }
+    }
+    
+    func timeString(time:TimeInterval) -> String {
+            let minutes = Int(time) / 60 % 60
+            let seconds = Int(time) % 60
+            return String(format:"%02i : %02i", minutes, seconds)
     }
     
     func listen(_ _ : [String : Any]){
@@ -140,7 +177,7 @@ extension TimerViewController: GetStation, HostUpdateListener {
         self.gameName = station.name
         self.gameLocation = station.place
         self.gamePoints = String(station.points)
-        self.refereeName = ""
+        self.refereeName = station.referee?.name
         self.gameRule = station.description
     }
 }

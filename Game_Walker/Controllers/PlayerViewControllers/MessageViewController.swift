@@ -32,23 +32,17 @@ class MessageViewController: UIViewController {
     
     private lazy var  messageLabel: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "message 1")
+        imageView.image = UIImage(named: "announcement 3")
         return imageView
     }()
     
-    private lazy var buttonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Regular", size: 17)
 
         // enable
-        button.setTitle(title, for: .normal)
+        button.setTitle("Close", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
@@ -59,19 +53,14 @@ class MessageViewController: UIViewController {
         // layer
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-
-        button.addAction(for: .touchUpInside) { _ in
+        
+        return button
+    }()
+    
+    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+        self.closeButton.addAction(for: .touchUpInside) { _ in
             completion?()
         }
-        buttonView.addSubview(button)
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 50),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -50),
-            button.topAnchor.constraint(equalTo: buttonView.topAnchor, constant: 30),
-            button.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor, constant: -45),
-            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
-        ])
     }
     
     convenience init(messages: [String]) {
@@ -123,7 +112,7 @@ class MessageViewController: UIViewController {
         self.view.addSubview(containerView)
         containerView.addSubview(messageLabel)
         containerView.addSubview(messageTableView)
-        containerView.addSubview(buttonView)
+        containerView.addSubview(closeButton)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
     
@@ -131,7 +120,7 @@ class MessageViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageTableView.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -144,20 +133,19 @@ class MessageViewController: UIViewController {
             messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 80),
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -80),
             messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.23),
+            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.19),
             messageLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
-            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
+            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
+            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.65),
+            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.85),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            buttonView.topAnchor.constraint(equalTo: messageTableView.bottomAnchor, constant: 15),
-            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5),
-            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            NSLayoutConstraint(item: closeButton, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -30),
+            closeButton.widthAnchor.constraint(equalToConstant: 200),
+            closeButton.heightAnchor.constraint(equalToConstant: 64.85),
+            closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
 }

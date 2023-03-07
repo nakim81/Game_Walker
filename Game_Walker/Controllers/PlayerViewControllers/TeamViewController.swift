@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var leaveButton: UIButton!
@@ -26,10 +26,13 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private var timer = Timer()
     static var read: Bool = true
+    private var diff: Int?
+    
+    static let notificationName = Notification.Name("readNotification")
     
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
@@ -41,12 +44,23 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let strongSelf = self else {
                 return
             }
-            if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
-                TeamViewController.read = false
-                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+            strongSelf.diff = (TeamViewController.messages?.count ?? 0) - TeamViewController.selectedIndexList.count
+            if strongSelf.diff == 0 {
+                if TeamViewController.read == true {
+                    
+                } else {
+                    TeamViewController.read = true
+                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead":TeamViewController.read])
+                    strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+                }
             } else {
-                TeamViewController.read = true
-                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+                if TeamViewController.read == false {
+                    
+                } else {
+                    TeamViewController.read = false
+                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead":TeamViewController.read])
+                    strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                }
             }
         }
     }
@@ -101,7 +115,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshController.endRefreshing()
         table.reloadData()
     }
-
+}
+// MARK: - TableView
+extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         cell.configureTeamTableViewCell(name: team!.players[indexPath.section].name)
@@ -134,11 +150,11 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
 extension TeamViewController: GetTeam, HostUpdateListener {
     func updateHost(_ host: Host) {
         TeamViewController.messages = host.announcements
-        if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
-            TeamViewController.read = false
-        } else {
-            announcementButton.setImage(readAll, for: .normal)
-        }
+//        if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
+//            TeamViewController.read = false
+//        } else {
+//            announcementButton.setImage(readAll, for: .normal)
+//        }
     }
     
     func getTeam(_ team: Team) {
