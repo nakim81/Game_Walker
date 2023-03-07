@@ -16,6 +16,18 @@ struct R {
     static let db = Firestore.firestore()
     static var delegate_refereeList: RefereeList?
     static var delegate_getReferee: GetReferee?
+    static var delegates : [RefereeUpdateListener] = []
+    
+    static func listenReferee(_ gamecode: String, _ referee: Referee, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+        db.collection("\(gamecode) : Referees").document(referee.name).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else { return }
+            guard let data = document.data() else { return }
+            let ref = convertDataToReferee(data)
+            for delegate in delegates {
+                delegate.updateReferee(ref)
+            }
+       }
+    }
 
     static func addReferee(_ gamecode: String, _ referee: Referee){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")

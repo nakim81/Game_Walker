@@ -234,7 +234,6 @@
 				61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */,
 				61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */,
 				6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */,
-				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
@@ -319,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
+				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 				DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */,
 				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */,
 				DA42138B28B47EDA000A395F /* PlayerViewControllers */,
@@ -726,7 +726,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -758,7 +758,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
