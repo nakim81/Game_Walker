@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Typography 1" translatesAutoresizingMaskIntoConstraints="NO" id="h4J-RS-OY5">
-                                <rect key="frame" x="68" y="153" width="278" height="171"/>
+                                <rect key="frame" x="68" y="137" width="278" height="181"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-VN-j8k">
-                                <rect key="frame" x="72.5" y="440.5" width="269" height="292.5"/>
+                                <rect key="frame" x="72.5" y="405" width="269" height="309"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15D-kC-3Ti">
-                                        <rect key="frame" x="0.0" y="0.0" width="269" height="80.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="86.5"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="player button 2 1"/>
                                         <connections>
@@ -31,7 +31,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tL-zp-Xl0">
-                                        <rect key="frame" x="0.0" y="105.5" width="269" height="81"/>
+                                        <rect key="frame" x="0.0" y="111.5" width="269" height="86"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="Referee button2 1"/>
                                         <connections>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHc-CG-zIU">
-                                        <rect key="frame" x="0.0" y="211.5" width="269" height="81"/>
+                                        <rect key="frame" x="0.0" y="222.5" width="269" height="86.5"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="Host button 2 1"/>
                                         <connections>
@@ -111,6 +111,25 @@
             </objects>
             <point key="canvasLocation" x="1566.6666666666667" y="245.75892857142856"/>
         </scene>
+        <!--Launch Screen Controller-->
+        <scene sceneID="05U-eC-pZQ">
+            <objects>
+                <viewController id="LYf-GC-7yG" customClass="LaunchScreenController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1xf-Ff-RBf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aZp-4M-YjT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4PX-bM-vVW"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="goToMain" modalPresentationStyle="fullScreen" id="7qw-G9-lwv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gcW-0m-8Uq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-122" y="98"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="vjI-4E-hdx">
             <objects>
@@ -122,12 +141,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Wnp-nP-Fcb"/>
+                        <segue destination="LYf-GC-7yG" kind="relationship" relationship="rootViewController" id="yEV-SV-I2B"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Oc-I9-8l2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="97.767857142857139"/>
+            <point key="canvasLocation" x="-1236" y="98"/>
         </scene>
     </scenes>
     <resources>
