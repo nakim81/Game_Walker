@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol RefereeUpdateListener {
+    func updateReferee(_ referee: Referee)
+}
+
 protocol GetReferee {
     func getReferee(_ referee: Referee)
 }
