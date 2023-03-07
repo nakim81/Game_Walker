@@ -39,12 +39,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lM5-Jl-jSM">
                                         <rect key="frame" x="0.0" y="0.0" width="321" height="193"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code?" translatesAutoresizingMaskIntoConstraints="NO" id="fxR-q8-2ia">
-                                                <rect key="frame" x="76.999999999999986" y="37.666666666666657" width="166.66666666666663" height="21"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code 1" translatesAutoresizingMaskIntoConstraints="NO" id="fxR-q8-2ia">
+                                                <rect key="frame" x="76.999999999999986" y="0.0" width="166.66666666666663" height="96.333333333333329"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-xa-Ha7">
                                                 <rect key="frame" x="34.333333333333343" y="77" width="252.00000000000003" height="96.666666666666686"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
@@ -56,19 +56,19 @@
                                             <constraint firstItem="fxR-q8-2ia" firstAttribute="centerX" secondItem="lM5-Jl-jSM" secondAttribute="centerX" id="cGI-AH-PwP"/>
                                             <constraint firstItem="fxR-q8-2ia" firstAttribute="centerY" secondItem="lM5-Jl-jSM" secondAttribute="centerY" multiplier="0.5" id="cWQ-ys-YWX"/>
                                             <constraint firstItem="b0T-xa-Ha7" firstAttribute="width" secondItem="lM5-Jl-jSM" secondAttribute="width" multiplier="0.784219" id="if6-Ta-4yb"/>
-                                            <constraint firstItem="fxR-q8-2ia" firstAttribute="height" secondItem="lM5-Jl-jSM" secondAttribute="height" multiplier="0.10733" id="sfp-Ba-1sO"/>
+                                            <constraint firstItem="fxR-q8-2ia" firstAttribute="height" secondItem="lM5-Jl-jSM" secondAttribute="height" multiplier="0.5" id="sfp-Ba-1sO"/>
                                             <constraint firstItem="b0T-xa-Ha7" firstAttribute="centerX" secondItem="lM5-Jl-jSM" secondAttribute="centerX" id="uG5-C4-LGc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-Nf-STL">
                                         <rect key="frame" x="0.0" y="195.99999999999994" width="321" height="190.33333333333331"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user name_ 2" translatesAutoresizingMaskIntoConstraints="NO" id="XDM-3F-1hH">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="username 1" translatesAutoresizingMaskIntoConstraints="NO" id="XDM-3F-1hH">
                                                 <rect key="frame" x="76.999999999999986" y="0.0" width="166.66666666666663" height="95"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="username" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="FHB-dB-ukm">
                                                 <rect key="frame" x="34.333333333333343" y="76" width="252.00000000000003" height="95.333333333333314"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
@@ -152,9 +152,8 @@
                                     <action selector="joinTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="OGX-ih-skl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftT-zA-sps">
-                                <rect key="frame" x="177" y="735" width="75" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftT-zA-sps">
+                                <rect key="frame" x="176.66666666666666" y="735" width="75" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
@@ -167,12 +166,14 @@
                         <constraints>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="height" secondItem="jjs-iK-Gsc" secondAttribute="height" multiplier="0.096577" id="3G4-Yc-LjP"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="centerX" secondItem="Ec7-NK-4PD" secondAttribute="centerX" id="3WV-ff-VWE"/>
+                            <constraint firstItem="ftT-zA-sps" firstAttribute="centerX" secondItem="jjs-iK-Gsc" secondAttribute="centerX" id="4RG-9J-Dq8"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="width" secondItem="jjs-iK-Gsc" secondAttribute="width" multiplier="0.588164" id="4lP-pH-LAf"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="centerY" secondItem="Ec7-NK-4PD" secondAttribute="centerY" multiplier="0.75" id="7dY-3m-L49"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="width" secondItem="jjs-iK-Gsc" secondAttribute="width" multiplier="0.588164" id="EGi-ot-JQw"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="height" secondItem="jjs-iK-Gsc" secondAttribute="height" multiplier="0.096577" id="NcL-Pa-ZM5"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="centerX" secondItem="jjs-iK-Gsc" secondAttribute="centerX" id="lch-wT-58J"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="centerY" secondItem="jjs-iK-Gsc" secondAttribute="centerY" multiplier="1.25" id="lhp-qB-1SL"/>
+                            <constraint firstItem="ftT-zA-sps" firstAttribute="top" secondItem="JX2-Lc-Buy" secondAttribute="bottom" constant="122.66666666666674" id="uvP-MA-DCO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3os-qE-uhh"/>
@@ -188,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYk-9a-1qU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="936" y="73"/>
+            <point key="canvasLocation" x="935.04672897196258" y="72.570194384449252"/>
         </scene>
         <!--Create Team View Controller-->
         <scene sceneID="7w9-ek-YbT">
@@ -198,7 +199,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="869"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Team name 1" translatesAutoresizingMaskIntoConstraints="NO" id="o71-xb-Yzf">
                                 <rect key="frame" x="139" y="120" width="150" height="35"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" background="long text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
@@ -206,7 +207,7 @@
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team number_ 2" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-Cg-dpa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team number 1" translatesAutoresizingMaskIntoConstraints="NO" id="wcS-Cg-dpa">
                                 <rect key="frame" x="125" y="250.33333333333337" width="178" height="35"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="my team number is..." textAlignment="center" minimumFontSize="17" background="long text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-VR-hmI">
@@ -215,18 +216,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choose your team icon 1" translatesAutoresizingMaskIntoConstraints="NO" id="ADp-y0-gcK">
-                                <rect key="frame" x="70.666666666666657" y="390" width="286.66666666666674" height="35.333333333333314"/>
+                                <rect key="frame" x="70.666666666666657" y="381.66666666666669" width="286.66666666666674" height="35"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
-                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666663" height="57.333333333333371"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="create team 1"/>
-                                <connections>
-                                    <action selector="createTeamButtonPressed:" destination="JIl-tV-nZg" eventType="touchUpInside" id="aj4-nc-kcg"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-Td-471">
-                                <rect key="frame" x="79.333333333333343" y="440.66666666666674" width="269.33333333333326" height="218"/>
+                                <rect key="frame" x="79.333333333333343" y="446.66666666666674" width="269.33333333333326" height="218"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7Kk-TS-KKy">
                                     <size key="itemSize" width="128" height="128"/>
@@ -245,6 +238,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
+                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666663" height="57"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="create team 1"/>
+                                <connections>
+                                    <action selector="createTeamButtonPressed:" destination="JIl-tV-nZg" eventType="touchUpInside" id="aj4-nc-kcg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wCW-Pj-Rj4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -258,7 +259,6 @@
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.057" id="BqX-xH-Nck"/>
                             <constraint firstItem="hLd-VR-hmI" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.59" id="ChI-TN-gs8"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.63" id="F08-YR-dQe"/>
-                            <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.607" id="FhA-gc-rFK"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.265" id="OLY-jR-M36"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.41" id="OeG-dm-Ei0"/>
                             <constraint firstItem="wcS-Cg-dpa" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0425791" id="PML-UN-QRU"/>
@@ -266,16 +266,17 @@
                             <constraint firstItem="aTU-Td-471" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="QzN-w5-uCt"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.35" id="RPI-mz-fFi"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0696822" id="RwY-9z-6Kz"/>
-                            <constraint firstItem="aTU-Td-471" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="1.2" id="SGS-Ry-u5T"/>
                             <constraint firstItem="hLd-VR-hmI" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.057" id="UYo-F9-20p"/>
                             <constraint firstItem="Vfe-6V-kyF" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="UsN-XE-nVK"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.0427873" id="WE6-RN-wCU"/>
+                            <constraint firstItem="Vfe-6V-kyF" firstAttribute="top" secondItem="aTU-Td-471" secondAttribute="bottom" constant="42.666666666666515" id="ZUQ-vd-afB"/>
+                            <constraint firstItem="ADp-y0-gcK" firstAttribute="top" secondItem="hLd-VR-hmI" secondAttribute="bottom" constant="43" id="cht-rg-ywo"/>
                             <constraint firstItem="hLd-VR-hmI" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="h6W-1i-qf0"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.67" id="hCO-bV-oLH"/>
-                            <constraint firstItem="ADp-y0-gcK" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.89" id="hHK-aM-Ta0"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.3" id="lp0-TA-vHa"/>
                             <constraint firstItem="o71-xb-Yzf" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="mHL-6M-ye6"/>
                             <constraint firstItem="ADp-y0-gcK" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="qOb-1H-GII"/>
+                            <constraint firstItem="aTU-Td-471" firstAttribute="top" secondItem="ADp-y0-gcK" secondAttribute="bottom" constant="30" id="qjb-dB-FCE"/>
                             <constraint firstItem="wcS-Cg-dpa" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.416" id="zfp-wT-KST"/>
                         </constraints>
                     </view>
@@ -579,7 +580,7 @@
                                 <rect key="frame" x="126.66666666666669" y="482.66666666666674" width="175" height="60"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="game info button 4"/>
+                                    <backgroundConfiguration key="background" image="current station info 2"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="gameInfoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="Ktk-4e-S5D"/>
@@ -589,7 +590,7 @@
                                 <rect key="frame" x="126.66666666666669" y="585" width="175" height="60"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="Next game button 1"/>
+                                    <backgroundConfiguration key="background" image="next station info 1"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="nextGameButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="UPF-XF-prI"/>
@@ -667,31 +668,31 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="M4x-Iq-v4s"/>
+        <segue reference="29y-2J-Hks"/>
         <segue reference="NyH-V6-DS8"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Next game button 1" width="176" height="57"/>
+        <image name="Team name 1" width="151" height="35"/>
         <image name="Timer 1" width="128" height="61"/>
         <image name="announcement" width="46" height="35"/>
         <image name="choose your team 1" width="237.66667175292969" height="35"/>
         <image name="choose your team icon 1" width="328" height="35"/>
         <image name="create team 1" width="243.66667175292969" height="79"/>
-        <image name="game code?" width="100" height="15"/>
-        <image name="game info button 4" width="169.66667175292969" height="55"/>
+        <image name="current station info 2" width="169.66667175292969" height="55"/>
+        <image name="game code 1" width="151.66667175292969" height="35"/>
         <image name="join 2" width="176" height="57"/>
         <image name="join team 2" width="243.66667175292969" height="79"/>
         <image name="leave 1" width="60" height="31"/>
         <image name="long text box 1" width="253" height="46.666667938232422"/>
         <image name="members 1" width="210" height="61"/>
+        <image name="next station info 1" width="169.66667175292969" height="55"/>
         <image name="ranking 1" width="187" height="61"/>
         <image name="score 2" width="84" height="112"/>
         <image name="team member icon 1" width="84" height="112"/>
-        <image name="team name 1" width="160" height="35"/>
-        <image name="team number_ 2" width="190" height="35"/>
+        <image name="team number 1" width="178.66667175292969" height="35"/>
         <image name="text box 1" width="243.66667175292969" height="79"/>
         <image name="timer icon 1" width="85" height="112"/>
-        <image name="user name_ 2" width="155.66667175292969" height="35"/>
+        <image name="username 1" width="131.66667175292969" height="35"/>
         <image name="설정 아이콘" width="53.666667938232422" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

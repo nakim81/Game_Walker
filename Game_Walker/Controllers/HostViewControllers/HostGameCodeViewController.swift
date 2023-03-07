@@ -51,7 +51,7 @@ class HostGameCodeViewController: BaseViewController {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
-                UserData.writeGamecode(gamecode!, "gamecode)
+                UserData.writeGamecode(gamecode!, "gamecode")
             }
 
 //            H.getHost(storedgamecode!)

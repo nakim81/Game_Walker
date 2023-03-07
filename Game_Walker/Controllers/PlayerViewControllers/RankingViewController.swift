@@ -23,20 +23,31 @@ class RankingViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private var timer = Timer()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
+        if TeamViewController.read {
+            self.announcementButton.setImage(readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegates.append(self)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            if TeamViewController.read {
-                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
-            } else {
-                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-            }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+            return
+        }
+        if isRead {
+            self.announcementButton.setImage(self.readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(self.unreadSome, for: .normal)
         }
     }
     

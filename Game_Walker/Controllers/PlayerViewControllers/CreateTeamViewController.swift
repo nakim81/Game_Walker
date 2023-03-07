@@ -81,7 +81,7 @@ extension CreateTeamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
             if selectedIndex == indexPath.row {
-                collectionView.deselectItem(at: indexPath, animated: true)
+                //collectionView.deselectItem(at: indexPath, animated: true)
                 cell.hideBorder()
                 selectedIndex = nil
             } else {
@@ -90,11 +90,11 @@ extension CreateTeamViewController: UICollectionViewDelegate {
             }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
-        cell.hideBorder()
-        selectedIndex = nil
-    }
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
+//        cell.hideBorder()
+//        selectedIndex = nil
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
