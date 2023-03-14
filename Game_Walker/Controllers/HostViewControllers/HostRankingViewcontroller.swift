@@ -11,6 +11,8 @@ import UIKit
 class HostRankingViewcontroller: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
+    @IBOutlet weak var announcementBtn: UIButton!
+    @IBOutlet weak var settingBtn: UIButton!
     private var messages: [String]?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
@@ -25,6 +27,15 @@ class HostRankingViewcontroller: UIViewController {
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
         H.getHost(gameCode)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+    }
+    
+    @objc func refresh() {
+        H.getHost(gameCode)
+        Task {
+            try await Task.sleep(nanoseconds: 180_000_000)
+            HostMessageViewController.messages = self.messages
+        }
     }
     
     func listen(_ _ : [String : Any]){
@@ -32,7 +43,7 @@ class HostRankingViewcontroller: UIViewController {
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
         H.getHost(gameCode)
-        showMessagePopUp(messages: messages)
+        showHostMessagePopUp(messages: messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {

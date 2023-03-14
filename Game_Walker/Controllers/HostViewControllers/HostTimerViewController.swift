@@ -11,6 +11,8 @@ import UIKit
 class HostTimerViewController: UIViewController {
     
     @IBOutlet weak var pauseOrPlayButton: UIButton!
+    @IBOutlet weak var announcementBtn: UIButton!
+    @IBOutlet weak var settingBtn: UIButton!
     private var messages: [String] = []
     
     private var timer = Timer()
@@ -45,6 +47,12 @@ class HostTimerViewController: UIViewController {
             print(seconds)
             configureTimerLabel()
         }
+    }
+    
+    @IBAction func announcementBtnPressed(_ sender: UIButton) {
+    }
+
+    @IBAction func settingBtnPressed(_ sender: UIButton) {
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {

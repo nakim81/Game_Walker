@@ -20,7 +20,8 @@ class TimerViewController: UIViewController {
     
     private var timer = Timer()
     private var timer2: Timer?
-    private var seconds: Int = 0
+    private var gameTime: Int = 0
+    private var movingTime: Int = 0
     private var time: Int?
     private var isPaused = true
     
@@ -70,21 +71,9 @@ class TimerViewController: UIViewController {
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         Task {
             try await Task.sleep(nanoseconds: 280_000_000)
-            print(seconds)
+            print(gameTime)
             configureTimerLabel()
         }
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-//            guard let strongSelf = self else { return }
-//            if strongSelf.seconds < 1 {
-//                timer.invalidate()
-//            }
-//            if !strongSelf.isPaused {
-//                strongSelf.seconds -= 1
-//                let minute = strongSelf.seconds/60
-//                let second = strongSelf.seconds % 60
-//                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-//            }
-//        }
         runTimer()
     }
     
@@ -92,7 +81,6 @@ class TimerViewController: UIViewController {
         guard let isRead = notification.userInfo?["isRead"] as? Bool else {
             return
         }
-        print("read\(isRead)")
         if isRead {
             self.announcementButton.setImage(self.readAll, for: .normal)
         } else {
@@ -117,11 +105,7 @@ class TimerViewController: UIViewController {
     }
     
     func configureAnnouncementbuttonImage(){
-        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
-            announcementButton.setImage(unreadSome, for: .normal)
-        } else {
             announcementButton.setImage(readAll, for: .normal)
-        }
     }
     
     func configureTimerLabel(){
@@ -144,11 +128,11 @@ class TimerViewController: UIViewController {
         } else {
             
         }
-        if seconds < 1 {
+        if gameTime < 1 {
             
         } else {
-            seconds -= 1
-            timerLabel.text = timeString(time: TimeInterval(seconds))
+            gameTime -= 1
+            timerLabel.text = timeString(time: TimeInterval(gameTime))
         }
     }
     
@@ -164,12 +148,8 @@ class TimerViewController: UIViewController {
 //MARK: - UIUpdate
 extension TimerViewController: GetStation, HostUpdateListener {
     func updateHost(_ host: Host) {
-        self.seconds = host.gameTime
-        if TeamViewController.messages?.count != TeamViewController.selectedIndexList.count {
-            announcementButton.setImage(unreadSome, for: .normal)
-        } else {
-            announcementButton.setImage(readAll, for: .normal)
-        }
+        self.gameTime = host.gameTime
+        self.movingTime = host.movingTime
         self.isPaused = host.paused
     }
     

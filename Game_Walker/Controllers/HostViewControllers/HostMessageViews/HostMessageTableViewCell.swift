@@ -1,16 +1,15 @@
 //
-//  MessageTableViewCell.swift
+//  HostMessageTableViewCell.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 1/25/23.
+//  Created by Noah Kim on 3/7/23.
 //
 
 import Foundation
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
-    
-    static let identifier = "MessageTableViewCell"
+class HostMessageTableViewCell: UITableViewCell {
+    static let identifier = "HostMessageTableViewCell"
 
     lazy var messageNameLabel: UILabel = {
         let label = UILabel()
@@ -19,6 +18,9 @@ class MessageTableViewCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let view = UIView()
+        view.layer.borderWidth = 3
+        view.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -26,25 +28,24 @@ class MessageTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubview(messageNameLabel)
         
-        contentView.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
+        contentView.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
         
         containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-//        containerView.layer.borderWidth = 3
-//        containerView.layer.cornerRadius = 5
         
         messageNameLabel.backgroundColor = .clear
         messageNameLabel.textAlignment = .center
-        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 20)
+        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 18)
         messageNameLabel.textColor = .white
         messageNameLabel.numberOfLines = 0
         messageNameLabel.translatesAutoresizingMaskIntoConstraints = false
         messageNameLabel.clipsToBounds = true
         
         NSLayoutConstraint.activate([
-            containerView.widthAnchor.constraint(equalToConstant: 280),
-            containerView.heightAnchor.constraint(equalToConstant: 40),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -9),
             containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             

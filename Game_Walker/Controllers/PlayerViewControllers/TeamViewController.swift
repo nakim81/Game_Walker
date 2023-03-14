@@ -16,6 +16,7 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     
     static var selectedIndexList: [IndexPath] = []
+    static var selectedIntList: [Int] = []
     static var messages: [String]?
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
@@ -45,20 +46,16 @@ class TeamViewController: UIViewController {
                 return
             }
             strongSelf.diff = (TeamViewController.messages?.count ?? 0) - TeamViewController.selectedIndexList.count
-            if strongSelf.diff == 0 {
-                if TeamViewController.read == true {
-                    
-                } else {
+            if strongSelf.diff! < 1 {
+                if TeamViewController.read == false {
                     TeamViewController.read = true
-                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead":TeamViewController.read])
+                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead": TeamViewController.read])
                     strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
                 }
             } else {
-                if TeamViewController.read == false {
-                    
-                } else {
+                if TeamViewController.read == true {
                     TeamViewController.read = false
-                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead":TeamViewController.read])
+                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead": TeamViewController.read])
                     strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
                 }
             }
@@ -83,6 +80,9 @@ class TeamViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
+        print(TeamViewController.selectedIntList)
+        print(TeamViewController.selectedIndexList)
+        print(TeamViewController.messages?.indices)
         showMessagePopUp(messages: TeamViewController.messages)
     }
     
@@ -149,12 +149,27 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TeamProtocol
 extension TeamViewController: GetTeam, HostUpdateListener {
     func updateHost(_ host: Host) {
-        TeamViewController.messages = host.announcements
-//        if TeamViewController.messages?.count ?? 0 > TeamViewController.selectedIndexList.count {
-//            TeamViewController.read = false
-//        } else {
-//            announcementButton.setImage(readAll, for: .normal)
-//        }
+        if (TeamViewController.messages?.count ?? 0 > host.announcements.count) {
+//            var count = 0
+//            if let messages = TeamViewController.messages {
+//                for ind in messages.indices {
+//                    if (ind - count >= host.announcements.count) {
+//                      break;
+//                    }
+//                    if (messages[ind] != host.announcements[ind - count]) {
+//                        if let index = TeamViewController.selectedIntList.firstIndex(of: ind) {
+//                            TeamViewController.selectedIntList.remove(at: index)
+//                            TeamViewController.selectedIndexList.remove(at: index)
+//                        }
+//                        count += 1
+//                    }
+//                }
+//            }
+            TeamViewController.messages = host.announcements
+            table.reloadData()
+        } else {
+            TeamViewController.messages = host.announcements
+        }
     }
     
     func getTeam(_ team: Team) {

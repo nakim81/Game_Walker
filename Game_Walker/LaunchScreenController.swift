@@ -7,14 +7,34 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class LaunchScreenController: UIViewController {
+    
+    private var soundPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .black;            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        self.view.backgroundColor = .black;
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.addRectangles()
         }
+        prepareSound()
+        soundPlayer?.play()
     }
+    
+    func prepareSound() {
+        let path = Bundle.main.path(forResource: "launchScreenSound.mp3", ofType: nil)!
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: url)
+            soundPlayer?.prepareToPlay()    // play 전에 미리 메모리에 로드해두고 준비하는 것.
+        } catch {
+            // couldn't load file :(
+        }
+    }
+    
     func addRectangles() {
         let screenSize = UIScreen.main.bounds.size
         let rectangleWidth = screenSize.width

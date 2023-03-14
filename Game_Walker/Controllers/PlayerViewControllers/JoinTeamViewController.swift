@@ -114,6 +114,7 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 extension JoinTeamViewController: TeamList {
     func listOfTeams(_ teams: [Team]) {
         self.teamList = teams
+        self.teamList.sort{$0.number < $1.number}
         self.collectionView?.reloadData()
     }
 }
