@@ -186,7 +186,7 @@
         <!--Add Station View Controller-->
         <scene sceneID="2AO-mp-5gj">
             <objects>
-                <viewController id="EDq-oM-bgK" customClass="AddStationViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddStationViewController" id="EDq-oM-bgK" customClass="AddStationViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8R1-oH-TTM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,7 +206,6 @@
                                         <state key="normal" backgroundImage="save 1"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
-                                            <segue destination="1L0-Oz-afr" kind="showDetail" id="Rcz-O1-KSj"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game name 2" translatesAutoresizingMaskIntoConstraints="NO" id="B8E-DG-Un9" userLabel="Game Name">
@@ -917,7 +916,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="OK4-sB-gpM"/>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Create game button 1" width="244" height="79"/>
