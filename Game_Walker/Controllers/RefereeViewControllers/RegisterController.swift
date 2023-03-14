@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RegisterController: BaseViewController {
+class RegisterController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!
@@ -18,6 +18,14 @@ class RegisterController: BaseViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
+        gamecodeTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == gamecodeTextField {
+            usernameTextField.becomeFirstResponder() 
+        }
+        return true
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
@@ -30,5 +38,4 @@ class RegisterController: BaseViewController {
         performSegue(withIdentifier: "goToWait", sender: self)
     }
 }
-
 

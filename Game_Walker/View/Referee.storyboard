@@ -560,7 +560,7 @@
         <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="user name_ 2" width="156" height="35"/>
-        <image name="waiting 2" width="174.5" height="57"/>
+        <image name="waiting 2" width="186.5" height="57"/>
         <image name="white!give points 1" width="263" height="61"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
