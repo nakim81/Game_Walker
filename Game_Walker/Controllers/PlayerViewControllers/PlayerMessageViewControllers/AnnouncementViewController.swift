@@ -53,7 +53,7 @@ class AnnouncementViewController: UIViewController {
     public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Regular", size: 17)
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
 
         // enable
         button.setTitle(title, for: .normal)

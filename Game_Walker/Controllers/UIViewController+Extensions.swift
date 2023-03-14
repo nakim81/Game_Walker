@@ -7,7 +7,7 @@
 
 import UIKit
 
-
+// MARK: - Keyboard
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -18,7 +18,9 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+}
+// MARK: - GameInfoPopUps
+extension UIViewController {
     func showGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, refereeName: String? = nil, gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = GameInfoViewController(gameName: gameName ?? "", gameLocation: gameLocation ?? "", gamePoints: gamePoitns ?? "", refereeName: refereeName ?? "", gameRule: gameRule ?? "")
         showGameInfoPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
@@ -42,25 +44,15 @@ extension UIViewController {
         }
         present(popUpViewController, animated: false, completion: nil)
     }
-    
+}
+// MARK: - PlayerMessagePopUps
+extension UIViewController {
     func showMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = MessageViewController(messages: messages ?? [])
         showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
     private func showMessagePopUp(popUpViewcontroller: MessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
-        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
-            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
-        }
-        present(popUpViewcontroller, animated: false, completion: nil)
-    }
-    
-    func showRefereeMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = RefereeMessageViewController(messages: messages ?? [])
-        showRefereeMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
-    }
-    
-    private func showRefereeMessagePopUp(popUpViewcontroller: RefereeMessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
         popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
             popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
         }
@@ -78,6 +70,20 @@ extension UIViewController {
         }
         present(popUpViewcontroller, animated: false, completion: nil)
     }
+}
+// MARK: - RefereeMessagePopUps
+extension UIViewController {
+    func showRefereeMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = RefereeMessageViewController(messages: messages ?? [])
+        showRefereeMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+    }
+    
+    private func showRefereeMessagePopUp(popUpViewcontroller: RefereeMessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewcontroller, animated: false, completion: nil)
+    }
     
     func showRefereeAnnouncementPopUp(announcement: String = "", _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = RefereeAnnouncementViewController(announcement: announcement)
@@ -85,6 +91,21 @@ extension UIViewController {
     }
     
     private func showRefereeAnnouncementPopUp(popUpViewcontroller: RefereeAnnouncementViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewcontroller, animated: false, completion: nil)
+    }
+}
+
+// MARK: - HostMessagePopUps
+extension UIViewController {
+    func showHostMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = HostMessageViewController(messages: messages ?? [])
+        showHostMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+    }
+    
+    private func showHostMessagePopUp(popUpViewcontroller: HostMessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
         popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
             popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
         }
