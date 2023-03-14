@@ -61,6 +61,10 @@ class AddStationViewController: BaseViewController {
             //checkthis
             gamepointsTextfield.placeholder = ""
             rulesTextfield.text = station?.description
+//            if ((station?.pvp) != nil) {
+//            } else {
+//            }
+            refereeLabel.text = station?.referee?.name
         }
         
         checkReferee()
