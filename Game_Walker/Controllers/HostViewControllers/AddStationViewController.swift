@@ -25,6 +25,9 @@ class AddStationViewController: BaseViewController {
     
     weak var stationsTableViewController: StationsTableViewController?
     
+    var stationExists = false
+    var station : Station?
+    
     var pvpnotchosen = true
     var isPvp = false
     var availableReferees : [Referee] = []
@@ -51,7 +54,14 @@ class AddStationViewController: BaseViewController {
         refereeTableView.dataSource = self
         
 
-    
+        if stationExists {
+            gamenameTextfield.placeholder = station?.name
+            gamelocationTextfield.placeholder = station?.place
+            let pointsstring = station?.points
+            //checkthis
+            gamepointsTextfield.placeholder = ""
+            rulesTextfield.text = station?.description
+        }
         
         checkReferee()
         setPaddings()

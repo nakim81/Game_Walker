@@ -52,7 +52,12 @@ extension StationsTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddStationViewController") as? AddStationViewController {
-            self.navigationController?.popToViewController(vc, animated: true)
+            vc.stationExists = true
+            vc.station = currentStations[indexPath.row]
+            
+            
+            self.navigationController?.present(vc, animated: true)
+            
         }
     }
     
