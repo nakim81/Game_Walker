@@ -19,20 +19,26 @@ class RefereePVPController: UIViewController {
     var round = 1
     var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Girl", number: 1, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconGirl"), Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Boy", number: 2, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconBoy")]
     var timer: Timer?
-    var seconds : Int?
+    var time : Int = 0
+    var movingTime : Int = 0
+    var gameTime : Int = 0
+    var paused : Bool = false
+    var moving : Bool = true
     var teamA : Team?
     var teamB : Team?
     
     override func viewDidLoad() {
         H.delegate_getHost = self
+        H.delegates.append(self)
         S.delegate_getStation = self
         T.delegate_getTeam = self
         T.delegates.append(self)
-        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
         H.getHost(UserData.readGamecode("gamecode")!)
+        H.listenHost(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
+        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing2")
+        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
         self.teamA = self.teamOrder[index]
         self.teamB = self.teamOrder[index+1]
-        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing2")
         super.viewDidLoad()
         self.view.addSubview(roundLabel)
         self.view.addSubview(leftcontainerView)
@@ -259,24 +265,30 @@ class RefereePVPController: UIViewController {
     }
     
     @objc func updateTimer() {
-            if seconds! < 1 {
-                H.getHost(UserData.readGamecode("gamecode")!)
-                T.getTeam(UserData.readGamecode("gamecode")!, UserData.readTeam("points")!.name)
-                round += 1
-                index += 2
-                lefticonButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
-                leftteamNumber.text = "Team " + "\(self.teamOrder[index].number)"
-                leftteamName.text = teamOrder[index].name
-                leftscoreLabel.text = "\(teamOrder[index].points)"
-                righticonButton.setImage(UIImage(named: teamOrder[index + 1].iconName), for: .normal)
-                rightteamNumber.text = "Team " + "\(self.teamOrder[index + 1].number)"
-                rightteamName.text = teamOrder[index + 1].name
-                rightscoreLabel.text = "\(teamOrder[index + 1].points)"
-                roundLabel.text = "Round " + "\(round)"
+            if time < 1 {
+                if moving {
+                    time = gameTime
+                    moving = false
+                } else {
+                    time = movingTime
+                    moving = true
+                    round += 1
+                    index += 2
+                    lefticonButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+                    leftteamNumber.text = "Team " + "\(self.teamOrder[index].number)"
+                    leftteamName.text = teamOrder[index].name
+                    leftscoreLabel.text = "\(teamOrder[index].points)"
+                    righticonButton.setImage(UIImage(named: teamOrder[index + 1].iconName), for: .normal)
+                    rightteamNumber.text = "Team " + "\(self.teamOrder[index + 1].number)"
+                    rightteamName.text = teamOrder[index + 1].name
+                    rightscoreLabel.text = "\(teamOrder[index + 1].points)"
+                    roundLabel.text = "Round " + "\(round)"
+                }
             } else {
-                seconds! -= 1
-                T.getTeam(UserData.readGamecode("gamecode")!, UserData.readTeam("points")!.name)
-                timerLabel.text = timeString(time: TimeInterval(seconds!))
+                if !paused {
+                    time -= 1
+                }
+                timerLabel.text = timeString(time: TimeInterval(time))
             }
     }
     
@@ -324,7 +336,9 @@ extension RefereePVPController: GetStation {
 //MARK: - UIUpdate
 extension RefereePVPController: GetHost {
     func getHost(_ host: Host) {
-        self.seconds = host.gameTime
+        self.time = host.movingTime
+        self.movingTime = host.movingTime
+        self.gameTime = host.gameTime
     }
 }
 //MARK: - UIUpdate
@@ -343,4 +357,11 @@ extension RefereePVPController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
     }
 }
+// MARK: - listener
+extension RefereePVPController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.paused = host.paused
+    }
+}
+
 

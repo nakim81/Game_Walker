@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "waiting 1.png",
+      "filename" : "waiting 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "waiting 1 (1).png",
+      "filename" : "waiting 2 (1).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "waiting 1 (2).png",
+      "filename" : "waiting 2 (2).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

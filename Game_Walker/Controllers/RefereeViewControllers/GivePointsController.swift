@@ -21,7 +21,7 @@ class GivePointsController: UIViewController {
         GMStepper.labelFont = UIFont(name: "Dosis-Bold", size: 100) ?? UIFont(name: "AvenirNext-Bold", size: 25.0)!
     }
     @IBAction func confirmButtonPressed(_ sender: UIButton) {
-        T.givePoints(UserData.readReferee("Referee")!.gamecode, UserData.readTeam("points")!.name, Int(GMStepper.value))
+        T.givePoints(UserData.readReferee("Referee")!.gamecode, UserData.readTeam("Team")!.name, Int(GMStepper.value))
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -294,9 +294,9 @@ class GivePointsController: UIViewController {
     var timerFireCount = 0
     var timerFireCountModulo: Int {
         if timerFireCount > 80 {
-            return 1 // 0.05 sec * 1 = 0.05 sec
+            return 10 // 0.05 sec * 1 = 0.05 sec
         } else if timerFireCount > 50 {
-            return 2 // 0.05 sec * 2 = 0.1 sec
+            return 10 // 0.05 sec * 2 = 0.1 sec
         } else {
             return 10 // 0.05 sec * 10 = 0.5 sec
         }

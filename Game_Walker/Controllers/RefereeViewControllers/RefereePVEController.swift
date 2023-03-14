@@ -14,19 +14,25 @@ class RefereePVEController: UIViewController {
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     var stationName = ""
-    var seconds : Int?
+    var time : Int = 0
+    var movingTime : Int = 0
+    var gameTime : Int = 0
+    var paused : Bool = false
+    var moving : Bool = true
     var timer : Timer?
     var index = 0
     var team : Team?
-    var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Air", number: 1, players: [], points: 10, currentStation: "testing", nextStation: "", iconName: "iconAir")]
+    var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Simon Dominic", number: 4, players: [], points: 0, currentStation: "testingPVE", nextStation: "", iconName: "iconAir")]
     
     override func viewDidLoad() {
+        
         H.delegate_getHost = self
+        H.delegates.append(self)
         S.delegate_getStation = self
-        T.delegate_getTeam = self
         T.delegates.append(self)
-        S.getStation(UserData.readReferee("Referee")!.gamecode, "testing")
         H.getHost(UserData.readGamecode("gamecode")!)
+        H.listenHost(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
+        S.getStation(UserData.readReferee("Referee")!.gamecode, "testingPVE")
         T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
         self.team = self.teamOrder[index]
         super.viewDidLoad()
@@ -74,6 +80,7 @@ class RefereePVEController: UIViewController {
         scoreLabel.heightAnchor.constraint(equalToConstant: 53).isActive = true
         scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         scoreLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 440).isActive = true
+        
         runTimer()
     }
     
@@ -152,34 +159,44 @@ class RefereePVEController: UIViewController {
         return view
     }()
     
+    
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(RefereePVEController.updateTimer)), userInfo: nil, repeats: true)
     }
-    
+        
     @objc func updateTimer() {
-        if seconds! < 1 {
-            index += 1
-            H.getHost(UserData.readGamecode("gamecode")!)
-            teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
-            teamName.text = teamOrder[index].name
-            roundLabel.text = "Round " + "\(index + 1)"
-            iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
-            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
-        } else {
-            seconds! -= 1
-            timerLabel.text = timeString(time: TimeInterval(seconds!))
-            T.getTeam(UserData.readGamecode("gamecode")!, self.teamOrder[index].name)
+        if time < 1 {
+            if moving {
+                time = gameTime
+                moving = false
+            } else {
+                time = movingTime
+                moving = true
+                // 노아는 이 부분 제외하고 카피
+                index += 1
+                teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
+                teamName.text = teamOrder[index].name
+                roundLabel.text = "Round " + "\(index + 1)"
+                iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
+                self.team = self.teamOrder[index]
+                //
+            }
+            } else {
+                if !paused {
+                    time -= 1
+                }
+                timerLabel.text = timeString(time: TimeInterval(time))
+            }
         }
-    }
-    
-    func timeString(time:TimeInterval) -> String {
-            let minutes = Int(time) / 60 % 60
-            let seconds = Int(time) % 60
-            return String(format:"%02i : %02i", minutes, seconds)
-    }
+        
+        func timeString(time:TimeInterval) -> String {
+                let minutes = Int(time) / 60 % 60
+                let seconds = Int(time) % 60
+                return String(format:"%02i : %02i", minutes, seconds)
+        }
     
     @IBAction func stationinfoButtonPressed(_ sender: Any) {
-        showRefereeGameInfoPopUp(gameRule: "You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy. You drive me crazy.")
+        showRefereeGameInfoPopUp()
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
@@ -191,13 +208,12 @@ class RefereePVEController: UIViewController {
     }
         
     @objc func buttonTapped() {
-        UserData.writeTeam(team!, "points")
+        UserData.writeTeam(team!, "Team")
         performSegue(withIdentifier: "givePointsPVE", sender: self)
     }
     
     func listen(_ _ : [String : Any]){
     }
-    
 }
 
 //MARK: - UIUpdate
@@ -210,17 +226,25 @@ extension RefereePVEController: GetStation {
 //MARK: - UIUpdate
 extension RefereePVEController: GetHost {
     func getHost(_ host: Host) {
-        self.seconds = host.gameTime
-    }
-}
-//MARK: - UIUpdate
-extension RefereePVEController: GetTeam {
-    func getTeam(_ team: Team) {
-        scoreLabel.text = "\(team.points)"
+        self.time = host.movingTime
+        self.movingTime = host.movingTime
+        self.gameTime = host.gameTime
     }
 }
 // MARK: - listener
 extension RefereePVEController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
+        for team in teams {
+            if team.name == self.team!.name {
+                self.team = team
+            }
+        }
+        scoreLabel.text = "\(self.team!.points)"
+    }
+}
+// MARK: - listener
+extension RefereePVEController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.paused = host.paused
     }
 }
