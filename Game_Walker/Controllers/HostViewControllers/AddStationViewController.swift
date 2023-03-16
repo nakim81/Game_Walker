@@ -145,7 +145,7 @@ class AddStationViewController: BaseViewController {
         gamenameTextfield.setPadding(left: padding, right: padding)
         gamelocationTextfield.setPadding(left: padding, right: padding)
         gamepointsTextfield.setPadding(left: padding, right: padding)
-        rulesTextfield.textContainerInset = UIEdgeInsets(top: 100, left: 50, bottom: 100, right: 50)
+        rulesTextfield.textContainerInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
     }
     
     @IBAction func pvpChosen(_ sender: UIButton) {
