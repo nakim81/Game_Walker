@@ -10,7 +10,7 @@ import UIKit
 class AlgorithmViewController: BaseViewController {
     
     @IBOutlet weak var startGameButton: UIButton!
-    var stationList: [Station] = []
+    var stationList: [Station]? = nil
     var grid: [[Int]] = [[Int]]()
     var totalrow : Int =  0
     var totalcolumn : Int = 0
@@ -42,14 +42,18 @@ class AlgorithmViewController: BaseViewController {
         collectionView.dataSource = self
         
         collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-        createGrid()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.createGrid()
+        }
+
     }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         alert2(title: "", message: "Everything set?")
     }
     func createGrid() {
-        var num_stations = stationList.count
+        var num_stations = stationList!.count
 
         if (num_stations < num_teams) {
             alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
@@ -134,6 +138,7 @@ extension AlgorithmViewController: StationList {
         self.stationList = stations
         self.num_stations = stations.count
         self.collectionView?.reloadData()
+        print("stationsList is empty? : " , stations.count , " and ", self.stationList!.count)
     }
     
 }
