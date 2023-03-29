@@ -98,6 +98,20 @@ extension UIViewController {
     }
 }
 
+// MARK: - InfoPopUp
+extension UIViewController {
+    func showInfoPopUp(_ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = InfoViewController(select: true)
+        showInfoPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
+    }
+    
+    private func showInfoPopUp(popUpViewcontroller: InfoViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
+        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
+            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
+        }
+        present(popUpViewcontroller, animated: false, completion: nil)
+    }
+}
 // MARK: - HostMessagePopUps
 extension UIViewController {
     func showHostMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {

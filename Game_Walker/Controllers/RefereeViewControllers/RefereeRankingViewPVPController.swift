@@ -8,30 +8,54 @@
 import Foundation
 import UIKit
 
-class RefereeRankingPVPViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RefereeRankingPVPViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
-    private var messages: [String]?
+    
     private var teamList: [Team] = []
-    private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
+    private var showScore = true
+    
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
+        if TeamViewController.read {
+            self.announcementButton.setImage(readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+            return
+        }
+        if isRead {
+            self.announcementButton.setImage(self.readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(self.unreadSome, for: .normal)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        T.delegate_teamList = self
-        H.delegate_getHost = self
+        T.delegates.append(self)
+        H.delegates.append(self)
         configureTableView()
-        T.getTeamList(gameCode)
-        H.getHost(gameCode)
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -40,7 +64,7 @@ class RefereeRankingPVPViewController: UIViewController, UITableViewDelegate, UI
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
-        leaderBoard.register(RefereeTeamTableViewCell.self, forCellReuseIdentifier: RefereeTeamTableViewCell.identifier)
+        leaderBoard.register(RefereeTableViewCell.self, forCellReuseIdentifier: RefereeTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
@@ -60,9 +84,21 @@ class RefereeRankingPVPViewController: UIViewController, UITableViewDelegate, UI
         leaderBoard.reloadData()
     }
     
+    func listen(_ _ : [String : Any]){
+    }
+}
+// MARK: - TableView
+extension RefereeRankingPVPViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = leaderBoard.dequeueReusableCell(withIdentifier: RefereeTeamTableViewCell.identifier, for: indexPath) as! RefereeTeamTableViewCell
-        cell.configureRankTableViewCell(imageName: teamList[indexPath.section].iconName, teamName: teamList[indexPath.section].name, points: teamList[indexPath.section].points)
+        let cell = leaderBoard.dequeueReusableCell(withIdentifier: RefereeTableViewCell.identifier, for: indexPath) as! RefereeTableViewCell
+        let team = teamList[indexPath.section]
+        let teamNum = String(team.number)
+        let points = String(team.points)
+        if (self.showScore) {
+            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points)
+        } else {
+            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: "")
+        }
         return cell
     }
     
@@ -85,14 +121,17 @@ class RefereeRankingPVPViewController: UIViewController, UITableViewDelegate, UI
     }
 }
 // MARK: - TeamProtocol
-extension RefereeRankingPVPViewController: TeamList, GetHost {
-    func listOfTeams(_ teams: [Team]) {
+extension RefereeRankingPVPViewController: TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
     }
-    
-    func getHost(_ host: Host) {
-        self.messages = host.announcements
+}
+// MARK: - HostProtocl
+extension RefereeRankingPVPViewController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.showScore = host.showScoreboard
+        leaderBoard.reloadData()
     }
 }
 

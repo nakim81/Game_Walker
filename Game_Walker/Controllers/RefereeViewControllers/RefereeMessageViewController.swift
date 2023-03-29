@@ -11,7 +11,7 @@ import UIKit
 class RefereeMessageViewController: UIViewController {
     
     private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-    private var messages: [String]? = ["Hi", "Hello", "Good morning"]
+    private var messages: [String] = []
     private let cellSpacingHeight: CGFloat = 0
     
     private let messageTableView: UITableView = {
@@ -149,10 +149,9 @@ class RefereeMessageViewController: UIViewController {
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.75),
+            messageTableView.bottomAnchor.constraint(equalTo: buttonView.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            buttonView.topAnchor.constraint(equalTo: messageTableView.bottomAnchor, constant: 15),
             buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1),
             buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1),
             buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5),
@@ -163,52 +162,36 @@ class RefereeMessageViewController: UIViewController {
 }
 
 // MARK: - TableView
-extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSource {
+extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSource {    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: RefereeMessageTableViewCell.identifier, for: indexPath) as! RefereeMessageTableViewCell
-        let ind = (messages?.firstIndex(where: {$0.elementsEqual(messages?[indexPath.section] ?? "")}) ?? 0) + 1
-        cell.configureTableViewCell(name: "Announcement \(ind)")
-        if TeamViewController.selectedIndexList.contains(indexPath) {
-            cell.layer.borderWidth = 3
-            cell.layer.borderColor = UIColor.lightText.cgColor
-            cell.layer.cornerRadius = 10
-            cell.messageNameLabel.textColor = UIColor.lightText
+        let ind = indexPath.row + 1
+        let announcement = messages[indexPath.row]
+        if (RefereeRankingPVEViewController.readMsgList.contains(announcement)) {
+            cell.configureTableViewCell(name: "Announcement \(ind)", read: true)
         } else {
-            cell.layer.borderWidth = 3
-            cell.layer.borderColor = UIColor.white.cgColor
-            cell.layer.cornerRadius = 10
+            cell.configureTableViewCell(name: "Announcement \(ind)", read: false)
         }
+        cell.selectionStyle = .none
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let messages = messages else {
-            return 0
-        }
-        return messages.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return 1
+        return messages.count
      }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNonzeroMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let messages = messages {
-            TeamViewController.selectedIndexList.append(indexPath)
-            let announcementText = messages[indexPath.section]
-            showAnnouncementPopUp(announcement: announcementText)
-            messageTableView.reloadRows(at: TeamViewController.selectedIndexList, with: .none)
+        let announcementText = messages[indexPath.row]
+        if !RefereeRankingPVEViewController.readMsgList.contains(announcementText) {
+            RefereeRankingPVEViewController.readMsgList.append(announcementText)
         }
+        showRefereeAnnouncementPopUp(announcement: announcementText)
+        messageTableView.deselectRow(at: indexPath, animated: true)
+        messageTableView.reloadData()
     }
 }
 

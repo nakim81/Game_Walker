@@ -27,6 +27,30 @@ class RefereePVPController: BaseViewController {
     var teamA : Team?
     var teamB : Team?
     
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
+        if RefereeRankingPVEViewController.read {
+            self.annnouncementButton.setImage(readAll, for: .normal)
+        } else {
+            self.annnouncementButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+            return
+        }
+        if isRead {
+//            self.announcementButton.setImage(self.readAll, for: .normal)
+        } else {
+//            self.announcementButton.setImage(self.unreadSome, for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
         H.delegate_getHost = self
         H.delegates.append(self)
@@ -330,7 +354,7 @@ class RefereePVPController: BaseViewController {
     }
     
     @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
-        showRefereeMessagePopUp()
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {

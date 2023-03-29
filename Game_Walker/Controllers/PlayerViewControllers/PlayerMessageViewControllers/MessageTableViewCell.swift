@@ -29,8 +29,8 @@ class MessageTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
         
         if (read) {
-            containerView.layer.borderColor = UIColor(white: 0.667, alpha: 1).cgColor
-            messageNameLabel.textColor = .lightGray
+            containerView.layer.borderColor = UIColor.lightText.cgColor
+            messageNameLabel.textColor = .lightText
         } else {
             containerView.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
             messageNameLabel.textColor = .white

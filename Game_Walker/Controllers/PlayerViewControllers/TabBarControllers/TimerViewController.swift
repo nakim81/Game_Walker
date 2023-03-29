@@ -19,11 +19,11 @@ class TimerViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private var timer = Timer()
-    private var timer2: Timer?
-    private var gameTime: Int = 0
-    private var movingTime: Int = 0
-    private var time: Int?
-    private var isPaused = true
+    var time : Int = 0
+    var movingTime : Int = 0
+    var gameTime : Int = 0
+    var paused : Bool = false
+    var moving : Bool = true
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var stationName: String = UserData.readTeam("team")?.currentStation ?? ""
@@ -123,16 +123,20 @@ class TimerViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        if isPaused {
-            timer.invalidate()
+        if time < 1 {
+            if moving {
+                time = gameTime
+                moving = false
+            } else {
+                time = movingTime
+                moving = true
+                
+            }
         } else {
-            
-        }
-        if gameTime < 1 {
-            
-        } else {
-            gameTime -= 1
-            timerLabel.text = timeString(time: TimeInterval(gameTime))
+            if !paused {
+                time -= 1
+            }
+            timerLabel.text = timeString(time: TimeInterval(time))
         }
     }
     
@@ -150,7 +154,7 @@ extension TimerViewController: GetStation, HostUpdateListener {
     func updateHost(_ host: Host) {
         self.gameTime = host.gameTime
         self.movingTime = host.movingTime
-        self.isPaused = host.paused
+        self.paused = host.paused
     }
     
     func getStation(_ station: Station) {

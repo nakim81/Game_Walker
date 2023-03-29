@@ -6,10 +6,12 @@ target 'Game_Walker' do
 
   # Pods for Game_Walker
 
-pod 'FirebaseAnalytics'
-pod 'FirebaseAuth'
-pod 'FirebaseFirestore'
-pod 'FirebaseFirestoreSwift'
-pod "GMStepper" 
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
+  pod "GMStepper"
+  pod "PromiseKit", "~> 6.8"
+  pod 'IQKeyboardManagerSwift'
 
 end

@@ -26,6 +26,30 @@ class RefereePVEController: BaseViewController {
     var team : Team = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Simon Dominic", number: 4, players: [], points: 0, currentStation: "testingPVE", nextStation: "", iconName: "iconAir")
     var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Simon Dominic", number: 4, players: [], points: 0, currentStation: "testingPVE", nextStation: "", iconName: "iconAir")]
     
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
+        if RefereeRankingPVEViewController.read {
+            self.messageButton.setImage(readAll, for: .normal)
+        } else {
+            self.messageButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+            return
+        }
+        if isRead {
+            //self.announcementButton.setImage(self.readAll, for: .normal)
+        } else {
+            //self.announcementButton.setImage(self.unreadSome, for: .normal)
+        }
+    }
+    
     override func viewDidLoad() {
         
         H.delegate_getHost = self
@@ -225,7 +249,7 @@ class RefereePVEController: BaseViewController {
     }
     
     @IBAction func messageButtonPressed(_ sender: Any) {
-        showRefereeMessagePopUp()
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {

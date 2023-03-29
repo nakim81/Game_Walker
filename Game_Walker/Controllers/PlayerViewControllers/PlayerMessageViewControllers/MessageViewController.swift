@@ -11,7 +11,7 @@ import UIKit
 class MessageViewController: UIViewController {
     
     private let fontColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-    private var messages: [String]?
+    private var messages: [String] = []
     private let cellSpacingHeight: CGFloat = 0
     
     private let messageTableView: UITableView = {
@@ -139,7 +139,7 @@ class MessageViewController: UIViewController {
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.85),
+            messageTableView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             NSLayoutConstraint(item: closeButton, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -30),
@@ -154,8 +154,9 @@ class MessageViewController: UIViewController {
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
-        let ind = indexPath.item + 1
-        if (TeamViewController.selectedIntList.contains(indexPath.row)) {
+        let ind = indexPath.row + 1
+        let announcement = messages[indexPath.row]
+        if (TeamViewController.readMsgList.contains(announcement)) {
             cell.configureTableViewCell(name: "Announcement \(ind)", read: true)
         } else {
             cell.configureTableViewCell(name: "Announcement \(ind)", read: false)
@@ -169,20 +170,16 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let messages = self.messages else {return 0}
         return messages.count
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let messages = messages {
-            let announcementText = messages[indexPath.row]
-            if !TeamViewController.selectedIndexList.contains(indexPath) {
-                TeamViewController.selectedIndexList.append(indexPath)
-                TeamViewController.selectedIntList.append(indexPath.row)
-            }
-            showAnnouncementPopUp(announcement: announcementText)
-            messageTableView.deselectRow(at: indexPath, animated: true)
-            messageTableView.reloadData()
+        let announcementText = messages[indexPath.row]
+        if !TeamViewController.readMsgList.contains(announcementText) {
+            TeamViewController.readMsgList.append(announcementText)
         }
+        showAnnouncementPopUp(announcement: announcementText)
+        messageTableView.deselectRow(at: indexPath, animated: true)
+        messageTableView.reloadData()
     }
 }
