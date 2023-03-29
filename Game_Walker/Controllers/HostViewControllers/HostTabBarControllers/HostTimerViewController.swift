@@ -59,7 +59,7 @@ class HostTimerViewController: UIViewController {
         if isPaused {
             sender.setImage(pause, for: .normal)
             isPaused = false
-            H.pause_resume_Game(gameCode)
+            H.pause_resume_game(gameCode, isPaused)
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 guard let strongSelf = self else {
                     return
@@ -78,7 +78,7 @@ class HostTimerViewController: UIViewController {
             sender.setImage(play, for: .normal)
             timer.invalidate()
             isPaused = true
-            H.pause_resume_Game(gameCode)
+            H.pause_resume_game(gameCode, isPaused)
 //            H.setTimer(gameCode, seconds, moveSeconds, rounds ?? 0)
         }
     }
