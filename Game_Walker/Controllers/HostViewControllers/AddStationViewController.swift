@@ -55,16 +55,18 @@ class AddStationViewController: BaseViewController {
         
 
         if stationExists {
-            gamenameTextfield.placeholder = station?.name
-            gamelocationTextfield.placeholder = station?.place
-            let pointsstring = station?.points
-            //checkthis
-            gamepointsTextfield.placeholder = ""
+            gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+            gamelocationTextfield.attributedPlaceholder = NSAttributedString(string: station!.place, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+            gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             rulesTextfield.text = station?.description
-//            if ((station?.pvp) != nil) {
-//            } else {
-//            }
-            refereeLabel.text = station?.referee?.name
+         
+            if ((station?.pvp) != nil) {
+                pvpButton.sendActions(for: .touchUpInside)
+            } else {
+                pveButton.sendActions(for: .touchUpInside)
+            }
+            refereename = (station?.referee!.name)!
+            
         }
         
         checkReferee()
@@ -130,7 +132,7 @@ class AddStationViewController: BaseViewController {
     }
     
     func checkReferee() {
-        if refereename == "" {
+        if refereename == "" && !stationExists{
             refereeLabel.text = "Choose Referee"
         } else{
             refereeLabel.text = refereename
@@ -143,7 +145,7 @@ class AddStationViewController: BaseViewController {
         gamenameTextfield.setPadding(left: padding, right: padding)
         gamelocationTextfield.setPadding(left: padding, right: padding)
         gamepointsTextfield.setPadding(left: padding, right: padding)
-        rulesTextfield.textContainerInset = UIEdgeInsets(top: 100, left: 50, bottom: 100, right: 50)
+        rulesTextfield.textContainerInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
     }
     
     @IBAction func pvpChosen(_ sender: UIButton) {
@@ -191,7 +193,7 @@ class AddStationViewController: BaseViewController {
         
         let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename,assigned: true)
         R.assignStation(UserData.readGamecode("gamecode")!, selectedReferee, gamename)
-        let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, description: rules)
+        let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
         S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
         
         stationsTableViewController?.reloadStationTable()
@@ -239,7 +241,12 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print(availableReferees[indexPath.row])
+        let selectedRefereeName = availableReferees[indexPath.row].name
         refereename = availableReferees[indexPath.row].name
+        if stationExists && refereename != selectedRefereeName {
+            //NEED SOME CODE THAT UNASSIGNS ORIGINAL REFEREE ("refereename")
+            //AND REASSIGNS NEW REFEREE ("selectedRefereeName")
+        }
 //        print(refereename)
         checkReferee()
         refereeButton.setTitle(refereename, for: .normal)

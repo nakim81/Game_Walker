@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="width" secondItem="cf7-AC-7yj" secondAttribute="height" multiplier="3.5:1" id="szy-uf-51D"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Join game button 1"/>
+                                <state key="normal" backgroundImage="resumegamebutton_modified"/>
                                 <connections>
                                     <action selector="joinButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ssN-9B-Ii4"/>
                                 </connections>
@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="width" secondItem="fjH-HA-b1K" secondAttribute="height" multiplier="3.5:1" id="MLO-JZ-zd0"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Create game button 1"/>
+                                <state key="normal" backgroundImage="creategamebutton_modified"/>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
                                 </connections>
@@ -423,7 +423,7 @@
                         <outlet property="refereeButton" destination="HQY-JV-gHm" id="ujA-78-iCg"/>
                         <outlet property="refereeLabel" destination="Ypb-us-q7L" id="GWA-yM-QFo"/>
                         <outlet property="rulesTextfield" destination="Xx1-Tw-m3A" id="1mj-dk-QNt"/>
-                        <outlet property="saveButton" destination="mew-pS-Laf" id="Alo-AB-Ffa"/>
+                        <outlet property="saveButton" destination="mew-pS-Laf" id="dpD-3V-Erl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKA-A4-yMy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -730,6 +730,7 @@
                     <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
                     <connections>
                         <outlet property="collectionView" destination="m6H-bD-wNG" id="Mcl-iI-C22"/>
+                        <outlet property="scrollView" destination="cy9-VK-BJG" id="wzm-cO-UsD"/>
                         <outlet property="startGameButton" destination="6s2-dh-Y7m" id="U3L-wq-9Vw"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="ManageGameSegue" id="6Td-1F-5ho"/>
                     </connections>
@@ -915,12 +916,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OK4-sB-gpM"/>
+        <segue reference="6Td-1F-5ho"/>
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Create game button 1" width="244" height="79"/>
-        <image name="Join game button 1" width="244" height="79"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
         <image name="Polygon 1" width="36.5" height="64"/>
@@ -929,6 +928,7 @@
         <image name="algorithm 1" width="221.5" height="61"/>
         <image name="announcement" width="46" height="35"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
+        <image name="creategamebutton_modified" width="244" height="79"/>
         <image name="game code 1" width="151.5" height="35"/>
         <image name="game location 2" width="138.5" height="25"/>
         <image name="game name 2" width="112.5" height="25"/>
@@ -942,6 +942,7 @@
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
         <image name="ranking 1" width="187" height="61"/>
+        <image name="resumegamebutton_modified" width="244" height="79"/>
         <image name="rounds 1" width="101" height="35"/>
         <image name="rounds line frame" width="35" height="292.5"/>
         <image name="rules 2" width="59" height="25.5"/>
