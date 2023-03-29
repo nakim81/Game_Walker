@@ -45,9 +45,18 @@ struct R {
         }
     }
     
-    static func modifyReferee(_ gamecode: String, _ old_referee: Referee, _ new_referee: Referee){
-        removeReferee(gamecode, old_referee)
-        addReferee(gamecode, new_referee)
+    static func unassignReferee(_ gamecode: String, _ old_referee : Referee ){
+        let server = db.collection("\(gamecode) : Referees").document(old_referee.name)
+        server.updateData([
+            "assigned" : false,
+            "stationName" : ""
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
     }
     
     static func removeReferee(_ gamecode: String, _ referee: Referee){
