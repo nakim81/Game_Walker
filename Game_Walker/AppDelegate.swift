@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         //let db = Firestore.firestore()
+        
+        // IQKeyvoardManager resolves the problem that keyboard covers the screen
+        // Let XCode to use the library
+        IQKeyboardManager.shared.enable = true
+        // Inserting a toolbar above the keyboard without additional lines of code
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        // Touch anywhere outside the keyboard will hide the keyboard
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
         return true
     }
 

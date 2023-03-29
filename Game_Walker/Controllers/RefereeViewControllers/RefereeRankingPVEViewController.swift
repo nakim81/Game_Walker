@@ -8,30 +8,65 @@
 import Foundation
 import UIKit
 
-class RefereeRankingPVEViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RefereeRankingPVEViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
-    private var messages: [String]?
+    
     private var teamList: [Team] = []
-    private var selectedIndex: Int?
+    
+    static var readMsgList: [String] = []
+    static var messages: [String] = []
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
+    private var showScore = true
+    
+    private var timer = Timer()
+    static var read: Bool = true
+    private var diff: Int?
+    
+    static let notificationName = Notification.Name("readNotification")
+    
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        T.delegate_teamList = self
-        H.delegate_getHost = self
+        T.delegates.append(self)
+        H.delegates.append(self)
         configureTableView()
-        T.getTeamList(gameCode)
-        H.getHost(gameCode)
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.diff = RefereeRankingPVEViewController.messages.count - RefereeRankingPVEViewController.readMsgList.count
+            if strongSelf.diff! < 1 {
+                if RefereeRankingPVEViewController.read == false {
+                    RefereeRankingPVEViewController.read = true
+                    NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["isRead": RefereeRankingPVEViewController.read])
+                    strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+                }
+            } else {
+                if RefereeRankingPVEViewController.read == true {
+                    RefereeRankingPVEViewController.read = false
+                    NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["isRead": RefereeRankingPVEViewController.read])
+                    strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                }
+            }
+        }
+    }
+    
+    func listen(_ _ : [String : Any]){
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: ["Hi", "Hello", "How are you"])
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -40,7 +75,7 @@ class RefereeRankingPVEViewController: UIViewController, UITableViewDelegate, UI
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
-        leaderBoard.register(RefereeTeamTableViewCell.self, forCellReuseIdentifier: RefereeTeamTableViewCell.identifier)
+        leaderBoard.register(RefereeTableViewCell.self, forCellReuseIdentifier: RefereeTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
@@ -59,10 +94,19 @@ class RefereeRankingPVEViewController: UIViewController, UITableViewDelegate, UI
         refreshController.endRefreshing()
         leaderBoard.reloadData()
     }
-    
+}
+// MARK: - TableView
+extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = leaderBoard.dequeueReusableCell(withIdentifier: RefereeTeamTableViewCell.identifier, for: indexPath) as! RefereeTeamTableViewCell
-        cell.configureRankTableViewCell(imageName: teamList[indexPath.section].iconName, teamName: teamList[indexPath.section].name, points: teamList[indexPath.section].points)
+        let cell = leaderBoard.dequeueReusableCell(withIdentifier: RefereeTableViewCell.identifier, for: indexPath) as! RefereeTableViewCell
+        let team = teamList[indexPath.section]
+        let teamNum = String(team.number)
+        let points = String(team.points)
+        if (self.showScore) {
+            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points)
+        } else {
+            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: "")
+        }
         return cell
     }
     
@@ -85,13 +129,37 @@ class RefereeRankingPVEViewController: UIViewController, UITableViewDelegate, UI
     }
 }
 // MARK: - TeamProtocol
-extension RefereeRankingPVEViewController: TeamList, GetHost {
-    func listOfTeams(_ teams: [Team]) {
+extension RefereeRankingPVEViewController: TeamUpdateListener {
+    func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
     }
-    
-    func getHost(_ host: Host) {
-        self.messages = host.announcements
+}
+// MARK: - HostProtocol
+extension RefereeRankingPVEViewController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.showScore = host.showScoreboard
+        let msgList = RefereeRankingPVEViewController.messages
+        if (msgList.count >= host.announcements.count) {
+            var count = 0
+            for ind in msgList.indices {
+                if (ind - count >= host.announcements.count) {
+                  break;
+                }
+                let text = msgList[ind]
+                if ((text != host.announcements[ind - count]) && RefereeRankingPVEViewController.readMsgList.contains(text)) {
+                    if let index = RefereeRankingPVEViewController.readMsgList.firstIndex(of: text) {
+                        RefereeRankingPVEViewController.readMsgList.remove(at: index)
+                    }
+                    if (msgList.count > host.announcements.count) {
+                        count += 1
+                    }
+                }
+            }
+            RefereeRankingPVEViewController.messages = host.announcements
+        } else {
+            RefereeRankingPVEViewController.messages = host.announcements
+        }
+        leaderBoard.reloadData()
     }
 }

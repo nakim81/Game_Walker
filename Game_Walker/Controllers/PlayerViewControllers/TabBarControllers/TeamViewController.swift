@@ -15,9 +15,11 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     
-    static var selectedIndexList: [IndexPath] = []
-    static var selectedIntList: [Int] = []
-    static var messages: [String]?
+    static var readMsgList: [String] = []
+    static var messages: [String] = []
+    private let readAll = UIImage(named: "announcement")
+    private let unreadSome = UIImage(named: "unreadMessage")
+    
     private var team: Team?
     private let cellSpacingHeight: CGFloat = 3
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
@@ -31,9 +33,6 @@ class TeamViewController: UIViewController {
     
     static let notificationName = Notification.Name("readNotification")
     
-    private let readAll = UIImage(named: "announcement")
-    private let unreadSome = UIImage(named: "unreadMessage")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_getTeam = self
@@ -45,7 +44,7 @@ class TeamViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.diff = (TeamViewController.messages?.count ?? 0) - TeamViewController.selectedIndexList.count
+            strongSelf.diff = TeamViewController.messages.count - TeamViewController.readMsgList.count
             if strongSelf.diff! < 1 {
                 if TeamViewController.read == false {
                     TeamViewController.read = true
@@ -80,9 +79,6 @@ class TeamViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        print(TeamViewController.selectedIntList)
-        print(TeamViewController.selectedIndexList)
-        print(TeamViewController.messages?.indices)
         showMessagePopUp(messages: TeamViewController.messages)
     }
     
@@ -97,6 +93,11 @@ class TeamViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
+            if let team = self.team {
+                if (team.players.count == 1) {
+                    T.removeTeam(gameCode, team)
+                }
+            }
             self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
         })
         alert.addAction(action)
@@ -149,24 +150,24 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TeamProtocol
 extension TeamViewController: GetTeam, HostUpdateListener {
     func updateHost(_ host: Host) {
-        if (TeamViewController.messages?.count ?? 0 > host.announcements.count) {
-//            var count = 0
-//            if let messages = TeamViewController.messages {
-//                for ind in messages.indices {
-//                    if (ind - count >= host.announcements.count) {
-//                      break;
-//                    }
-//                    if (messages[ind] != host.announcements[ind - count]) {
-//                        if let index = TeamViewController.selectedIntList.firstIndex(of: ind) {
-//                            TeamViewController.selectedIntList.remove(at: index)
-//                            TeamViewController.selectedIndexList.remove(at: index)
-//                        }
-//                        count += 1
-//                    }
-//                }
-//            }
+        let msgList = TeamViewController.messages
+        if (msgList.count >= host.announcements.count) {
+            var count = 0
+            for ind in msgList.indices {
+                if (ind - count >= host.announcements.count) {
+                  break;
+                }
+                let text = msgList[ind]
+                if ((text != host.announcements[ind - count]) && TeamViewController.readMsgList.contains(text)) {
+                    if let index = TeamViewController.readMsgList.firstIndex(of: text) {
+                        TeamViewController.readMsgList.remove(at: index)
+                    }
+                    if (msgList.count > host.announcements.count) {
+                        count += 1
+                    }
+                }
+            }
             TeamViewController.messages = host.announcements
-            table.reloadData()
         } else {
             TeamViewController.messages = host.announcements
         }

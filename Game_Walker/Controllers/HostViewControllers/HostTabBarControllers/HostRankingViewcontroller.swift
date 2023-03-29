@@ -13,20 +13,20 @@ class HostRankingViewcontroller: UIViewController {
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
+    @IBOutlet weak var switchBtn: CustomSwitchButton!
+    
     private var messages: [String]?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 3
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
+    private var showScore = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        T.delegates.append(self)
-        H.delegate_getHost = self
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        setDelegates()
         configureTableView()
-        H.getHost(gameCode)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
     }
     
@@ -49,6 +49,20 @@ class HostRankingViewcontroller: UIViewController {
     @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
+    @IBAction func switchBtnPressed(_ sender: CustomSwitchButton) {
+        //Update showScoreBoard of host on the server
+        leaderBoard.reloadData()
+    }
+    
+    private func setDelegates() {
+        T.delegates.append(self)
+        H.delegate_getHost = self
+        switchBtn.delegate = self
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.getHost(gameCode)
+        self.showScore = switchBtn.isOn
+    }
+    
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
@@ -65,7 +79,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = String(teamList[indexPath.section].number)
         let team = teamList[indexPath.section]
-        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: team.points)
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
         return cell
     }
@@ -107,4 +121,11 @@ extension HostRankingViewcontroller: TeamUpdateListener, GetHost {
     func getHost(_ host: Host) {
         self.messages = host.announcements
     }
+}
+// MARK: - SwitchBtn
+extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
+  func isOnValueChange(isOn: Bool) {
+      self.showScore = isOn
+      leaderBoard.reloadData()
+  }
 }

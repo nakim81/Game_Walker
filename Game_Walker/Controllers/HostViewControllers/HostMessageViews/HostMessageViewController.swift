@@ -162,14 +162,14 @@ class HostMessageViewController: UIViewController {
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.heightAnchor.constraint(equalTo: messageTableView.widthAnchor, multiplier: 0.8),
+            messageTableView.bottomAnchor.constraint(equalTo: addAnnouncementBtn.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             addAnnouncementBtn.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
             addAnnouncementBtn.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
             addAnnouncementBtn.widthAnchor.constraint(equalTo: messageTableView.widthAnchor),
             addAnnouncementBtn.heightAnchor.constraint(equalToConstant: 40),
-            NSLayoutConstraint(item: addAnnouncementBtn, attribute: .top, relatedBy: .equal, toItem: messageTableView, attribute: .bottom, multiplier: 1, constant: 20),
+            NSLayoutConstraint(item: addAnnouncementBtn, attribute: .bottom, relatedBy: .equal, toItem: closeButton, attribute: .top, multiplier: 1, constant: -20),
             
             NSLayoutConstraint(item: closeButton, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -10),
             closeButton.widthAnchor.constraint(equalToConstant: 200),

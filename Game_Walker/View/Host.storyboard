@@ -198,7 +198,7 @@
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
-                                        <rect key="frame" x="105.5" y="634.5" width="195" height="58.5"/>
+                                        <rect key="frame" x="105.5" y="634.5" width="195" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="175:52" id="VeK-ka-nJC"/>
                                         </constraints>
@@ -865,6 +865,14 @@
                                     <constraint firstItem="41c-QL-V9u" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" multiplier="0.5" id="yEr-mF-JoK"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-CG-hVP" customClass="CustomSwitchButton" customModule="Game_Walker" customModuleProvider="target">
+                                <rect key="frame" x="304.5" y="106" width="80" height="40"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="switchBtnPressed:" destination="L51-9x-cCC" eventType="touchUpInside" id="xib-pn-eJf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tgv-Dy-rrr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -876,7 +884,11 @@
                             <constraint firstItem="A6M-cq-y2e" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" multiplier="1.6" id="B4g-ZZ-FGe"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.857488" id="ELI-5y-dNp"/>
                             <constraint firstItem="A6M-cq-y2e" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="0.16" id="Enz-BH-vvx"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="firstBaseline" secondItem="Z5O-CG-hVP" secondAttribute="baseline" constant="8" symbolType="layoutAnchor" id="Q0c-oV-9dN"/>
+                            <constraint firstItem="Z5O-CG-hVP" firstAttribute="width" secondItem="F4M-EA-8mT" secondAttribute="width" multiplier="0.225352" id="SLW-W3-xQn"/>
+                            <constraint firstItem="Z5O-CG-hVP" firstAttribute="height" secondItem="F4M-EA-8mT" secondAttribute="height" multiplier="0.0769231" id="XDr-II-Af7"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" id="ZwM-qw-uk8"/>
+                            <constraint firstItem="Z5O-CG-hVP" firstAttribute="trailing" secondItem="F4M-EA-8mT" secondAttribute="trailing" id="diK-OR-vF6"/>
                             <constraint firstItem="VCg-rd-HS9" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="0.27" id="gqo-Xu-fg5"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.659062" id="lX4-Y3-EX8"/>
                             <constraint firstItem="A6M-cq-y2e" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.18" id="v5A-mX-2Rl"/>
@@ -887,7 +899,8 @@
                     <connections>
                         <outlet property="announcementBtn" destination="41c-QL-V9u" id="azZ-af-6ec"/>
                         <outlet property="leaderBoard" destination="F4M-EA-8mT" id="Lg0-8l-mCC"/>
-                        <outlet property="settingBtn" destination="EVw-hW-wn8" id="jBN-wm-5WV"/>
+                        <outlet property="settingBtn" destination="EVw-hW-wn8" id="Amk-AC-nuv"/>
+                        <outlet property="switchBtn" destination="Z5O-CG-hVP" id="Bsk-vu-AMi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afc-mH-dDd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

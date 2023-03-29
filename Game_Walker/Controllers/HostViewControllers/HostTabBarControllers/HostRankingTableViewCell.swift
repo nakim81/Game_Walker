@@ -1,26 +1,16 @@
 //
-//  TeamTableViewCell.swift
+//  HostRankingTableViewCell.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 7/22/22.
+//  Created by Noah Kim on 2/2/23.
 //
 
 import Foundation
 import UIKit
 
-class TeamTableViewCell: UITableViewCell {
+class HostRankingTableViewCell: UITableViewCell {
     
-    static let identifier = "TeamTableViewCell"
-    
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
-        label.numberOfLines = 0
-        return label
-    }()
+    static let identifier = "HostRankingTableViewCell"
     
     private let teamNumLabel: UILabel = {
         let label = UILabel()
@@ -30,16 +20,6 @@ class TeamTableViewCell: UITableViewCell {
         label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 0
         return label
-    }()
-    
-    private let backGroundView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "name box fill 1")
-        view.alpha = 0.5
-        return view
     }()
     
     private lazy var containerView: UIView = {
@@ -79,10 +59,10 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
 
-    public let borderView: UIView = {
+    private let borderView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 85, width: 330, height: 2))
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        view.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
         return view
     }()
     
@@ -93,39 +73,20 @@ class TeamTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
-    func configureTeamTableViewCell(name: String) {
-        contentView.addSubview(containerView)
-        containerView.addSubview(backGroundView)
-        containerView.addSubview(nameLabel)
-
-        NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 330),
-            containerView.heightAnchor.constraint(equalToConstant: 50),
-            
-            nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            nameLabel.widthAnchor.constraint(equalToConstant: 203),
-            nameLabel.heightAnchor.constraint(equalToConstant: 27),
-            
-            backGroundView.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
-            backGroundView.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            backGroundView.widthAnchor.constraint(equalToConstant: 328),
-            backGroundView.heightAnchor.constraint(equalToConstant: 47)
-        ])
-        nameLabel.text = name
     
-    }
-    
-    func configureRankTableViewCell(imageName: String, teamNum: String, teamName: String, points: Int) {
+    func configureRankTableViewCell(imageName: String, teamNum: String, teamName: String, points: Int, showScore: Bool) {
         contentView.addSubview(containerView)
         containerView.addSubview(teamIconImage)
         containerView.addSubview(teamNameLabel)
         containerView.addSubview(scoreLabel)
         containerView.addSubview(borderView)
         containerView.addSubview(teamNumLabel)
+        
+        if (showScore) {
+            scoreLabel.textColor = .black
+        } else {
+            scoreLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.35)
+        }
         
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
@@ -159,7 +120,7 @@ class TeamTableViewCell: UITableViewCell {
         scoreLabel.text = String(points)
     }
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

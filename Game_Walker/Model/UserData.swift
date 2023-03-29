@@ -16,6 +16,14 @@ class UserData {
         return UserDefaults.standard.string(forKey: key)
     }
     
+    static func writeUsername(_ username: String, _ key: String){
+        UserDefaults.standard.set(username, forKey: key)
+    }
+
+    static func readUsername(_ key: String) -> String? {
+        return UserDefaults.standard.string(forKey: key)
+    }
+    
     static func writePlayer(_ player: Player, _ key: String){
         do{
             let encoder = JSONEncoder()

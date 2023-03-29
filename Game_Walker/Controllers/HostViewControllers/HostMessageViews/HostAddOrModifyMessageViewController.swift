@@ -132,7 +132,6 @@ class HostAddOrModifyMessageViewController: UIViewController {
         let view = UIStackView()
         view.spacing = 14.0
         view.distribution = .fillEqually
-
         return view
     }()
     
