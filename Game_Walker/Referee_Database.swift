@@ -45,6 +45,11 @@ struct R {
         }
     }
     
+    static func modifyReferee(_ gamecode: String, _ old_referee: Referee, _ new_referee: Referee){
+        removeReferee(gamecode, old_referee)
+        addReferee(gamecode, new_referee)
+    }
+    
     static func removeReferee(_ gamecode: String, _ referee: Referee){
         db.collection("\(gamecode) : Referees").document(referee.name).delete() { err in
             if let err = err {
