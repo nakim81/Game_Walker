@@ -22,38 +22,56 @@ class AlgorithmViewController: BaseViewController {
     var num_teams : Int = 0
     var num_stations : Int = 0
     
+
+    var collectionViewWidth = UIScreen.main.bounds.width * 0.7
+    var cellWidth : Int = 0
+    
     private var gamecode = UserData.readGamecode("gamecode")!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         S.delegate_stationList = self
         S.getStationList(gamecode)
-
-//        T.delegate_teamList = self
-//        T.getTeamList(curr_gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
-//        H.getHost("705154")
-    
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-        
+        collectionView.isScrollEnabled = false
+        collectionView.dragInteractionEnabled = true
+//        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+        print(collectionView.frame, "  HMMMM  ")
+//        scrollView.contentSize = collectionView.contentSize
+//        cellWidth = (Int(collectionViewWidth) - 4 * 16) / 8
+        cellWidth = 17
+print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.createGrid()
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+            self.collectionView.dragDelegate = self
+            self.collectionView.dropDelegate = self
+
+            self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
+            
         }
 
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+//        scrollView.contentSize = collectionView.contentSize
+        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
+    }
+
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         alert2(title: "", message: "Everything set?")
     }
     func createGrid() {
-        var num_stations = stationList!.count
+        num_stations = stationList!.count
 
         if (num_stations < num_teams) {
             alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
@@ -90,7 +108,7 @@ class AlgorithmViewController: BaseViewController {
             grid.append(curr_row)
             curr_row.removeAll()
         }
-        print(grid)
+        print("This is my grid: ", grid)
     }
 
 
@@ -111,27 +129,36 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell, let columns = grid.first?.count {
-            if (station_smallerthaneight && team_smallerthaneight) {
-                let columns = 8
-            }
-            let item = indexPath.item
-            let row : Int = totalrow
-            let column : Int = Int(CGFloat(item).truncatingRemainder(dividingBy: CGFloat(columns)))
-//        else { return UICollectionViewCell() }
-//        let num_team = teamList[indexPath.item].number
-//        let num_team = host!.teams
-//        var num_cols = stationList.count
-//        var num_rows = host!.rounds
-        if (column == columns) {
-            totalrow += 1
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell else {
+            return UICollectionViewCell()
         }
-//            cell.configureAlgorithmCell(cellteamnum:grid[row][column])
+
+        let teamnumberlabel = grid[indexPath.section][indexPath.item]
+        
+        print(teamnumberlabel)
+
+        // start new code
+        var deficit_amount = 0
+        var deficit : String
+        if (num_stations - num_teams) == 0 {
+            deficit = "none"
+            cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
+        }
+        else if min(num_stations, num_teams) == num_stations {
+            deficit = "stations"
+            deficit_amount = min(num_stations, num_teams)
+            cell.configureAlgorithmSpecialCell2(cellteamnum : teamnumberlabel)
+        } else {
+            deficit = "teams"
+            deficit_amount = min(num_stations, num_teams)
+            cell.configureAlgorithmSpecialCell1()
+        }
         return cell
-        }
-        return UICollectionViewCell();
     }
 }
+        
+
+
 
 extension AlgorithmViewController: StationList {
     func listOfStations(_ stations: [Station]) {
@@ -149,9 +176,90 @@ extension AlgorithmViewController: GetHost {
         print("algorithm protocol")
         self.num_teams = host.teams
         self.num_rounds = host.rounds
-        print("number of teams : ",self.num_teams)
-        print("number of rounds : ", self.num_rounds)
+
         self.collectionView?.reloadData()
         
+    }
+}
+
+
+extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // calculates cell size.
+        // however this should be the same as it assumes the collection view to display 8 cells no matter what.
+        print(cellWidth ," ECECELL WIDTHT")
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // Although the collection shows 8 x 8 in default, the content should be able to be larger.
+        let col_nums = max(num_stations, num_teams)
+        // 4 is the space between cells
+        let contentWidth = (4 * (col_nums + 1)) + (col_nums * cellWidth)
+        
+        let row_nums = grid.count
+        print("col_nums = ", col_nums, "row_nums = ", row_nums)
+        let contentHeight = (4 * (row_nums + 1)) + (row_nums * cellWidth)
+        
+        collectionView.contentSize = CGSize(width: contentWidth, height: contentHeight)
+
+    }
+
+}
+
+
+extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionViewDragDelegate{
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = indexPath
+        return [dragItem]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSString.self)
+    }
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
+        
+        coordinator.session.loadObjects(ofClass: NSArray.self as! any NSItemProviderReading.Type) { items in
+            guard let sourceIndexPaths = items as? [IndexPath] else { return }
+            
+            collectionView.performBatchUpdates({
+                var deleteIndexPaths = [IndexPath]()
+                var insertIndexPaths = [IndexPath]()
+                
+                for sourceIndexPath in sourceIndexPaths {
+                    if sourceIndexPath.section == destinationIndexPath.section {
+                        if sourceIndexPath.item < destinationIndexPath.item {
+                            deleteIndexPaths.append(sourceIndexPath)
+                            insertIndexPaths.append(destinationIndexPath)
+                        } else if sourceIndexPath.item > destinationIndexPath.item {
+                            deleteIndexPaths.append(sourceIndexPath)
+                            insertIndexPaths.append(destinationIndexPath)
+                        }
+                    } else {
+                        // Moving to different section
+                        deleteIndexPaths.append(sourceIndexPath)
+                        insertIndexPaths.append(destinationIndexPath)
+                    }
+                }
+                
+                collectionView.deleteItems(at: deleteIndexPaths)
+                collectionView.insertItems(at: insertIndexPaths)
+                
+            }, completion: nil)
+            
+            coordinator.drop(coordinator.items.first!.dragItem, toItemAt: destinationIndexPath)
+        }
     }
 }

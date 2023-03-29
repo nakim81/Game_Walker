@@ -14,7 +14,17 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "AlgorithmCollectionViewCell"
     
-    func configureAlgorithmCell(cellteamnum:Int) {
+    func configureAlgorithmNormalCell(cellteamnum : Int) {
         teamnumLabel.text = String(cellteamnum)
+    }
+    
+    func configureAlgorithmSpecialCell1() {
+        teamnumLabel.text = ""
+        algorithmCellBox.backgroundColor = UIColor.red
+    }
+    
+    func configureAlgorithmSpecialCell2(cellteamnum : Int) {
+        teamnumLabel.text = String(cellteamnum)
+        algorithmCellBox.backgroundColor = UIColor.blue
     }
 }
