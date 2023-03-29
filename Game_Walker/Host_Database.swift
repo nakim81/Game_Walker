@@ -55,19 +55,49 @@ struct H {
         }
     }
     
-    static func pause_resume_Game(_ gamecode: String){
-        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-        docRef.getDocument {(document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                var host = convertDataToHost(data)
-                host.paused = !host.paused
-                updateHost(gamecode, host)
+    //if show is true, all players can see the score; if false, only the players cannot see their team score (refs and host can)
+    static func hide_show_score(_ gamecode: String, _ show: Bool){
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        server.updateData([
+            "showScoreboard" : show
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
             } else {
-                print("Host does not exist")
+                print("Document successfully updated")
             }
         }
     }
+    
+    //if pause is true, the game is paused; if false, the game (time clock) is running
+    static func pause_resume_game(_ gamecode: String, _ pause: Bool){
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        server.updateData([
+            "paused" : pause
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
+    
+//
+//    static func pause_resume_Game(_ gamecode: String){
+//        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+//        docRef.getDocument {(document, error) in
+//            if let document = document, document.exists {
+//                guard let data = document.data() else {return}
+//                var host = convertDataToHost(data)
+//                host.paused = !host.paused
+//                updateHost(gamecode, host)
+//            } else {
+//                print("Host does not exist")
+//            }
+//        }
+//    }
     
     static func addAnnouncement(_ gamecode: String, _ announcement: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
@@ -110,8 +140,6 @@ struct H {
             }
         }
     }
-    
-    
     
     static func getHost(_ gamecode: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
