@@ -45,20 +45,6 @@ struct R {
         }
     }
     
-    static func unassignReferee(_ gamecode: String, _ old_referee : Referee ){
-        let server = db.collection("\(gamecode) : Referees").document(old_referee.name)
-        server.updateData([
-            "assigned" : false,
-            "stationName" : ""
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
-    }
-    
     static func removeReferee(_ gamecode: String, _ referee: Referee){
         db.collection("\(gamecode) : Referees").document(referee.name).delete() { err in
             if let err = err {
@@ -79,6 +65,20 @@ struct R {
                 print("Error updating document: \(err)")
             } else {
                 print("Referee Document successfully updated")
+            }
+        }
+    }
+    
+    static func unassignStation(_ gamecode: String, _ old_referee : Referee){
+        let server = db.collection("\(gamecode) : Referees").document(old_referee.name)
+        server.updateData([
+            "assigned" : false,
+            "stationName" : ""
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
             }
         }
     }
