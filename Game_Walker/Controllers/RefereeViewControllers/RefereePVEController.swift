@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereePVEController: UIViewController {
+class RefereePVEController: BaseViewController {
     
     @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
@@ -17,11 +17,13 @@ class RefereePVEController: UIViewController {
     var time : Int = 0
     var movingTime : Int = 0
     var gameTime : Int = 0
+    var gameCode = UserData.readGamecode("gamecode")!
+    var referee = UserData.readReferee("Referee")!
     var paused : Bool = false
     var moving : Bool = true
     var timer : Timer?
     var index = 0
-    var team : Team?
+    var team : Team = Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Simon Dominic", number: 4, players: [], points: 0, currentStation: "testingPVE", nextStation: "", iconName: "iconAir")
     var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Simon Dominic", number: 4, players: [], points: 0, currentStation: "testingPVE", nextStation: "", iconName: "iconAir")]
     
     override func viewDidLoad() {
@@ -30,60 +32,70 @@ class RefereePVEController: UIViewController {
         H.delegates.append(self)
         S.delegate_getStation = self
         T.delegates.append(self)
-        H.getHost(UserData.readGamecode("gamecode")!)
-        H.listenHost(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
-        S.getStation(UserData.readReferee("Referee")!.gamecode, "testingPVE")
-        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
-        self.team = self.teamOrder[index]
-        super.viewDidLoad()
+        H.getHost(gameCode)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        S.getStation(gameCode, "testingPVE")
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         
-        self.view.addSubview(roundLabel)
-        self.view.addSubview(borderView)
-        self.view.addSubview(iconButton)
-        self.view.addSubview(teamNumber)
-        self.view.addSubview(teamName)
-        self.view.addSubview(timerLabel)
-        self.view.addSubview(scoreLabel)
-        
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        borderView.widthAnchor.constraint(equalToConstant: 211).isActive = true
-        borderView.heightAnchor.constraint(equalToConstant: 306).isActive = true
-        borderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        borderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 187).isActive = true
-        iconButton.translatesAutoresizingMaskIntoConstraints = false
-        iconButton.widthAnchor.constraint(equalToConstant: 175).isActive = true
-        iconButton.heightAnchor.constraint(equalToConstant: 175).isActive = true
-        iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 200).isActive = true
-        teamNumber.translatesAutoresizingMaskIntoConstraints = false
-        teamNumber.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        teamNumber.heightAnchor.constraint(equalToConstant: 38).isActive = true
-        teamNumber.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamNumber.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 382).isActive = true
-        teamName.translatesAutoresizingMaskIntoConstraints = false
-        teamName.widthAnchor.constraint(equalToConstant: 174).isActive = true
-        teamName.heightAnchor.constraint(equalToConstant: 38).isActive = true
-        teamName.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamName.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 411).isActive = true
-        roundLabel.translatesAutoresizingMaskIntoConstraints = false
-        roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
-        roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
-        roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 101).isActive = true
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
-        timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
-        timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 521).isActive = true
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        scoreLabel.heightAnchor.constraint(equalToConstant: 53).isActive = true
-        scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        scoreLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 440).isActive = true
-        
-        runTimer()
+        Task {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            self.team = self.teamOrder[index]
+            
+            super.viewDidLoad()
+            self.view.addSubview(roundLabel)
+            self.view.addSubview(borderView)
+            self.view.addSubview(iconButton)
+            self.view.addSubview(teamNumber)
+            self.view.addSubview(teamName)
+            self.view.addSubview(timerLabel)
+            self.view.addSubview(scoreLabel)
+            self.view.addSubview(timetypeLabel)
+            
+            borderView.translatesAutoresizingMaskIntoConstraints = false
+            borderView.widthAnchor.constraint(equalToConstant: 211).isActive = true
+            borderView.heightAnchor.constraint(equalToConstant: 306).isActive = true
+            borderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            borderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 187).isActive = true
+            iconButton.translatesAutoresizingMaskIntoConstraints = false
+            iconButton.widthAnchor.constraint(equalToConstant: 175).isActive = true
+            iconButton.heightAnchor.constraint(equalToConstant: 175).isActive = true
+            iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 200).isActive = true
+            teamNumber.translatesAutoresizingMaskIntoConstraints = false
+            teamNumber.widthAnchor.constraint(equalToConstant: 115).isActive = true
+            teamNumber.heightAnchor.constraint(equalToConstant: 38).isActive = true
+            teamNumber.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            teamNumber.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 382).isActive = true
+            teamName.translatesAutoresizingMaskIntoConstraints = false
+            teamName.widthAnchor.constraint(equalToConstant: 174).isActive = true
+            teamName.heightAnchor.constraint(equalToConstant: 38).isActive = true
+            teamName.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            teamName.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 411).isActive = true
+            roundLabel.translatesAutoresizingMaskIntoConstraints = false
+            roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
+            roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
+            roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 101).isActive = true
+            timerLabel.translatesAutoresizingMaskIntoConstraints = false
+            timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
+            timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
+            timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 575).isActive = true
+            scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+            scoreLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+            scoreLabel.heightAnchor.constraint(equalToConstant: 53).isActive = true
+            scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            scoreLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 440).isActive = true
+            timetypeLabel.translatesAutoresizingMaskIntoConstraints = false
+            timetypeLabel.widthAnchor.constraint(equalToConstant: 168).isActive = true
+            timetypeLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+            timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
+            
+            runTimer()
+        }
     }
-    
+//MARK: - UI elements
     private lazy var borderView: UIView = {
         var view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 211, height: 306)
@@ -95,9 +107,12 @@ class RefereePVEController: UIViewController {
         view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
         border.layer.borderWidth = 5
         border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
+        border.addGestureRecognizer(tapGesture)
+        border.isUserInteractionEnabled = true
         return view
     }()
-    
+
     private lazy var iconButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         button.setTitle("", for: .normal)
@@ -159,6 +174,16 @@ class RefereePVEController: UIViewController {
         return view
     }()
     
+    private lazy var timetypeLabel: UILabel = {
+        var view = UILabel()
+        view.frame = CGRect(x: 0, y: 0, width: 151, height: 44)
+        view.backgroundColor = .white
+        view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        view.font = UIFont(name: "Dosis-Regular", size: 35)
+        view.textAlignment = .center
+        view.text = "Moving Time"
+        return view
+    }()
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(RefereePVEController.updateTimer)), userInfo: nil, repeats: true)
@@ -208,7 +233,7 @@ class RefereePVEController: UIViewController {
     }
         
     @objc func buttonTapped() {
-        UserData.writeTeam(team!, "Team")
+        UserData.writeTeam(team, "Team")
         performSegue(withIdentifier: "givePointsPVE", sender: self)
     }
     
@@ -216,14 +241,14 @@ class RefereePVEController: UIViewController {
     }
 }
 
-//MARK: - UIUpdate
+//MARK: - GetStation
 extension RefereePVEController: GetStation {
     func getStation(_ station: Station) {
         self.stationName = station.name
         self.teamOrder = station.teamOrder
     }
 }
-//MARK: - UIUpdate
+//MARK: - GetHost
 extension RefereePVEController: GetHost {
     func getHost(_ host: Host) {
         self.time = host.movingTime
@@ -231,18 +256,18 @@ extension RefereePVEController: GetHost {
         self.gameTime = host.gameTime
     }
 }
-// MARK: - listener
+// MARK: - TeamUpdateListener
 extension RefereePVEController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         for team in teams {
-            if team.name == self.team!.name {
+            if team.name == self.team.name {
                 self.team = team
             }
         }
-        scoreLabel.text = "\(self.team!.points)"
+        scoreLabel.text = "\(self.team.points)"
     }
 }
-// MARK: - listener
+// MARK: - HostUpdateListener
 extension RefereePVEController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.paused = host.paused

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereePVPController: UIViewController {
+class RefereePVPController: BaseViewController {
     
     @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var annnouncementButton: UIButton!
@@ -123,8 +123,14 @@ class RefereePVPController: UIViewController {
         timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
         timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
         timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500).isActive = true
-    
+        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 575).isActive = true
+        
+        timetypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timetypeLabel.widthAnchor.constraint(equalToConstant: 168).isActive = true
+        timetypeLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
+        
         runTimer()
         
     }
@@ -257,6 +263,17 @@ class RefereePVPController: UIViewController {
         view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         view.font = UIFont(name: "Dosis-Regular", size: 55)
         view.textAlignment = .center
+        return view
+    }()
+    
+    private lazy var timetypeLabel: UILabel = {
+        var view = UILabel()
+        view.frame = CGRect(x: 0, y: 0, width: 151, height: 44)
+        view.backgroundColor = .white
+        view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        view.font = UIFont(name: "Dosis-Regular", size: 35)
+        view.textAlignment = .center
+        view.text = "Moving Time"
         return view
     }()
     
