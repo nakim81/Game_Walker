@@ -25,6 +25,7 @@
 		61E509532988D91400F37E79 /* RefereeTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTeamTableViewCell.swift */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
+		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -122,6 +123,7 @@
 		61E509522988D91400F37E79 /* RefereeTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTeamTableViewCell.swift; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
 		A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAlgorithmViewController.swift; sourceTree = "<group>"; };
 		A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
 		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */,
 				A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */,
 				A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */,
+				A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */,
 				A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */,
 				A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */,
 				A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */,
@@ -629,6 +632,7 @@
 				6159252829694A0600BC6D7F /* RegisterController.swift in Sources */,
 				FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
+				A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,

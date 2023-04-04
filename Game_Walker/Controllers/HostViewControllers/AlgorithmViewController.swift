@@ -23,9 +23,10 @@ class AlgorithmViewController: BaseViewController {
     var num_stations : Int = 0
     
 
-    var collectionViewWidth = UIScreen.main.bounds.width * 0.7
-    var cellWidth : Int = 0
-    
+
+    var collectionViewWidth = UIScreen.main.bounds.width * 0.6
+    var collectionViewCellWidth : Int = 0
+
     private var gamecode = UserData.readGamecode("gamecode")!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -39,29 +40,32 @@ class AlgorithmViewController: BaseViewController {
         S.getStationList(gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
+        scrollView.isScrollEnabled = true
         collectionView.dragInteractionEnabled = true
 //        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
         print(collectionView.frame, "  HMMMM  ")
 //        scrollView.contentSize = collectionView.contentSize
 //        cellWidth = (Int(collectionViewWidth) - 4 * 16) / 8
-        cellWidth = 17
-print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
+//        cellWidth = 17
+        collectionView.delegate = self
+//print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.createGrid()
-            self.collectionView.delegate = self
             self.collectionView.dataSource = self
             self.collectionView.dragDelegate = self
             self.collectionView.dropDelegate = self
 
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-            
+
         }
 
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+//        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+        addviewsConstraints()
+
 //        scrollView.contentSize = collectionView.contentSize
         print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
     }
@@ -140,19 +144,20 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         // start new code
         var deficit_amount = 0
         var deficit : String
-        if (num_stations - num_teams) == 0 {
-            deficit = "none"
-            cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
-        }
-        else if min(num_stations, num_teams) == num_stations {
-            deficit = "stations"
-            deficit_amount = min(num_stations, num_teams)
-            cell.configureAlgorithmSpecialCell2(cellteamnum : teamnumberlabel)
-        } else {
-            deficit = "teams"
-            deficit_amount = min(num_stations, num_teams)
-            cell.configureAlgorithmSpecialCell1()
-        }
+//        if (num_stations - num_teams) == 0 {
+//            deficit = "none"
+//            cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
+//        }
+//        else if min(num_stations, num_teams) == num_stations {
+//            deficit = "stations"
+//            deficit_amount = min(num_stations, num_teams)
+//            cell.configureAlgorithmSpecialCell2(cellteamnum : teamnumberlabel)
+//        } else {
+//            deficit = "teams"
+//            deficit_amount = min(num_stations, num_teams)
+//            cell.configureAlgorithmSpecialCell1()
+//        }
+        cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
         return cell
     }
 }
@@ -186,13 +191,24 @@ extension AlgorithmViewController: GetHost {
 extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // calculates cell size.
-        // however this should be the same as it assumes the collection view to display 8 cells no matter what.
-        print(cellWidth ," ECECELL WIDTHT")
-        return CGSize(width: cellWidth, height: cellWidth)
+        let numberOfCellsPerRow = 8
+        let numberOfItems = collectionView.numberOfItems(inSection: 0)
+        let numberOfRows = (numberOfItems + numberOfCellsPerRow - 1) / numberOfCellsPerRow
+        let cellWidth = collectionViewWidth / CGFloat(numberOfCellsPerRow)
+        let cellHeight = cellWidth
+        let collectionViewHeight = cellHeight * CGFloat(numberOfRows)
+        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 3 * (8 - 1)) / 8
+        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 3 * (8 - 1)) / 8
+        collectionViewCellWidth = Int(width)
+        return CGSize(width: width, height: height)
+//        print("ISIT COMING THROUGH TH ECELL SIZE")
+//        return CGSize(width: 10, height: 10)
+//
+
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
         return 3
     }
 
@@ -200,47 +216,59 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         return 3
     }
 
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // Although the collection shows 8 x 8 in default, the content should be able to be larger.
-        let col_nums = max(num_stations, num_teams)
-        // 4 is the space between cells
-        let contentWidth = (4 * (col_nums + 1)) + (col_nums * cellWidth)
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        // Although the collection shows 8 x 8 in default, the content should be able to be larger.
+//        let col_nums = max(num_stations, num_teams)
+//        // 4 is the space between cells
+//        let contentWidth = (4 * (col_nums + 1)) + (col_nums * cellWidth)
+//
+//        let row_nums = grid.count
+//        print("col_nums = ", col_nums, "row_nums = ", row_nums)
+//        let contentHeight = (4 * (row_nums + 1)) + (row_nums * cellWidth)
+//
+//        collectionView.contentSize = CGSize(width: contentWidth, height: contentHeight)
+//
+//    }
+    func addviewsConstraints() {
+        print("HEYEYEYEYEY IM INNN")
+        let flowLayout = AlgorithmCustomFlowLayout()
+        collectionView.collectionViewLayout = flowLayout
         
-        let row_nums = grid.count
-        print("col_nums = ", col_nums, "row_nums = ", row_nums)
-        let contentHeight = (4 * (row_nums + 1)) + (row_nums * cellWidth)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        collectionView.contentSize = CGSize(width: contentWidth, height: contentHeight)
+        let contentSize = CGSize(width: collectionViewWidth * 2, height: collectionViewWidth * 2)
 
-    }
-    
-    func addCollectionViewConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor),
-            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
-    
-    func addScrollViewConstraints() {
-        let scrollView = UIScrollView(frame: .zero)
-        view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let contentSize = CGSize(width: collectionView.frame.width * 1.5, height: collectionView.frame.height * 1.5)
+        scrollView.backgroundColor = .yellow
         scrollView.contentSize = contentSize
-        
-        scrollView.addSubview(collectionView)
-        
+        scrollView.isDirectionalLockEnabled = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .green
+
+//        scrollView.addSubview(collectionView)
+//        view.addSubview(scrollView)
+
         NSLayoutConstraint.activate([
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
-            scrollView.heightAnchor.constraint(equalTo: scrollView.widthAnchor),
+            scrollView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
+            scrollView.heightAnchor.constraint(equalToConstant: collectionViewWidth),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            collectionView.widthAnchor.constraint(equalToConstant: contentSize.width),
+            collectionView.heightAnchor.constraint(equalToConstant: contentSize.height),
+            collectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
+        
+//
+//        let collectionViewContentSize = CGSize(width: collectionViewCellWidth * max(num_stations, num_teams), height: collectionViewCellWidth * num_rounds)
+////        collectionView.contentSize = contentSize
+//        collectionView.contentSize = collectionViewContentSize
+
     }
 
 }
