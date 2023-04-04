@@ -549,7 +549,7 @@
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
-                                    <segue destination="Vjg-e5-r3Z" kind="show" id="MjT-Ml-Hra"/>
+                                    <segue destination="uLg-Pv-BMT" kind="show" id="NcL-hR-YeL"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
@@ -656,11 +656,11 @@
             <objects>
                 <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
-                                <rect key="frame" x="23.5" y="83.5" width="222" height="61"/>
+                                <rect key="frame" x="23.5" y="80.5" width="222" height="61"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations line frame" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
                                 <rect key="frame" x="61" y="239" width="291" height="35"/>
@@ -681,7 +681,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
-                                        <rect key="frame" x="1" y="0.0" width="290" height="360"/>
+                                        <rect key="frame" x="1" y="0.0" width="290" height="336"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="m6H-bD-wNG" secondAttribute="height" multiplier="1:1" id="T0d-CM-Gth"/>
                                         </constraints>
@@ -693,7 +693,7 @@
                                         </collectionViewFlowLayout>
                                         <cells/>
                                     </collectionView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-Rt-Hrb" userLabel="Algorithm Collection View">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-Rt-Hrb" userLabel="Algorithm Collection View">
                                         <rect key="frame" x="-9" y="-35" width="292" height="336"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DKG-ob-7RS">
@@ -718,7 +718,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
-                                <rect key="frame" x="119" y="750" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Start game button"/>
                                 <connections>
@@ -759,17 +759,17 @@
             <objects>
                 <viewController id="Vjg-e5-r3Z" customClass="ManualAlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="imv-QA-M8c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="R3K-lf-CpX">
-                                <rect key="frame" x="24" y="71.5" width="221" height="61"/>
+                                <rect key="frame" x="24" y="74" width="221" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="R3K-lf-CpX" secondAttribute="height" multiplier="221:61" id="Gp6-0c-gGc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTF-pY-YhS">
-                                <rect key="frame" x="119" y="726" width="176" height="57"/>
+                                <rect key="frame" x="119" y="750" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Start game button"/>
                             </button>
@@ -979,7 +979,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OK4-sB-gpM"/>
+        <segue reference="6Td-1F-5ho"/>
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>

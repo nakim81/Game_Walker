@@ -213,6 +213,35 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         collectionView.contentSize = CGSize(width: contentWidth, height: contentHeight)
 
     }
+    
+    func addCollectionViewConstraints() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    func addScrollViewConstraints() {
+        let scrollView = UIScrollView(frame: .zero)
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let contentSize = CGSize(width: collectionView.frame.width * 1.5, height: collectionView.frame.height * 1.5)
+        scrollView.contentSize = contentSize
+        
+        scrollView.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
+            scrollView.heightAnchor.constraint(equalTo: scrollView.widthAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
 
 }
 
