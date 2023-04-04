@@ -549,7 +549,7 @@
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
-                                    <segue destination="Vjg-e5-r3Z" kind="show" identifier="ManualAlgSegue" id="0nB-cp-B0T"/>
+                                    <segue destination="Vjg-e5-r3Z" kind="show" id="MjT-Ml-Hra"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
@@ -649,7 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2404" y="-319"/>
+            <point key="canvasLocation" x="2420" y="-517"/>
         </scene>
         <!--Algorithm View Controller-->
         <scene sceneID="scy-qe-gvo">
@@ -979,7 +979,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6Td-1F-5ho"/>
+        <segue reference="OK4-sB-gpM"/>
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
