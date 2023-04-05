@@ -26,6 +26,9 @@ class AlgorithmViewController: BaseViewController {
 
     var collectionViewWidth = UIScreen.main.bounds.width * 0.6
     var collectionViewCellWidth : Int = 0
+    
+    var num_cols : Int = 8
+    var num_rows : Int = 8
 
     private var gamecode = UserData.readGamecode("gamecode")!
     
@@ -40,7 +43,7 @@ class AlgorithmViewController: BaseViewController {
         S.getStationList(gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
-        collectionView.isScrollEnabled = true
+        collectionView.isScrollEnabled = false
         scrollView.isScrollEnabled = true
         collectionView.dragInteractionEnabled = true
 //        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
@@ -67,7 +70,7 @@ class AlgorithmViewController: BaseViewController {
         addviewsConstraints()
 
 //        scrollView.contentSize = collectionView.contentSize
-        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
+
     }
 
     
@@ -94,7 +97,9 @@ class AlgorithmViewController: BaseViewController {
         }
         totalcolumn = max(num_teams, num_stations)
         totalrow = max(num_stations, 8)
-
+        
+        num_cols = totalcolumn
+        num_rows = totalrow
         print(totalrow)
         for r in 0...(totalrow - 1) {
             var curr_row = [Int]()
@@ -192,28 +197,29 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCellsPerRow = 8
-        let numberOfItems = collectionView.numberOfItems(inSection: 0)
-        let numberOfRows = (numberOfItems + numberOfCellsPerRow - 1) / numberOfCellsPerRow
-        let cellWidth = collectionViewWidth / CGFloat(numberOfCellsPerRow)
-        let cellHeight = cellWidth
-        let collectionViewHeight = cellHeight * CGFloat(numberOfRows)
-        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 3 * (8 - 1)) / 8
-        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 3 * (8 - 1)) / 8
+        //this calculates how big the cellshould be
+        collectionViewCellWidth = Int(collectionViewWidth / CGFloat(numberOfCellsPerRow))
+
+        // this calculates the contentsize
+        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 0 * (8 - 1)) / 8
+        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 0 * (8 - 1)) / 8
         collectionViewCellWidth = Int(width)
+        print("CONTENT INSETS: ", collectionView.contentInset.top,collectionView.contentInset.bottom, collectionView.contentInset.left, collectionView.contentInset.right)
         return CGSize(width: width, height: height)
 //        print("ISIT COMING THROUGH TH ECELL SIZE")
 //        return CGSize(width: 10, height: 10)
+
 //
 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
-        return 3
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 3
+        return 0
     }
 
 //    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -235,25 +241,20 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         collectionView.collectionViewLayout = flowLayout
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        let contentSize = CGSize(width: collectionViewWidth * 2, height: collectionViewWidth * 2)
+
+        let contentSize = CGSize(width: collectionViewCellWidth * num_cols, height: collectionViewCellWidth * num_rows)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .yellow
         scrollView.contentSize = contentSize
         scrollView.isDirectionalLockEnabled = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .green
-
-//        scrollView.addSubview(collectionView)
-//        view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
             scrollView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
             scrollView.heightAnchor.constraint(equalToConstant: collectionViewWidth),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
+
             collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -263,11 +264,47 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
             collectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
-        
+
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.contentSize = contentSize
+//        let flowLayout = AlgorithmCustomFlowLayout()
+//        collectionView.collectionViewLayout = flowLayout
 //
-//        let collectionViewContentSize = CGSize(width: collectionViewCellWidth * max(num_stations, num_teams), height: collectionViewCellWidth * num_rounds)
-////        collectionView.contentSize = contentSize
-//        collectionView.contentSize = collectionViewContentSize
+//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//        let contentSize = CGSize(width: collectionViewWidth * 2, height: collectionViewWidth * 2)
+//
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+     ////   scrollView.backgroundColor = .yellow
+//        scrollView.contentSize = contentSize
+//        scrollView.isDirectionalLockEnabled = true
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+      ////  collectionView.backgroundColor = .green
+//
+////        scrollView.addSubview(collectionView)
+////        view.addSubview(scrollView)
+//
+//        NSLayoutConstraint.activate([
+//            scrollView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
+//            scrollView.heightAnchor.constraint(equalToConstant: collectionViewWidth),
+//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//
+//            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+//            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+//            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+//            collectionView.widthAnchor.constraint(equalToConstant: contentSize.width),
+//            collectionView.heightAnchor.constraint(equalToConstant: contentSize.height),
+//            collectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+//            collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
+//        ])
+//
+//
+//        collectionView.collectionViewLayout.invalidateLayout()
+//        collectionView.contentSize = contentSize
+        
+        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
 
     }
 

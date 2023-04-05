@@ -10,7 +10,7 @@ import UIKit
 class AlgorithmCustomFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
         super.prepare()
-        
+
         guard let collectionView = collectionView else { return }
         
         let cellSize = CGSize(width: collectionView.bounds.width / 8, height: collectionView.bounds.width / 8)

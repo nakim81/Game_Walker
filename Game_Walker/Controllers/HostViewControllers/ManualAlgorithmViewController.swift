@@ -18,9 +18,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        layout.minimumInteritemSpacing = 3
-        layout.minimumLineSpacing = 3
+
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
         collectionView.dragInteractionEnabled = true
