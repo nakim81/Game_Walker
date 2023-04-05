@@ -18,7 +18,7 @@ class RefereeRankingPVEViewController: UIViewController {
     
     static var readMsgList: [String] = []
     static var messages: [String] = []
-    private let cellSpacingHeight: CGFloat = 3
+    private let cellSpacingHeight: CGFloat = 1
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
@@ -102,11 +102,7 @@ extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataS
         let team = teamList[indexPath.section]
         let teamNum = String(team.number)
         let points = String(team.points)
-        if (self.showScore) {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points)
-        } else {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: "")
-        }
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points, showScore: self.showScore)
         return cell
     }
     
@@ -120,6 +116,10 @@ extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -139,6 +139,7 @@ extension RefereeRankingPVEViewController: TeamUpdateListener {
 extension RefereeRankingPVEViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.showScore = host.showScoreboard
+        leaderBoard.reloadData()
         let msgList = RefereeRankingPVEViewController.messages
         if (msgList.count >= host.announcements.count) {
             var count = 0
@@ -160,6 +161,5 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         } else {
             RefereeRankingPVEViewController.messages = host.announcements
         }
-        leaderBoard.reloadData()
     }
 }

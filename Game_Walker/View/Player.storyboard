@@ -240,7 +240,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
-                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666663" height="57"/>
+                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666657" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="create team 1"/>
                                 <connections>
@@ -303,7 +303,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Kg-HhG">
-                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666663" height="57.333333333333371"/>
+                                <rect key="frame" x="122.66666666666667" y="707.33333333333337" width="182.66666666666657" height="57.333333333333371"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="join team 2"/>
                                 <connections>
@@ -404,7 +404,7 @@
                                 <rect key="frame" x="30.666666666666671" y="80" width="217.33333333333331" height="61.333333333333343"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="40.666666666666657" y="150" width="347" height="520"/>
+                                <rect key="frame" x="40.666666666666657" y="164" width="347" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdP-DM-uNL">
@@ -463,13 +463,13 @@
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="FNZ-PN-dnp"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
                             <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.634146" id="WeU-ic-fbf"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.7" id="WeU-ic-fbf"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0475" id="WwQ-YD-q2P"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="ZwR-9C-rKf"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.284" id="aMs-iQ-M7C"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0378049" id="ak0-Nc-oww"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="jag-WH-U88"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" id="qyz-91-rpR"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="1.1" id="qyz-91-rpR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>
@@ -498,7 +498,7 @@
                                 <rect key="frame" x="30" y="80" width="192.66666666666666" height="61.333333333333343"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
-                                <rect key="frame" x="36.666666666666657" y="170.66666666666663" width="355" height="520"/>
+                                <rect key="frame" x="36.666666666666657" y="143.66666666666663" width="355" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZ6-J9-loV">
@@ -545,7 +545,7 @@
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0745721" id="B9d-c9-cuK"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.18" id="C9b-qO-3Uu"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.829439" id="F9a-eD-U9z"/>
-                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.634146" id="Je0-WM-88q"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.7" id="Je0-WM-88q"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.16" id="LAm-vL-Vn4"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0475" id="XPu-hZ-Wm9"/>
                             <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="0.59" id="Zf9-wO-SWd"/>

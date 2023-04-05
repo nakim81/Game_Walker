@@ -13,7 +13,7 @@ protocol CustomSwitchButtonDelegate: AnyObject {
 }
 
 class CustomSwitchButton: UIButton {
-    typealias SwitchColor = (bar: UIImage, circle: UIImage)
+    typealias SwitchImage = (bar: UIImage, circle: UIImage)
 
         private var barView: UIImageView!
         private var circleView: UIImageView!
@@ -25,7 +25,7 @@ class CustomSwitchButton: UIButton {
         }
 
         // button image when the button is on
-        var onImage: SwitchColor = (UIImage(named: "StateShow")!, UIImage(named: "SwitchBtnImage")!) {
+        var onImage: SwitchImage = (UIImage(named: "StateShow")!, UIImage(named: "SwitchBtnImage")!) {
             didSet {
                 if isOn {
                     self.barView.image = self.onImage.bar
@@ -35,7 +35,7 @@ class CustomSwitchButton: UIButton {
         }
 
         // button image when the button is off
-        var offImage: SwitchColor = (UIImage(named: "StateHid")!, UIImage(named: "SwitchBtnImage")!) {
+        var offImage: SwitchImage = (UIImage(named: "StateHid")!, UIImage(named: "SwitchBtnImage")!) {
             didSet {
                 if isOn == false {
                     self.barView.image = self.offImage.bar
@@ -51,7 +51,7 @@ class CustomSwitchButton: UIButton {
         private var isAnimated: Bool = false
 
         // circleView's top and bottom margin
-        var circleViewTopBottomMargin: CGFloat = 1
+        var circleViewTopBottomMargin: CGFloat = 2
 
         weak var delegate: CustomSwitchButtonDelegate?
 

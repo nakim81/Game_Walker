@@ -16,7 +16,7 @@ class RankingViewController: UIViewController {
     private var showScore = true
     private var teamList: [Team] = []
     private var selectedIndex: Int?
-    private let cellSpacingHeight: CGFloat = 3
+    private let cellSpacingHeight: CGFloat = 1
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
@@ -97,6 +97,10 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
