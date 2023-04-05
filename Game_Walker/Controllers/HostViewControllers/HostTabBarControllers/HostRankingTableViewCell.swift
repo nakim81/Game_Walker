@@ -99,12 +99,12 @@ class HostRankingTableViewCell: UITableViewCell {
             teamNumLabel.trailingAnchor.constraint(equalTo: teamNameLabel.leadingAnchor),
             teamNumLabel.heightAnchor.constraint(equalToConstant: 23),
             
-            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 20),
+            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 35),
             teamNameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
             teamNameLabel.widthAnchor.constraint(equalToConstant: 100),
             teamNameLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            scoreLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 95),
+            scoreLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor, constant: 110),
             scoreLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
             scoreLabel.widthAnchor.constraint(equalToConstant: 70),
             scoreLabel.heightAnchor.constraint(equalToConstant: 30)

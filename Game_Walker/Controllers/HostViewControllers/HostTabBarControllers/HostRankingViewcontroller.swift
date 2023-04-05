@@ -51,7 +51,7 @@ class HostRankingViewcontroller: UIViewController {
     
     @IBAction func switchBtnPressed(_ sender: CustomSwitchButton) {
         //Update showScoreBoard of host on the server
-        leaderBoard.reloadData()
+        //leaderBoard.reloadData()
     }
     
     private func setDelegates() {
@@ -126,6 +126,7 @@ extension HostRankingViewcontroller: TeamUpdateListener, GetHost {
 extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
   func isOnValueChange(isOn: Bool) {
       self.showScore = isOn
+      H.hide_show_score(gameCode, self.showScore)
       leaderBoard.reloadData()
   }
 }

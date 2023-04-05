@@ -15,7 +15,7 @@ class RefereeRankingPVPViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     
     private var teamList: [Team] = []
-    private let cellSpacingHeight: CGFloat = 3
+    private let cellSpacingHeight: CGFloat = 1
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
@@ -94,11 +94,7 @@ extension RefereeRankingPVPViewController: UITableViewDelegate, UITableViewDataS
         let team = teamList[indexPath.section]
         let teamNum = String(team.number)
         let points = String(team.points)
-        if (self.showScore) {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points)
-        } else {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: "")
-        }
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points, showScore: self.showScore)
         return cell
     }
     
@@ -112,6 +108,10 @@ extension RefereeRankingPVPViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
