@@ -112,6 +112,7 @@
                         <outlet property="gamecodeTextField" destination="4M3-nc-0rD" id="WLt-Hs-uRA"/>
                         <outlet property="nextButton" destination="7mt-aS-C4U" id="sMC-Qd-M5A"/>
                         <outlet property="usernameTextField" destination="QN8-sD-k2a" id="2dL-tD-L4u"/>
+                        <segue destination="oap-1p-LNQ" kind="presentation" identifier="Testing" id="hbi-P9-syF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -218,6 +219,7 @@
                             <constraint firstItem="V1z-WK-izo" firstAttribute="centerX" secondItem="DDt-pE-hgc" secondAttribute="centerX" id="vgm-ee-JSp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="tmS-eX-ckY"/>
                     <connections>
                         <outlet property="GMStepper" destination="7dt-w1-Eds" id="RYI-me-aXR"/>
                     </connections>
@@ -543,7 +545,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GxM-Ra-Tyo"/>
+        <segue reference="hbi-P9-syF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="announcement" width="46" height="35"/>
