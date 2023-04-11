@@ -17,7 +17,7 @@ class HostTimerViewController: UIViewController {
     
     private var timer = Timer()
     private var totalTime: Int = 0
-    private var time: Int = 0
+    private var time: Int?
     private var seconds: Int = 0
     private var moveSeconds: Int = 0
     private var moving: Bool = true
@@ -137,7 +137,7 @@ class HostTimerViewController: UIViewController {
                 if strongSelf.rounds! < 1 {
                     timer.invalidate()
                 }
-                if strongSelf.time < 1 {
+                if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
                         strongSelf.moving = false
@@ -150,9 +150,9 @@ class HostTimerViewController: UIViewController {
                         strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                     }
                 }
-                strongSelf.time -= 1
-                let minute = strongSelf.time/60
-                let second = strongSelf.time % 60
+                strongSelf.time! -= 1
+                let minute = strongSelf.time!/60
+                let second = strongSelf.time! % 60
                 strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
                 strongSelf.totalTime += 1
                 let totalMinute = strongSelf.totalTime/60

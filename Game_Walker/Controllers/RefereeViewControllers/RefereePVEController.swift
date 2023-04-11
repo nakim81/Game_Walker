@@ -221,14 +221,12 @@ class RefereePVEController: BaseViewController {
             } else {
                 time = movingTime
                 moving = true
-                // 노아는 이 부분 제외하고 카피
                 index += 1
                 teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
                 teamName.text = teamOrder[index].name
                 roundLabel.text = "Round " + "\(index + 1)"
                 iconButton.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
                 self.team = self.teamOrder[index]
-                //
             }
             } else {
                 if !paused {

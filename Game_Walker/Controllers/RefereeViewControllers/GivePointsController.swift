@@ -216,6 +216,7 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.leftButtonPress))
+        longGestureRecognizer.minimumPressDuration = 1.5
         button.addGestureRecognizer(longGestureRecognizer)
         return button
     }()
@@ -231,6 +232,7 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.rightButtonPress))
+        longGestureRecognizer.minimumPressDuration = 1.5
         button.addGestureRecognizer(longGestureRecognizer)
         return button
     }()
@@ -381,7 +383,7 @@ extension GMStepper {
             leftButton.isEnabled = false
             rightButton.isEnabled = false
             // Start a timer when long press begins
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: false)
         case .changed:
             // Do nothing while the gesture is being changed
             break

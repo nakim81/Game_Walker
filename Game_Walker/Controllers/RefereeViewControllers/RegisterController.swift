@@ -13,12 +13,16 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
+    private var storedRefereename = UserData.readUsername("refereename") ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.delegate = self
+        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
+        usernameTextField.placeholder = storedRefereename != "" ? storedRefereename : "refereename"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -34,8 +38,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             R.addReferee(gamecode, newReferee)
             UserData.writeGamecode(gamecode, "gamecode")
             UserData.writeReferee(newReferee, "Referee")
+            UserData.writeUsername(newReferee.name, "refereename")
         }
-        performSegue(withIdentifier: "goToWait", sender: self)
     }
 }
 
