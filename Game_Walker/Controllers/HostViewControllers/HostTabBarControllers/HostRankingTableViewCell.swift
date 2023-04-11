@@ -54,7 +54,7 @@ class HostRankingTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var stationNameLabel = {
+    private lazy var stationNameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
