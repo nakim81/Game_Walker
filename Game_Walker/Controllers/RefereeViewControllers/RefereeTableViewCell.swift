@@ -59,6 +59,7 @@ class RefereeTableViewCell: UITableViewCell {
         let view = UIView(frame: CGRect(x: 0, y: 85, width: 330, height: 2))
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
