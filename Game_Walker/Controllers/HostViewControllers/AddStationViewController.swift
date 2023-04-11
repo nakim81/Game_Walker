@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import PromiseKit
 
 class AddStationViewController: BaseViewController {
 
@@ -45,6 +46,8 @@ class AddStationViewController: BaseViewController {
     let transparentView = UIView()
     
     var refereeBefore : Referee?
+    var newReferee : Referee?
+    var stationToReplace : Station?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +61,7 @@ class AddStationViewController: BaseViewController {
         refereeTableView.delegate = self
         refereeTableView.dataSource = self
         
+
 
         if stationExists {
             gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
@@ -148,6 +152,43 @@ class AddStationViewController: BaseViewController {
 
     }
     
+
+
+
+//    func updateStation(gamecode: String, refereeBefore: Referee?, gamename: String, refereename: String, isPvp: Bool, gamepoints: Int, gamelocation: String, rules: String) -> Promise<Void> {
+//        return Promise<Void> { resolver in
+//            // Call unassignStation
+//            R.unassignStation(gamecode, refereeBefore!)
+//                .then { () -> Promise<Referee> in
+//                    // Create new referee object
+//                    let newReferee = Referee(gamecode: UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename, assigned: true)
+//                    // Call assignStation
+//                    return R.assignStation(UserData.readGamecode("gamecode")!, newReferee, gamename)
+//                }
+//                .then { (newReferee: Referee) -> Promise<Station> in
+//                    // Create station object
+//                    let stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
+//                    // Call removeStation
+//                    return S.removeStation(gamecode, gamename).then { () -> Promise<Station> in
+//                        // Call addStation
+//                        return S.addStation(gamecode, stationToReplace)
+//                    }
+//                }
+//                .done { _ in
+//                    // Resolve promise when all functions complete successfully
+//                    resolver.fulfill(())
+//                }
+//                .catch { (error) in
+//                    // Reject promise if any function throws an error
+//                    resolver.reject(error)
+//                }
+//        }
+//    }
+//
+//
+
+
+    
     func checkReferee() {
         if refereename == "" && !stationExists{
             refereeLabel.text = "Choose Referee"
@@ -215,15 +256,52 @@ class AddStationViewController: BaseViewController {
         if (stationExists && !modified) {
             self.dismiss(animated: true, completion: nil)
         } else if (stationExists && modified) {
-            //unassigning referee
-            R.unassignStation(gamecode, refereeBefore!)
-            
+//
+//            firstly { () -> Promise<Void> in
+//                return Promise<Void> { seal in
+//                    //unassigns referee object's station
+//                    R.unassignStation(gamecode, refereeBefore!) {
+//                        print("Unassigning referee object's station")
+//                        newReferee = Referee(gamecode: gamecode, name: refereename, stationName: gamename, assigned: true)
+//                        seal.fulfill(())
+//                    }
+//                }
+//            }.then {
+//                return Promise<Void> { seal in
+//                    R.assignStation(gamecode, newReferee!, gamename) {
+//                        seal.fulfill(())
+//                    }
+//                }
+//            }.then { () -> Promise<Void> in
+//                return Promise<Void> { seal in
+//                    // removes station
+//                    S.removeStation(gamecode, station!) {
+//                        seal.fulfill(())
+//                    }
+//                }
+//            }.then { () -> Promise<Void> in
+//                return Promise<Void> { seal in
+//                    //creates new station with new referee
+//                    stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
+//                    S.addStation(gamecode, stationToReplace!) {
+//                        seal.fulfill(())
+//                    }
+//                }
+//            }.done {
+//                print("All works with the server are done")
+//            }.catch { error in
+//                print("An error occurred: \(error)")
+//                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
+//            }
+
+        } else if (!stationExists) {
+            let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename,assigned: true)
+            R.assignStation(UserData.readGamecode("gamecode")!, selectedReferee, gamename)
+            let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
+            S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
         }
         
-        let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename,assigned: true)
-        R.assignStation(UserData.readGamecode("gamecode")!, selectedReferee, gamename)
-        let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
-        S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+
         
         stationsTableViewController?.reloadStationTable()
         self.dismiss(animated: true, completion: nil)
@@ -317,4 +395,14 @@ extension AddStationViewController : GetReferee {
     func getReferee(_ referee: Referee) {
         refereeBefore = referee
     }
+}
+
+extension AddStationViewController : GetStation {
+    func getStation(_ station: Station) {
+        if stationExists {
+            self.station = station
+        }
+    }
+    
+    
 }
