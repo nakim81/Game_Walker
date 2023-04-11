@@ -32,47 +32,38 @@ class HostGivePointsController : UIViewController {
         super.viewDidLoad()
         //self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.view.addSubview(containerView)
-        self.view.addSubview(currentstationLabel)
-        self.view.addSubview(currentpointsLabel)
         self.view.addSubview(givepointsLabel)
+        self.view.bringSubviewToFront(givepointsLabel)
+        self.view.addSubview(closeButton)
         self.view.addSubview(stepper)
         self.view.addSubview(confirmButton)
-        self.view.bringSubviewToFront(givepointsLabel)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.widthAnchor.constraint(equalToConstant: 338).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 338).isActive = true
         containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 220).isActive = true
-        currentstationLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentstationLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        currentstationLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        currentstationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        currentstationLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 22).isActive = true
-        currentpointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentpointsLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        currentpointsLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        currentpointsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        currentpointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 73).isActive = true
         givepointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        givepointsLabel.widthAnchor.constraint(equalToConstant: 150.85).isActive = true
-        givepointsLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        givepointsLabel.widthAnchor.constraint(equalToConstant: 267.74).isActive = true
+        givepointsLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
         givepointsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        givepointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 118).isActive = true
-        givepointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        givepointsLabel.widthAnchor.constraint(equalToConstant: 150.85).isActive = true
-        givepointsLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        givepointsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        givepointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 118).isActive = true
+        givepointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 55).isActive = true
         stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.widthAnchor.constraint(equalToConstant: 265).isActive = true
         stepper.heightAnchor.constraint(equalToConstant: 134).isActive = true
         stepper.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        stepper.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 129).isActive = true
+        stepper.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 116).isActive = true
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 284).isActive = true
+        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.widthAnchor.constraint(equalToConstant: 175.8).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 57).isActive = true
         confirmButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         confirmButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 265).isActive = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popupClosed))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     private lazy var containerView: UIView = {
@@ -84,32 +75,9 @@ class HostGivePointsController : UIViewController {
         return view
     }()
     
-    private lazy var currentstationLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
-        view.layer.backgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
-        view.textColor = .white
-        view.font = UIFont(name: "Dosis-SemiBold", size: 20)
-        view.textAlignment = .center
-        view.text = "Current station: " + currentStationName
-        return view
-    }()
-    
-    private lazy var currentpointsLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
-        view.layer.backgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
-        view.textColor = .white
-        view.font = UIFont(name: "Dosis-SemiBold", size: 20)
-        view.textAlignment = .center
-        view.text = "Current points: " + "\(currentPoints)"
-        return view
-    }()
-    
     private lazy var givepointsLabel: UILabel = {
         var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 150.85, height: 35)
-        view.layer.backgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
+        view.frame = CGRect(x: 0, y: 0, width: 267.74, height: 61)
         let image0 = UIImage(named: "white!give points 1.png")?.cgImage
         let layer0 = CALayer()
         layer0.contents = image0
@@ -129,6 +97,14 @@ class HostGivePointsController : UIViewController {
         return view
     }()
     
+    private lazy var closeButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: "icon _close_"), for: .normal)
+        button.addTarget(self, action: #selector(popupClosed), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var confirmButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175.8, height: 57))
         button.setTitle("", for: .normal)
@@ -139,6 +115,10 @@ class HostGivePointsController : UIViewController {
     
     @objc func buttonTapped() {
         T.givePoints(gameCode, team.name, Int(stepper.value))
+        self.presentingViewController?.dismiss(animated: true)
+    }
+    
+    @objc func popupClosed() {
         self.presentingViewController?.dismiss(animated: true)
     }
 }

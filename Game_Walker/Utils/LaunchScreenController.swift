@@ -16,7 +16,7 @@ class LaunchScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black;
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                 self.addRectangles()
         }
         prepareSound()
@@ -53,7 +53,7 @@ class LaunchScreenController: UIViewController {
         ]
         let words = ["LET", "THERE", "BE", "LIGHT"]
         addRectangle(at: 0, rectangleViews: rectangleViews, colors: colors, words: words)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
             self.view.backgroundColor = .white
             self.addWords()
         }
@@ -70,10 +70,10 @@ class LaunchScreenController: UIViewController {
         rectangleView.addSubview(label)
         self.view.addSubview(rectangleView)
         
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.45, animations: {
             rectangleView.alpha = 1.0
         }, completion: { _ in
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.45, animations: {
                 rectangleView.alpha = 0.0
             }, completion: { _ in
                 rectangleView.removeFromSuperview()
@@ -104,16 +104,16 @@ class LaunchScreenController: UIViewController {
         label.heightAnchor.constraint(equalToConstant: 44).isActive = true
         label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.9, animations: {
                label.alpha = 1.0
            }, completion: { _ in
-               UIView.animate(withDuration: 1.0, animations: {
+               UIView.animate(withDuration: 0.9, animations: {
                    label.alpha = 0.0
                }, completion: { _ in
                    label.removeFromSuperview()
                })
            })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             self.addIcon()
         }
     }
@@ -128,10 +128,10 @@ class LaunchScreenController: UIViewController {
         imageView.heightAnchor.constraint(equalToConstant: 181).isActive = true
         imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.9, animations: {
                imageView.alpha = 1.0
            }, completion: { _ in
-               UIView.animate(withDuration: 1.0, animations: {
+               UIView.animate(withDuration: 0.9, animations: {
                    imageView.alpha = 0.0
                }, completion: { _ in
                    imageView.removeFromSuperview()

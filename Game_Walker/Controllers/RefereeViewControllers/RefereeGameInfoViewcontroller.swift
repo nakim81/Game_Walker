@@ -28,25 +28,25 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var  gameInfoLabel: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "game info_white 2")
+        imageView.image = UIImage(named: "Station Info 2")
         return imageView
     }()
     
     private lazy var gameNameLabel: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "game name 2")
+        imageView.image = UIImage(named: "station name 1")
         return imageView
     }()
     
     private lazy var gameLocationLabel: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "game location 2")
+        imageView.image = UIImage(named: "Station location 1")
         return imageView
     }()
     
     private lazy var gamePointsLabel: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "game points 2")
+        imageView.image = UIImage(named: "station points 3")
         return imageView
     }()
     
