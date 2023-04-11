@@ -33,11 +33,6 @@ struct S {
         }
     }
     
-    static func modifyStation(_ gamecode: String, _ old_station: Station, _ new_station: Station) {
-        removeStation(gamecode, old_station)
-        addStation(gamecode, new_station)
-    }
-    
     static func removeStation(_ gamecode: String, _ station: Station){
         db.collection("\(gamecode) : Stations").document(station.name).delete() { err in
             if let err = err {
