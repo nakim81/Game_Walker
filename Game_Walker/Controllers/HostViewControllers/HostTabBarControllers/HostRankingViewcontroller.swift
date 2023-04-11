@@ -18,7 +18,7 @@ class HostRankingViewcontroller: UIViewController {
     private var messages: [String]?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
-    private let cellSpacingHeight: CGFloat = 3
+    private let cellSpacingHeight: CGFloat = 1
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
@@ -79,7 +79,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = String(teamList[indexPath.section].number)
         let team = teamList[indexPath.section]
-        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: team.points, showScore: self.showScore)
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: team.currentStation, points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
         return cell
     }
@@ -94,6 +94,10 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

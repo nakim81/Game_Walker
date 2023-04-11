@@ -13,7 +13,7 @@ class RankingViewController: UIViewController {
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
-    private var showScore = true
+    private var showScore: Bool?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 1
@@ -35,11 +35,7 @@ class RankingViewController: UIViewController {
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
-        if TeamViewController.read {
-            self.announcementButton.setImage(readAll, for: .normal)
-        } else {
-            self.announcementButton.setImage(unreadSome, for: .normal)
-        }
+        configureAlertIcon()
     }
     
     @objc func readAll(notification: Notification) {
@@ -63,6 +59,14 @@ class RankingViewController: UIViewController {
     @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
+    private func configureAlertIcon() {
+        if TeamViewController.read {
+            self.announcementButton.setImage(readAll, for: .normal)
+        } else {
+            self.announcementButton.setImage(unreadSome, for: .normal)
+        }
+    }
+    
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
@@ -79,11 +83,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
         let team = teamList[indexPath.section]
         let teamNum = String(team.number)
         let points = String(team.points)
-        if (self.showScore) {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points)
-        } else {
-            cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: "")
-        }
+        cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points, showScore: self.showScore ?? true)
         return cell
     }
     
@@ -113,13 +113,13 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
 extension RankingViewController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
-        leaderBoard.reloadData()
+        self.leaderBoard.reloadData()
     }
 }
 // MARK: - HostProtocol
 extension RankingViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.showScore = host.showScoreboard
-        leaderBoard.reloadData()
+        self.leaderBoard.reloadData()
     }
 }

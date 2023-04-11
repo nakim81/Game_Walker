@@ -78,7 +78,7 @@ class AlgorithmViewController: BaseViewController {
         alert2(title: "", message: "Everything set?")
     }
     func createGrid() {
-        num_stations = stationList!.count
+        num_stations = /*stationList!.count**/ 8
 
         if (num_stations < num_teams) {
             alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
