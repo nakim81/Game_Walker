@@ -61,9 +61,13 @@ class JoinGameViewController: BaseViewController {
         
         if (gamecode.isEmpty || gamecode == savedGameCode) && (username.isEmpty || username == savedUserName) {
             
-            // User wants to join the game with the stored game code, username, and player object
-            performSegue(withIdentifier: "ResumeGameSegue", sender: self)
-            
+            if (UserData.readTeam("team") != nil) {
+                // User wants to join the game with the stored game code, username, and player object
+                performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+            } else {
+                // User gets to choose to create or join a team
+                performSegue(withIdentifier: "goToPF2VC", sender: self)
+            }
         } else if savedGameCode.isEmpty && savedUserName.isEmpty {
             
             // User is joining a new game
