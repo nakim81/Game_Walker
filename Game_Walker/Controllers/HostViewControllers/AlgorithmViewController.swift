@@ -66,11 +66,7 @@ class AlgorithmViewController: BaseViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
         addviewsConstraints()
-
-//        scrollView.contentSize = collectionView.contentSize
-
     }
 
     
@@ -149,19 +145,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         // start new code
         var deficit_amount = 0
         var deficit : String
-//        if (num_stations - num_teams) == 0 {
-//            deficit = "none"
-//            cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
-//        }
-//        else if min(num_stations, num_teams) == num_stations {
-//            deficit = "stations"
-//            deficit_amount = min(num_stations, num_teams)
-//            cell.configureAlgorithmSpecialCell2(cellteamnum : teamnumberlabel)
-//        } else {
-//            deficit = "teams"
-//            deficit_amount = min(num_stations, num_teams)
-//            cell.configureAlgorithmSpecialCell1()
-//        }
+
         cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
         return cell
     }
@@ -222,19 +206,6 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 
-//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        // Although the collection shows 8 x 8 in default, the content should be able to be larger.
-//        let col_nums = max(num_stations, num_teams)
-//        // 4 is the space between cells
-//        let contentWidth = (4 * (col_nums + 1)) + (col_nums * cellWidth)
-//
-//        let row_nums = grid.count
-//        print("col_nums = ", col_nums, "row_nums = ", row_nums)
-//        let contentHeight = (4 * (row_nums + 1)) + (row_nums * cellWidth)
-//
-//        collectionView.contentSize = CGSize(width: contentWidth, height: contentHeight)
-//
-//    }
     func addviewsConstraints() {
         print("HEYEYEYEYEY IM INNN")
         let flowLayout = AlgorithmCustomFlowLayout()
@@ -267,42 +238,7 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.contentSize = contentSize
-//        let flowLayout = AlgorithmCustomFlowLayout()
-//        collectionView.collectionViewLayout = flowLayout
-//
-//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//
-//        let contentSize = CGSize(width: collectionViewWidth * 2, height: collectionViewWidth * 2)
-//
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-     ////   scrollView.backgroundColor = .yellow
-//        scrollView.contentSize = contentSize
-//        scrollView.isDirectionalLockEnabled = true
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-      ////  collectionView.backgroundColor = .green
-//
-////        scrollView.addSubview(collectionView)
-////        view.addSubview(scrollView)
-//
-//        NSLayoutConstraint.activate([
-//            scrollView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
-//            scrollView.heightAnchor.constraint(equalToConstant: collectionViewWidth),
-//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//
-//            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-//            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            collectionView.widthAnchor.constraint(equalToConstant: contentSize.width),
-//            collectionView.heightAnchor.constraint(equalToConstant: contentSize.height),
-//            collectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-//        ])
-//
-//
-//        collectionView.collectionViewLayout.invalidateLayout()
-//        collectionView.contentSize = contentSize
+
         
         print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
 
