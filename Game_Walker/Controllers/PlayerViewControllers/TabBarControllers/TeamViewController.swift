@@ -98,6 +98,7 @@ class TeamViewController: UIViewController {
                     T.removeTeam(gameCode, team)
                 }
             }
+            UserData.clearMyTeam("team")
             self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
         })
         alert.addAction(action)

@@ -111,6 +111,8 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
+        H.getHost(gameCode)
+        showHostMessagePopUp(messages: messages)
     }
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
@@ -214,5 +216,6 @@ extension HostTimerViewController: GetHost {
         self.seconds = host.gameTime
         self.moveSeconds = host.movingTime
         self.rounds = host.rounds
+        self.messages = host.announcements
     }
 }
