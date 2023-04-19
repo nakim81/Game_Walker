@@ -110,10 +110,29 @@ class SettingTimeHostViewController: BaseViewController {
         gametimePicker.dataSource = self
         movetimePicker.dataSource = self
         
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
+        view.addGestureRecognizer(tapGesture)
         
     }
     
+
+    @objc func dismissPicker() {
+        if pickertype == 0 {
+            if gametimePickerView.frame.origin.y == view.bounds.height - gametimePickerView.bounds.size.height {
+                // Dismiss the picker view
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.gametimePickerView.frame = CGRect(x:0, y: self.view.bounds.height, width: self.gametimePickerView.bounds.size.width, height: self.gametimePickerView.bounds.size.height)
+                })
+            }
+        } else {
+            if movetimePickerView.frame.origin.y == view.bounds.height - movetimePickerView.bounds.size.height {
+                // Dismiss the picker view
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.movetimePickerView.frame = CGRect(x:0, y: self.view.bounds.height, width: self.movetimePickerView.bounds.size.width, height: self.movetimePickerView.bounds.size.height)
+                })
+            }
+        }
+    }
     @IBAction func gametimePressed(_ sender: UIButton) {
         pickertype = 0
         pickerAppear()
