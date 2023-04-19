@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22E4777EF55774A055E34BFF /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707D4D5422284C9C2D5C0BAD /* Pods_Game_Walker.framework */; };
 		6149DB5E2992036900DD4DC2 /* HostGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */; };
 		6149DB6029921B5600DD4DC2 /* WarningScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */; };
 		6159252829694A0600BC6D7F /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252129694A0600BC6D7F /* RegisterController.swift */; };
@@ -27,9 +28,9 @@
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
-		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
-		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		A1E3DDB52880F506008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
 		A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */; };
@@ -40,7 +41,6 @@
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
-		AAF42DF835FA27BAEC58ABD8 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -103,8 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
+		4ABFB9912FB69B7D53D1C1A6 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGivePointsController.swift; sourceTree = "<group>"; };
 		6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningScreenController.swift; sourceTree = "<group>"; };
 		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -121,6 +120,8 @@
 		61E5094C2988D8A400F37E79 /* RefereeTabBarPVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTabBarPVPController.swift; sourceTree = "<group>"; };
 		61E5094E2988D8BB00F37E79 /* RefereePVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereePVPController.swift; sourceTree = "<group>"; };
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
+		707D4D5422284C9C2D5C0BAD /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81C993B98B62CEE1DF0BBC62 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
@@ -170,7 +171,6 @@
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
-		E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
@@ -204,17 +204,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAF42DF835FA27BAEC58ABD8 /* Pods_Game_Walker.framework in Frameworks */,
+				22E4777EF55774A055E34BFF /* Pods_Game_Walker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01C5611983B3CB1DBC626A36 /* Frameworks */ = {
+		19C2EAEE7F19D094C45196F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				37CA2311D7F85B13DD91EAF1 /* Pods_Game_Walker.framework */,
+				707D4D5422284C9C2D5C0BAD /* Pods_Game_Walker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,8 +222,8 @@
 		4332FA625A04330489170BE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */,
-				E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */,
+				81C993B98B62CEE1DF0BBC62 /* Pods-Game_Walker.debug.xcconfig */,
+				4ABFB9912FB69B7D53D1C1A6 /* Pods-Game_Walker.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -288,8 +288,8 @@
 				DA28D78E284FF9CE00EA1B94 /* Game_Walker */,
 				DA28D78D284FF9CE00EA1B94 /* Products */,
 				4332FA625A04330489170BE4 /* Pods */,
-				01C5611983B3CB1DBC626A36 /* Frameworks */,
 				A1C62CC22891270B0078C89E /* Recovered References */,
+				19C2EAEE7F19D094C45196F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -481,11 +481,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA28D7A0284FF9D300EA1B94 /* Build configuration list for PBXNativeTarget "Game_Walker" */;
 			buildPhases = (
-				810C2B6F436D4C32651D4DE5 /* [CP] Check Pods Manifest.lock */,
+				4CD83CD3925FBEFA89A703BC /* [CP] Check Pods Manifest.lock */,
 				DA28D788284FF9CE00EA1B94 /* Sources */,
 				DA28D789284FF9CE00EA1B94 /* Frameworks */,
 				DA28D78A284FF9CE00EA1B94 /* Resources */,
-				ED1E7E4756761D2BE38CAC5F /* [CP] Embed Pods Frameworks */,
+				4ED52CBFF32F3FB237440501 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -534,7 +534,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
+				A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */,
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
@@ -560,7 +560,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		810C2B6F436D4C32651D4DE5 /* [CP] Check Pods Manifest.lock */ = {
+		4CD83CD3925FBEFA89A703BC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -582,7 +582,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ED1E7E4756761D2BE38CAC5F /* [CP] Embed Pods Frameworks */ = {
+		4ED52CBFF32F3FB237440501 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -637,9 +637,9 @@
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
 				61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */,
-				A1E3DDB52880F506008D7060 /* (null) in Sources */,
+				A1E3DDB52880F506008D7060 /* BuildFile in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */,
-				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
+				A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
@@ -709,7 +709,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -722,7 +722,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -735,6 +735,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -769,7 +770,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -781,7 +782,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -789,6 +790,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -800,13 +802,15 @@
 		};
 		DA28D7A1284FF9D300EA1B94 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 485B23F4821014EF1734A048 /* Pods-Game_Walker.debug.xcconfig */;
+			baseConfigurationReference = 81C993B98B62CEE1DF0BBC62 /* Pods-Game_Walker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -832,13 +836,15 @@
 		};
 		DA28D7A2284FF9D300EA1B94 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E50AA65B49ED0EE8AB004841 /* Pods-Game_Walker.release.xcconfig */;
+			baseConfigurationReference = 4ABFB9912FB69B7D53D1C1A6 /* Pods-Game_Walker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;

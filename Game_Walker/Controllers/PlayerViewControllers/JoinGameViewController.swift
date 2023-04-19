@@ -22,7 +22,6 @@ class JoinGameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(storedPlayer)
         setDelegates()
         setUpTextFields()
         configureNavItem()

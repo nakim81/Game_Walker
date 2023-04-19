@@ -9,15 +9,17 @@ import UIKit
 
 class TeamIconCollectionViewCell: UICollectionViewCell {
     
-    private var imageView: UIImageView = {
+    private var imageName: String?
+    
+    private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
         return view
     }()
-    private var imageName: String?
-    private var teamNameLabel: UILabel = {
+    
+    private lazy var teamNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -25,7 +27,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-    private var teamNumLabel: UILabel = {
+    private lazy var teamNumLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
@@ -34,17 +36,19 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var containerView: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     private let borderView = UIView(frame: CGRect(x: -5, y: 0, width: 70, height: 70))
     
     static let identifier = "IconCollectionViewCell"
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        
-        contentView.addSubview(imageView)
-        contentView.addSubview(teamNameLabel)
-        contentView.addSubview(borderView)
-        contentView.addSubview(teamNumLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -52,19 +56,33 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     }
   
     func configureCreateTeamCell(_ imageName: String) {
+        contentView.addSubview(containerView)
+        containerView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                    
+            imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
         self.imageName = imageName
-        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         imageView.image = UIImage(named: imageName)
     }
     
     func configureJoinTeamCell(imageName: String, teamName: String, teamNum: String) {
         self.imageName = imageName
-        imageView.image = UIImage(named: imageName)
-        teamNameLabel.text = teamName
-        teamNumLabel.text = teamNum
+        
+        contentView.addSubview(imageView)
+        contentView.addSubview(teamNameLabel)
+        //contentView.addSubview(borderView)
+        contentView.addSubview(teamNumLabel)
+        
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15),
@@ -84,15 +102,19 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
             teamNameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: -2),
             teamNameLabel.heightAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35)
         ])
+        
+        imageView.image = UIImage(named: imageName)
+        teamNameLabel.text = teamName
+        teamNumLabel.text = teamNum
     }
     
     func showBorder() {
-        borderView.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
-        borderView.layer.borderWidth = 1
-        borderView.layer.cornerRadius = borderView.layer.bounds.width / 2
+        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.borderWidth = 1
+        containerView.layer.cornerRadius = containerView.frame.width / 2
     }
     
     func hideBorder() {
-        borderView.layer.borderWidth = 0
+        containerView.layer.borderWidth = 0
     }
 }

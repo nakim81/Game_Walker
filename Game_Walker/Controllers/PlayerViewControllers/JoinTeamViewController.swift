@@ -67,22 +67,25 @@ class JoinTeamViewController: BaseViewController {
 // MARK: - UICollectionViewDelegate
 extension JoinTeamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
-            if selectedIndex == indexPath.row {
-                collectionView.deselectItem(at: indexPath, animated: true)
-                cell.layer.borderWidth = 0
-                selectedIndex = nil
-            } else {
-                selectedIndex = indexPath.row
-                cell.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-                cell.layer.borderWidth = 1
-            }
+        guard let cell = self.collectionView.cellForItem(at: indexPath) else {return}
+        if selectedIndex == indexPath.item {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            cell.layer.borderWidth = 0
+            selectedIndex = nil
+            cell.isSelected = false
+        } else {
+            selectedIndex = indexPath.row
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+            cell.isSelected = true
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) else {return}
         cell.layer.borderWidth = 0
         selectedIndex = nil
+        cell.isSelected = false
     }
 }
 
@@ -98,6 +101,12 @@ extension JoinTeamViewController: UICollectionViewDataSource {
         let team = teamList[indexPath.item]
         let teamNum = String(team.number)
         cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name, teamNum: "Team \(teamNum)")
+        if cell.isSelected == true {
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+        } else {
+            cell.layer.borderWidth = 0.0
+        }
         return cell
     }
 }
