@@ -57,10 +57,10 @@ class RefereePVPController: BaseViewController {
         S.delegate_getStation = self
         T.delegate_getTeam = self
         T.delegates.append(self)
-        H.getHost(UserData.readGamecode("gamecode")!)
-        H.listenHost(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
+        H.getHost(UserData.readGamecode("refereeGamecode")!)
+        H.listenHost(UserData.readGamecode("refereeGamecode")!, onListenerUpdate: listen(_:))
         S.getStation(UserData.readReferee("Referee")!.gamecode, "testing2")
-        T.listenTeams(UserData.readGamecode("gamecode")!, onListenerUpdate: listen(_:))
+        T.listenTeams(UserData.readGamecode("refereeGamecode")!, onListenerUpdate: listen(_:))
         self.teamA = self.teamOrder[index]
         self.teamB = self.teamOrder[index+1]
         super.viewDidLoad()
