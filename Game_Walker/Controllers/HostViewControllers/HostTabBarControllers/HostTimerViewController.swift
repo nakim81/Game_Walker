@@ -210,6 +210,7 @@ class HostTimerViewController: UIViewController {
 //MARK: - UIUpdate
 extension HostTimerViewController: GetHost {
     func getHost(_ host: Host) {
+        self.time = host.movingTime
         self.seconds = host.gameTime
         self.moveSeconds = host.movingTime
         self.rounds = host.rounds
