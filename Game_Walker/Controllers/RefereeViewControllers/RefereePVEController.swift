@@ -17,7 +17,7 @@ class RefereePVEController: BaseViewController {
     var time : Int = 0
     var movingTime : Int = 0
     var gameTime : Int = 0
-    var gameCode = UserData.readGamecode("gamecode")!
+    var gameCode = UserData.readGamecode("refereeGamecode")!
     var referee = UserData.readReferee("Referee")!
     var paused : Bool = false
     var moving : Bool = true
@@ -256,7 +256,8 @@ class RefereePVEController: BaseViewController {
         
     @objc func buttonTapped() {
         UserData.writeTeam(team, "Team")
-        performSegue(withIdentifier: "givePointsPVE", sender: self)
+        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
+        self.present(popUpWindow, animated: true, completion: nil)
     }
     
     func listen(_ _ : [String : Any]){

@@ -256,43 +256,43 @@ class AddStationViewController: BaseViewController {
         if (stationExists && !modified) {
             self.dismiss(animated: true, completion: nil)
         } else if (stationExists && modified) {
-//
-//            firstly { () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    //unassigns referee object's station
-//                    R.unassignStation(gamecode, refereeBefore!) {
-//                        print("Unassigning referee object's station")
-//                        newReferee = Referee(gamecode: gamecode, name: refereename, stationName: gamename, assigned: true)
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then {
-//                return Promise<Void> { seal in
-//                    R.assignStation(gamecode, newReferee!, gamename) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then { () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    // removes station
-//                    S.removeStation(gamecode, station!) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then { () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    //creates new station with new referee
-//                    stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
-//                    S.addStation(gamecode, stationToReplace!) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.done {
-//                print("All works with the server are done")
-//            }.catch { error in
-//                print("An error occurred: \(error)")
-//                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-//            }
+
+            firstly { () -> Promise<Void> in
+                return Promise<Void> { seal in
+                    //unassigns referee object's station
+                    unassignStation(gamecode: gamecode, refereetounassign: refereeBefore!) { [self] in
+                        print("Unassigning referee object's station")
+                        newReferee = Referee(gamecode: gamecode, name: refereename, stationName: gamename, assigned: true)
+                        seal.fulfill(())
+                    }
+                }
+            }.then { [self] in
+                return Promise<Void> { seal in
+                    assignStation(gamecode: gamecode, refereetoassign: newReferee!, stationName: gamename) {
+                        seal.fulfill(())
+                    }
+                }
+            }.then { [self] () -> Promise<Void> in
+                return Promise<Void> { seal in
+                    // removes station
+                    removeStation(gamecode: gamecode, stationtoremove: station!) {
+                        seal.fulfill(())
+                    }
+                }
+            }.then { [self] () -> Promise<Void> in
+                return Promise<Void> { seal in
+                    //creates new station with new referee
+                    stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
+                    addStation(gamecode: gamecode, stationtoadd: stationToReplace!) {
+                        seal.fulfill(())
+                    }
+                }
+            }.done {
+                print("All works with the server are done")
+            }.catch { error in
+                print("An error occurred: \(error)")
+                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
+            }
 
         } else if (!stationExists) {
             let selectedReferee = Referee(gamecode:UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename,assigned: true)
@@ -405,4 +405,39 @@ extension AddStationViewController : GetStation {
     }
     
     
+}
+
+
+extension AddStationViewController {
+    func addStation(gamecode: String, stationtoadd: Station, completion: @escaping () -> Void) {
+        S.addStation(gamecode, stationtoadd)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            // Simulate asynchronous task completion after 0.4 seconds
+            completion()
+        }
+    }
+    
+    func removeStation(gamecode: String, stationtoremove: Station, completion: @escaping () -> Void) {
+        S.removeStation(gamecode,stationtoremove)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            // Simulate asynchronous task completion after 0.4 seconds
+            completion()
+        }
+    }
+    
+    func assignStation(gamecode: String, refereetoassign: Referee, stationName: String, completion: @escaping () -> Void) {
+        R.assignStation(gamecode, refereetoassign, stationName)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            // Simulate asynchronous task completion after 0.4 seconds
+            completion()
+        }
+    }
+    
+    func unassignStation(gamecode: String, refereetounassign: Referee, completion: @escaping () -> Void) {
+        R.unassignStation(gamecode, refereetounassign)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            // Simulate asynchronous task completion after 0.4 seconds
+            completion()
+        }
+    }
 }

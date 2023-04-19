@@ -12,7 +12,7 @@ class WaitingController: BaseViewController {
 
     @IBOutlet weak var GameIconView: UIImageView!
     @IBOutlet weak var WaitingImageView: UIImageView!
-    var gameCode = UserData.readGamecode("gamecode")!
+    var gameCode = UserData.readGamecode("refereeGamecode")!
     var referee = UserData.readReferee("Referee")!
     var timer: Timer?
     var pvp: Bool = false
@@ -46,9 +46,8 @@ class WaitingController: BaseViewController {
                 // This command only exists for testing.
                 if !self.isAssignStationCalled {
                     self.isAssignStationCalled = true
-                    print("A")
                     print(self.isAssignStationCalled)
-                    //R.assignStation(self.gameCode, self.referee, "testingPVE")
+                    R.assignStation(self.gameCode, self.referee, "testingPVE")
                 }
                 //
             }
@@ -72,8 +71,6 @@ class WaitingController: BaseViewController {
     }
     func nextScreen() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            print(2)
-            print(self.pvp)
             if self.pvp {
                 self.performSegue(withIdentifier: "goToPVP", sender: self)
             }
@@ -82,6 +79,7 @@ class WaitingController: BaseViewController {
             }
         }
     }
+    
 }
 // MARK: - listener
 extension WaitingController: RefereeUpdateListener {
