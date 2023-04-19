@@ -58,7 +58,7 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.dataSource = self
             self.collectionView.dragDelegate = self
             self.collectionView.dropDelegate = self
-
+            self.collectionView.isUserInteractionEnabled = true
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
 
         }
@@ -147,8 +147,33 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         var deficit : String
 
         cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
+        
+        //adding double tap to manually input cell number
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGestureRecognizer.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(doubleTapGestureRecognizer)
+        
         return cell
     }
+    
+    @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+        guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
+        
+        let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            if let numberString = alertController.textFields?.first?.text,
+               let number = Int(numberString) {
+                
+                cell.teamnumLabel.text = "\(number)"
+            }
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+
 }
         
 
@@ -293,3 +318,4 @@ extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionVie
         }
     }
 }
+
