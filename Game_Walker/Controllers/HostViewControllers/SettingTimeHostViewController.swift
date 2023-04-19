@@ -19,9 +19,9 @@ class SettingTimeHostViewController: BaseViewController {
     
 //    var host: Host?
 //    var team: Team?
-    var gameminutes: Int = 20
+    var gameminutes: Int = 0
     var gameseconds: Int = 0
-    var moveminutes: Int = 10
+    var moveminutes: Int = 0
     var moveseconds: Int = 0
     var teamcount: Int = 0
     var pickertype = 0
@@ -60,8 +60,9 @@ class SettingTimeHostViewController: BaseViewController {
         teamcountTextField.textAlignment = .center
         teamcountTextField.delegate = self
         
-        gameMinutesLabel.text = String(gameminutes)
-        movingMinutesLabel.text = String(moveminutes)
+        
+        gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
+        movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
         
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
