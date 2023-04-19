@@ -22,6 +22,7 @@ class JoinGameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(storedPlayer)
         setDelegates()
         setUpTextFields()
         configureNavItem()
@@ -61,9 +62,13 @@ class JoinGameViewController: BaseViewController {
         
         if (gamecode.isEmpty || gamecode == savedGameCode) && (username.isEmpty || username == savedUserName) {
             
-            // User wants to join the game with the stored game code, username, and player object
-            performSegue(withIdentifier: "ResumeGameSegue", sender: self)
-            
+            if (UserData.readTeam("team") != nil) {
+                // User wants to join the game with the stored game code, username, and player object
+                performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+            } else {
+                // User gets to choose to create or join a team
+                performSegue(withIdentifier: "goToPF2VC", sender: self)
+            }
         } else if savedGameCode.isEmpty && savedUserName.isEmpty {
             
             // User is joining a new game
@@ -126,51 +131,83 @@ class JoinGameViewController: BaseViewController {
             
         } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
             
-            // Remove original player object to reflect the username change
-            firstly { () -> Promise<Void> in
-                return Promise<Void> { seal in
-                    // Leave team to reflect the username change
-                    leaveTeam(gamecode: storedGameCode, teamName: storedTeamName, storedPlayer: storedPlayer) {
-                        print("leaving team")
-                        seal.fulfill(())
+            if (UserData.readTeam("team") != nil) {
+                // User wants to join the game with the stored game code with new player object
+                // Remove original player object to reflect the username change
+                firstly { () -> Promise<Void> in
+                    return Promise<Void> { seal in
+                        // Leave team to reflect the username change
+                        leaveTeam(gamecode: storedGameCode, teamName: storedTeamName, storedPlayer: storedPlayer) {
+                            print("leaving team")
+                            seal.fulfill(())
+                        }
                     }
-                }
-            }.then {
-                return Promise<Void> { seal in
-                    // Remove original player object to reflect the username change
-                    self.removePlayer(gamecode: gamecode, storedPlayer: self.storedPlayer) {
-                        print("removing player")
-                        // Create new player object with new username
-                        seal.fulfill(())
+                }.then {
+                    return Promise<Void> { seal in
+                        // Remove original player object to reflect the username change
+                        self.removePlayer(gamecode: gamecode, storedPlayer: self.storedPlayer) {
+                            print("removing player")
+                            // Create new player object with new username
+                            seal.fulfill(())
+                        }
                     }
-                }
-            }.then {
-                return Promise<Void> { seal in
-                    //User joins the existing game and team with new user name
-                    UserData.writeUsername(username, "username")
-                    player = Player(gamecode: savedGameCode, name: username)
-                    UserData.writePlayer(player, "player")
-                    print("created new player")
-                    self.addPlayer(gamecode: savedGameCode, player: player) {
-                        print("adding player")
-                        seal.fulfill(())
+                }.then {
+                    return Promise<Void> { seal in
+                        //User joins the existing game and team with new user name
+                        UserData.writeUsername(username, "username")
+                        player = Player(gamecode: savedGameCode, name: username)
+                        UserData.writePlayer(player, "player")
+                        print("created new player")
+                        self.addPlayer(gamecode: savedGameCode, player: player) {
+                            print("adding player")
+                            seal.fulfill(())
+                        }
                     }
-                }
-            }.then { [self] in
-                return Promise<Void> { seal in
-                    //User joins the existing game and team with new user name
-                    self.joinTeam(gamecode: savedGameCode, teamName: storedTeamName, player: player) {
-                        print("joining team")
-                        seal.fulfill(())
+                }.then { [self] in
+                    return Promise<Void> { seal in
+                        //User joins the existing game and team with new user name
+                        self.joinTeam(gamecode: savedGameCode, teamName: storedTeamName, player: player) {
+                            print("joining team")
+                            seal.fulfill(())
+                        }
                     }
+                }.done {
+                    print("All works with the server are done")
+                    self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+                }.catch { error in
+                    print("An error occurred: \(error)")
+                    self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
                 }
-            }.done {
-                print("All works with the server are done")
-                self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
-            }.catch { error in
-                print("An error occurred: \(error)")
-                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-                
+            } else {
+                // User gets to choose to create or join a team
+                firstly { () -> Promise<Void> in
+                    return Promise<Void> { seal in
+                        // Remove original player object to reflect the username change
+                        self.removePlayer(gamecode: gamecode, storedPlayer: self.storedPlayer) {
+                            print("removing player")
+                            // Create new player object with new username
+                            seal.fulfill(())
+                        }
+                    }
+                }.then {
+                    return Promise<Void> { seal in
+                        //User joins the existing game and team with new user name
+                        UserData.writeUsername(username, "username")
+                        player = Player(gamecode: savedGameCode, name: username)
+                        UserData.writePlayer(player, "player")
+                        print("created new player")
+                        self.addPlayer(gamecode: savedGameCode, player: player) {
+                            print("adding player")
+                            seal.fulfill(())
+                        }
+                    }
+                }.done {
+                    print("All works with the server are done")
+                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                }.catch { error in
+                    print("An error occurred: \(error)")
+                    self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
+                }
             }
         } else if gamecode != savedGameCode && username != savedUserName {
             // User leave the existing game

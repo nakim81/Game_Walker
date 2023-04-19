@@ -59,6 +59,10 @@ class UserData {
         }
     }
     
+    static func clearMyTeam(_ key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
+    
     static func readTeam(_ key: String) -> Team? {
         if let data = UserDefaults.standard.data(forKey: key) {
             do {
