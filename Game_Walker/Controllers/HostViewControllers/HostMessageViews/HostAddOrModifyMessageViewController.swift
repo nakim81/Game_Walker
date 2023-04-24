@@ -26,12 +26,6 @@ class HostAddOrModifyMessageViewController: UIViewController {
         return view
     }()
     
-    private lazy var  announcementLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "announcement 3")
-        return imageView
-    }()
-    
     private lazy var announcementTextView: UITextView = {
         let textView = UITextView()
         textView.text = announcement
@@ -91,7 +85,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
         // enable
-        button.setTitle("Save", for: .normal)
+        button.setTitle("Edit", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
@@ -191,7 +185,6 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     private func setUpViews() {
         self.view.addSubview(containerView)
-        containerView.addSubview(announcementLabel)
         containerView.addSubview(announcementTextView)
         containerView.addSubview(buttonStackView)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
@@ -199,7 +192,6 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     private func makeConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        announcementLabel.translatesAutoresizingMaskIntoConstraints = false
         announcementTextView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -211,16 +203,10 @@ class HostAddOrModifyMessageViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            announcementLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
-            announcementLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -15),
-            announcementLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
-            announcementLabel.heightAnchor.constraint(equalTo: announcementLabel.widthAnchor, multiplier: 0.178),
-            announcementLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            
             announcementTextView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
             announcementTextView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            announcementTextView.topAnchor.constraint(equalTo: announcementLabel.bottomAnchor, constant: 2),
-            announcementTextView.heightAnchor.constraint(equalTo: announcementTextView.widthAnchor, multiplier: 0.53),
+            announcementTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
+            announcementTextView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -25),
             announcementTextView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
 
             buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
