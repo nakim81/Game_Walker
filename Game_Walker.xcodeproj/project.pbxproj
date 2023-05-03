@@ -41,6 +41,7 @@
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
+		CB61A709D36306498786A711 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -104,6 +105,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
+		3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGivePointsController.swift; sourceTree = "<group>"; };
 		6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningScreenController.swift; sourceTree = "<group>"; };
 		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -206,7 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8517E9D8966359EBDDAD3F4F /* Pods_Game_Walker.framework in Frameworks */,
+				CB61A709D36306498786A711 /* Pods_Game_Walker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +220,8 @@
 		4332FA625A04330489170BE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AEBF32FB4B06D57C1C799267 /* Pods-Game_Walker.debug.xcconfig */,
-				6AC8A591AE98725F41ECE2AB /* Pods-Game_Walker.release.xcconfig */,
+				5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */,
+				0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -292,7 +296,7 @@
 				DA28D78D284FF9CE00EA1B94 /* Products */,
 				4332FA625A04330489170BE4 /* Pods */,
 				A1C62CC22891270B0078C89E /* Recovered References */,
-				7340A524D8A67EFA42F12BF3 /* Frameworks */,
+				E0AF554902D895AD1C71F318 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,6 +374,14 @@
 			);
 			name = PlayerViewControllers;
 			path = Controllers/PlayerViewControllers;
+			sourceTree = "<group>";
+		};
+		E0AF554902D895AD1C71F318 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FC152E6D29C4C423007A85CA /* HostTabBarControllers */ = {
@@ -484,11 +496,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA28D7A0284FF9D300EA1B94 /* Build configuration list for PBXNativeTarget "Game_Walker" */;
 			buildPhases = (
-				2BF495387052B1116C288D8B /* [CP] Check Pods Manifest.lock */,
+				C3ABCF18562CAEC5ABFFE1F4 /* [CP] Check Pods Manifest.lock */,
 				DA28D788284FF9CE00EA1B94 /* Sources */,
 				DA28D789284FF9CE00EA1B94 /* Frameworks */,
 				DA28D78A284FF9CE00EA1B94 /* Resources */,
-				ED405677C16CBA7E6D9931E6 /* [CP] Embed Pods Frameworks */,
+				49C715C1FFCD2B7DC0AAB0AA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -563,7 +575,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		49C715C1FFCD2B7DC0AAB0AA /* [CP] Embed Pods Frameworks */ = {
 		2BF495387052B1116C288D8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3ABCF18562CAEC5ABFFE1F4 /* [CP] Check Pods Manifest.lock */ = {
+		ED405677C16CBA7E6D9931E6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -583,23 +614,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ED405677C16CBA7E6D9931E6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -806,15 +820,14 @@
 		};
 		DA28D7A1284FF9D300EA1B94 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEBF32FB4B06D57C1C799267 /* Pods-Game_Walker.debug.xcconfig */;
+			baseConfigurationReference = 5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
-				GCC_NO_COMMON_BLOCKS = NO;
+				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -830,7 +843,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -840,15 +853,14 @@
 		};
 		DA28D7A2284FF9D300EA1B94 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AC8A591AE98725F41ECE2AB /* Pods-Game_Walker.release.xcconfig */;
+			baseConfigurationReference = 0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
-				GCC_NO_COMMON_BLOCKS = NO;
+				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -864,7 +876,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

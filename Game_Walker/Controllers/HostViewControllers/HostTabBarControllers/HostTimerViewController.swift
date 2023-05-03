@@ -131,6 +131,8 @@ class HostTimerViewController: UIViewController {
     }
     
     func runTimer() {
+        let startTime = Date()
+        // A function to store this somewhere
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
@@ -156,13 +158,21 @@ class HostTimerViewController: UIViewController {
                 let minute = strongSelf.time!/60
                 let second = strongSelf.time! % 60
                 strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                strongSelf.totalTime += 1
-                let totalMinute = strongSelf.totalTime/60
-                let totalSecond = strongSelf.totalTime % 60
-                let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20)])
-                attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)]))
-                strongSelf.totalTimeLabel.attributedText = attributedString
             }
+        }
+    }
+    
+    func runTotalTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.totalTime += 1
+            let totalMinute = strongSelf.totalTime/60
+            let totalSecond = strongSelf.totalTime % 60
+            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20)])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)]))
+            strongSelf.totalTimeLabel.attributedText = attributedString
         }
     }
     
@@ -207,6 +217,7 @@ class HostTimerViewController: UIViewController {
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
         runTimer()
+        runTotalTimer()
     }
 }
 //MARK: - UIUpdate
