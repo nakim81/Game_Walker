@@ -42,6 +42,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     var gameToolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
     var moveToolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
+    var roundToolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
 
     
     
@@ -56,9 +57,11 @@ class SettingTimeHostViewController: BaseViewController {
         roundsTextField.keyboardType = .numberPad
         roundsTextField.textAlignment = .center
         roundsTextField.delegate = self
+        roundsTextField.returnKeyType = .next
         teamcountTextField.keyboardType = .numberPad
         teamcountTextField.textAlignment = .center
         teamcountTextField.delegate = self
+
         
         
         gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
@@ -66,13 +69,27 @@ class SettingTimeHostViewController: BaseViewController {
         
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
+        
+        
         let gamedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
         let movedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
 
-        gameToolBar.setItems([gamedoneButton], animated: true)
+        let gamenextButton = UIBarButtonItem(title: "Next", style: .plain, target: self,  action: #selector(self.applyNext))
+        gamenextButton.tag = 1
+        let movenextButton = UIBarButtonItem(title: "Next", style: .plain, target: self,  action: #selector(self.applyNext))
+        movenextButton.tag = 2
+        print("my move next tag: ", movenextButton.tag)
+        
+        let roundnextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(self.applyNext))
+        roundnextButton.tag = 3
+        
+        gameToolBar.setItems([gamenextButton, UIBarButtonItem.flexibleSpace(), gamedoneButton], animated: true)
         gameToolBar.isUserInteractionEnabled = true
-        moveToolBar.setItems([movedoneButton], animated: true)
+        moveToolBar.setItems([movenextButton, UIBarButtonItem.flexibleSpace(), movedoneButton], animated: true)
         moveToolBar.isUserInteractionEnabled = true
+        roundToolBar.items = [UIBarButtonItem.flexibleSpace(), roundnextButton]
+        roundToolBar.sizeToFit()
+        roundsTextField.inputAccessoryView = roundToolBar
 
 
         gametimePickerView = UIView(frame: CGRect(x:0, y: view.frame.height + 260, width: view.frame.width, height: 260))
@@ -153,8 +170,35 @@ class SettingTimeHostViewController: BaseViewController {
         
         self.movetimePickerView.endEditing(true)
         pickerDisappear()
-        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes )
-        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds )
+        self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
+        self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds)
+    }
+    
+    @objc func applyNext(_ sender: UIBarButtonItem) {
+        print(sender.tag)
+        if (sender.tag == 1) {
+            print("in tag 1")
+//            self.view.endEditing(true)
+            self.gametimePickerView.endEditing(true)
+            pickerDisappear()
+            self.gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes )
+            self.gameSecondsLabel.text = changeTimeToString(timeInteger: gameseconds )
+            
+            pickertype = 1
+            pickerAppear()
+            
+        } else if sender.tag == 2 {
+            print("in tag 2")
+            pickertype = 1
+            self.movetimePickerView.endEditing(true)
+            pickerDisappear()
+            self.movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
+            self.movingSecondsLabel.text = changeTimeToString(timeInteger: moveseconds)
+            roundsTextField.becomeFirstResponder()
+            
+        } else if  sender.tag == 3 {
+            teamcountTextField.becomeFirstResponder()
+        }
     }
     
     func changeTimeToString(timeInteger : Int) -> String{
