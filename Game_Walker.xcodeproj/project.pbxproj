@@ -1,4 +1,3 @@
-// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -576,7 +575,6 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		49C715C1FFCD2B7DC0AAB0AA /* [CP] Embed Pods Frameworks */ = {
-		2BF495387052B1116C288D8B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -594,7 +592,6 @@
 			showEnvVarsInLog = 0;
 		};
 		C3ABCF18562CAEC5ABFFE1F4 /* [CP] Check Pods Manifest.lock */ = {
-		ED405677C16CBA7E6D9931E6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
