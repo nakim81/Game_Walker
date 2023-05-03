@@ -79,21 +79,26 @@ class CreateTeamViewController: BaseViewController {
 // MARK: - UICollectionViewDelegate
 extension CreateTeamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
-            if selectedIndex == indexPath.row {
-                collectionView.deselectItem(at: indexPath, animated: true)
-                cell.hideBorder()
-                selectedIndex = nil
-            } else {
-                selectedIndex = indexPath.row
-                cell.showBorder()
-            }
+        guard let cell = self.collectionView.cellForItem(at: indexPath) else {return}
+        if selectedIndex == indexPath.item {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            cell.layer.borderWidth = 0
+            selectedIndex = nil
+            cell.isSelected = false
+        } else {
+            selectedIndex = indexPath.row
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+            cell.layer.cornerRadius = cell.frame.size.width / 2
+            cell.isSelected = true
+        }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
-        cell.hideBorder()
+        guard let cell = collectionView.cellForItem(at: indexPath) else {return}
+        cell.layer.borderWidth = 0
         selectedIndex = nil
+        cell.isSelected = false
     }
 }
 
@@ -107,6 +112,13 @@ extension CreateTeamViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamIconCollectionViewCell.identifier , for: indexPath) as! TeamIconCollectionViewCell
         cell.configureCreateTeamCell(iconImageNames[indexPath.item])
+        if cell.isSelected == false {
+            cell.layer.borderWidth = 0.0
+        } else {
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+            cell.layer.cornerRadius = cell.frame.size.width / 2
+        }
         return cell
     }
 }
