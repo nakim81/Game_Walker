@@ -28,9 +28,9 @@
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
-		A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */ = {isa = PBXBuildFile; };
-		A1E3DDB52880F506008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
+		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
 		A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */; };
@@ -87,6 +87,7 @@
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
 		FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC21701F29A319BB00FD5F66 /* Award.storyboard */; };
+		FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21CB6F29F036F00024A248 /* endGameViewController.swift */; };
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */; };
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
@@ -184,6 +185,7 @@
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
 		FC21701F29A319BB00FD5F66 /* Award.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Award.storyboard; sourceTree = "<group>"; };
+		FC21CB6F29F036F00024A248 /* endGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = endGameViewController.swift; sourceTree = "<group>"; };
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */,
 				FC152E6D29C4C423007A85CA /* HostTabBarControllers */,
 				FC44B65729B76B480072946F /* HostMessageViews */,
+				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -534,7 +537,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */,
+				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
@@ -608,6 +611,7 @@
 			files = (
 				61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */,
 				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
+				FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */,
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
@@ -637,9 +641,9 @@
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
 				61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */,
-				A1E3DDB52880F506008D7060 /* BuildFile in Sources */,
+				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */,
-				A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
