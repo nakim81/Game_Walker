@@ -43,11 +43,12 @@ class AlgorithmViewController: BaseViewController {
         S.getStationList(gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
+        scrollView.isUserInteractionEnabled = true
         scrollView.isScrollEnabled = true
         collectionView.dragInteractionEnabled = true
 //        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
-        print(collectionView.frame, "  HMMMM  ")
+//        print(collectionView.frame, "  HMMMM  ")
 //        scrollView.contentSize = collectionView.contentSize
 //        cellWidth = (Int(collectionViewWidth) - 4 * 16) / 8
 //        cellWidth = 17
@@ -76,12 +77,12 @@ class AlgorithmViewController: BaseViewController {
     func createGrid() {
         num_stations = /*stationList!.count**/ 8
 
-        if (num_stations < num_teams) {
-            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-        }
-        if (num_teams < num_stations) {
-            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-        }
+//        if (num_stations < num_teams) {
+//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
+//        }
+//        if (num_teams < num_stations) {
+//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
+//        }
 
         if (num_teams < 8) {
             team_smallerthaneight = true
@@ -92,7 +93,7 @@ class AlgorithmViewController: BaseViewController {
             num_stations = 8
         }
         totalcolumn = max(num_teams, num_stations)
-        totalrow = max(num_stations, 8)
+        totalrow = max(num_rounds, 8)
         
         num_cols = totalcolumn
         num_rows = totalrow
@@ -105,10 +106,10 @@ class AlgorithmViewController: BaseViewController {
                     number = totalcolumn
                 }
                 curr_row.append(number)
-                print("r = " , r ,
-                "t = " , t ,
-                "totalrow = " ,totalrow ,
-                      "totalcolumn = ",totalcolumn)
+//                print("r = " , r ,
+//                "t = " , t ,
+//                "totalrow = " ,totalrow ,
+//                      "totalcolumn = ",totalcolumn)
             }
             grid.append(curr_row)
             curr_row.removeAll()
@@ -143,8 +144,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         print(teamnumberlabel)
 
         // start new code
-        var deficit_amount = 0
-        var deficit : String
 
         cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
         
@@ -207,7 +206,7 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCellsPerRow = 8
         //this calculates how big the cellshould be
-        collectionViewCellWidth = Int(collectionViewWidth / CGFloat(numberOfCellsPerRow))
+//        collectionViewCellWidth = Int(collectionViewWidth / CGFloat(numberOfCellsPerRow))
 
         // this calculates the contentsize
         let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 0 * (8 - 1)) / 8
@@ -223,7 +222,7 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
+//        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
         return 0
     }
 
@@ -232,16 +231,17 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func addviewsConstraints() {
-        print("HEYEYEYEYEY IM INNN")
+//        print("HEYEYEYEYEY IM INNN")
         let flowLayout = AlgorithmCustomFlowLayout()
         collectionView.collectionViewLayout = flowLayout
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        let contentSize = CGSize(width: collectionViewCellWidth * num_cols, height: collectionViewCellWidth * num_rows)
+        let contentSize = CGSize(width: collectionViewCellWidth * (num_cols + 1), height: collectionViewCellWidth * (num_rows + 1))
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.contentSize = contentSize
+        collectionView.contentSize = contentSize
         scrollView.isDirectionalLockEnabled = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -261,16 +261,25 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
             collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
 
-        collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.contentSize = contentSize
+//        collectionView.collectionViewLayout.invalidateLayout()
+//        collectionView.contentSize = contentSize
 
         
-        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!")
+        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!", scrollView.frame.size, " <- this is my scrollview frame size!")
 
     }
 
 }
 
+extension AlgorithmViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == collectionView {
+            print("------Collection view scrolling-----")
+        } else if scrollView == self.scrollView {
+            print("------Scroll view scrolling-------")
+        }
+    }
+}
 
 extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionViewDragDelegate{
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
