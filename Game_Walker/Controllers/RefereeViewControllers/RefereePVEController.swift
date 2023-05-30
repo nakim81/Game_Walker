@@ -62,9 +62,8 @@ class RefereePVEController: BaseViewController {
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         
         Task {
-            try await Task.sleep(nanoseconds: 250_000_000)
+            try await Task.sleep(nanoseconds: 350_000_000)
             self.team = self.teamOrder[index]
-            
             super.viewDidLoad()
             self.view.addSubview(roundLabel)
             self.view.addSubview(borderView)

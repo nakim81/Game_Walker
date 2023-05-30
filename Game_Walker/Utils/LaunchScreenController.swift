@@ -53,7 +53,7 @@ class LaunchScreenController: UIViewController {
         ]
         let words = ["LET", "THERE", "BE", "LIGHT"]
         addRectangle(at: 0, rectangleViews: rectangleViews, colors: colors, words: words)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
             self.view.backgroundColor = .white
             self.addWords()
         }
