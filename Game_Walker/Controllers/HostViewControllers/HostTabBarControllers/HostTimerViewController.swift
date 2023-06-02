@@ -119,15 +119,10 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
-        if isPaused {
-            sender.setImage(pause, for: .normal)
-            isPaused = false
-            H.pause_resume_game(gameCode, isPaused)
-        } else {
-            sender.setImage(play, for: .normal)
-            isPaused = true
-            H.pause_resume_game(gameCode, isPaused)
-        }
+        
+        sender.setImage(play, for: .normal)
+        isPaused = !isPaused
+        H.pause_resume_game(gameCode)
     }
     
     func runTimer() {

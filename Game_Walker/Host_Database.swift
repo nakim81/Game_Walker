@@ -16,6 +16,7 @@ struct H {
     static let db = Firestore.firestore()
     static var delegate_getHost: GetHost?
     static var delegates : [HostUpdateListener] = []
+
     
     static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
          db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
@@ -68,36 +69,30 @@ struct H {
             }
         }
     }
-    
-    //if pause is true, the game is paused; if false, the game (time clock) is running
-    static func pause_resume_game(_ gamecode: String, _ pause: Bool){
-        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
-        server.updateData([
-            "paused" : pause
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
+
+
+    static func pause_resume_game(_ gamecode: String){
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        docRef.getDocument {(document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                var host = convertDataToHost(data)
+                //when resume
+                if host.paused {
+                    let currentTime = Int(Date().timeIntervalSince1970)
+                    host.pausedTime += (currentTime - host.pauseTimestamp)
+                }
+                // When pause
+                else {
+                    host.pauseTimestamp = Int(Date().timeIntervalSince1970)
+                }
+                host.paused = !host.paused
+                updateHost(gamecode, host)
             } else {
-                print("Document successfully updated")
+                print("Host does not exist")
             }
         }
     }
-    
-    
-//
-//    static func pause_resume_Game(_ gamecode: String){
-//        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-//        docRef.getDocument {(document, error) in
-//            if let document = document, document.exists {
-//                guard let data = document.data() else {return}
-//                var host = convertDataToHost(data)
-//                host.paused = !host.paused
-//                updateHost(gamecode, host)
-//            } else {
-//                print("Host does not exist")
-//            }
-//        }
-//    }
     
     static func addAnnouncement(_ gamecode: String, _ announcement: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
@@ -166,12 +161,12 @@ struct H {
     static func convertDataToHost(_ data : [String : Any]) -> Host {
         do {
             //convert Dictionary data to JSON data first
-            let json = try JSONSerialization.data(withJSONObject: data)
+            let json = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
             //decode the JSON data to object
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let decoded = try decoder.decode(Host.self, from: json)
-            return decoded
+            let host = try decoder.decode(Host.self, from: json)
+            return host
         } catch {
             print(error)
         }

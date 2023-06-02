@@ -1,3 +1,4 @@
+// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -22,7 +23,6 @@
 		61E5094D2988D8A400F37E79 /* RefereeTabBarPVPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5094C2988D8A400F37E79 /* RefereeTabBarPVPController.swift */; };
 		61E5094F2988D8BB00F37E79 /* RefereePVPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5094E2988D8BB00F37E79 /* RefereePVPController.swift */; };
 		61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTableViewCell.swift */; };
-		8517E9D8966359EBDDAD3F4F /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666571F9E0BB02CFED87EE8D /* Pods_Game_Walker.framework */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
@@ -123,8 +123,6 @@
 		61E5094C2988D8A400F37E79 /* RefereeTabBarPVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTabBarPVPController.swift; sourceTree = "<group>"; };
 		61E5094E2988D8BB00F37E79 /* RefereePVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereePVPController.swift; sourceTree = "<group>"; };
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
-		666571F9E0BB02CFED87EE8D /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6AC8A591AE98725F41ECE2AB /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
-		AEBF32FB4B06D57C1C799267 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -246,14 +243,6 @@
 			);
 			name = RefereeViewControllers;
 			path = Controllers/RefereeViewControllers;
-			sourceTree = "<group>";
-		};
-		7340A524D8A67EFA42F12BF3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				666571F9E0BB02CFED87EE8D /* Pods_Game_Walker.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A1C62CC22891270B0078C89E /* Recovered References */ = {
@@ -824,7 +813,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -857,7 +846,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Game_Walker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
