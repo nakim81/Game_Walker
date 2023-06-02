@@ -416,7 +416,6 @@ class GivePointsController: UIViewController {
     }
 
     @objc func updateValue() {
-        print(value)
         if stepperState == .ShouldIncrease {
             value += stepValue
         } else if stepperState == .ShouldDecrease {

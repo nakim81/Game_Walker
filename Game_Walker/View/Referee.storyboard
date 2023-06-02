@@ -23,16 +23,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AOq-eE-Ep7">
-                                <rect key="frame" x="47" y="113" width="320" height="401"/>
+                                <rect key="frame" x="47" y="113.5" width="320" height="400.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-Gh-99w">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code 1" translatesAutoresizingMaskIntoConstraints="NO" id="R2P-Hb-2ch">
-                                                <rect key="frame" x="84.5" y="53" width="151" height="35"/>
+                                                <rect key="frame" x="84.5" y="52.5" width="151" height="35"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode #" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="4M3-nc-0rD">
-                                                <rect key="frame" x="38.5" y="97" width="243" height="87"/>
+                                                <rect key="frame" x="38.5" y="96.5" width="243" height="87"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -50,13 +50,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ede-ac-NpO">
-                                        <rect key="frame" x="0.0" y="200.5" width="320" height="200.5"/>
+                                        <rect key="frame" x="0.0" y="200" width="320" height="200.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="username 1" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-cB-HGA">
-                                                <rect key="frame" x="93.5" y="133" width="133" height="35"/>
+                                                <rect key="frame" x="93.5" y="82.5" width="133" height="35.5"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="game id text" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-sD-k2a">
-                                                <rect key="frame" x="38.5" y="177" width="243" height="87"/>
+                                                <rect key="frame" x="38.5" y="127" width="243" height="86.5"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -64,9 +64,9 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="QN8-sD-k2a" firstAttribute="height" secondItem="ede-ac-NpO" secondAttribute="height" multiplier="0.433" id="BJM-uW-ueb"/>
-                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" multiplier="1.5" id="L07-py-q18"/>
+                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" id="L07-py-q18"/>
                                             <constraint firstItem="lWx-cB-HGA" firstAttribute="height" secondItem="ede-ac-NpO" secondAttribute="height" multiplier="0.175" id="W3e-QF-W5j"/>
-                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" multiplier="2.2" id="bV7-TN-758"/>
+                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" multiplier="1.7" id="bV7-TN-758"/>
                                             <constraint firstItem="QN8-sD-k2a" firstAttribute="centerX" secondItem="ede-ac-NpO" secondAttribute="centerX" id="jee-9u-ftU"/>
                                             <constraint firstItem="lWx-cB-HGA" firstAttribute="width" secondItem="ede-ac-NpO" secondAttribute="width" multiplier="0.415" id="kgk-mh-8uT"/>
                                             <constraint firstItem="QN8-sD-k2a" firstAttribute="width" secondItem="ede-ac-NpO" secondAttribute="width" multiplier="0.76" id="qhn-XW-eD3"/>
@@ -101,7 +101,7 @@
                         <constraints>
                             <constraint firstItem="AOq-eE-Ep7" firstAttribute="centerX" secondItem="SQm-9U-CwM" secondAttribute="centerX" id="8eo-FR-H7E"/>
                             <constraint firstItem="7mt-aS-C4U" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.06" id="8lj-tc-EMp"/>
-                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.447443" id="OTF-dT-h0H"/>
+                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.447" id="OTF-dT-h0H"/>
                             <constraint firstItem="AOq-eE-Ep7" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.772947" id="RQU-14-DL2"/>
                             <constraint firstItem="7mt-aS-C4U" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.3" id="Rdj-LP-6fl"/>
                             <constraint firstItem="7mt-aS-C4U" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" multiplier="1.75" id="hAR-nm-Mbf"/>
@@ -126,41 +126,11 @@
                     <view key="view" contentMode="scaleToFill" id="DhH-6s-bpn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Unz-TM-jgm">
-                                <rect key="frame" x="51.5" y="336.5" width="311" height="223"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="game 1" translatesAutoresizingMaskIntoConstraints="NO" id="NBH-4W-MxT">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="146.5"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting 1" translatesAutoresizingMaskIntoConstraints="NO" id="aiB-fy-qcp">
-                                        <rect key="frame" x="0.0" y="146.5" width="311" height="76.5"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="aiB-fy-qcp" firstAttribute="centerX" secondItem="Unz-TM-jgm" secondAttribute="centerX" id="GvL-kw-NUE"/>
-                                    <constraint firstItem="NBH-4W-MxT" firstAttribute="width" secondItem="Unz-TM-jgm" secondAttribute="width" id="MdA-Je-hX8"/>
-                                    <constraint firstItem="NBH-4W-MxT" firstAttribute="centerX" secondItem="Unz-TM-jgm" secondAttribute="centerX" id="apJ-Tt-wgL"/>
-                                    <constraint firstItem="NBH-4W-MxT" firstAttribute="height" secondItem="Unz-TM-jgm" secondAttribute="height" multiplier="0.656951" id="gc3-Ke-Ckv"/>
-                                    <constraint firstItem="aiB-fy-qcp" firstAttribute="height" secondItem="Unz-TM-jgm" secondAttribute="height" multiplier="0.343049" id="ha0-FH-Pys"/>
-                                    <constraint firstItem="aiB-fy-qcp" firstAttribute="width" secondItem="Unz-TM-jgm" secondAttribute="width" multiplier="0.5" id="zfF-g5-MuV"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="D6l-lh-G8K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Unz-TM-jgm" firstAttribute="height" secondItem="DhH-6s-bpn" secondAttribute="height" multiplier="0.248778" id="Pn8-KB-8Jk"/>
-                            <constraint firstItem="Unz-TM-jgm" firstAttribute="centerX" secondItem="D6l-lh-G8K" secondAttribute="centerX" id="QaO-H1-K5F"/>
-                            <constraint firstItem="Unz-TM-jgm" firstAttribute="centerY" secondItem="DhH-6s-bpn" secondAttribute="centerY" id="SYz-lZ-G3Y"/>
-                            <constraint firstItem="aiB-fy-qcp" firstAttribute="leading" secondItem="D6l-lh-G8K" secondAttribute="leading" constant="51.5" id="Wml-sC-C4u"/>
-                            <constraint firstItem="Unz-TM-jgm" firstAttribute="width" secondItem="DhH-6s-bpn" secondAttribute="width" multiplier="0.751208" id="bSo-MM-8CI"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tmS-eX-ckY"/>
                     <connections>
-                        <outlet property="GameIconView" destination="NBH-4W-MxT" id="JvG-zl-ujF"/>
-                        <outlet property="WaitingImageView" destination="aiB-fy-qcp" id="3sC-J6-uAZ"/>
                         <segue destination="4eu-zS-s9n" kind="presentation" identifier="goToPVE" modalPresentationStyle="fullScreen" id="nu7-bb-fST"/>
                         <segue destination="R55-PH-MbY" kind="presentation" identifier="goToPVP" modalPresentationStyle="fullScreen" id="4BV-bu-swU"/>
                     </connections>
@@ -506,7 +476,6 @@
     <resources>
         <image name="announcement" width="46" height="35"/>
         <image name="current station info green 1" width="126.5" height="41"/>
-        <image name="game 1" width="311" height="146.5"/>
         <image name="game code 1" width="151.5" height="35"/>
         <image name="join button 2" width="176" height="57"/>
         <image name="next button 1" width="175.5" height="57"/>
@@ -516,7 +485,6 @@
         <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="username 1" width="131.5" height="35"/>
-        <image name="waiting 1" width="174.5" height="57"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
