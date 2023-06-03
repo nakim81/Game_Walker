@@ -24,7 +24,7 @@ class LaunchScreenController: UIViewController {
     }
     
     func prepareSound() {
-        let path = Bundle.main.path(forResource: "launchScreenBGM.mp3", ofType: nil)!
+        let path = Bundle.main.path(forResource: "LaunchScreenMusic.m4a", ofType: nil)!
         let url = URL(fileURLWithPath: path)
 
         do {
