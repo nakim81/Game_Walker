@@ -95,7 +95,6 @@
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
-		FC96248C29C0A83600A74179 /* launchScreenBGM.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC96248B29C0A83600A74179 /* launchScreenBGM.mp3 */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
 		FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */; };
 		FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */; };
@@ -175,6 +174,7 @@
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaunchScreenMusic.m4a; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
@@ -194,7 +194,6 @@
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
-		FC96248B29C0A83600A74179 /* launchScreenBGM.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = launchScreenBGM.mp3; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingViewcontroller.swift; sourceTree = "<group>"; };
@@ -445,8 +444,7 @@
 		FCF4C94F29C8B35100CE8F42 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FC96248B29C0A83600A74179 /* launchScreenBGM.mp3 */,
-				61BB7C952A36D108005C482C /* timer_end.wav */,
+				FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.m4a */,
 				FC1AE24D28E9769B00D8C9D9 /* Fonts */,
 				DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */,
 				DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */,
@@ -548,7 +546,6 @@
 				FC1AE25528E976DE00D8C9D9 /* Dosis-Medium.ttf in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
-				FC96248C29C0A83600A74179 /* launchScreenBGM.mp3 in Resources */,
 				FC1AE25828E976DE00D8C9D9 /* Dosis-Bold.ttf in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */,
@@ -742,7 +739,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -797,7 +794,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -824,6 +821,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -857,6 +855,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
