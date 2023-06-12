@@ -174,7 +174,7 @@
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
-		FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaunchScreenMusic.m4a; sourceTree = "<group>"; };
+		FC0846C42A1F60CC003A73DC /* LaunchScreen.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = LaunchScreen.m4a; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
@@ -444,6 +444,7 @@
 		FCF4C94F29C8B35100CE8F42 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				61BB7C952A36D108005C482C /* timer_end.wav */,
 				FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.m4a */,
 				FC1AE24D28E9769B00D8C9D9 /* Fonts */,
 				DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */,
