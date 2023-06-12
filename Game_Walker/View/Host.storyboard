@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,7 +71,7 @@
             <objects>
                 <viewController id="4gK-PM-WO8" customClass="HostGameCodeViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eY5-V3-TIK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code 1" translatesAutoresizingMaskIntoConstraints="NO" id="ust-Tq-mj7">
@@ -127,7 +127,7 @@
             <objects>
                 <viewController id="1L0-Oz-afr" customClass="StationsTableViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQk-vm-7Sx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations 1" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-tB-jas" userLabel="Stations">
@@ -137,7 +137,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="Next button 1-1"/>
                                 <connections>
@@ -145,11 +145,11 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
-                                <rect key="frame" x="41.5" y="189.5" width="331" height="487"/>
+                                <rect key="frame" x="41.5" y="189.5" width="331" height="434.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-lG-6rY" userLabel="Add Button">
-                                <rect key="frame" x="32.5" y="691.5" width="349" height="46"/>
+                                <rect key="frame" x="32.5" y="639" width="349" height="46"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="newaddbutton"/>
                                 <connections>
@@ -188,7 +188,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddStationViewController" id="EDq-oM-bgK" customClass="AddStationViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8R1-oH-TTM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l6w-xV-CKG">
@@ -198,7 +198,7 @@
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
-                                        <rect key="frame" x="105.5" y="634.5" width="195" height="58.5"/>
+                                        <rect key="frame" x="105.5" y="634.5" width="195" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="175:52" id="VeK-ka-nJC"/>
                                         </constraints>
@@ -435,38 +435,38 @@
             <objects>
                 <viewController id="KzH-J8-5vd" customClass="SettingTimeHostViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sav-4G-tMH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer 1-1" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-mI-mS1" userLabel="Timer Label">
-                                <rect key="frame" x="31" y="109.5" width="145" height="64.5"/>
+                                <rect key="frame" x="31" y="111.5" width="145" height="61"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game time per round 3" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
-                                <rect key="frame" x="103.5" y="208" width="207" height="28"/>
+                                <rect key="frame" x="103.5" y="206.5" width="207" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="186.5:25" id="1OR-fC-KEp"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
-                                <rect key="frame" x="105.5" y="239" width="203" height="64"/>
+                                <rect key="frame" x="105.5" y="237" width="203" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="174:55" id="89c-SK-TFL"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                <rect key="frame" x="115.5" y="242" width="183" height="57.5"/>
+                                <rect key="frame" x="115.5" y="240" width="183" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="2.5" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -490,19 +490,19 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moving time 1" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="140" y="331" width="134" height="27.5"/>
+                                <rect key="frame" x="140" y="329" width="134" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="121:25" id="wkB-x3-fMl"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
-                                <rect key="frame" x="105.5" y="364.5" width="203" height="64"/>
+                                <rect key="frame" x="105.5" y="363" width="203" height="64"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                <rect key="frame" x="115.5" y="368" width="183" height="57.5"/>
+                                <rect key="frame" x="115.5" y="366" width="183" height="58"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
-                                        <rect key="frame" x="87" y="-4.5" width="9" height="66"/>
+                                        <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
                                         <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
@@ -517,7 +517,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
-                                        <rect key="frame" x="-10" y="-3.5" width="203" height="64"/>
+                                        <rect key="frame" x="-10" y="-3" width="203" height="64"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
@@ -535,16 +535,16 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds 1" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="168" y="456.5" width="78" height="28"/>
+                                <rect key="frame" x="168" y="455" width="78" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="79:28" id="gC4-9S-8sz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
-                                <rect key="frame" x="105.5" y="487.5" width="203" height="64"/>
+                                <rect key="frame" x="105.5" y="486" width="203" height="64"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
@@ -553,22 +553,22 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                <rect key="frame" x="115.5" y="490.5" width="183" height="58"/>
+                                <rect key="frame" x="115.5" y="489" width="183" height="57.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Number of Teams 1" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-bV-YWp" userLabel="Team Count label">
-                                <rect key="frame" x="117" y="579.5" width="180" height="28"/>
+                                <rect key="frame" x="117" y="578" width="180" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WYz-bV-YWp" secondAttribute="height" multiplier="162.4:25" id="sJQ-7T-Ic5"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer-time-box" translatesAutoresizingMaskIntoConstraints="NO" id="Vix-LA-Y4c" userLabel="Team Count box">
-                                <rect key="frame" x="105.5" y="610.5" width="203" height="64"/>
+                                <rect key="frame" x="105.5" y="608.5" width="203" height="64"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                <rect key="frame" x="115.5" y="613.5" width="183" height="58"/>
+                                <rect key="frame" x="115.5" y="612" width="183" height="57.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -656,7 +656,7 @@
             <objects>
                 <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="xFP-8B-6Yp">
@@ -676,12 +676,12 @@
                                     <constraint firstAttribute="height" constant="291" id="Lce-s0-Yq3"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="cy9-VK-BJG">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="cy9-VK-BJG">
                                 <rect key="frame" x="61" y="275" width="291" height="291"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="292" height="292"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
+                                        <rect key="frame" x="0.0" y="0.0" width="873" height="292"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
                                             <size key="itemSize" width="32" height="32"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -692,7 +692,12 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="trailing" secondItem="TtO-gM-xsu" secondAttribute="trailing" constant="292" id="7fl-5V-8aa"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="TtO-gM-xsu" secondAttribute="leading" id="8is-VS-tAW"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="bottom" secondItem="TtO-gM-xsu" secondAttribute="bottom" constant="292" id="A86-6j-DfE"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="TtO-gM-xsu" secondAttribute="top" id="hhm-Si-eU8"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="height" secondItem="7cj-Cz-6Bz" secondAttribute="height" multiplier="1.00344" id="iDo-OK-6oD"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="width" secondItem="7cj-Cz-6Bz" secondAttribute="width" multiplier="3" id="mwi-iK-xxR"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="TtO-gM-xsu"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="7cj-Cz-6Bz"/>
@@ -701,7 +706,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="119" y="726" width="176" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="Start game button"/>
                                 <connections>
@@ -774,14 +779,14 @@
             <objects>
                 <viewController id="XpD-HK-1hf" customClass="HostTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a7a-eq-zES">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer 1" translatesAutoresizingMaskIntoConstraints="NO" id="S0z-Qo-01x">
-                                <rect key="frame" x="27" y="80.5" width="134" height="65"/>
+                                <rect key="frame" x="27" y="76" width="134" height="61"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NaI-KP-VEh">
-                                <rect key="frame" x="162" y="548.5" width="90" height="58"/>
+                                <rect key="frame" x="162" y="517" width="90" height="55"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Polygon 1"/>
                                 <connections>
@@ -789,10 +794,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mtV-fz-sEF">
-                                <rect key="frame" x="294" y="47" width="74.5" height="40"/>
+                                <rect key="frame" x="294" y="44.5" width="74.5" height="37.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgH-dT-cdH">
-                                        <rect key="frame" x="2" y="-198.5" width="33.5" height="437"/>
+                                        <rect key="frame" x="2" y="-187.5" width="33.5" height="412"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="announcement"/>
                                         <connections>
@@ -800,7 +805,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4W-ai-af5">
-                                        <rect key="frame" x="39" y="-7.5" width="33.5" height="55"/>
+                                        <rect key="frame" x="39" y="-7.5" width="33.5" height="52"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -854,21 +859,21 @@
             <objects>
                 <viewController id="L51-9x-cCC" customClass="HostRankingViewcontroller" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8nu-hd-YkZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="VCg-rd-HS9">
-                                <rect key="frame" x="26" y="80.5" width="192.5" height="65"/>
+                                <rect key="frame" x="26" y="76" width="192.5" height="61"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F4M-EA-8mT">
-                                <rect key="frame" x="29.5" y="160.5" width="355" height="586"/>
+                                <rect key="frame" x="29.5" y="152" width="355" height="552.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6M-cq-y2e">
-                                <rect key="frame" x="294" y="47" width="74.5" height="40"/>
+                                <rect key="frame" x="294" y="44.5" width="74.5" height="37.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41c-QL-V9u">
-                                        <rect key="frame" x="2" y="-198.5" width="33.5" height="437"/>
+                                        <rect key="frame" x="2" y="-187.5" width="33.5" height="412"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="announcement"/>
                                         <connections>
@@ -876,7 +881,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVw-hW-wn8">
-                                        <rect key="frame" x="39" y="-7.5" width="33.5" height="55"/>
+                                        <rect key="frame" x="39" y="-7.5" width="33.5" height="52"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -897,7 +902,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-CG-hVP" customClass="CustomSwitchButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="324.5" y="121.5" width="60" height="31"/>
+                                <rect key="frame" x="324.5" y="113" width="60" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="oU8-ce-AOK"/>
                                     <constraint firstAttribute="width" constant="60" id="sVW-0k-iJc"/>
@@ -909,7 +914,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Te-FI-vyR">
-                                <rect key="frame" x="89.5" y="776.5" width="235" height="50"/>
+                                <rect key="frame" x="89.5" y="734.5" width="235" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KUP-Yj-CNZ"/>
                                 </constraints>

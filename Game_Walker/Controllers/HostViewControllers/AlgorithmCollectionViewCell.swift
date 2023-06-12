@@ -27,4 +27,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.text = String(cellteamnum)
         algorithmCellBox.backgroundColor = UIColor.blue
     }
+    
+    func changeRed() {
+        teamnumLabel.textColor = UIColor.red
+    }
 }
