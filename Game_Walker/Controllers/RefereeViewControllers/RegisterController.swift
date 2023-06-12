@@ -197,7 +197,7 @@ extension RegisterController {
         }
     }
 }
-// MARK: - Protocoal
+// MARK: - Protocol
 extension RegisterController {
     func getStation(_ station: Station) {
         storedStation = station
