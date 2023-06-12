@@ -35,6 +35,8 @@ class AlgorithmViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    var indexPathA: IndexPath?
+    var indexPathB: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.dataSource = self
             self.collectionView.dragDelegate = self
             self.collectionView.dropDelegate = self
+            self.collectionView.clipsToBounds = true
             self.collectionView.isUserInteractionEnabled = true
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
 
@@ -67,7 +70,8 @@ class AlgorithmViewController: BaseViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addviewsConstraints()
+//        addviewsConstraints()
+//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
 
     
@@ -119,7 +123,9 @@ class AlgorithmViewController: BaseViewController {
 
 
 }
-
+func hasSameTeam( grid : [[Int]]) {
+    
+}
 extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int{
@@ -133,7 +139,43 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             return grid[section].count
         }
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPathA == nil {
+            // First selection
+            indexPathA = indexPath
+        } else if indexPathB == nil {
+            // Second selection
+            indexPathB = indexPath
+        }
+        
+        if let indexPathA = indexPathA, let indexPathB = indexPathB {
+            let itemA = grid[indexPathA.section][indexPathA.item]
+            let itemB = grid[indexPathB.section][indexPathB.item]
+            
+            grid[indexPathA.section][indexPathA.item] = itemB
+            grid[indexPathB.section][indexPathB.item] = itemA
+            
+            collectionView.performBatchUpdates({
+                collectionView.moveItem(at: indexPathA, to: indexPathB)
+                collectionView.moveItem(at: indexPathB, to: indexPathA)
+            }, completion: { _ in
+                // Swap completed
+                print("swap completed:", self.grid)
+                self.indexPathA = nil
+                self.indexPathB = nil
+            })
+        }
+    }
     
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let algorithmcell = cell as? AlgorithmCollectionViewCell
+//        if (hasSameTeam(grid: grid)) {
+//            algorithmcell?.changeRed() // Change the color to red
+//        } else {
+//            algorithmcell?.teamnumLabel.textColor = UIColor.white // Reset the color to white or any other default color
+//        }
+//    }
+//
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell else {
             return UICollectionViewCell()
@@ -209,8 +251,8 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 //        collectionViewCellWidth = Int(collectionViewWidth / CGFloat(numberOfCellsPerRow))
 
         // this calculates the contentsize
-        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 0 * (8 - 1)) / 8
-        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 0 * (8 - 1)) / 8
+        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 2 * (8 - 1)) / 8
+        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 2 * (8 - 1)) / 8
         collectionViewCellWidth = Int(width)
         print("CONTENT INSETS: ", collectionView.contentInset.top,collectionView.contentInset.bottom, collectionView.contentInset.left, collectionView.contentInset.right)
         return CGSize(width: width, height: height)
@@ -223,11 +265,11 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
-        return 0
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 2
     }
 
     func addviewsConstraints() {
