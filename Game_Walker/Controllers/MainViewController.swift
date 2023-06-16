@@ -20,6 +20,9 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var settingBtn: UIButton!
     
     override func viewDidLoad() {
+        if UserData.readUUID() == nil {
+            UserData.writeUUID(UUID().uuidString)
+        }
         super.viewDidLoad()
     }
     

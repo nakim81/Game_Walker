@@ -18,8 +18,8 @@ struct R {
     static var delegate_getReferee: GetReferee?
     static var delegates : [RefereeUpdateListener] = []
     
-    static func listenReferee(_ gamecode: String, _ referee: Referee, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-        db.collection("\(gamecode) : Referees").document(referee.name).addSnapshotListener { documentSnapshot, error in
+    static func listenReferee(_ gamecode: String, _ uuid: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+        db.collection("\(gamecode) : Referees").document(uuid).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else { return }
             guard let data = document.data() else { return }
             let ref = convertDataToReferee(data)
@@ -29,12 +29,12 @@ struct R {
        }
     }
 
-    static func addReferee(_ gamecode: String, _ referee: Referee){
+    static func addReferee(_ gamecode: String, _ referee: Referee, _ uuid: String){
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 do {
-                    try db.collection("\(gamecode) : Referees").document(referee.name).setData(from: referee)
+                    try db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
                     print("Referee sucessfully saved")
                 } catch let error {
                     print("Error writing to Firestore: \(error)")
@@ -45,8 +45,8 @@ struct R {
         }
     }
     
-    static func removeReferee(_ gamecode: String, _ referee: Referee){
-        db.collection("\(gamecode) : Referees").document(referee.name).delete() { err in
+    static func removeReferee(_ gamecode: String, _ uuid: String){
+        db.collection("\(gamecode) : Referees").document(uuid).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
@@ -54,12 +54,25 @@ struct R {
             }
         }
     }
+    
+    static func modifyName(_ gamecode: String, _ uuid : String, _ name: String){
+        let server = db.collection("\(gamecode) : Referees").document(uuid)
+        server.updateData([
+            "name": name
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
         
-    static func assignStation(_ gamecode: String, _ referee: Referee, _ stationName: String){
-        let refDoc = db.collection("\(gamecode) : Referees").document(referee.name)
+    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool){
+        let refDoc = db.collection("\(gamecode) : Referees").document(uuid)
         refDoc.updateData([
             "stationName": stationName,
-            "assigned": true
+            "assigned": assigned
         ]){ err in
             if let err = err {
                 print("Error updating document: \(err)")
@@ -69,23 +82,23 @@ struct R {
         }
     }
     
-    static func unassignStation(_ gamecode: String, _ old_referee : Referee){
-        let server = db.collection("\(gamecode) : Referees").document(old_referee.name)
-        server.updateData([
-            "assigned" : false,
-            "stationName" : ""
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
-        }
-    }
+//    static func unassignStation(_ gamecode: String, _ uuid : String){
+//        let server = db.collection("\(gamecode) : Referees").document(uuid)
+//        server.updateData([
+//            "assigned" : false,
+//            "stationName" : ""
+//        ]) { err in
+//            if let err = err {
+//                print("Error updating document: \(err)")
+//            } else {
+//                print("Document successfully updated")
+//            }
+//        }
+//    }
     
     
-    static func getReferee(_ gamecode: String, _ refereeName : String){
-        let docRef = db.collection("\(gamecode) : Referees").document(refereeName)
+    static func getReferee(_ gamecode: String, _ uuid : String){
+        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 guard let data = document.data() else {return}

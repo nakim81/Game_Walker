@@ -8,6 +8,15 @@
 import Foundation
 
 class UserData {
+    
+    static func writeUUID(_ uuid: String){
+        UserDefaults.standard.set(uuid, forKey: "uuid")
+    }
+
+    static func readUUID() -> String? {
+        return UserDefaults.standard.string(forKey: "uuid")
+    }
+    
     static func writeGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
     }
