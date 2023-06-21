@@ -59,7 +59,7 @@ struct H {
     static func startGame(_ gamecode: String){
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         server.updateData([
-            "startTimestamp": Int(Date().timeIntervalSince1970)
+            "startTimestamp": Int(Date().timeIntervalSince1970),
             "paused" : false
         ]) { err in
             if let err = err {
