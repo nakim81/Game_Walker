@@ -30,7 +30,6 @@
 		A1A4CD202A371AA100704BF8 /* Host_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1F2A371AA100704BF8 /* Host_Database.swift */; };
 		A1A4CD222A371AC700704BF8 /* Player_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD212A371AC700704BF8 /* Player_Database.swift */; };
 		A1A4CD242A371AEF00704BF8 /* Referee_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD232A371AEF00704BF8 /* Referee_Database.swift */; };
-		A1A4CD262A371B0600704BF8 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD252A371B0600704BF8 /* Host.swift */; };
 		A1A4CD282A371B2400704BF8 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD272A371B2400704BF8 /* Protocols.swift */; };
 		A1A4CD2A2A371B3B00704BF8 /* Team_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD292A371B3B00704BF8 /* Team_Database.swift */; };
 		A1A4CD2C2A371B4A00704BF8 /* Station_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD2B2A371B4A00704BF8 /* Station_Database.swift */; };
@@ -130,7 +129,6 @@
 		A1A4CD1F2A371AA100704BF8 /* Host_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host_Database.swift; path = Database/Host_Database.swift; sourceTree = "<group>"; };
 		A1A4CD212A371AC700704BF8 /* Player_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player_Database.swift; path = Database/Player_Database.swift; sourceTree = "<group>"; };
 		A1A4CD232A371AEF00704BF8 /* Referee_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee_Database.swift; path = Database/Referee_Database.swift; sourceTree = "<group>"; };
-		A1A4CD252A371B0600704BF8 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		A1A4CD272A371B2400704BF8 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = Database/Protocols.swift; sourceTree = "<group>"; };
 		A1A4CD292A371B3B00704BF8 /* Team_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team_Database.swift; path = Database/Team_Database.swift; sourceTree = "<group>"; };
 		A1A4CD2B2A371B4A00704BF8 /* Station_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station_Database.swift; path = Database/Station_Database.swift; sourceTree = "<group>"; };
@@ -169,8 +167,6 @@
 		DA42139428B47EDA000A395F /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		DA42139528B47EDA000A395F /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
-		DA9662C0285AA39200B66629 /* Host_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host_Database.swift; path = Database/Host_Database.swift; sourceTree = "<group>"; };
-		DA9662C2285AFA4700B66629 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = Database/Protocols.swift; sourceTree = "<group>"; };
 		DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Player.storyboard; path = View/Player.storyboard; sourceTree = "<group>"; };
 		DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Referee.storyboard; path = View/Referee.storyboard; sourceTree = "<group>"; };
 		DABC1E82288BA9CA00C75DC7 /* Host.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Host.storyboard; path = View/Host.storyboard; sourceTree = "<group>"; };
@@ -179,10 +175,6 @@
 		DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		DABC1EEA288F3DC400C75DC7 /* Player_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player_Database.swift; path = Database/Player_Database.swift; sourceTree = "<group>"; };
-		DABC1EEC2890CEDB00C75DC7 /* Referee_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee_Database.swift; path = Database/Referee_Database.swift; sourceTree = "<group>"; };
-		DABC1EEE28911F8100C75DC7 /* Team_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team_Database.swift; path = Database/Team_Database.swift; sourceTree = "<group>"; };
-		DABC1EF028911FA900C75DC7 /* Station_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station_Database.swift; path = Database/Station_Database.swift; sourceTree = "<group>"; };
 		DAC313262858619900BECF89 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Model/Player.swift; sourceTree = "<group>"; };
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
@@ -191,13 +183,6 @@
 		FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = LaunchScreenMusic.m4a; path = "Supporting Files/LaunchScreenMusic.m4a"; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
-		FC1AE24E28E976DE00D8C9D9 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-Medium.ttf"; path = "Supporting Files/Fonts/Dosis-Medium.ttf"; sourceTree = "<group>"; };
-		FC1AE24F28E976DE00D8C9D9 /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-ExtraLight.ttf"; path = "Supporting Files/Fonts/Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
-		FC1AE25028E976DE00D8C9D9 /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-ExtraBold.ttf"; path = "Supporting Files/Fonts/Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
-		FC1AE25128E976DE00D8C9D9 /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-Bold.ttf"; path = "Supporting Files/Fonts/Dosis-Bold.ttf"; sourceTree = "<group>"; };
-		FC1AE25228E976DE00D8C9D9 /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-Regular.ttf"; path = "Supporting Files/Fonts/Dosis-Regular.ttf"; sourceTree = "<group>"; };
-		FC1AE25328E976DE00D8C9D9 /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-SemiBold.ttf"; path = "Supporting Files/Fonts/Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
-		FC1AE25428E976DE00D8C9D9 /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-Light.ttf"; path = "Supporting Files/Fonts/Dosis-Light.ttf"; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
 		FC21701F29A319BB00FD5F66 /* Award.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Award.storyboard; path = View/Award.storyboard; sourceTree = "<group>"; };
@@ -483,13 +468,12 @@
 		FCFE6C4C29B77FC5002FCD19 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				A1A4CD212A371AC700704BF8 /* Player_Database.swift */,
+				A1A4CD232A371AEF00704BF8 /* Referee_Database.swift */,
 				A1A4CD2B2A371B4A00704BF8 /* Station_Database.swift */,
 				A1A4CD292A371B3B00704BF8 /* Team_Database.swift */,
-				A1A4CD272A371B2400704BF8 /* Protocols.swift */,
-				A1A4CD252A371B0600704BF8 /* Host.swift */,
-				A1A4CD232A371AEF00704BF8 /* Referee_Database.swift */,
-				A1A4CD212A371AC700704BF8 /* Player_Database.swift */,
 				A1A4CD1F2A371AA100704BF8 /* Host_Database.swift */,
+				A1A4CD272A371B2400704BF8 /* Protocols.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -564,7 +548,6 @@
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				61BB7C962A36D108005C482C /* timer_end.wav in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
-				FC1AE25628E976DE00D8C9D9 /* Dosis-ExtraLight.ttf in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
@@ -631,7 +614,6 @@
 				A1A4CD2C2A371B4A00704BF8 /* Station_Database.swift in Sources */,
 				A1A4CD2A2A371B3B00704BF8 /* Team_Database.swift in Sources */,
 				A1A4CD282A371B2400704BF8 /* Protocols.swift in Sources */,
-				A1A4CD262A371B0600704BF8 /* Host.swift in Sources */,
 				A1A4CD242A371AEF00704BF8 /* Referee_Database.swift in Sources */,
 				A1A4CD222A371AC700704BF8 /* Player_Database.swift in Sources */,
 				A1A4CD202A371AA100704BF8 /* Host_Database.swift in Sources */,
@@ -668,7 +650,6 @@
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */,
 				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
-				DABC1EEF28911F8100C75DC7 /* Team_Database.swift in Sources */,
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
