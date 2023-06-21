@@ -76,6 +76,7 @@ class AlgorithmViewController: BaseViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
 //        addviewsConstraints()
 //        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
@@ -107,7 +108,7 @@ class AlgorithmViewController: BaseViewController {
         
         num_cols = totalcolumn
         num_rows = totalrow
-        print(totalrow)
+//        print(totalrow)
         for r in 0...(totalrow - 1) {
             var curr_row = [Int]()
             for t in 0...(totalcolumn - 1) {
@@ -146,6 +147,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell = collectionView.cellForItem(at: indexPath)
+        let beforeSize = selectedCell?.contentView.frame.size
+        print("Before selection CELL SIZE: \(beforeSize)")
         if indexPathA == nil {
             // First selection
             indexPathA = indexPath
@@ -153,9 +157,11 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             let selectedCellA = collectionView.cellForItem(at: indexPathA!) as? AlgorithmCollectionViewCell
             originalcellAimage = selectedCellA?.algorithmCellBox.image
             originalcellAcolor = selectedCellA?.teamnumLabel.textColor
-            
-            selectedCellA?.algorithmCellBox.image = UIImage(named: "cellselected")
-            selectedCellA?.teamnumLabel.textColor = UIColor.gray
+
+            selectedCellA?.makeCellSelected()
+//            selectedCellA?.algorithmCellBox.image = UIImage(named: "cellselected")
+//            selectedCellA?.teamnumLabel.textColor = UIColor.gray
+
             
         } else if indexPathB == nil {
             // Second selection
@@ -165,8 +171,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             let selectedCellB = collectionView.cellForItem(at: indexPathB!) as? AlgorithmCollectionViewCell
             originalcellBimage = selectedCellB?.algorithmCellBox.image
             originalcellBcolor = selectedCellB?.teamnumLabel.textColor
-            selectedCellB?.algorithmCellBox.image = UIImage(named: "cellselected")
-            selectedCellB?.teamnumLabel.textColor = UIColor.gray
+            selectedCellB?.makeCellSelected()
+//            selectedCellB?.algorithmCellBox.image = UIImage(named: "cellselected")
+//            selectedCellB?.teamnumLabel.textColor = UIColor.gray
         }
         
         if let indexPathA = indexPathA, let indexPathB = indexPathB {
@@ -179,6 +186,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             grid[indexPathB.section][indexPathB.item] = itemA
             
             collectionView.performBatchUpdates({
+                let afterSize = selectedCell?.contentView.frame.size
+                print("After selection CELL SIZE: \(afterSize)")
+                
                 collectionView.moveItem(at: indexPathA, to: indexPathB)
                 collectionView.moveItem(at: indexPathB, to: indexPathA)
             }, completion: { _ in
@@ -208,6 +218,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 //        }
 //    }
 //
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell else {
             return UICollectionViewCell()
@@ -231,7 +242,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
-        
+        cell.makeCellOriginal()
         let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.keyboardType = .numberPad
@@ -245,6 +256,12 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             }
         }))
         present(alertController, animated: true, completion: nil)
+        
+        // deselects cell when it is double tapped.
+        if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
+            let indexPath = indexPaths[0]
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
 
 }
@@ -257,7 +274,7 @@ extension AlgorithmViewController: StationList {
         self.stationList = stations
         self.num_stations = stations.count
         self.collectionView?.reloadData()
-        print("stationsList is empty? : " , stations.count , " and ", self.stationList!.count)
+//        print("stationsList is empty? : " , stations.count , " and ", self.stationList!.count)
     }
     
 }
@@ -265,7 +282,7 @@ extension AlgorithmViewController: StationList {
 
 extension AlgorithmViewController: GetHost {
     func getHost(_ host: Host) {
-        print("algorithm protocol")
+//        print("algorithm protocol")
         self.num_teams = host.teams
         self.num_rounds = host.rounds
 
@@ -286,7 +303,7 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 2 * (8 - 1)) / 8
         let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 2 * (8 - 1)) / 8
         collectionViewCellWidth = Int(width)
-        print("CONTENT INSETS: ", collectionView.contentInset.top,collectionView.contentInset.bottom, collectionView.contentInset.left, collectionView.contentInset.right)
+//        print("CONTENT INSETS: ", collectionView.contentInset.top,collectionView.contentInset.bottom, collectionView.contentInset.left, collectionView.contentInset.right)
         return CGSize(width: width, height: height)
 //        print("ISIT COMING THROUGH TH ECELL SIZE")
 //        return CGSize(width: 10, height: 10)
@@ -297,11 +314,11 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
-        return 2
+        return 4
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 4
     }
 
     func addviewsConstraints() {
@@ -347,11 +364,11 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
 extension AlgorithmViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            print("------Collection view scrolling-----")
-        } else if scrollView == self.scrollView {
-            print("------Scroll view scrolling-------")
-        }
+//        if scrollView == collectionView {
+//            print("------Collection view scrolling-----")
+//        } else if scrollView == self.scrollView {
+//            print("------Scroll view scrolling-------")
+//        }
     }
 }
 

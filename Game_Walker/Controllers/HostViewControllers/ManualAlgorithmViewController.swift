@@ -84,7 +84,7 @@ class ManualAlgorithmViewController: BaseViewController {
             print(teamnumberlabel)
 
 
-            cell.configureAlgorithmSpecialCell2(cellteamnum: teamnumberlabel)
+//            cell.configureAlgorithmSpecialCell2(cellteamnum: teamnumberlabel)
             return cell
         }
     }
