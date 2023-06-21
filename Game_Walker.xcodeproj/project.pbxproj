@@ -40,6 +40,7 @@
 		A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A4CD312A371C0400704BF8 /* Dosis-Regular.ttf */; };
 		A1A4CD392A371C0500704BF8 /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A4CD322A371C0500704BF8 /* Dosis-ExtraLight.ttf */; };
 		A1A4CD3A2A371C0500704BF8 /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1A4CD332A371C0500704BF8 /* Dosis-Medium.ttf */; };
+		A1A4CD3B2A42B8A800704BF8 /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96396F28A33CDA00853F05 /* Host.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -656,6 +657,7 @@
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
 				A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */,
 				DABE5EF72A42B8970072203F /* Host.swift in Sources */,
+				A1A4CD3B2A42B8A800704BF8 /* Host.swift in Sources */,
 				61C33E2F299B25BC00A512E5 /* RefereeAnnouncementController.swift in Sources */,
 				FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */,
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
