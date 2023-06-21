@@ -38,6 +38,12 @@ class AlgorithmViewController: BaseViewController {
     var indexPathA: IndexPath?
     var indexPathB: IndexPath?
     
+    var originalcellAimage: UIImage?
+    var originalcellAcolor: UIColor?
+    var originalcellBimage: UIImage?
+    var originalcellBcolor: UIColor?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,7 +85,7 @@ class AlgorithmViewController: BaseViewController {
         alert2(title: "", message: "Everything set?")
     }
     func createGrid() {
-        num_stations = /*stationList!.count**/ 8
+        num_stations = stationList!.count
 
 //        if (num_stations < num_teams) {
 //            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
@@ -143,14 +149,31 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPathA == nil {
             // First selection
             indexPathA = indexPath
+            
+            let selectedCellA = collectionView.cellForItem(at: indexPathA!) as? AlgorithmCollectionViewCell
+            originalcellAimage = selectedCellA?.algorithmCellBox.image
+            originalcellAcolor = selectedCellA?.teamnumLabel.textColor
+            
+            selectedCellA?.algorithmCellBox.image = UIImage(named: "cellselected")
+            selectedCellA?.teamnumLabel.textColor = UIColor.gray
+            
         } else if indexPathB == nil {
             // Second selection
             indexPathB = indexPath
+            
+            
+            let selectedCellB = collectionView.cellForItem(at: indexPathB!) as? AlgorithmCollectionViewCell
+            originalcellBimage = selectedCellB?.algorithmCellBox.image
+            originalcellBcolor = selectedCellB?.teamnumLabel.textColor
+            selectedCellB?.algorithmCellBox.image = UIImage(named: "cellselected")
+            selectedCellB?.teamnumLabel.textColor = UIColor.gray
         }
         
         if let indexPathA = indexPathA, let indexPathB = indexPathB {
             let itemA = grid[indexPathA.section][indexPathA.item]
             let itemB = grid[indexPathB.section][indexPathB.item]
+            
+
             
             grid[indexPathA.section][indexPathA.item] = itemB
             grid[indexPathB.section][indexPathB.item] = itemA
@@ -161,6 +184,15 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             }, completion: { _ in
                 // Swap completed
                 print("swap completed:", self.grid)
+                let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
+                let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
+                
+                selectedCellA?.algorithmCellBox.image = self.originalcellAimage
+                selectedCellA?.teamnumLabel.textColor = self.originalcellAcolor
+                selectedCellB?.algorithmCellBox.image = self.originalcellBimage
+                selectedCellB?.teamnumLabel.textColor = self.originalcellBcolor
+                
+                
                 self.indexPathA = nil
                 self.indexPathB = nil
             })
