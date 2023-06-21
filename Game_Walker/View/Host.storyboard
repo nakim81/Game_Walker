@@ -692,7 +692,7 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="trailing" secondItem="TtO-gM-xsu" secondAttribute="trailing" constant="292" id="7fl-5V-8aa"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="trailing" secondItem="TtO-gM-xsu" secondAttribute="trailing" id="7fl-5V-8aa"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="TtO-gM-xsu" secondAttribute="leading" id="8is-VS-tAW"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="bottom" secondItem="TtO-gM-xsu" secondAttribute="bottom" constant="292" id="A86-6j-DfE"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="TtO-gM-xsu" secondAttribute="top" id="hhm-Si-eU8"/>
