@@ -42,6 +42,20 @@ struct S {
             }
         }
     }
+    
+    
+    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee){
+        let docRef = db.collection("\(gamecode) : Stations").document(station.name)
+        docRef.updateData([
+            "referee": referee
+        ]){ err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Station Document successfully updated")
+            }
+        }
+    }
 
     static func getStation(_ gamecode: String, _ stationName : String){
         let docRef = db.collection("\(gamecode) : Stations").document(stationName)
