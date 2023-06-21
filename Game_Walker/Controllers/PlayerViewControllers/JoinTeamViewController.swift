@@ -15,32 +15,50 @@ class JoinTeamViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var selectedIndex: Int?
-    private var teams: [Team] = []
-    
+    private var teamList: [Team] = []
+    private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
+    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private let refreshController: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = UICollectionViewFlowLayout()
-        collectionView.collectionViewLayout = layout
-        
+        T.delegate_teamList = self
+        configureCollectionView()
+        T.getTeamList(gameCode)
+    }
+    
+    private func configureCollectionView() {
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         collectionView.register(TeamIconCollectionViewCell.self, forCellWithReuseIdentifier: TeamIconCollectionViewCell.identifier)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.allowsMultipleSelection = false
-        
+        collectionView.refreshControl = refreshController
+        settingRefreshControl()
     }
 
-
+    private func settingRefreshControl() {
+        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
+        refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+    }
+    
+    @objc func refreshFunction() {
+        T.getTeamList(gameCode)
+        refreshController.endRefreshing()
+        collectionView.reloadData()
+    }
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            K.Database.setupRequest(gamecode: UserData.gamecode!, player: UserData.player, referee: nil, team: teams[selectedIndex], station: nil, gameTime: nil, movingTime: nil, rounds: nil, request: .joinTeam)
-
-            performSegue(withIdentifier: "goToPF44", sender: self)
+            UserData.writeTeam(teamList[selectedIndex], "team")
+            T.joinTeam(gameCode, teamList[selectedIndex].name, currentPlayer)
+            Task {
+                try await Task.sleep(nanoseconds: 250_000_000)
+                performSegue(withIdentifier: "goToPF44", sender: self)
+            }
         } else {
-            alert(title: "No Icon Selected", message: "Please select a team icon")
+            alert(title: "No Team Selected", message: "Please select your team")
             return
         }
     }
@@ -49,23 +67,25 @@ class JoinTeamViewController: BaseViewController {
 // MARK: - UICollectionViewDelegate
 extension JoinTeamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
-            if selectedIndex == indexPath.row {
-                collectionView.deselectItem(at: indexPath, animated: true)
-                cell.layer.borderWidth = 0
-                selectedIndex = nil
-            } else {
-                selectedIndex = indexPath.row
-                cell.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-                cell.layer.borderWidth = 1
-            }
+        guard let cell = self.collectionView.cellForItem(at: indexPath) else {return}
+        if selectedIndex == indexPath.item {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            cell.layer.borderWidth = 0
+            selectedIndex = nil
+            cell.isSelected = false
+        } else {
+            selectedIndex = indexPath.row
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+            cell.isSelected = true
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TeamIconCollectionViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) else {return}
         cell.layer.borderWidth = 0
         selectedIndex = nil
-        print("\(cell.getImageName()) deselected")
+        cell.isSelected = false
     }
 }
 
@@ -73,14 +93,20 @@ extension JoinTeamViewController: UICollectionViewDelegate {
 extension JoinTeamViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teams.count
+        return teamList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamIconCollectionViewCell.identifier , for: indexPath) as! TeamIconCollectionViewCell
-        let team = teams[indexPath.item]
-        cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name)
-        //cell.setImage(with: iconImageNames[indexPath.item])
+        let team = teamList[indexPath.item]
+        let teamNum = String(team.number)
+        cell.configureJoinTeamCell(imageName: team.iconName, teamName: team.name, teamNum: "Team \(teamNum)")
+        if cell.isSelected == true {
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.borderWidth = 1
+        } else {
+            cell.layer.borderWidth = 0.0
+        }
         return cell
     }
 }
@@ -89,14 +115,16 @@ extension JoinTeamViewController: UICollectionViewDataSource {
 extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 110)
+        return CGSize(width: 80, height: 130)
     }
 }
 
-//MARK: - UIUpdate
-extension JoinTeamViewController: DataUpdateListener {
-    func onDataUpdate(_ host: Host) {
-        host.teams
+//MARK: - TeamProtocols
+extension JoinTeamViewController: TeamList {
+    func listOfTeams(_ teams: [Team]) {
+        self.teamList = teams
+        self.teamList.sort{$0.number < $1.number}
+        self.collectionView?.reloadData()
     }
 }
 

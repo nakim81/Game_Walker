@@ -7,21 +7,23 @@
 
 import Foundation
 
-struct Station : Codable, Equatable {
-    var name : String = ""
-    var pvp : Bool = true
-    var points : Int = 0
-    var place : String = ""
-    var description : String = ""
-    var teams : [Team] = []
+struct Station: Codable, Equatable {
+    var name: String = ""
+    var pvp: Bool = true
+    var points: Int = 0
+    var place: String = ""
+    var referee: Referee?
+    var description: String = ""
+    var teamOrder: [Team] = []
     
     enum CodingKeys: String, CodingKey {
         case name
         case pvp
         case points
         case place
+        case referee
         case description
-        case teams
+        case teamOrder
     }
     
 }
