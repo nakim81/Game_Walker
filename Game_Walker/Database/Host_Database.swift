@@ -40,7 +40,7 @@ struct H {
         }
     }
     
-    static func setTimer(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int){
+    static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int){
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         server.updateData([
             "gameTime": gameTime,
@@ -55,6 +55,21 @@ struct H {
             }
         }
     }
+    
+    static func startGame(_ gamecode: String){
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        server.updateData([
+            "startTimestamp": Int(Date().timeIntervalSince1970),
+            "paused" : false
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+    
     
     //if show is true, all players can see the score; if false, only the players cannot see their team score (refs and host can)
     static func hide_show_score(_ gamecode: String, _ show: Bool){

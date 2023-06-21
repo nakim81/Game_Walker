@@ -21,6 +21,7 @@ struct Host: Codable {
     var blanked: [[Int]] = []
     //game control
     var showScoreboard: Bool = true
+    var gameover: Bool = false
     //pause
     var paused: Bool = true
     var startTimestamp: Int = Int(Date().timeIntervalSince1970)
@@ -42,6 +43,7 @@ struct Host: Codable {
         case doubled
         case blanked
         case showScoreboard
+        case gameover
         case paused
         case startTimestamp
         case pauseTimestamp
