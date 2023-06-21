@@ -97,24 +97,22 @@ struct R {
 //    }
     
     
-    static func getReferee(_ gamecode: String, _ uuid : String){
-        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                let referee = convertDataToReferee(data)
-                delegate_getReferee?.getReferee(referee)
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
+//    static func getReferee(_ gamecode: String, _ uuid : String){
+//        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                guard let data = document.data() else {return}
+//                let referee = convertDataToReferee(data)
+//                delegate_getReferee?.getReferee(referee)
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//    }
     
-    
-    //Only Unassigned Referees List
+
     static func getRefereeList(_ gamecode: String){
-        db.collection("\(gamecode) : Referees").whereField("assigned", isEqualTo: false)
-            .getDocuments() { (querySnapshot, err) in
+        db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
