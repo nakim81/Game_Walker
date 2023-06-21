@@ -26,7 +26,7 @@ class WaitingController: BaseViewController {
             
         R.delegates.append(self)
         S.delegate_getStation = self
-        R.listenReferee(self.gameCode, self.referee, onListenerUpdate: listen(_:))
+        R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
             
         self.view.addSubview(gameIconView)
         self.view.addSubview(waitingImageView)

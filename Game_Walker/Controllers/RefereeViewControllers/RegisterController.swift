@@ -16,6 +16,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButton: UIButton!
     private var storedGameCode = UserData.readGamecode("refereeGamecode") ?? ""
     private var storedRefereeName = UserData.readUsername("refereeName") ?? ""
+    private var refereeUserID = UserData.readUUID()!
     private var storedStation: Station?
     
     override func viewDidLoad() {
@@ -40,21 +41,21 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             // Rejoining the game.
             if (gamecode.isEmpty || gamecode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let newReferee = Referee(gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
+                let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
                 UserData.writeGamecode(storedGameCode, "refereeGamecode")
                 UserData.writeReferee(newReferee, "Referee")
                 UserData.writeUsername(newReferee.name, "refereeName")
-                R.addReferee(storedGameCode, newReferee)
+                R.addReferee(storedGameCode, newReferee, refereeUserID)
                 performSegue(withIdentifier: "goToWait", sender: self)
             }
             // Joining the game for the first time.
             else if storedGameCode.isEmpty && storedRefereeName.isEmpty {
                 if !gamecode.isEmpty && !name.isEmpty {
-                    let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
+                    let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: name, stationName: "", assigned: false)
                     UserData.writeGamecode(gamecode, "refereeGamecode")
                     UserData.writeReferee(newReferee, "Referee")
                     UserData.writeUsername(newReferee.name, "refereeName")
-                    R.addReferee(gamecode, newReferee)
+                    R.addReferee(gamecode, newReferee, refereeUserID)
                     performSegue(withIdentifier: "goToWait", sender: self)
                 } else {
                     alert(title: "", message: "Please enter both game code and username.")
@@ -63,10 +64,10 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             // Leaving the game and entering a new game.
             else if (gamecode != storedGameCode) && (name.isEmpty || name == storedRefereeName){
                 let oldReferee = UserData.readReferee("Referee")!
-                let newReferee = Referee(gamecode: gamecode, name: storedRefereeName, stationName: "", assigned: false)
+                let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: storedRefereeName, stationName: "", assigned: false)
                 firstly { () -> Promise<Void> in
                     return Promise<Void> { seal in
-                        self.removeReferee(gamecode: storedGameCode, storedReferee: oldReferee) {
+                        self.removeReferee(gamecode: storedGameCode, uuid: refereeUserID) {
                             seal.fulfill(())
                         }
                     }
@@ -74,7 +75,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 .then {
                     return Promise<Void> { seal in
                         UserData.writeReferee(newReferee, "Referee")
-                        self.addReferee(gamecode: gamecode, referee: newReferee){
+                        self.addReferee(gamecode: gamecode, referee: newReferee, uuid: self.refereeUserID) {
                             seal.fulfill(())
                         }
                     }
@@ -89,40 +90,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             // Joining the game again with a new name.
             else if (gamecode.isEmpty || gamecode == storedGameCode) && (name != storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
+                let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
                 firstly { () -> Promise<Void> in
                     return Promise<Void> { seal in
-                        UserData.writeUsername(oldReferee.stationName, "stationName")
-                        self.removeReferee(gamecode: self.storedGameCode, storedReferee: oldReferee){
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .then {
-                    return Promise<Void> { seal in
-                        self.loadStation(gamecode: self.storedGameCode, stationName: UserData.readUsername("stationName")!){
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .then {
-                    return Promise<Void> { seal in
-                        self.removeStation(gamecode: self.storedGameCode, station: self.storedStation!){
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .then {
-                    return Promise<Void> { seal in
-                        self.addStation(gamecode: self.storedGameCode, station: Station(name: self.storedStation!.name, pvp: self.storedStation!.pvp, points: self.storedStation!.points, place: self.storedStation!.place, referee: self.storedStation!.referee, description: self.storedStation!.description, teamOrder: self.storedStation!.teamOrder)){
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .then {
-                    return Promise<Void> { seal in
-                        UserData.writeReferee(Referee(gamecode: oldReferee.gamecode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned), "Referee")
-                        UserData.writeUsername(name, "Referee")
-                        self.addReferee(gamecode: self.storedGameCode, referee: Referee(gamecode: oldReferee.gamecode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)){
+                        UserData.writeReferee(newReferee, "Referee")
+                        self.modifiyRefereeName(gamecode: gamecode, uuid: refereeUserID, name: name){
                             seal.fulfill(())
                         }
                     }
@@ -140,7 +112,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
                 firstly { () -> Promise<Void> in
                     return Promise<Void> { seal in
-                        self.removeReferee(gamecode: storedGameCode, storedReferee: oldReferee) {
+                        self.removeReferee(gamecode: storedGameCode, uuid: refereeUserID) {
                             seal.fulfill(())
                         }
                     }
@@ -149,7 +121,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     return Promise<Void> { seal in
                         UserData.writeReferee(newReferee, "Referee")
                         UserData.writeUsername(name, "refereeName")
-                        self.addReferee(gamecode: gamecode, referee: newReferee){
+                        self.addReferee(gamecode: gamecode, referee: newReferee, uuid: self.refereeUserID){
                             seal.fulfill(())
                         }
                     }
@@ -166,14 +138,20 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 }
 // MARK: - Promise
 extension RegisterController {
-    func removeReferee(gamecode: String, storedReferee: Referee, completion: @escaping () -> Void) {
-        R.removeReferee(gamecode, storedReferee)
+    func modifiyRefereeName(gamecode: String, uuid: String, name: String, completion: @escaping () -> Void) {
+        R.modifyName(gamecode, uuid, name)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             completion()
         }
     }
-    func addReferee(gamecode: String, referee: Referee, completion: @escaping () -> Void) {
-        R.addReferee(gamecode, referee)
+    func removeReferee(gamecode: String, uuid: String, completion: @escaping () -> Void) {
+        R.removeReferee(gamecode, uuid)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            completion()
+        }
+    }
+    func addReferee(gamecode: String, referee: Referee, uuid: String, completion: @escaping () -> Void) {
+        R.addReferee(gamecode, referee, uuid)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             completion()
         }
