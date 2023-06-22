@@ -57,9 +57,6 @@ class AlgorithmViewController: BaseViewController {
         collectionView.dragInteractionEnabled = true
 //        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
 //        print(collectionView.frame, "  HMMMM  ")
-//        scrollView.contentSize = collectionView.contentSize
-//        cellWidth = (Int(collectionViewWidth) - 4 * 16) / 8
-//        cellWidth = 17
         collectionView.delegate = self
 //print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -70,6 +67,12 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.clipsToBounds = true
             self.collectionView.isUserInteractionEnabled = true
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
+            let borderView = VerticalBorderView(frame: CGRect(x:  self.collectionViewWidth / 8, y: 0, width: 1, height: self.collectionViewWidth - 8))
+            self.collectionView.addSubview(borderView)
+            
+            print("MY CELL WIDTH?"  , self.collectionViewCellWidth)
+            print("MY COLLECTION VIEW WIDTH?  ", self.collectionViewWidth)
+            print("MY CALCS: " , self.collectionViewWidth / 8)
 
         }
 
