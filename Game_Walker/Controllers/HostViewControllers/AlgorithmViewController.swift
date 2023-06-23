@@ -54,8 +54,9 @@ class AlgorithmViewController: BaseViewController {
         collectionView.isScrollEnabled = true
         scrollView.isUserInteractionEnabled = true
         scrollView.isScrollEnabled = true
+        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
         collectionView.dragInteractionEnabled = true
-//        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+
 //        print(collectionView.frame, "  HMMMM  ")
         collectionView.delegate = self
 //print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
@@ -69,6 +70,12 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
             let borderView = VerticalBorderView(frame: CGRect(x:  self.collectionViewWidth / 8, y: 0, width: 1, height: self.collectionViewWidth - 8))
             self.collectionView.addSubview(borderView)
+             
+            let flowlayout = UICollectionViewFlowLayout()
+            flowlayout.scrollDirection = .vertical
+            
+            self.collectionView.collectionViewLayout = flowlayout
+
             
             print("MY CELL WIDTH?"  , self.collectionViewCellWidth)
             print("MY COLLECTION VIEW WIDTH?  ", self.collectionViewWidth)
@@ -120,10 +127,6 @@ class AlgorithmViewController: BaseViewController {
                     number = totalcolumn
                 }
                 curr_row.append(number)
-//                print("r = " , r ,
-//                "t = " , t ,
-//                "totalrow = " ,totalrow ,
-//                      "totalcolumn = ",totalcolumn)
             }
             grid.append(curr_row)
             curr_row.removeAll()
@@ -152,7 +155,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCell = collectionView.cellForItem(at: indexPath)
         let beforeSize = selectedCell?.contentView.frame.size
-        print("Before selection CELL SIZE: \(beforeSize)")
         if indexPathA == nil {
             // First selection
             indexPathA = indexPath
@@ -162,8 +164,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             originalcellAcolor = selectedCellA?.teamnumLabel.textColor
 
             selectedCellA?.makeCellSelected()
-//            selectedCellA?.algorithmCellBox.image = UIImage(named: "cellselected")
-//            selectedCellA?.teamnumLabel.textColor = UIColor.gray
 
             
         } else if indexPathB == nil {
@@ -175,8 +175,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             originalcellBimage = selectedCellB?.algorithmCellBox.image
             originalcellBcolor = selectedCellB?.teamnumLabel.textColor
             selectedCellB?.makeCellSelected()
-//            selectedCellB?.algorithmCellBox.image = UIImage(named: "cellselected")
-//            selectedCellB?.teamnumLabel.textColor = UIColor.gray
+
         }
         
         if let indexPathA = indexPathA, let indexPathB = indexPathB {
@@ -189,8 +188,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             grid[indexPathB.section][indexPathB.item] = itemA
             
             collectionView.performBatchUpdates({
-                let afterSize = selectedCell?.contentView.frame.size
-                print("After selection CELL SIZE: \(afterSize)")
+
                 
                 collectionView.moveItem(at: indexPathA, to: indexPathB)
                 collectionView.moveItem(at: indexPathB, to: indexPathA)
@@ -299,29 +297,26 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCellsPerRow = 8
-        //this calculates how big the cellshould be
-//        collectionViewCellWidth = Int(collectionViewWidth / CGFloat(numberOfCellsPerRow))
-
-        // this calculates the contentsize
-        let width = (collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - 2 * (8 - 1)) / 8
-        let height = (collectionView.frame.height - collectionView.contentInset.top - collectionView.contentInset.bottom - 2 * (8 - 1)) / 8
+        let width = (collectionViewWidth - collectionView.contentInset.left - collectionView.contentInset.right - 2 * (8 - 1)) / 8
+        let height = (collectionViewWidth - collectionView.contentInset.top - collectionView.contentInset.bottom - 2 * (8 - 1)) / 8
         collectionViewCellWidth = Int(width)
-//        print("CONTENT INSETS: ", collectionView.contentInset.top,collectionView.contentInset.bottom, collectionView.contentInset.left, collectionView.contentInset.right)
-        return CGSize(width: width, height: height)
-//        print("ISIT COMING THROUGH TH ECELL SIZE")
-//        return CGSize(width: 10, height: 10)
-
-//
+        
+//        collectionViewCellWidth = Int(collectionViewWidth / 11.5)
+print("THIS IS MY COLLECTION VIEW CELL WIDTH AND VIEW WIDTH: ", collectionViewCellWidth, collectionViewWidth)
+        
+        return CGSize(width: collectionViewCellWidth, height: collectionViewCellWidth)
 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        print("ITS MINIMUM INTERIMADFADAFADFADFADFA")
-        return 4
+
+        return CGFloat(collectionViewCellWidth / 3)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+//        return CGFloat(collectionViewCellWidth / 3)
+        return 20
+
     }
 
     func addviewsConstraints() {
