@@ -460,13 +460,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="2.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -505,13 +505,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -682,7 +682,6 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
                                         <rect key="frame" x="0.0" y="0.0" width="727.5" height="291"/>
-                                        <color key="backgroundColor" systemColor="linkColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
                                             <size key="itemSize" width="32" height="32"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1024,9 +1023,6 @@
         <image name="timer 1-1" width="128" height="61"/>
         <image name="timer icon 1" width="85" height="112"/>
         <image name="timer-time-box" width="221" height="70"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

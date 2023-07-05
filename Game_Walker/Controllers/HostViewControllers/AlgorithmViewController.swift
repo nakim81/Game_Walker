@@ -10,31 +10,33 @@ import UIKit
 class AlgorithmViewController: BaseViewController {
     
     @IBOutlet weak var startGameButton: UIButton!
-    var stationList: [Station]? = nil
-    var grid: [[Int]] = [[Int]]()
-    var totalrow : Int =  0
-    var totalcolumn : Int = 0
+    private var stationList: [Station]? = nil
+    private var grid: [[Int]] = [[Int]]()
+    private var totalrow : Int =  0
+    private var totalcolumn : Int = 0
     
-    var team_smallerthaneight : Bool = false
-    var station_smallerthaneight : Bool = false
-    var round_smallerthaneight : Bool = false
-    var num_rounds : Int = 0
-    var num_teams : Int = 0
-    var num_stations : Int = 0
+    private var team_smallerthaneight : Bool = false
+    private var station_smallerthaneight : Bool = false
+    private var round_smallerthaneight : Bool = false
+    private var num_rounds : Int = 0
+    private var num_teams : Int = 0
+    private var num_stations : Int = 0
     
 
-
-    var collectionViewWidth = UIScreen.main.bounds.width * 0.85
-    var collectionViewCellWidth : Int = 0
-    var collectionViewCellSpacing = 4
+    private var collectionViewWidth = UIScreen.main.bounds.width * 0.85
+    private var collectionViewCellWidth : Int = 0
+    private var collectionViewCellSpacing = 4
     
-    var num_cols : Int = 8
-    var num_rows : Int = 8
+    private var num_cols : Int = 8
+    private var num_rows : Int = 8
 
     private var gamecode = UserData.readGamecode("gamecode")!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var pvpGameCount : Int = 0
+    private var pveGameCount : Int = 0
 
     var indexPathA: IndexPath?
     var indexPathB: IndexPath?
@@ -61,6 +63,7 @@ class AlgorithmViewController: BaseViewController {
 //        print(collectionView.frame, "  HMMMM  ")
         collectionView.delegate = self
 //print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.createGrid()
             self.collectionView.dataSource = self
@@ -69,14 +72,15 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.clipsToBounds = true
             self.collectionView.isUserInteractionEnabled = true
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
+            
 
         }
+
 
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let borderView = VerticalBorderView(frame: CGRect(x: collectionViewCellWidth, y: 0, width: 1, height: Int(collectionViewWidth)))
-        collectionView.addSubview(borderView)
+
          
         let flowlayout = UICollectionViewFlowLayout()
         flowlayout.scrollDirection = .vertical
@@ -104,10 +108,14 @@ class AlgorithmViewController: BaseViewController {
         
         print("widthConstraint i am trying to make: ", widthConstraint)
         print("ACUTAL WIDTH OF COLLECTION VIEW : ", collectionView.frame.width)
+        
+        if collectionViewCellWidth > 0  {
+//            let borderView = VerticalBorderView(frame: CGRect(x: collectionViewCellWidth + 2 , y: 0, width: 2, height: Int(collectionViewWidth)))
+//            collectionView.addSubview(borderView)
+            createBorderLines()
+        }
+        
 
-//        addviewsConstraints()
-//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     
@@ -288,7 +296,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 }
         
 
-
+func createBorderLines() {
+    //            let borderView = VerticalBorderView(frame: CGRect(x: collectionViewCellWidth + 2 , y: 0, width: 2, height: Int(collectionViewWidth)))
+    //            collectionView.addSubview(borderView)
+}
 
 extension AlgorithmViewController: StationList {
     func listOfStations(_ stations: [Station]) {
