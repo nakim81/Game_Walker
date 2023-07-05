@@ -460,13 +460,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="2.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -505,13 +505,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="36.5" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="2.5" width="45" height="53"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -681,7 +681,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="873" height="292"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="727.5" height="291"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
                                             <size key="itemSize" width="32" height="32"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -694,10 +694,10 @@
                                 <constraints>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="trailing" secondItem="TtO-gM-xsu" secondAttribute="trailing" id="7fl-5V-8aa"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="TtO-gM-xsu" secondAttribute="leading" id="8is-VS-tAW"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="bottom" secondItem="TtO-gM-xsu" secondAttribute="bottom" constant="292" id="A86-6j-DfE"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="bottom" secondItem="TtO-gM-xsu" secondAttribute="bottom" id="A86-6j-DfE"/>
                                     <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="TtO-gM-xsu" secondAttribute="top" id="hhm-Si-eU8"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="height" secondItem="7cj-Cz-6Bz" secondAttribute="height" multiplier="1.00344" id="iDo-OK-6oD"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="width" secondItem="7cj-Cz-6Bz" secondAttribute="width" multiplier="3" id="mwi-iK-xxR"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="height" secondItem="7cj-Cz-6Bz" secondAttribute="height" id="iDo-OK-6oD"/>
+                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="width" secondItem="7cj-Cz-6Bz" secondAttribute="width" multiplier="2.5" id="mwi-iK-xxR"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="TtO-gM-xsu"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="7cj-Cz-6Bz"/>
