@@ -35,7 +35,7 @@ class AlgorithmViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var pvpGameCount : Int = 0
+    private var pvpGameCount : Int = 1
     private var pveGameCount : Int = 0
 
     var indexPathA: IndexPath?
@@ -110,7 +110,7 @@ class AlgorithmViewController: BaseViewController {
         print("ACUTAL WIDTH OF COLLECTION VIEW : ", collectionView.frame.width)
         
         if collectionViewCellWidth > 0  {
-//            let borderView = VerticalBorderView(frame: CGRect(x: collectionViewCellWidth + 2 , y: 0, width: 2, height: Int(collectionViewWidth)))
+//            let borderView = VerticalBorderView(frame: CGRect(x: (collectionViewCellWidth + 2) + (collectionViewCellWidth + 5), y: 0, width: 2, height: Int(collectionViewWidth)))
 //            collectionView.addSubview(borderView)
             createBorderLines()
         }
@@ -122,6 +122,40 @@ class AlgorithmViewController: BaseViewController {
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         alert2(title: "", message: "Everything set?")
     }
+    
+    func createBorderLines() {
+        
+        var positions: [(Int, Int)] = []
+
+        for i in 0..<pvpGameCount {
+            let one = i * 2 + 1
+            let two = i * 2 + 2
+            positions.append((one, two))
+        }
+        
+        for position in positions {
+            let first = position.0
+            let second = position.1
+        
+            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 0, width: 2, height: Int(collectionViewWidth)))
+            collectionView.addSubview(borderView)
+        }
+    }
+    
+    func getLinePosition(firstColumn: Int, secondColumn: Int ) -> CGFloat? {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let indexPath1 = IndexPath(item: firstColumn, section: 0)
+            let indexPath2 = IndexPath(item: secondColumn, section: 0)
+            
+            if let attributes1 = layout.layoutAttributesForItem(at: indexPath1),
+               let attributes2 = layout.layoutAttributesForItem(at: indexPath2) {
+                let midpointX = (attributes1.frame.midX + attributes2.frame.midX) / 2.0
+                return midpointX
+            }
+        }
+        return nil
+    }
+    
     func createGrid() {
         num_stations = stationList!.count
 
@@ -162,11 +196,9 @@ class AlgorithmViewController: BaseViewController {
         print("This is my grid: ", grid)
     }
 
+}
 
-}
-func hasSameTeam( grid : [[Int]]) {
-    
-}
+
 extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int{
@@ -238,15 +270,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        let algorithmcell = cell as? AlgorithmCollectionViewCell
-//        if (hasSameTeam(grid: grid)) {
-//            algorithmcell?.changeRed() // Change the color to red
-//        } else {
-//            algorithmcell?.teamnumLabel.textColor = UIColor.white // Reset the color to white or any other default color
-//        }
-//    }
-//
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell else {
@@ -296,10 +320,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 }
         
 
-func createBorderLines() {
-    //            let borderView = VerticalBorderView(frame: CGRect(x: collectionViewCellWidth + 2 , y: 0, width: 2, height: Int(collectionViewWidth)))
-    //            collectionView.addSubview(borderView)
-}
+
+
+
 
 extension AlgorithmViewController: StationList {
     func listOfStations(_ stations: [Station]) {
