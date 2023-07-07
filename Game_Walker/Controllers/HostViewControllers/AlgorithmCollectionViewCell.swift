@@ -51,4 +51,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBox
     }
+    
+    func makeCellEmpty() {
+        teamnumLabel.text = ""
+    }
 }

@@ -15,12 +15,21 @@ class AlgorithmViewController: BaseViewController {
     private var totalrow : Int =  0
     private var totalcolumn : Int = 0
     
-    private var team_smallerthaneight : Bool = false
-    private var station_smallerthaneight : Bool = false
-    private var round_smallerthaneight : Bool = false
+//    private var team_smallerthaneight : Bool = false
+//    private var station_smallerthaneight : Bool = false
+//    private var round_smallerthaneight : Bool = false
     private var num_rounds : Int = 0
     private var num_teams : Int = 0
     private var num_stations : Int = 0
+    
+    
+    private var needHorizontalEmptyCells = false
+    private var needVerticalEmptyCells = false
+    private var horizontalEmptyCells = 0
+    private var verticalEmptyCells = 0
+    //options: "none", "teams", "stations"
+    private var excessOf = "none"
+    private var excessCells = 0
     
 
     private var collectionViewWidth = UIScreen.main.bounds.width * 0.85
@@ -35,7 +44,7 @@ class AlgorithmViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var pvpGameCount : Int = 1
+    private var pvpGameCount : Int = 2
     private var pveGameCount : Int = 0
 
     var indexPathA: IndexPath?
@@ -75,8 +84,6 @@ class AlgorithmViewController: BaseViewController {
             
 
         }
-
-
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -87,27 +94,24 @@ class AlgorithmViewController: BaseViewController {
         
         
 
-        print("cell spacing , cell width, view width : ", collectionViewCellSpacing, collectionViewCellWidth, collectionViewWidth)
+//        print("cell spacing , cell width, view width : ", collectionViewCellSpacing, collectionViewCellWidth, collectionViewWidth)
         flowlayout.minimumLineSpacing = CGFloat(collectionViewCellSpacing)
         flowlayout.minimumInteritemSpacing = CGFloat(collectionViewCellSpacing)
         
         collectionView.collectionViewLayout = flowlayout
         
-        print("MY CELL WIDTH?"  , collectionViewCellWidth)
-        print("MY COLLECTION VIEW WIDTH?  ", collectionViewWidth)
-        print("MY CALCS: " , collectionViewWidth / 8)
-        
-        print("SPACING SIZES: ", flowlayout.minimumLineSpacing, " AND iteritem: ", flowlayout.minimumInteritemSpacing)
-        
-
-        let contentWidth = (totalcolumn * 8 * collectionViewCellWidth) + ( 14 * Int(flowlayout.minimumInteritemSpacing))
-    
+//        print("MY CELL WIDTH?"  , collectionViewCellWidth)
+//        print("MY COLLECTION VIEW WIDTH?  ", collectionViewWidth)
+//        print("MY CALCS: " , collectionViewWidth / 8)
+//
+//        print("SPACING SIZES: ", flowlayout.minimumLineSpacing, " AND iteritem: ", flowlayout.minimumInteritemSpacing)
+//
         
         let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
 //        widthConstraint.isActive = true
-        
-        print("widthConstraint i am trying to make: ", widthConstraint)
-        print("ACUTAL WIDTH OF COLLECTION VIEW : ", collectionView.frame.width)
+//
+//        print("widthConstraint i am trying to make: ", widthConstraint)
+//        print("ACUTAL WIDTH OF COLLECTION VIEW : ", collectionView.frame.width)
         
         if collectionViewCellWidth > 0  {
 //            let borderView = VerticalBorderView(frame: CGRect(x: (collectionViewCellWidth + 2) + (collectionViewCellWidth + 5), y: 0, width: 2, height: Int(collectionViewWidth)))
@@ -165,14 +169,30 @@ class AlgorithmViewController: BaseViewController {
 //        if (num_teams < num_stations) {
 //            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
 //        }
-
-        if (num_teams < 8) {
-            team_smallerthaneight = true
-            num_teams = 8
+        
+        
+        if (max(num_teams, num_stations) < 8) {
+            needHorizontalEmptyCells = true
+            horizontalEmptyCells = 8 - max(num_teams, num_stations)
+            if (num_teams < 8) {
+                num_teams = 8
+            }
+            if (num_stations < 8) {
+                num_stations = 8
+            }
         }
-        if (num_stations < 8) {
-            station_smallerthaneight = true
-            num_stations = 8
+
+        if (num_rounds < 8) {
+            needVerticalEmptyCells = true
+            verticalEmptyCells = 8 - num_rounds
+        }
+        if (num_stations < num_teams) {
+            excessOf = "teams"
+            excessCells = num_teams - num_stations
+        }
+        if (num_teams < num_stations) {
+            excessOf = "stations"
+            excessCells = num_stations - num_teams
         }
         totalcolumn = max(num_teams, num_stations)
         totalrow = max(num_rounds, 8)
@@ -180,6 +200,7 @@ class AlgorithmViewController: BaseViewController {
         num_cols = totalcolumn
         num_rows = totalrow
 //        print(totalrow)
+        
         for r in 0...(totalrow - 1) {
             var curr_row = [Int]()
             for t in 0...(totalcolumn - 1) {
@@ -192,7 +213,38 @@ class AlgorithmViewController: BaseViewController {
             grid.append(curr_row)
             curr_row.removeAll()
         }
+        
 
+        // case when we need empty cells vertically
+        if needVerticalEmptyCells {
+            if verticalEmptyCells <= grid.count {
+                let startIndex = grid.count - verticalEmptyCells
+                
+                for index in startIndex..<grid.count {
+                    grid[index] = Array(repeating: 0, count: grid[index].count)
+                }
+            } else {
+                print("Invalid value for vertical empty cells")
+            }
+        }
+
+        
+        // case when we need empty cells horizontally
+        if needHorizontalEmptyCells {
+            for rowIndex in 0..<grid.count {
+                let row = grid[rowIndex]
+                
+                if horizontalEmptyCells <= row.count {
+                    let startIndex = row.count - horizontalEmptyCells
+                    for index in startIndex..<row.count {
+                        grid[rowIndex][index] = 0
+                    }
+                } else {
+                    print("Invalid value for horizontal empty cells")
+                }
+            }
+        }
+        
         print("This is my grid: ", grid)
     }
 
@@ -214,7 +266,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCell = collectionView.cellForItem(at: indexPath)
-        let beforeSize = selectedCell?.contentView.frame.size
+
         if indexPathA == nil {
             // First selection
             indexPathA = indexPath
@@ -306,6 +358,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                let number = Int(numberString) {
                 
                 cell.teamnumLabel.text = "\(number)"
+                if number == 0 {
+                    cell.makeCellEmpty()
+                }
             }
         }))
         present(alertController, animated: true, completion: nil)
@@ -358,69 +413,14 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 //        collectionViewCellWidth = 30
         
 //        collectionViewCellWidth = Int(collectionViewWidth / 11.5)
-print("THIS IS MY COLLECTION VIEW CELL WIDTH AND VIEW WIDTH: ", collectionViewCellWidth, collectionViewWidth)
+//print("THIS IS MY COLLECTION VIEW CELL WIDTH AND VIEW WIDTH: ", collectionViewCellWidth, collectionViewWidth)
         
         return CGSize(width: collectionViewCellWidth, height: collectionViewCellWidth)
 
     }
     
 
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//
-//
-//        return 2
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-////        return CGFloat(collectionViewCellWidth / 3)
-//
-//        return 2
-//
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-//            let insets = flowLayout.sectionInset
-//            print("Section insets: \(insets)")
-//            return insets
-//        }
-//        return UIEdgeInsets.zero
-//
-//    }
 
-//    func addviewsConstraints() {
-////        print("HEYEYEYEYEY IM INNN")
-//        let flowLayout = AlgorithmCustomFlowLayout()
-//        collectionView.collectionViewLayout = flowLayout
-//
-//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//
-//        let contentSize = CGSize(width: collectionViewCellWidth * (num_cols + 1), height: collectionViewCellWidth * (num_rows + 1))
-//
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.contentSize = contentSize
-//        collectionView.contentSize = contentSize
-//        scrollView.isDirectionalLockEnabled = true
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            scrollView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
-//            scrollView.heightAnchor.constraint(equalToConstant: collectionViewWidth),
-//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//
-//            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-//            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            collectionView.widthAnchor.constraint(equalToConstant: contentSize.width),
-//            collectionView.heightAnchor.constraint(equalToConstant: contentSize.height),
-//            collectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            collectionView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-//        ])
-//
-//        print(collectionView.frame.size, "<- this is my collection view frame size! ", collectionView.contentSize, "<- This is my content Size!", scrollView.contentSize, "<- this is my scrollview content size!", scrollView.frame.size, " <- this is my scrollview frame size!")
-//    }
 }
 
 extension AlgorithmViewController: UIScrollViewDelegate {
