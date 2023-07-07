@@ -328,22 +328,41 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgorithmCollectionViewCell.identifier, for: indexPath) as? AlgorithmCollectionViewCell else {
             return UICollectionViewCell()
         }
-
-        let teamnumberlabel = grid[indexPath.section][indexPath.item]
         
-        print(teamnumberlabel)
-
-        // start new code
-
-        cell.configureAlgorithmNormalCell(cellteamnum : teamnumberlabel)
-        
-        //adding double tap to manually input cell number
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         cell.addGestureRecognizer(doubleTapGestureRecognizer)
+
+        let teamNumberLabel = grid[indexPath.section][indexPath.item]
+        
+//        print(teamnumberlabel)
+        
+        // configure cells differently based on what it is
+        if teamNumberLabel == 0 {
+            cell.makeCellEmpty()
+        } else {
+            cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
+        }
+
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let cellNumber = grid[indexPath.section][indexPath.item]
+        
+        if shouldDisableInteraction(for: cellNumber) {
+            return false
+        }
+        
+        return true
+    }
+
+    func shouldDisableInteraction(for cellNumber: Int) -> Bool {
+        return cellNumber == 0
+    }
+
+
     
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
