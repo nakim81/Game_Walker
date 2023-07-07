@@ -23,6 +23,7 @@ class MainViewController: BaseViewController {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
+      //  UserData.writeUUID(UUID().uuidString)
         super.viewDidLoad()
     }
     
