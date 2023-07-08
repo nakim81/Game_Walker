@@ -20,7 +20,7 @@ struct T {
     
     static func listenTeams(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
          db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
-             guard let documents = querySnapshot?.documents else { return }
+             guard let documents = querySnapshot?.documents else { print("Error listening Teams"); return }
              var teams: [Team] = []
              for document in documents {
                  teams.append(convertDataToTeam(document.data()))
@@ -38,21 +38,21 @@ struct T {
             let document = try await docRef.getDocument()
             if document.exists {
                 await updateTeam(gamecode, team)
-                print("added Team async")
+                print("Team added")
             } else {
                 print("Gamecode does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error adding Team: \(error)")
         }
     }
     
     static func removeTeam(_ gamecode: String, _ team: Team){
         db.collection("\(gamecode) : Teams").document(team.name).delete() { err in
             if let err = err {
-                print("Error removing document: \(err)")
+                print("Error removing Team: \(err)")
             } else {
-                print("Team Document successfully removed!")
+                print("Team removed")
             }
         }
     }
@@ -68,12 +68,12 @@ struct T {
                 team.players.append(player)
                 // Update team member
                 try await updateTeam(gamecode, team)
-                print("joined Team async")
+                print("Team joined")
             } else {
-                print("Can't join the team")
+                print("Team does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error joining Team: \(error)")
         }
     }
     
@@ -88,12 +88,12 @@ struct T {
                     team.players.remove(at: index)
                 }
                 try await updateTeam(gamecode, team)
-                print("Successfully left the team")
+                print("Left Team")
             } else {
                 print("Team does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error leaving team: \(error)")
             throw error
         }
     }
@@ -111,7 +111,7 @@ struct T {
                 print("Team does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error giving points to Team: \(error)")
             throw error
         }
     }
@@ -124,7 +124,7 @@ struct T {
                 let team = convertDataToTeam(data)
                 delegate_getTeam?.getTeam(team)
             } else {
-                print("Team does not exist")
+                print("Error getting Team")
             }
         }
     }
@@ -134,7 +134,7 @@ struct T {
         db.collection("\(gamecode) : Teams")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("Error getting List of Team: \(err)")
                 } else {
                     var teams : [Team] = []
                     for document in querySnapshot!.documents {
@@ -153,7 +153,7 @@ struct T {
             try await db.collection("\(gamecode) : Teams").document("\(team.name)").setData(from: team)
             //print("Team successfully saved")
         } catch {
-            print("Error writing to Firestore: \(error)")
+            print("Error updating Team: \(error)")
         }
     }
     
@@ -167,10 +167,10 @@ struct T {
             let decoded = try decoder.decode(Team.self, from: json)
             return decoded
         } catch {
-            print(error)
+            print("Converting json data to Team \(error)")
         }
         //blank team
-        return Team(gamecode: "", name: "", players: [], points: 0, currentStation: "", nextStation: "", iconName: "")
+        return Team()
      }
 }
 

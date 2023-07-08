@@ -21,13 +21,13 @@ struct P {
             let document = try await docRef.getDocument()
             if document.exists {
                 try await db.collection("\(gamecode) : Players").document(uuid).setData(from: player)
-                print("Player successfully saved async")
+                print("Player added")
             } else {
                 print("Gamecode does not exist")
                 //throw error
             }
         } catch {
-            print("Error writing to Firestore: \(error)")
+            print("Error adding Player: \(error)")
             throw error
         }
     }
@@ -52,9 +52,9 @@ struct P {
     static func removePlayer(_ gamecode: String, _ uuid: String){
             db.collection("\(gamecode) : Players").document(uuid).delete() { err in
                 if let err = err {
-                    print("Error removing document: \(err)")
+                    print("Error removing player: \(err)")
                 } else {
-                    print("Player Document successfully removed!")
+                    print("Player removed")
                 }
             }
         }
@@ -65,9 +65,9 @@ struct P {
             try await server.updateData([
                 "name": name
             ])
-            print("Document successfully updated")
+            print("Player name modified")
         } catch {
-            print("Error updating document: \(error)")
+            print("Error modifying Player name: \(error)")
             throw error
         }
     }

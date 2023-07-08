@@ -19,8 +19,8 @@ struct H {
     
     static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
          db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
-                 guard let document = documentSnapshot else { return }
-                 guard let data = document.data() else { return }
+             guard let document = documentSnapshot else { print("Error listening Host"); return }
+             guard let data = document.data() else { print("Error listening Host"); return }
                  let host = convertDataToHost(data)
                  for delegate in delegates {
                      delegate.updateHost(host)
@@ -31,9 +31,9 @@ struct H {
     static func createGame(_ gamecode: String, _ host: Host) async throws {
         do {
             try await db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
-            print("Data successfully saved")
+            print("Created Game")
         } catch {
-            print("Error writing to Firestore: \(error)")
+            print("Error creating Game: \(error)")
             throw error
         }
     }
@@ -47,9 +47,9 @@ struct H {
                 "rounds": rounds,
                 "teams": teams
             ])
-            print("Document successfully updated")
+            print("Host setted Settings")
         } catch {
-            print("Error updating document: \(error)")
+            print("Error setting settings Host: \(error)")
             throw error
         }
     }
@@ -61,9 +61,9 @@ struct H {
                 "startTimestamp": Int(Date().timeIntervalSince1970),
                 "paused": false
             ])
-            print("Document successfully updated")
+            print("Started Game")
         } catch {
-            print("Error updating document: \(error)")
+            print("Error starting Game: \(error)")
             throw error
         }
     }
@@ -75,9 +75,9 @@ struct H {
             try await server.updateData([
                 "showScoreboard": show
             ])
-            print("Document successfully updated")
+            print("Hid/Showed Score")
         } catch {
-            print("Error updating document: \(error)")
+            print("Error hiding/showing score: \(error)")
             throw error
         }
     }
@@ -104,7 +104,7 @@ struct H {
                 print("Host does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error pausing/resuming Game: \(error)")
             throw error
         }
     }
@@ -122,7 +122,7 @@ struct H {
                 print("Host does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error adding Announcement: \(error)")
             throw error
         }
     }
@@ -144,7 +144,7 @@ struct H {
                 print("Host does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error modfiying Announcement: \(error)")
             throw error
         }
     }
@@ -166,7 +166,7 @@ struct H {
                 print("Host does not exist")
             }
         } catch {
-            print("Error fetching document: \(error)")
+            print("Error removing Announcement: \(error)")
             throw error
         }
     }
@@ -179,7 +179,7 @@ struct H {
                 let host = convertDataToHost(data)
                 delegate_getHost?.getHost(host)
             } else {
-                print("Host does not exist")
+                print("Error getting Host")
             }
         }
     }
@@ -187,9 +187,9 @@ struct H {
     static func updateHost(_ gamecode: String, _ host: Host) async throws {
         do {
             try await db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
-            print("Data successfully saved")
+            print("Updated Host")
         } catch {
-            print("Error writing to Firestore: \(error)")
+            print("Error updating Host: \(error)")
             throw error
         }
     }
@@ -204,7 +204,7 @@ struct H {
             let host = try decoder.decode(Host.self, from: json)
             return host
         } catch {
-            print(error)
+            print("Converting json data to Host \(error)")
         }
         //blank team
         return Host()

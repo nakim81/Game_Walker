@@ -23,12 +23,12 @@ struct S {
             let document = try await docRef.getDocument()
             if document.exists {
                 try await db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
-                print("Station successfully saved")
+                print("Station added")
             } else {
                 print("Gamecode does not exist")
             }
         } catch {
-            print("Error writing to Firestore: \(error)")
+            print("Error adding Station: \(error)")
             throw error
         }
     }
@@ -36,9 +36,9 @@ struct S {
     static func removeStation(_ gamecode: String, _ station: Station){
         db.collection("\(gamecode) : Stations").document(station.name).delete() { err in
             if let err = err {
-                print("Error removing document: \(err)")
+                print("Error removing Station: \(err)")
             } else {
-                print("Station Document successfully removed!")
+                print("Station removed")
             }
         }
     }
@@ -49,9 +49,9 @@ struct S {
             try await docRef.updateData([
                 "referee": referee
             ])
-            print("Station Document successfully updated")
+            print("Station assigned Referee")
         } catch {
-            print("Error updating document: \(error)")
+            print("Error assigning Station a Referee: \(error)")
             throw error
         }
     }
@@ -64,7 +64,7 @@ struct S {
                 let station = convertDataToStation(data)
                 delegate_getStation?.getStation(station)
             } else {
-                print("Document does not exist")
+                print("Error getting Station")
             }
         }
     }
@@ -74,7 +74,7 @@ struct S {
         db.collection("\(gamecode) : Stations")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("Error getting List of Station: \(err)")
                 } else {
                     var stations : [Station] = []
                     for document in querySnapshot!.documents {
@@ -98,7 +98,7 @@ struct S {
             let decoded = try decoder.decode(Station.self, from: json)
             return decoded
         } catch {
-            print(error)
+            print("Converting json data to Station \(error)")
         }
         //blank station
         return Station()
