@@ -155,7 +155,9 @@ class HostTimerViewController: UIViewController {
             sender.setImage(play, for: .normal)
         }
         isPaused = !isPaused
-        H.pause_resume_game(gameCode)
+        Task { @MainActor in
+            try await H.pause_resume_game(gameCode)
+        }
     }
     
     func runTimer() {

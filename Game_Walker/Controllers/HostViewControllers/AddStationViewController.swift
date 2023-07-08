@@ -271,14 +271,15 @@ class AddStationViewController: BaseViewController {
         if (stationExists && !modified) {
             self.dismiss(animated: true, completion: nil)
         } else if (stationExists && modified) {
-            //unassign station from referee
-            R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-            //assign station to new referee
-            R.assignStation(gamecode, newReferee!.uuid, gamename, true)
-            
-            //assign new referee to the station that exists
-            S.assignReferee(gamecode, station!, newReferee!)
-            
+            Task { @MainActor in
+                //unassign station from referee
+                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+                //assign station to new referee
+                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                
+                //assign new referee to the station that exists
+                try await S.assignReferee(gamecode, station!, newReferee!)
+            }
 //
 //            firstly { () -> Promise<Void> in
 //                return Promise<Void> { seal in
@@ -319,11 +320,13 @@ class AddStationViewController: BaseViewController {
 
         } else if (!stationExists) {
             let selectedReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: refereeUuid)
-            R.assignStation(gamecode, refereeUuid, gamename, true)
-
-            let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
-            
-            S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+            Task { @MainActor in
+               try await R.assignStation(gamecode, refereeUuid, gamename, true)
+                
+                let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
+                
+                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+            }
         }
         
 

@@ -246,11 +246,13 @@ class SettingTimeHostViewController: BaseViewController {
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
 //            H.setTimer(gamecode, 110, 120, 13, 14)
-            H.setSettings(gamecode,
-                       timeConvert(min:gameminutes , sec:gameseconds ),
-                       timeConvert(min:moveminutes , sec:moveseconds ),
-                       Int(rounds) ?? 0,
-                       Int(teamcount) ?? 0)
+            Task { @MainActor in
+                try await H.setSettings(gamecode,
+                              timeConvert(min:gameminutes , sec:gameseconds ),
+                              timeConvert(min:moveminutes , sec:moveseconds ),
+                              Int(rounds) ?? 0,
+                              Int(teamcount) ?? 0)
+            }
 
 //            print("ROUNDS AND TEAMCOUNT: ",rounds, teamcount)
 //            performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)

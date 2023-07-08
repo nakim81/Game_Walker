@@ -45,7 +45,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 UserData.writeGamecode(storedGameCode, "refereeGamecode")
                 UserData.writeReferee(newReferee, "Referee")
                 UserData.writeUsername(newReferee.name, "refereeName")
-                R.addReferee(storedGameCode, newReferee, refereeUserID)
+                Task { @MainActor in
+                    try await R.addReferee(storedGameCode, newReferee, refereeUserID)
+                }
                 performSegue(withIdentifier: "goToWait", sender: self)
             }
             // Joining the game for the first time.
@@ -55,7 +57,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     UserData.writeGamecode(gamecode, "refereeGamecode")
                     UserData.writeReferee(newReferee, "Referee")
                     UserData.writeUsername(newReferee.name, "refereeName")
-                    R.addReferee(gamecode, newReferee, refereeUserID)
+                    Task { @MainActor in
+                        try await R.addReferee(gamecode, newReferee, refereeUserID)
+                    }
                     performSegue(withIdentifier: "goToWait", sender: self)
                 } else {
                     alert(title: "", message: "Please enter both game code and username.")
@@ -139,7 +143,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 // MARK: - Promise
 extension RegisterController {
     func modifiyRefereeName(gamecode: String, uuid: String, name: String, completion: @escaping () -> Void) {
-        R.modifyName(gamecode, uuid, name)
+        Task { @MainActor in
+            try await R.modifyName(gamecode, uuid, name)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             completion()
         }
@@ -151,7 +157,9 @@ extension RegisterController {
         }
     }
     func addReferee(gamecode: String, referee: Referee, uuid: String, completion: @escaping () -> Void) {
-        R.addReferee(gamecode, referee, uuid)
+        Task { @MainActor in
+            try await R.addReferee(gamecode, referee, uuid)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             completion()
         }
@@ -169,7 +177,9 @@ extension RegisterController {
         }
     }
     func addStation(gamecode: String, station: Station, completion: @escaping () -> Void) {
-        S.addStation(gamecode, station)
+        Task { @MainActor in
+            try await S.addStation(gamecode, station)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
             completion()
         }

@@ -136,7 +136,9 @@ extension HostRankingViewcontroller: TeamUpdateListener, GetHost {
 extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
   func isOnValueChange(isOn: Bool) {
       self.showScore = isOn
-      H.hide_show_score(gameCode, self.showScore)
+      Task { @MainActor in
+          try await H.hide_show_score(gameCode, self.showScore)
+      }
       leaderBoard.reloadData()
   }
 }
