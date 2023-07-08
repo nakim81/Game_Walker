@@ -29,19 +29,19 @@ struct R {
        }
     }
 
-    static func addReferee(_ gamecode: String, _ referee: Referee, _ uuid: String){
+    static func addReferee(_ gamecode: String, _ referee: Referee, _ uuid: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                do {
-                    try db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
-                    print("Referee sucessfully saved")
-                } catch let error {
-                    print("Error writing to Firestore: \(error)")
-                }
+        do {
+            let document = try await docRef.getDocument()
+            if document.exists {
+                try await db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
+                print("Referee successfully saved")
             } else {
                 print("Gamecode does not exist")
             }
+        } catch {
+            print("Error writing to Firestore: \(error)")
+            throw error
         }
     }
     
@@ -55,30 +55,31 @@ struct R {
         }
     }
     
-    static func modifyName(_ gamecode: String, _ uuid : String, _ name: String){
+    static func modifyName(_ gamecode: String, _ uuid: String, _ name: String) async throws {
         let server = db.collection("\(gamecode) : Referees").document(uuid)
-        server.updateData([
-            "name": name
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
-            }
+        do {
+            try await server.updateData([
+                "name": name
+            ])
+            print("Document successfully updated")
+        } catch {
+            print("Error updating document: \(error)")
+            throw error
         }
     }
-        
-    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool){
+
+    
+    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async throws {
         let refDoc = db.collection("\(gamecode) : Referees").document(uuid)
-        refDoc.updateData([
-            "stationName": stationName,
-            "assigned": assigned
-        ]){ err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Referee Document successfully updated")
-            }
+        do {
+            try await refDoc.updateData([
+                "stationName": stationName,
+                "assigned": assigned
+            ])
+            print("Referee Document successfully updated")
+        } catch {
+            print("Error updating document: \(error)")
+            throw error
         }
     }
     
@@ -96,20 +97,18 @@ struct R {
 //        }
 //    }
     
-    
-//    static func getReferee(_ gamecode: String, _ uuid : String){
-//        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                guard let data = document.data() else {return}
-//                let referee = convertDataToReferee(data)
-//                delegate_getReferee?.getReferee(referee)
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-//    }
-    
+    static func getReferee(_ gamecode: String, _ uuid : String){
+        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                let referee = convertDataToReferee(data)
+                delegate_getReferee?.getReferee(referee)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
 
     static func getRefereeList(_ gamecode: String){
         db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
@@ -142,8 +141,5 @@ struct R {
         //blank host
         return Referee()
      }
-    
-    
-    
-    
+
 }

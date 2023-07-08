@@ -114,7 +114,9 @@ class HostGivePointsController : UIViewController {
     }()
     
     @objc func buttonTapped() {
-        T.givePoints(gameCode, team.name, Int(stepper.value))
+        Task { @MainActor in
+            try await T.givePoints(gameCode, team.name, Int(stepper.value))
+        }
         self.presentingViewController?.dismiss(animated: true)
     }
     
