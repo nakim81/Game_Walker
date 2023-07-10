@@ -17,19 +17,19 @@ struct S {
     static var delegate_stationList: StationList?
     static var delegate_getStation: GetStation?
 
-    static func addStation(_ gamecode: String, _ station: Station){
+    static func addStation(_ gamecode: String, _ station: Station) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                do {
-                    try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
-                    print("Station sucessfully saved")
-                } catch let error {
-                    print("Error writing to Firestore: \(error)")
-                }
+        do {
+            let document = try await docRef.getDocument()
+            if document.exists {
+                try await db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+                print("Station successfully saved")
             } else {
                 print("Gamecode does not exist")
             }
+        } catch {
+            print("Error writing to Firestore: \(error)")
+            throw error
         }
     }
     
@@ -43,17 +43,16 @@ struct S {
         }
     }
     
-    
-    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee){
+    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async throws {
         let docRef = db.collection("\(gamecode) : Stations").document(station.name)
-        docRef.updateData([
-            "referee": referee
-        ]){ err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Station Document successfully updated")
-            }
+        do {
+            try await docRef.updateData([
+                "referee": referee
+            ])
+            print("Station Document successfully updated")
+        } catch {
+            print("Error updating document: \(error)")
+            throw error
         }
     }
 
@@ -83,7 +82,7 @@ struct S {
                         let station = convertDataToStation(data)
                         stations.append(station)
                     }
-                    stations.sort { $0.pvp && !$1.pvp}
+                    stations.sort {$0.pvp && !$1.pvp}
                     delegate_stationList?.listOfStations(stations)
                 }
         }
@@ -101,7 +100,7 @@ struct S {
         } catch {
             print(error)
         }
-        //blank host
+        //blank station
         return Station()
      }
 }

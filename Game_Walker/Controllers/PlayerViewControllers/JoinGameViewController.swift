@@ -82,7 +82,9 @@ class JoinGameViewController: BaseViewController {
                 UserData.writePlayer(player, "player")
                 
                 // Join the game
-                P.addPlayer(gamecode, player, uuid)
+                Task { @MainActor in
+                    try await P.addPlayer(gamecode, player, uuid)
+                }
                 performSegue(withIdentifier: "goToPF2VC", sender: self)
             } else {
                 // Invalid input
@@ -222,7 +224,9 @@ extension JoinGameViewController: HostUpdateListener, TeamUpdateListener {
 // MARK: - Promise
 extension JoinGameViewController {
     func leaveTeam(gamecode: String, teamName: String, storedPlayer: Player, completion: @escaping () -> Void) {
-        T.leaveTeam(gamecode, teamName, storedPlayer)
+        Task { @MainActor in
+            try await T.leaveTeam(gamecode, teamName, storedPlayer)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // Simulate asynchronous task completion after 0.4 seconds
             completion()
@@ -238,7 +242,9 @@ extension JoinGameViewController {
     }
     
     func addPlayer(gamecode: String, player: Player, uuid: String, completion: @escaping () -> Void) {
-        P.addPlayer(gamecode, player, uuid)
+        Task { @MainActor in
+            try await P.addPlayer(gamecode, player, uuid)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // Simulate asynchronous task completion after 0.4 seconds
             completion()
@@ -246,7 +252,9 @@ extension JoinGameViewController {
     }
     
     func joinTeam(gamecode: String, teamName: String, player: Player, completion: @escaping () -> Void) {
-        T.joinTeam(gamecode, teamName, player)
+        Task { @MainActor in
+            try await T.joinTeam(gamecode, teamName, player)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // Simulate asynchronous task completion after 0.4 seconds
             completion()

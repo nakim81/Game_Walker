@@ -210,8 +210,8 @@ extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource 
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
             HostMessageViewController.messages?.remove(at: indexPath.row)
             self?.messageTableView.deleteRows(at: [indexPath], with: .automatic)
-            H.removeAnnouncement(self?.gameCode ?? "", indexPath.section)
-            Task {
+            Task { @MainActor in
+                try await H.removeAnnouncement(self?.gameCode ?? "", indexPath.section)
                 try await Task.sleep(nanoseconds: 200_000_000)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             }

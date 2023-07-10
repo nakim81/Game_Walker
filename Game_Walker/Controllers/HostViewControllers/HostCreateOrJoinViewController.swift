@@ -20,8 +20,9 @@ class HostCreateOrJoinViewController: BaseViewController {
         let gc = String(Int.random(in: 100000 ... 999999))
 //        let host = Host(gamecode: "705154")
         let host = Host(gamecode: gc)
-        H.createGame(gc, host)
-        
+        Task { @MainActor in
+            try await H.createGame(gc, host)
+        }
 //        let host1 = Host(gamecode: "123456")
 //        let host2 = Host(gamecode: "999999")
 //        H.createGame("123456", host1)
