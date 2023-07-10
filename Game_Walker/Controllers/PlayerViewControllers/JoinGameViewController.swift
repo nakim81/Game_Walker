@@ -132,28 +132,30 @@ class JoinGameViewController: BaseViewController {
             }
             
         } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
-            
-            if (UserData.readTeam("team") != nil) {
-                // User wants to join the game with the stored game code with new player object
-                // Modify existing Player's name and then perform segue
-                Task { @MainActor in
-                    try await P.modifyName(savedGameCode, uuid, username)
-                    try await Task.sleep(nanoseconds: 300_000_000)
-                    performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+                firstly { () -> Promise<Void> in
+                    return Promise<Void> { seal in
+                        self.modifyName(gamecode: savedGameCode, uuid: uuid, name: username) {
+                            print("modifying username")
+                            seal.fulfill(())
+                        }
+                    }
+                }.done {
+                    print("modified username")
+                    if (UserData.readTeam("team") != nil) {
+                        self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+                    } else {
+                        self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                    }
+                }.catch { error in
+                    print("An error occurred: \(error)")
+                    self.alert(title: "", message: "Error occurred while modifying username")
                 }
-            } else {
-                //Modify existing Player's name, and the player chooses between creating or joining a team
-                Task { @MainActor in
-                    try await P.modifyName(savedGameCode, uuid, username)
-                }
-                performSegue(withIdentifier: "goToPF2VC", sender: self)
-            }
         } else if gamecode != savedGameCode && username != savedUserName {
             // User leave the existing game
             firstly { () -> Promise<Void> in
                 return Promise<Void> { seal in
                     // Leave team to reflect the gamecode and username change
-                    leaveTeam(gamecode: savedGameCode, teamName: savedUserName, storedPlayer: player) {
+                    self.leaveTeam(gamecode: savedGameCode, teamName: savedUserName, storedPlayer: player) {
                         print("leaving team")
                         seal.fulfill(())
                     }
@@ -256,6 +258,13 @@ extension JoinGameViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // Simulate asynchronous task completion after 0.4 seconds
             completion()
+        }
+    }
+
+    func modifyName(gamecode: String, uuid : String, name: String, completion: @escaping () -> Void) {
+        P.modifyName(gamecode, uuid, name)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+          completion()
         }
     }
 }
