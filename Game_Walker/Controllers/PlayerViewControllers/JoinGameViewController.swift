@@ -17,7 +17,7 @@ class JoinGameViewController: BaseViewController {
     
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedUsername = UserData.readUsername("username") ?? ""
-    private var storedPlayer = UserData.readPlayer("player") ?? Player()
+    private var storedPlayer = UserData.readPlayer("player") ?? nil
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     
     override func viewDidLoad() {
@@ -38,7 +38,6 @@ class JoinGameViewController: BaseViewController {
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
         usernameTextField.placeholder = storedUsername != "" ? storedUsername : "username"
-        self.hideKeyboardWhenTappedAround()
     }
     
     private func configureNavItem() {
@@ -92,103 +91,45 @@ class JoinGameViewController: BaseViewController {
             }
             
         } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
-            
-            // User leave the existing game
-            firstly { () -> Promise<Void> in
-                return Promise<Void> { seal in
-                    // Leave team to reflect the gamecode change
-                    leaveTeam(gamecode: savedGameCode, teamName: savedUserName, storedPlayer: player) {
-                        print("leaving team")
-                        seal.fulfill(())
-                    }
+            Task { @MainActor in
+                if (UserData.readTeam("team") != nil) {
+                    try await T.leaveTeam(savedGameCode, savedUserName, player)
                 }
-            }.then {
-                return Promise<Void> { seal in
-                    // Remove original player object to reflect the gamecode change
-                    self.removePlayer(gamecode: savedGameCode, uuid: uuid) {
-                        print("removing player")
-                        // Create new player object with new username
-                        seal.fulfill(())
-                    }
-                }
-            }.then {
-                return Promise<Void> { seal in
-                    //User joins the new game and team with new gamecode
-                    UserData.writeGamecode(gamecode, "gamecode")
-                    player = Player(gamecode: gamecode, name: savedUserName)
-                    UserData.writePlayer(player, "player")
-                    print("created new player")
-                    self.addPlayer(gamecode: gamecode, player: player, uuid: uuid) {
-                        print("adding player")
-                        seal.fulfill(())
-                    }
-                }
-            }.done {
-                print("All works with the server are done")
+                P.removePlayer(savedGameCode, uuid)
+                UserData.writeGamecode(gamecode, "gamecode")
+                player = Player(gamecode: gamecode, name: savedUserName)
+                UserData.writePlayer(player, "player")
+                try await P.addPlayer(gamecode, player, uuid)
                 self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-            }.catch { error in
-                print("An error occurred: \(error)")
-                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
             }
-            
+            //self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
         } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
-                firstly { () -> Promise<Void> in
-                    return Promise<Void> { seal in
-                        self.modifyName(gamecode: savedGameCode, uuid: uuid, name: username) {
-                            print("modifying username")
-                            seal.fulfill(())
-                        }
-                    }
-                }.done {
-                    print("modified username")
-                    if (UserData.readTeam("team") != nil) {
-                        self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
-                    } else {
-                        self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-                    }
-                }.catch { error in
-                    print("An error occurred: \(error)")
-                    self.alert(title: "", message: "Error occurred while modifying username")
+            Task { @MainActor in
+                try await P.modifyName(savedGameCode, uuid, username)
+                player = Player(gamecode: gamecode, name: username)
+                UserData.writePlayer(player, "player")
+                UserData.writeUsername(username, "username")
+                if (UserData.readTeam("team") != nil) {
+                    self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+                } else {
+                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
                 }
-        } else if gamecode != savedGameCode && username != savedUserName {
-            // User leave the existing game
-            firstly { () -> Promise<Void> in
-                return Promise<Void> { seal in
-                    // Leave team to reflect the gamecode and username change
-                    self.leaveTeam(gamecode: savedGameCode, teamName: savedUserName, storedPlayer: player) {
-                        print("leaving team")
-                        seal.fulfill(())
-                    }
-                }
-            }.then {
-                return Promise<Void> { seal in
-                    // Remove original player object to reflect the gamecode and username change
-                    self.removePlayer(gamecode: savedGameCode, uuid: uuid) {
-                        print("removing player")
-                        // Create new player object with new username
-                        seal.fulfill(())
-                    }
-                }
-            }.then {
-                return Promise<Void> { seal in
-                    //User joins the new game and team with new gamecode and username
-                    UserData.writeGamecode(gamecode, "gamecode")
-                    UserData.writeUsername(username, "username")
-                    player = Player(gamecode: gamecode, name: username)
-                    UserData.writePlayer(player, "player")
-                    print("created new player")
-                    self.addPlayer(gamecode: gamecode, player: player, uuid: uuid) {
-                        print("adding player")
-                        seal.fulfill(())
-                    }
-                }
-            }.done {
-                print("All works with the server are done")
-                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-            }.catch { error in
-                print("An error occurred: \(error)")
-                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
             }
+            //self.alert(title: "", message: "Error occurred while modifying username")
+        } else if gamecode != savedGameCode && username != savedUserName {
+            Task {@MainActor in
+                if UserData.readTeam("team") != nil {
+                    try await T.leaveTeam(savedGameCode, savedUserName, player)
+                }
+                P.removePlayer(savedGameCode, uuid)
+                UserData.writeGamecode(gamecode, "gamecode")
+                UserData.writeUsername(username, "username")
+                player = Player(gamecode: gamecode, name: username)
+                UserData.writePlayer(player, "player")
+                try await P.addPlayer(gamecode, player, uuid)
+                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+            }
+            //self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
         } else {
             alert(title: "", message: "Invalid Input!")
         }
@@ -218,53 +159,5 @@ extension JoinGameViewController: HostUpdateListener, TeamUpdateListener {
     
     func updateHost(_ host: Host) {
         
-    }
-}
-
-// MARK: - Promise
-extension JoinGameViewController {
-    func leaveTeam(gamecode: String, teamName: String, storedPlayer: Player, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await T.leaveTeam(gamecode, teamName, storedPlayer)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            // Simulate asynchronous task completion after 0.4 seconds
-            completion()
-        }
-    }
-    
-    func removePlayer(gamecode: String, uuid: String, completion: @escaping () -> Void) {
-        P.removePlayer(gamecode, uuid)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            // Simulate asynchronous task completion after 0.4 seconds
-            completion()
-        }
-    }
-    
-    func addPlayer(gamecode: String, player: Player, uuid: String, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await P.addPlayer(gamecode, player, uuid)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            // Simulate asynchronous task completion after 0.4 seconds
-            completion()
-        }
-    }
-    
-    func joinTeam(gamecode: String, teamName: String, player: Player, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await T.joinTeam(gamecode, teamName, player)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            // Simulate asynchronous task completion after 0.4 seconds
-            completion()
-        }
-    }
-
-    func modifyName(gamecode: String, uuid : String, name: String, completion: @escaping () -> Void) {
-        P.modifyName(gamecode, uuid, name)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-          completion()
-        }
     }
 }
