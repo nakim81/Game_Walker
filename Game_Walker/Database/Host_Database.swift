@@ -28,17 +28,16 @@ struct H {
             }
     }
     
-    static func createGame(_ gamecode: String, _ host: Host) async throws {
+    static func createGame(_ gamecode: String, _ host: Host) {
         do {
-            try await db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
+            try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
             print("Created Game")
         } catch {
             print("Error creating Game: \(error)")
-            throw error
         }
     }
     
-    static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async throws {
+    static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -50,11 +49,10 @@ struct H {
             print("Host setted Settings")
         } catch {
             print("Error setting settings Host: \(error)")
-            throw error
         }
     }
     
-    static func startGame(_ gamecode: String) async throws {
+    static func startGame(_ gamecode: String) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -64,12 +62,11 @@ struct H {
             print("Started Game")
         } catch {
             print("Error starting Game: \(error)")
-            throw error
         }
     }
     
     //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
-     static func hide_show_score(_ gamecode: String, _ show: Bool) async throws {
+     static func hide_show_score(_ gamecode: String, _ show: Bool) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -78,11 +75,10 @@ struct H {
             print("Hid/Showed Score")
         } catch {
             print("Error hiding/showing score: \(error)")
-            throw error
         }
     }
     
-    static func pause_resume_game(_ gamecode: String) async throws {
+    static func pause_resume_game(_ gamecode: String) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -99,17 +95,17 @@ struct H {
                     host.pauseTimestamp = Int(Date().timeIntervalSince1970)
                 }
                 host.paused = !host.paused
-                try await updateHost(gamecode, host)
+                updateHost(gamecode, host)
+                print("Paused/Resumed Game")
             } else {
                 print("Host does not exist")
             }
         } catch {
             print("Error pausing/resuming Game: \(error)")
-            throw error
         }
     }
      
-    static func addAnnouncement(_ gamecode: String, _ announcement: String) async throws {
+    static func addAnnouncement(_ gamecode: String, _ announcement: String) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -117,17 +113,17 @@ struct H {
                 guard let data = document.data() else { return }
                 var host = convertDataToHost(data)
                 host.announcements.append(announcement)
-                try await updateHost(gamecode, host)
+                updateHost(gamecode, host)
+                print("Added Announcement")
             } else {
                 print("Host does not exist")
             }
         } catch {
             print("Error adding Announcement: \(error)")
-            throw error
         }
     }
     
-    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async throws {
+    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -136,7 +132,8 @@ struct H {
                 var host = convertDataToHost(data)
                 if index >= 0 && index < host.announcements.count {
                     host.announcements[index] = announcement
-                    try await updateHost(gamecode, host)
+                    updateHost(gamecode, host)
+                    print("Modified Announcement")
                 } else {
                     print("Invalid index of announcement")
                 }
@@ -145,11 +142,10 @@ struct H {
             }
         } catch {
             print("Error modfiying Announcement: \(error)")
-            throw error
         }
     }
     
-    static func removeAnnouncement(_ gamecode: String, _ index: Int) async throws {
+    static func removeAnnouncement(_ gamecode: String, _ index: Int) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -158,7 +154,8 @@ struct H {
                 var host = convertDataToHost(data)
                 if index >= 0 && index < host.announcements.count {
                     host.announcements.remove(at: index)
-                    try await updateHost(gamecode, host)
+                    updateHost(gamecode, host)
+                    print("Removed Announcement")
                 } else {
                     print("Invalid announcement index")
                 }
@@ -167,7 +164,6 @@ struct H {
             }
         } catch {
             print("Error removing Announcement: \(error)")
-            throw error
         }
     }
     
@@ -184,13 +180,11 @@ struct H {
         }
     }
     
-    static func updateHost(_ gamecode: String, _ host: Host) async throws {
+    static func updateHost(_ gamecode: String, _ host: Host) {
         do {
-            try await db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
-            print("Updated Host")
+            try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
         } catch {
             print("Error updating Host: \(error)")
-            throw error
         }
     }
 

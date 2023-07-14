@@ -83,7 +83,7 @@ class JoinGameViewController: BaseViewController {
                 
                 // Join the game
                 Task { @MainActor in
-                    try await P.addPlayer(gamecode, player, uuid)
+                    //try await P.addPlayer(gamecode, player, uuid)
                 }
                 performSegue(withIdentifier: "goToPF2VC", sender: self)
             } else {
@@ -241,7 +241,7 @@ extension JoinGameViewController {
     
     func addPlayer(gamecode: String, player: Player, uuid: String, completion: @escaping () -> Void) {
         Task { @MainActor in
-            try await P.addPlayer(gamecode, player, uuid)
+            //try await P.addPlayer(gamecode, player, uuid)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // Simulate asynchronous task completion after 0.4 seconds

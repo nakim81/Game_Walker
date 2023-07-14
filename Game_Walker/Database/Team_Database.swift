@@ -32,12 +32,12 @@ struct T {
         }
     }
     
-    static func addTeam(_ gamecode: String, _ team: Team) async throws {
+    static func addTeam(_ gamecode: String, _ team: Team) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                await updateTeam(gamecode, team)
+                updateTeam(gamecode, team)
                 print("Team added")
             } else {
                 print("Gamecode does not exist")
@@ -47,7 +47,7 @@ struct T {
         }
     }
     
-    static func removeTeam(_ gamecode: String, _ team: Team){
+    static func removeTeam(_ gamecode: String, _ team: Team) {
         db.collection("\(gamecode) : Teams").document(team.name).delete() { err in
             if let err = err {
                 print("Error removing Team: \(err)")
@@ -57,9 +57,8 @@ struct T {
         }
     }
     
-    static func joinTeam(_ gamecode: String, _ teamName: String, _ player: Player) async throws {
+    static func joinTeam(_ gamecode: String, _ teamName: String, _ player: Player) async {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
-        
         do {
             let document = try await docRef.getDocument()
             if document.exists {
@@ -67,7 +66,7 @@ struct T {
                 var team = convertDataToTeam(data)
                 team.players.append(player)
                 // Update team member
-                try await updateTeam(gamecode, team)
+                updateTeam(gamecode, team)
                 print("Team joined")
             } else {
                 print("Team does not exist")
@@ -77,7 +76,7 @@ struct T {
         }
     }
     
-    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player) async throws {
+    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player) async {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         do {
             let document = try await docRef.getDocument()
@@ -87,18 +86,17 @@ struct T {
                 if let index = team.players.firstIndex(of: player) {
                     team.players.remove(at: index)
                 }
-                try await updateTeam(gamecode, team)
+                updateTeam(gamecode, team)
                 print("Left Team")
             } else {
                 print("Team does not exist")
             }
         } catch {
             print("Error leaving team: \(error)")
-            throw error
         }
     }
     
-    static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int) async throws {
+    static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int) async {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         do {
             let document = try await docRef.getDocument()
@@ -106,17 +104,16 @@ struct T {
                 guard let data = document.data() else { return }
                 var team = convertDataToTeam(data)
                 team.points += points
-                try await updateTeam(gamecode, team)
+                updateTeam(gamecode, team)
             } else {
                 print("Team does not exist")
             }
         } catch {
             print("Error giving points to Team: \(error)")
-            throw error
         }
     }
 
-    static func getTeam(_ gamecode: String, _ teamName : String){
+    static func getTeam(_ gamecode: String, _ teamName : String) {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -129,7 +126,7 @@ struct T {
         }
     }
     
-    static func getTeamList(_ gamecode: String){
+    static func getTeamList(_ gamecode: String) {
         //sort by points
         db.collection("\(gamecode) : Teams")
             .getDocuments() { (querySnapshot, err) in
@@ -148,10 +145,10 @@ struct T {
         }
     }
     
-    static func updateTeam(_ gamecode: String, _ team: Team) async {
+    static func updateTeam(_ gamecode: String, _ team: Team) {
         do {
-            try await db.collection("\(gamecode) : Teams").document("\(team.name)").setData(from: team)
-            //print("Team successfully saved")
+            try db.collection("\(gamecode) : Teams").document("\(team.name)").setData(from: team)
+            print("Team successfully saved")
         } catch {
             print("Error updating Team: \(error)")
         }

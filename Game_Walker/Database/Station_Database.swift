@@ -17,23 +17,22 @@ struct S {
     static var delegate_stationList: StationList?
     static var delegate_getStation: GetStation?
 
-    static func addStation(_ gamecode: String, _ station: Station) async throws {
+    static func addStation(_ gamecode: String, _ station: Station) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                try await db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+                try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
                 print("Station added")
             } else {
                 print("Gamecode does not exist")
             }
         } catch {
             print("Error adding Station: \(error)")
-            throw error
         }
     }
     
-    static func removeStation(_ gamecode: String, _ station: Station){
+    static func removeStation(_ gamecode: String, _ station: Station) {
         db.collection("\(gamecode) : Stations").document(station.name).delete() { err in
             if let err = err {
                 print("Error removing Station: \(err)")
@@ -43,7 +42,7 @@ struct S {
         }
     }
     
-    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async throws {
+    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async {
         let docRef = db.collection("\(gamecode) : Stations").document(station.name)
         do {
             try await docRef.updateData([
@@ -52,11 +51,10 @@ struct S {
             print("Station assigned Referee")
         } catch {
             print("Error assigning Station a Referee: \(error)")
-            throw error
         }
     }
 
-    static func getStation(_ gamecode: String, _ stationName : String){
+    static func getStation(_ gamecode: String, _ stationName : String) {
         let docRef = db.collection("\(gamecode) : Stations").document(stationName)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -69,7 +67,7 @@ struct S {
         }
     }
     
-    static func getStationList(_ gamecode: String){
+    static func getStationList(_ gamecode: String) {
         //Sorted by pvp, pve
         db.collection("\(gamecode) : Stations")
             .getDocuments() { (querySnapshot, err) in

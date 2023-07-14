@@ -12,23 +12,25 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import SwiftUI
 
+
 struct P {
     static let db = Firestore.firestore()
         
-    static func addPlayer(_ gamecode: String, _ player: Player, _ uuid: String) async throws {
+    static func addPlayer(_ gamecode: String, _ player: Player, _ uuid: String) async throws{
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                try await db.collection("\(gamecode) : Players").document(uuid).setData(from: player)
+                try db.collection("\(gamecode) : Players").document(uuid).setData(from: player)
                 print("Player added")
             } else {
                 print("Gamecode does not exist")
-                //throw error
+                throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
+        } catch let gamecodeError as GamecodeError{
+            throw gamecodeError
         } catch {
             print("Error adding Player: \(error)")
-            throw error
         }
     }
     
@@ -67,8 +69,8 @@ struct P {
             ])
             print("Player name modified")
         } catch {
-            print("Error modifying Player name: \(error)")
-            throw error
+            print("Gamecode does not exist")
+            throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
         }
     }
     
