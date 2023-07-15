@@ -39,7 +39,6 @@ class CreateTeamViewController: BaseViewController {
         super.viewDidLoad()
         teamNameTextField.delegate = self
         teamNameTextField.delegate = self
-        self.hideKeyboardWhenTappedAround()
         configureCollectionView()
     }
     
@@ -66,7 +65,7 @@ class CreateTeamViewController: BaseViewController {
             UserData.writeTeam(newTeam, "team")
             Task { @MainActor in
                 try await T.addTeam(gameCode, newTeam)
-                try await Task.sleep(nanoseconds: 250_000_000)
+//                try await Task.sleep(nanoseconds: 250_000_000)
                 try await T.joinTeam(gameCode, newTeam.name, currentPlayer)
                 performSegue(withIdentifier: "goToTPF4", sender: self)
             }

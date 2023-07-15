@@ -51,10 +51,11 @@ class JoinTeamViewController: BaseViewController {
 
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
-            UserData.writeTeam(teamList[selectedIndex], "team")
-            Task { @MainActor in
+            let selectedTeam = teamList[selectedIndex]
+            UserData.writeTeam(selectedTeam, "team")
+            Task { [weak self] in
                 //여기 안되던데 확인 바람
-                //try await T.joinTeam(gameCode, teamList[selectedIndex].name, currentPlayer)
+                try await T.joinTeam(gameCode, selectedTeam.name, currentPlayer)
                 try await Task.sleep(nanoseconds: 250_000_000)
                 performSegue(withIdentifier: "goToPF44", sender: self)
             }
