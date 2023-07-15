@@ -30,7 +30,6 @@ class HostGameCodeViewController: BaseViewController {
 //        H.delegate_getHost = self
 
         gameCodeInput.placeholder = storedgamecode
-        self.hideKeyboardWhenTappedAround()
     }
     
     func setGameCode() {
