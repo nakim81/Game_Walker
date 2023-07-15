@@ -16,7 +16,7 @@ import SwiftUI
 struct P {
     static let db = Firestore.firestore()
         
-    static func addPlayer(_ gamecode: String, _ player: Player, _ uuid: String) async throws{
+    static func addPlayer(_ gamecode: String, _ player: Player, _ uuid: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -51,7 +51,7 @@ struct P {
 //            }
 //        }
         
-    static func removePlayer(_ gamecode: String, _ uuid: String){
+    static func removePlayer(_ gamecode: String, _ uuid: String) {
             db.collection("\(gamecode) : Players").document(uuid).delete() { err in
                 if let err = err {
                     print("Error removing player: \(err)")
