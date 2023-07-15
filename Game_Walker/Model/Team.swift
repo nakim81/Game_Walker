@@ -14,8 +14,7 @@ struct Team : Codable, Equatable {
     var number: Int = 0
     var players : [Player] = []
     var points : Int = 0
-    var currentStation : String = ""
-    var nextStation : String = ""
+    var stationOrder : [Int] = []
     var iconName: String = ""
 
     
@@ -25,8 +24,7 @@ struct Team : Codable, Equatable {
         case number
         case players
         case points
-        case currentStation
-        case nextStation
+        case stationOrder
         case iconName
     }
 }
