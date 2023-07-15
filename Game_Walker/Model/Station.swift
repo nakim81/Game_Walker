@@ -9,6 +9,7 @@ import Foundation
 
 struct Station: Codable, Equatable {
     var name: String = ""
+    var number: Int = 0
     var pvp: Bool = true
     var points: Int = 0
     var place: String = ""
@@ -18,6 +19,7 @@ struct Station: Codable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case name
+        case number
         case pvp
         case points
         case place
