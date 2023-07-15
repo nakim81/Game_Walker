@@ -131,7 +131,6 @@ class endGameViewController: UIViewController {
         configureButtons()
         setUpViews()
         makeConstraints()
-        hideKeyboardWhenTappedAround()
     }
     
     private func configureButtons() {

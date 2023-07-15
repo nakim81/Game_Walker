@@ -27,7 +27,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         }
         
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.delegate = self
         gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "game code #"

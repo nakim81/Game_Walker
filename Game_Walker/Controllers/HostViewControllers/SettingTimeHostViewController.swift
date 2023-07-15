@@ -51,8 +51,6 @@ class SettingTimeHostViewController: BaseViewController {
 
         
         super.viewDidLoad()
-
-        self.hideKeyboardWhenTappedAround()
         
         roundsTextField.keyboardType = .numberPad
         roundsTextField.textAlignment = .center

@@ -99,9 +99,6 @@ class AddStationViewController: BaseViewController {
         R.getRefereeList(gamecode)
         checkReferee()
         setPaddings()
-
-        
-        self.hideKeyboardWhenTappedAround()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

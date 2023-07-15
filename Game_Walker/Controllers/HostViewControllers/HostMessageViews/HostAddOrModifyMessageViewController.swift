@@ -171,7 +171,6 @@ class HostAddOrModifyMessageViewController: UIViewController {
         configureButtons()
         setUpViews()
         makeConstraints()
-        hideKeyboardWhenTappedAround()
     }
     
     private func configureButtons() {
