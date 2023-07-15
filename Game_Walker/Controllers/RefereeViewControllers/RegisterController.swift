@@ -20,6 +20,12 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedStation: Station?
     
     override func viewDidLoad() {
+        var teamOrder : [Team] = [Team(gamecode: "333333", name: "Simon Dominic1", number: 10, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconAir"), Team(gamecode: "333333", name: "Simon Dominic2", number: 11, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBear"), Team(gamecode: "333333", name: "Simon Dominic3", number: 12, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBlue"), Team(gamecode: "333333", name: "Simon Dominic4", number: 13, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBoy"), Team(gamecode: "333333", name: "Simon Dominic5", number: 14, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconPenguin")]
+        var test = Station(name: "testing", pvp: false, points: 0, place: "", referee: Referee(uuid: refereeUserID, gamecode: "333333", name: "Referee 1", stationName: "", assigned: false), description: "I am testing now.", teamOrder: teamOrder)
+        Task { @MainActor in
+            try await S.addStation("333333", test)
+        }
+        
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
@@ -37,6 +43,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         }
         return true
     }
+    
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             // Rejoining the game.
@@ -69,125 +76,34 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             else if (gamecode != storedGameCode) && (name.isEmpty || name == storedRefereeName){
                 let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: storedRefereeName, stationName: "", assigned: false)
-                firstly { () -> Promise<Void> in
-                    return Promise<Void> { seal in
-                        self.removeReferee(gamecode: storedGameCode, uuid: refereeUserID) {
-                            seal.fulfill(())
-                        }
-                    }
+                Task { @MainActor in
+                    R.removeReferee(storedGameCode, refereeUserID)
+                    try await R.addReferee(gamecode, newReferee, refereeUserID)
                 }
-                .then {
-                    return Promise<Void> { seal in
-                        UserData.writeReferee(newReferee, "Referee")
-                        self.addReferee(gamecode: gamecode, referee: newReferee, uuid: self.refereeUserID) {
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .done {
-                    self.performSegue(withIdentifier: "goToWait", sender: self)
-                }
-                .catch { error in
-                    self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-                }
+                performSegue(withIdentifier: "goToWait", sender: self)
             }
             // Joining the game again with a new name.
             else if (gamecode.isEmpty || gamecode == storedGameCode) && (name != storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
-                firstly { () -> Promise<Void> in
-                    return Promise<Void> { seal in
-                        UserData.writeReferee(newReferee, "Referee")
-                        self.modifiyRefereeName(gamecode: gamecode, uuid: refereeUserID, name: name){
-                            seal.fulfill(())
-                        }
-                    }
+                UserData.writeReferee(newReferee, "Referee")
+                Task { @MainActor in
+                    try await R.modifyName(gamecode, refereeUserID, name)
                 }
-                .done {
-                    self.performSegue(withIdentifier: "goToWait", sender: self)
-                }
-                .catch { error in
-                    self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-                }
+                performSegue(withIdentifier: "goToWait", sender: self)
             }
             //Joining a completely new game with a different name on the same machine.
             else {
                 let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
-                firstly { () -> Promise<Void> in
-                    return Promise<Void> { seal in
-                        self.removeReferee(gamecode: storedGameCode, uuid: refereeUserID) {
-                            seal.fulfill(())
-                        }
-                    }
+                UserData.writeReferee(newReferee, "Referee")
+                UserData.writeUsername(name, "refereeName")
+                Task { @MainActor in
+                    R.removeReferee(storedGameCode, refereeUserID)
+                    try await R.addReferee(gamecode, newReferee, refereeUserID)
                 }
-                .then {
-                    return Promise<Void> { seal in
-                        UserData.writeReferee(newReferee, "Referee")
-                        UserData.writeUsername(name, "refereeName")
-                        self.addReferee(gamecode: gamecode, referee: newReferee, uuid: self.refereeUserID){
-                            seal.fulfill(())
-                        }
-                    }
-                }
-                .done {
-                    self.performSegue(withIdentifier: "goToWait", sender: self)
-                }
-                .catch { error in
-                    self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-                }
+                performSegue(withIdentifier: "goToWait", sender: self)
             }
         }
-    }
-}
-// MARK: - Promise
-extension RegisterController {
-    func modifiyRefereeName(gamecode: String, uuid: String, name: String, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await R.modifyName(gamecode, uuid, name)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-    func removeReferee(gamecode: String, uuid: String, completion: @escaping () -> Void) {
-        R.removeReferee(gamecode, uuid)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-    func addReferee(gamecode: String, referee: Referee, uuid: String, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await R.addReferee(gamecode, referee, uuid)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-    func loadStation(gamecode: String, stationName: String, completion: @escaping () -> Void) {
-        S.getStation(gamecode, stationName)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-    func removeStation(gamecode: String, station: Station, completion: @escaping () -> Void) {
-        S.removeStation(gamecode, station)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-    func addStation(gamecode: String, station: Station, completion: @escaping () -> Void) {
-        Task { @MainActor in
-            try await S.addStation(gamecode, station)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            completion()
-        }
-    }
-}
-// MARK: - Protocol
-extension RegisterController {
-    func getStation(_ station: Station) {
-        storedStation = station
     }
 }

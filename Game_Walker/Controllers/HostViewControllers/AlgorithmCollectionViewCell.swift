@@ -11,9 +11,10 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var algorithmCellBox: UIImageView!
     @IBOutlet weak var teamnumLabel: UILabel!
-    var selectedCellBox = UIImage(named: "cellselected 1" )
-    var originalCellBox = UIImage(named: "celloriginal")
-    
+    private var selectedCellBoxImage = UIImage(named: "cellselected 1" )
+    private var originalCellBoxImage = UIImage(named: "celloriginal")
+    private var emptyCellBoxImage = UIImage(named: "emptycell")
+    private var visible : Bool = true
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -42,13 +43,19 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     }
     
     func makeCellSelected() {
-        algorithmCellBox.image = selectedCellBox
+        algorithmCellBox.image = selectedCellBoxImage
         teamnumLabel.textColor = UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1.0)
 
     }
     
     func makeCellOriginal() {
         teamnumLabel.textColor = UIColor.black
-        algorithmCellBox.image = originalCellBox
+        algorithmCellBox.image = originalCellBoxImage
+    }
+    
+    func makeCellEmpty() {
+        teamnumLabel.text = ""
+        algorithmCellBox.image = emptyCellBoxImage
+        visible = false
     }
 }

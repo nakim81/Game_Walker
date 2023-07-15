@@ -34,23 +34,25 @@ struct R {
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                try await db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
-                print("Referee successfully saved")
+                try db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
+                print("Referee added")
             } else {
                 print("Gamecode does not exist")
+                throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
+        } catch let gamecodeError as GamecodeError{
+            throw gamecodeError
         } catch {
-            print("Error writing to Firestore: \(error)")
-            throw error
+            print("Gamecode does not exist")
         }
     }
     
-    static func removeReferee(_ gamecode: String, _ uuid: String){
+    static func removeReferee(_ gamecode: String, _ uuid: String) {
         db.collection("\(gamecode) : Referees").document(uuid).delete() { err in
             if let err = err {
-                print("Error removing document: \(err)")
+                print("Error removing Referee: \(err)")
             } else {
-                print("Referee Document successfully removed!")
+                print("Referee removed")
             }
         }
     }
@@ -61,43 +63,28 @@ struct R {
             try await server.updateData([
                 "name": name
             ])
-            print("Document successfully updated")
+            print("Referee name modified")
         } catch {
-            print("Error updating document: \(error)")
-            throw error
+            print("Gamecode does not exist")
+            throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
         }
     }
 
     
-    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async throws {
+    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async {
         let refDoc = db.collection("\(gamecode) : Referees").document(uuid)
         do {
             try await refDoc.updateData([
                 "stationName": stationName,
                 "assigned": assigned
             ])
-            print("Referee Document successfully updated")
+            print("Referee assigned station")
         } catch {
-            print("Error updating document: \(error)")
-            throw error
+            print("Error assigning Referee a station: \(error)")
         }
     }
     
-//    static func unassignStation(_ gamecode: String, _ uuid : String){
-//        let server = db.collection("\(gamecode) : Referees").document(uuid)
-//        server.updateData([
-//            "assigned" : false,
-//            "stationName" : ""
-//        ]) { err in
-//            if let err = err {
-//                print("Error updating document: \(err)")
-//            } else {
-//                print("Document successfully updated")
-//            }
-//        }
-//    }
-    
-    static func getReferee(_ gamecode: String, _ uuid : String){
+    static func getReferee(_ gamecode: String, _ uuid : String) {
         let docRef = db.collection("\(gamecode) : Referees").document(uuid)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -105,15 +92,15 @@ struct R {
                 let referee = convertDataToReferee(data)
                 delegate_getReferee?.getReferee(referee)
             } else {
-                print("Document does not exist")
+                print("Error in getting Referee")
             }
         }
     }
 
-    static func getRefereeList(_ gamecode: String){
+    static func getRefereeList(_ gamecode: String) {
         db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("Error getting List of Referee: \(err)")
                 } else {
                     var referees : [Referee] = []
                     for document in querySnapshot!.documents {
@@ -136,7 +123,7 @@ struct R {
             let decoded = try decoder.decode(Referee.self, from: json)
             return decoded
         } catch {
-            print(error)
+            print("Converting json data to Referee \(error)")
         }
         //blank host
         return Referee()

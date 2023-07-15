@@ -82,7 +82,7 @@ class JoinGameViewController: BaseViewController {
                 
                 // Join the game
                 Task { @MainActor in
-                    try await P.addPlayer(gamecode, player, uuid)
+                    //try await P.addPlayer(gamecode, player, uuid)
                 }
                 performSegue(withIdentifier: "goToPF2VC", sender: self)
             } else {
