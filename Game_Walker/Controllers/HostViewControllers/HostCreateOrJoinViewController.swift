@@ -23,11 +23,6 @@ class HostCreateOrJoinViewController: BaseViewController {
         Task { @MainActor in
             try await H.createGame(gc, host)
         }
-//        let host1 = Host(gamecode: "123456")
-//        let host2 = Host(gamecode: "999999")
-//        H.createGame("123456", host1)
-//        H.createGame("999999", host2)
-//        UserData.writeGamecode("705154", "gamecode")
         UserData.writeGamecode(gc, "gamecode")
 //        T.listenTeams("705154", onListenerUpdate: listen(_:))
         T.listenTeams(gc, onListenerUpdate: listen(_:))
