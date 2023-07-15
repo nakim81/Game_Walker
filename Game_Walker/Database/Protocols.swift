@@ -47,3 +47,7 @@ protocol HostUpdateListener {
 protocol GetHost {
     func getHost(_ host: Host)
 }
+
+enum GamecodeError: Error {
+    case invalidGamecode(String)
+}

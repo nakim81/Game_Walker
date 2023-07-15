@@ -17,46 +17,44 @@ struct S {
     static var delegate_stationList: StationList?
     static var delegate_getStation: GetStation?
 
-    static func addStation(_ gamecode: String, _ station: Station) async throws {
+    static func addStation(_ gamecode: String, _ station: Station) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                try await db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
-                print("Station successfully saved")
+                try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+                print("Station added")
             } else {
                 print("Gamecode does not exist")
             }
         } catch {
-            print("Error writing to Firestore: \(error)")
-            throw error
+            print("Error adding Station: \(error)")
         }
     }
     
-    static func removeStation(_ gamecode: String, _ station: Station){
+    static func removeStation(_ gamecode: String, _ station: Station) {
         db.collection("\(gamecode) : Stations").document(station.name).delete() { err in
             if let err = err {
-                print("Error removing document: \(err)")
+                print("Error removing Station: \(err)")
             } else {
-                print("Station Document successfully removed!")
+                print("Station removed")
             }
         }
     }
     
-    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async throws {
+    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async {
         let docRef = db.collection("\(gamecode) : Stations").document(station.name)
         do {
             try await docRef.updateData([
                 "referee": referee
             ])
-            print("Station Document successfully updated")
+            print("Station assigned Referee")
         } catch {
-            print("Error updating document: \(error)")
-            throw error
+            print("Error assigning Station a Referee: \(error)")
         }
     }
 
-    static func getStation(_ gamecode: String, _ stationName : String){
+    static func getStation(_ gamecode: String, _ stationName : String) {
         let docRef = db.collection("\(gamecode) : Stations").document(stationName)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -64,17 +62,17 @@ struct S {
                 let station = convertDataToStation(data)
                 delegate_getStation?.getStation(station)
             } else {
-                print("Document does not exist")
+                print("Error getting Station")
             }
         }
     }
     
-    static func getStationList(_ gamecode: String){
+    static func getStationList(_ gamecode: String) {
         //Sorted by pvp, pve
         db.collection("\(gamecode) : Stations")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("Error getting documents: \(err)")
+                    print("Error getting List of Station: \(err)")
                 } else {
                     var stations : [Station] = []
                     for document in querySnapshot!.documents {
@@ -98,7 +96,7 @@ struct S {
             let decoded = try decoder.decode(Station.self, from: json)
             return decoded
         } catch {
-            print(error)
+            print("Converting json data to Station \(error)")
         }
         //blank station
         return Station()
