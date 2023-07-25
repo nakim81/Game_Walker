@@ -99,23 +99,9 @@ class AlgorithmViewController: BaseViewController {
         flowlayout.minimumInteritemSpacing = CGFloat(collectionViewCellSpacing)
         
         collectionView.collectionViewLayout = flowlayout
-        
-//        print("MY CELL WIDTH?"  , collectionViewCellWidth)
-//        print("MY COLLECTION VIEW WIDTH?  ", collectionViewWidth)
-//        print("MY CALCS: " , collectionViewWidth / 8)
-//
-//        print("SPACING SIZES: ", flowlayout.minimumLineSpacing, " AND iteritem: ", flowlayout.minimumInteritemSpacing)
-//
-        
-        let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
-//        widthConstraint.isActive = true
-//
-//        print("widthConstraint i am trying to make: ", widthConstraint)
-//        print("ACUTAL WIDTH OF COLLECTION VIEW : ", collectionView.frame.width)
-        
+           
+        let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
         if collectionViewCellWidth > 0  {
-//            let borderView = VerticalBorderView(frame: CGRect(x: (collectionViewCellWidth + 2) + (collectionViewCellWidth + 5), y: 0, width: 2, height: Int(collectionViewWidth)))
-//            collectionView.addSubview(borderView)
             createBorderLines()
         }
         
@@ -141,7 +127,7 @@ class AlgorithmViewController: BaseViewController {
             let first = position.0
             let second = position.1
         
-            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 0, width: 2, height: Int(collectionViewWidth)))
+            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 3, width: 2, height: Int(getLineLength()!)))
             collectionView.addSubview(borderView)
         }
     }
@@ -159,6 +145,23 @@ class AlgorithmViewController: BaseViewController {
         }
         return nil
     }
+                                                 
+    func getLineLength() -> CGFloat? {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let topCellIndexPath = IndexPath(item: 0, section: 0)
+            let bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
+            
+            if let topAttributes = layout.layoutAttributesForItem(at: topCellIndexPath),
+               let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
+                let length = bottomAttributes.frame.maxY - topAttributes.frame.minY
+                return length
+                }
+            }
+            return nil
+        }
+                                                 
+                                                 
+    
     
     func createGrid() {
         num_stations = stationList!.count
