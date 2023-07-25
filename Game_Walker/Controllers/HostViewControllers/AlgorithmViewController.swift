@@ -127,7 +127,7 @@ class AlgorithmViewController: BaseViewController {
             let first = position.0
             let second = position.1
         
-            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 3, width: 2, height: Int(getLineLength()!)))
+            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 3, width: 2, height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
             collectionView.addSubview(borderView)
         }
     }
@@ -146,14 +146,16 @@ class AlgorithmViewController: BaseViewController {
         return nil
     }
                                                  
-    func getLineLength() -> CGFloat? {
+    func getLineLength(smallerThanEight: Bool) -> CGFloat? {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let topCellIndexPath = IndexPath(item: 0, section: 0)
-            let bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
-            
+            var bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
+            if smallerThanEight {
+                bottomCellIndexPath  = IndexPath(item: 0, section: collectionView.numberOfSections - 1 - verticalEmptyCells)
+            }
             if let topAttributes = layout.layoutAttributesForItem(at: topCellIndexPath),
                let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
-                let length = bottomAttributes.frame.maxY - topAttributes.frame.minY
+                let length = bottomAttributes.frame.maxY - topAttributes.frame.minY - 3
                 return length
                 }
             }
