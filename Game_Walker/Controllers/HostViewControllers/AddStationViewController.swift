@@ -270,12 +270,15 @@ class AddStationViewController: BaseViewController {
         } else if (stationExists && modified) {
             Task { @MainActor in
                 //unassign station from referee
-                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+//                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+                await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
                 //assign station to new referee
-                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+//                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
                 
                 //assign new referee to the station that exists
-                try await S.assignReferee(gamecode, station!, newReferee!)
+//                try await S.assignReferee(gamecode, station!, newReferee!)
+                await S.assignReferee(gamecode, station!, newReferee!)
             }
 //
 //            firstly { () -> Promise<Void> in

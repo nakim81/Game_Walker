@@ -408,6 +408,15 @@ extension AlgorithmViewController: StationList {
         self.stationList = stations
         self.num_stations = stations.count
         self.collectionView?.reloadData()
+        var pvpCount = 0
+        for station in stations {
+            if station.pvp {
+                pvpCount += 1
+            }
+        }
+        self.pvpGameCount = pvpCount
+        self.pveGameCount = stations.count - pvpCount
+
 //        print("stationsList is empty? : " , stations.count , " and ", self.stationList!.count)
     }
     
