@@ -209,6 +209,16 @@ class AlgorithmViewController: BaseViewController {
             curr_row.removeAll()
         }
         
+        guard pvpGameCount > 0 && pvpGameCount <= grid.count else {
+            print("Invalid number of pvp games compared to number of teams")
+            return
+        }
+        
+        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
+            for i in 0..<(pvpGameCount * 2) {
+                grid[rowIndex][i] = -1
+            }
+        }
 
         // case when we need empty cells vertically
         if needVerticalEmptyCells {
@@ -242,16 +252,7 @@ class AlgorithmViewController: BaseViewController {
         
         // case when considering pvp cases
         
-        guard pvpGameCount > 0 && pvpGameCount <= grid.count else {
-            print("Invalid number of pvp games compared to number of teams")
-            return
-        }
-        
-        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
-            for i in 0..<(pvpGameCount * 2) {
-                grid[rowIndex][i] = -1
-            }
-        }
+
         
         
         print("This is my grid: ", grid)
@@ -287,7 +288,10 @@ class AlgorithmViewController: BaseViewController {
                 } else {
                     // Reset the background image of the cell to nil (no warningImage)
                     if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
-                        cell.makeCellOriginal()
+                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                            cell.makeCellOriginal()
+                        }
+
                     }
                 }
             }
@@ -385,6 +389,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 //        print(teamnumberlabel)
         
         // configure cells differently based on what it is
+        updateCellBackgroundImages()
         if teamNumberLabel == 0 {
             cell.makeCellInvisible()
         } else if teamNumberLabel == -1 {
@@ -393,7 +398,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
         
-        updateCellBackgroundImages()
+       
 
         
         return cell

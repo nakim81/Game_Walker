@@ -52,11 +52,14 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func makeCellOriginal() {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBoxImage
+        isUserInteractionEnabled = true
     }
     
     func makeCellInvisible() {
         algorithmCellBox.image = emptyCellBoxImage
         visible = false
+        isUserInteractionEnabled = false
+        teamnumLabel.text = ""
     }
     
     func makeCellEmpty() {
