@@ -44,7 +44,7 @@ class AlgorithmViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var pvpGameCount : Int = 2
+    private var pvpGameCount : Int = 0
     private var pveGameCount : Int = 0
 
     var indexPathA: IndexPath?
@@ -250,6 +250,19 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
+        // case when considering pvp cases
+        
+        guard pvpGameCount > 0 && pvpGameCount <= grid.count else {
+            print("Invalid number of pvp games compared to number of teams")
+            return
+        }
+        
+        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
+            for i in 0..<(pvpGameCount * 2) {
+                grid[rowIndex][i] = -1
+            }
+        }
+        
         print("This is my grid: ", grid)
     }
 
@@ -344,8 +357,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         
         // configure cells differently based on what it is
         if teamNumberLabel == 0 {
+            cell.makeCellInvisible()
+        } else if teamNumberLabel == -1 {
             cell.makeCellEmpty()
-        } else {
+        }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
 

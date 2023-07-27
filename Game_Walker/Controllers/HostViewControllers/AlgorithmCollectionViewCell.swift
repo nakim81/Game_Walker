@@ -53,9 +53,12 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = originalCellBoxImage
     }
     
-    func makeCellEmpty() {
-        teamnumLabel.text = ""
+    func makeCellInvisible() {
         algorithmCellBox.image = emptyCellBoxImage
         visible = false
+    }
+    
+    func makeCellEmpty() {
+        teamnumLabel.text = ""
     }
 }
