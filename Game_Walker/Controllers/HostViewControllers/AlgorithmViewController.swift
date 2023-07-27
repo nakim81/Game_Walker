@@ -15,9 +15,6 @@ class AlgorithmViewController: BaseViewController {
     private var totalrow : Int =  0
     private var totalcolumn : Int = 0
     
-//    private var team_smallerthaneight : Bool = false
-//    private var station_smallerthaneight : Bool = false
-//    private var round_smallerthaneight : Bool = false
     private var num_rounds : Int = 0
     private var num_teams : Int = 0
     private var num_stations : Int = 0
@@ -69,9 +66,7 @@ class AlgorithmViewController: BaseViewController {
         collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
         collectionView.dragInteractionEnabled = true
 
-//        print(collectionView.frame, "  HMMMM  ")
         collectionView.delegate = self
-//print("CELL WIDTH: ", cellWidth, " :CELL WIDTH")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.createGrid()
@@ -81,7 +76,6 @@ class AlgorithmViewController: BaseViewController {
             self.collectionView.clipsToBounds = true
             self.collectionView.isUserInteractionEnabled = true
             self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-            
 
         }
     }
@@ -161,9 +155,6 @@ class AlgorithmViewController: BaseViewController {
             }
             return nil
         }
-                                                 
-                                                 
-    
     
     func createGrid() {
         num_stations = stationList!.count
@@ -174,7 +165,6 @@ class AlgorithmViewController: BaseViewController {
 //        if (num_teams < num_stations) {
 //            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
 //        }
-        
         
         if (max(num_teams, num_stations) < 8) {
             needHorizontalEmptyCells = true
@@ -263,7 +253,45 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
+        
         print("This is my grid: ", grid)
+    }
+    
+    func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
+        var existingNumbers = Set<Int>()
+        var duplicates = [Int]()
+        for row in grid {
+            let number = row[column]
+            if existingNumbers.contains(number) {
+                duplicates.append(number)
+            }
+            existingNumbers.insert(number)
+        }
+        return duplicates
+    }
+    
+    func updateCellBackgroundImages() {
+        
+        for section in 0..<grid.count {
+            for item in 0..<grid[section].count {
+                let column = item
+                let duplicates = hasDuplicatesInColumn(column, in: grid)
+                
+                if  duplicates.contains(grid[section][item]) {
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
+                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                            cell.makeRedWarning()
+                        }
+    
+                    }
+                } else {
+                    // Reset the background image of the cell to nil (no warningImage)
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
+                        cell.makeCellOriginal()
+                    }
+                }
+            }
+        }
     }
 
 }
@@ -283,7 +311,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCell = collectionView.cellForItem(at: indexPath)
 
         if indexPathA == nil {
             // First selection
@@ -334,6 +361,8 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 selectedCellB?.teamnumLabel.textColor = self.originalcellBcolor
                 
                 
+                self.updateCellBackgroundImages()
+                
                 self.indexPathA = nil
                 self.indexPathB = nil
             })
@@ -363,6 +392,8 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
+        
+        updateCellBackgroundImages()
 
         
         return cell
