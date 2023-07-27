@@ -209,6 +209,7 @@ class AlgorithmViewController: BaseViewController {
             curr_row.removeAll()
         }
         
+        // case when considering pvp cases
         guard pvpGameCount > 0 && pvpGameCount <= grid.count else {
             print("Invalid number of pvp games compared to number of teams")
             return
@@ -250,8 +251,6 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
-        // case when considering pvp cases
-        
 
         
         
@@ -271,14 +270,56 @@ class AlgorithmViewController: BaseViewController {
         return duplicates
     }
     
-    func updateCellBackgroundImages() {
+    func checkAndChangeDuplicatesInRow(section: Int) -> Bool {
+        // Get the number of items in the section (row)
+        let numberOfItems = collectionView.numberOfItems(inSection: section)
+        var existingNumbers = Set<Int>()
+        var duplicates = Set<Int>()
         
+        var didHaveDuplicate = false
+        
+        for item in 0..<numberOfItems {
+            let indexPath = IndexPath(item: item, section: section)
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+               let text = cell.teamnumLabel.text,
+               let number = Int(text) {
+                if existingNumbers.contains(number) {
+                    duplicates.insert(number)
+                } else {
+                        existingNumbers.insert(number)
+                }
+            }
+        }
+        
+        for item in 0..<numberOfItems {
+            let indexPath = IndexPath(item: item, section: section)
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+               let text = cell.teamnumLabel.text,
+               let number = Int(text) {
+                if duplicates.contains(number) {
+                    if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                        cell.makeBlueWarning()
+                        didHaveDuplicate = true
+                    }
+                } else {
+                    if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                        cell.makeCellOriginal()
+                    }
+                }
+            }
+        }
+        return didHaveDuplicate
+    }
+    
+    func updateCellBackgroundImages() {
+        var hadRowDuplicates = false
         for section in 0..<grid.count {
+            hadRowDuplicates = checkAndChangeDuplicatesInRow(section: section)
             for item in 0..<grid[section].count {
                 let column = item
                 let duplicates = hasDuplicatesInColumn(column, in: grid)
                 
-                if  duplicates.contains(grid[section][item]) {
+                if duplicates.contains(grid[section][item]) {
                     if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
                         if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
                             cell.makeRedWarning()
@@ -288,7 +329,7 @@ class AlgorithmViewController: BaseViewController {
                 } else {
                     // Reset the background image of the cell to nil (no warningImage)
                     if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
-                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
                             cell.makeCellOriginal()
                         }
 
@@ -359,16 +400,15 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
                 let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
                 
-                selectedCellA?.algorithmCellBox.image = self.originalcellAimage
+//                selectedCellA?.algorithmCellBox.image = self.originalcellAimage
                 selectedCellA?.teamnumLabel.textColor = self.originalcellAcolor
-                selectedCellB?.algorithmCellBox.image = self.originalcellBimage
+//                selectedCellB?.algorithmCellBox.image = self.originalcellBimage
                 selectedCellB?.teamnumLabel.textColor = self.originalcellBcolor
                 
                 
-                self.updateCellBackgroundImages()
-                
                 self.indexPathA = nil
                 self.indexPathB = nil
+                self.updateCellBackgroundImages()
             })
         }
     }
