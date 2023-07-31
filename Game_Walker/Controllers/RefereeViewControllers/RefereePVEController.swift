@@ -24,7 +24,7 @@ class RefereePVEController: BaseViewController {
     var timer : Timer?
     var index = 0
     var team : Team?
-    var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 100, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconCutApple")]
+    var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 100, players: [], points: 0, stationOrder: [0], iconName: "iconCutApple")]
     
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
