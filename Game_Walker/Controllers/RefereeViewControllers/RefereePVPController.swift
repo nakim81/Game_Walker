@@ -17,7 +17,7 @@ class RefereePVPController: BaseViewController {
     var stationName = ""
     var index = 0
     var round = 1
-    var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Girl", number: 1, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconGirl"), Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Boy", number: 2, players: [], points: 10, currentStation: "testing2", nextStation: "", iconName: "iconBoy")]
+    var teamOrder : [Team] = [Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Girl", number: 1, players: [], points: 10, stationOrder: [0], iconName: "iconGirl"), Team(gamecode: UserData.readReferee("Referee")!.gamecode, name: "Boy", number: 2, players: [], points: 10, stationOrder: [0], iconName: "iconBoy")]
     var timer: Timer?
     var time : Int = 0
     var movingTime : Int = 0

@@ -20,12 +20,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedStation: Station?
     
     override func viewDidLoad() {
-        var teamOrder : [Team] = [Team(gamecode: "333333", name: "Simon Dominic1", number: 10, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconAir"), Team(gamecode: "333333", name: "Simon Dominic2", number: 11, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBear"), Team(gamecode: "333333", name: "Simon Dominic3", number: 12, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBlue"), Team(gamecode: "333333", name: "Simon Dominic4", number: 13, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconBoy"), Team(gamecode: "333333", name: "Simon Dominic5", number: 14, players: [], points: 0, currentStation: "testing", nextStation: "", iconName: "iconPenguin")]
-        var test = Station(name: "testing", pvp: false, points: 0, place: "", referee: Referee(uuid: refereeUserID, gamecode: "333333", name: "Referee 1", stationName: "", assigned: false), description: "I am testing now.", teamOrder: teamOrder)
-        Task { @MainActor in
-            try await S.addStation("333333", test)
-        }
-        
         super.viewDidLoad()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.delegate = self
