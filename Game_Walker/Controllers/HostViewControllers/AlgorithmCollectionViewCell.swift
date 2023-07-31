@@ -14,6 +14,9 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var selectedCellBoxImage = UIImage(named: "cellselected 1" )
     private var originalCellBoxImage = UIImage(named: "celloriginal")
     private var emptyCellBoxImage = UIImage(named: "emptycell")
+    private var redWarningBoxImage = UIImage(named: "red-warning")
+    private var purpleWarningBoxImage = UIImage(named: "purple-warning")
+    private var blueWarningBoxImage = UIImage(named: "blue-warning")
     private var visible : Bool = true
     
     static let identifier = "AlgorithmCollectionViewCell"
@@ -51,11 +54,29 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func makeCellOriginal() {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBoxImage
+        isUserInteractionEnabled = true
+    }
+    
+    func makeCellInvisible() {
+        algorithmCellBox.image = emptyCellBoxImage
+        visible = false
+        isUserInteractionEnabled = false
+        teamnumLabel.text = ""
     }
     
     func makeCellEmpty() {
         teamnumLabel.text = ""
-        algorithmCellBox.image = emptyCellBoxImage
-        visible = false
+    }
+    
+    func makeRedWarning() {
+        //same team in same column
+        algorithmCellBox.image = redWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+    }
+    
+    func makeBlueWarning() {
+        //same team in same row
+        algorithmCellBox.image = blueWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
     }
 }
