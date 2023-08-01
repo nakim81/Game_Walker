@@ -156,7 +156,7 @@ class HostTimerViewController: UIViewController {
         }
         isPaused = !isPaused
         Task { @MainActor in
-            try await H.pause_resume_game(gameCode)
+            await H.pause_resume_game(gameCode)
         }
     }
     

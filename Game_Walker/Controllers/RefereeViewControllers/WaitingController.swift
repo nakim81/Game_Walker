@@ -55,7 +55,7 @@ class WaitingController: BaseViewController {
             
             if self.currentIndex == 2 {
                 Task {@ MainActor in
-                    try await R.assignStation(self.referee.gamecode, self.referee.uuid, "testing", true)
+                    await R.assignStation(self.referee.gamecode, self.referee.uuid, "testing", true)
                 }
                 self.waitingImageViewWidthConstraint?.isActive = false
                 self.waitingImageViewWidthConstraint = self.waitingImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.47)
