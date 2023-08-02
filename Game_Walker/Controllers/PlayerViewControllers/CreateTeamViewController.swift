@@ -61,11 +61,11 @@ class CreateTeamViewController: BaseViewController {
             return
         }
         if let teamName: String = teamNameTextField.text, !teamName.isEmpty, let teamNumber: String = teamNumberTextField.text, !teamNumber.isEmpty {
-            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [], points: 0, currentStation: "", nextStation: "", iconName: selectedIconName)
+            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [], points: 0, stationOrder: [], iconName: selectedIconName)
             UserData.writeTeam(newTeam, "team")
             Task { @MainActor in
-                try await T.addTeam(gameCode, newTeam)
-                try await T.joinTeam(gameCode, newTeam.name, currentPlayer)
+                await T.addTeam(gameCode, newTeam)
+                await T.joinTeam(gameCode, newTeam.name, currentPlayer)
                 performSegue(withIdentifier: "goToTPF4", sender: self)
             }
         } else {
