@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 
 class GivePointsController: UIViewController {
-    var currentStationName: String
+    //var currentStationName: String
     var currentPoints: Int
     let gameCode: String
     let team: Team
     
     init(team: Team, gameCode: String) {
         self.team = team
-        self.currentStationName = team.currentStation
         self.currentPoints = team.points
         self.gameCode = gameCode
         super.init(nibName: nil, bundle: nil)
@@ -113,7 +112,7 @@ class GivePointsController: UIViewController {
     
     @objc func buttonTapped() {
         Task { @MainActor in
-            try await T.givePoints(gameCode, team.name, Int(stepper.value))
+            await T.givePoints(gameCode, team.name, Int(stepper.value))
         }
         self.presentingViewController?.dismiss(animated: true)
     }
