@@ -21,6 +21,7 @@ struct Host: Codable {
     var blanked: [[Int]] = []
     //game control
     var showScoreboard: Bool = true
+    //var gamestart: Bool = false
     var gameover: Bool = false
     //pause
     var paused: Bool = true
