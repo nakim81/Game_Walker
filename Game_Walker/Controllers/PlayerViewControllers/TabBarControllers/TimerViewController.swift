@@ -36,14 +36,16 @@ class TimerViewController: UIViewController {
     private var t : Int = 0
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private var stationName: String = "Hi"
+    private var stationOrder : [Int] = []
     
+    private var stationName: String?
     private var gameName: String?
     private var gameLocation: String?
     private var gamePoints: String?
     private var refereeName: String?
     private var gameRule: String?
     
+    private var nextStationName: String?
     private var nextGameName: String?
     private var nextGameLocation: String?
     private var nextGamePoints: String?
@@ -138,12 +140,21 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         S.delegate_getStation = self
+<<<<<<< HEAD
         // S.getStation("StationName")
+=======
+        S.delegate_stationList = self
+>>>>>>> fa85962 (Timer Implemented)
         H.delegates.append(self)
         H.delegate_getHost = self
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        T.delegate_getTeam = self
         Task {
             H.getHost(gameCode)
+<<<<<<< HEAD
+=======
+            T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
+>>>>>>> fa85962 (Timer Implemented)
             try await Task.sleep(nanoseconds: 280_000_000)
             configureTimerLabel()
         }
@@ -161,11 +172,21 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
+        Task {
+            S.getStationList(gameCode)
+            S.getStation(gameCode, self.stationName!)
+            try await Task.sleep(nanoseconds: 280_000_000)
+        }
         showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
-//        showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
+        Task {
+            S.getStationList(gameCode)
+            S.getStation(gameCode, self.nextStationName!)
+            try await Task.sleep(nanoseconds: 280_000_000)
+        }
+        showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
@@ -177,7 +198,7 @@ class TimerViewController: UIViewController {
     }
     
     func configureAnnouncementbuttonImage(){
-            announcementButton.setImage(readAll, for: .normal)
+        announcementButton.setImage(readAll, for: .normal)
     }
     
     func configureTimerLabel(){
@@ -336,7 +357,11 @@ class TimerViewController: UIViewController {
     }
 }
 //MARK: - UIUpdate
+<<<<<<< HEAD
 extension TimerViewController: GetStation, GetHost, HostUpdateListener {
+=======
+extension TimerViewController: GetStation, GetHost, GetTeam, StationList, HostUpdateListener {
+>>>>>>> fa85962 (Timer Implemented)
     func updateHost(_ host: Host) {
         self.isPaused = host.paused
         self.pauseTime = host.pauseTimestamp
@@ -360,5 +385,20 @@ extension TimerViewController: GetStation, GetHost, HostUpdateListener {
         self.gamePoints = String(station.points)
         self.refereeName = station.referee?.name
         self.gameRule = station.description
+    }
+    
+    func listOfStations(_ stations: [Station]) {
+        for station in stations {
+            if station.number == self.stationOrder[round - 1] {
+                self.stationName = station.name
+            }
+            else if station.number == self.stationOrder[round] {
+                self.nextStationName = station.name
+            }
+        }
+    }
+    
+    func getTeam(_ team: Team) {
+        self.stationOrder = team.stationOrder
     }
 }
