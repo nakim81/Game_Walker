@@ -26,7 +26,7 @@ class TimerViewController: UIViewController {
     var moving : Bool = true
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private var stationName: String = UserData.readTeam("team")?.currentStation ?? ""
+    private var stationName: String = "Hi"
     
     private var gameName: String?
     private var gameLocation: String?
