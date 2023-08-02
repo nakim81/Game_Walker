@@ -140,21 +140,14 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         S.delegate_getStation = self
-<<<<<<< HEAD
-        // S.getStation("StationName")
-=======
         S.delegate_stationList = self
->>>>>>> fa85962 (Timer Implemented)
         H.delegates.append(self)
         H.delegate_getHost = self
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.delegate_getTeam = self
         Task {
             H.getHost(gameCode)
-<<<<<<< HEAD
-=======
             T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
->>>>>>> fa85962 (Timer Implemented)
             try await Task.sleep(nanoseconds: 280_000_000)
             configureTimerLabel()
         }
@@ -357,11 +350,7 @@ class TimerViewController: UIViewController {
     }
 }
 //MARK: - UIUpdate
-<<<<<<< HEAD
-extension TimerViewController: GetStation, GetHost, HostUpdateListener {
-=======
 extension TimerViewController: GetStation, GetHost, GetTeam, StationList, HostUpdateListener {
->>>>>>> fa85962 (Timer Implemented)
     func updateHost(_ host: Host) {
         self.isPaused = host.paused
         self.pauseTime = host.pauseTimestamp
