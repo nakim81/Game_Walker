@@ -16,10 +16,6 @@ class GivePointsController: UIViewController {
     
     init(team: Team, gameCode: String) {
         self.team = team
-<<<<<<< HEAD
-        //self.currentStationName = team.currentStationName
-=======
->>>>>>> fa85962 (Timer Implemented)
         self.currentPoints = team.points
         self.gameCode = gameCode
         super.init(nibName: nil, bundle: nil)

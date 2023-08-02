@@ -11,20 +11,12 @@ import GMStepper
 
 class HostGivePointsController : UIViewController {
     
-<<<<<<< HEAD
-    //var currentStationName: String
-=======
->>>>>>> fa85962 (Timer Implemented)
     var currentPoints: Int
     let gameCode: String
     let team: Team
     
     init(team: Team, gameCode: String) {
         self.team = team
-<<<<<<< HEAD
-        //self.currentStationName = team.currentStation
-=======
->>>>>>> fa85962 (Timer Implemented)
         self.currentPoints = team.points
         self.gameCode = gameCode
         super.init(nibName: nil, bundle: nil)
