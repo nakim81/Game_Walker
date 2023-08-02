@@ -85,7 +85,8 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = String(teamList[indexPath.section].number)
         let team = teamList[indexPath.section]
-        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: team.currentStation, points: team.points, showScore: self.showScore)
+        //comeback later: stationName
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: "team.currentStation", points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
         return cell
     }
