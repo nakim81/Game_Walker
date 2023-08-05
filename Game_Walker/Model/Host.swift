@@ -14,14 +14,15 @@ struct Host: Codable {
     var movingTime: Int = 0
     var rounds: Int = 0
     var teams: Int = 0
+    var currentRound: Int = 1
     //algorithm
     var algorithm: [[String]] = []
-    var duplicated: [[Int]] = []
-    var doubled: [[Int]] = []
-    var blanked: [[Int]] = []
+//    var duplicated: [[Int]] = []
+//    var doubled: [[Int]] = []
+//    var blanked: [[Int]] = []
     //game control
     var showScoreboard: Bool = true
-    //var gamestart: Bool = false
+    var gameStart: Bool = false
     var gameover: Bool = false
     //pause
     var paused: Bool = true
@@ -38,12 +39,14 @@ struct Host: Codable {
         case gameTime
         case movingTime
         case rounds
+        case currentRound
         case teams
         case algorithm
-        case duplicated
-        case doubled
-        case blanked
+//        case duplicated
+//        case doubled
+//        case blanked
         case showScoreboard
+        case gameStart
         case gameover
         case paused
         case startTimestamp
