@@ -53,6 +53,18 @@ struct S {
             print("Error assigning Station a Referee: \(error)")
         }
     }
+    
+    static func updateTeamOrder(_ gamecode: String, _ station: Station, _ teamOrder: [Team]) async {
+        let docRef = db.collection("\(gamecode) : Stations").document(station.name)
+        do {
+            try await docRef.updateData([
+                "teamOrder": teamOrder
+            ])
+            print("Station assigned Referee")
+        } catch {
+            print("Error assigning Station a Referee: \(error)")
+        }
+    }
 
     static func getStation(_ gamecode: String, _ stationName : String) {
         let docRef = db.collection("\(gamecode) : Stations").document(stationName)
@@ -67,8 +79,9 @@ struct S {
         }
     }
     
+    
     static func getStationList(_ gamecode: String) {
-        //Sorted by pvp, pve
+        //sorted by station number and station is numbered priority to pvp
         db.collection("\(gamecode) : Stations")
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -81,6 +94,12 @@ struct S {
                         stations.append(station)
                     }
                     stations.sort {$0.pvp && !$1.pvp}
+                    if stations.first?.number == 0 {
+                        for i in 0...stations.count-1 {
+                            stations[i].number = i+1
+                        }
+                    }
+                    stations.sort {$0.number < $1.number}
                     delegate_stationList?.listOfStations(stations)
                 }
         }

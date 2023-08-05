@@ -57,13 +57,15 @@ struct H {
         do {
             try await server.updateData([
                 "startTimestamp": Int(Date().timeIntervalSince1970),
-                "paused": false
+                "paused": false,
+                "gameStart": true
             ])
             print("Started Game")
         } catch {
             print("Error starting Game: \(error)")
         }
     }
+    
     
     //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
      static func hide_show_score(_ gamecode: String, _ show: Bool) async {
@@ -102,6 +104,18 @@ struct H {
             }
         } catch {
             print("Error pausing/resuming Game: \(error)")
+        }
+    }
+    
+    static func updateRound(_ gamecode: String, _ currentRound: Int) async {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "currentRound": currentRound
+            ])
+            print("updated Round")
+        } catch {
+            print("Error updating Round: \(error)")
         }
     }
      

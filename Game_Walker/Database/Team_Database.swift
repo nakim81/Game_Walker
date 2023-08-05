@@ -112,6 +112,18 @@ struct T {
             print("Error giving points to Team: \(error)")
         }
     }
+    
+    static func updateStationOrder(_ gamecode: String, _ team: Team, _ stationOrder: [Int]) async {
+        let docRef = db.collection("\(gamecode) : Stations").document(team.name)
+        do {
+            try await docRef.updateData([
+                "stationOrder": stationOrder
+            ])
+            print("Staion Order updated")
+        } catch {
+            print("Error updating Station Order: \(error)")
+        }
+    }
 
     static func getTeam(_ gamecode: String, _ teamName : String) {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
