@@ -119,7 +119,7 @@ struct T {
             try await docRef.updateData([
                 "stationOrder": stationOrder
             ])
-            print("Staion Order updated")
+            print("Updated Station Order")
         } catch {
             print("Error updating Station Order: \(error)")
         }
@@ -182,4 +182,3 @@ struct T {
         return Team()
      }
 }
-

@@ -60,9 +60,9 @@ struct S {
             try await docRef.updateData([
                 "teamOrder": teamOrder
             ])
-            print("Station assigned Referee")
+            print("Updated Team order")
         } catch {
-            print("Error assigning Station a Referee: \(error)")
+            print("Error updating team order: \(error)")
         }
     }
 
