@@ -107,15 +107,15 @@ struct H {
         }
     }
     
-    static func updateRound(_ gamecode: String, _ currentRound: Int) async {
+    static func updateCurrentRound(_ gamecode: String, _ currentRound: Int) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
                 "currentRound": currentRound
             ])
-            print("updated Round")
+            print("Updated Current Round")
         } catch {
-            print("Error updating Round: \(error)")
+            print("Error updating Current Round: \(error)")
         }
     }
      
