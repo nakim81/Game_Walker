@@ -33,7 +33,7 @@ class MainViewController: BaseViewController {
 //            Task { @MainActor in
 //                H.createGame(gc, host1)
 //                for i in 1...8 {
-//                    let team = Team(gamecode: gc, name: "Team \(i)")
+//                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
 //                    let uuid = UUID().uuidString
 //                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)")
 //                    let station = Station(name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", referee: ref, description: "Fun * \(i)")
