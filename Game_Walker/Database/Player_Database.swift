@@ -14,8 +14,11 @@ import SwiftUI
 
 
 struct P {
+    
     static let db = Firestore.firestore()
-        
+    
+    //MARK: - Player Control Functions
+    
     static func addPlayer(_ gamecode: String, _ player: Player, _ uuid: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -33,23 +36,6 @@ struct P {
             print("Error adding Player: \(error)")
         }
     }
-    
-//    //to delete
-//    static func addPlayer2(_ gamecode: String, _ player: Player, _ uuid: String){
-//            let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-//            docRef.getDocument { (document, error) in
-//                if let document = document, document.exists {
-//                    do {
-//                        try db.collection("\(gamecode) : Players").document(uuid).setData(from: player)
-//                        print("Player sucessfully saved")
-//                    } catch let error {
-//                        print("Error writing to Firestore: \(error)")
-//                    }
-//                } else {
-//                    print("Gamecode does not exist")
-//                }
-//            }
-//        }
         
     static func removePlayer(_ gamecode: String, _ uuid: String) {
             db.collection("\(gamecode) : Players").document(uuid).delete() { err in

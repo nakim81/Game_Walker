@@ -13,24 +13,13 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct T {
+    
     static let db = Firestore.firestore()
     static var delegate_teamList: TeamList?
     static var delegate_getTeam: GetTeam?
     static var delegates : [TeamUpdateListener] = []
     
-    static func listenTeams(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-         db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
-             guard let documents = querySnapshot?.documents else { print("Error listening Teams"); return }
-             var teams: [Team] = []
-             for document in documents {
-                 teams.append(convertDataToTeam(document.data()))
-             }
-             teams.sort{$0.points > $1.points}
-            for delegate in delegates {
-                delegate.updateTeams(teams)
-            }
-        }
-    }
+    //MARK: - Team Control Functions
     
     static func addTeam(_ gamecode: String, _ team: Team) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
@@ -122,6 +111,22 @@ struct T {
             print("Updated Station Order")
         } catch {
             print("Error updating Station Order: \(error)")
+        }
+    }
+    
+    //MARK: - Database Functions
+    
+    static func listenTeams(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+         db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
+             guard let documents = querySnapshot?.documents else { print("Error listening Teams"); return }
+             var teams: [Team] = []
+             for document in documents {
+                 teams.append(convertDataToTeam(document.data()))
+             }
+             teams.sort{$0.points > $1.points}
+            for delegate in delegates {
+                delegate.updateTeams(teams)
+            }
         }
     }
 

@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+//MARK: - Protocols
+
 protocol RefereeUpdateListener {
     func updateReferee(_ referee: Referee)
 }
@@ -47,6 +49,8 @@ protocol HostUpdateListener {
 protocol GetHost {
     func getHost(_ host: Host)
 }
+
+//MARK: - Errors
 
 enum GamecodeError: Error {
     case invalidGamecode(String)

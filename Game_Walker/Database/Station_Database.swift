@@ -13,10 +13,13 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct S {
+    
     static let db = Firestore.firestore()
     static var delegate_stationList: StationList?
     static var delegate_getStation: GetStation?
-
+    
+    //MARK: - Station Control Functions
+    
     static func addStation(_ gamecode: String, _ station: Station) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -65,6 +68,8 @@ struct S {
             print("Error updating team order: \(error)")
         }
     }
+    
+    //MARK: - Database Functions
 
     static func getStation(_ gamecode: String, _ stationName : String) {
         let docRef = db.collection("\(gamecode) : Stations").document(stationName)
