@@ -75,7 +75,7 @@ class JoinGameViewController: BaseViewController {
                 // Save the game code and username to user defaults
                 UserData.writeGamecode(gamecode, "gamecode")
                 UserData.writeUsername(username, "username")
-
+                
                 // Create a new player object for the new game
                 player = Player(gamecode: gamecode, name: username)
                 UserData.writePlayer(player, "player")
@@ -93,7 +93,7 @@ class JoinGameViewController: BaseViewController {
         } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
             Task { @MainActor in
                 if (UserData.readTeam("team") != nil) {
-                    try await T.leaveTeam(savedGameCode, savedUserName, player)
+                    await T.leaveTeam(savedGameCode, savedUserName, player)
                 }
                 P.removePlayer(savedGameCode, uuid)
                 UserData.writeGamecode(gamecode, "gamecode")
@@ -119,7 +119,7 @@ class JoinGameViewController: BaseViewController {
         } else if gamecode != savedGameCode && username != savedUserName {
             Task {@MainActor in
                 if UserData.readTeam("team") != nil {
-                    try await T.leaveTeam(savedGameCode, savedUserName, player)
+                    await T.leaveTeam(savedGameCode, savedUserName, player)
                 }
                 P.removePlayer(savedGameCode, uuid)
                 UserData.writeGamecode(gamecode, "gamecode")
@@ -134,7 +134,7 @@ class JoinGameViewController: BaseViewController {
             alert(title: "", message: "Invalid Input!")
         }
     }
-
+    
     func listen(_ _ : [String : Any]){
     }
 }
