@@ -180,6 +180,9 @@ class HostTimerViewController: UIViewController {
                         strongSelf.moving = true
                         strongSelf.timeTypeLabel.text = "Moving Time"
                         strongSelf.round += 1
+                        Task {
+                            await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
+                        }
                         strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         strongSelf.rounds! -= 1
                     }
@@ -236,6 +239,9 @@ class HostTimerViewController: UIViewController {
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
+        Task {
+            await H.updateCurrentRound(gameCode, self.round)
+        }
         self.rounds! = self.rounds! - self.round
         self.roundLabel.text = "Round \(quotient + 1)"
     }
