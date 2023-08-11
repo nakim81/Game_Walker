@@ -37,7 +37,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var containerView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         return view
@@ -54,7 +54,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-  
+    
     func configureCreateTeamCell(_ imageName: String) {
         contentView.addSubview(containerView)
         containerView.addSubview(imageView)
@@ -64,7 +64,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                    
+            
             imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 50),

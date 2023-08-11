@@ -17,21 +17,40 @@ class LaunchScreenController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black;
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                self.addRectangles()
+            self.addRectangles()
         }
-        //prepareSound()
-        soundPlayer?.play()
+        self.playSound()
     }
+    //
+    //    func playMusic() {
+    //        guard let soundURL = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "m4a") else {
+    //            print("Background music file not found.")
+    //            return
+    //        }
+    //
+    //        do {
+    //            soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+    //            soundPlayer?.numberOfLoops = 2
+    //            soundPlayer?.prepareToPlay()
+    //            soundPlayer?.play()
+    //        } catch {
+    //            print("Failed to play background music: \(error.localizedDescription)")
+    //        }
+    //    }
     
-    func prepareSound() {
-        let path = Bundle.main.path(forResource: "LaunchScreenMusic.m4a", ofType: nil)!
-        let url = URL(fileURLWithPath: path)
-
+    func playSound() {
+        let soundName = "LaunchScreenMusic"
+        // forResource: 파일 이름(확장자 제외) , withExtension: 확장자(mp3, wav 등) 입력
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
+            return
+        }
+        
         do {
-            soundPlayer = try AVAudioPlayer(contentsOf: url)
-            soundPlayer?.prepareToPlay()    // play 전에 미리 메모리에 로드해두고 준비하는 것.
-        } catch {
-            // couldn't load file :(
+            soundPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+            soundPlayer?.numberOfLoops = 1
+            soundPlayer?.play()
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -58,7 +77,7 @@ class LaunchScreenController: UIViewController {
             self.addWords()
         }
     }
-
+    
     func addRectangle(at index: Int, rectangleViews: [UIView], colors: [UIColor], words: [String]) {
         let rectangleView = rectangleViews[index]
         rectangleView.backgroundColor = colors[index]
@@ -105,14 +124,14 @@ class LaunchScreenController: UIViewController {
         label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         UIView.animate(withDuration: 0.9, animations: {
-               label.alpha = 1.0
-           }, completion: { _ in
-               UIView.animate(withDuration: 0.9, animations: {
-                   label.alpha = 0.0
-               }, completion: { _ in
-                   label.removeFromSuperview()
-               })
-           })
+            label.alpha = 1.0
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.9, animations: {
+                label.alpha = 0.0
+            }, completion: { _ in
+                label.removeFromSuperview()
+            })
+        })
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             self.addIcon()
         }
@@ -129,15 +148,15 @@ class LaunchScreenController: UIViewController {
         imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         UIView.animate(withDuration: 0.9, animations: {
-               imageView.alpha = 1.0
-           }, completion: { _ in
-               UIView.animate(withDuration: 0.9, animations: {
-                   imageView.alpha = 0.0
-               }, completion: { _ in
-                   imageView.removeFromSuperview()
-                   self.performSegue(withIdentifier: "goToMain", sender: self)
-               })
-           })
+            imageView.alpha = 1.0
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.9, animations: {
+                imageView.alpha = 0.0
+            }, completion: { _ in
+                imageView.removeFromSuperview()
+                self.performSegue(withIdentifier: "goToMain", sender: self)
+            })
+        })
     }
 }
 

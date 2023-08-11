@@ -136,18 +136,18 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return 1
-     }
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return cellSpacingHeight
-        }
+        return cellSpacingHeight
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.clear
-            return headerView
-        }
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
 }
 
 // MARK: - TeamProtocol
@@ -158,7 +158,7 @@ extension TeamViewController: GetTeam, HostUpdateListener {
             var count = 0
             for ind in msgList.indices {
                 if (ind - count >= host.announcements.count) {
-                  break;
+                    break;
                 }
                 let text = msgList[ind]
                 if ((text != host.announcements[ind - count]) && TeamViewController.readMsgList.contains(text)) {
