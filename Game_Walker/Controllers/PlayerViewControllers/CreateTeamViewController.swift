@@ -113,12 +113,12 @@ class CreateTeamViewController: BaseViewController {
         //        }
         //        self.algorithm = random2DArray
         //        //
-        self.algorithm = [[1,2,3,4,5,6],
-                          [6,0,0,4,5,1],
-                          [6,3,4,5,1,2],
-                          [6,0,0,1,2,3],
-                          [6,5,1,2,3,4],
-                          [5,1,2,3,4,6]]
+//        self.algorithm = [[1,2,3,4,5,6],
+//                          [6,0,0,4,5,1],
+//                          [6,3,4,5,1,2],
+//                          [6,0,0,1,2,3],
+//                          [6,5,1,2,3,4],
+//                          [5,1,2,3,4,6]]
         if Int(teamNumber) ?? 0 > 0 {
             if !self.algorithm.isEmpty {
                 teamNameTextField.resignFirstResponder()
@@ -183,7 +183,7 @@ class CreateTeamViewController: BaseViewController {
             for column in order {
                 //no game for the round
                 if column == -1{
-                    actualOrder.append(-1)
+                    actualOrder.append(0)
                 }
                 // pvp games
                 else if column < limit {
