@@ -7,27 +7,62 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class RefereePVEController: BaseViewController {
     
     @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
-    var stationName = ""
-    var time : Int = 0
-    var movingTime : Int = 0
-    var gameTime : Int = 0
-    var gameCode = UserData.readGamecode("refereeGamecode")!
-    var referee = UserData.readReferee("Referee")!
-    var paused : Bool = false
-    var moving : Bool = true
-    var timer : Timer?
-    var index = 0
-    var team : Team?
-    var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 100, players: [], points: 0, stationOrder: [0], iconName: "iconCutApple")]
+    
+    private var stationName = ""
+    private var gameCode = UserData.readGamecode("refereeGamecode")!
+    private var referee = UserData.readReferee("Referee")!
+
+    private var team : Team?
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 100, players: [], points: 0, stationOrder: [0], iconName: "iconCutApple")]
     
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
+    private var messages: [String] = []
+    
+    private var startTime : Int = 0
+    private var pauseTime : Int = 0
+    private var pausedTime : Int = 0
+    private var timer = Timer()
+    private var totalTime: Int = 0
+    private var time: Int?
+    private var seconds: Int = 0
+    private var moveSeconds: Int = 0
+    private var moving: Bool = true
+    private var tapped: Bool = false
+    private var round: Int = 1
+    private var rounds: Int?
+    private var isPaused = true
+    private var currentRound : Int = 0
+    private var t : Int = 0
+    
+    var audioPlayer: AVAudioPlayer?
+
+    func playMusic() {
+        guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
+            print("Background music file not found.")
+            return
+        }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.numberOfLoops = 2
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("Failed to play background music: \(error.localizedDescription)")
+        }
+    }
+    
+    func stopMusic() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,8 +85,25 @@ class RefereePVEController: BaseViewController {
         }
     }
     
-    override func viewDidLoad() {
+    @IBAction func stationinfoButtonPressed(_ sender: Any) {
+        showRefereeGameInfoPopUp()
+    }
+    
+    @IBAction func messageButtonPressed(_ sender: Any) {
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: Any) {
         
+    }
+        
+    @objc func buttonTapped() {
+        UserData.writeTeam(self.team!, "Team")
+        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
+        self.present(popUpWindow, animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
         H.delegate_getHost = self
         H.delegates.append(self)
         S.delegate_getStation = self
@@ -62,12 +114,12 @@ class RefereePVEController: BaseViewController {
         S.getStation(gameCode, referee.stationName)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         
-        self.team = self.teamOrder[index]
+        self.team = self.teamOrder[self.round - 1]
         self.addSubviews()
         self.addConstraints()
-        self.runTimer()
+        calculateTime()
+        runTimer()
         super.viewDidLoad()
-        
     }
 //MARK: - UI elements
     private lazy var borderView: UIView = {
@@ -90,7 +142,7 @@ class RefereePVEController: BaseViewController {
     private lazy var iconButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         button.setTitle("", for: .normal)
-        button.setImage(UIImage(named: self.teamOrder[index].iconName), for: .normal)
+        button.setImage(UIImage(named: self.teamOrder[self.round - 1].iconName), for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
@@ -102,7 +154,7 @@ class RefereePVEController: BaseViewController {
         view.textColor = .black
         view.font = UIFont(name: "Dosis-SemiBold", size: 25)
         view.textAlignment = .center
-        view.text = "Team " + "\(self.teamOrder[index].number)"
+        view.text = "Team " + "\(self.teamOrder[self.round - 1].number)"
         return view
     }()
     
@@ -113,7 +165,7 @@ class RefereePVEController: BaseViewController {
         view.textColor = .black
         view.font = UIFont(name: "Dosis-Regular", size: 25)
         view.textAlignment = .center
-        view.text = self.teamOrder[index].name
+        view.text = self.teamOrder[self.round - 1].name
         return view
     }()
     
@@ -124,7 +176,7 @@ class RefereePVEController: BaseViewController {
         view.textColor = .black
         view.font = UIFont(name: "Dosis-Bold", size: 50)
         view.textAlignment = .center
-        view.text = "\(self.teamOrder[index].points)"
+        view.text = "\(self.teamOrder[self.round - 1].points)"
         return view
     }()
     
@@ -135,7 +187,7 @@ class RefereePVEController: BaseViewController {
         view.textColor = .black
         view.font = UIFont(name: "Dosis-SemiBold", size: 45)
         view.textAlignment = .center
-        view.text = "Round " + "\(index + 1)"
+        view.text = "Round " + "\(self.round)"
         return view
     }()
     
@@ -158,60 +210,6 @@ class RefereePVEController: BaseViewController {
         view.text = "Moving Time"
         return view
     }()
-    
-    func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(RefereePVEController.updateTimer)), userInfo: nil, repeats: true)
-    }
-        
-    @objc func updateTimer() {
-        if time < 1 {
-            if moving {
-                time = gameTime
-                moving = false
-            } else {
-                time = movingTime
-                moving = true
-                index += 1
-                teamNumber.text = "Team " + "\(self.teamOrder[index].number)"
-                teamName.text = self.teamOrder[index].name
-                roundLabel.text = "Round " + "\(index + 1)"
-                iconButton.setImage(UIImage(named: self.teamOrder[index].iconName), for: .normal)
-                self.team = self.teamOrder[index]
-            }
-            } else {
-                if !paused {
-                    time -= 1
-                }
-                timerLabel.text = timeString(time: TimeInterval(time))
-            }
-        }
-        
-        func timeString(time:TimeInterval) -> String {
-                let minutes = Int(time) / 60 % 60
-                let seconds = Int(time) % 60
-                return String(format:"%02i : %02i", minutes, seconds)
-        }
-    
-    @IBAction func stationinfoButtonPressed(_ sender: Any) {
-        showRefereeGameInfoPopUp()
-    }
-    
-    @IBAction func messageButtonPressed(_ sender: Any) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
-    }
-    
-    @IBAction func settingsButtonPressed(_ sender: Any) {
-        
-    }
-        
-    @objc func buttonTapped() {
-        UserData.writeTeam(self.team!, "Team")
-        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
-        self.present(popUpWindow, animated: true, completion: nil)
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
     
     func addSubviews() {
         self.view.addSubview(roundLabel)
@@ -266,27 +264,96 @@ class RefereePVEController: BaseViewController {
         timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
     }
+    
+//MARK: - Timer
+    func runTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if !strongSelf.isPaused {
+                if strongSelf.rounds! < 1 {
+                    strongSelf.playMusic()
+                    timer.invalidate()
+                }
+                if strongSelf.time! < 1 {
+                    if strongSelf.moving {
+                        strongSelf.time = strongSelf.seconds
+                        strongSelf.moving = false
+                        strongSelf.timetypeLabel.text = "Game Time"
+                    } else {
+                        strongSelf.time = strongSelf.moveSeconds
+                        strongSelf.moving = true
+                        strongSelf.timetypeLabel.text = "Moving Time"
+                        strongSelf.teamNumber.text = "Team " + "\(strongSelf.teamOrder[strongSelf.round - 1].number)"
+                        strongSelf.roundLabel.text = "Round \(strongSelf.round)"
+                        strongSelf.rounds! -= 1
+                    }
+                }
+                strongSelf.time! -= 1
+                let minute = strongSelf.time!/60
+                let second = strongSelf.time! % 60
+                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+            }
+        }
+    }
+    
+    func calculateTime() {
+        if isPaused {
+            t = pauseTime - startTime - pausedTime
+        }
+        else {
+            if pausedTime != 0 {
+                t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
+            }
+            else {
+                t = 0
+            }
+        }
+        let remainder = t%(moveSeconds + seconds)
+        if (remainder/moveSeconds) == 0 {
+            self.timetypeLabel.text = "Moving Time"
+            self.time = (moveSeconds - remainder)
+            self.moving = true
+            let minute = (moveSeconds - remainder)/60
+            let second = (moveSeconds - remainder) % 60
+            self.timerLabel.text = String(format:"%02i : %02i", minute, second)
+        }
+        else {
+            self.timetypeLabel.text = "Game Time"
+            self.time = (seconds - remainder)
+            self.moving = false
+            let minute = (seconds - remainder)/60
+            let second = (seconds - remainder) % 60
+            self.timerLabel.text = String(format:"%02i : %02i", minute, second)
+        }
+        self.rounds! = self.rounds! - self.round
+    }
+    
+    func listen(_ _ : [String : Any]){
+    }
+    
 }
 
-//MARK: - GetStation
-extension RefereePVEController: GetStation {
+//MARK: - Protocols
+extension RefereePVEController: GetStation, GetHost, TeamUpdateListener, HostUpdateListener {
     func getStation(_ station: Station) {
-        print("C")
         self.stationName = station.name
         self.teamOrder = station.teamOrder
     }
-}
-//MARK: - GetHost
-extension RefereePVEController: GetHost {
+    
     func getHost(_ host: Host) {
-        print("D")
-        self.time = host.movingTime
-        self.movingTime = host.movingTime
-        self.gameTime = host.gameTime
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.round = host.currentRound
+        self.messages = host.announcements
     }
-}
-// MARK: - TeamUpdateListener
-extension RefereePVEController: TeamUpdateListener {
+    
     func updateTeams(_ teams: [Team]) {
         for team in teams {
             if self.team!.name == team.name {
@@ -295,10 +362,15 @@ extension RefereePVEController: TeamUpdateListener {
         }
         scoreLabel.text = "\(self.team!.points)"
     }
-}
-// MARK: - HostUpdateListener
-extension RefereePVEController: HostUpdateListener {
+    
     func updateHost(_ host: Host) {
-        self.paused = host.paused
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.round = host.currentRound
+        self.roundLabel.text = "Round \(host.currentRound)"
+        self.currentRound = host.currentRound
     }
 }
+
+

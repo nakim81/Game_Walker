@@ -75,7 +75,7 @@ class GameInfoViewController: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
+        
         return label
     }()
     
@@ -90,7 +90,7 @@ class GameInfoViewController: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
+        
         return label
     }()
     
@@ -105,7 +105,7 @@ class GameInfoViewController: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
+        
         return label
     }()
     
@@ -120,7 +120,7 @@ class GameInfoViewController: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
+        
         return label
     }()
     
@@ -148,20 +148,20 @@ class GameInfoViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Regular", size: 17)
-
+        
         // enable
         button.setTitle(title, for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
+        
         // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-
+        
         // layer
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-
+        
         button.addAction(for: .touchUpInside) { _ in
             completion?()
         }
@@ -189,30 +189,30 @@ class GameInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         // curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         // curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = true
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         makeConstraints()
     }
-
+    
     private func setupViews() {
         self.view.addSubview(containerView)
         containerView.addSubview(gameInfoLabel)
@@ -229,7 +229,7 @@ class GameInfoViewController: UIViewController {
         containerView.addSubview(buttonView)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
-
+    
     private func makeConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         gameInfoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -344,35 +344,35 @@ extension UIColor {
 
 extension UIControl {
     public typealias UIControlTargetClosure = (UIControl) -> ()
-
+    
     private class UIControlClosureWrapper: NSObject {
         let closure: UIControlTargetClosure
         init(_ closure: @escaping UIControlTargetClosure) {
             self.closure = closure
         }
     }
-
+    
     private struct AssociatedKeys {
         static var targetClosure = "targetClosure"
     }
-
+    
     private var targetClosure: UIControlTargetClosure? {
         get {
             guard let closureWrapper = objc_getAssociatedObject(self, &AssociatedKeys.targetClosure) as? UIControlClosureWrapper else { return nil }
             return closureWrapper.closure
-
+            
         } set(newValue) {
             guard let newValue = newValue else { return }
             objc_setAssociatedObject(self, &AssociatedKeys.targetClosure, UIControlClosureWrapper(newValue),
                                      objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
+    
     @objc func closureAction() {
         guard let targetClosure = targetClosure else { return }
         targetClosure(self)
     }
-
+    
     public func addAction(for event: UIControl.Event, closure: @escaping UIControlTargetClosure) {
         targetClosure = closure
         addTarget(self, action: #selector(UIControl.closureAction), for: event)
