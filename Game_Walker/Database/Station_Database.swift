@@ -57,13 +57,19 @@ struct S {
         }
     }
     
-    static func updateTeamOrder(_ gamecode: String, _ station: Station, _ teamOrder: [Team]) async {
-        let docRef = db.collection("\(gamecode) : Stations").document(station.name)
+    static func updateTeamOrder(_ gamecode: String, _ stationName: String, _ teamOrder: [Team]) async {
+        let docRef = db.collection("\(gamecode) : Stations").document(stationName)
         do {
-            try await docRef.updateData([
-                "teamOrder": teamOrder
-            ])
-            print("Updated Team order")
+            let document = try await docRef.getDocument()
+            if document.exists {
+                guard let data = document.data() else { return }
+                var station = convertDataToStation(data)
+                station.teamOrder = teamOrder
+                print(station.teamOrder)
+                try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+            } else {
+                print("Updated Team order")
+            }
         } catch {
             print("Error updating team order: \(error)")
         }

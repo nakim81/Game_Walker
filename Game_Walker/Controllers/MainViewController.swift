@@ -23,6 +23,8 @@ class MainViewController: BaseViewController {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
+        
+        
         //print(UserData.readUUID())
      
 //        for i in 1...9 {

@@ -103,7 +103,7 @@ struct T {
     }
     
     static func updateStationOrder(_ gamecode: String, _ team: Team, _ stationOrder: [Int]) async {
-        let docRef = db.collection("\(gamecode) : Stations").document(team.name)
+        let docRef = db.collection("\(gamecode) : Teams").document(team.name)
         do {
             try await docRef.updateData([
                 "stationOrder": stationOrder
