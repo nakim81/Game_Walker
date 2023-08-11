@@ -13,20 +13,12 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct H {
+    
     static let db = Firestore.firestore()
     static var delegate_getHost: GetHost?
     static var delegates : [HostUpdateListener] = []
     
-    static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-         db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
-             guard let document = documentSnapshot else { print("Error listening Host"); return }
-             guard let data = document.data() else { print("Error listening Host"); return }
-                 let host = convertDataToHost(data)
-                 for delegate in delegates {
-                     delegate.updateHost(host)
-                 }
-            }
-    }
+    //MARK: - Game Control Functions
     
     static func createGame(_ gamecode: String, _ host: Host) {
         do {
@@ -66,20 +58,6 @@ struct H {
         }
     }
     
-    
-    //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
-     static func hide_show_score(_ gamecode: String, _ show: Bool) async {
-        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
-        do {
-            try await server.updateData([
-                "showScoreboard": show
-            ])
-            print("Hid/Showed Score")
-        } catch {
-            print("Error hiding/showing score: \(error)")
-        }
-    }
-    
     static func pause_resume_game(_ gamecode: String) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -107,6 +85,18 @@ struct H {
         }
     }
     
+    static func endGame(_ gamecode: String) async {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "gameover": true
+            ])
+            print("End Game")
+        } catch {
+            print("Error ending Game: \(error)")
+        }
+    }
+    
     static func updateCurrentRound(_ gamecode: String, _ currentRound: Int) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -118,6 +108,21 @@ struct H {
             print("Error updating Current Round: \(error)")
         }
     }
+    
+    //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
+     static func hide_show_score(_ gamecode: String, _ show: Bool) async {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "showScoreboard": show
+            ])
+            print("Hid/Showed Score")
+        } catch {
+            print("Error hiding/showing score: \(error)")
+        }
+    }
+        
+    //MARK: - Announcment Functions
      
     static func addAnnouncement(_ gamecode: String, _ announcement: String) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
@@ -179,6 +184,19 @@ struct H {
         } catch {
             print("Error removing Announcement: \(error)")
         }
+    }
+    
+    //MARK: - Database Functions
+    
+    static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+         db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
+             guard let document = documentSnapshot else { print("Error listening Host"); return }
+             guard let data = document.data() else { print("Error listening Host"); return }
+                 let host = convertDataToHost(data)
+                 for delegate in delegates {
+                     delegate.updateHost(host)
+                 }
+            }
     }
     
     static func getHost(_ gamecode: String){

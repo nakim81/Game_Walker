@@ -8,7 +8,7 @@
 import Foundation
 
 struct Host: Codable {
-    //game info
+    //MARK: - Game Info
     var gamecode: String = ""
     var gameTime: Int = 0
     var movingTime: Int = 0
@@ -17,10 +17,8 @@ struct Host: Codable {
     var currentRound: Int = 1
     //algorithm
     var algorithm: [[Int]] = []
-//    var duplicated: [[Int]] = []
-//    var doubled: [[Int]] = []
-//    var blanked: [[Int]] = []
-    //game control
+    
+    //MARK: - Game Control
     var showScoreboard: Bool = true
     var gameStart: Bool = false
     var gameover: Bool = false
@@ -42,9 +40,6 @@ struct Host: Codable {
         case currentRound
         case teams
         case algorithm
-//        case duplicated
-//        case doubled
-//        case blanked
         case showScoreboard
         case gameStart
         case gameover
@@ -56,7 +51,7 @@ struct Host: Codable {
     }
     
     
-////MARK: - Algorithm
+//MARK: - Algorithm Functions
 //    mutating func setAlgorithm(){
 //        sortStations()
 //        let columns = stations.count + countOfPVP
