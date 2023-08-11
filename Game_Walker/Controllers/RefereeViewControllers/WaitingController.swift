@@ -27,28 +27,30 @@ class WaitingController: BaseViewController {
     private var pvp : Bool = true
     private var number : Int = 0
     private var teams : [Team] = []
+    private var updatedTeamOrder : [Team] = []
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        configureNavItem()
         callProtocols()
         //testing1()
         //testing2()
         //testing3()
+        //testing4()
+        setTeamOrder()
         Task {
-            T.getTeamList(gameCode)
-            S.getStationList(gameCode)
-            S.removeStation(gameCode, self.station)
-            //self.station.teamOrder = setTeamOrder()
-            await S.addStation(gameCode, self.station)
+//            T.getTeamList(gameCode)
+//            S.getStationList(gameCode)
+//            await S.addStation(gameCode, Station(name: "UpdateTesting", number : 11, pvp : false))
+//            await S.updateTeamOrder(gameCode, "UpdateTesting", self.updatedTeamOrder)
+//            await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
         }
         addSubviews()
         makeConstraints()
         animateWaitingScreen()
+        super.viewDidLoad()
     }
     
 // MARK: - SetTeamOrder
-    func setTeamOrder() -> [Team] {
+    func setTeamOrder() {
         //Function is being called after S.getStation(referee.stationName) called and that referee is assigned.
         var pvp_count : Int = 0
         var column_number_index : Int = 0
@@ -56,11 +58,13 @@ class WaitingController: BaseViewController {
         var right : [Int] = []
         var teamNumOrder : [Int] = []
         var teamOrder : [Team] = []
+        print(self.stationList)
         for station in self.stationList {
             if station.pvp == true {
                 pvp_count += 1
             }
         }
+        print(pvp_count)
         if self.station.pvp {
             column_number_index = 2 * station.number - 2
             var left = self.algorithm.map({ $0[column_number_index] })
@@ -74,18 +78,27 @@ class WaitingController: BaseViewController {
         }
         else {
             column_number_index = 2 * pvp_count + station.number - pvp_count - 1
+            print(column_number_index)
+            print(self.algorithm)
             teamNumOrder = self.algorithm.map({ $0[column_number_index] })
+            print(teamNumOrder)
         }
+        print(teamNumOrder)
         for team_num in teamNumOrder {
+            if team_num == 0 {
+                teamOrder.append(Team())
+            }
             for team in self.teams {
                 if team_num == team.number {
                     teamOrder.append(team)
                 }
             }
         }
-        return teamOrder
+        print(teamOrder)
+        self.updatedTeamOrder = teamOrder
     }
-
+    
+    
     // Testing Case # 1
     func testing1() {
         self.algorithm = [[1, 2, 3, 4, 5, 6, 7, 8],
@@ -128,6 +141,21 @@ class WaitingController: BaseViewController {
         self.station = Station(number : 4, pvp : false)
     }
     
+    // Testing Case # 4
+    func testing4() {
+        self.algorithm = [[1, 2, 3, 4, 5, 6, 7, 8],
+                          [2, 3, 4, 5, 6, 7, 8, 1],
+                          [3, 4, 5, 6, 7, 8, 1, 2],
+                          [6, 7, 8, 1, 2, 0, 4, 5],
+                          [7, 8, 1, 2, 3, 4, 5, 6],
+                          [8, 1, 2, 3, 4, 0, 6, 7],
+                          [4, 5, 6, 7, 8, 1, 2, 3],
+                          [5, 6, 7, 8, 1, 2, 3, 4]]
+        self.stationList = [Station(number : 1, pvp : true), Station(number : 2, pvp : true), Station(number : 3, pvp : true), Station(number : 4, pvp : false), Station(number : 5, pvp : false)]
+        self.station = Station(number : 4, pvp : false)
+        self.teams = [Team(number: 1), Team(number: 2), Team(number: 3), Team(number: 4), Team(number: 5), Team(number: 6), Team(number: 7), Team(number: 8)]
+    }
+    
     //MARK: - Animating Screen
     func animateWaitingScreen() {
         if timer != nil {
@@ -140,6 +168,7 @@ class WaitingController: BaseViewController {
                 self.waitingImageViewWidthConstraint = self.waitingImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.47)
                 self.waitingImageViewWidthConstraint?.isActive = true
                 self.currentIndex = 0
+                self.performSegue(withIdentifier: "goToPVE", sender: self)
             }
             else {
                 self.currentIndex += 1
@@ -171,16 +200,6 @@ class WaitingController: BaseViewController {
     }
     
 //MARK: - UI elements
-    func configureNavItem() {
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(WaitingController.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-    }
-    
-    @objc func back(sender: UIBarButtonItem) {
-        //performSegue(withIdentifier: "", sender: self)
-    }
-    
     private lazy var gameIconView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 311, height: 146.46))
         imageView.image = UIImage(named: "game 1")
@@ -218,6 +237,11 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "Referee")
         self.referee = UserData.readReferee("Referee")!
+        for station in self.stationList {
+            if self.referee.stationName == station.name {
+                self.station = station
+            }
+        }
     }
     
     func listOfStations(_ stations: [Station]) {
@@ -228,7 +252,7 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
     func updateHost(_ host: Host) {
         self.algorithm = host.algorithm
         if self.algorithm != [] {
-            self.station.teamOrder = setTeamOrder()
+            setTeamOrder()
         }
     }
     

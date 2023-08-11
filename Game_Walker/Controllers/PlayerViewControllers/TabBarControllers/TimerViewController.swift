@@ -147,8 +147,6 @@ class TimerViewController: UIViewController {
             H.getHost(gameCode)
             T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
             S.getStationList(gameCode)
-            //try await Task.sleep(nanoseconds: 280_000_000)
-            configureTimerLabel()
         }
     }
     
@@ -204,7 +202,7 @@ class TimerViewController: UIViewController {
         }
     }
     
-    func configureTimerLabel(){
+    func configureTimerLabel() {
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
@@ -236,15 +234,15 @@ class TimerViewController: UIViewController {
             totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
             totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
         ])
-        let minute = moveSeconds/60
-        let second = moveSeconds % 60
-        timerLabel.text = String(format:"%02i : %02i", minute, second)
-        roundLabel.text = "Round \(round)"
-        let totalMinute = totalTime/60
-        let totalSecond = totalTime % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-        totalTimeLabel.attributedText = attributedString
+//        let minute = moveSeconds/60
+//        let second = moveSeconds % 60
+//        timerLabel.text = String(format:"%02i : %02i", minute, second)
+//        roundLabel.text = "Round \(round)"
+//        let totalMinute = totalTime/60
+//        let totalSecond = totalTime % 60
+//        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+//        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+//        totalTimeLabel.attributedText = attributedString
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
@@ -326,7 +324,7 @@ class TimerViewController: UIViewController {
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
         self.rounds! = self.rounds! - self.round
-        self.roundLabel.text = "Round \(self.round + 1)"
+        self.roundLabel.text = "Round \(self.round)"
     }
     
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
@@ -375,6 +373,7 @@ extension TimerViewController: GetHost, GetTeam, StationList, HostUpdateListener
         self.rounds = host.rounds
         self.round = host.currentRound
         self.messages = host.announcements
+        configureTimerLabel()
     }
     
     func listOfStations(_ stations: [Station]) {
