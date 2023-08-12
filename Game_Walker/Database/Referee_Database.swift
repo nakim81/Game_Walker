@@ -113,6 +113,7 @@ struct R {
                         let referee = convertDataToReferee(data)
                         referees.append(referee)
                     }
+                    referees.sort{$0.name < $1.name}
                     delegate_refereeList?.listOfReferees(referees)
                 }
         }

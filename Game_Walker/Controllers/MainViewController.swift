@@ -38,7 +38,7 @@ class MainViewController: BaseViewController {
 //                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
 //                    let uuid = UUID().uuidString
 //                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)")
-//                    let station = Station(name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", referee: ref, description: "Fun * \(i)")
+//                    let station = Station(name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", description: "Fun * \(i)")
 //                    await T.addTeam(gc, team)
 //                    try await R.addReferee(gc, ref, uuid)
 //                    await S.addStation(gc, station)
