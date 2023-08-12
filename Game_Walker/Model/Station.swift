@@ -8,6 +8,7 @@
 import Foundation
 
 struct Station: Codable, Equatable {
+    var uuid: String = ""
     var name: String = ""
     var number: Int = 0
     var pvp: Bool = true
@@ -18,6 +19,7 @@ struct Station: Codable, Equatable {
     var teamOrder: [Team] = []
     
     enum CodingKeys: String, CodingKey {
+        case uuid
         case name
         case number
         case pvp

@@ -27,33 +27,34 @@ class MainViewController: BaseViewController {
         
         //print(UserData.readUUID())
      
-//        for i in 1...9 {
-//            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
-//            let host1 = Host(gamecode: gc)
-//            var uuids: [String] = []
-//
-//            Task { @MainActor in
-//                H.createGame(gc, host1)
-//                for i in 1...8 {
-//                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
-//                    let uuid = UUID().uuidString
-//                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)")
-//                    let station = Station(name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", description: "Fun * \(i)")
-//                    await T.addTeam(gc, team)
-//                    try await R.addReferee(gc, ref, uuid)
-//                    await S.addStation(gc, station)
-//                    await H.addAnnouncement(gc, "Announcement \(i) \n This is announcement \(i)!")
-//                }
-//                for i in 1...64 {
-//                    let player = Player(gamecode: gc, name: "Player \(i)")
-//                    let uuid = UUID().uuidString
-//                    uuids.append(uuid)
-//                    try await P.addPlayer(gc, player, uuid)
-//                    let j = i%8 + 1
-//                    await T.joinTeam(gc, "Team \(j)", player)
-//                }
-//            }
-//        }
+        for i in 1...4 {
+            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
+            let host1 = Host(gamecode: gc)
+            var uuids: [String] = []
+
+            Task { @MainActor in
+                H.createGame(gc, host1)
+                for i in 1...8 {
+                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
+                    let uuid = UUID().uuidString
+                    let uuid2 = UUID().uuidString
+                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)")
+                    let station = Station(uuid: uuid, name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", description: "Fun * \(i)")
+                    await T.addTeam(gc, team)
+                    try await R.addReferee(gc, ref, uuid)
+                    await S.saveStation(gc, station)
+                    await H.addAnnouncement(gc, "Announcement \(i) \n This is announcement \(i)!")
+                }
+                for i in 1...64 {
+                    let player = Player(gamecode: gc, name: "Player \(i)")
+                    let uuid = UUID().uuidString
+                    uuids.append(uuid)
+                    try await P.addPlayer(gc, player, uuid)
+                    let j = i%8 + 1
+                    await T.joinTeam(gc, "Team \(j)", player)
+                }
+            }
+        }
         
         super.viewDidLoad()
     }
