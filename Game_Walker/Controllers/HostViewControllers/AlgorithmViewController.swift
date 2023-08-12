@@ -159,12 +159,6 @@ class AlgorithmViewController: BaseViewController {
     func createGrid() {
         num_stations = stationList!.count
 
-//        if (num_stations < num_teams) {
-//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-//        }
-//        if (num_teams < num_stations) {
-//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-//        }
         
         if (max(num_teams, num_stations) < 8) {
             needHorizontalEmptyCells = true
@@ -251,11 +245,24 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
-
-        
-        
         print("This is my grid: ", grid)
     }
+//    func checkDuplicatesInColumns(for pvpCount: Int) {
+//        let columnPairs = pvpCount > 0 ? (0..<grid[0].count / 2) : [] // Define column pairs based on pvpCount
+//
+//        for row in 0..<grid.count {
+//            for columnIndex in columnPairs {
+//                let valueA = grid[row][columnIndex]
+//                let valueB = grid[row][columnIndex + grid[0].count / 2]
+//
+//                if valueA == valueB {
+//                    // Handle the case of duplicate values
+//                    print("Duplicate value \(valueA) in column \(columnIndex + 1) and \(columnIndex + grid[0].count / 2 + 1), row \(row + 1)")
+//                }
+//            }
+//        }
+//    }
+    
     
     func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
         var existingNumbers = Set<Int>()
