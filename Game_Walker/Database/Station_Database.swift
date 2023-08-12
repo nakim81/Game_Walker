@@ -90,7 +90,6 @@ struct S {
         }
     }
     
-    
     static func getStationList(_ gamecode: String) {
         //sorted by station number and station is numbered priority to pvp
         db.collection("\(gamecode) : Stations")
