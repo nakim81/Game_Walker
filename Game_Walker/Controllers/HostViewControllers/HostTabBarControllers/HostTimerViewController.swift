@@ -133,10 +133,6 @@ class HostTimerViewController: UIViewController {
         H.delegate_getHost = self
         H.getHost(gameCode)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        Task {
-            try await Task.sleep(nanoseconds: 280_000_000)
-            configureTimerLabel()
-        }
     }
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
@@ -278,15 +274,15 @@ class HostTimerViewController: UIViewController {
             totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
             totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
         ])
-        let minute = moveSeconds/60
-        let second = moveSeconds % 60
-        timerLabel.text = String(format:"%02i : %02i", minute, second)
-        roundLabel.text = "Round \(round)"
-        let totalMinute = totalTime/60
-        let totalSecond = totalTime % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-        totalTimeLabel.attributedText = attributedString
+//        let minute = moveSeconds/60
+//        let second = moveSeconds % 60
+//        timerLabel.text = String(format:"%02i : %02i", minute, second)
+//        roundLabel.text = "Round \(round)"
+//        let totalMinute = totalTime/60
+//        let totalSecond = totalTime % 60
+//        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+//        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+//        totalTimeLabel.attributedText = attributedString
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
@@ -315,6 +311,7 @@ extension HostTimerViewController: GetHost {
         else {
             pauseOrPlayButton.setImage(pause, for: .normal)
         }
+        configureTimerLabel()
     }
 }
 //MARK: - Listener

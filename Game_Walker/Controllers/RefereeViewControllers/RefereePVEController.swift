@@ -18,7 +18,6 @@ class RefereePVEController: BaseViewController {
     private var stationName = ""
     private var gameCode = UserData.readGamecode("refereeGamecode")!
     private var referee = UserData.readReferee("Referee")!
-
     private var team : Team?
     private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 100, players: [], points: 0, stationOrder: [0], iconName: "iconCutApple")]
     
@@ -41,7 +40,8 @@ class RefereePVEController: BaseViewController {
     private var isPaused = true
     private var currentRound : Int = 0
     private var t : Int = 0
-    
+
+//MARK: - Music Playing
     var audioPlayer: AVAudioPlayer?
 
     func playMusic() {
@@ -104,23 +104,19 @@ class RefereePVEController: BaseViewController {
     }
     
     override func viewDidLoad() {
-        H.delegate_getHost = self
-        H.delegates.append(self)
-        S.delegate_getStation = self
-        T.delegates.append(self)
-        
+        callProtocols()
         H.getHost(gameCode)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         S.getStation(gameCode, referee.stationName)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        
         self.team = self.teamOrder[self.round - 1]
-        self.addSubviews()
-        self.addConstraints()
+        addSubviews()
+        addConstraints()
         calculateTime()
         runTimer()
         super.viewDidLoad()
     }
+
 //MARK: - UI elements
     private lazy var borderView: UIView = {
         var view = UIView()
@@ -329,10 +325,6 @@ class RefereePVEController: BaseViewController {
         }
         self.rounds! = self.rounds! - self.round
     }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
 }
 
 //MARK: - Protocols
@@ -370,6 +362,16 @@ extension RefereePVEController: GetStation, GetHost, TeamUpdateListener, HostUpd
         self.round = host.currentRound
         self.roundLabel.text = "Round \(host.currentRound)"
         self.currentRound = host.currentRound
+    }
+    
+    func listen(_ _ : [String : Any]){
+    }
+    
+    func callProtocols() {
+        H.delegate_getHost = self
+        H.delegates.append(self)
+        S.delegate_getStation = self
+        T.delegates.append(self)
     }
 }
 
