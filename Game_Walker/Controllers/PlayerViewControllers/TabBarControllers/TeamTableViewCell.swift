@@ -58,7 +58,7 @@ class TeamTableViewCell: UITableViewCell {
     }()
     
     private lazy var teamNameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Dosis-Regular", size: 15)
@@ -74,7 +74,7 @@ class TeamTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         return label
     }()
-
+    
     public lazy var borderView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 85, width: 330, height: 2))
         view.layer.borderWidth = 1
@@ -90,12 +90,12 @@ class TeamTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
+    
     func configureTeamTableViewCell(name: String) {
         contentView.addSubview(containerView)
         containerView.addSubview(backGroundView)
         containerView.addSubview(nameLabel)
-
+        
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
@@ -113,7 +113,7 @@ class TeamTableViewCell: UITableViewCell {
             backGroundView.heightAnchor.constraint(equalToConstant: 47)
         ])
         nameLabel.text = name
-    
+        
     }
     
     func configureRankTableViewCellWithScore(imageName: String, teamNum: String, teamName: String, points: String, showScore: Bool) {

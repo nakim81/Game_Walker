@@ -36,7 +36,7 @@ class JoinTeamViewController: BaseViewController {
         collectionView.refreshControl = refreshController
         settingRefreshControl()
     }
-
+    
     private func settingRefreshControl() {
         refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
         refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
@@ -48,14 +48,14 @@ class JoinTeamViewController: BaseViewController {
         refreshController.endRefreshing()
         collectionView.reloadData()
     }
-
+    
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")
             Task { [weak self] in
                 //여기 안되던데 확인 바람
-                try await T.joinTeam(gameCode, selectedTeam.name, currentPlayer)
+                await T.joinTeam(gameCode, selectedTeam.name, currentPlayer)
                 try await Task.sleep(nanoseconds: 250_000_000)
                 performSegue(withIdentifier: "goToPF44", sender: self)
             }
@@ -115,7 +115,7 @@ extension JoinTeamViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 130)
     }
