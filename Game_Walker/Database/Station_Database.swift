@@ -20,12 +20,12 @@ struct S {
     
     //MARK: - Station Control Functions
     
-    static func addStation(_ gamecode: String, _ station: Station) async {
+    static func saveStation(_ gamecode: String, _ station: Station) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
             if document.exists {
-                try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+                updateStation(gamecode, station)
                 print("Station added")
             } else {
                 print("Gamecode does not exist")
@@ -45,28 +45,32 @@ struct S {
         }
     }
     
-    static func assignReferee(_ gamecode: String, _ station: Station, _ referee: Referee) async {
-        let docRef = db.collection("\(gamecode) : Stations").document(station.name)
+    static func assignReferee(_ gamecode: String, _ stationto: Station, _ referee: Referee) async {
+        let docRef = db.collection("\(gamecode) : Stations").document(stationto.uuid)
         do {
-            try await docRef.updateData([
-                "referee": referee
-            ])
-            print("Station assigned Referee")
+            let document = try await docRef.getDocument()
+            if document.exists {
+                guard let data = document.data() else { return }
+                var station = convertDataToStation(data)
+                station.referee = referee
+                updateStation(gamecode, station)
+            } else {
+                print("Station assigned Referee")
+            }
         } catch {
-            print("Error assigning Station a Referee: \(error)")
+            print("Error assigning Referee: \(error)")
         }
     }
     
-    static func updateTeamOrder(_ gamecode: String, _ stationName: String, _ teamOrder: [Team]) async {
-        let docRef = db.collection("\(gamecode) : Stations").document(stationName)
+    static func updateTeamOrder(_ gamecode: String, _ uuid: String, _ teamOrder: [Team]) async {
+        let docRef = db.collection("\(gamecode) : Stations").document(uuid)
         do {
             let document = try await docRef.getDocument()
             if document.exists {
                 guard let data = document.data() else { return }
                 var station = convertDataToStation(data)
                 station.teamOrder = teamOrder
-                print(station.teamOrder)
-                try db.collection("\(gamecode) : Stations").document("\(station.name)").setData(from: station)
+                updateStation(gamecode, station)
             } else {
                 print("Updated Team order")
             }
@@ -77,8 +81,8 @@ struct S {
     
     //MARK: - Database Functions
 
-    static func getStation(_ gamecode: String, _ stationName : String) {
-        let docRef = db.collection("\(gamecode) : Stations").document(stationName)
+    static func getStation(_ gamecode: String, _ uuid : String) {
+        let docRef = db.collection("\(gamecode) : Stations").document(uuid)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 guard let data = document.data() else {return}
@@ -112,6 +116,15 @@ struct S {
                     stations.sort {$0.number < $1.number}
                     delegate_stationList?.listOfStations(stations)
                 }
+        }
+    }
+    
+    static func updateStation(_ gamecode: String, _ station: Station) {
+        do {
+            try db.collection("\(gamecode) : Stations").document("\(station.uuid)").setData(from: station)
+            print("Station successfully saved")
+        } catch {
+            print("Error updating Team: \(error)")
         }
     }
     

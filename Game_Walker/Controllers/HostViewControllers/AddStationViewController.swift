@@ -297,7 +297,7 @@ class AddStationViewController: BaseViewController {
                 let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
                 
 //                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
-                await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+                await S.saveStation(UserData.readGamecode("gamecode")!, stationToAdd)
             }
         }
         
