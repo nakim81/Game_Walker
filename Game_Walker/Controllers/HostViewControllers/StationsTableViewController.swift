@@ -47,6 +47,7 @@ extension StationsTableViewController: UITableViewDataSource {
         let curr_cellname = currentStations[indexPath.row].name
         cell.configureStationCell(stationName: curr_cellname)
         cell.backgroundView = UIImageView(image: UIImage(named: "cell-with-transparent"))
+        cell.selectionStyle = .none
         return cell
     }
     
