@@ -44,6 +44,7 @@ class AddStationViewController: BaseViewController {
     
     var refereename = ""
     var refereeUuid = ""
+    var refereeModified = false
     
     var isdropped = false
     var rules = ""
@@ -81,6 +82,7 @@ class AddStationViewController: BaseViewController {
             
             gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             rulesTextfield.text = station?.description
+            rules = station?.description ?? ""
             gamepoints = station!.points
             
             pvpnotchosen = false
@@ -241,16 +243,18 @@ class AddStationViewController: BaseViewController {
             Task { @MainActor in
                 //unassign station from referee
             
+                var tempReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
 
-//                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-                await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-                //assign station to new referee
-//                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
-                await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                if (refereeModified) {
+                    await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+
+                    await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                    
+                    tempReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: newReferee!.uuid)
+                }
                 
-                let selectedNewReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: newReferee!.uuid)
                 
-                let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedNewReferee, description: rules)
+                let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
                 await S.saveStation(gamecode, modifiedStation)
             }
 
@@ -302,12 +306,18 @@ extension AddStationViewController: UITextFieldDelegate {
         // check if content changed
         if stationExists {
             if textField == gamenameTextfield {
-                gamename = string
+                let newGameName = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                gamename = newGameName
+                print("gamename: ", gamename)
             } else if textField == gamelocationTextfield {
-                gamelocation = string
+                let newGameLocation = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                gamelocation = newGameLocation
+                print("gamelocation: ", gamelocation)
             } else if textField == gamepointsTextfield {
-                if let points = Int(string) {
-                    gamepoints = points
+                let points = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                if let newGamePoints = Int(points) {
+                    gamepoints = newGamePoints
+                    print("gamepoints : ", gamepoints)
                 } else {
                     alert(title: "", message: "gamepoints should be an integer")
                 }
@@ -322,8 +332,12 @@ extension AddStationViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if stationExists {
             modified = true
-            // modified rules are saved here
-            rules = text
+            // appends all text rules being typed in
+            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+            
+            rules = newText
+            
+            print(rules)
         }
         return true
     }
@@ -350,6 +364,7 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
         
         if stationExists && refereeUuid != selectedRefereeUuid {
             modified = true
+            refereeModified = true
             refereeUuid = selectedRefereeUuid
             refereename = selectedRefereeName
             
@@ -362,7 +377,8 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
             refereename = selectedRefereeName
             refereeUuid = selectedRefereeUuid
         }
-        refereeButton.setTitle(refereename, for: .normal)
+//        refereeButton.setTitle(refereename, for: .normal)
+        refereeLabel.text = refereename
         removeRefereeTable()
     }
 
@@ -382,15 +398,15 @@ extension AddStationViewController: RefereeList {
     }
 }
 
-
-extension AddStationViewController : GetStation {
-    func getStation(_ station: Station) {
-        if stationExists {
-            self.station = station
-        }
-    }
-    
-}
+//
+//extension AddStationViewController : GetStation {
+//    func getStation(_ station: Station) {
+//        if stationExists {
+//            self.station = station
+//        }
+//    }
+//    
+//}
 
 
 
