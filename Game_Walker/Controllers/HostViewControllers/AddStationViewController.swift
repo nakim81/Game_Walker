@@ -27,6 +27,8 @@ class AddStationViewController: BaseViewController {
     weak var stationsTableViewController: StationsTableViewController?
 
     var gamecode = UserData.readGamecode("gamecode")!
+    var stationUuid = ""
+    var tempStationUuid = ""
     
     var stationExists = false
     var modified = false
@@ -39,8 +41,10 @@ class AddStationViewController: BaseViewController {
     var gamename = ""
     var gamelocation = ""
     var gamepoints = 0
+    
     var refereename = ""
     var refereeUuid = ""
+    
     var isdropped = false
     var rules = ""
     
@@ -67,6 +71,8 @@ class AddStationViewController: BaseViewController {
 
 
         if stationExists {
+            stationUuid = station!.uuid
+            
             gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             gamename = station!.name
             
@@ -90,9 +96,10 @@ class AddStationViewController: BaseViewController {
             //change to -> station?.referee!.uuid
             //and compare with uuids.
             // for every Referee.uuid == uuid
+            
             refereename = (station?.referee!.name)!
             refereeUuid = (station?.referee!.uuid)!
-//            refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+            refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
 
         }
         
@@ -148,9 +155,6 @@ class AddStationViewController: BaseViewController {
             refereeTableView.widthAnchor.constraint(equalTo: refereeButton.widthAnchor),
             refereeTableView.heightAnchor.constraint(equalTo: refereeButton.heightAnchor, multiplier: 6)
         ])
-//        refereeTableView.layer.borderColor = .init(red: 25, green: 225, blue: 15, alpha: 1)
-//        refereeTableView.layer.borderWidth = 4
-//        refereeTableView.layer.cornerRadius = 15
     }
     
     @objc func removeRefereeTable() {
@@ -164,40 +168,6 @@ class AddStationViewController: BaseViewController {
 
     }
     
-
-
-
-//    func updateStation(gamecode: String, refereeBefore: Referee?, gamename: String, refereename: String, isPvp: Bool, gamepoints: Int, gamelocation: String, rules: String) -> Promise<Void> {
-//        return Promise<Void> { resolver in
-//            // Call unassignStation
-//            R.unassignStation(gamecode, refereeBefore!)
-//                .then { () -> Promise<Referee> in
-//                    // Create new referee object
-//                    let newReferee = Referee(gamecode: UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename, assigned: true)
-//                    // Call assignStation
-//                    return R.assignStation(UserData.readGamecode("gamecode")!, newReferee, gamename)
-//                }
-//                .then { (newReferee: Referee) -> Promise<Station> in
-//                    // Create station object
-//                    let stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
-//                    // Call removeStation
-//                    return S.removeStation(gamecode, gamename).then { () -> Promise<Station> in
-//                        // Call addStation
-//                        return S.addStation(gamecode, stationToReplace)
-//                    }
-//                }
-//                .done { _ in
-//                    // Resolve promise when all functions complete successfully
-//                    resolver.fulfill(())
-//                }
-//                .catch { (error) in
-//                    // Reject promise if any function throws an error
-//                    resolver.reject(error)
-//                }
-//        }
-//    }
-//
-//
 
 
     
@@ -270,9 +240,7 @@ class AddStationViewController: BaseViewController {
         } else if (stationExists && modified) {
             Task { @MainActor in
                 //unassign station from referee
-                refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
-                
-                newReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+            
 
 //                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
                 await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
@@ -280,9 +248,10 @@ class AddStationViewController: BaseViewController {
 //                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
                 await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
                 
-                //assign new referee to the station that exists
-//                try await S.assignReferee(gamecode, station!, newReferee!)
-                await S.assignReferee(gamecode, station!, newReferee!)
+                let selectedNewReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: newReferee!.uuid)
+                
+                let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedNewReferee, description: rules)
+                await S.saveStation(gamecode, modifiedStation)
             }
 
 
@@ -294,10 +263,13 @@ class AddStationViewController: BaseViewController {
 //               try await R.assignStation(gamecode, refereeUuid, gamename, true)
                 await R.assignStation(gamecode, refereeUuid, gamename, true)
                 
-                let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
+                let uuid = UUID()
+                stationUuid = uuid.uuidString
+                
+                let stationToAdd = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
                 
 //                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
-                await S.saveStation(UserData.readGamecode("gamecode")!, stationToAdd)
+                await S.saveStation(gamecode, stationToAdd)
             }
         }
         
@@ -329,6 +301,17 @@ extension AddStationViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // check if content changed
         if stationExists {
+            if textField == gamenameTextfield {
+                gamename = string
+            } else if textField == gamelocationTextfield {
+                gamelocation = string
+            } else if textField == gamepointsTextfield {
+                if let points = Int(string) {
+                    gamepoints = points
+                } else {
+                    alert(title: "", message: "gamepoints should be an integer")
+                }
+            }
             modified = true
         }
         return true
@@ -339,6 +322,8 @@ extension AddStationViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if stationExists {
             modified = true
+            // modified rules are saved here
+            rules = text
         }
         return true
     }
@@ -359,17 +344,24 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(availableReferees[indexPath.row])
 
-        refereename = availableReferees[indexPath.row].name
-        refereeUuid = availableReferees[indexPath.row].uuid
+        let selectedRefereeName = availableReferees[indexPath.row].name
+        let selectedRefereeUuid = availableReferees[indexPath.row].uuid
         
-        if stationExists && refereeUuid != refereeBefore!.uuid {
+        if stationExists && refereeUuid != selectedRefereeUuid {
             modified = true
-//            newReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+            refereeUuid = selectedRefereeUuid
+            refereename = selectedRefereeName
+            
+            newReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+
         }
 //        print(refereename)
         checkReferee()
+        if !stationExists {
+            refereename = selectedRefereeName
+            refereeUuid = selectedRefereeUuid
+        }
         refereeButton.setTitle(refereename, for: .normal)
         removeRefereeTable()
     }
@@ -398,41 +390,7 @@ extension AddStationViewController : GetStation {
         }
     }
     
-    
 }
 
 
-//extension AddStationViewController {
-//    func addStation(gamecode: String, stationtoadd: Station, completion: @escaping () -> Void) {
-//        S.addStation(gamecode, stationtoadd)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
-//
-//    func removeStation(gamecode: String, stationtoremove: Station, completion: @escaping () -> Void) {
-//        S.removeStation(gamecode,stationtoremove)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
-//
-//    func assignStation(gamecode: String, refereetoassign: Referee, stationName: String, completion: @escaping () -> Void) {
-//        R.assignStation(gamecode, refereetoassign.uuid, stationName, true)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
-//
-//    func unassignStation(gamecode: String, refereetounassign: Referee, completion: @escaping () -> Void) {
-//        R.assignStation(gamecode, refereetounassign.uuid, "", false)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
-//}
 
