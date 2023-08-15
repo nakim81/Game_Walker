@@ -34,7 +34,27 @@ class StationsTableViewController: BaseViewController {
 }
 
 extension StationsTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            
+            self.deleteStation(at: indexPath)
+            
+            completionHandler(true)
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        
+        return configuration
+    }
+
     
+    func deleteStation(at indexPath: IndexPath) {
+        print("It will activate the delete function!")
+    }
 }
 
 extension StationsTableViewController: UITableViewDataSource {
