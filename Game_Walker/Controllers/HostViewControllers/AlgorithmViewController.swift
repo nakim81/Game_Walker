@@ -248,6 +248,7 @@ class AlgorithmViewController: BaseViewController {
         
         print("This is my grid: ", grid)
     }
+    
 //    func checkDuplicatesInColumns(for pvpCount: Int) {
 //        let columnPairs = pvpCount > 0 ? (0..<grid[0].count / 2) : [] // Define column pairs based on pvpCount
 //

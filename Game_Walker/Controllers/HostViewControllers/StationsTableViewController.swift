@@ -61,6 +61,17 @@ extension StationsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentStations.count
     }
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        if let cell = stationTable.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = false
+        }
+    }
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if let indexPath = indexPath, let cell = stationTable.cellForRow(at: indexPath) {
+            cell.isUserInteractionEnabled = true
+        }
+    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = stationTable.dequeueReusableCell(withIdentifier: "HostStationsTableViewCell", for: indexPath) as! HostStationsTableViewCell
