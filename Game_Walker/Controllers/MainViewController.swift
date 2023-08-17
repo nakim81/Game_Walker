@@ -24,13 +24,12 @@ class MainViewController: BaseViewController {
             UserData.writeUUID(UUID().uuidString)
         }
         
-        
-        //print(UserData.readUUID())
      
 //        for i in 1...4 {
 //            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
+//            //let gc = "888888"
+//
 //            let host1 = Host(gamecode: gc)
-//            var uuids: [String] = []
 //
 //            Task { @MainActor in
 //                H.createGame(gc, host1)
@@ -38,17 +37,21 @@ class MainViewController: BaseViewController {
 //                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
 //                    let uuid = UUID().uuidString
 //                    let uuid2 = UUID().uuidString
-//                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)")
-//                    let station = Station(uuid: uuid, name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", description: "Fun * \(i)")
+//                    let station = Station(uuid: uuid2, name: "Station \(i)", pvp: false, points: i*10, place: "Room \(i)", description: "Fun * \(i)")
+//                    let ref = Referee(uuid: uuid, gamecode: gc, name: "Referee \(i)",stationName: station.name, assigned: true)
 //                    await T.addTeam(gc, team)
 //                    try await R.addReferee(gc, ref, uuid)
 //                    await S.saveStation(gc, station)
+//                    await S.assignReferee(gc, station, ref)
 //                    await H.addAnnouncement(gc, "Announcement \(i) \n This is announcement \(i)!")
 //                }
+//                let uuid = UUID().uuidString
+//                let ref2 = Referee(uuid: uuid, gamecode: gc, name: "Referee unassigned", assigned: false)
+//                try await R.addReferee(gc, ref2, uuid)
+//
 //                for i in 1...64 {
 //                    let player = Player(gamecode: gc, name: "Player \(i)")
 //                    let uuid = UUID().uuidString
-//                    uuids.append(uuid)
 //                    try await P.addPlayer(gc, player, uuid)
 //                    let j = i%8 + 1
 //                    await T.joinTeam(gc, "Team \(j)", player)

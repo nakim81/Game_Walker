@@ -14,7 +14,7 @@ struct Station: Codable, Equatable {
     var pvp: Bool = true
     var points: Int = 0
     var place: String = ""
-    var referee: Referee? = nil
+    var referee: Referee? = Referee()
     var description: String = ""
     var teamOrder: [Team] = []
     
