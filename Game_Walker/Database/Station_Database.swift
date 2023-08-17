@@ -36,7 +36,7 @@ struct S {
     }
     
     static func removeStation(_ gamecode: String, _ station: Station) {
-        db.collection("\(gamecode) : Stations").document(station.name).delete() { err in
+        db.collection("\(gamecode) : Stations").document(station.uuid).delete() { err in
             if let err = err {
                 print("Error removing Station: \(err)")
             } else {
