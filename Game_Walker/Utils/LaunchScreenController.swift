@@ -18,9 +18,22 @@ class LaunchScreenController: UIViewController {
         self.view.backgroundColor = .black;
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             self.addRectangles()
+            self.playMusic()
         }
-        self.playSound()
+//        self.playSound()
     }
+    private func playMusic() {
+            let url = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "wav")
+            if let url = url {
+                do {
+                    soundPlayer = try AVAudioPlayer(contentsOf: url)
+                    soundPlayer?.prepareToPlay()
+                    soundPlayer?.play()
+                } catch {
+                    print(error)
+                }
+            }
+        }
     //
     //    func playMusic() {
     //        guard let soundURL = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "m4a") else {
@@ -38,21 +51,21 @@ class LaunchScreenController: UIViewController {
     //        }
     //    }
     
-    func playSound() {
-        let soundName = "LaunchScreenMusic"
-        // forResource: 파일 이름(확장자 제외) , withExtension: 확장자(mp3, wav 등) 입력
-        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
-            return
-        }
-        
-        do {
-            soundPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-            soundPlayer?.numberOfLoops = 1
-            soundPlayer?.play()
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+//    func playSound() {
+//        let soundName = "LaunchScreenMusic"
+//        // forResource: 파일 이름(확장자 제외) , withExtension: 확장자(mp3, wav 등) 입력
+//        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
+//            return
+//        }
+//
+//        do {
+//            soundPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+//            soundPlayer?.numberOfLoops = 1
+//            soundPlayer?.play()
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+//    }
     
     func addRectangles() {
         let screenSize = UIScreen.main.bounds.size
