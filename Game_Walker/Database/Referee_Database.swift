@@ -13,21 +13,13 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct R {
+    
     static let db = Firestore.firestore()
     static var delegate_refereeList: RefereeList?
     static var delegate_getReferee: GetReferee?
     static var delegates : [RefereeUpdateListener] = []
     
-    static func listenReferee(_ gamecode: String, _ uuid: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-        db.collection("\(gamecode) : Referees").document(uuid).addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else { return }
-            guard let data = document.data() else { return }
-            let ref = convertDataToReferee(data)
-            for delegate in delegates {
-                delegate.updateReferee(ref)
-            }
-       }
-    }
+    //MARK: - Referee Control Functions
 
     static func addReferee(_ gamecode: String, _ referee: Referee, _ uuid: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
@@ -84,6 +76,19 @@ struct R {
         }
     }
     
+    //MARK: - Database Functions
+    
+    static func listenReferee(_ gamecode: String, _ uuid: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+        db.collection("\(gamecode) : Referees").document(uuid).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else { return }
+            guard let data = document.data() else { return }
+            let ref = convertDataToReferee(data)
+            for delegate in delegates {
+                delegate.updateReferee(ref)
+            }
+       }
+    }
+    
     static func getReferee(_ gamecode: String, _ uuid : String) {
         let docRef = db.collection("\(gamecode) : Referees").document(uuid)
         docRef.getDocument { (document, error) in
@@ -108,6 +113,7 @@ struct R {
                         let referee = convertDataToReferee(data)
                         referees.append(referee)
                     }
+                    referees.sort{$0.name < $1.name}
                     delegate_refereeList?.listOfReferees(referees)
                 }
         }

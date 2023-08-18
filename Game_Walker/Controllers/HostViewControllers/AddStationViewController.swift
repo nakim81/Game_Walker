@@ -27,6 +27,8 @@ class AddStationViewController: BaseViewController {
     weak var stationsTableViewController: StationsTableViewController?
 
     var gamecode = UserData.readGamecode("gamecode")!
+    var stationUuid = ""
+    var tempStationUuid = ""
     
     var stationExists = false
     var modified = false
@@ -39,8 +41,11 @@ class AddStationViewController: BaseViewController {
     var gamename = ""
     var gamelocation = ""
     var gamepoints = 0
+    
     var refereename = ""
     var refereeUuid = ""
+    var refereeModified = false
+    
     var isdropped = false
     var rules = ""
     
@@ -62,10 +67,13 @@ class AddStationViewController: BaseViewController {
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
         refereeTableView.dataSource = self
-        
+        R.delegate_refereeList = self
+        R.getRefereeList(gamecode)
 
 
         if stationExists {
+            stationUuid = station!.uuid
+            
             gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             gamename = station!.name
             
@@ -74,6 +82,7 @@ class AddStationViewController: BaseViewController {
             
             gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
             rulesTextfield.text = station?.description
+            rules = station?.description ?? ""
             gamepoints = station!.points
             
             pvpnotchosen = false
@@ -89,14 +98,14 @@ class AddStationViewController: BaseViewController {
             //change to -> station?.referee!.uuid
             //and compare with uuids.
             // for every Referee.uuid == uuid
+            
             refereename = (station?.referee!.name)!
             refereeUuid = (station?.referee!.uuid)!
             refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
 
         }
         
-        R.delegate_refereeList = self
-        R.getRefereeList(gamecode)
+
         checkReferee()
         setPaddings()
     }
@@ -148,9 +157,6 @@ class AddStationViewController: BaseViewController {
             refereeTableView.widthAnchor.constraint(equalTo: refereeButton.widthAnchor),
             refereeTableView.heightAnchor.constraint(equalTo: refereeButton.heightAnchor, multiplier: 6)
         ])
-//        refereeTableView.layer.borderColor = .init(red: 25, green: 225, blue: 15, alpha: 1)
-//        refereeTableView.layer.borderWidth = 4
-//        refereeTableView.layer.cornerRadius = 15
     }
     
     @objc func removeRefereeTable() {
@@ -164,40 +170,6 @@ class AddStationViewController: BaseViewController {
 
     }
     
-
-
-
-//    func updateStation(gamecode: String, refereeBefore: Referee?, gamename: String, refereename: String, isPvp: Bool, gamepoints: Int, gamelocation: String, rules: String) -> Promise<Void> {
-//        return Promise<Void> { resolver in
-//            // Call unassignStation
-//            R.unassignStation(gamecode, refereeBefore!)
-//                .then { () -> Promise<Referee> in
-//                    // Create new referee object
-//                    let newReferee = Referee(gamecode: UserData.readGamecode("gamecode")!, name: refereename, stationName: gamename, assigned: true)
-//                    // Call assignStation
-//                    return R.assignStation(UserData.readGamecode("gamecode")!, newReferee, gamename)
-//                }
-//                .then { (newReferee: Referee) -> Promise<Station> in
-//                    // Create station object
-//                    let stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
-//                    // Call removeStation
-//                    return S.removeStation(gamecode, gamename).then { () -> Promise<Station> in
-//                        // Call addStation
-//                        return S.addStation(gamecode, stationToReplace)
-//                    }
-//                }
-//                .done { _ in
-//                    // Resolve promise when all functions complete successfully
-//                    resolver.fulfill(())
-//                }
-//                .catch { (error) in
-//                    // Reject promise if any function throws an error
-//                    resolver.reject(error)
-//                }
-//        }
-//    }
-//
-//
 
 
     
@@ -270,62 +242,38 @@ class AddStationViewController: BaseViewController {
         } else if (stationExists && modified) {
             Task { @MainActor in
                 //unassign station from referee
-//                try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-                await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-                //assign station to new referee
-//                try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
-                await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+            
+                var tempReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+
+                if (refereeModified) {
+                    await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+
+                    await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                    
+                    tempReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: newReferee!.uuid)
+                }
                 
-                //assign new referee to the station that exists
-//                try await S.assignReferee(gamecode, station!, newReferee!)
-                await S.assignReferee(gamecode, station!, newReferee!)
+                
+                let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
+                await S.saveStation(gamecode, modifiedStation)
             }
-//
-//            firstly { () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    //unassigns referee object's station
-//                    unassignStation(gamecode: gamecode, refereetounassign: refereeBefore!) { [self] in
-//                        print("Unassigning referee object's station")
-//                        newReferee = Referee(gamecode: gamecode, name: refereename, stationName: gamename, assigned: true)
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then { [self] in
-//                return Promise<Void> { seal in
-//                    assignStation(gamecode: gamecode, refereetoassign: newReferee!, stationName: gamename) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then { [self] () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    // removes station
-//                    removeStation(gamecode: gamecode, stationtoremove: station!) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.then { [self] () -> Promise<Void> in
-//                return Promise<Void> { seal in
-//                    //creates new station with new referee
-//                    stationToReplace = Station(name: gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee: newReferee, description: rules)
-//                    addStation(gamecode: gamecode, stationtoadd: stationToReplace!) {
-//                        seal.fulfill(())
-//                    }
-//                }
-//            }.done {
-//                print("All works with the server are done")
-//            }.catch { error in
-//                print("An error occurred: \(error)")
-//                self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
-//            }
+
+
+
 
         } else if (!stationExists) {
             let selectedReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: refereeUuid)
             Task { @MainActor in
-               try await R.assignStation(gamecode, refereeUuid, gamename, true)
+//               try await R.assignStation(gamecode, refereeUuid, gamename, true)
+                await R.assignStation(gamecode, refereeUuid, gamename, true)
                 
-                let stationToAdd = Station(name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
+                let uuid = UUID()
+                stationUuid = uuid.uuidString
                 
-                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+                let stationToAdd = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
+                
+//                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+                await S.saveStation(gamecode, stationToAdd)
             }
         }
         
@@ -357,6 +305,23 @@ extension AddStationViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // check if content changed
         if stationExists {
+            if textField == gamenameTextfield {
+                let newGameName = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                gamename = newGameName
+                print("gamename: ", gamename)
+            } else if textField == gamelocationTextfield {
+                let newGameLocation = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                gamelocation = newGameLocation
+                print("gamelocation: ", gamelocation)
+            } else if textField == gamepointsTextfield {
+                let points = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+                if let newGamePoints = Int(points) {
+                    gamepoints = newGamePoints
+                    print("gamepoints : ", gamepoints)
+                } else {
+                    alert(title: "", message: "gamepoints should be an integer")
+                }
+            }
             modified = true
         }
         return true
@@ -367,6 +332,12 @@ extension AddStationViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if stationExists {
             modified = true
+            // appends all text rules being typed in
+            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+            
+            rules = newText
+            
+            print(rules)
         }
         return true
     }
@@ -387,18 +358,27 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(availableReferees[indexPath.row])
 
-        refereename = availableReferees[indexPath.row].name
-        refereeUuid = availableReferees[indexPath.row].uuid
+        let selectedRefereeName = availableReferees[indexPath.row].name
+        let selectedRefereeUuid = availableReferees[indexPath.row].uuid
         
-        if stationExists && refereeUuid != refereeBefore!.uuid {
+        if stationExists && refereeUuid != selectedRefereeUuid {
             modified = true
+            refereeModified = true
+            refereeUuid = selectedRefereeUuid
+            refereename = selectedRefereeName
+            
             newReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+
         }
 //        print(refereename)
         checkReferee()
-        refereeButton.setTitle(refereename, for: .normal)
+        if !stationExists {
+            refereename = selectedRefereeName
+            refereeUuid = selectedRefereeUuid
+        }
+//        refereeButton.setTitle(refereename, for: .normal)
+        refereeLabel.text = refereename
         removeRefereeTable()
     }
 
@@ -418,49 +398,15 @@ extension AddStationViewController: RefereeList {
     }
 }
 
-
-extension AddStationViewController : GetStation {
-    func getStation(_ station: Station) {
-        if stationExists {
-            self.station = station
-        }
-    }
-    
-    
-}
-
-
-//extension AddStationViewController {
-//    func addStation(gamecode: String, stationtoadd: Station, completion: @escaping () -> Void) {
-//        S.addStation(gamecode, stationtoadd)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
 //
-//    func removeStation(gamecode: String, stationtoremove: Station, completion: @escaping () -> Void) {
-//        S.removeStation(gamecode,stationtoremove)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
+//extension AddStationViewController : GetStation {
+//    func getStation(_ station: Station) {
+//        if stationExists {
+//            self.station = station
 //        }
 //    }
-//
-//    func assignStation(gamecode: String, refereetoassign: Referee, stationName: String, completion: @escaping () -> Void) {
-//        R.assignStation(gamecode, refereetoassign.uuid, stationName, true)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
-//
-//    func unassignStation(gamecode: String, refereetounassign: Referee, completion: @escaping () -> Void) {
-//        R.assignStation(gamecode, refereetounassign.uuid, "", false)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//            // Simulate asynchronous task completion after 0.4 seconds
-//            completion()
-//        }
-//    }
+//    
 //}
+
+
 

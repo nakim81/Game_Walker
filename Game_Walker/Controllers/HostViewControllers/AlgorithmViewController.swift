@@ -55,53 +55,54 @@ class AlgorithmViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        S.delegate_stationList = self
-        S.getStationList(gamecode)
-        H.delegate_getHost = self
-        H.getHost(gamecode)
-        collectionView.isScrollEnabled = true
-        scrollView.isUserInteractionEnabled = true
-        scrollView.isScrollEnabled = true
-        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
-        collectionView.dragInteractionEnabled = true
+        setupCollectionView()
+        fetchDataAndInitialize()
 
-        collectionView.delegate = self
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.createGrid()
-            self.collectionView.dataSource = self
-            self.collectionView.dragDelegate = self
-            self.collectionView.dropDelegate = self
-            self.collectionView.clipsToBounds = true
-            self.collectionView.isUserInteractionEnabled = true
-            self.collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-
-        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-         
-        let flowlayout = UICollectionViewFlowLayout()
-        flowlayout.scrollDirection = .vertical
-        
-        
-
-//        print("cell spacing , cell width, view width : ", collectionViewCellSpacing, collectionViewCellWidth, collectionViewWidth)
-        flowlayout.minimumLineSpacing = CGFloat(collectionViewCellSpacing)
-        flowlayout.minimumInteritemSpacing = CGFloat(collectionViewCellSpacing)
-        
-        collectionView.collectionViewLayout = flowlayout
-           
         let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
         if collectionViewCellWidth > 0  {
             createBorderLines()
         }
-        
-
     }
 
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.clipsToBounds = true
+        collectionView.isUserInteractionEnabled = true
+        
+        let flowlayout = UICollectionViewFlowLayout()
+        flowlayout.scrollDirection = .vertical
+    
+        flowlayout.minimumLineSpacing = CGFloat(collectionViewCellSpacing)
+        flowlayout.minimumInteritemSpacing = CGFloat(collectionViewCellSpacing)
+        
+        collectionView.collectionViewLayout = flowlayout
+        collectionView.register(UINib(nibName: "AlgorithmCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
+        
+        collectionView.isScrollEnabled = true
+        scrollView.isUserInteractionEnabled = true
+        scrollView.isScrollEnabled = true
+        collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
+        collectionView.delegate = self
+
+        
+    }
+    
+    private func fetchDataAndInitialize() {
+        S.delegate_stationList = self
+        S.getStationList(gamecode)
+        H.delegate_getHost = self
+        H.getHost(gamecode)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.createGrid()
+            self.collectionView.reloadData()
+        }
+    }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
         alert2(title: "", message: "Everything set?")
@@ -159,12 +160,6 @@ class AlgorithmViewController: BaseViewController {
     func createGrid() {
         num_stations = stationList!.count
 
-//        if (num_stations < num_teams) {
-//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-//        }
-//        if (num_teams < num_stations) {
-//            alert(title:"We need more game stations!", message:"There are teams that don't have a game.")
-//        }
         
         if (max(num_teams, num_stations) < 8) {
             needHorizontalEmptyCells = true
@@ -210,7 +205,7 @@ class AlgorithmViewController: BaseViewController {
         }
         
         // case when considering pvp cases
-        guard pvpGameCount > 0 && pvpGameCount <= grid.count else {
+        guard pvpGameCount >= 0 && pvpGameCount <= grid.count else {
             print("Invalid number of pvp games compared to number of teams")
             return
         }
@@ -251,11 +246,25 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
-
-        
-        
         print("This is my grid: ", grid)
     }
+    
+//    func checkDuplicatesInColumns(for pvpCount: Int) {
+//        let columnPairs = pvpCount > 0 ? (0..<grid[0].count / 2) : [] // Define column pairs based on pvpCount
+//
+//        for row in 0..<grid.count {
+//            for columnIndex in columnPairs {
+//                let valueA = grid[row][columnIndex]
+//                let valueB = grid[row][columnIndex + grid[0].count / 2]
+//
+//                if valueA == valueB {
+//                    // Handle the case of duplicate values
+//                    print("Duplicate value \(valueA) in column \(columnIndex + 1) and \(columnIndex + grid[0].count / 2 + 1), row \(row + 1)")
+//                }
+//            }
+//        }
+//    }
+    
     
     func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
         var existingNumbers = Set<Int>()
@@ -557,50 +566,50 @@ extension AlgorithmViewController: UIScrollViewDelegate {
     }
 }
 
-extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionViewDragDelegate{
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = indexPath
-        return [dragItem]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: NSString.self)
-    }
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
-        
-        coordinator.session.loadObjects(ofClass: NSArray.self as! any NSItemProviderReading.Type) { items in
-            guard let sourceIndexPaths = items as? [IndexPath] else { return }
-            
-            collectionView.performBatchUpdates({
-                var deleteIndexPaths = [IndexPath]()
-                var insertIndexPaths = [IndexPath]()
-                
-                for sourceIndexPath in sourceIndexPaths {
-                    if sourceIndexPath.section == destinationIndexPath.section {
-                        if sourceIndexPath.item < destinationIndexPath.item {
-                            deleteIndexPaths.append(sourceIndexPath)
-                            insertIndexPaths.append(destinationIndexPath)
-                        } else if sourceIndexPath.item > destinationIndexPath.item {
-                            deleteIndexPaths.append(sourceIndexPath)
-                            insertIndexPaths.append(destinationIndexPath)
-                        }
-                    } else {
-                        // Moving to different section
-                        deleteIndexPaths.append(sourceIndexPath)
-                        insertIndexPaths.append(destinationIndexPath)
-                    }
-                }
-                
-                collectionView.deleteItems(at: deleteIndexPaths)
-                collectionView.insertItems(at: insertIndexPaths)
-                
-            }, completion: nil)
-            
-            coordinator.drop(coordinator.items.first!.dragItem, toItemAt: destinationIndexPath)
-        }
-    }
-}
-
+//extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionViewDragDelegate{
+//    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+//
+//        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+//        dragItem.localObject = indexPath
+//        return [dragItem]
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+//        return session.canLoadObjects(ofClass: NSString.self)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+//        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
+//
+//        coordinator.session.loadObjects(ofClass: NSArray.self as! any NSItemProviderReading.Type) { items in
+//            guard let sourceIndexPaths = items as? [IndexPath] else { return }
+//
+//            collectionView.performBatchUpdates({
+//                var deleteIndexPaths = [IndexPath]()
+//                var insertIndexPaths = [IndexPath]()
+//
+//                for sourceIndexPath in sourceIndexPaths {
+//                    if sourceIndexPath.section == destinationIndexPath.section {
+//                        if sourceIndexPath.item < destinationIndexPath.item {
+//                            deleteIndexPaths.append(sourceIndexPath)
+//                            insertIndexPaths.append(destinationIndexPath)
+//                        } else if sourceIndexPath.item > destinationIndexPath.item {
+//                            deleteIndexPaths.append(sourceIndexPath)
+//                            insertIndexPaths.append(destinationIndexPath)
+//                        }
+//                    } else {
+//                        // Moving to different section
+//                        deleteIndexPaths.append(sourceIndexPath)
+//                        insertIndexPaths.append(destinationIndexPath)
+//                    }
+//                }
+//
+//                collectionView.deleteItems(at: deleteIndexPaths)
+//                collectionView.insertItems(at: insertIndexPaths)
+//
+//            }, completion: nil)
+//
+//            coordinator.drop(coordinator.items.first!.dragItem, toItemAt: destinationIndexPath)
+//        }
+//    }
+//}
+//

@@ -36,16 +36,15 @@ class TimerViewController: UIViewController {
     private var t : Int = 0
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private var stationsList : [Station] = []
     private var stationOrder : [Int] = []
    
-    private var stationName: String?
     private var gameName: String?
     private var gameLocation: String?
     private var gamePoints: String?
     private var refereeName: String?
     private var gameRule: String?
     
-    private var nextStationName: String?
     private var nextGameName: String?
     private var nextGameLocation: String?
     private var nextGamePoints: String?
@@ -139,7 +138,6 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        S.delegate_getStation = self
         S.delegate_stationList = self
         H.delegates.append(self)
         H.delegate_getHost = self
@@ -148,8 +146,7 @@ class TimerViewController: UIViewController {
         Task {
             H.getHost(gameCode)
             T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
-            try await Task.sleep(nanoseconds: 280_000_000)
-            configureTimerLabel()
+            S.getStationList(gameCode)
         }
     }
     
@@ -165,20 +162,12 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        Task {
-            S.getStationList(gameCode)
-            S.getStation(gameCode, self.stationName!)
-            try await Task.sleep(nanoseconds: 280_000_000)
-        }
+        findStation()
         showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
-        Task {
-            S.getStationList(gameCode)
-            S.getStation(gameCode, self.nextStationName!)
-            try await Task.sleep(nanoseconds: 280_000_000)
-        }
+        findStation()
         showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
     }
     
@@ -194,7 +183,26 @@ class TimerViewController: UIViewController {
         announcementButton.setImage(readAll, for: .normal)
     }
     
-    func configureTimerLabel(){
+    func findStation() {
+        for station in self.stationsList {
+            if station.number == self.stationOrder[round - 1] {
+                self.gameName = station.name
+                self.gameLocation = station.place
+                self.gamePoints = String(station.points)
+                self.refereeName = station.referee!.name
+                self.gameRule = station.description
+            }
+            else if station.number == self.stationOrder[round] {
+                self.nextGameName = station.name
+                self.nextGameLocation = station.place
+                self.nextGamePoints = String(station.points)
+                self.nextRefereeName = station.referee!.name
+                self.nextGameRule = station.description
+            }
+        }
+    }
+    
+    func configureTimerLabel() {
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
@@ -226,15 +234,15 @@ class TimerViewController: UIViewController {
             totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
             totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
         ])
-        let minute = moveSeconds/60
-        let second = moveSeconds % 60
-        timerLabel.text = String(format:"%02i : %02i", minute, second)
-        roundLabel.text = "Round \(round)"
-        let totalMinute = totalTime/60
-        let totalSecond = totalTime % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-        totalTimeLabel.attributedText = attributedString
+//        let minute = moveSeconds/60
+//        let second = moveSeconds % 60
+//        timerLabel.text = String(format:"%02i : %02i", minute, second)
+//        roundLabel.text = "Round \(round)"
+//        let totalMinute = totalTime/60
+//        let totalSecond = totalTime % 60
+//        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+//        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+//        totalTimeLabel.attributedText = attributedString
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
@@ -261,7 +269,6 @@ class TimerViewController: UIViewController {
                         strongSelf.time = strongSelf.moveSeconds
                         strongSelf.moving = true
                         strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.round += 1
                         strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         strongSelf.rounds! -= 1
                     }
@@ -293,7 +300,6 @@ class TimerViewController: UIViewController {
                 t = 0
             }
         }
-        let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
             self.timeTypeLabel.text = "Moving Time"
@@ -317,9 +323,8 @@ class TimerViewController: UIViewController {
         let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
-        self.round = quotient + 1
         self.rounds! = self.rounds! - self.round
-        self.roundLabel.text = "Round \(quotient + 1)"
+        self.roundLabel.text = "Round \(self.round)"
     }
     
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
@@ -341,20 +346,21 @@ class TimerViewController: UIViewController {
     }
     
     func timeString(time:TimeInterval) -> String {
-            let minutes = Int(time) / 60 % 60
-            let seconds = Int(time) % 60
-            return String(format:"%02i : %02i", minutes, seconds)
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i : %02i", minutes, seconds)
     }
     
     func listen(_ _ : [String : Any]){
     }
 }
 //MARK: - UIUpdate
-extension TimerViewController: GetStation, GetHost, GetTeam, StationList, HostUpdateListener {
+extension TimerViewController: GetHost, GetTeam, StationList, HostUpdateListener {
     func updateHost(_ host: Host) {
         self.isPaused = host.paused
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
+        self.round = host.currentRound
     }
     
     func getHost(_ host: Host) {
@@ -365,26 +371,13 @@ extension TimerViewController: GetStation, GetHost, GetTeam, StationList, HostUp
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.round = host.currentRound
         self.messages = host.announcements
-    }
-    
-    func getStation(_ station: Station) {
-        self.gameName = station.name
-        self.gameLocation = station.place
-        self.gamePoints = String(station.points)
-        self.refereeName = station.referee?.name
-        self.gameRule = station.description
+        configureTimerLabel()
     }
     
     func listOfStations(_ stations: [Station]) {
-        for station in stations {
-            if station.number == self.stationOrder[round - 1] {
-                self.stationName = station.name
-            }
-            else if station.number == self.stationOrder[round] {
-                self.nextStationName = station.name
-            }
-        }
+        self.stationsList = stations
     }
     
     func getTeam(_ team: Team) {
