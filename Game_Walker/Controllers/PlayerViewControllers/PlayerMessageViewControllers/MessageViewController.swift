@@ -40,16 +40,16 @@ class MessageViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
-
+        
         // enable
         button.setTitle("Close", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
+        
         // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-
+        
         // layer
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
@@ -72,30 +72,30 @@ class MessageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         //curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         //curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = true
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         setUpViews()
         makeConstraints()
-    }    
+    }
     
     private func configureTableView() {
         messageTableView.delegate = self
@@ -121,7 +121,7 @@ class MessageViewController: UIViewController {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageTableView.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
@@ -164,14 +164,14 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
-     }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let announcementText = messages[indexPath.row]

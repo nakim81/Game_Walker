@@ -24,7 +24,7 @@ class AnnouncementViewController: UIViewController {
     }()
     
     private lazy var announcmentScrollView: UIScrollView = {
-       let view = UIScrollView()
+        let view = UIScrollView()
         view.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         view.layer.borderWidth = 3
         view.layer.cornerRadius = 8
@@ -58,20 +58,20 @@ class AnnouncementViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
-
+        
         // enable
         button.setTitle(title, for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
+        
         // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-
+        
         // layer
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-
+        
         button.addAction(for: .touchUpInside) { _ in
             completion?()
         }
@@ -94,24 +94,24 @@ class AnnouncementViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         //curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         //curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = true
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -158,7 +158,7 @@ class AnnouncementViewController: UIViewController {
             announcementTextLabel.bottomAnchor.constraint(equalTo: announcmentScrollView.bottomAnchor),
             announcementTextLabel.centerXAnchor.constraint(equalTo: announcmentScrollView.centerXAnchor),
             announcementTextLabel.widthAnchor.constraint(equalTo: announcmentScrollView.widthAnchor),
-
+            
             buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1.0),
             buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1.0),
             buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5.0),
