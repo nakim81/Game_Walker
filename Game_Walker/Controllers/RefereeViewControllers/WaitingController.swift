@@ -212,7 +212,20 @@ class WaitingController: BaseViewController {
         return imageView
     }()
     
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Game Code" + gameCode
+        label.numberOfLines = 2
+        return label
+    }()
+    
     func makeConstraints() {
+        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.36).isActive = true
+        gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.18).isActive = true
+        gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.83).isActive = true
+        
         gameIconView.translatesAutoresizingMaskIntoConstraints = false
         gameIconView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         gameIconView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.36).isActive = true

@@ -30,16 +30,63 @@ class HostTimerViewController: UIViewController {
     private var rounds: Int?
     private var isPaused = true
     private var t : Int = 0
+    
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
+    private let end = UIImage(named: "Game End Button")
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private var gameStart : Bool = false
+    private var gameOver : Bool = false
+    private var segueCalled : Bool = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        H.delegate_getHost = self
+        H.getHost(gameCode)
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+    }
+    
+    @IBAction func announcementBtnPressed(_ sender: UIButton) {
+        showHostMessagePopUp(messages: messages)
+    }
+
+    @IBAction func settingBtnPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
+        if sender.image(for: .normal) != end {
+            if !gameStart {
+                Task { @MainActor in
+                    await H.startGame(gameCode)
+                    sender.setImage(pause, for: .normal)
+                }
+            }
+            else {
+                if isPaused {
+                    sender.setImage(pause, for: .normal)
+                }
+                else {
+                    sender.setImage(play, for: .normal)
+                }
+                isPaused = !isPaused
+                Task { @MainActor in
+                    await H.pause_resume_game(gameCode)
+                }
+            }
+        }
+        else {
+            self.pauseOrPlayButton.isHidden = true
+            configureEndButton()
+        }
+    }
+    //MARK: - Music
     var audioPlayer: AVAudioPlayer?
 
     func playMusic() {
         guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
-            print("Background music file not found.")
+            print("Music file not found.")
             return
         }
 
@@ -49,7 +96,7 @@ class HostTimerViewController: UIViewController {
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
         } catch {
-            print("Failed to play background music: \(error.localizedDescription)")
+            print("Failed to play music: \(error.localizedDescription)")
         }
     }
     
@@ -57,7 +104,7 @@ class HostTimerViewController: UIViewController {
         audioPlayer?.stop()
         audioPlayer = nil
     }
-    
+    //MARK: - UI Timer Elements
     private let timerCircle: UILabel = {
         var view = UILabel()
         view.clipsToBounds = true
@@ -67,7 +114,7 @@ class HostTimerViewController: UIViewController {
         view.alpha = 0.6
         view.layer.borderWidth = 15
         view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        view.layer.cornerRadius = 130
+        view.layer.cornerRadius = view.frame.width / 2.0
         return view
     }()
     
@@ -128,34 +175,146 @@ class HostTimerViewController: UIViewController {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        H.delegate_getHost = self
-        H.getHost(gameCode)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+    func configureTimerLabel(){
+        self.view.addSubview(timerCircle)
+        self.view.addSubview(timerLabel)
+        self.view.addSubview(timeTypeLabel)
+        self.view.addSubview(roundLabel)
+        self.view.addSubview(totalTimeLabel)
+        NSLayoutConstraint.activate([
+            timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
+            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.27),
+            timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
+            timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
+            
+            timerLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            timerLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.39),
+            timerLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.70),
+            timerLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.36),
+            
+            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.29),
+            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.656),
+            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
+            
+            roundLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.32),
+            roundLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.605),
+            roundLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
+            
+            totalTimeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            totalTimeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.547),
+            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
+            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
+        ])
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
+        timerCircle.addGestureRecognizer(tapGesture)
+        timerCircle.isUserInteractionEnabled = true
+        calculateTime()
+        runTimer()
     }
     
-    @IBAction func announcementBtnPressed(_ sender: UIButton) {
-        H.getHost(gameCode)
-        showHostMessagePopUp(messages: messages)
-    }
-
-    @IBAction func settingBtnPressed(_ sender: UIButton) {
-    }
+    //MARK: - UI Button Elements
+    private lazy var cancelImg: UIImageView = {
+        var imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: 0, width: 63, height: 31)
+        imageView.image = UIImage(named: "slider button")
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 63, height: 31))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "END GAME"
+        label.textColor = UIColor(red: 1.0, green: 0.047, blue: 0.047, alpha: 1)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        imageView.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5).isActive = true
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(touched(_:)))
+        imageView.addGestureRecognizer(gestureRecognizer)
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
     
-    @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
-        if isPaused {
-            sender.setImage(pause, for: .normal)
-        }
-        else {
-            sender.setImage(play, for: .normal)
-        }
-        isPaused = !isPaused
-        Task { @MainActor in
-            await H.pause_resume_game(gameCode)
-        }
-    }
+    @objc private func touched(_ gestureRecognizer: UIGestureRecognizer) {
+        guard let touchedView = gestureRecognizer.view else { return }
+            switch gestureRecognizer.state {
+            case .changed:
+                let locationInView = gestureRecognizer.location(in: touchedView)
+                var newPos = touchedView.frame.origin.x + locationInView.x
+                newPos = max(self.view.bounds.width * 0.293, newPos)
+                newPos = min(self.view.bounds.width * 0.54, newPos)
+                touchedView.frame.origin.x = newPos
+                if touchedView.frame.origin.x >= self.view.bounds.width * 0.54 {
+                    if !segueCalled {
+                        segueCalled = true
+                        Task {
+                            await H.endGame(gameCode)
+                            performSegue(withIdentifier: "toEnd", sender: self)
+                        }
+                    }
+                } else {
+                    segueCalled = false
+                }
+            case .ended:
+                touchedView.frame.origin.x = self.view.bounds.width * 0.293
+            default:
+                break
+            }
+            UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+      }
     
+    private lazy var scrollLabel: UIView  = {
+        var view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 176, height: 58)
+        view.layer.cornerRadius = 15
+        view.layer.backgroundColor = UIColor(red: 1.0, green: 0.047, blue: 0.047, alpha: 1).cgColor
+        return view
+    }()
+    
+    private lazy var scrollTxt: UILabel  = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        let image0 = UIImage(named: "slider image")
+        let imageView = UIImageView(image: image0)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        label.addSubview(imageView)
+        imageView.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: label.trailingAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: label.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        return label
+    }()
+    
+    func configureEndButton() {
+        self.view.addSubview(scrollLabel)
+        self.view.addSubview(scrollTxt)
+        self.view.bringSubviewToFront(scrollTxt)
+        self.view.addSubview(cancelImg)
+        
+        scrollLabel.translatesAutoresizingMaskIntoConstraints = false
+        scrollLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.469).isActive = true
+        scrollLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.071).isActive = true
+        scrollLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        scrollLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.698).isActive = true
+        
+        cancelImg.translatesAutoresizingMaskIntoConstraints = false
+        cancelImg.widthAnchor.constraint(equalTo: scrollLabel.widthAnchor, multiplier: 0.358).isActive = true
+        cancelImg.heightAnchor.constraint(equalTo: scrollLabel.heightAnchor, multiplier: 0.534).isActive = true
+        cancelImg.leadingAnchor.constraint(equalTo: scrollLabel.leadingAnchor, constant: self.view.bounds.width * 0.0266).isActive = true
+        cancelImg.topAnchor.constraint(equalTo: scrollLabel.topAnchor, constant: self.view.bounds.height * 0.016).isActive = true
+        
+        scrollTxt.translatesAutoresizingMaskIntoConstraints = false
+        scrollTxt.widthAnchor.constraint(equalTo: scrollLabel.widthAnchor, multiplier: 0.496).isActive = true
+        scrollTxt.heightAnchor.constraint(equalTo: scrollLabel.heightAnchor, multiplier: 0.448).isActive = true
+        scrollTxt.leadingAnchor.constraint(equalTo: scrollLabel.leadingAnchor, constant: self.view.bounds.width * 0.208).isActive = true
+        scrollTxt.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.718).isActive = true
+    }
+    //MARK: - Timer Algorithm
     func runTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
@@ -164,6 +323,7 @@ class HostTimerViewController: UIViewController {
             if !strongSelf.isPaused {
                 if strongSelf.rounds! < 1 {
                     strongSelf.playMusic()
+                    strongSelf.pauseOrPlayButton.setImage(strongSelf.end, for: .normal)
                     timer.invalidate()
                 }
                 if strongSelf.time! < 1 {
@@ -242,60 +402,9 @@ class HostTimerViewController: UIViewController {
         self.roundLabel.text = "Round \(quotient + 1)"
     }
     
-    func configureTimerLabel(){
-        self.view.addSubview(timerCircle)
-        self.view.addSubview(timerLabel)
-        self.view.addSubview(timeTypeLabel)
-        self.view.addSubview(roundLabel)
-        self.view.addSubview(totalTimeLabel)
-        NSLayoutConstraint.activate([
-            timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.27),
-            timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
-            timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
-            
-            timerLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timerLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.39),
-            timerLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.70),
-            timerLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.36),
-            
-            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.29),
-            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.656),
-            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
-            
-            roundLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.32),
-            roundLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.605),
-            roundLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
-            
-            totalTimeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            totalTimeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.547),
-            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
-            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
-        ])
-//        let minute = moveSeconds/60
-//        let second = moveSeconds % 60
-//        timerLabel.text = String(format:"%02i : %02i", minute, second)
-//        roundLabel.text = "Round \(round)"
-//        let totalMinute = totalTime/60
-//        let totalSecond = totalTime % 60
-//        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-//        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-//        totalTimeLabel.attributedText = attributedString
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
-        timerCircle.addGestureRecognizer(tapGesture)
-        timerCircle.isUserInteractionEnabled = true
-        calculateTime()
-        runTimer()
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
 }
 //MARK: - Protocol
-extension HostTimerViewController: GetHost {
+extension HostTimerViewController: GetHost, HostUpdateListener {
     func getHost(_ host: Host) {
         self.seconds = host.gameTime
         self.moveSeconds = host.movingTime
@@ -305,19 +414,18 @@ extension HostTimerViewController: GetHost {
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
         self.messages = host.announcements
-        if host.paused {
-            pauseOrPlayButton.setImage(play, for: .normal)
-        }
-        else {
-            pauseOrPlayButton.setImage(pause, for: .normal)
-        }
+        self.gameStart = host.gameStart
+        self.gameOver = host.gameover
         configureTimerLabel()
     }
-}
-//MARK: - Listener
-extension HostTimerViewController: HostUpdateListener{
+    
     func updateHost(_ host: Host) {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
+        self.messages = host.announcements
+        self.gameStart = host.gameStart
+    }
+    
+    func listen(_ _ : [String : Any]){
     }
 }

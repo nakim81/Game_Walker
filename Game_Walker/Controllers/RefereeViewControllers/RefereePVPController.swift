@@ -103,20 +103,6 @@ class RefereePVPController: BaseViewController {
     }
 
     //MARK: - UI elements
-    private lazy var leftcontainerView: UIView = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        return border
-    }()
-    
     private lazy var lefticonButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         button.setTitle("", for: .normal)
@@ -156,20 +142,6 @@ class RefereePVPController: BaseViewController {
         view.textAlignment = .center
         view.text = "\(teamOrder[index].points)"
         return view
-    }()
-    
-    private lazy var rightcontainerView: UIView = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        return border
     }()
     
     private lazy var righticonButton: UIButton = {
@@ -246,12 +218,10 @@ class RefereePVPController: BaseViewController {
     
     func addSubviews() {
         self.view.addSubview(roundLabel)
-        self.view.addSubview(leftcontainerView)
         self.view.addSubview(lefticonButton)
         self.view.addSubview(leftteamNumber)
         self.view.addSubview(leftteamName)
         self.view.addSubview(leftscoreLabel)
-        self.view.addSubview(rightcontainerView)
         self.view.addSubview(righticonButton)
         self.view.addSubview(rightteamNumber)
         self.view.addSubview(rightteamName)
@@ -260,71 +230,61 @@ class RefereePVPController: BaseViewController {
     }
     
     func addConstraints() {
-        roundLabel.translatesAutoresizingMaskIntoConstraints = false
-        roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
-        roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
-        roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 151).isActive = true
-        leftcontainerView.translatesAutoresizingMaskIntoConstraints = false
-        leftcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        leftcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
-        leftcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 23).isActive = true
-        leftcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
-        lefticonButton.translatesAutoresizingMaskIntoConstraints = false
-        lefticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
-        lefticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
-        lefticonButton.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        lefticonButton.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 5).isActive = true
-        leftteamNumber.translatesAutoresizingMaskIntoConstraints = false
-        leftteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
-        leftteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        leftteamNumber.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftteamNumber.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 145.51).isActive = true
-        leftteamName.translatesAutoresizingMaskIntoConstraints = false
-        leftteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
-        leftteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        leftteamName.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftteamName.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 167.46).isActive = true
-        leftscoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
-        leftscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
-        leftscoreLabel.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftscoreLabel.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant:191.88).isActive = true
-        rightcontainerView.translatesAutoresizingMaskIntoConstraints = false
-        rightcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        rightcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
-        rightcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 199).isActive = true
-        rightcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
-        righticonButton.translatesAutoresizingMaskIntoConstraints = false
-        righticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
-        righticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
-        righticonButton.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        righticonButton.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 5).isActive = true
-        rightteamNumber.translatesAutoresizingMaskIntoConstraints = false
-        rightteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
-        rightteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        rightteamNumber.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightteamNumber.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 145.51).isActive = true
-        rightteamName.translatesAutoresizingMaskIntoConstraints = false
-        rightteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
-        rightteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        rightteamName.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightteamName.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 167.46).isActive = true
-        rightscoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
-        rightscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
-        rightscoreLabel.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightscoreLabel.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 191.88).isActive = true
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
-        timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
-        timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 575).isActive = true
-        timetypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timetypeLabel.widthAnchor.constraint(equalToConstant: 168).isActive = true
-        timetypeLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
+//        roundLabel.translatesAutoresizingMaskIntoConstraints = false
+//        roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
+//        roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
+//        roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 151).isActive = true
+//        lefticonButton.translatesAutoresizingMaskIntoConstraints = false
+//        lefticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
+//        lefticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
+//        lefticonButton.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+//        lefticonButton.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 5).isActive = true
+//        leftteamNumber.translatesAutoresizingMaskIntoConstraints = false
+//        leftteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
+//        leftteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+//        leftteamNumber.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+//        leftteamNumber.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 145.51).isActive = true
+//        leftteamName.translatesAutoresizingMaskIntoConstraints = false
+//        leftteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
+//        leftteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+//        leftteamName.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+//        leftteamName.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 167.46).isActive = true
+//        leftscoreLabel.translatesAutoresizingMaskIntoConstraints = false
+//        leftscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
+//        leftscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
+//        leftscoreLabel.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
+//        leftscoreLabel.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant:191.88).isActive = true
+//        righticonButton.translatesAutoresizingMaskIntoConstraints = false
+//        righticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
+//        righticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
+//        righticonButton.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+//        righticonButton.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 5).isActive = true
+//        rightteamNumber.translatesAutoresizingMaskIntoConstraints = false
+//        rightteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
+//        rightteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+//        rightteamNumber.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+//        rightteamNumber.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 145.51).isActive = true
+//        rightteamName.translatesAutoresizingMaskIntoConstraints = false
+//        rightteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
+//        rightteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
+//        rightteamName.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+//        rightteamName.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 167.46).isActive = true
+//        rightscoreLabel.translatesAutoresizingMaskIntoConstraints = false
+//        rightscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
+//        rightscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
+//        rightscoreLabel.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
+//        rightscoreLabel.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 191.88).isActive = true
+//        timerLabel.translatesAutoresizingMaskIntoConstraints = false
+//        timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
+//        timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
+//        timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 575).isActive = true
+//        timetypeLabel.translatesAutoresizingMaskIntoConstraints = false
+//        timetypeLabel.widthAnchor.constraint(equalToConstant: 168).isActive = true
+//        timetypeLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+//        timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
     }
     
     @objc func leftbuttonTapped() {

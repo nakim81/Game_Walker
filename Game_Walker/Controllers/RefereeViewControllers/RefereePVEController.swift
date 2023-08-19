@@ -118,23 +118,6 @@ class RefereePVEController: BaseViewController {
     }
 
 //MARK: - UI elements
-    private lazy var borderView: UIView = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 211, height: 306)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
-        border.addGestureRecognizer(tapGesture)
-        border.isUserInteractionEnabled = true
-        return view
-    }()
-
     private lazy var iconButton: UIButton = {
         var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         button.setTitle("", for: .normal)
@@ -209,7 +192,6 @@ class RefereePVEController: BaseViewController {
     
     func addSubviews() {
         self.view.addSubview(roundLabel)
-        self.view.addSubview(borderView)
         self.view.addSubview(iconButton)
         self.view.addSubview(teamNumber)
         self.view.addSubview(teamName)
@@ -219,11 +201,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func addConstraints() {
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        borderView.widthAnchor.constraint(equalToConstant: 211).isActive = true
-        borderView.heightAnchor.constraint(equalToConstant: 306).isActive = true
-        borderView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        borderView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 187).isActive = true
         iconButton.translatesAutoresizingMaskIntoConstraints = false
         iconButton.widthAnchor.constraint(equalToConstant: 175).isActive = true
         iconButton.heightAnchor.constraint(equalToConstant: 175).isActive = true
