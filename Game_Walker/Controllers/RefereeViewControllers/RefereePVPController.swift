@@ -14,14 +14,24 @@ class RefereePVPController: BaseViewController {
     @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var annnouncementButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var leaveButton: UIButton!
+    
     
     private var gameCode = UserData.readGamecode("refereeGamecode")!
     private var referee = UserData.readReferee("Referee")!
     private var stationName = ""
-    private var teamOrder : [Team] = []
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 1, players: [], points: 0, stationOrder: [0], iconName: "iconDaisy"),Team(gamecode: "333333", name: "ABCDEF", number: 2, players: [], points: 0, stationOrder: [0], iconName: "iconBoy"),
+                                      Team(gamecode: "333333", name: "Simon Dominic", number: 3, players: [], points: 0, stationOrder: [0], iconName: "iconGirl"),
+                                      Team(gamecode: "333333", name: "Driver", number: 4, players: [], points: 0, stationOrder: [0], iconName: "iconAir")]
     private var teamA : Team?
     private var teamB : Team?
     private var index: Int = 0
+    
+    private var stationUuid : String = ""
+    private var points : Int = 0
+    private var name : String = ""
+    private var location : String = ""
+    private var rule : String = ""
     
     private var startTime : Int = 0
     private var pauseTime : Int = 0
@@ -29,12 +39,12 @@ class RefereePVPController: BaseViewController {
     private var timer = Timer()
     private var totalTime: Int = 0
     private var time: Int?
-    private var seconds: Int = 0
-    private var moveSeconds: Int = 0
+    private var seconds: Int = 100
+    private var moveSeconds: Int = 50
     private var moving: Bool = true
     private var tapped: Bool = false
     private var round: Int = 1
-    private var rounds: Int?
+    private var rounds: Int = 8
     private var isPaused = true
     private var currentRound : Int = 0
     private var t : Int = 0
@@ -87,11 +97,14 @@ class RefereePVPController: BaseViewController {
         }
     }
     
+    @IBAction func leaveButtonPressed(_ sender: Any) {
+    }
+    
     override func viewDidLoad() {
         callProtocols()
         H.getHost(gameCode)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        S.getStation(gameCode, referee.stationName)
+        S.getStationList(gameCode)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         self.teamA = self.teamOrder[self.round - 1]
         self.teamB = self.teamOrder[self.round]
@@ -103,114 +116,29 @@ class RefereePVPController: BaseViewController {
     }
 
     //MARK: - UI elements
-    private lazy var leftcontainerView: UIView = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        return border
-    }()
     
-    private lazy var lefticonButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
-        button.setTitle("", for: .normal)
-        button.setImage(UIImage(named: teamOrder[index].iconName), for: .normal)
-        button.addTarget(self, action: #selector(leftbuttonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var leftteamNumber: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-SemiBold", size: 15)
-        view.textAlignment = .center
-        view.text = "Team " + "\(self.teamOrder[index].number)"
-        return view
-    }()
-    
-    private lazy var leftteamName: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 174, height: 38)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-Regular", size: 15)
-        view.textAlignment = .center
-        view.text = teamOrder[index].name
-        return view
-    }()
-    
-    private lazy var leftscoreLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 150, height: 53)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-Bold", size: 35)
-        view.textAlignment = .center
-        view.text = "\(teamOrder[index].points)"
-        return view
-    }()
-    
-    private lazy var rightcontainerView: UIView = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 153, height: 231.61)
-        view.backgroundColor = .white
-        var border = UIView()
-        border.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.center = view.center
-        view.addSubview(border)
-        view.bounds = view.bounds.insetBy(dx: -5, dy: -5)
-        border.layer.borderWidth = 5
-        border.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 0.5).cgColor
-        return border
-    }()
-    
-    private lazy var righticonButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
-        button.setTitle("", for: .normal)
-        button.setImage(UIImage(named: teamOrder[index + 1].iconName), for: .normal)
-        button.addTarget(self, action: #selector(rightbuttonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var rightteamNumber: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 83.58, height: 28.76)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-SemiBold", size: 15)
-        view.textAlignment = .center
-        view.text = "Team " + "\(self.teamOrder[index + 1].number)"
-        return view
-    }()
-    
-    private lazy var rightteamName: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 174, height: 38)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-Regular", size: 15)
-        view.textAlignment = .center
-        view.text = teamOrder[index + 1].name
-        return view
-    }()
-    
-    private lazy var rightscoreLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 150, height: 53)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-Bold", size: 35)
-        view.textAlignment = .center
-        view.text = "\(teamOrder[index + 1].points)"
-        return view
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        return label
     }()
     
     private lazy var roundLabel: UILabel = {
@@ -224,121 +152,259 @@ class RefereePVPController: BaseViewController {
         return view
     }()
     
+    @objc func leftbuttonTapped() {
+        UserData.writeTeam(self.teamA!, "Team")
+        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
+        self.present(popUpWindow, animated: true, completion: nil)
+    }
+    
+    private lazy var lefticonButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
+        view.image = UIImage(named: teamOrder[index].iconName)
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(leftbuttonTapped))
+        view.addGestureRecognizer(tapGesture)
+        return view
+    }()
+    
+    private lazy var leftteamInfoLabel: UILabel = {
+        let teamNumber = "Team \(self.teamOrder[index].number)"
+        let teamName = self.teamOrder[index].name
+        let score = "\(self.teamOrder[index].points)"
+        let attributedText = NSMutableAttributedString()
+        let teamNumberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-SemiBold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let teamNumberAttributedString = NSAttributedString(string: teamNumber + "\n", attributes: teamNumberAttributes)
+        attributedText.append(teamNumberAttributedString)
+        let teamNameAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let teamNameAttributedString = NSAttributedString(string: teamName + "\n", attributes: teamNameAttributes)
+        attributedText.append(teamNameAttributedString)
+        let scoreAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
+            .foregroundColor: UIColor.black
+        ]
+        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
+        attributedText.append(scoreAttributedString)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 174, height: 139))
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.numberOfLines = 3
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var leftWinButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        button.setTitle("Win", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
+        button.titleLabel?.textColor = .white
+        button.setImage(UIImage(named: "Win Blue Button"), for: .normal)
+        button.addTarget(self, action: #selector(leftWinButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func leftWinButtonTapped() {
+        Task {
+            await T.givePoints(gameCode, self.teamA!.name, self.points)
+        }
+        leftWinButton.isEnabled = false
+        leftLoseButton.isEnabled = false
+    }
+    
+    private lazy var leftLoseButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        button.setTitle("Win", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
+        button.titleLabel?.textColor = .white
+        button.setImage(UIImage(named: "Lose Gray Button"), for: .normal)
+        button.addTarget(self, action: #selector(leftWinButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func leftLoseButtonTapped() {
+        leftWinButton.isEnabled = false
+        leftLoseButton.isEnabled = false
+    }
+    
+    @objc func rightbuttonTapped() {
+        UserData.writeTeam(self.teamB!, "Team")
+        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
+        self.present(popUpWindow, animated: true, completion: nil)
+    }
+    
+    private lazy var righticonButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
+        view.image = UIImage(named: teamOrder[index+1].iconName)
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(rightbuttonTapped))
+        view.addGestureRecognizer(tapGesture)
+        return view
+    }()
+    
+    private lazy var rightteamInfoLabel: UILabel = {
+        let teamNumber = "Team \(self.teamOrder[index + 1].number)"
+        let teamName = self.teamOrder[index + 1].name
+        let score = "\(self.teamOrder[index + 1].points)"
+        let attributedText = NSMutableAttributedString()
+        let teamNumberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-SemiBold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let teamNumberAttributedString = NSAttributedString(string: teamNumber + "\n", attributes: teamNumberAttributes)
+        attributedText.append(teamNumberAttributedString)
+        let teamNameAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let teamNameAttributedString = NSAttributedString(string: teamName + "\n", attributes: teamNameAttributes)
+        attributedText.append(teamNameAttributedString)
+        let scoreAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
+            .foregroundColor: UIColor.black
+        ]
+        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
+        attributedText.append(scoreAttributedString)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 174, height: 139))
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.numberOfLines = 3
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var rightWinButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        button.setTitle("Win", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
+        button.titleLabel?.textColor = .white
+        button.setImage(UIImage(named: "Lose Yellow Button"), for: .normal)
+        button.addTarget(self, action: #selector(rightWinButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func rightWinButtonTapped() {
+        Task {
+            await T.givePoints(gameCode, self.teamB!.name, self.points)
+        }
+        rightWinButton.isEnabled = false
+        rightLoseButton.isEnabled = false
+    }
+    
+    private lazy var rightLoseButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        button.setTitle("Lose", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
+        button.titleLabel?.textColor = .black
+        button.setImage(UIImage(named: "Lose Gray Button"), for: .normal)
+        button.addTarget(self, action: #selector(rightLoseButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func rightLoseButtonTapped() {
+        rightWinButton.isEnabled = false
+        rightLoseButton.isEnabled = false
+    }
+    
     private lazy var timerLabel: UILabel = {
         var view = UILabel()
         view.frame = CGRect(x: 0, y: 0, width: 179, height: 53)
         view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        view.font = UIFont(name: "Dosis-Regular", size: 55)
+        view.font = UIFont(name: "Dosis-Regular", size: 25)
         view.textAlignment = .center
-        return view
-    }()
-    
-    private lazy var timetypeLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 151, height: 44)
-        view.backgroundColor = .white
-        view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        view.font = UIFont(name: "Dosis-Regular", size: 35)
-        view.textAlignment = .center
-        view.text = "Moving Time"
+        view.text = "Moving Time" + String(format:"%02i : %02i", self.moveSeconds/60, self.moveSeconds % 60)
+        view.numberOfLines = 0
         return view
     }()
     
     func addSubviews() {
+        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
-        self.view.addSubview(leftcontainerView)
         self.view.addSubview(lefticonButton)
-        self.view.addSubview(leftteamNumber)
-        self.view.addSubview(leftteamName)
-        self.view.addSubview(leftscoreLabel)
-        self.view.addSubview(rightcontainerView)
+        self.view.addSubview(leftteamInfoLabel)
+        self.view.addSubview(leftWinButton)
+        self.view.addSubview(leftLoseButton)
         self.view.addSubview(righticonButton)
-        self.view.addSubview(rightteamNumber)
-        self.view.addSubview(rightteamName)
+        self.view.addSubview(rightteamInfoLabel)
+        self.view.addSubview(rightWinButton)
+        self.view.addSubview(rightLoseButton)
         self.view.addSubview(timerLabel)
-        self.view.addSubview(rightscoreLabel)
     }
     
     func addConstraints() {
+        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.0541).isActive = true
+        gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.04).isActive = true
+        gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2).isActive = true
+        
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
-        roundLabel.widthAnchor.constraint(equalToConstant: 149.17).isActive = true
-        roundLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
+        roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579).isActive = true
+        roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751).isActive = true
         roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 151).isActive = true
-        leftcontainerView.translatesAutoresizingMaskIntoConstraints = false
-        leftcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        leftcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
-        leftcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 23).isActive = true
-        leftcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
+        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.186).isActive = true
+        
         lefticonButton.translatesAutoresizingMaskIntoConstraints = false
-        lefticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
-        lefticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
-        lefticonButton.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        lefticonButton.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 5).isActive = true
-        leftteamNumber.translatesAutoresizingMaskIntoConstraints = false
-        leftteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
-        leftteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        leftteamNumber.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftteamNumber.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 145.51).isActive = true
-        leftteamName.translatesAutoresizingMaskIntoConstraints = false
-        leftteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
-        leftteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        leftteamName.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftteamName.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant: 167.46).isActive = true
-        leftscoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
-        leftscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
-        leftscoreLabel.centerXAnchor.constraint(equalTo: leftcontainerView.centerXAnchor).isActive = true
-        leftscoreLabel.topAnchor.constraint(equalTo: leftcontainerView.topAnchor, constant:191.88).isActive = true
-        rightcontainerView.translatesAutoresizingMaskIntoConstraints = false
-        rightcontainerView.widthAnchor.constraint(equalToConstant: 153).isActive = true
-        rightcontainerView.heightAnchor.constraint(equalToConstant: 238).isActive = true
-        rightcontainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 199).isActive = true
-        rightcontainerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 237).isActive = true
+        lefticonButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36).isActive = true
+        lefticonButton.heightAnchor.constraint(equalTo: lefticonButton.widthAnchor, multiplier: 1).isActive = true
+        lefticonButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.0853).isActive = true
+        lefticonButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.298).isActive = true
+        
+        leftteamInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftteamInfoLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.333).isActive = true
+        leftteamInfoLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.123).isActive = true
+        leftteamInfoLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.107).isActive = true
+        leftteamInfoLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.471).isActive = true
+        
+        leftWinButton.translatesAutoresizingMaskIntoConstraints = false
+        leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
+        leftWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
+        leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.079).isActive = true
+        leftWinButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.590).isActive = true
+        
+        leftLoseButton.translatesAutoresizingMaskIntoConstraints = false
+        leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
+        leftLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
+        leftLoseButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.269).isActive = true
+        leftLoseButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.590).isActive = true
+        
         righticonButton.translatesAutoresizingMaskIntoConstraints = false
-        righticonButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
-        righticonButton.heightAnchor.constraint(equalToConstant: 135).isActive = true
-        righticonButton.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        righticonButton.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 5).isActive = true
-        rightteamNumber.translatesAutoresizingMaskIntoConstraints = false
-        rightteamNumber.widthAnchor.constraint(equalToConstant: 83.58).isActive = true
-        rightteamNumber.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        rightteamNumber.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightteamNumber.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 145.51).isActive = true
-        rightteamName.translatesAutoresizingMaskIntoConstraints = false
-        rightteamName.widthAnchor.constraint(equalToConstant: 126.45).isActive = true
-        rightteamName.heightAnchor.constraint(equalToConstant: 28.76).isActive = true
-        rightteamName.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightteamName.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 167.46).isActive = true
-        rightscoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightscoreLabel.widthAnchor.constraint(equalToConstant: 109.01).isActive = true
-        rightscoreLabel.heightAnchor.constraint(equalToConstant: 40.12).isActive = true
-        rightscoreLabel.centerXAnchor.constraint(equalTo: rightcontainerView.centerXAnchor).isActive = true
-        rightscoreLabel.topAnchor.constraint(equalTo: rightcontainerView.topAnchor, constant: 191.88).isActive = true
+        righticonButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36).isActive = true
+        righticonButton.heightAnchor.constraint(equalTo: righticonButton.widthAnchor, multiplier: 1).isActive = true
+        righticonButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.555).isActive = true
+        righticonButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.298).isActive = true
+
+        rightteamInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightteamInfoLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.333).isActive = true
+        rightteamInfoLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.123).isActive = true
+        rightteamInfoLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.565).isActive = true
+        rightteamInfoLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.471).isActive = true
+
+        rightWinButton.translatesAutoresizingMaskIntoConstraints = false
+        rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
+        rightWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
+        rightWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.550).isActive = true
+        rightWinButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.590).isActive = true
+
+        rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
+        rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
+        rightLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
+        rightLoseButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.735).isActive = true
+        rightLoseButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.590).isActive = true
+        
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.widthAnchor.constraint(equalToConstant: 179).isActive = true
-        timerLabel.heightAnchor.constraint(equalToConstant: 73).isActive = true
+        timerLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.477).isActive = true
+        timerLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0394).isActive = true
         timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 575).isActive = true
-        timetypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timetypeLabel.widthAnchor.constraint(equalToConstant: 168).isActive = true
-        timetypeLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        timetypeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timetypeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 520).isActive = true
-    }
-    
-    @objc func leftbuttonTapped() {
-        UserData.writeTeam(teamA!, "points")
-        performSegue(withIdentifier: "givePointsPVP", sender: self)
-    }
-    
-    @objc func rightbuttonTapped() {
-        UserData.writeTeam(teamB!, "points")
-        performSegue(withIdentifier: "givePointsPVP", sender: self)
+        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.70).isActive = true
     }
     
     @IBAction func stationinfoButtonPressed(_ sender: UIButton) {
-        showRefereeGameInfoPopUp()
+        showRefereeGameInfoPopUp(gameName: self.name, gameLocation: self.location, gamePoitns: String(self.points), gameRule: self.rule)
     }
     
     @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
@@ -356,36 +422,34 @@ class RefereePVPController: BaseViewController {
                 return
             }
             if !strongSelf.isPaused {
-                if strongSelf.rounds! < 1 {
+                if strongSelf.rounds < 1 {
                     strongSelf.playMusic()
                     timer.invalidate()
                 }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
+                        strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.moving = false
-                        strongSelf.timetypeLabel.text = "Game Time"
                     } else {
                         strongSelf.time = strongSelf.moveSeconds
+                        strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.moving = true
-                        strongSelf.timetypeLabel.text = "Moving Time"
-                        strongSelf.rounds! -= 1
+                        strongSelf.rounds -= 1
                         strongSelf.index += 2
-                        strongSelf.lefticonButton.setImage(UIImage(named: strongSelf.teamOrder[strongSelf.index].iconName), for: .normal)
-                        strongSelf.leftteamNumber.text = "Team " + "\(strongSelf.teamOrder[strongSelf.index].number)"
-                        strongSelf.leftteamName.text = strongSelf.teamOrder[strongSelf.index].name
-                        strongSelf.leftscoreLabel.text = "\(strongSelf.teamOrder[strongSelf.index].points)"
-                        strongSelf.righticonButton.setImage(UIImage(named: strongSelf.teamOrder[strongSelf.index + 1].iconName), for: .normal)
-                        strongSelf.rightteamNumber.text = "Team " + "\(strongSelf.teamOrder[strongSelf.index + 1].number)"
-                        strongSelf.rightteamName.text = strongSelf.teamOrder[strongSelf.index + 1].name
-                        strongSelf.rightscoreLabel.text = "\(strongSelf.teamOrder[strongSelf.index + 1].points)"
+                        strongSelf.lefticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index].iconName)
+                        strongSelf.righticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index + 1].iconName)
                         strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
                     }
                 }
                 strongSelf.time! -= 1
                 let minute = strongSelf.time!/60
                 let second = strongSelf.time! % 60
-                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+                if strongSelf.moving {
+                    strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
+                } else {
+                    strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", minute, second)
+                }
             }
         }
     }
@@ -404,7 +468,7 @@ class RefereePVPController: BaseViewController {
         }
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            self.timetypeLabel.text = "Moving Time"
+            
             self.time = (moveSeconds - remainder)
             self.moving = true
             let minute = (moveSeconds - remainder)/60
@@ -412,22 +476,34 @@ class RefereePVPController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timetypeLabel.text = "Game Time"
+            
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
             let second = (seconds - remainder) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
-        self.rounds! = self.rounds! - self.round
+        self.rounds = self.rounds - self.round
     }
 }
 
 //MARK: - Protocols
-extension RefereePVPController: GetStation, GetHost, TeamUpdateListener, HostUpdateListener {
+extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateListener, HostUpdateListener {
     func getStation(_ station: Station) {
-        self.stationName = station.name
         self.teamOrder = station.teamOrder
+        self.name = station.name
+        self.location = station.place
+        self.rule = station.description
+        self.points = station.points
+    }
+    
+    func listOfStations(_ stations: [Station]) {
+        for station in stations {
+            if station.name == referee.stationName {
+                self.stationUuid = station.uuid
+                S.getStation(gameCode, station.uuid)
+            }
+        }
     }
     
     func getHost(_ host: Host) {
@@ -446,11 +522,11 @@ extension RefereePVPController: GetStation, GetHost, TeamUpdateListener, HostUpd
         for team in teams {
             if self.teamA!.name == team.name {
                 self.teamA! = team
-                leftscoreLabel.text = "\(self.teamA!.points)"
+                //leftscoreLabel.text = "\(self.teamA!.points)"
             }
             if self.teamB!.name == team.name {
                 self.teamB! = team
-                rightscoreLabel.text = "\(self.teamB!.points)"
+                //rightscoreLabel.text = "\(self.teamB!.points)"
             }
         }
     }

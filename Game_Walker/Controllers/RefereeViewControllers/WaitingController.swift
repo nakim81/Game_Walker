@@ -31,17 +31,9 @@ class WaitingController: BaseViewController {
     
     override func viewDidLoad() {
         callProtocols()
-        //testing1()
-        //testing2()
-        //testing3()
-        //testing4()
-        setTeamOrder()
         Task {
-//            T.getTeamList(gameCode)
-//            S.getStationList(gameCode)
-//            await S.addStation(gameCode, Station(name: "UpdateTesting", number : 11, pvp : false))
-//            await S.updateTeamOrder(gameCode, "UpdateTesting", self.updatedTeamOrder)
-//            await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
+            T.getTeamList(gameCode)
+            S.getStationList(gameCode)
         }
         addSubviews()
         makeConstraints()
@@ -58,13 +50,11 @@ class WaitingController: BaseViewController {
         var right : [Int] = []
         var teamNumOrder : [Int] = []
         var teamOrder : [Team] = []
-        print(self.stationList)
         for station in self.stationList {
             if station.pvp == true {
                 pvp_count += 1
             }
         }
-        print(pvp_count)
         if self.station.pvp {
             column_number_index = 2 * station.number - 2
             var left = self.algorithm.map({ $0[column_number_index] })
@@ -78,12 +68,8 @@ class WaitingController: BaseViewController {
         }
         else {
             column_number_index = 2 * pvp_count + station.number - pvp_count - 1
-            print(column_number_index)
-            print(self.algorithm)
             teamNumOrder = self.algorithm.map({ $0[column_number_index] })
-            print(teamNumOrder)
         }
-        print(teamNumOrder)
         for team_num in teamNumOrder {
             if team_num == 0 {
                 teamOrder.append(Team())
@@ -94,66 +80,10 @@ class WaitingController: BaseViewController {
                 }
             }
         }
-        print(teamOrder)
         self.updatedTeamOrder = teamOrder
-    }
-    
-    
-    // Testing Case # 1
-    func testing1() {
-        self.algorithm = [[1, 2, 3, 4, 5, 6, 7, 8],
-                          [2, 3, 4, 5, 6, 7, 8, 1],
-                          [3, 4, 5, 6, 7, 8, 1, 2],
-                          [4, 5, 6, 7, 8, 1, 2, 3],
-                          [5, 6, 7, 8, 1, 2, 3, 4],
-                          [6, 7, 8, 1, 2, 3, 4, 5],
-                          [7, 8, 1, 2, 3, 4, 5, 6],
-                          [8, 1, 2, 3, 4, 5, 6, 7]]
-        self.stationList = [Station(number : 1, pvp : true), Station(number : 2, pvp : true), Station(number : 3, pvp : true), Station(number : 4, pvp : false), Station(number : 5, pvp : false)]
-        self.station = Station(number : 5, pvp : false)
-    }
-    
-    // Testing Case # 2
-    func testing2() {
-        self.algorithm = [[2, 3, 4, 5, 6, 7, 8, 1],
-                          [3, 4, 5, 6, 7, 8, 1, 2],
-                          [4, 5, 6, 7, 8, 1, 2, 3],
-                          [5, 6, 7, 8, 1, 2, 3, 4],
-                          [6, 7, 8, 1, 2, 3, 4, 5],
-                          [7, 8, 1, 2, 3, 4, 5, 6],
-                          [8, 1, 2, 3, 4, 5, 6, 7],
-                          [1, 2, 3, 4, 5, 6, 7, 8]]
-        self.stationList = [Station(number : 1, pvp : true), Station(number : 2, pvp : true), Station(number : 3, pvp : true), Station(number : 4, pvp : false), Station(number : 5, pvp : false)]
-        self.station = Station(number : 2, pvp : true)
-    }
-    
-    // Testing Case # 3
-    func testing3() {
-        self.algorithm = [[1, 2, 3, 4, 5, 6, 7, 8],
-                          [2, 3, 4, 5, 6, 7, 8, 1],
-                          [3, 4, 5, 6, 7, 8, 1, 2],
-                          [6, 7, 8, 1, 2, 3, 4, 5],
-                          [7, 8, 1, 2, 3, 4, 5, 6],
-                          [8, 1, 2, 3, 4, 5, 6, 7],
-                          [4, 5, 6, 7, 8, 1, 2, 3],
-                          [5, 6, 7, 8, 1, 2, 3, 4]]
-        self.stationList = [Station(number : 1, pvp : true), Station(number : 2, pvp : true), Station(number : 3, pvp : true), Station(number : 4, pvp : false), Station(number : 5, pvp : false)]
-        self.station = Station(number : 4, pvp : false)
-    }
-    
-    // Testing Case # 4
-    func testing4() {
-        self.algorithm = [[1, 2, 3, 4, 5, 6, 7, 8],
-                          [2, 3, 4, 5, 6, 7, 8, 1],
-                          [3, 4, 5, 6, 7, 8, 1, 2],
-                          [6, 7, 8, 1, 2, 0, 4, 5],
-                          [7, 8, 1, 2, 3, 4, 5, 6],
-                          [8, 1, 2, 3, 4, 0, 6, 7],
-                          [4, 5, 6, 7, 8, 1, 2, 3],
-                          [5, 6, 7, 8, 1, 2, 3, 4]]
-        self.stationList = [Station(number : 1, pvp : true), Station(number : 2, pvp : true), Station(number : 3, pvp : true), Station(number : 4, pvp : false), Station(number : 5, pvp : false)]
-        self.station = Station(number : 4, pvp : false)
-        self.teams = [Team(number: 1), Team(number: 2), Team(number: 3), Team(number: 4), Team(number: 5), Team(number: 6), Team(number: 7), Team(number: 8)]
+        Task {
+            await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
+        }
     }
     
     //MARK: - Animating Screen
@@ -185,7 +115,7 @@ class WaitingController: BaseViewController {
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
             if self.referee.assigned && !self.isGetStationCalled {
-                if self.pvp {
+                if self.station.pvp {
                     self.performSegue(withIdentifier: "goToPVP", sender: self)
                 }
                 else {
@@ -218,6 +148,7 @@ class WaitingController: BaseViewController {
         gameIconView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.36).isActive = true
         gameIconView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.18).isActive = true
         gameIconView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.83).isActive = true
+        
         waitingImageView.translatesAutoresizingMaskIntoConstraints = false
         waitingImageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.07).isActive = true
         waitingImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.567).isActive = true
@@ -240,13 +171,13 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
         for station in self.stationList {
             if self.referee.stationName == station.name {
                 self.station = station
+                self.isGetStationCalled = true
             }
         }
     }
     
     func listOfStations(_ stations: [Station]) {
         self.stationList = stations
-        self.isGetStationCalled = true
     }
     
     func updateHost(_ host: Host) {

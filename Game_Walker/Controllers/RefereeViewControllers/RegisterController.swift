@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import PromiseKit
 
 class RegisterController: BaseViewController, UITextFieldDelegate {
     
@@ -18,8 +17,10 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedRefereeName = UserData.readUsername("refereeName") ?? ""
     private var refereeUserID = UserData.readUUID()!
     private var storedStation: Station?
+    private var pvp : Bool = false
     
     override func viewDidLoad() {
+        callProtocols()
         super.viewDidLoad()
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.delegate = self
@@ -41,14 +42,22 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         if let gamecode = gamecodeTextField.text, let name = usernameTextField.text {
             // Rejoining the game.
             if (gamecode.isEmpty || gamecode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
+                let oldReferee = UserData.readReferee("Referee")!
+                let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "Station 1", assigned: true)
                 UserData.writeGamecode(storedGameCode, "refereeGamecode")
                 UserData.writeReferee(newReferee, "Referee")
                 UserData.writeUsername(newReferee.name, "refereeName")
                 Task { @MainActor in
                     try await R.addReferee(storedGameCode, newReferee, refereeUserID)
+                    S.getStationList(storedGameCode)
+                    try await Task.sleep(nanoseconds: 280_000_000)
+                    if self.pvp {
+                        performSegue(withIdentifier: "toPVP", sender: self)
+                    }
+                    else {
+                        performSegue(withIdentifier: "toPVE", sender: self)
+                    }
                 }
-                performSegue(withIdentifier: "goToWait", sender: self)
             }
             // Joining the game for the first time.
             else if storedGameCode.isEmpty && storedRefereeName.isEmpty {
@@ -67,7 +76,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             }
             // Leaving the game and entering a new game.
             else if (gamecode != storedGameCode) && (name.isEmpty || name == storedRefereeName){
-                let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gamecode, name: storedRefereeName, stationName: "", assigned: false)
                 Task { @MainActor in
                     R.removeReferee(storedGameCode, refereeUserID)
@@ -82,12 +90,18 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 UserData.writeReferee(newReferee, "Referee")
                 Task { @MainActor in
                     try await R.modifyName(gamecode, refereeUserID, name)
+                    S.getStationList(storedGameCode)
+                    try await Task.sleep(nanoseconds: 280_000_000)
+                    if self.pvp {
+                        performSegue(withIdentifier: "toPVP", sender: self)
+                    }
+                    else {
+                        performSegue(withIdentifier: "toPVE", sender: self)
+                    }
                 }
-                performSegue(withIdentifier: "goToWait", sender: self)
             }
             //Joining a completely new game with a different name on the same machine.
             else {
-                let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(gamecode: gamecode, name: name, stationName: "", assigned: false)
                 UserData.writeReferee(newReferee, "Referee")
                 UserData.writeUsername(name, "refereeName")
@@ -100,3 +114,18 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         }
     }
 }
+// MARK: - Protocols
+extension RegisterController: StationList {
+    func listOfStations(_ stations: [Station]) {
+        for station in stations {
+            if station.name == UserData.readReferee("Referee")!.stationName {
+                self.pvp = station.pvp
+            }
+        }
+    }
+    
+    func callProtocols() {
+        S.delegate_stationList = self
+    }
+}
+
