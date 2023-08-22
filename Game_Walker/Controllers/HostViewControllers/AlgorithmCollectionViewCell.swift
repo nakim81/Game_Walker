@@ -19,7 +19,9 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var blueWarningBoxImage = UIImage(named: "blue-warning")
     private var yellowWarningBoxImage = UIImage(named: "yellow-warning")
     private var orangeWarningBoxImage = UIImage(named: "orange-warning")
-    private var visible : Bool = true
+    var visible : Bool = true
+    var warningColor : String = ""
+    var hasWarning : Bool = false
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -45,6 +47,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     
     func changeRed() {
         teamnumLabel.textColor = UIColor.red
+        warningColor = "red"
+        hasWarning = true
     }
     
     func makeCellSelected() {
@@ -57,6 +61,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBoxImage
         isUserInteractionEnabled = true
+        hasWarning = false
+        warningColor = ""
     }
     
     func makeCellInvisible() {
@@ -64,31 +70,43 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         visible = false
         isUserInteractionEnabled = false
         teamnumLabel.text = ""
+        warningColor = ""
+        hasWarning = false
     }
     
     func makeCellEmpty() {
         teamnumLabel.text = ""
+        warningColor = ""
+        hasWarning = false
     }
     
     func makeRedWarning() {
         //same team in same column
         algorithmCellBox.image = redWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "red"
     }
     
     func makeBlueWarning() {
         //same team in same row
         algorithmCellBox.image = blueWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "blue"
     }
     
     func makeOrangeWarning() {
         algorithmCellBox.image = orangeWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "orange"
     }
     
     func makeYellowWarning() {
         algorithmCellBox.image = yellowWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "yellow"
     }
 }

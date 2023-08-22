@@ -48,9 +48,9 @@ class AlgorithmViewController: BaseViewController {
     var indexPathB: IndexPath?
     
     var originalcellAimage: UIImage?
-    var originalcellAcolor: UIColor?
+    var originalcellAcolor: String?
     var originalcellBimage: UIImage?
-    var originalcellBcolor: UIColor?
+    var originalcellBcolor: String?
 
     
     override func viewDidLoad() {
@@ -250,35 +250,66 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func checkPvpGameDuplicates() {
-        var columnPairs: CountableRange<Int> = 0..<0
-        
-        if pvpGameCount > 0 {
-            columnPairs = 0..<grid[0].count / 2
-        }
-        
-        var duplicateIndexPaths: [IndexPath] = []
-        
-        for row in 0..<grid.count {
-            for columnIndex in columnPairs {
-                let valueA = grid[row][columnIndex]
-                let valueB = grid[row][columnIndex + grid[0].count / 2]
+        let totalColumns = grid[0].count
+        let maxPairs = totalColumns / 2
+
+        if pvpGameCount > maxPairs {
+            print("Error: pvpCount is greater than available column pairs")
+        } else {
+            for columnIndex in stride(from: 0, to: totalColumns, by: 2) {
+                let columnPair = columnIndex..<(columnIndex + 2)
                 
-                if valueA == valueB {
-                    let indexPathA = IndexPath(item: columnIndex, section: row)
-                    let indexPathB = IndexPath(item: columnIndex + grid[0].count / 2, section: row)
-                    duplicateIndexPaths.append(indexPathA)
-                    duplicateIndexPaths.append(indexPathB)
+                // Your duplicate checking logic here
+                let duplicateValues = findDuplicatesInColumns(columnPair)
+                
+                // Handle the duplicate values, e.g., change cell backgrounds
+                for (_, rows) in duplicateValues {
+                    for row in rows {
+                        // Calculate the corresponding IndexPath and call changeBackgroundTo()
+                        let indexPath = IndexPath(item: row, section: columnPair.lowerBound)
+                        let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
+                        cell?.makeYellowWarning()
+                    }
+                }
+            }
+        }
+
+    }
+    
+    func findDuplicatesInColumns(_ columns: Range<Int>) -> [Int: [Int]] {
+        var duplicates: [Int: [Int]] = [:]
+        
+        for columnIndex in columns {
+            var seenValues: [Int: [Int]] = [:]
+            
+            for rowIndex in 0..<grid.count {
+                let value = grid[rowIndex][columnIndex]
+                
+                if value == -1 || value == 0 {
+                    continue
+                }
+                
+                if var existingRows = seenValues[value] {
+                    existingRows.append(rowIndex)
+                    seenValues[value] = existingRows
+                } else {
+                    seenValues[value] = [rowIndex]
+                }
+            }
+            
+            for (value, rows) in seenValues where rows.count > 1 {
+                if var existingRows = duplicates[value] {
+                    existingRows.append(contentsOf: rows)
+                    duplicates[value] = existingRows
+                } else {
+                    duplicates[value] = rows
                 }
             }
         }
         
-        // Update cell backgrounds based on duplicate index paths
-        for indexPath in duplicateIndexPaths {
-            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                cell.makeYellowWarning() // Assuming you have this function in your cell
-            }
-        }
+        return duplicates
     }
+
     
     
     func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
@@ -387,7 +418,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             
             let selectedCellA = collectionView.cellForItem(at: indexPathA!) as? AlgorithmCollectionViewCell
             originalcellAimage = selectedCellA?.algorithmCellBox.image
-            originalcellAcolor = selectedCellA?.teamnumLabel.textColor
+            originalcellAcolor = selectedCellA?.warningColor
 
             selectedCellA?.makeCellSelected()
 
@@ -399,7 +430,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             
             let selectedCellB = collectionView.cellForItem(at: indexPathB!) as? AlgorithmCollectionViewCell
             originalcellBimage = selectedCellB?.algorithmCellBox.image
-            originalcellBcolor = selectedCellB?.teamnumLabel.textColor
+            originalcellBcolor = selectedCellB?.warningColor
             selectedCellB?.makeCellSelected()
 
         }
@@ -424,15 +455,34 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
                 let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
                 
-//                selectedCellA?.algorithmCellBox.image = self.originalcellAimage
-                selectedCellA?.teamnumLabel.textColor = self.originalcellAcolor
-//                selectedCellB?.algorithmCellBox.image = self.originalcellBimage
-                selectedCellB?.teamnumLabel.textColor = self.originalcellBcolor
+////                selectedCellA?.algorithmCellBox.image = self.originalcellAimage
+//                selectedCellA?.teamnumLabel.textColor = self.originalcellAcolor
+////                selectedCellB?.algorithmCellBox.image = self.originalcellBimage
+//                selectedCellB?.teamnumLabel.textColor = self.originalcellBcolor
+//                
+//                if let colorString = selectedCell.colorString {
+//                    switch colorString {
+//                        case "red":
+//                            selectedCell.makeRedWarning()
+//                        case "blue":
+//                            selectedCell.makeBlueWarning()
+//                        case "green":
+//                            selectedCell.makeGreenWarning()
+//                        case "yellow":
+//                            selectedCell.makeYellowWarning()
+//                        case "":
+//                            selectedCell.makeCellOriginal()
+//                        default:
+//                            break // Handle other cases or do nothing if needed
+//                    }
+//                }
+
                 
                 
                 self.indexPathA = nil
                 self.indexPathB = nil
                 self.updateCellBackgroundImages()
+                self.checkPvpGameDuplicates()
             })
         }
     }
@@ -449,8 +499,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.addGestureRecognizer(doubleTapGestureRecognizer)
 
         let teamNumberLabel = grid[indexPath.section][indexPath.item]
-        
-//        print(teamnumberlabel)
+
         
         // configure cells differently based on what it is
         updateCellBackgroundImages()
@@ -558,11 +607,6 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
         let width = (Int(collectionViewWidth - 20) - (16 * collectionViewCellSpacing)) / 8
 
         collectionViewCellWidth = width > 0 ? Int(width) : Int(width - 1)
-//        collectionViewCellWidth = 30
-        
-//        collectionViewCellWidth = Int(collectionViewWidth / 11.5)
-//print("THIS IS MY COLLECTION VIEW CELL WIDTH AND VIEW WIDTH: ", collectionViewCellWidth, collectionViewWidth)
-        
         return CGSize(width: collectionViewCellWidth, height: collectionViewCellWidth)
 
     }
