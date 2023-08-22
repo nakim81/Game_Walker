@@ -249,21 +249,36 @@ class AlgorithmViewController: BaseViewController {
         print("This is my grid: ", grid)
     }
     
-//    func checkDuplicatesInColumns(for pvpCount: Int) {
-//        let columnPairs = pvpCount > 0 ? (0..<grid[0].count / 2) : [] // Define column pairs based on pvpCount
-//
-//        for row in 0..<grid.count {
-//            for columnIndex in columnPairs {
-//                let valueA = grid[row][columnIndex]
-//                let valueB = grid[row][columnIndex + grid[0].count / 2]
-//
-//                if valueA == valueB {
-//                    // Handle the case of duplicate values
-//                    print("Duplicate value \(valueA) in column \(columnIndex + 1) and \(columnIndex + grid[0].count / 2 + 1), row \(row + 1)")
-//                }
-//            }
-//        }
-//    }
+    func checkPvpGameDuplicates() {
+        var columnPairs: CountableRange<Int> = 0..<0
+        
+        if pvpGameCount > 0 {
+            columnPairs = 0..<grid[0].count / 2
+        }
+        
+        var duplicateIndexPaths: [IndexPath] = []
+        
+        for row in 0..<grid.count {
+            for columnIndex in columnPairs {
+                let valueA = grid[row][columnIndex]
+                let valueB = grid[row][columnIndex + grid[0].count / 2]
+                
+                if valueA == valueB {
+                    let indexPathA = IndexPath(item: columnIndex, section: row)
+                    let indexPathB = IndexPath(item: columnIndex + grid[0].count / 2, section: row)
+                    duplicateIndexPaths.append(indexPathA)
+                    duplicateIndexPaths.append(indexPathB)
+                }
+            }
+        }
+        
+        // Update cell backgrounds based on duplicate index paths
+        for indexPath in duplicateIndexPaths {
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+                cell.makeYellowWarning() // Assuming you have this function in your cell
+            }
+        }
+    }
     
     
     func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
@@ -566,50 +581,3 @@ extension AlgorithmViewController: UIScrollViewDelegate {
     }
 }
 
-//extension AlgorithmViewController: UICollectionViewDropDelegate, UICollectionViewDragDelegate{
-//    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-//
-//        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-//        dragItem.localObject = indexPath
-//        return [dragItem]
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-//        return session.canLoadObjects(ofClass: NSString.self)
-//    }
-//    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-//        guard let destinationIndexPath = coordinator.destinationIndexPath else { return }
-//
-//        coordinator.session.loadObjects(ofClass: NSArray.self as! any NSItemProviderReading.Type) { items in
-//            guard let sourceIndexPaths = items as? [IndexPath] else { return }
-//
-//            collectionView.performBatchUpdates({
-//                var deleteIndexPaths = [IndexPath]()
-//                var insertIndexPaths = [IndexPath]()
-//
-//                for sourceIndexPath in sourceIndexPaths {
-//                    if sourceIndexPath.section == destinationIndexPath.section {
-//                        if sourceIndexPath.item < destinationIndexPath.item {
-//                            deleteIndexPaths.append(sourceIndexPath)
-//                            insertIndexPaths.append(destinationIndexPath)
-//                        } else if sourceIndexPath.item > destinationIndexPath.item {
-//                            deleteIndexPaths.append(sourceIndexPath)
-//                            insertIndexPaths.append(destinationIndexPath)
-//                        }
-//                    } else {
-//                        // Moving to different section
-//                        deleteIndexPaths.append(sourceIndexPath)
-//                        insertIndexPaths.append(destinationIndexPath)
-//                    }
-//                }
-//
-//                collectionView.deleteItems(at: deleteIndexPaths)
-//                collectionView.insertItems(at: insertIndexPaths)
-//
-//            }, completion: nil)
-//
-//            coordinator.drop(coordinator.items.first!.dragItem, toItemAt: destinationIndexPath)
-//        }
-//    }
-//}
-//

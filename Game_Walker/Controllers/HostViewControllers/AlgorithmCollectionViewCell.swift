@@ -17,6 +17,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var redWarningBoxImage = UIImage(named: "red-warning")
     private var purpleWarningBoxImage = UIImage(named: "purple-warning")
     private var blueWarningBoxImage = UIImage(named: "blue-warning")
+    private var yellowWarningBoxImage = UIImage(named: "yellow-warning")
+    private var orangeWarningBoxImage = UIImage(named: "orange-warning")
     private var visible : Bool = true
     
     static let identifier = "AlgorithmCollectionViewCell"
@@ -77,6 +79,16 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func makeBlueWarning() {
         //same team in same row
         algorithmCellBox.image = blueWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+    }
+    
+    func makeOrangeWarning() {
+        algorithmCellBox.image = orangeWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+    }
+    
+    func makeYellowWarning() {
+        algorithmCellBox.image = yellowWarningBoxImage
         teamnumLabel.textColor = UIColor.white
     }
 }
