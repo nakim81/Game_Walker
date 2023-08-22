@@ -182,9 +182,9 @@ class HostTimerViewController: UIViewController {
         self.view.addSubview(roundLabel)
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
-            timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
+            timerCircle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.27),
-            timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
+            timerCircle.widthAnchor.constraint(equalTo: timerCircle.heightAnchor),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
             timerLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
@@ -331,10 +331,12 @@ class HostTimerViewController: UIViewController {
                         strongSelf.time = strongSelf.seconds
                         strongSelf.moving = false
                         strongSelf.timeTypeLabel.text = "Game Time"
+                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                     } else {
                         strongSelf.time = strongSelf.moveSeconds
                         strongSelf.moving = true
                         strongSelf.timeTypeLabel.text = "Moving Time"
+                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.round += 1
                         Task {
                             await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)

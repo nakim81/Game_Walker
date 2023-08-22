@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class GivePointsController: UIViewController {
-    //var currentStationName: String
     var currentPoints: Int
     let gameCode: String
     let team: Team
@@ -322,11 +321,9 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpInside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
-        
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.handleRightLongPress(gesture:)))
         longPressGestureRecognizer.minimumPressDuration = 1.0
         button.addGestureRecognizer(longPressGestureRecognizer)
-        
         return button
     }()
     
