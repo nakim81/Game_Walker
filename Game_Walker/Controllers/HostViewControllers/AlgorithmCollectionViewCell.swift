@@ -109,4 +109,11 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         hasWarning = true
         warningColor = "yellow"
     }
+    
+    func makePurpleWarning() {
+        algorithmCellBox.image = purpleWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "purple"
+    }
 }
