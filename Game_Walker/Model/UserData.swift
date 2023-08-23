@@ -12,7 +12,7 @@ class UserData {
     static func writeUUID(_ uuid: String){
         UserDefaults.standard.set(uuid, forKey: "uuid")
     }
-
+    
     static func readUUID() -> String? {
         return UserDefaults.standard.string(forKey: "uuid")
     }
@@ -20,7 +20,7 @@ class UserData {
     static func writeGamecode(_ gamecode: String, _ key: String){
         UserDefaults.standard.set(gamecode, forKey: key)
     }
-
+    
     static func readGamecode(_ key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }
@@ -28,7 +28,7 @@ class UserData {
     static func writeUsername(_ username: String, _ key: String){
         UserDefaults.standard.set(username, forKey: key)
     }
-
+    
     static func readUsername(_ key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }

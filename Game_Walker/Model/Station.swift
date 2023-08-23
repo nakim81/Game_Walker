@@ -29,5 +29,4 @@ struct Station: Codable, Equatable {
         case description
         case teamOrder
     }
-    
 }
