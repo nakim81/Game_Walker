@@ -22,6 +22,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var visible : Bool = true
     var warningColor : String = ""
     var hasWarning : Bool = false
+    var hasPvpWarning : Bool = false
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -62,6 +63,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = originalCellBoxImage
         isUserInteractionEnabled = true
         hasWarning = false
+        hasPvpWarning = false
         warningColor = ""
     }
     
@@ -72,12 +74,15 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.text = ""
         warningColor = ""
         hasWarning = false
+        hasPvpWarning = false
     }
     
     func makeCellEmpty() {
         teamnumLabel.text = ""
         warningColor = ""
         hasWarning = false
+        algorithmCellBox.image = originalCellBoxImage
+        hasPvpWarning = false
     }
     
     func makeRedWarning() {
@@ -106,7 +111,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func makeYellowWarning() {
         algorithmCellBox.image = yellowWarningBoxImage
         teamnumLabel.textColor = UIColor.white
-        hasWarning = true
+        hasWarning = false
+        hasPvpWarning = true
         warningColor = "yellow"
     }
     

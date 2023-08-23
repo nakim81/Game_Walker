@@ -51,12 +51,6 @@ class AlgorithmViewController: BaseViewController {
     var originalcellAcolor: String?
     var originalcellBimage: UIImage?
     var originalcellBcolor: String?
-    
-
-    var rowConflicts: [ [Int] ] = []
-    var columnConflicts: [ [Int] ] = []
-    var pvpConflicts: [Bool] = []
-    
 
     
     override func viewDidLoad() {
@@ -256,147 +250,178 @@ class AlgorithmViewController: BaseViewController {
     }
 
     
-//    func findDuplicatesInColumns(_ columns: Range<Int>) -> [Int: [Int]] {
-//        var duplicates: [Int: [Int]] = [:]
-//
-//        for columnIndex in columns {
-//            var seenValues: [Int: [Int]] = [:]
-//
-//            for rowIndex in 0..<grid.count {
-//                let value = grid[rowIndex][columnIndex]
-//
-//                if value == -1 || value == 0 {
-//                    continue
-//                }
-//
-//                if var existingRows = seenValues[value] {
-//                    existingRows.append(rowIndex)
-//                    seenValues[value] = existingRows
-//                } else {
-//                    seenValues[value] = [rowIndex]
-//                }
-//            }
-//
-//            for (value, rows) in seenValues where rows.count > 1 {
-//                if var existingRows = duplicates[value] {
-//                    existingRows.append(contentsOf: rows)
-//                    duplicates[value] = existingRows
-//                } else {
-//                    duplicates[value] = rows
-//                }
-//            }
-//        }
-//
-//        return duplicates
-//    }
-
     
-    func detectRowColumnConflicts() {
-        rowConflicts = Array(repeating: [], count: grid.count)
-        columnConflicts = Array(repeating: [], count: grid[0].count)
-        
-        // Detect row conflicts
-        for row in 0..<grid.count {
-            let rowValues = grid[row]
-            var duplicateIndices = [Int]()
-            
-            for col in 0..<rowValues.count {
-                let value = rowValues[col]
-                if value != 0 && value != -1 && rowValues.filter({ $0 == value && $0 != 0 && $0 != -1 }).count > 1 {
-                    duplicateIndices.append(col)
-                }
+    //checks each column for duplicates
+    func hasDuplicatesInColumn(_ column: Int, in grid: [[Int]]) -> [Int] {
+        var existingNumbers = Set<Int>()
+        var duplicates = [Int]()
+        for row in grid {
+            let number = row[column]
+            if existingNumbers.contains(number) {
+                duplicates.append(number)
             }
-            
-            rowConflicts[row] = duplicateIndices
+            existingNumbers.insert(number)
         }
-        
-        // Detect column conflicts
-        for col in 0..<grid[0].count {
-            var columnValues = [Int]()
-            
-            for row in 0..<grid.count {
-                columnValues.append(grid[row][col])
-            }
-            
-            var duplicateIndices = [Int]()
-            
-            for row in 0..<grid.count {
-                let value = grid[row][col]
-                if value != 0 && value != -1 && columnValues.filter({ $0 == value && $0 != 0 && $0 != -1 }).count > 1 {
-                    duplicateIndices.append(row)
-                }
-            }
-            
-            columnConflicts[col] = duplicateIndices
-        }
+        return duplicates
     }
     
-    func detectPvPConflicts() {
-        for pairIndex in 0..<pvpConflicts.count {
-            let firstCol = pairIndex * 2
-            let secondCol = firstCol + 1
-            var seenValues: Set<Int> = []
-            var hasConflict = false
-            
-            for row in 0..<grid.count {
-                let firstValue = grid[row][firstCol]
-                let secondValue = grid[row][secondCol]
-                
-                if containsNonConflictValues([firstValue, secondValue]) {
-                    if seenValues.contains(firstValue) || seenValues.contains(secondValue) {
-                        hasConflict = true
-                        break
+    //checked the section (row)'s duplicates and callled warning
+    func checkAndChangeDuplicatesInRow(section: Int) -> Bool {
+        // Get the number of items in the section (row)
+        let numberOfItems = collectionView.numberOfItems(inSection: section)
+        var existingNumbers = Set<Int>()
+        var duplicates = Set<Int>()
+        
+        var didHaveDuplicate = false
+        
+        for item in 0..<numberOfItems {
+            let indexPath = IndexPath(item: item, section: section)
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+               let text = cell.teamnumLabel.text,
+               let number = Int(text) {
+                if existingNumbers.contains(number) {
+                    duplicates.insert(number)
+                } else {
+                        existingNumbers.insert(number)
+                }
+            }
+        }
+        
+        for item in 0..<numberOfItems {
+            let indexPath = IndexPath(item: item, section: section)
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+               let text = cell.teamnumLabel.text,
+               let number = Int(text) {
+                if duplicates.contains(number) {
+                    if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                        if cell.warningColor == "orange" || cell.warningColor == "yellow" {
+                            cell.makeRedWarning()
+                        } else {
+                            cell.makePurpleWarning()
+                        }
+                        didHaveDuplicate = true
+
+   
                     }
-                    
-                    seenValues.insert(firstValue)
-                    seenValues.insert(secondValue)
+                } else {
+                    if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                        cell.makeCellOriginal()
+                    }
                 }
             }
-            
-            pvpConflicts[pairIndex] = hasConflict
         }
+        return didHaveDuplicate
     }
     
-    func containsNonConflictValues(_ values: [Int]) -> Bool {
-        for value in values {
-            if value != 0 && value != -1 {
-                return true
+    func updateCellBackgroundImages() {
+        var hadRowDuplicates = false
+        for section in 0..<grid.count {
+            hadRowDuplicates = checkAndChangeDuplicatesInRow(section: section)
+            
+            //goes through each rows' columns
+            for item in 0..<grid[section].count {
+                let column = item
+                //array of integers that contains duplicates in column
+                let duplicates = hasDuplicatesInColumn(column, in: grid)
+                
+                if duplicates.contains(grid[section][item]) {
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
+                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
+                            if cell.warningColor == "purple" || cell.warningColor == "yellow" {
+                                cell.makeRedWarning()
+                            } else {
+                                cell.makeOrangeWarning()
+                            }
+                            
+
+                        }
+    
+                    }
+                } else {
+                    // Reset the background image of the cell to nil (no warningImage)
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
+                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
+                            cell.makeCellOriginal()
+                        }
+
+                    }
+                }
             }
         }
-        return false
     }
 
     
-//    func updateCellBackgroundImages() {
-//        var hadRowDuplicates = false
-//        for section in 0..<grid.count {
-//            hadRowDuplicates = checkAndChangeDuplicatesInRow(section: section)
-//            for item in 0..<grid[section].count {
-//                let column = item
-//                let duplicates = hasDuplicatesInColumn(column, in: grid)
-//
-//                if duplicates.contains(grid[section][item]) {
-//                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
-//                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
-//                            cell.makeRedWarning()
-//                        }
-//
-//                    }
-//                } else {
-//                    // Reset the background image of the cell to nil (no warningImage)
-//                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
-//                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
-//                            cell.makeCellOriginal()
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //checking pvp pair duplicates
+    
+    func checkPvpDuplicatesAndApplyWarning() {
+        // Loop through the pairs of columns based on pvpGameCount
+        for pairIndex in 0..<pvpGameCount {
+            let columnIndexA = pairIndex * 2
+            let columnIndexB = columnIndexA + 1
+            
+            let duplicatesFound = checkForDuplicatesInPairs(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
+            
+            if duplicatesFound {
+                applyYellowWarningToColumns(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
+            }
+        }
+    }
 
+    func checkForDuplicatesInPairs(columnIndexA: Int, columnIndexB: Int) -> Bool {
+        let duplicatesInRows = checkDuplicatesInRows(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
+        let duplicatesInColumns = checkDuplicatesInColumns(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
+        
+        return duplicatesInRows || duplicatesInColumns
+    }
+
+    func checkDuplicatesInRows(columnIndexA: Int, columnIndexB: Int) -> Bool {
+        var duplicatesFound = false
+        for rowIndex in 0..<grid.count {
+            if grid[rowIndex][columnIndexA] == grid[rowIndex][columnIndexB] {
+                duplicatesFound = true
+                break
+            }
+        }
+        return duplicatesFound
+    }
+
+    func checkDuplicatesInColumns(columnIndexA: Int, columnIndexB: Int) -> Bool {
+        var duplicatesFound = false
+        for rowIndex in 0..<grid.count {
+            let valueA = grid[rowIndex][columnIndexA]
+            let valueB = grid[rowIndex][columnIndexB]
+            
+            if valueA != -1 && valueB != -1 && valueA != 0 && valueB != 0 && valueA == valueB {
+                duplicatesFound = true
+                break
+            }
+        }
+        return duplicatesFound
+    }
+
+    func applyYellowWarningToColumns(columnIndexA: Int, columnIndexB: Int) {
+        for rowIndex in 0..<grid.count {
+            let valueA = grid[rowIndex][columnIndexA]
+            let valueB = grid[rowIndex][columnIndexB]
+            
+            if valueA != -1 && valueB != -1 && valueA != 0 && valueB != 0 && valueA == valueB {
+                let indexPathA = IndexPath(item: columnIndexA, section: rowIndex)
+                let indexPathB = IndexPath(item: columnIndexB, section: rowIndex)
+                
+                if let cellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
+                    cellA.makeYellowWarning()
+                }
+                
+                if let cellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell {
+                    cellB.makeYellowWarning()
+                }
+            }
+        }
+    }
 }
 
+
+//checking pvp pair duplicates
 
 extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
@@ -456,14 +481,13 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
                 let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
 
+                
+                
                 self.indexPathA = nil
                 self.indexPathB = nil
-                
-                self.detectRowColumnConflicts()
-                if self.pvpGameCount > 0 {
-                    self.detectPvPConflicts()
-                }
-                collectionView.reloadData()
+                self.updateCellBackgroundImages()
+                self.checkPvpDuplicatesAndApplyWarning()
+
             })
         }
     }
@@ -483,26 +507,13 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 
         
         // configure cells differently based on what it is
-//        updateCellBackgroundImages()
+        updateCellBackgroundImages()
         if teamNumberLabel == 0 {
             cell.makeCellInvisible()
         } else if teamNumberLabel == -1 {
             cell.makeCellEmpty()
         }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
-            
-            if indexPath.section < rowConflicts.count && rowConflicts[indexPath.section].contains(indexPath.item) {
-                cell.makePurpleWarning()
-            }
-            if indexPath.item < columnConflicts.count && columnConflicts[indexPath.item].contains(indexPath.section) {
-                cell.makeOrangeWarning()
-            }
-//            if indexPath.section < rowConflicts.count && indexPath.item < columnConflicts.count &&
-//               (rowConflicts[indexPath.section].contains(indexPath.item) || columnConflicts[indexPath.item].contains(indexPath.section)) {
-//                cell.makeYellowWarning()
-//            }
-             
-             return cell
         }
         
        
