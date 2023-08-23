@@ -20,8 +20,8 @@ class LaunchScreenController: UIViewController {
             self.addRectangles()
             self.playMusic()
         }
-//        self.playSound()
     }
+    
     private func playMusic() {
             let url = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "wav")
             if let url = url {
@@ -34,38 +34,6 @@ class LaunchScreenController: UIViewController {
                 }
             }
         }
-    //
-    //    func playMusic() {
-    //        guard let soundURL = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "m4a") else {
-    //            print("Background music file not found.")
-    //            return
-    //        }
-    //
-    //        do {
-    //            soundPlayer = try AVAudioPlayer(contentsOf: soundURL)
-    //            soundPlayer?.numberOfLoops = 2
-    //            soundPlayer?.prepareToPlay()
-    //            soundPlayer?.play()
-    //        } catch {
-    //            print("Failed to play background music: \(error.localizedDescription)")
-    //        }
-    //    }
-    
-//    func playSound() {
-//        let soundName = "LaunchScreenMusic"
-//        // forResource: 파일 이름(확장자 제외) , withExtension: 확장자(mp3, wav 등) 입력
-//        guard let url = Bundle.main.url(forResource: soundName, withExtension: "wav") else {
-//            return
-//        }
-//
-//        do {
-//            soundPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-//            soundPlayer?.numberOfLoops = 1
-//            soundPlayer?.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
     
     func addRectangles() {
         let screenSize = UIScreen.main.bounds.size

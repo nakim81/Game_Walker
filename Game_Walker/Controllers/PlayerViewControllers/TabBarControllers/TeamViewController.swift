@@ -14,6 +14,7 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var leaveButton: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var testBtn: UIButton!
     
     static var readMsgList: [String] = []
     static var messages: [String] = []
@@ -87,6 +88,9 @@ class TeamViewController: UIViewController {
     
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func testBtnPressed(_ sender: Any) {
+        showAwardPopUp()
     }
     
     func alert(title: String, message: String, sender: UIButton) {
