@@ -153,39 +153,27 @@
                                     <action selector="joinTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="OGX-ih-skl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftT-zA-sps">
-                                <rect key="frame" x="176.66666666666666" y="739.33333333333337" width="75" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="testBtnPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="uUf-fr-LqA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jjs-iK-Gsc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="height" secondItem="jjs-iK-Gsc" secondAttribute="height" multiplier="0.096577" id="3G4-Yc-LjP"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="centerX" secondItem="Ec7-NK-4PD" secondAttribute="centerX" id="3WV-ff-VWE"/>
-                            <constraint firstItem="ftT-zA-sps" firstAttribute="centerX" secondItem="jjs-iK-Gsc" secondAttribute="centerX" id="4RG-9J-Dq8"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="width" secondItem="jjs-iK-Gsc" secondAttribute="width" multiplier="0.588164" id="4lP-pH-LAf"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="centerY" secondItem="Ec7-NK-4PD" secondAttribute="centerY" multiplier="0.75" id="7dY-3m-L49"/>
                             <constraint firstItem="ktk-W4-AgV" firstAttribute="width" secondItem="jjs-iK-Gsc" secondAttribute="width" multiplier="0.588164" id="EGi-ot-JQw"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="height" secondItem="jjs-iK-Gsc" secondAttribute="height" multiplier="0.096577" id="NcL-Pa-ZM5"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="centerX" secondItem="jjs-iK-Gsc" secondAttribute="centerX" id="lch-wT-58J"/>
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="centerY" secondItem="jjs-iK-Gsc" secondAttribute="centerY" multiplier="1.25" id="lhp-qB-1SL"/>
-                            <constraint firstItem="ftT-zA-sps" firstAttribute="top" secondItem="JX2-Lc-Buy" secondAttribute="bottom" constant="122.66666666666674" id="uvP-MA-DCO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3os-qE-uhh"/>
                     <connections>
                         <outlet property="creatTeamButton" destination="ktk-W4-AgV" id="Goi-Co-Ghr"/>
                         <outlet property="joinTeamButton" destination="JX2-Lc-Buy" id="dql-d5-uTk"/>
-                        <outlet property="testButton" destination="ftT-zA-sps" id="qp8-Na-OfC"/>
                         <segue destination="JIl-tV-nZg" kind="show" identifier="goToPF3_1VC" id="tM0-u9-p7X"/>
                         <segue destination="QO4-di-gmo" kind="show" identifier="goToPF3_2VC" id="4MI-aS-g5L"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="goToJoinGameVC" animates="NO" id="lz2-86-c74"/>
-                        <segue destination="Bmc-lM-UJi" kind="show" identifier="ToAwardVC" id="fum-G8-JW5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYk-9a-1qU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -362,16 +350,6 @@
             </objects>
             <point key="canvasLocation" x="1192" y="1041"/>
         </scene>
-        <!--AwardVC-->
-        <scene sceneID="Mnq-lW-Dds">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Award" referencedIdentifier="AwardVC" id="Bmc-lM-UJi" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="x1W-l1-Acd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c2e-pp-TBz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-398" y="588"/>
-        </scene>
         <!--Player Tab Bar Controller-->
         <scene sceneID="7ne-qa-X0d">
             <objects>
@@ -450,6 +428,15 @@
                                     <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="centerY" secondItem="Pfz-mn-NZG" secondAttribute="centerY" id="y9N-ns-M14"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52M-V5-ZRM">
+                                <rect key="frame" x="308" y="108" width="72" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Award"/>
+                                <connections>
+                                    <action selector="testBtnPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="kUl-3W-hXC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -480,6 +467,7 @@
                         <outlet property="leaveButton" destination="qdP-DM-uNL" id="DXO-uU-QqS"/>
                         <outlet property="settingButton" destination="oaC-ZZ-TQ6" id="o6q-FR-xoW"/>
                         <outlet property="table" destination="vrd-Ze-eKQ" id="2dK-sj-K7o"/>
+                        <outlet property="testBtn" destination="52M-V5-ZRM" id="HOb-4M-O9U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -669,6 +657,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="4MI-aS-g5L"/>
         <segue reference="M4x-Iq-v4s"/>
         <segue reference="KAQ-jp-596"/>
     </inferredMetricsTieBreakers>

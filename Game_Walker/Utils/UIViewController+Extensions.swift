@@ -113,7 +113,17 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
 }
-
+// MARK: - AwardPopUps
+extension UIViewController {
+    func showAwardPopUp() {
+        let popUpViewController = AwardViewController()
+        showAwardPopUp(popUpViewcontroller: popUpViewController)
+    }
+    
+    private func showAwardPopUp(popUpViewcontroller: AwardViewController) {
+        present(popUpViewcontroller, animated: false, completion: nil)
+    }
+}
 // MARK: - textField
 extension UITextField {
     func setPadding(left: CGFloat, right: CGFloat? = nil) {

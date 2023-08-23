@@ -56,7 +56,6 @@
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
-		CB61A709D36306498786A711 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -84,12 +83,12 @@
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
+		F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */; };
 		FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
-		FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC21701F29A319BB00FD5F66 /* Award.storyboard */; };
 		FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21CB6F29F036F00024A248 /* endGameViewController.swift */; };
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */; };
@@ -97,6 +96,7 @@
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
+		FCD7B1842A8D16C7000DCCA2 /* LaunchScreenMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
 		FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */; };
 		FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */; };
@@ -106,9 +106,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
-		3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGivePointsController.swift; sourceTree = "<group>"; };
 		6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningScreenController.swift; sourceTree = "<group>"; };
 		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -154,6 +151,8 @@
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
+		A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
@@ -183,13 +182,12 @@
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
+		DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
-		FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
-		FC21701F29A319BB00FD5F66 /* Award.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Award.storyboard; path = View/Award.storyboard; sourceTree = "<group>"; };
 		FC21CB6F29F036F00024A248 /* endGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = endGameViewController.swift; sourceTree = "<group>"; };
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,6 +195,7 @@
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
+		FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingViewcontroller.swift; sourceTree = "<group>"; };
@@ -210,7 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB61A709D36306498786A711 /* Pods_Game_Walker.framework in Frameworks */,
+				F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,10 +219,18 @@
 		4332FA625A04330489170BE4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */,
-				0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */,
+				DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */,
+				C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		54D6A435FF4DEBD20058B94A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6159251E29694A0600BC6D7F /* RefereeViewControllers */ = {
@@ -289,7 +296,7 @@
 				DA28D78D284FF9CE00EA1B94 /* Products */,
 				4332FA625A04330489170BE4 /* Pods */,
 				A1C62CC22891270B0078C89E /* Recovered References */,
-				E0AF554902D895AD1C71F318 /* Frameworks */,
+				54D6A435FF4DEBD20058B94A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -348,7 +355,6 @@
 				DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */,
 				DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */,
 				DABC1E82288BA9CA00C75DC7 /* Host.storyboard */,
-				FC21701F29A319BB00FD5F66 /* Award.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -367,14 +373,6 @@
 			);
 			name = PlayerViewControllers;
 			path = Controllers/PlayerViewControllers;
-			sourceTree = "<group>";
-		};
-		E0AF554902D895AD1C71F318 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3427E6CC222EAF2543BDEEE3 /* Pods_Game_Walker.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FC152E6D29C4C423007A85CA /* HostTabBarControllers */ = {
@@ -449,7 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				61BB7C952A36D108005C482C /* timer_end.wav */,
-				FC0846C42A1F60CC003A73DC /* LaunchScreenMusic.wav */,
+				FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */,
 				FC1AE24D28E9769B00D8C9D9 /* Fonts */,
 				DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */,
 				DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */,
@@ -490,11 +488,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA28D7A0284FF9D300EA1B94 /* Build configuration list for PBXNativeTarget "Game_Walker" */;
 			buildPhases = (
-				C3ABCF18562CAEC5ABFFE1F4 /* [CP] Check Pods Manifest.lock */,
+				187DE79A8908263F21FFC3DB /* [CP] Check Pods Manifest.lock */,
 				DA28D788284FF9CE00EA1B94 /* Sources */,
 				DA28D789284FF9CE00EA1B94 /* Frameworks */,
 				DA28D78A284FF9CE00EA1B94 /* Resources */,
-				49C715C1FFCD2B7DC0AAB0AA /* [CP] Embed Pods Frameworks */,
+				50E4DE089693808B58FC0D4E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -558,8 +556,8 @@
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
-				FC21702029A319BB00FD5F66 /* Award.storyboard in Resources */,
 				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
+				FCD7B1842A8D16C7000DCCA2 /* LaunchScreenMusic.wav in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
@@ -570,24 +568,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		49C715C1FFCD2B7DC0AAB0AA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C3ABCF18562CAEC5ABFFE1F4 /* [CP] Check Pods Manifest.lock */ = {
+		187DE79A8908263F21FFC3DB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -607,6 +588,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50E4DE089693808B58FC0D4E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Game_Walker/Pods-Game_Walker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -815,7 +813,7 @@
 		};
 		DA28D7A1284FF9D300EA1B94 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C5324E141F05DD46BECDBF1 /* Pods-Game_Walker.debug.xcconfig */;
+			baseConfigurationReference = DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -850,7 +848,7 @@
 		};
 		DA28D7A2284FF9D300EA1B94 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0FE61858B1E64EBA379742C0 /* Pods-Game_Walker.release.xcconfig */;
+			baseConfigurationReference = C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

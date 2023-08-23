@@ -43,7 +43,7 @@ class CreateTeamViewController: BaseViewController {
         teamNameTextField.delegate = self
         configureCollectionView()
         configureDelegates()
-//        S.getStationList(gameCode)
+        //        S.getStationList(gameCode)
         self.stationList = [Station(name: "game1", number: 1, pvp: true), Station(name: "game2", number: 2, pvp: true), Station(name: "game3", number: 3, pvp: true)]
         print(self.stationList)
         print(self.algorithm, self.algorithm.count)
@@ -113,12 +113,12 @@ class CreateTeamViewController: BaseViewController {
         //        }
         //        self.algorithm = random2DArray
         //        //
-//        self.algorithm = [[1,2,3,4,5,6],
-//                          [6,0,0,4,5,1],
-//                          [6,3,4,5,1,2],
-//                          [6,0,0,1,2,3],
-//                          [6,5,1,2,3,4],
-//                          [5,1,2,3,4,6]]
+        //        self.algorithm = [[1,2,3,4,5,6],
+        //                          [6,0,0,4,5,1],
+        //                          [6,3,4,5,1,2],
+        //                          [6,0,0,1,2,3],
+        //                          [6,5,1,2,3,4],
+        //                          [5,1,2,3,4,6]]
         if Int(teamNumber) ?? 0 > 0 {
             if !self.algorithm.isEmpty {
                 teamNameTextField.resignFirstResponder()

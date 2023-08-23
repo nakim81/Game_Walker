@@ -106,7 +106,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     @objc func sendMessage() {
         Task { @MainActor in
-            try await H.addAnnouncement(gameCode, announcementTextView.text)
+            await H.addAnnouncement(gameCode, announcementTextView.text)
             try await Task.sleep(nanoseconds: 200_000_000)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
         }
@@ -115,7 +115,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     @objc func modifyMessage() {
         Task { @MainActor in
-            try await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
+            await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
             try await Task.sleep(nanoseconds: 200_000_000)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
         }

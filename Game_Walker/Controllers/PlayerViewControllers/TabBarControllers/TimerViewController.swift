@@ -38,7 +38,7 @@ class TimerViewController: UIViewController {
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var stationsList : [Station] = []
     private var stationOrder : [Int] = []
-   
+    
     private var gameName: String?
     private var gameLocation: String?
     private var gamePoints: String?
@@ -52,13 +52,13 @@ class TimerViewController: UIViewController {
     private var nextGameRule: String?
     
     var audioPlayer: AVAudioPlayer?
-
+    
     func playMusic() {
         guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
             print("Background music file not found.")
             return
         }
-
+        
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
             audioPlayer?.numberOfLoops = 2
@@ -234,6 +234,7 @@ class TimerViewController: UIViewController {
             totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
             totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
         ])
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
