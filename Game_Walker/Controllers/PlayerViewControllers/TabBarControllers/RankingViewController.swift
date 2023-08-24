@@ -13,15 +13,20 @@ class RankingViewController: UIViewController {
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    
     private var showScore: Bool?
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 1
+    
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
+    
+    private let audioPlayerManager = AudioPlayerManager()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,6 +51,7 @@ class RankingViewController: UIViewController {
             self.announcementButton.setImage(self.readAll, for: .normal)
         } else {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         }
     }
     

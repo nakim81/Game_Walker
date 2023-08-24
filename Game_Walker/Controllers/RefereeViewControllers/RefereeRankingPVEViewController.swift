@@ -28,6 +28,8 @@ class RefereeRankingPVEViewController: UIViewController {
     static var read: Bool = true
     private var diff: Int?
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     static let notificationName = Notification.Name("readNotification")
     
     private let readAll = UIImage(named: "announcement")
@@ -57,6 +59,7 @@ class RefereeRankingPVEViewController: UIViewController {
                     RefereeRankingPVEViewController.read = false
                     NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["isRead": RefereeRankingPVEViewController.read])
                     strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                    strongSelf.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                 }
             }
         }

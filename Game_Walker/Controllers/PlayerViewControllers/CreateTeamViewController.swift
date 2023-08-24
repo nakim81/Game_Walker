@@ -137,9 +137,11 @@ class CreateTeamViewController: BaseViewController {
                 }
             } else {
                 alert(title: "", message: "The game has not started yet. Please try few minutes later!")
+                return
             }
         } else {
             alert(title: "Team Number Error", message: "Team number should be greater than 0!")
+            return
         }
     }
     

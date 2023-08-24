@@ -32,6 +32,8 @@ class TeamViewController: UIViewController {
     static var read: Bool = true
     private var diff: Int?
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     static let notificationName = Notification.Name("readNotification")
     
     override func viewDidLoad() {
@@ -41,6 +43,7 @@ class TeamViewController: UIViewController {
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
         T.getTeam(gameCode, teamName)
+        // timer checks if all the announcements are read or not
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
@@ -57,6 +60,7 @@ class TeamViewController: UIViewController {
                     TeamViewController.read = false
                     NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead": TeamViewController.read])
                     strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                    strongSelf.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                 }
             }
         }

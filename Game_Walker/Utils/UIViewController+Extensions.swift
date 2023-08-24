@@ -116,12 +116,9 @@ extension UIViewController {
 // MARK: - AwardPopUps
 extension UIViewController {
     func showAwardPopUp() {
-        let popUpViewController = AwardViewController()
-        showAwardPopUp(popUpViewcontroller: popUpViewController)
-    }
-    
-    private func showAwardPopUp(popUpViewcontroller: AwardViewController) {
-        present(popUpViewcontroller, animated: false, completion: nil)
+        let awardViewController = AwardViewController()
+//        present(awardViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(awardViewController, animated: true)
     }
 }
 // MARK: - textField

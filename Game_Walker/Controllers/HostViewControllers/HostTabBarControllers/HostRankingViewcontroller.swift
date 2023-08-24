@@ -138,7 +138,7 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
   func isOnValueChange(isOn: Bool) {
       self.showScore = isOn
       Task { @MainActor in
-          try await H.hide_show_score(gameCode, self.showScore)
+          await H.hide_show_score(gameCode, self.showScore)
       }
       leaderBoard.reloadData()
   }

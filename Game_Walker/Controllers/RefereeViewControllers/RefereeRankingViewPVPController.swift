@@ -24,6 +24,8 @@ class RefereeRankingPVPViewController: UIViewController {
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
@@ -31,6 +33,7 @@ class RefereeRankingPVPViewController: UIViewController {
             self.announcementButton.setImage(readAll, for: .normal)
         } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         }
     }
     
@@ -42,6 +45,7 @@ class RefereeRankingPVPViewController: UIViewController {
             self.announcementButton.setImage(self.readAll, for: .normal)
         } else {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         }
     }
     

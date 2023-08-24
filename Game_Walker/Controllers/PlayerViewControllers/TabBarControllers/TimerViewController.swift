@@ -51,28 +51,7 @@ class TimerViewController: UIViewController {
     private var nextRefereeName: String?
     private var nextGameRule: String?
     
-    var audioPlayer: AVAudioPlayer?
-    
-    func playMusic() {
-        guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
-            print("Background music file not found.")
-            return
-        }
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = 2
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch {
-            print("Failed to play background music: \(error.localizedDescription)")
-        }
-    }
-    
-    func stopMusic() {
-        audioPlayer?.stop()
-        audioPlayer = nil
-    }
+    private let audioPlayerManager = AudioPlayerManager()
     
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -158,6 +137,7 @@ class TimerViewController: UIViewController {
             self.announcementButton.setImage(self.readAll, for: .normal)
         } else {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         }
     }
     
@@ -249,7 +229,7 @@ class TimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.rounds! < 1 {
-                    strongSelf.playMusic()
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                     timer.invalidate()
                 }
                 if strongSelf.time! < 1 {
