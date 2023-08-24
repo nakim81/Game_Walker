@@ -58,6 +58,10 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
 
     }
     
+    func makeCellImageOriginal() {
+        algorithmCellBox.image = originalCellBoxImage
+    }
+    
     func makeCellOriginal() {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBoxImage

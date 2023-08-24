@@ -28,14 +28,14 @@ class AlgorithmViewController: BaseViewController {
     private var excessOf = "none"
     private var excessCells = 0
     
-
+    
     private var collectionViewWidth = UIScreen.main.bounds.width * 0.85
     private var collectionViewCellWidth : Int = 0
     private var collectionViewCellSpacing = 4
     
     private var num_cols : Int = 8
     private var num_rows : Int = 8
-
+    
     private var gamecode = UserData.readGamecode("gamecode")!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -43,7 +43,7 @@ class AlgorithmViewController: BaseViewController {
     
     private var pvpGameCount : Int = 0
     private var pveGameCount : Int = 0
-
+    
     var indexPathA: IndexPath?
     var indexPathB: IndexPath?
     
@@ -51,23 +51,23 @@ class AlgorithmViewController: BaseViewController {
     var originalcellAcolor: String?
     var originalcellBimage: UIImage?
     var originalcellBcolor: String?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         fetchDataAndInitialize()
-
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
         if collectionViewCellWidth > 0  {
             createBorderLines()
         }
     }
-
+    
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -77,7 +77,7 @@ class AlgorithmViewController: BaseViewController {
         
         let flowlayout = UICollectionViewFlowLayout()
         flowlayout.scrollDirection = .vertical
-    
+        
         flowlayout.minimumLineSpacing = CGFloat(collectionViewCellSpacing)
         flowlayout.minimumInteritemSpacing = CGFloat(collectionViewCellSpacing)
         
@@ -89,7 +89,7 @@ class AlgorithmViewController: BaseViewController {
         scrollView.isScrollEnabled = true
         collectionView.frame = CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewWidth)
         collectionView.delegate = self
-
+        
         
     }
     
@@ -111,7 +111,7 @@ class AlgorithmViewController: BaseViewController {
     func createBorderLines() {
         
         var positions: [(Int, Int)] = []
-
+        
         for i in 0..<pvpGameCount {
             let one = i * 2 + 1
             let two = i * 2 + 2
@@ -121,7 +121,7 @@ class AlgorithmViewController: BaseViewController {
         for position in positions {
             let first = position.0
             let second = position.1
-        
+            
             let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 3, width: 2, height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
             collectionView.addSubview(borderView)
         }
@@ -140,7 +140,7 @@ class AlgorithmViewController: BaseViewController {
         }
         return nil
     }
-                                                 
+    
     func getLineLength(smallerThanEight: Bool) -> CGFloat? {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let topCellIndexPath = IndexPath(item: 0, section: 0)
@@ -152,14 +152,14 @@ class AlgorithmViewController: BaseViewController {
                let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
                 let length = bottomAttributes.frame.maxY - topAttributes.frame.minY - 3
                 return length
-                }
             }
-            return nil
         }
+        return nil
+    }
     
     func createGrid() {
         num_stations = stationList!.count
-
+        
         
         if (max(num_teams, num_stations) < 8) {
             needHorizontalEmptyCells = true
@@ -171,7 +171,7 @@ class AlgorithmViewController: BaseViewController {
                 num_stations = 8
             }
         }
-
+        
         if (num_rounds < 8) {
             needVerticalEmptyCells = true
             verticalEmptyCells = 8 - num_rounds
@@ -189,7 +189,7 @@ class AlgorithmViewController: BaseViewController {
         
         num_cols = totalcolumn
         num_rows = totalrow
-//        print(totalrow)
+        //        print(totalrow)
         
         for r in 0...(totalrow - 1) {
             var curr_row = [Int]()
@@ -215,7 +215,7 @@ class AlgorithmViewController: BaseViewController {
                 grid[rowIndex][i] = -1
             }
         }
-
+        
         // case when we need empty cells vertically
         if needVerticalEmptyCells {
             if verticalEmptyCells <= grid.count {
@@ -228,7 +228,7 @@ class AlgorithmViewController: BaseViewController {
                 print("Invalid value for vertical empty cells")
             }
         }
-
+        
         
         // case when we need empty cells horizontally
         if needHorizontalEmptyCells {
@@ -248,7 +248,7 @@ class AlgorithmViewController: BaseViewController {
         
         print("This is my grid: ", grid)
     }
-
+    
     
     
     //checks each column for duplicates
@@ -282,7 +282,7 @@ class AlgorithmViewController: BaseViewController {
                 if existingNumbers.contains(number) {
                     duplicates.insert(number)
                 } else {
-                        existingNumbers.insert(number)
+                    existingNumbers.insert(number)
                 }
             }
         }
@@ -300,8 +300,8 @@ class AlgorithmViewController: BaseViewController {
                             cell.makePurpleWarning()
                         }
                         didHaveDuplicate = true
-
-   
+                        
+                        
                     }
                 } else {
                     if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
@@ -332,10 +332,8 @@ class AlgorithmViewController: BaseViewController {
                             } else {
                                 cell.makeOrangeWarning()
                             }
-                            
-
                         }
-    
+                        
                     }
                 } else {
                     // Reset the background image of the cell to nil (no warningImage)
@@ -343,83 +341,86 @@ class AlgorithmViewController: BaseViewController {
                         if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
                             cell.makeCellOriginal()
                         }
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    //checking pvp pair duplicates
+    
+    func findPvpDuplicates() -> [[Int]] {
+        var duplicatesArray: [[Int]] = []
+        
+        for pairIndex in 0..<pvpGameCount {
+            let startColumn = pairIndex * 2
+            let endColumn = startColumn + 1
+            
+            var seenValues: Set<Int> = []
+            var duplicateValues: Set<Int> = []
+            
+            for rowIndex in 0..<grid.count {
+                let row = grid[rowIndex]
+                
+                if startColumn < row.count, endColumn < row.count {
+                    let firstValue = row[startColumn]
+                    let secondValue = row[endColumn]
+                    
 
+                        
+                        if seenValues.contains(firstValue) && firstValue != 0, firstValue != -1 {
+                            duplicateValues.insert(firstValue)
+                        } else {
+                            seenValues.insert(firstValue)
+                        }
+                        
+                        if seenValues.contains(secondValue) && secondValue != 0, secondValue != -1 {
+                            duplicateValues.insert(secondValue)
+                        } else {
+                            seenValues.insert(secondValue)
+                        }
+                    
+                }
+            }
+            
+            if duplicateValues.isEmpty {
+                duplicatesArray.append([])
+            } else {
+                duplicatesArray.append(Array(duplicateValues))
+            }
+        }
+        
+        return duplicatesArray
+    }
+
+    
+    func updatePvpCellDuplicates(_ duplicates: [[Int]]) {
+        for (pairIndex, duplicateValues) in duplicates.enumerated() {
+            let startColumn = pairIndex * 2
+            let endColumn = startColumn + 1
+            
+            for value in duplicateValues {
+                for section in 0..<collectionView.numberOfSections {
+                    for item in 0..<collectionView.numberOfItems(inSection: section) {
+                        let indexPath = IndexPath(item: item, section: section)
+                        let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
+                        
+                        if grid[indexPath.section][startColumn] == value {
+                            cell?.makeOrangeWarning()
+                        }
+                        
+                        if grid[indexPath.section][endColumn] == value {
+                            cell?.makeOrangeWarning()
+                        }
                     }
                 }
             }
         }
     }
 
-    
-    //checking pvp pair duplicates
-    
-    func checkPvpDuplicatesAndApplyWarning() {
-        // Loop through the pairs of columns based on pvpGameCount
-        for pairIndex in 0..<pvpGameCount {
-            let columnIndexA = pairIndex * 2
-            let columnIndexB = columnIndexA + 1
-            
-            let duplicatesFound = checkForDuplicatesInPairs(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
-            
-            if duplicatesFound {
-                applyYellowWarningToColumns(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
-            }
-        }
-    }
-
-    func checkForDuplicatesInPairs(columnIndexA: Int, columnIndexB: Int) -> Bool {
-        let duplicatesInRows = checkDuplicatesInRows(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
-        let duplicatesInColumns = checkDuplicatesInColumns(columnIndexA: columnIndexA, columnIndexB: columnIndexB)
-        
-        return duplicatesInRows || duplicatesInColumns
-    }
-
-    func checkDuplicatesInRows(columnIndexA: Int, columnIndexB: Int) -> Bool {
-        var duplicatesFound = false
-        for rowIndex in 0..<grid.count {
-            if grid[rowIndex][columnIndexA] == grid[rowIndex][columnIndexB] {
-                duplicatesFound = true
-                break
-            }
-        }
-        return duplicatesFound
-    }
-
-    func checkDuplicatesInColumns(columnIndexA: Int, columnIndexB: Int) -> Bool {
-        var duplicatesFound = false
-        for rowIndex in 0..<grid.count {
-            let valueA = grid[rowIndex][columnIndexA]
-            let valueB = grid[rowIndex][columnIndexB]
-            
-            if valueA != -1 && valueB != -1 && valueA != 0 && valueB != 0 && valueA == valueB {
-                duplicatesFound = true
-                break
-            }
-        }
-        return duplicatesFound
-    }
-
-    func applyYellowWarningToColumns(columnIndexA: Int, columnIndexB: Int) {
-        for rowIndex in 0..<grid.count {
-            let valueA = grid[rowIndex][columnIndexA]
-            let valueB = grid[rowIndex][columnIndexB]
-            
-            if valueA != -1 && valueB != -1 && valueA != 0 && valueB != 0 && valueA == valueB {
-                let indexPathA = IndexPath(item: columnIndexA, section: rowIndex)
-                let indexPathB = IndexPath(item: columnIndexB, section: rowIndex)
-                
-                if let cellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
-                    cellA.makeYellowWarning()
-                }
-                
-                if let cellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell {
-                    cellB.makeYellowWarning()
-                }
-            }
-        }
-    }
 }
-
 
 //checking pvp pair duplicates
 
@@ -480,13 +481,15 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 print("swap completed:", self.grid)
                 let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
                 let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
-
-                
+                selectedCellA?.makeCellImageOriginal()
+                selectedCellB?.makeCellImageOriginal()
                 
                 self.indexPathA = nil
                 self.indexPathB = nil
                 self.updateCellBackgroundImages()
-                self.checkPvpDuplicatesAndApplyWarning()
+                print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
+                self.updatePvpCellDuplicates(self.findPvpDuplicates())
+
 
             })
         }
