@@ -212,7 +212,7 @@ class AlgorithmViewController: BaseViewController {
         
         for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
             for i in 0..<(pvpGameCount * 2) {
-                grid[rowIndex][i] = -1
+                grid[rowIndex][i] = 0
             }
         }
         
@@ -238,7 +238,7 @@ class AlgorithmViewController: BaseViewController {
                 if horizontalEmptyCells <= row.count {
                     let startIndex = row.count - horizontalEmptyCells
                     for index in startIndex..<row.count {
-                        grid[rowIndex][index] = 0
+                        grid[rowIndex][index] = -1
                     }
                 } else {
                     print("Invalid value for horizontal empty cells")
@@ -403,17 +403,17 @@ class AlgorithmViewController: BaseViewController {
             
             for value in duplicateValues {
                 for section in 0..<collectionView.numberOfSections {
-                    for item in 0..<collectionView.numberOfItems(inSection: section) {
-                        let indexPath = IndexPath(item: item, section: section)
-                        let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
-                        
-                        if grid[indexPath.section][startColumn] == value {
-                            cell?.makeOrangeWarning()
-                        }
-                        
-                        if grid[indexPath.section][endColumn] == value {
-                            cell?.makeOrangeWarning()
-                        }
+                    let indexPathStartColumn = IndexPath(item: startColumn, section: section)
+                    let indexPathEndColumn = IndexPath(item: endColumn, section: section)
+                    
+                    if grid[indexPathStartColumn.section][indexPathStartColumn.item] == value {
+                        let cell = collectionView.cellForItem(at: indexPathStartColumn) as? AlgorithmCollectionViewCell
+                        cell?.makeOrangeWarning()
+                    }
+                    
+                    if grid[indexPathEndColumn.section][indexPathEndColumn.item] == value {
+                        let cell = collectionView.cellForItem(at: indexPathEndColumn) as? AlgorithmCollectionViewCell
+                        cell?.makeOrangeWarning()
                     }
                 }
             }
@@ -511,14 +511,14 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         
         // configure cells differently based on what it is
         updateCellBackgroundImages()
-        if teamNumberLabel == 0 {
+        if teamNumberLabel == -1 {
             cell.makeCellInvisible()
-        } else if teamNumberLabel == -1 {
+        } else if teamNumberLabel == 0 {
             cell.makeCellEmpty()
         }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
-        
+        updatePvpCellDuplicates(self.findPvpDuplicates())
        
 
         
@@ -544,6 +544,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
         cell.makeCellOriginal()
+
         let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.keyboardType = .numberPad
@@ -557,7 +558,18 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 if number == 0 {
                     cell.makeCellEmpty()
                 }
+                
+                if let indexPath = self.collectionView.indexPath(for: cell) {
+                    let section = indexPath.section
+                    let item = indexPath.item
+                    self.grid[section][item] = number
+                }
+                print("My grid after double tapped : " , self.grid)
+                self.updateCellBackgroundImages()
+                self.updatePvpCellDuplicates(self.findPvpDuplicates())
             }
+            
+
         }))
         present(alertController, animated: true, completion: nil)
         
