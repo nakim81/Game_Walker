@@ -142,11 +142,13 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         findStation()
         showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         findStation()
         showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
     }

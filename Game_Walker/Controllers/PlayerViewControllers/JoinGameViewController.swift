@@ -15,6 +15,8 @@ class JoinGameViewController: BaseViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedUsername = UserData.readUsername("username") ?? ""
     private var storedPlayer = UserData.readPlayer("player") ?? nil
@@ -51,6 +53,8 @@ class JoinGameViewController: BaseViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
         var player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")

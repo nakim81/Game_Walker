@@ -20,6 +20,8 @@ class JoinTeamViewController: BaseViewController {
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         T.delegate_teamList = self
@@ -50,6 +52,8 @@ class JoinTeamViewController: BaseViewController {
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")
