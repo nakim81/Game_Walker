@@ -58,10 +58,11 @@ class JoinTeamViewController: BaseViewController {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")
             Task { [weak self] in
-                //여기 안되던데 확인 바람
-                await T.joinTeam(gameCode, selectedTeam.name, currentPlayer)
-                try await Task.sleep(nanoseconds: 250_000_000)
-                performSegue(withIdentifier: "goToPF44", sender: self)
+                guard let strongSelf = self else {
+                    return
+                }
+                await T.joinTeam(strongSelf.gameCode, selectedTeam.name, strongSelf.currentPlayer)
+                strongSelf.performSegue(withIdentifier: "goToPF44", sender: strongSelf)
             }
         } else {
             alert(title: "No Team Selected", message: "Please select your team")
