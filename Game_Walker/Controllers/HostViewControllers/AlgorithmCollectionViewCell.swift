@@ -23,6 +23,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var warningColor : String = ""
     var hasWarning : Bool = false
     var hasPvpWarning : Bool = false
+    var number : Int?
+
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -43,6 +45,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func configureAlgorithmNormalCell(cellteamnum : Int) {
         
         teamnumLabel.text = String(cellteamnum)
+        number = cellteamnum
     }
     
     
