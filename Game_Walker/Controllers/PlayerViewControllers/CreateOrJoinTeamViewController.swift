@@ -13,6 +13,9 @@ class CreateOrJoinTeamViewController: BaseViewController {
     
     @IBOutlet weak var creatTeamButton: UIButton!
     @IBOutlet weak var joinTeamButton: UIButton!
+    
+    private let audioPlayerManager = AudioPlayerManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavItem()
@@ -29,10 +32,12 @@ class CreateOrJoinTeamViewController: BaseViewController {
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_1VC", sender: self)
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
     }
 }

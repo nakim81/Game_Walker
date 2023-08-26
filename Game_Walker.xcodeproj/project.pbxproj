@@ -12,7 +12,6 @@
 		6159252829694A0600BC6D7F /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252129694A0600BC6D7F /* RegisterController.swift */; };
 		6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252429694A0600BC6D7F /* WaitingController.swift */; };
 		6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252529694A0600BC6D7F /* GivePointsController.swift */; };
-		61BB7C962A36D108005C482C /* timer_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = 61BB7C952A36D108005C482C /* timer_end.wav */; };
 		61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */; };
 		61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */; };
 		61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */; };
@@ -59,7 +58,6 @@
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
-		DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA28D798284FF9D300EA1B94 /* Assets.xcassets */; };
 		DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138C28B47EDA000A395F /* TeamViewController.swift */; };
 		DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138D28B47EDA000A395F /* RankingViewController.swift */; };
 		DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */; };
@@ -86,6 +84,7 @@
 		F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */; };
+		FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC18D25A2A9899E100E6B144 /* Assets.xcassets */; };
 		FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
@@ -96,7 +95,15 @@
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
-		FCD7B1842A8D16C7000DCCA2 /* LaunchScreenMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */; };
+		FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0E2A97A04A00F4AE99 /* purple.wav */; };
+		FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0F2A97A04A00F4AE99 /* blue.wav */; };
+		FCB13E172A97A04B00F4AE99 /* green.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E102A97A04A00F4AE99 /* green.wav */; };
+		FCB13E182A97A04B00F4AE99 /* bgm.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E112A97A04A00F4AE99 /* bgm.wav */; };
+		FCB13E192A97A04B00F4AE99 /* timer_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E122A97A04A00F4AE99 /* timer_end.wav */; };
+		FCB13E1A2A97A04B00F4AE99 /* congrats_ending.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E132A97A04B00F4AE99 /* congrats_ending.wav */; };
+		FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E142A97A04B00F4AE99 /* message.wav */; };
+		FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */; };
+		FCB13E1F2A97A1FD00F4AE99 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
 		FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */; };
 		FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */; };
@@ -111,7 +118,6 @@
 		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		6159252429694A0600BC6D7F /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		6159252529694A0600BC6D7F /* GivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivePointsController.swift; sourceTree = "<group>"; };
-		61BB7C952A36D108005C482C /* timer_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = timer_end.wav; path = "Supporting Files/timer_end.wav"; sourceTree = "<group>"; };
 		61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingViewPVPController.swift; sourceTree = "<group>"; };
 		61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageViewController.swift; sourceTree = "<group>"; };
 		61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,7 +163,6 @@
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "Supporting Files/SceneDelegate.swift"; sourceTree = "<group>"; };
-		DA28D798284FF9D300EA1B94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		DA42138C28B47EDA000A395F /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		DA42138D28B47EDA000A395F /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 		DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
+		FC18D25A2A9899E100E6B144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +201,15 @@
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
-		FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
+		FCB13E0E2A97A04A00F4AE99 /* purple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purple.wav; path = "Supporting Files/purple.wav"; sourceTree = "<group>"; };
+		FCB13E0F2A97A04A00F4AE99 /* blue.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = blue.wav; path = "Supporting Files/blue.wav"; sourceTree = "<group>"; };
+		FCB13E102A97A04A00F4AE99 /* green.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = green.wav; path = "Supporting Files/green.wav"; sourceTree = "<group>"; };
+		FCB13E112A97A04A00F4AE99 /* bgm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bgm.wav; path = "Supporting Files/bgm.wav"; sourceTree = "<group>"; };
+		FCB13E122A97A04A00F4AE99 /* timer_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = timer_end.wav; path = "Supporting Files/timer_end.wav"; sourceTree = "<group>"; };
+		FCB13E132A97A04B00F4AE99 /* congrats_ending.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = congrats_ending.wav; path = "Supporting Files/congrats_ending.wav"; sourceTree = "<group>"; };
+		FCB13E142A97A04B00F4AE99 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = message.wav; path = "Supporting Files/message.wav"; sourceTree = "<group>"; };
+		FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
+		FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingViewcontroller.swift; sourceTree = "<group>"; };
@@ -311,9 +325,9 @@
 		DA28D78E284FF9CE00EA1B94 /* Game_Walker */ = {
 			isa = PBXGroup;
 			children = (
+				FC18D25A2A9899E100E6B144 /* Assets.xcassets */,
 				FCF4C94F29C8B35100CE8F42 /* Supporting Files */,
 				FCFE6C4C29B77FC5002FCD19 /* Database */,
-				DA28D798284FF9D300EA1B94 /* Assets.xcassets */,
 				DA28D7A4284FFACA00EA1B94 /* Model */,
 				DA28D7A6284FFC9700EA1B94 /* View */,
 				DA28D7A3284FFA9A00EA1B94 /* Controllers */,
@@ -446,8 +460,14 @@
 		FCF4C94F29C8B35100CE8F42 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				61BB7C952A36D108005C482C /* timer_end.wav */,
-				FCD7B1832A8D16C7000DCCA2 /* LaunchScreenMusic.wav */,
+				FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */,
+				FCB13E112A97A04A00F4AE99 /* bgm.wav */,
+				FCB13E0F2A97A04A00F4AE99 /* blue.wav */,
+				FCB13E132A97A04B00F4AE99 /* congrats_ending.wav */,
+				FCB13E102A97A04A00F4AE99 /* green.wav */,
+				FCB13E142A97A04B00F4AE99 /* message.wav */,
+				FCB13E0E2A97A04A00F4AE99 /* purple.wav */,
+				FCB13E122A97A04A00F4AE99 /* timer_end.wav */,
 				FC1AE24D28E9769B00D8C9D9 /* Fonts */,
 				DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */,
 				DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */,
@@ -464,6 +484,7 @@
 				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */,
+				FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -541,26 +562,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
+				FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */,
 				A1A4CD352A371C0500704BF8 /* Dosis-SemiBold.ttf in Resources */,
+				FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */,
+				FCB13E1A2A97A04B00F4AE99 /* congrats_ending.wav in Resources */,
 				A1A4CD362A371C0500704BF8 /* Dosis-Bold.ttf in Resources */,
 				A1A4CD372A371C0500704BF8 /* Dosis-ExtraBold.ttf in Resources */,
 				A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */,
 				A1A4CD392A371C0500704BF8 /* Dosis-ExtraLight.ttf in Resources */,
 				A1A4CD3A2A371C0500704BF8 /* Dosis-Medium.ttf in Resources */,
+				FCB13E182A97A04B00F4AE99 /* bgm.wav in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
-				61BB7C962A36D108005C482C /* timer_end.wav in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
+				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
+				FCB13E192A97A04B00F4AE99 /* timer_end.wav in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
-				FCD7B1842A8D16C7000DCCA2 /* LaunchScreenMusic.wav in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
-				DA28D799284FF9D300EA1B94 /* Assets.xcassets in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
+				FCB13E172A97A04B00F4AE99 /* green.wav in Resources */,
+				FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */,
 				A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +658,7 @@
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */,
 				FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */,
+				FCB13E1F2A97A1FD00F4AE99 /* AudioPlayerManager.swift in Sources */,
 				61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */,
 				61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */,
 				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
@@ -820,7 +848,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -837,7 +865,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
@@ -855,7 +883,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -872,7 +900,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.Game-Walker1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;

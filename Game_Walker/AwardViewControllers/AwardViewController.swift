@@ -9,13 +9,24 @@ import Foundation
 import UIKit
 
 class AwardViewController: UIViewController {
+    private let gameCode = UserData.readGamecode("gamecode") ?? ""
+    private var teamList: [Team] = []
+    private var newTeamList: [Team] = []
+    private var firstPlace: Team?
+    private var secondPlace: Team?
+    private var thirdPlace: Team?
     
     private let leaderBoard = UITableView(frame: .zero)
+    private let cellSpacingHeight: CGFloat = 3
     
-//    private let containerView: UIView = {
-//        let view = UIView()
-//        return view
-//    }()
+    private let audioPlayerManager = AudioPlayerManager()
+    
+    private let containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
     
     private lazy var congratulationLabel: UIImageView = {
         let view = UIImageView()
@@ -24,12 +35,14 @@ class AwardViewController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
+    
     private lazy var firstPlaceImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         return view
     }()
+    
     private lazy var firstPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -38,6 +51,7 @@ class AwardViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var firstPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -46,6 +60,7 @@ class AwardViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var firstPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -93,30 +108,34 @@ class AwardViewController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
+    
     private lazy var secondPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var secondPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 18)
+        label.font = UIFont(name: "Dosis-Regular", size: 13)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var secondPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 23)
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var secondPlaceView: UIView = {
         let view = UIView()
         view.addSubview(secondPlaceImage)
@@ -127,7 +146,7 @@ class AwardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             secondPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            secondPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.884354),
+            secondPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.78),
             secondPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
             NSLayoutConstraint(item: secondPlaceImage, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
             
@@ -155,30 +174,34 @@ class AwardViewController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
+    
     private lazy var thirdPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var thirdPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 18)
+        label.font = UIFont(name: "Dosis-Regular", size: 13)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var thirdPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 23)
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var thirdPlaceView: UIView = {
         let view = UIView()
         view.addSubview(thirdPlaceImage)
@@ -189,7 +212,7 @@ class AwardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             thirdPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            thirdPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.884354),
+            thirdPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.78),
             thirdPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
             NSLayoutConstraint(item: thirdPlaceImage, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
             
@@ -215,28 +238,26 @@ class AwardViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = 25
+        stackView.spacing = 20
         stackView.addArrangedSubview(secondPlaceView)
         stackView.addArrangedSubview(thirdPlaceView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    private let cellSpacingHeight: CGFloat = 3
     
-    private let gameCode = UserData.readGamecode("gamecode") ?? ""
-    private var teamList: [Team] = []
-    private var newTeamList: [Team] = []
-    private var firstPlace: Team?
-    private var secondPlace: Team?
-    private var thirdPlace: Team?
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
         T.delegate_teamList = self
         T.getTeamList(gameCode)
         configureViews()
+        print(teamList)
         Task {
-            try await Task.sleep(nanoseconds: 280_000_000)
+            try await Task.sleep(nanoseconds: 300_000_000)
             self.firstPlace = teamList.first
             self.secondPlace = teamList[1]
             self.thirdPlace = teamList[2]
@@ -247,32 +268,40 @@ class AwardViewController: UIViewController {
     }
     
     func configureViews() {
-        self.view.addSubview(congratulationLabel)
-        self.view.addSubview(firstPlaceView)
-        self.view.addSubview(stackView)
-        self.view.addSubview(leaderBoard)
+        view.addSubview(containerView)
+        containerView.addSubview(congratulationLabel)
+        containerView.addSubview(firstPlaceView)
+        containerView.addSubview(stackView)
+        containerView.addSubview(leaderBoard)
         leaderBoard.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            congratulationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            congratulationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.780322),
-            congratulationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0658762),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 0.2, constant: 0),
+            containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
-            firstPlaceView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            firstPlaceView.widthAnchor.constraint(equalTo: congratulationLabel.widthAnchor, multiplier: 0.479348),
-            firstPlaceView.heightAnchor.constraint(equalTo: congratulationLabel.heightAnchor, multiplier: 4.24),
+            congratulationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            congratulationLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
+            congratulationLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.0658762),
+            NSLayoutConstraint(item: congratulationLabel, attribute: .centerY, relatedBy: .equal, toItem: containerView, attribute: .centerY, multiplier: 0.2, constant: 0),
+            
+            firstPlaceView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            firstPlaceView.widthAnchor.constraint(equalTo: congratulationLabel.widthAnchor, multiplier: 0.47),
+            firstPlaceView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.25),
             NSLayoutConstraint(item: firstPlaceView, attribute: .top, relatedBy: .equal, toItem: congratulationLabel, attribute: .bottom, multiplier: 1.2, constant: 0),
             
-            stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.64),
-            stackView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.22),
-            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: firstPlaceView, attribute: .bottom, multiplier: 1.05, constant: 0),
+            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            stackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.64),
+            stackView.heightAnchor.constraint(equalTo: firstPlaceView.heightAnchor, multiplier: 0.7),
+            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: firstPlaceView, attribute: .bottom, multiplier: 1.02, constant: 0),
             
-            leaderBoard.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            leaderBoard.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.712468),
+            leaderBoard.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            leaderBoard.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.712468),
             leaderBoard.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 15),
-            leaderBoard.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+            leaderBoard.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
         ])
     }
     

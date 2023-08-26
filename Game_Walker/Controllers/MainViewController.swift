@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
+import AVFoundation
 
 class MainViewController: BaseViewController {
    
@@ -19,11 +20,15 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     override func viewDidLoad() {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
-        
+//        UserDefaults.standard.removeObject(forKey: "team")
+//        UserDefaults.standard.removeObject(forKey: "gamecode")
+//        UserDefaults.standard.removeObject(forKey: "username")
 //        for i in 1...4 {
 //            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
 //            //let gc = "888888"
@@ -59,6 +64,7 @@ class MainViewController: BaseViewController {
 //        }
         
         super.viewDidLoad()
+        self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +73,21 @@ class MainViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @IBAction func playerBtnPressed(_ sender: Any) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        performSegue(withIdentifier: "goToPlayer", sender: self)
+    }
+    
+    @IBAction func refereeBtnPressed(_ sender: Any) {
+        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        performSegue(withIdentifier: "goToReferee", sender: self)
+    }
+    
+    @IBAction func hostBtnPressed(_ sender: Any) {
+        self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
+        performSegue(withIdentifier: "goToHost", sender: self)
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {

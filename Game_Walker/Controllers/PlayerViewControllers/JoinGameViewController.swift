@@ -15,6 +15,8 @@ class JoinGameViewController: BaseViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    private let audioPlayerManager = AudioPlayerManager()
+    
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedUsername = UserData.readUsername("username") ?? ""
     private var storedPlayer = UserData.readPlayer("player") ?? nil
@@ -51,9 +53,11 @@ class JoinGameViewController: BaseViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
-        var player = UserData.readPlayer("player") ?? Player(gamecode: savedGameCode, name: savedUserName)
+        var player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")
         
         guard let gamecode = gamecodeTextField.text else { return }
         guard let username = usernameTextField.text else { return }
@@ -72,22 +76,28 @@ class JoinGameViewController: BaseViewController {
             
             // User is joining a new game
             if !gamecode.isEmpty && !username.isEmpty {
-                // Save the game code and username to user defaults
-                UserData.writeGamecode(gamecode, "gamecode")
-                UserData.writeUsername(username, "username")
-                
                 // Create a new player object for the new game
                 player = Player(gamecode: gamecode, name: username)
-                UserData.writePlayer(player, "player")
                 
                 // Join the game
                 Task { @MainActor in
-                    //try await P.addPlayer(gamecode, player, uuid)
+                    //                    try await P.addPlayer(gamecode, player, uuid)
+                    do {
+                        try await P.addPlayer(gamecode, player, uuid)
+                        UserData.writeGamecode(gamecode, "gamecode")
+                        UserData.writeUsername(username, "username")
+                        UserData.writePlayer(player, "player")
+                        performSegue(withIdentifier: "goToPF2VC", sender: self)
+                    } catch GamecodeError.invalidGamecode(let text) {
+                        print(text)
+                        alert(title: "Invalid Gamecode", message: text)
+                        return
+                    }
                 }
-                performSegue(withIdentifier: "goToPF2VC", sender: self)
             } else {
                 // Invalid input
                 alert(title: "", message: "Please enter both game code and username.")
+                return
             }
             
         } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
@@ -96,42 +106,58 @@ class JoinGameViewController: BaseViewController {
                     await T.leaveTeam(savedGameCode, savedUserName, player)
                 }
                 P.removePlayer(savedGameCode, uuid)
-                UserData.writeGamecode(gamecode, "gamecode")
                 player = Player(gamecode: gamecode, name: savedUserName)
-                UserData.writePlayer(player, "player")
-                try await P.addPlayer(gamecode, player, uuid)
-                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                do{
+                    try await P.addPlayer(gamecode, player, uuid)
+                    UserData.writeGamecode(gamecode, "gamecode")
+                    UserData.writePlayer(player, "player")
+                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                } catch GamecodeError.invalidGamecode(let text){
+                    print(text)
+                    alert(title: "Invalid Gamecode", message: text)
+                    return
+                }
             }
-            //self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
         } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
             Task { @MainActor in
-                try await P.modifyName(savedGameCode, uuid, username)
-                player = Player(gamecode: gamecode, name: username)
-                UserData.writePlayer(player, "player")
-                UserData.writeUsername(username, "username")
+                do {
+                    try await P.modifyName(savedGameCode, uuid, username)
+                    player = Player(gamecode: gamecode, name: username)
+                    UserData.writePlayer(player, "player")
+                    UserData.writeUsername(username, "username")
+                } catch GamecodeError.invalidGamecode(let text){
+                    print(text)
+                    alert(title: "Invalid Gamecode", message: text)
+                    return
+                }
                 if (UserData.readTeam("team") != nil) {
                     self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
                 } else {
                     self.performSegue(withIdentifier: "goToPF2VC", sender: self)
                 }
             }
-            //self.alert(title: "", message: "Error occurred while modifying username")
         } else if gamecode != savedGameCode && username != savedUserName {
             Task {@MainActor in
                 if UserData.readTeam("team") != nil {
                     await T.leaveTeam(savedGameCode, savedUserName, player)
                 }
                 P.removePlayer(savedGameCode, uuid)
-                UserData.writeGamecode(gamecode, "gamecode")
-                UserData.writeUsername(username, "username")
                 player = Player(gamecode: gamecode, name: username)
-                UserData.writePlayer(player, "player")
-                try await P.addPlayer(gamecode, player, uuid)
-                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                do {
+                    try await P.addPlayer(gamecode, player, uuid)
+                    UserData.writeGamecode(gamecode, "gamecode")
+                    UserData.writeUsername(username, "username")
+                    UserData.writePlayer(player, "player")
+                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                } catch GamecodeError.invalidGamecode(let text) {
+                    print(text)
+                    alert(title: "Invalid Gamecode", message: text)
+                    return
+                }
             }
-            //self.alert(title: "", message: "Error occurred while communicating with the server. Try again few seconds later!")
         } else {
             alert(title: "", message: "Invalid Input!")
+            return
         }
     }
     

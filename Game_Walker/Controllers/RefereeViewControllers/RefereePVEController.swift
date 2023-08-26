@@ -51,6 +51,7 @@ class RefereePVEController: BaseViewController {
 
 //MARK: - Music Playing
     var audioPlayer: AVAudioPlayer?
+    private let audioPlayerManager = AudioPlayerManager()
 
     func playMusic() {
         guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
@@ -87,9 +88,10 @@ class RefereePVEController: BaseViewController {
             return
         }
         if isRead {
-            //self.announcementButton.setImage(self.readAll, for: .normal)
+            self.messageButton.setImage(self.readAll, for: .normal)
         } else {
-            //self.announcementButton.setImage(self.unreadSome, for: .normal)
+            self.messageButton.setImage(self.unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         }
     }
     

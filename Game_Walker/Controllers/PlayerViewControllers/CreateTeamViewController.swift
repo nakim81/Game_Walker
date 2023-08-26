@@ -14,10 +14,13 @@ class CreateTeamViewController: BaseViewController {
     @IBOutlet weak var teamNumberTextField: UITextField!
     @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var stationList: [Station] = []
     private var algorithm: [[Int]] = []
+    
+    private let audioPlayerManager = AudioPlayerManager()
     
     private let iconImageNames : [String] = [
         "iconBoy", "iconBear", "iconJam-min", "iconGeum-jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
@@ -95,6 +98,8 @@ class CreateTeamViewController: BaseViewController {
     //    }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        
         guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
             alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
             return
@@ -104,21 +109,6 @@ class CreateTeamViewController: BaseViewController {
             return
         }
         H.getHost(gameCode)
-        ///        //generating random 2d 8 X 8 array for local testing
-        //        let numberOfRows = 8
-        //        let numberOfColumns = 8
-        //        let random2DArray = generateRandomNonRepeating2DArray(rows: numberOfRows, columns: numberOfColumns)
-        //        for row in random2DArray {
-        //            print(row)
-        //        }
-        //        self.algorithm = random2DArray
-        //        //
-        //        self.algorithm = [[1,2,3,4,5,6],
-        //                          [6,0,0,4,5,1],
-        //                          [6,3,4,5,1,2],
-        //                          [6,0,0,1,2,3],
-        //                          [6,5,1,2,3,4],
-        //                          [5,1,2,3,4,6]]
         if Int(teamNumber) ?? 0 > 0 {
             if !self.algorithm.isEmpty {
                 teamNameTextField.resignFirstResponder()
@@ -137,39 +127,42 @@ class CreateTeamViewController: BaseViewController {
                 }
             } else {
                 alert(title: "", message: "The game has not started yet. Please try few minutes later!")
+                return
             }
         } else {
             alert(title: "Team Number Error", message: "Team number should be greater than 0!")
+            return
         }
     }
     
-    //return the order of staions for the team
+    ///return the order of staions for the team
     private func getStationOrder(_ algorithm: [[Int]], _ teamNumber: Int) -> [Int] {
-        var index = 0 //represents the column index in the row
+        var index = 0 ///represents the column index in the row
         var order: [Int] = []
-        //each row of the algorithm = teams
+        ///each row of the algorithm = teams
         for teams in algorithm {
-            //each column of the algorithm = team
+            ///each column of the algorithm = team
             for team in teams {
-                // if my team found in the row
+                /// if my team found in the row
                 if team == teamNumber {
                     order.append(index)
                     break
                 } else {
                     index += 1
                 }
-                //if my team not found in the row
+                ///if my team not found in the row
                 if index == teams.count {
                     order.append(-1)
                 }
             }
-            //reset search index when moving to the next row
+            ///reset search index when moving to the next row
             index = 0
         }
         print("column order: \(order)")
-        let pvp = self.findNumberOfPVP() //number of pvp games
+        let pvp = self.findNumberOfPVP() ///number of pvp games
         var actualOrder: [Int] = [] //array of station.numbers
-        // if no pvp game, then order = actualOrder
+        
+        /// if no pvp game, then order = actualOrder
         if pvp == 0 {
             for column in order {
                 if column == -1 {
@@ -178,18 +171,18 @@ class CreateTeamViewController: BaseViewController {
                     actualOrder.append(self.stationList[column].number)
                 }
             }
-        } else { // if there are pvp games
-            let limit = pvp * 2 //columns whose index is smaller than the limit colum are pvp games
+        } else { /// if there are pvp games
+            let limit = pvp * 2 /// columns whose index is smaller than the limit colum are pvp games
             for column in order {
-                //no game for the round
+                /// no game for the round
                 if column == -1{
                     actualOrder.append(0)
                 }
-                // pvp games
+                /// pvp games
                 else if column < limit {
                     actualOrder.append(self.stationList[column / 2].number)
                 }
-                // pve games
+                /// pve games
                 else {
                     actualOrder.append(self.stationList[column - pvp].number)
                 }
@@ -198,7 +191,7 @@ class CreateTeamViewController: BaseViewController {
         return actualOrder
     }
     
-    //find the number of pvp games
+    /// find the number of pvp games
     private func findNumberOfPVP() -> Int {
         var pvp = 0
         for station in self.stationList {

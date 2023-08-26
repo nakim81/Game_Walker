@@ -11,28 +11,32 @@ import AVFoundation
 
 class LaunchScreenController: UIViewController {
     
-    private var soundPlayer: AVAudioPlayer?
+//    private var soundPlayer: AVAudioPlayer?
+    private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black;
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             self.addRectangles()
+            self.audioPlayerManager.playAudioFile(named: "LaunchScreenMusic", withExtension: "wav")
         }
     }
     
-    private func playMusic() {
-            let url = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "wav")
-            if let url = url {
-                do {
-                    soundPlayer = try AVAudioPlayer(contentsOf: url)
-                    soundPlayer?.prepareToPlay()
-                    soundPlayer?.play()
-                } catch {
-                    print(error)
-                }
-            }
-        }
+//    private func playMusic() {
+//            let url = Bundle.main.url(forResource: "LaunchScreenMusic", withExtension: "wav")
+//            if let url = url {
+//                do {
+//                    soundPlayer = try AVAudioPlayer(contentsOf: url)
+//                    soundPlayer?.prepareToPlay()
+//                    soundPlayer?.play()
+//                } catch {
+//                    print(error)
+//                }
+//            } else {
+//                print("Audio file not found")
+//            }
+//        }
     
     func addRectangles() {
         self.playMusic()
