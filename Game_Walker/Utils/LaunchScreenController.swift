@@ -39,7 +39,7 @@ class LaunchScreenController: UIViewController {
 //        }
     
     func addRectangles() {
-        self.playMusic()
+        //self.playMusic()
         let screenSize = UIScreen.main.bounds.size
         let rectangleWidth = screenSize.width
         let rectangleHeight = screenSize.height/4
