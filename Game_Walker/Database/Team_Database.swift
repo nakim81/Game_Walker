@@ -117,19 +117,19 @@ struct T {
     //MARK: - Database Functions
     
     static func listenTeams(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-         db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
-             guard let documents = querySnapshot?.documents else { print("Error listening Teams"); return }
-             var teams: [Team] = []
-             for document in documents {
-                 teams.append(convertDataToTeam(document.data()))
-             }
-             teams.sort{$0.points > $1.points}
+        db.collection("\(gamecode) : Teams").addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else { print("Error listening Teams"); return }
+            var teams: [Team] = []
+            for document in documents {
+                teams.append(convertDataToTeam(document.data()))
+            }
+            teams.sort{$0.points > $1.points}
             for delegate in delegates {
                 delegate.updateTeams(teams)
             }
         }
     }
-
+    
     static func getTeam(_ gamecode: String, _ teamName : String) {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         docRef.getDocument { (document, error) in
@@ -159,7 +159,7 @@ struct T {
                     teams.sort{$0.points > $1.points}
                     delegate_teamList?.listOfTeams(teams)
                 }
-        }
+            }
     }
     
     static func updateTeam(_ gamecode: String, _ team: Team) {
@@ -185,5 +185,5 @@ struct T {
         }
         //blank team
         return Team()
-     }
+    }
 }
