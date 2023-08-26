@@ -18,7 +18,6 @@ class LaunchScreenController: UIViewController {
         self.view.backgroundColor = .black;
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             self.addRectangles()
-            self.playMusic()
         }
     }
     
@@ -36,6 +35,7 @@ class LaunchScreenController: UIViewController {
         }
     
     func addRectangles() {
+        self.playMusic()
         let screenSize = UIScreen.main.bounds.size
         let rectangleWidth = screenSize.width
         let rectangleHeight = screenSize.height/4
