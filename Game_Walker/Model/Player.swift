@@ -15,5 +15,4 @@ struct Player: Codable, Equatable {
         case gamecode
         case name
     }
-    
 }

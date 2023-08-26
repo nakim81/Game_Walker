@@ -29,7 +29,6 @@ class MainViewController: BaseViewController {
 //        UserDefaults.standard.removeObject(forKey: "team")
 //        UserDefaults.standard.removeObject(forKey: "gamecode")
 //        UserDefaults.standard.removeObject(forKey: "username")
-     
 //        for i in 1...4 {
 //            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
 //            //let gc = "888888"

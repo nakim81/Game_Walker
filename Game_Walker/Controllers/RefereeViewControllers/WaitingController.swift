@@ -11,7 +11,7 @@ import PromiseKit
 
 class WaitingController: BaseViewController {
     
-    private var gameCode = UserData.readGamecode("refereeGamecode")!
+    private var gameCode = UserData.readGamecode("refereeGameCode")! 
     private var referee = UserData.readReferee("Referee")!
     private var timer: Timer?
     
@@ -32,8 +32,8 @@ class WaitingController: BaseViewController {
     override func viewDidLoad() {
         callProtocols()
         Task {
-            T.getTeamList(gameCode)
             S.getStationList(gameCode)
+            T.getTeamList(gameCode)
         }
         addSubviews()
         makeConstraints()
@@ -115,6 +115,7 @@ class WaitingController: BaseViewController {
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
             if self.referee.assigned && !self.isGetStationCalled {
+                self.isGetStationCalled = true
                 if self.station.pvp {
                     self.performSegue(withIdentifier: "goToPVP", sender: self)
                 }
@@ -171,7 +172,6 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
         for station in self.stationList {
             if self.referee.stationName == station.name {
                 self.station = station
-                self.isGetStationCalled = true
             }
         }
     }

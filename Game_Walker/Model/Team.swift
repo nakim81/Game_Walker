@@ -16,7 +16,6 @@ struct Team : Codable, Equatable {
     var points : Int = 0
     var stationOrder : [Int] = []
     var iconName: String = ""
-
     
     enum CodingKeys: String, CodingKey {
         case gamecode

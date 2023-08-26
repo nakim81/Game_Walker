@@ -80,7 +80,7 @@ struct S {
     }
     
     //MARK: - Database Functions
-
+    
     static func getStation(_ gamecode: String, _ uuid : String) {
         let docRef = db.collection("\(gamecode) : Stations").document(uuid)
         docRef.getDocument { (document, error) in
@@ -116,7 +116,7 @@ struct S {
                     stations.sort {$0.number < $1.number}
                     delegate_stationList?.listOfStations(stations)
                 }
-        }
+            }
     }
     
     static func updateStation(_ gamecode: String, _ station: Station) {
@@ -142,5 +142,5 @@ struct S {
         }
         //blank station
         return Station()
-     }
+    }
 }
