@@ -16,7 +16,7 @@ class RefereePVEController: BaseViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
     
-    private var gameCode = UserData.readGamecode("refereeGamecode")!
+    private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
     private var team : Team?
     private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 1, players: [], points: 0, stationOrder: [0], iconName: "iconDaisy"),Team(gamecode: "333333", name: "ABCDEFGHIJKLMNOP", number: 2, players: [], points: 0, stationOrder: [0], iconName: "iconBoy"),
@@ -171,14 +171,18 @@ class RefereePVEController: BaseViewController {
         return label
     }()
     
-    private lazy var winButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Win", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .white
-        button.setImage(UIImage(named: "Win Blue Button"), for: .normal)
-        button.addTarget(self, action: #selector(winButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var winButton: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.layer.cornerRadius = 20
+        label.backgroundColor = .blue
+        label.text = "Win"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(winButtonTapped))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+        return label
     }()
     
     @objc func winButtonTapped() {
@@ -186,21 +190,29 @@ class RefereePVEController: BaseViewController {
             await T.givePoints(gameCode, self.team!.name, self.points)
         }
         winButton.isEnabled = false
-        loseButton.isEnabled = false
+        winButton.backgroundColor = .gray
+        loseButton.isEnabled = true
+        loseButton.backgroundColor = .yellow
     }
     
-    private lazy var loseButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Lose", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .black
-        button.setImage(UIImage(named: "Lose Yellow Button"), for: .normal)
-        button.addTarget(self, action: #selector(loseButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var loseButton: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.layer.cornerRadius = 20
+        label.backgroundColor = .yellow
+        label.text = "Lose"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(loseButtonTapped))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+        return label
     }()
     
     @objc func loseButtonTapped() {
-        winButton.isEnabled = false
+        winButton.backgroundColor = .blue
+        winButton.isEnabled = true
+        loseButton.backgroundColor = .gray
         loseButton.isEnabled = false
     }
     

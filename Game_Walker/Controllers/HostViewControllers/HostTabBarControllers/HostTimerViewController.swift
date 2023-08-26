@@ -61,6 +61,7 @@ class HostTimerViewController: UIViewController {
                 Task { @MainActor in
                     await H.startGame(gameCode)
                     sender.setImage(pause, for: .normal)
+                    await H.pause_resume_game(gameCode)
                 }
             }
             else {
