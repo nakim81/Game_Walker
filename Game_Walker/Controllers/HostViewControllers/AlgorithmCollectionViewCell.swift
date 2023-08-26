@@ -17,7 +17,14 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var redWarningBoxImage = UIImage(named: "red-warning")
     private var purpleWarningBoxImage = UIImage(named: "purple-warning")
     private var blueWarningBoxImage = UIImage(named: "blue-warning")
-    private var visible : Bool = true
+    private var yellowWarningBoxImage = UIImage(named: "yellow-warning")
+    private var orangeWarningBoxImage = UIImage(named: "orange-warning")
+    var visible : Bool = true
+    var warningColor : String = ""
+    var hasWarning : Bool = false
+    var hasPvpWarning : Bool = false
+    var number : Int?
+
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -38,11 +45,14 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     func configureAlgorithmNormalCell(cellteamnum : Int) {
         
         teamnumLabel.text = String(cellteamnum)
+        number = cellteamnum
     }
     
     
     func changeRed() {
         teamnumLabel.textColor = UIColor.red
+        warningColor = "red"
+        hasWarning = true
     }
     
     func makeCellSelected() {
@@ -51,10 +61,17 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
 
     }
     
+    func makeCellImageOriginal() {
+        algorithmCellBox.image = originalCellBoxImage
+    }
+    
     func makeCellOriginal() {
         teamnumLabel.textColor = UIColor.black
         algorithmCellBox.image = originalCellBoxImage
         isUserInteractionEnabled = true
+        hasWarning = false
+        hasPvpWarning = false
+        warningColor = ""
     }
     
     func makeCellInvisible() {
@@ -62,21 +79,54 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         visible = false
         isUserInteractionEnabled = false
         teamnumLabel.text = ""
+        warningColor = ""
+        hasWarning = false
+        hasPvpWarning = false
     }
     
     func makeCellEmpty() {
         teamnumLabel.text = ""
+        warningColor = ""
+        hasWarning = false
+        algorithmCellBox.image = originalCellBoxImage
+        hasPvpWarning = false
     }
     
     func makeRedWarning() {
         //same team in same column
         algorithmCellBox.image = redWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "red"
     }
     
     func makeBlueWarning() {
         //same team in same row
         algorithmCellBox.image = blueWarningBoxImage
         teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "blue"
+    }
+    
+    func makeOrangeWarning() {
+        algorithmCellBox.image = orangeWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "orange"
+    }
+    
+    func makeYellowWarning() {
+        algorithmCellBox.image = yellowWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+        hasWarning = false
+        hasPvpWarning = true
+        warningColor = "yellow"
+    }
+    
+    func makePurpleWarning() {
+        algorithmCellBox.image = purpleWarningBoxImage
+        teamnumLabel.textColor = UIColor.white
+        hasWarning = true
+        warningColor = "purple"
     }
 }
