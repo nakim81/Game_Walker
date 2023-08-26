@@ -20,7 +20,7 @@ struct R {
     static var delegates : [RefereeUpdateListener] = []
     
     //MARK: - Referee Control Functions
-
+    
     static func addReferee(_ gamecode: String, _ referee: Referee, _ uuid: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -61,7 +61,7 @@ struct R {
             throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
         }
     }
-
+    
     
     static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async {
         let refDoc = db.collection("\(gamecode) : Referees").document(uuid)
@@ -86,7 +86,7 @@ struct R {
             for delegate in delegates {
                 delegate.updateReferee(ref)
             }
-       }
+        }
     }
     
     static func getReferee(_ gamecode: String, _ uuid : String) {
@@ -101,21 +101,21 @@ struct R {
             }
         }
     }
-
+    
     static func getRefereeList(_ gamecode: String) {
         db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting List of Referee: \(err)")
-                } else {
-                    var referees : [Referee] = []
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        let referee = convertDataToReferee(data)
-                        referees.append(referee)
-                    }
-                    referees.sort{$0.name < $1.name}
-                    delegate_refereeList?.listOfReferees(referees)
+            if let err = err {
+                print("Error getting List of Referee: \(err)")
+            } else {
+                var referees : [Referee] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let referee = convertDataToReferee(data)
+                    referees.append(referee)
                 }
+                referees.sort{$0.name < $1.name}
+                delegate_refereeList?.listOfReferees(referees)
+            }
         }
     }
     
@@ -133,6 +133,6 @@ struct R {
         }
         //blank host
         return Referee()
-     }
-
+    }
+    
 }

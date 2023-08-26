@@ -110,7 +110,7 @@ struct H {
     }
     
     //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
-     static func hide_show_score(_ gamecode: String, _ show: Bool) async {
+    static func hide_show_score(_ gamecode: String, _ show: Bool) async {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -121,9 +121,9 @@ struct H {
             print("Error hiding/showing score: \(error)")
         }
     }
-        
+    
     //MARK: - Announcment Functions
-     
+    
     static func addAnnouncement(_ gamecode: String, _ announcement: String) async {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -189,14 +189,14 @@ struct H {
     //MARK: - Database Functions
     
     static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-         db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
-             guard let document = documentSnapshot else { print("Error listening Host"); return }
-             guard let data = document.data() else { print("Error listening Host"); return }
-                 let host = convertDataToHost(data)
-                 for delegate in delegates {
-                     delegate.updateHost(host)
-                 }
+        db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else { print("Error listening Host"); return }
+            guard let data = document.data() else { print("Error listening Host"); return }
+            let host = convertDataToHost(data)
+            for delegate in delegates {
+                delegate.updateHost(host)
             }
+        }
     }
     
     static func getHost(_ gamecode: String){
@@ -219,7 +219,7 @@ struct H {
             print("Error updating Host: \(error)")
         }
     }
-
+    
     static func convertDataToHost(_ data : [String : Any]) -> Host {
         do {
             //convert Dictionary data to JSON data first
@@ -234,5 +234,5 @@ struct H {
         }
         //blank team
         return Host()
-     }
+    }
 }

@@ -30,8 +30,6 @@ struct Host: Codable {
     //announcements
     var announcements: [String] = []
     
-    
-    
     enum CodingKeys: String, CodingKey {
         case gamecode
         case gameTime

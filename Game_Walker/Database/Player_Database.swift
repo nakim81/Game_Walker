@@ -36,17 +36,17 @@ struct P {
             print("Error adding Player: \(error)")
         }
     }
-        
+    
     static func removePlayer(_ gamecode: String, _ uuid: String) {
-            db.collection("\(gamecode) : Players").document(uuid).delete() { err in
-                if let err = err {
-                    print("Error removing player: \(err)")
-                } else {
-                    print("Player removed")
-                }
+        db.collection("\(gamecode) : Players").document(uuid).delete() { err in
+            if let err = err {
+                print("Error removing player: \(err)")
+            } else {
+                print("Player removed")
             }
         }
-        
+    }
+    
     static func modifyName(_ gamecode: String, _ uuid: String, _ name: String) async throws {
         do {
             let server = db.collection("\(gamecode) : Players").document(uuid)

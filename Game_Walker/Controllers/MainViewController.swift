@@ -24,7 +24,6 @@ class MainViewController: BaseViewController {
             UserData.writeUUID(UUID().uuidString)
         }
         
-     
 //        for i in 1...4 {
 //            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
 //            //let gc = "888888"
@@ -61,7 +60,6 @@ class MainViewController: BaseViewController {
         
         super.viewDidLoad()
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
