@@ -247,6 +247,7 @@ class AlgorithmViewController: BaseViewController {
         }
         
         print("This is my grid: ", grid)
+        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 8, 8, 10, 1], [3, 4, 5, 6, 7, 9, 8, 10, 1, 2], [0, 0, 0, 0, 8, 9, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
     }
     
     
@@ -266,31 +267,46 @@ class AlgorithmViewController: BaseViewController {
     }
     
     //checked the section (row)'s duplicates and callled warning
-    func checkAndChangeDuplicatesInRow(section: Int) -> Bool {
+    func checkAndChangeDuplicatesInRow(section: Int) -> [Int] {
         // Get the number of items in the section (row)
         let numberOfItems = collectionView.numberOfItems(inSection: section)
         var existingNumbers = Set<Int>()
-        var duplicates = Set<Int>()
+        var duplicates = [Int]()
+        
+        //new//
+        var indexPathsToStore: [IndexPath] = []
+        
+        //new//
         
         var didHaveDuplicate = false
         
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
-            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
-               let text = cell.teamnumLabel.text,
-               let number = Int(text) {
-                if existingNumbers.contains(number) {
-                    duplicates.insert(number)
-                } else {
-                    existingNumbers.insert(number)
+//            print(indexPath, "<----- INDEXPATH   "  )
+//            let validity = isIndexPathValid(indexPath)
+//            print(validity)
+            let number = grid[section][item]
+            
+            if existingNumbers.contains(number) {
+                if number != 0 && number != -1 {
+                    duplicates.append(number)
                     didHaveDuplicate = true
+                    //new//
+                    indexPathsToStore.append(indexPath)
+                    //new//
                 }
+                
+            } else {
+                existingNumbers.insert(number)
+                
             }
+            
         }
         
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
-            
+//            let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
+//            print(cell)
             if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
 //               let text = cell.teamnumLabel.text,
                let number = cell.number {
@@ -299,7 +315,11 @@ class AlgorithmViewController: BaseViewController {
                         
                         //here new code
 
-                        let scannedRed = scanItems(inColumn: item, with: number) 
+                        let scannedRed = scanItems(inColumn: item, with: number, until: section)
+//                        print("checkandchange duplicates after scanning red for : " , number)
+                        if duplicates.filter { $0 == number }.count > 1{
+                            
+                        }
                         if scannedRed {
                             cell.makeRedWarning()
                         } else {
@@ -311,21 +331,61 @@ class AlgorithmViewController: BaseViewController {
                 }
             }
         }
-
-        return didHaveDuplicate
+        return duplicates
     }
     
     
-    func scanItems(inRow section: Int, with targetNumber: Int) -> Bool {
+    func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
+        let numberOfSections = collectionView.numberOfSections
+        let numberOfItemsInSection = collectionView.numberOfItems(inSection: indexPath.section)
+        
+        let isSectionValid = indexPath.section >= 0 && indexPath.section < numberOfSections
+        let isItemValid = indexPath.item >= 0 && indexPath.item < numberOfItemsInSection
+        
+        return isSectionValid && isItemValid
+    }
+
+    func scanForRedHorizontally(inRow section: Int, with targetNumber: Int) -> Bool {
+        var foundRedCell = false
+        let indexPathsInSection = collectionView.indexPathsForVisibleItems.filter { $0.section == section }
+        
+        for indexPath in indexPathsInSection {
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+                if cell.number == targetNumber && cell.warningColor == "red"{
+                    foundRedCell = true
+                }
+            }
+        }
+        return foundRedCell
+    }
+    
+    func scanForRedVertically(inColumn column: Int, with targetNumber: Int) -> Bool {
+        var foundRedCell = false
+        let sections = collectionView.numberOfSections
+        
+        for section in 0..<sections {
+            let indexPath = IndexPath(item: column, section: section)
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+              let number = cell.number {
+                if number == targetNumber && cell.warningColor == "red" {
+                    foundRedCell = true
+                }
+            }
+        }
+        return foundRedCell
+    }
+    
+    func scanItems(inRow section: Int, with targetNumber: Int, until stopColumn: Int) -> Bool {
         var scannedRed = false
         let indexPathsInSection = collectionView.indexPathsForVisibleItems.filter { $0.section == section }
         
         for indexPath in indexPathsInSection {
             if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                if cell.number == targetNumber && cell.warningColor == "purple" {
+                if cell.number == targetNumber && indexPath.item != stopColumn{
                     cell.makeRedWarning()
                     scannedRed = true
-                    let willScanRed = scanItems(inColumn: indexPath.item, with: targetNumber)
+                    let willScanRed = scanItems(inColumn: indexPath.item, with: targetNumber, until: section)
                 } else if cell.number == targetNumber && cell.warningColor == "yellow" {
                     // have to check the column next toit
                 }
@@ -334,7 +394,7 @@ class AlgorithmViewController: BaseViewController {
         return scannedRed
     }
     
-    func scanItems(inColumn column: Int, with targetNumber: Int) -> Bool{
+    func scanItems(inColumn column: Int, with targetNumber: Int, until stopSection: Int) -> Bool{
         var scannedRed = false
         let sections = collectionView.numberOfSections
         
@@ -342,10 +402,10 @@ class AlgorithmViewController: BaseViewController {
             let indexPath = IndexPath(item: column, section: section)
             
             if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                if cell.number == targetNumber && cell.warningColor == "orange" {
+                if cell.number == targetNumber && section != stopSection {
                     cell.makeRedWarning()
                     scannedRed = true
-                    let willScanRed = scanItems(inRow: section, with: targetNumber)
+                    let willScanRed = scanItems(inRow: section, with: targetNumber, until: column)
                 } else if cell.number == targetNumber && cell.warningColor == "yellow" {
                     // have to check the column next to it
                 }
@@ -357,7 +417,8 @@ class AlgorithmViewController: BaseViewController {
     func updateCellBackgroundImages() {
         var hadRowDuplicates = false
         for section in 0..<grid.count {
-            hadRowDuplicates = checkAndChangeDuplicatesInRow(section: section)
+            let rowDuplicates = checkAndChangeDuplicatesInRow(section: section)
+            hadRowDuplicates = !rowDuplicates.isEmpty
             
             //goes through each rows' columns
             for item in 0..<grid[section].count {
@@ -368,9 +429,13 @@ class AlgorithmViewController: BaseViewController {
                 if duplicates.contains(grid[section][item]) {
                     if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
                         if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
-
-                            let scannedRed = scanItems(inRow:section, with: cell.number!)
-                            if scannedRed {
+                            
+                            let scannedRed = scanItems(inRow:section, with: cell.number!, until: column)
+                            print("did it have duplicates for", cell.number!,"? ", hadRowDuplicates)
+//                            print("updatecellbacgroundiages duplicates after scanning red for : " , cell.number)
+                            if scannedRed || scanForRedVertically(inColumn: column, with: cell.number!) {
+                                print("had row duplicates and it contained this number: ", cell.number!)
+                                print("here is my row Duplicate set! : ", rowDuplicates)
                                 cell.makeRedWarning()
                             } else {
                                 cell.makeOrangeWarning()
@@ -464,6 +529,11 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func resetAll() {
+        if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
+            for indexPath in indexPaths {
+                self.collectionView.deselectItem(at: indexPath, animated: true)
+            }
+        }
         for section in 0..<collectionView.numberOfSections {
             for item in 0..<collectionView.numberOfItems(inSection: section) {
                 let indexPath = IndexPath(item: item, section: section)
@@ -474,6 +544,7 @@ class AlgorithmViewController: BaseViewController {
                 }
             }
         }
+        
     }
 
 
@@ -495,7 +566,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        print("Selected cell at IndexPath: \(indexPath)")
         if indexPathA == nil {
             // First selection
             indexPathA = indexPath
@@ -543,7 +614,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 
                 self.indexPathA = nil
                 self.indexPathB = nil
+                
+                print("RESET!______________")
                 self.resetAll()
+                Thread.sleep(forTimeInterval: 5.0)
                 self.updateCellBackgroundImages()
                 print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
                 self.updatePvpCellDuplicates(self.findPvpDuplicates())
@@ -568,7 +642,11 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 
         
         // configure cells differently based on what it is
+        print("RESET!______________")
+        resetAll()
         updateCellBackgroundImages()
+        updatePvpCellDuplicates(findPvpDuplicates())
+
         if teamNumberLabel == -1 {
             cell.makeCellInvisible()
         } else if teamNumberLabel == 0 {
@@ -576,7 +654,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
-        updatePvpCellDuplicates(self.findPvpDuplicates())
+//        updatePvpCellDuplicates(self.findPvpDuplicates())
        
 
         
@@ -585,7 +663,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let cellNumber = grid[indexPath.section][indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
         
         if shouldDisableInteraction(for: cellNumber) {
             return false
@@ -624,6 +701,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     self.grid[section][item] = number
                 }
                 print("My grid after double tapped : " , self.grid)
+                print("RESET!______________")
+
+                self.resetAll()
                 self.updateCellBackgroundImages()
                 self.updatePvpCellDuplicates(self.findPvpDuplicates())
             }
@@ -633,11 +713,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         present(alertController, animated: true, completion: nil)
         
         // deselects cell when it is double tapped.
-        if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
-            for indexPath in indexPaths {
-                collectionView.deselectItem(at: indexPath, animated: true)
-            }
-        }
+
     }
 
 }
