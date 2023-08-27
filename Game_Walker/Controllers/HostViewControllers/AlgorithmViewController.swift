@@ -247,7 +247,7 @@ class AlgorithmViewController: BaseViewController {
         }
         
         print("This is my grid: ", grid)
-        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 8, 8, 10, 1], [3, 4, 5, 6, 7, 9, 8, 10, 1, 2], [0, 0, 0, 0, 8, 9, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
+        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 9, 8, 10, 1], [3, 4, 5, 6, 7, 8, 9, 10, 1, 2], [0, 0, 0, 0, 9, 8, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
     }
     
     
@@ -617,7 +617,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 
                 print("RESET!______________")
                 self.resetAll()
-                Thread.sleep(forTimeInterval: 5.0)
+
                 self.updateCellBackgroundImages()
                 print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
                 self.updatePvpCellDuplicates(self.findPvpDuplicates())
@@ -679,41 +679,42 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
-        cell.makeCellOriginal()
-
-        let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
-        alertController.addTextField { textField in
-            textField.keyboardType = .numberPad
-        }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            if let numberString = alertController.textFields?.first?.text,
-               let number = Int(numberString) {
-                
-                cell.teamnumLabel.text = "\(number)"
-                if number == 0 {
-                    cell.makeCellEmpty()
-                }
-                
-                if let indexPath = self.collectionView.indexPath(for: cell) {
-                    let section = indexPath.section
-                    let item = indexPath.item
-                    self.grid[section][item] = number
-                }
-                print("My grid after double tapped : " , self.grid)
-                print("RESET!______________")
-
-                self.resetAll()
-                self.updateCellBackgroundImages()
-                self.updatePvpCellDuplicates(self.findPvpDuplicates())
-            }
-            
-
-        }))
-        present(alertController, animated: true, completion: nil)
         
-        // deselects cell when it is double tapped.
-
+        if !cell.isSelected {
+            
+                let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
+                alertController.addTextField { textField in
+                textField.keyboardType = .numberPad
+            }
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                cell.isSelected = false
+                alertController.dismiss(animated: true, completion: nil)
+            }))
+        
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                if let numberString = alertController.textFields?.first?.text,
+                let number = Int(numberString) {
+                
+                    cell.teamnumLabel.text = "\(number)"
+                    if number == 0 {
+                        cell.makeCellEmpty()
+                    }
+                
+                    if let indexPath = self.collectionView.indexPath(for: cell) {
+                        let section = indexPath.section
+                        let item = indexPath.item
+                        self.grid[section][item] = number
+                    }
+                    self.resetAll()
+                    self.updateCellBackgroundImages()
+                    self.updatePvpCellDuplicates(self.findPvpDuplicates())
+                    cell.isSelected = false
+                }
+            
+                alertController.dismiss(animated: true, completion: nil)
+            }))
+            present(alertController, animated: true, completion: nil)
+        }
     }
 
 }
