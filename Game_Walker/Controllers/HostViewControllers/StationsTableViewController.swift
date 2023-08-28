@@ -55,9 +55,12 @@ extension StationsTableViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
             
-            self.deleteStation(at: indexPath)
+            Task {
+                await self.deleteStation(at: indexPath)
             
-            completionHandler(true)
+                // Calls the completion handler after it finishes deleting station.
+                completionHandler(true)
+            }
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
         
@@ -67,8 +70,30 @@ extension StationsTableViewController: UITableViewDelegate {
         return configuration
     }
     
-    func deleteStation(at indexPath: IndexPath) {
-        print("It will activate the delete function!")
+    func deleteStation(at indexPath: IndexPath) async {
+
+        print("stationList before Removal: ", currentStations)
+//        print("Removed station at : " , indexPath)
+
+        
+        let stationIndex = indexPath.item
+        let stationToRemove = currentStations[stationIndex]
+        
+        // Change referee to unassign
+
+        let refereeToRemove = stationToRemove.referee
+        
+        await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+        S.removeStation(gamecode!, stationToRemove)
+        
+        // Remove the station from data source
+        currentStations.remove(at: stationIndex)
+        
+        // Reload the table view on the main thread
+        DispatchQueue.main.async {
+            self.stationTable.reloadData()
+        }
+        print("CURRENT stations List: ", currentStations)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
