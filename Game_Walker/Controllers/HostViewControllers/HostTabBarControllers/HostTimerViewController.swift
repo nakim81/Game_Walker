@@ -20,6 +20,7 @@ class HostTimerViewController: UIViewController {
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
     private var timer = Timer()
+    private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int?
     private var seconds: Int = 0
@@ -31,6 +32,7 @@ class HostTimerViewController: UIViewController {
     private var isPaused = true
     private var t : Int = 0
     
+    private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
     private let end = UIImage(named: "Game End Button")
@@ -61,6 +63,7 @@ class HostTimerViewController: UIViewController {
                 Task { @MainActor in
                     await H.startGame(gameCode)
                     sender.setImage(pause, for: .normal)
+                    isPaused = !isPaused
                     await H.pause_resume_game(gameCode)
                 }
             }
@@ -78,8 +81,7 @@ class HostTimerViewController: UIViewController {
             }
         }
         else {
-            self.pauseOrPlayButton.isHidden = true
-            configureEndButton()
+            performSegue(withIdentifier: "toEnd", sender: self)
         }
     }
     //MARK: - Music
@@ -215,106 +217,6 @@ class HostTimerViewController: UIViewController {
         runTimer()
     }
     
-    //MARK: - UI Button Elements
-    private lazy var cancelImg: UIImageView = {
-        var imageView = UIImageView()
-        imageView.frame = CGRect(x: 0, y: 0, width: 63, height: 31)
-        imageView.image = UIImage(named: "slider button")
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 63, height: 31))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "END GAME"
-        label.textColor = UIColor(red: 1.0, green: 0.047, blue: 0.047, alpha: 1)
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        imageView.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5).isActive = true
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(touched(_:)))
-        imageView.addGestureRecognizer(gestureRecognizer)
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    @objc private func touched(_ gestureRecognizer: UIGestureRecognizer) {
-        guard let touchedView = gestureRecognizer.view else { return }
-            switch gestureRecognizer.state {
-            case .changed:
-                let locationInView = gestureRecognizer.location(in: touchedView)
-                var newPos = touchedView.frame.origin.x + locationInView.x
-                newPos = max(self.view.bounds.width * 0.293, newPos)
-                newPos = min(self.view.bounds.width * 0.54, newPos)
-                touchedView.frame.origin.x = newPos
-                if touchedView.frame.origin.x >= self.view.bounds.width * 0.54 {
-                    if !segueCalled {
-                        segueCalled = true
-                        Task {
-                            await H.endGame(gameCode)
-                            performSegue(withIdentifier: "toEnd", sender: self)
-                        }
-                    }
-                } else {
-                    segueCalled = false
-                }
-            case .ended:
-                touchedView.frame.origin.x = self.view.bounds.width * 0.293
-            default:
-                break
-            }
-            UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-      }
-    
-    private lazy var scrollLabel: UIView  = {
-        var view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 176, height: 58)
-        view.layer.cornerRadius = 15
-        view.layer.backgroundColor = UIColor(red: 1.0, green: 0.047, blue: 0.047, alpha: 1).cgColor
-        return view
-    }()
-    
-    private lazy var scrollTxt: UILabel  = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        let image0 = UIImage(named: "slider image")
-        let imageView = UIImageView(image: image0)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        label.addSubview(imageView)
-        imageView.leadingAnchor.constraint(equalTo: label.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: label.trailingAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: label.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
-        return label
-    }()
-    
-    func configureEndButton() {
-        self.view.addSubview(scrollLabel)
-        self.view.addSubview(scrollTxt)
-        self.view.bringSubviewToFront(scrollTxt)
-        self.view.addSubview(cancelImg)
-        
-        scrollLabel.translatesAutoresizingMaskIntoConstraints = false
-        scrollLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.469).isActive = true
-        scrollLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.071).isActive = true
-        scrollLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        scrollLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.698).isActive = true
-        
-        cancelImg.translatesAutoresizingMaskIntoConstraints = false
-        cancelImg.widthAnchor.constraint(equalTo: scrollLabel.widthAnchor, multiplier: 0.358).isActive = true
-        cancelImg.heightAnchor.constraint(equalTo: scrollLabel.heightAnchor, multiplier: 0.534).isActive = true
-        cancelImg.leadingAnchor.constraint(equalTo: scrollLabel.leadingAnchor, constant: self.view.bounds.width * 0.0266).isActive = true
-        cancelImg.topAnchor.constraint(equalTo: scrollLabel.topAnchor, constant: self.view.bounds.height * 0.016).isActive = true
-        
-        scrollTxt.translatesAutoresizingMaskIntoConstraints = false
-        scrollTxt.widthAnchor.constraint(equalTo: scrollLabel.widthAnchor, multiplier: 0.496).isActive = true
-        scrollTxt.heightAnchor.constraint(equalTo: scrollLabel.heightAnchor, multiplier: 0.448).isActive = true
-        scrollTxt.leadingAnchor.constraint(equalTo: scrollLabel.leadingAnchor, constant: self.view.bounds.width * 0.208).isActive = true
-        scrollTxt.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.718).isActive = true
-    }
     //MARK: - Timer Algorithm
     func runTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
@@ -323,9 +225,12 @@ class HostTimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.rounds! < 1 {
-                    strongSelf.playMusic()
+                    strongSelf.audioPlayer?.stop()
                     strongSelf.pauseOrPlayButton.setImage(strongSelf.end, for: .normal)
                     timer.invalidate()
+                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
@@ -416,6 +321,7 @@ extension HostTimerViewController: GetHost, HostUpdateListener {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.messages = host.announcements
         self.gameStart = host.gameStart
         self.gameOver = host.gameover

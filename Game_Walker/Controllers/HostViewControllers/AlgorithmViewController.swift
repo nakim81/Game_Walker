@@ -247,7 +247,7 @@ class AlgorithmViewController: BaseViewController {
         }
         
         print("This is my grid: ", grid)
-        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 9, 8, 10, 1], [3, 4, 5, 6, 7, 8, 9, 10, 1, 2], [0, 0, 0, 0, 9, 8, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
+//        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 9, 8, 10, 1], [3, 4, 5, 6, 7, 8, 9, 10, 1, 2], [0, 0, 0, 0, 9, 8, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
     }
     
     
@@ -317,9 +317,7 @@ class AlgorithmViewController: BaseViewController {
 
                         let scannedRed = scanItems(inColumn: item, with: number, until: section)
 //                        print("checkandchange duplicates after scanning red for : " , number)
-                        if duplicates.filter { $0 == number }.count > 1{
-                            
-                        }
+
                         if scannedRed {
                             cell.makeRedWarning()
                         } else {

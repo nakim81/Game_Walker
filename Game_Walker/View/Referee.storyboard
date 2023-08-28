@@ -135,7 +135,7 @@
                     <navigationItem key="navigationItem" id="tmS-eX-ckY"/>
                     <connections>
                         <segue destination="4eu-zS-s9n" kind="show" identifier="goToPVE" id="nu7-bb-fST"/>
-                        <segue destination="R55-PH-MbY" kind="show" id="S3m-98-REn"/>
+                        <segue destination="R55-PH-MbY" kind="show" identifier="goToPVP" id="S3m-98-REn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJ1-28-Y2a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -200,7 +200,6 @@
                     <connections>
                         <segue destination="Zoa-T9-beL" kind="relationship" relationship="viewControllers" id="Yev-Pi-Mn0"/>
                         <segue destination="05k-AC-OW6" kind="relationship" relationship="viewControllers" id="aMM-jN-jlm"/>
-                        <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="8qD-Ib-caM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tct-dh-Exx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -234,7 +233,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-Oa-bu2">
                                 <rect key="frame" x="365.5" y="41" width="35" height="35.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                 <connections>
                                     <action selector="settingsButtonPressed:" destination="Zoa-T9-beL" eventType="touchUpInside" id="xMt-i5-Wkr"/>
                                 </connections>
@@ -277,6 +276,7 @@
                         <outlet property="settingsButton" destination="eE9-Oa-bu2" id="K18-zm-7E7"/>
                         <outlet property="stationinfoButton" destination="VwA-wW-Qtj" id="AUY-KX-ERM"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVE" id="bfG-fW-iGy"/>
+                        <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="KeI-Qk-QLQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42f-rM-rtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -309,7 +309,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz6-Ao-RVq">
                                 <rect key="frame" x="365.5" y="67" width="35" height="33.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                 <connections>
                                     <action selector="settingButtonPressed:" destination="05k-AC-OW6" eventType="touchUpInside" id="uLd-VL-kfr"/>
                                 </connections>
@@ -360,7 +360,6 @@
                     <connections>
                         <segue destination="Hmo-3x-snH" kind="relationship" relationship="viewControllers" id="jK5-Se-haV"/>
                         <segue destination="5aH-sB-meb" kind="relationship" relationship="viewControllers" id="eiJ-QN-gbd"/>
-                        <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="Tyr-To-eiO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gdk-XE-qHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -394,7 +393,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECZ-cN-lrq">
                                 <rect key="frame" x="365.5" y="42" width="35" height="33.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                 <connections>
                                     <action selector="settingsButtonPressed:" destination="Hmo-3x-snH" eventType="touchUpInside" id="yp6-3S-cGu"/>
                                 </connections>
@@ -438,6 +437,7 @@
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVP" id="GxM-Ra-Tyo"/>
                         <segue destination="4ne-ui-1tf" kind="presentation" identifier="HostTesting" id="XX4-lf-zyp"/>
                         <segue destination="L9I-bT-gaG" kind="presentation" identifier="warning" id="bt3-RT-8hR"/>
+                        <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="ef2-ZC-eYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUJ-SR-8WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -467,7 +467,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zk-M0-jsJ">
                                 <rect key="frame" x="365.5" y="67" width="35" height="33.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="setting"/>
+                                <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GdT-CQ-CKW"/>
@@ -504,10 +504,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SEr-t1-evM"/>
+        <segue reference="S3m-98-REn"/>
         <segue reference="qww-74-glH"/>
         <segue reference="GxM-Ra-Tyo"/>
-        <segue reference="Tyr-To-eiO"/>
+        <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Green Station Info" width="126.5" height="41"/>
@@ -518,7 +518,7 @@
         <image name="next button 1" width="175.5" height="57"/>
         <image name="ranking 1" width="187" height="61"/>
         <image name="score 2" width="84" height="112"/>
-        <image name="setting" width="128" height="128"/>
+        <image name="settingIcon" width="53.5" height="40"/>
         <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="username 1" width="131.5" height="35"/>

@@ -26,7 +26,6 @@ class GivePointsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.view.addSubview(containerView)
         self.view.addSubview(givepointsLabel)
         self.view.bringSubviewToFront(givepointsLabel)
@@ -307,6 +306,7 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.handleLeftLongPress(gesture:)))
         longPressGestureRecognizer.minimumPressDuration = 1.0
+        longPressGestureRecognizer.allowableMovement = 50
         button.addGestureRecognizer(longPressGestureRecognizer)
         return button
     }()
@@ -323,6 +323,7 @@ class GivePointsController: UIViewController {
         button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.handleRightLongPress(gesture:)))
         longPressGestureRecognizer.minimumPressDuration = 1.0
+        longPressGestureRecognizer.allowableMovement = 50
         button.addGestureRecognizer(longPressGestureRecognizer)
         return button
     }()
@@ -365,7 +366,7 @@ class GivePointsController: UIViewController {
     /// Timer used for autorepeat option
     var timer: Timer?
 
-    let timerInterval = TimeInterval(1.0)
+    let timerInterval = TimeInterval(1.5)
 
     @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -381,14 +382,11 @@ class GivePointsController: UIViewController {
         addSubview(leftButton)
         addSubview(rightButton)
         addSubview(label)
-
         backgroundColor = buttonsBackgroundColor
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
         labelOriginalCenter = label.center
-
         setupNumberFormatter()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(GMStepper.reset), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
@@ -403,11 +401,9 @@ class GivePointsController: UIViewController {
     public override func layoutSubviews() {
         let buttonWidth = bounds.size.width * ((1 - labelWidthWeight) / 2)
         let labelWidth = bounds.size.width * labelWidthWeight
-
         leftButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: bounds.size.height)
         label.frame = CGRect(x: buttonWidth, y: 0, width: labelWidth, height: bounds.size.height)
         rightButton.frame = CGRect(x: labelWidth + buttonWidth, y: 0, width: buttonWidth, height: bounds.size.height)
-
         labelMaximumCenterX = label.center.x + labelSlideLength
         labelMinimumCenterX = label.center.x - labelSlideLength
         labelOriginalCenter = label.center
@@ -437,9 +433,11 @@ extension GMStepper {
     @objc func handleRightLongPress(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(updateValue), userInfo: nil, repeats: true)
+            if timer == nil {
+                timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(updateValue), userInfo: nil, repeats: true)
+            }
             stepperState = .MoreIncrease
-        case .changed, .ended, .cancelled, .failed:
+        case .ended, .cancelled, .failed:
             reset()
         default:
             break
@@ -449,9 +447,11 @@ extension GMStepper {
     @objc func handleLeftLongPress(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(updateValue), userInfo: nil, repeats: true)
+            if timer == nil {
+                timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(updateValue), userInfo: nil, repeats: true)
+            }
             stepperState = .MoreDecrease
-        case .changed, .ended, .cancelled, .failed:
+        case .ended, .cancelled, .failed:
             reset()
         default:
             break
@@ -471,7 +471,6 @@ extension GMStepper {
     @objc func leftButtonTouchDown(button: UIButton) {
         rightButton.isEnabled = false
         label.isUserInteractionEnabled = false
-        resetTimer()
         if value != minimumValue {
             stepperState = .ShouldDecrease
         }
@@ -480,15 +479,12 @@ extension GMStepper {
     @objc func rightButtonTouchDown(button: UIButton) {
         leftButton.isEnabled = false
         label.isUserInteractionEnabled = false
-        resetTimer()
-
         if value != maximumValue {
             stepperState = .ShouldIncrease
         }
     }
 
     @objc func buttonTouchUp(button: UIButton) {
-        reset()
     }
 }
 

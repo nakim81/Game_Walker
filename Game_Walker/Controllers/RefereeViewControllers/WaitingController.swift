@@ -98,7 +98,6 @@ class WaitingController: BaseViewController {
                 self.waitingImageViewWidthConstraint = self.waitingImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.47)
                 self.waitingImageViewWidthConstraint?.isActive = true
                 self.currentIndex = 0
-                self.performSegue(withIdentifier: "goToPVE", sender: self)
             }
             else {
                 self.currentIndex += 1
@@ -169,20 +168,23 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "Referee")
         self.referee = UserData.readReferee("Referee")!
+    }
+    
+    func listOfStations(_ stations: [Station]) {
+        self.stationList = stations
         for station in self.stationList {
             if self.referee.stationName == station.name {
                 self.station = station
             }
         }
-    }
-    
-    func listOfStations(_ stations: [Station]) {
-        self.stationList = stations
+        //setTeamOrder()
     }
     
     func updateHost(_ host: Host) {
         self.algorithm = host.algorithm
         if self.algorithm != [] {
+            //T.getTeamList(gameCode)
+            //S.getStationList(gameCode)
             setTeamOrder()
         }
     }

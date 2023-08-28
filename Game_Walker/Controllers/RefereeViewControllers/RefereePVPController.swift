@@ -17,14 +17,14 @@ class RefereePVPController: BaseViewController {
     @IBOutlet weak var leaveButton: UIButton!
     
     
-    private var gameCode = UserData.readGamecode("refereeGamecode")!
+    private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
     private var stationName = ""
-    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 1, players: [], points: 0, stationOrder: [0], iconName: "iconDaisy"),Team(gamecode: "333333", name: "ABCDEF", number: 2, players: [], points: 0, stationOrder: [0], iconName: "iconBoy"),
-                                      Team(gamecode: "333333", name: "Simon Dominic", number: 3, players: [], points: 0, stationOrder: [0], iconName: "iconGirl"),
-                                      Team(gamecode: "333333", name: "Driver", number: 4, players: [], points: 0, stationOrder: [0], iconName: "iconAir")]
-    private var teamA : Team?
-    private var teamB : Team?
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),
+                                      Team(gamecode: "333333", name: "Team 3", number: 3, players: [], points: 0, stationOrder: [], iconName: "iconBlue"),
+                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy"), Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear")]
+    private var teamA : Team = Team()
+    private var teamB : Team = Team()
     private var index: Int = 0
     
     private var stationUuid : String = ""
@@ -37,7 +37,7 @@ class RefereePVPController: BaseViewController {
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
     private var timer = Timer()
-    private var totalTime: Int = 0
+    private var remainingTime: Int = 0
     private var time: Int?
     private var seconds: Int = 100
     private var moveSeconds: Int = 50
@@ -105,15 +105,9 @@ class RefereePVPController: BaseViewController {
     override func viewDidLoad() {
         callProtocols()
         H.getHost(gameCode)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         S.getStationList(gameCode)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        self.teamA = self.teamOrder[self.round - 1]
-        self.teamB = self.teamOrder[self.round]
-        addSubviews()
-        addConstraints()
-        calculateTime()
-        runTimer()
         super.viewDidLoad()
     }
 
@@ -155,9 +149,13 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func leftbuttonTapped() {
-        UserData.writeTeam(self.teamA!, "Team")
-        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
-        self.present(popUpWindow, animated: true, completion: nil)
+        if self.teamA.number == 0 {
+            alert(title: "", message: "The Team doesn't exist")
+        } else {
+            UserData.writeTeam(self.teamA, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
     }
     
     private lazy var lefticonButton: UIImageView = {
@@ -200,43 +198,87 @@ class RefereePVPController: BaseViewController {
         return label
     }()
     
-    private lazy var leftWinButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Win", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .white
-        button.setImage(UIImage(named: "Win Blue Button"), for: .normal)
-        button.addTarget(self, action: #selector(leftWinButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var leftWinButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Win Blue Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Win"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(leftWinButtonTapped))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func leftWinButtonTapped() {
+        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamA!.name, self.points)
+            await T.givePoints(gameCode, self.teamA.name, self.points)
         }
-        leftWinButton.isEnabled = false
-        leftLoseButton.isEnabled = false
+        leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        leftWinButton.image = UIImage(named: "Lose Gray Button")
+        leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        leftLoseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
-    private lazy var leftLoseButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Win", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .white
-        button.setImage(UIImage(named: "Lose Gray Button"), for: .normal)
-        button.addTarget(self, action: #selector(leftWinButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var leftLoseButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Lose Yellow Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Lose"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(leftLoseButtonTapped))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func leftLoseButtonTapped() {
-        leftWinButton.isEnabled = false
-        leftLoseButton.isEnabled = false
+        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
+        leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        leftWinButton.image = UIImage(named: "Lose Yellow Button")
+        leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        leftLoseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     @objc func rightbuttonTapped() {
-        UserData.writeTeam(self.teamB!, "Team")
-        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
-        self.present(popUpWindow, animated: true, completion: nil)
+        if self.teamB.number == 0 {
+            alert(title: "", message: "The Team doesn't exist")
+        } else {
+            UserData.writeTeam(self.teamB, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
     }
     
     private lazy var righticonButton: UIImageView = {
@@ -279,37 +321,77 @@ class RefereePVPController: BaseViewController {
         return label
     }()
     
-    private lazy var rightWinButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Win", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .white
-        button.setImage(UIImage(named: "Lose Yellow Button"), for: .normal)
-        button.addTarget(self, action: #selector(rightWinButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var rightWinButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Win Blue Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Win"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(rightWinButtonTapped))
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func rightWinButtonTapped() {
+        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamB!.name, self.points)
+            await T.givePoints(gameCode, self.teamB.name, self.points)
         }
-        rightWinButton.isEnabled = false
-        rightLoseButton.isEnabled = false
+        rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        rightWinButton.image = UIImage(named: "Lose Gray Button")
+        rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        rightLoseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
-    private lazy var rightLoseButton: UIButton = {
-        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        button.setTitle("Lose", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 13)
-        button.titleLabel?.textColor = .black
-        button.setImage(UIImage(named: "Lose Gray Button"), for: .normal)
-        button.addTarget(self, action: #selector(rightLoseButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var rightLoseButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Lose Yellow Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Lose"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(rightLoseButtonTapped))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func rightLoseButtonTapped() {
-        rightWinButton.isEnabled = false
-        rightLoseButton.isEnabled = false
+        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
+        rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        rightWinButton.image = UIImage(named: "Lose Yellow Button")
+        rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        rightLoseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     private lazy var timerLabel: UILabel = {
@@ -319,6 +401,8 @@ class RefereePVPController: BaseViewController {
         view.font = UIFont(name: "Dosis-Regular", size: 25)
         view.textAlignment = .center
         view.text = "Moving Time" + String(format:"%02i : %02i", self.moveSeconds/60, self.moveSeconds % 60)
+        view.adjustsFontSizeToFitWidth = true
+        view.minimumScaleFactor = 0.5
         view.numberOfLines = 0
         return view
     }()
@@ -425,8 +509,11 @@ class RefereePVPController: BaseViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.rounds < 1 {
-                    strongSelf.playMusic()
+                    strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
+                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
@@ -441,6 +528,22 @@ class RefereePVPController: BaseViewController {
                         strongSelf.index += 2
                         strongSelf.lefticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index].iconName)
                         strongSelf.righticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index + 1].iconName)
+                        strongSelf.leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.leftWinButton.image = UIImage(named: "Win Blue Button")
+                        strongSelf.leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+                        strongSelf.rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.rightWinButton.image = UIImage(named: "Win Blue Button")
+                        strongSelf.rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.rightLoseButton.image = UIImage(named: "Lose Yellow Button")
                         strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
                     }
                 }
@@ -470,7 +573,6 @@ class RefereePVPController: BaseViewController {
         }
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            
             self.time = (moveSeconds - remainder)
             self.moving = true
             let minute = (moveSeconds - remainder)/60
@@ -478,7 +580,6 @@ class RefereePVPController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
@@ -493,10 +594,16 @@ class RefereePVPController: BaseViewController {
 extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateListener, HostUpdateListener {
     func getStation(_ station: Station) {
         self.teamOrder = station.teamOrder
+        self.teamA = self.teamOrder[self.round - 1]
+        self.teamB = self.teamOrder[self.round]
         self.name = station.name
         self.location = station.place
         self.rule = station.description
         self.points = station.points
+        addSubviews()
+        addConstraints()
+        calculateTime()
+        runTimer()
     }
     
     func listOfStations(_ stations: [Station]) {
@@ -516,18 +623,19 @@ extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateList
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
         self.messages = host.announcements
     }
     
     func updateTeams(_ teams: [Team]) {
         for team in teams {
-            if self.teamA!.name == team.name {
-                self.teamA! = team
+            if self.teamA.name == team.name {
+                self.teamA = team
                 //leftscoreLabel.text = "\(self.teamA!.points)"
             }
-            if self.teamB!.name == team.name {
-                self.teamB! = team
+            if self.teamB.name == team.name {
+                self.teamB = team
                 //rightscoreLabel.text = "\(self.teamB!.points)"
             }
         }
@@ -537,8 +645,8 @@ extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateList
         self.isPaused = host.paused
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
-        self.round = host.currentRound
-        self.roundLabel.text = "Round \(host.currentRound)"
+//        self.round = host.currentRound
+//        self.roundLabel.text = "Round \(host.currentRound)"
         self.currentRound = host.currentRound
     }
     
@@ -546,6 +654,7 @@ extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateList
         H.delegate_getHost = self
         H.delegates.append(self)
         S.delegate_getStation = self
+        S.delegate_stationList = self
         T.delegates.append(self)
     }
     
