@@ -20,11 +20,11 @@ class RefereePVPController: BaseViewController {
     private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
     private var stationName = ""
-    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear"),
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),
                                       Team(gamecode: "333333", name: "Team 3", number: 3, players: [], points: 0, stationOrder: [], iconName: "iconBlue"),
-                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy")]
-    private var teamA : Team?
-    private var teamB : Team?
+                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy"), Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear")]
+    private var teamA : Team = Team()
+    private var teamB : Team = Team()
     private var index: Int = 0
     
     private var stationUuid : String = ""
@@ -149,10 +149,10 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func leftbuttonTapped() {
-        if self.teamA!.number == 0 {
+        if self.teamA.number == 0 {
             alert(title: "", message: "The Team doesn't exist")
         } else {
-            UserData.writeTeam(self.teamA!, "Team")
+            UserData.writeTeam(self.teamA, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
             self.present(popUpWindow, animated: true, completion: nil)
         }
@@ -224,7 +224,7 @@ class RefereePVPController: BaseViewController {
     @objc func leftWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamA!.name, self.points)
+            await T.givePoints(gameCode, self.teamA.name, self.points)
         }
         leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false
@@ -261,9 +261,6 @@ class RefereePVPController: BaseViewController {
     
     @objc func leftLoseButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
-        Task {
-            await T.givePoints(gameCode, self.teamA!.name, self.points)
-        }
         leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = true
         }
@@ -275,10 +272,10 @@ class RefereePVPController: BaseViewController {
     }
     
     @objc func rightbuttonTapped() {
-        if self.teamB!.number == 0 {
+        if self.teamB.number == 0 {
             alert(title: "", message: "The Team doesn't exist")
         } else {
-            UserData.writeTeam(self.teamB!, "Team")
+            UserData.writeTeam(self.teamB, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
             self.present(popUpWindow, animated: true, completion: nil)
         }
@@ -350,7 +347,7 @@ class RefereePVPController: BaseViewController {
     @objc func rightWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamB!.name, self.points)
+            await T.givePoints(gameCode, self.teamB.name, self.points)
         }
         rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false
@@ -387,9 +384,6 @@ class RefereePVPController: BaseViewController {
     
     @objc func rightLoseButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
-        Task {
-            await T.givePoints(gameCode, self.teamA!.name, self.points)
-        }
         rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = true
         }
@@ -636,12 +630,12 @@ extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateList
     
     func updateTeams(_ teams: [Team]) {
         for team in teams {
-            if self.teamA!.name == team.name {
-                self.teamA! = team
+            if self.teamA.name == team.name {
+                self.teamA = team
                 //leftscoreLabel.text = "\(self.teamA!.points)"
             }
-            if self.teamB!.name == team.name {
-                self.teamB! = team
+            if self.teamB.name == team.name {
+                self.teamB = team
                 //rightscoreLabel.text = "\(self.teamB!.points)"
             }
         }
@@ -660,6 +654,7 @@ extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateList
         H.delegate_getHost = self
         H.delegates.append(self)
         S.delegate_getStation = self
+        S.delegate_stationList = self
         T.delegates.append(self)
     }
     
