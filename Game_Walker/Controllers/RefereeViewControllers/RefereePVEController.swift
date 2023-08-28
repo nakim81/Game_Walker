@@ -19,9 +19,9 @@ class RefereePVEController: BaseViewController {
     private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
     private var team : Team = Team()
-    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear"),
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),
                                       Team(gamecode: "333333", name: "Team 3", number: 3, players: [], points: 0, stationOrder: [], iconName: "iconBlue"),
-                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy")]
+                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy"), Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear")]
     
     private var stationUuid : String = ""
     private var points : Int = 0

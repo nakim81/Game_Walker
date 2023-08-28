@@ -95,11 +95,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         alert(title: "", message: "Invalid GameCode")
                         return
                     }
+                    UserData.writeGamecode(gameCode, "refereeGameCode")
+                    UserData.writeUsername(newReferee.name, "refereeName")
+                    UserData.writeReferee(newReferee, "Referee")
+                    performSegue(withIdentifier: "goToWait", sender: self)
                 }
-                UserData.writeGamecode(gameCode, "refereeGameCode")
-                UserData.writeUsername(newReferee.name, "refereeName")
-                UserData.writeReferee(newReferee, "Referee")
-                performSegue(withIdentifier: "goToWait", sender: self)
             }
             // Joining the game again with a new name.
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name != storedRefereeName) {
@@ -138,11 +138,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         alert(title: "", message: "Invalid GameCode")
                         return
                     }
+                    UserData.writeGamecode(gameCode, "refereeGameCode")
+                    UserData.writeUsername(name, "refereeName")
+                    UserData.writeReferee(newReferee, "Referee")
+                    performSegue(withIdentifier: "goToWait", sender: self)
                 }
-                UserData.writeGamecode(gameCode, "refereeGameCode")
-                UserData.writeUsername(name, "refereeName")
-                UserData.writeReferee(newReferee, "Referee")
-                performSegue(withIdentifier: "goToWait", sender: self)
             }
         }
     }
