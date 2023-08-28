@@ -24,6 +24,7 @@ class TimerViewController: UIViewController {
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
     private var timer = Timer()
+    private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int?
     private var seconds: Int = 0
@@ -234,9 +235,9 @@ class TimerViewController: UIViewController {
                     strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
                 }
-//                if strongSelf.remainingTime <= 5 {
-//                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-//                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
@@ -349,6 +350,7 @@ extension TimerViewController: GetHost, GetTeam, StationList, HostUpdateListener
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
         self.messages = host.announcements
         configureTimerLabel()

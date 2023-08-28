@@ -20,6 +20,7 @@ class HostTimerViewController: UIViewController {
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
     private var timer = Timer()
+    private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int?
     private var seconds: Int = 0
@@ -31,6 +32,7 @@ class HostTimerViewController: UIViewController {
     private var isPaused = true
     private var t : Int = 0
     
+    private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
     private let end = UIImage(named: "Game End Button")
@@ -223,9 +225,12 @@ class HostTimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.rounds! < 1 {
-                    strongSelf.playMusic()
+                    strongSelf.audioPlayer?.stop()
                     strongSelf.pauseOrPlayButton.setImage(strongSelf.end, for: .normal)
                     timer.invalidate()
+                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
@@ -316,6 +321,7 @@ extension HostTimerViewController: GetHost, HostUpdateListener {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.messages = host.announcements
         self.gameStart = host.gameStart
         self.gameOver = host.gameover

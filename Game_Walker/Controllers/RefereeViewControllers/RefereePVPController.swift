@@ -105,15 +105,9 @@ class RefereePVPController: BaseViewController {
     override func viewDidLoad() {
         callProtocols()
         H.getHost(gameCode)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         S.getStationList(gameCode)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        self.teamA = self.teamOrder[self.round - 1]
-        self.teamB = self.teamOrder[self.round]
-        addSubviews()
-        addConstraints()
-        calculateTime()
-        runTimer()
         super.viewDidLoad()
     }
 
@@ -222,8 +216,8 @@ class RefereePVPController: BaseViewController {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(leftWinButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -260,8 +254,8 @@ class RefereePVPController: BaseViewController {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(leftLoseButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -348,8 +342,8 @@ class RefereePVPController: BaseViewController {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(rightWinButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -413,6 +407,8 @@ class RefereePVPController: BaseViewController {
         view.font = UIFont(name: "Dosis-Regular", size: 25)
         view.textAlignment = .center
         view.text = "Moving Time" + String(format:"%02i : %02i", self.moveSeconds/60, self.moveSeconds % 60)
+        view.adjustsFontSizeToFitWidth = true
+        view.minimumScaleFactor = 0.5
         view.numberOfLines = 0
         return view
     }()
@@ -525,9 +521,6 @@ class RefereePVPController: BaseViewController {
                 if strongSelf.remainingTime <= 5 {
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
-                if strongSelf.remainingTime <= 5 {
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
@@ -541,6 +534,22 @@ class RefereePVPController: BaseViewController {
                         strongSelf.index += 2
                         strongSelf.lefticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index].iconName)
                         strongSelf.righticonButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.index + 1].iconName)
+                        strongSelf.leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.leftWinButton.image = UIImage(named: "Win Blue Button")
+                        strongSelf.leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+                        strongSelf.rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.rightWinButton.image = UIImage(named: "Win Blue Button")
+                        strongSelf.rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                            gestureRecognizer.isEnabled = true
+                        }
+                        strongSelf.rightLoseButton.image = UIImage(named: "Lose Yellow Button")
                         strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
                     }
                 }
@@ -570,7 +579,6 @@ class RefereePVPController: BaseViewController {
         }
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            
             self.time = (moveSeconds - remainder)
             self.moving = true
             let minute = (moveSeconds - remainder)/60
@@ -578,7 +586,6 @@ class RefereePVPController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
@@ -593,10 +600,16 @@ class RefereePVPController: BaseViewController {
 extension RefereePVPController: GetStation, StationList, GetHost, TeamUpdateListener, HostUpdateListener {
     func getStation(_ station: Station) {
         self.teamOrder = station.teamOrder
+        self.teamA = self.teamOrder[self.round - 1]
+        self.teamB = self.teamOrder[self.round]
         self.name = station.name
         self.location = station.place
         self.rule = station.description
         self.points = station.points
+        addSubviews()
+        addConstraints()
+        calculateTime()
+        runTimer()
     }
     
     func listOfStations(_ stations: [Station]) {
