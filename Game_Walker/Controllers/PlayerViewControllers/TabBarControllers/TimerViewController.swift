@@ -231,9 +231,12 @@ class TimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.rounds! < 1 {
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
                 }
+//                if strongSelf.remainingTime <= 5 {
+//                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+//                }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds

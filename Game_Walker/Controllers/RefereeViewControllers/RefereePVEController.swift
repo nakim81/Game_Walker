@@ -18,10 +18,10 @@ class RefereePVEController: BaseViewController {
     
     private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
-    private var team : Team?
-    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Dok2", number: 1, players: [], points: 0, stationOrder: [0], iconName: "iconDaisy"),Team(gamecode: "333333", name: "ABCDEFGHIJKLMNOP", number: 2, players: [], points: 0, stationOrder: [0], iconName: "iconBoy"),
-                                      Team(gamecode: "333333", name: "Simon Dominic", number: 3, players: [], points: 0, stationOrder: [0], iconName: "iconGirl"),
-                                      Team(gamecode: "333333", name: "Driver", number: 4, players: [], points: 0, stationOrder: [0], iconName: "iconAir")]
+    private var team : Team = Team()
+    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear"),
+                                      Team(gamecode: "333333", name: "Team 3", number: 3, players: [], points: 0, stationOrder: [], iconName: "iconBlue"),
+                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy")]
     
     private var stationUuid : String = ""
     private var points : Int = 0
@@ -29,49 +29,37 @@ class RefereePVEController: BaseViewController {
     private var location : String = ""
     private var rule : String = ""
     
+    private let audioPlayerManager = AudioPlayerManager()
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
     
+    private var gameStart : Bool = false
+    private var gameOver : Bool = false
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
     private var timer = Timer()
-    private var totalTime: Int = 0
+    private var remainingTime: Int = 0
     private var time: Int?
-    private var seconds: Int = 100
-    private var moveSeconds: Int = 50
+    private var seconds: Int = 0
+    private var moveSeconds: Int = 0
     private var moving: Bool = true
-    private var tapped: Bool = false
     private var round: Int = 1
     private var rounds: Int = 8
     private var isPaused = true
-    private var currentRound : Int = 0
     private var t : Int = 0
-
-//MARK: - Music Playing
-    var audioPlayer: AVAudioPlayer?
-    private let audioPlayerManager = AudioPlayerManager()
-
-    func playMusic() {
-        guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
-            print("Background music file not found.")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = 2
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch {
-            print("Failed to play background music: \(error.localizedDescription)")
-        }
-    }
     
-    func stopMusic() {
-        audioPlayer?.stop()
-        audioPlayer = nil
+    override func viewDidLoad() {
+        callProtocols()
+        H.getHost(gameCode)
+        S.getStationList(gameCode)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        super.viewDidLoad()
     }
+
+//MARK: - Messages
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,7 +83,9 @@ class RefereePVEController: BaseViewController {
         }
     }
     
+//MARK: - Buttons Pressed
     @IBAction func stationinfoButtonPressed(_ sender: Any) {
+        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         showRefereeGameInfoPopUp(gameName: self.name, gameLocation: self.location, gamePoitns: String(self.points), gameRule: self.rule)
     }
     
@@ -112,27 +102,16 @@ class RefereePVEController: BaseViewController {
     }
         
     @objc func buttonTapped() {
-        UserData.writeTeam(self.team!, "Team")
-        let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGamecode")!)
-        self.present(popUpWindow, animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        callProtocols()
-        H.getHost(gameCode)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        S.getStationList(gameCode)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        self.team = self.teamOrder[self.round - 1]
-        addSubviews()
-        addConstraints()
-        calculateTime()
-        runTimer()
-        super.viewDidLoad()
+        if self.team.number == 0 {
+            alert(title: "", message: "The Team doesn't exist")
+        } else {
+            UserData.writeTeam(self.team, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
     }
 
 //MARK: - UI elements
-    
     private lazy var iconButton: UIImageView = {
         var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         view.image = UIImage(named: self.teamOrder[self.round - 1].iconName)
@@ -173,49 +152,78 @@ class RefereePVEController: BaseViewController {
         return label
     }()
     
-    private lazy var winButton: UILabel = {
+    private lazy var winButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Win Blue Button")
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        label.layer.cornerRadius = 20
-        label.backgroundColor = .blue
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Win"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(winButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
-        return label
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func winButtonTapped() {
+        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
+        print("x")
         Task {
-            await T.givePoints(gameCode, self.team!.name, self.points)
+            await T.givePoints(gameCode, self.team.name, self.points)
         }
-        winButton.isEnabled = false
-        winButton.backgroundColor = .gray
-        loseButton.isEnabled = true
-        loseButton.backgroundColor = .yellow
+        winButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        winButton.image = UIImage(named: "Lose Gray Button")
+        loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        loseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
-    private lazy var loseButton: UILabel = {
+    private lazy var loseButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Lose Yellow Button")
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
-        label.layer.cornerRadius = 20
-        label.backgroundColor = .yellow
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Lose"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(loseButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
-        return label
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     @objc func loseButtonTapped() {
-        winButton.backgroundColor = .blue
-        winButton.isEnabled = true
-        loseButton.backgroundColor = .gray
-        loseButton.isEnabled = false
+        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
+        winButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = true
+        }
+        winButton.image = UIImage(named: "Win Blue Button")
+        loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+            gestureRecognizer.isEnabled = false
+        }
+        loseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     private lazy var roundLabel: UILabel = {
@@ -315,7 +323,7 @@ class RefereePVEController: BaseViewController {
         
         iconButton.translatesAutoresizingMaskIntoConstraints = false
         iconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
-        iconButton.heightAnchor.constraint(equalTo: iconButton.widthAnchor, multiplier: 1).isActive = true
+        iconButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
         iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.246).isActive = true
         
@@ -351,8 +359,11 @@ class RefereePVEController: BaseViewController {
                 return
             }
             if !strongSelf.isPaused {
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                }
                 if strongSelf.rounds < 1 {
-                    strongSelf.playMusic()
+                    strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
                 }
                 if strongSelf.time! < 1 {
@@ -364,26 +375,25 @@ class RefereePVEController: BaseViewController {
                         strongSelf.time = strongSelf.moveSeconds
                         strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.moving = true
-                        strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
                         strongSelf.makeTeamInfoLabel()
+                        // Testing Purpose
+                        strongSelf.round += 1
+                        strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
+                        strongSelf.team = strongSelf.teamOrder[strongSelf.round]
+                        //
                         strongSelf.rounds -= 1
                     }
                 }
                 else {
                     strongSelf.time! -= 1
+                    strongSelf.remainingTime -= 1
                     let minute = strongSelf.time!/60
                     let second = strongSelf.time! % 60
                     if strongSelf.moving {
-                        strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
-                        strongSelf.roundLabel.text = "Round \(strongSelf.round)"
-                        strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
-                        strongSelf.makeTeamInfoLabel()
-                    } else {
                         strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", minute, second)
-                        strongSelf.roundLabel.text = "Round \(strongSelf.round)"
-                        strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
-                        strongSelf.makeTeamInfoLabel()
+                    } else {
+                        strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
                     }
                 }
             }
@@ -425,10 +435,15 @@ class RefereePVEController: BaseViewController {
 extension RefereePVEController: GetStation, StationList, GetHost, TeamUpdateListener, HostUpdateListener {
     func getStation(_ station: Station) {
         self.teamOrder = station.teamOrder
+        self.team = self.teamOrder[self.round - 1]
         self.name = station.name
         self.location = station.place
         self.rule = station.description
         self.points = station.points
+        addSubviews()
+        addConstraints()
+        calculateTime()
+        runTimer()
     }
     
     func listOfStations(_ stations: [Station]) {
@@ -454,43 +469,33 @@ extension RefereePVEController: GetStation, StationList, GetHost, TeamUpdateList
     
     func updateTeams(_ teams: [Team]) {
         for team in teams {
-            if self.team!.name == team.name {
-                self.team! = team
+            if self.team.name == team.name {
+                self.team = team
             }
         }
-        let teamNumber = "Team \(self.teamOrder[self.round - 1].number)"
-        let teamName = self.teamOrder[self.round - 1].name
-        let score = "\(self.team!.points)"
-        let attributedText = NSMutableAttributedString()
-        let teamNumberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-SemiBold", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNumberAttributedString = NSAttributedString(string: teamNumber + "\n", attributes: teamNumberAttributes)
-        attributedText.append(teamNumberAttributedString)
-        let teamNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNameAttributedString = NSAttributedString(string: teamName + "\n", attributes: teamNameAttributes)
-        attributedText.append(teamNameAttributedString)
-        let scoreAttributes: [NSAttributedString.Key: Any] = [
+        let newScore = "\(self.team.points)"
+        let newScoreAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 50) ?? UIFont.boldSystemFont(ofSize: 50),
             .foregroundColor: UIColor.black
         ]
-        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
-        attributedText.append(scoreAttributedString)
-        self.teamInfoLabel.attributedText = attributedText
+        let newScoreAttributedString = NSAttributedString(string: newScore, attributes: newScoreAttributes)
+        if let attributedText = self.teamInfoLabel.attributedText as? NSMutableAttributedString {
+//            if let rangeOfScore = attributedText.string.range(of: score) {
+//                attributedText.replaceCharacters(in: NSRange(rangeOfScore, in: attributedText.string), with: newScoreAttributedString)
+//            }
+            self.teamInfoLabel.attributedText = attributedText
+        }
         
     }
     
     func updateHost(_ host: Host) {
+        self.gameStart = host.gameStart
+        self.gameOver = host.gameover
         self.isPaused = host.paused
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
-        self.round = host.currentRound
-        self.roundLabel.text = "Round \(host.currentRound)"
-        self.currentRound = host.currentRound
+//        self.roundLabel.text = "Round \(host.currentRound)"
+//        self.round = host.currentRound
     }
     
     func listen(_ _ : [String : Any]){
