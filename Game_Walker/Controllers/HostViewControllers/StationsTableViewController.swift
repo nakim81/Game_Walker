@@ -19,6 +19,7 @@ class StationsTableViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         S.delegate_stationList = self
+//        S.getStationList(gamecode!)
         S.getStationList(gamecode!)
         
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
@@ -29,6 +30,17 @@ class StationsTableViewController: BaseViewController {
         stationTable.refreshControl = refreshController
         settingRefreshControl()
         
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddStationSegue",
+            let addStationVC = segue.destination as? AddStationViewController,
+            let selectedStation = sender as? Station {
+            addStationVC.stationExists = true
+            addStationVC.station = selectedStation
+            addStationVC.delegate = self
+        }
     }
     
     private func settingRefreshControl() {
@@ -43,9 +55,10 @@ class StationsTableViewController: BaseViewController {
     }
     
    func reloadStationTable() {
-        S.getStationList(gamecode!)
+       S.getStationList(self.gamecode!)
         self.stationTable.reloadData()
     }
+    
     
 
 }
@@ -132,14 +145,7 @@ extension StationsTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddStationViewController") as? AddStationViewController {
-            vc.stationExists = true
-            vc.station = currentStations[indexPath.row]
-            
-            
-            self.navigationController?.present(vc, animated: true)
-            
-        }
+        performSegue(withIdentifier: "AddStationSegue", sender: currentStations[indexPath.row])
     }
     
     
@@ -153,5 +159,16 @@ extension StationsTableViewController: StationList {
             self.stationTable.reloadData()
             self.refreshController.endRefreshing()
         }
+    }
+}
+
+extension StationsTableViewController: AddStationDelegate {
+    func didUpdateStationData() {
+        S.getStationList(self.gamecode!)
+            DispatchQueue.main.async {
+                print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
+                self.stationTable.reloadData()
+            }
+        
     }
 }

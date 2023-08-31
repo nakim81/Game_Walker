@@ -153,7 +153,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="newaddbutton"/>
                                 <connections>
-                                    <segue destination="EDq-oM-bgK" kind="presentation" id="8x5-g0-ems"/>
+                                    <segue destination="EDq-oM-bgK" kind="presentation" identifier="AddStationSegue" id="8x5-g0-ems"/>
                                 </connections>
                             </button>
                         </subviews>

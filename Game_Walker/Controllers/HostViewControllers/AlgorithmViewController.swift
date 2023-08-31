@@ -33,8 +33,8 @@ class AlgorithmViewController: BaseViewController {
     private var collectionViewCellWidth : Int = 0
     private var collectionViewCellSpacing = 4
     
-    private var num_cols : Int = 8
-    private var num_rows : Int = 8
+//    private var num_cols : Int = 8
+//    private var num_rows : Int = 8
     
     private var gamecode = UserData.readGamecode("gamecode")!
     
@@ -43,6 +43,8 @@ class AlgorithmViewController: BaseViewController {
     
     private var pvpGameCount : Int = 0
     private var pveGameCount : Int = 0
+    
+    private var omittedTeamCells = 0
     
     var indexPathA: IndexPath?
     var indexPathB: IndexPath?
@@ -62,7 +64,7 @@ class AlgorithmViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
+//        let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
         if collectionViewCellWidth > 0  {
             createBorderLines()
         }
@@ -95,6 +97,7 @@ class AlgorithmViewController: BaseViewController {
     
     private func fetchDataAndInitialize() {
         S.delegate_stationList = self
+//        S.getStationList(gamecode)
         S.getStationList(gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
@@ -157,19 +160,26 @@ class AlgorithmViewController: BaseViewController {
         return nil
     }
     
+    func hasOmittedTeamCells() -> Int {
+        let stationCells = pvpGameCount * 2 + pveGameCount
+        let teamCells = num_teams
+        
+        if teamCells > stationCells {
+            print("Be cautious there are omitted Team Cells.")
+            return teamCells - stationCells
+        }
+        return 0
+    }
+    
     func createGrid() {
-        num_stations = stationList!.count
+        num_stations = pvpGameCount * 2 + pveGameCount
+        var moreTeamsThanStations = 0
+        var moreStationsThanTeams = 0
+        omittedTeamCells = hasOmittedTeamCells()
         
-        
-        if (max(num_teams, num_stations) < 8) {
+        if (num_stations < 8) {
             needHorizontalEmptyCells = true
-            horizontalEmptyCells = 8 - max(num_teams, num_stations)
-            if (num_teams < 8) {
-                num_teams = 8
-            }
-            if (num_stations < 8) {
-                num_stations = 8
-            }
+            horizontalEmptyCells = 8 - num_stations
         }
         
         if (num_rounds < 8) {
@@ -184,11 +194,11 @@ class AlgorithmViewController: BaseViewController {
             excessOf = "stations"
             excessCells = num_stations - num_teams
         }
-        totalcolumn = max(num_teams, num_stations)
+        totalcolumn = max(num_stations, 8)
         totalrow = max(num_rounds, 8)
         
-        num_cols = totalcolumn
-        num_rows = totalrow
+//        num_cols = totalcolumn
+//        num_rows = totalrow
         //        print(totalrow)
         
         for r in 0...(totalrow - 1) {
@@ -205,7 +215,7 @@ class AlgorithmViewController: BaseViewController {
         }
         
         // case when considering pvp cases
-        guard pvpGameCount >= 0 && pvpGameCount <= grid.count else {
+        guard pvpGameCount >= 0 && pvpGameCount <= grid.count / 2 else {
             print("Invalid number of pvp games compared to number of teams")
             return
         }
@@ -278,7 +288,7 @@ class AlgorithmViewController: BaseViewController {
         
         //new//
         
-        var didHaveDuplicate = false
+//        var didHaveDuplicate = false
         
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
@@ -290,7 +300,7 @@ class AlgorithmViewController: BaseViewController {
             if existingNumbers.contains(number) {
                 if number != 0 && number != -1 {
                     duplicates.append(number)
-                    didHaveDuplicate = true
+//                    didHaveDuplicate = true
                     //new//
                     indexPathsToStore.append(indexPath)
                     //new//
@@ -305,10 +315,8 @@ class AlgorithmViewController: BaseViewController {
         
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
-//            let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell
-//            print(cell)
+
             if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
-//               let text = cell.teamnumLabel.text,
                let number = cell.number {
                 if duplicates.contains(number) {
                     if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
@@ -383,7 +391,7 @@ class AlgorithmViewController: BaseViewController {
                 if cell.number == targetNumber && indexPath.item != stopColumn{
                     cell.makeRedWarning()
                     scannedRed = true
-                    let willScanRed = scanItems(inColumn: indexPath.item, with: targetNumber, until: section)
+                    _ = scanItems(inColumn: indexPath.item, with: targetNumber, until: section)
                 } else if cell.number == targetNumber && cell.warningColor == "yellow" {
                     // have to check the column next toit
                 }
@@ -403,7 +411,7 @@ class AlgorithmViewController: BaseViewController {
                 if cell.number == targetNumber && section != stopSection {
                     cell.makeRedWarning()
                     scannedRed = true
-                    let willScanRed = scanItems(inRow: section, with: targetNumber, until: column)
+                    _ = scanItems(inRow: section, with: targetNumber, until: column)
                 } else if cell.number == targetNumber && cell.warningColor == "yellow" {
                     // have to check the column next to it
                 }
@@ -429,11 +437,7 @@ class AlgorithmViewController: BaseViewController {
                         if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "" {
                             
                             let scannedRed = scanItems(inRow:section, with: cell.number!, until: column)
-                            print("did it have duplicates for", cell.number!,"? ", hadRowDuplicates)
-//                            print("updatecellbacgroundiages duplicates after scanning red for : " , cell.number)
                             if scannedRed || scanForRedVertically(inColumn: column, with: cell.number!) {
-                                print("had row duplicates and it contained this number: ", cell.number!)
-                                print("here is my row Duplicate set! : ", rowDuplicates)
                                 cell.makeRedWarning()
                             } else {
                                 cell.makeOrangeWarning()
@@ -640,7 +644,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 
         
         // configure cells differently based on what it is
-        print("RESET!______________")
+//        print("RESET!______________")
         resetAll()
         updateCellBackgroundImages()
         updatePvpCellDuplicates(findPvpDuplicates())
