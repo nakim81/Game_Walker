@@ -243,7 +243,7 @@ class AlgorithmViewController: BaseViewController {
 
         
         print("This is my grid: ", grid)
-//        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 9, 8, 10, 1], [3, 4, 5, 6, 7, 8, 9, 10, 1, 2], [0, 0, 0, 0, 9, 8, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]
+       grid = [[1, 2, 3, 4, 5, 6, 7, -1], [0, 0, 0, 0, 6, 7, 1, -1], [3, 4, 5, 6, 7, 1, 2, -1], [0, 0, 0, 0, 1, 2, 3, -1], [5, 6, 7, 1, 4, 3, 4, -1], [0, 0, 0, 0, 2, 4, 5, -1], [7, 1, 2, 3, 4, 5, 6, -1]]
     }
     
     
@@ -406,6 +406,11 @@ class AlgorithmViewController: BaseViewController {
         return scannedRed
     }
                    
+    
+    func updateEncounteredSameTeam() {
+        
+    }
+    
     func updateCellBackgroundImages() {
         var hadRowDuplicates = false
         for section in 0..<grid.count {
@@ -629,12 +634,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         let teamNumberLabel = grid[indexPath.section][indexPath.item]
 
         
-        // configure cells differently based on what it is
-//        print("RESET!______________")
-        resetAll()
-        updateCellBackgroundImages()
-        updatePvpCellDuplicates(findPvpDuplicates())
-
         if teamNumberLabel == -1 {
             cell.makeCellInvisible()
         } else if teamNumberLabel == 0 {
@@ -642,10 +641,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
-//        updatePvpCellDuplicates(self.findPvpDuplicates())
-       
-
-        
+        resetAll()
+        updateCellBackgroundImages()
+        updatePvpCellDuplicates(findPvpDuplicates())
         return cell
     }
     
