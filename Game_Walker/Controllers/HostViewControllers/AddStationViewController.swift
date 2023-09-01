@@ -25,6 +25,8 @@ class AddStationViewController: BaseViewController {
     @IBOutlet weak var refereeLabel: UILabel!
     
     weak var stationsTableViewController: StationsTableViewController?
+    
+    weak var delegate: AddStationDelegate?
 
     var gamecode = UserData.readGamecode("gamecode")!
     var stationUuid = ""
@@ -86,7 +88,7 @@ class AddStationViewController: BaseViewController {
             gamepoints = station!.points
             
             pvpnotchosen = false
-            if ((station?.pvp) != nil) {
+            if (station?.pvp == true) {
                 pvpButton.sendActions(for: .touchUpInside)
                 isPvp = true
                 modified = true
@@ -241,7 +243,7 @@ class AddStationViewController: BaseViewController {
             self.dismiss(animated: true, completion: nil)
         } else if (stationExists && modified) {
             Task { @MainActor in
-                //unassign station from referee
+                //unassign station from referee 
             
                 var tempReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
 
@@ -279,7 +281,7 @@ class AddStationViewController: BaseViewController {
         
 
         
-        stationsTableViewController?.reloadStationTable()
+        delegate?.didUpdateStationData()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -337,7 +339,7 @@ extension AddStationViewController: UITextViewDelegate {
             
             rules = newText
             
-            print(rules)
+//            print(rules)
         }
         return true
     }
@@ -391,7 +393,7 @@ extension AddStationViewController: RefereeList {
         for referee in referees {
             if (!referee.assigned) {
                 availableReferees.append(referee)
-                print(availableReferees)
+//                print(availableReferees)
             }
             allReferees.append(referee)
         }

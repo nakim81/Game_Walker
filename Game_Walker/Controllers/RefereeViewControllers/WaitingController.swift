@@ -30,6 +30,7 @@ class WaitingController: BaseViewController {
     private var updatedTeamOrder : [Team] = []
     
     override func viewDidLoad() {
+        configureNavItem()
         callProtocols()
         Task {
             S.getStationList(gameCode)
@@ -39,6 +40,19 @@ class WaitingController: BaseViewController {
         makeConstraints()
         animateWaitingScreen()
         super.viewDidLoad()
+    }
+    
+    private func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(WaitingController.onBackPressed))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc override func onBackPressed() {
+        R.removeReferee(gameCode, referee.uuid)
+        UserDefaults.standard.removeObject(forKey: "refereeGameCode")
+        UserDefaults.standard.removeObject(forKey: "refereeName")
+        performSegue(withIdentifier: "toRegister", sender: self)
     }
     
 // MARK: - SetTeamOrder
@@ -86,7 +100,7 @@ class WaitingController: BaseViewController {
         }
     }
     
-    //MARK: - Animating Screen
+//MARK: - Animating Screen
     func animateWaitingScreen() {
         if timer != nil {
             return
@@ -98,7 +112,6 @@ class WaitingController: BaseViewController {
                 self.waitingImageViewWidthConstraint = self.waitingImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.47)
                 self.waitingImageViewWidthConstraint?.isActive = true
                 self.currentIndex = 0
-                self.performSegue(withIdentifier: "goToPVE", sender: self)
             }
             else {
                 self.currentIndex += 1
@@ -169,21 +182,24 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "Referee")
         self.referee = UserData.readReferee("Referee")!
+    }
+    
+    func listOfStations(_ stations: [Station]) {
+        self.stationList = stations
         for station in self.stationList {
             if self.referee.stationName == station.name {
                 self.station = station
             }
         }
-    }
-    
-    func listOfStations(_ stations: [Station]) {
-        self.stationList = stations
+        //self.setTeamOrder()
     }
     
     func updateHost(_ host: Host) {
         self.algorithm = host.algorithm
         if self.algorithm != [] {
-            setTeamOrder()
+            //T.getTeamList(gameCode)
+            //S.getStationList(gameCode)
+            self.setTeamOrder()
         }
     }
     

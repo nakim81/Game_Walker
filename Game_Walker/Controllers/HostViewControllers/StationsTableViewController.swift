@@ -9,26 +9,56 @@ import UIKit
 
 class StationsTableViewController: BaseViewController {
     
-    var currentStations: [Station] = []
+    private var currentStations: [Station] = []
 
-    var curr_gamecode = UserData.readGamecode("gamecode")
+    private var gamecode = UserData.readGamecode("gamecode")
+    
+    private let refreshController : UIRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        S.delegate_stationList = self
+//        S.getStationList(gamecode!)
+        S.getStationList(gamecode!)
         
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.delegate = self
         stationTable.dataSource = self
         stationTable.separatorStyle = UITableViewCell.SeparatorStyle.none
-        S.delegate_stationList = self
-        S.getStationList(curr_gamecode!)
+        
+        stationTable.refreshControl = refreshController
+        settingRefreshControl()
+        
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddStationSegue",
+            let addStationVC = segue.destination as? AddStationViewController,
+            let selectedStation = sender as? Station {
+            addStationVC.stationExists = true
+            addStationVC.station = selectedStation
+            addStationVC.delegate = self
+        }
     }
     
-    func reloadStationTable() {
-        S.getStationList(curr_gamecode!)
+    private func settingRefreshControl() {
+        refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
+        refreshController.tintColor = UIColor(red: 0.92, green: 0.75, blue: 0.99, alpha: 1.00)
+        refreshController.attributedTitle = NSAttributedString(string: "", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.92, green: 0.75, blue: 0.99, alpha: 1.00), NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+    }
+    
+    @objc func refreshFunction() {
+        reloadStationTable()
+
+    }
+    
+   func reloadStationTable() {
+       S.getStationList(self.gamecode!)
         self.stationTable.reloadData()
     }
+    
     
 
 }
@@ -38,11 +68,13 @@ extension StationsTableViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
             
-            self.deleteStation(at: indexPath)
+            Task {
+                await self.deleteStation(at: indexPath)
             
-            completionHandler(true)
+                // Calls the completion handler after it finishes deleting station.
+                completionHandler(true)
+            }
         }
-        
         deleteAction.image = UIImage(systemName: "trash.fill")
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
@@ -50,11 +82,41 @@ extension StationsTableViewController: UITableViewDelegate {
         
         return configuration
     }
-
     
-    func deleteStation(at indexPath: IndexPath) {
-        print("It will activate the delete function!")
+    func deleteStation(at indexPath: IndexPath) async {
+
+        print("stationList before Removal: ", currentStations)
+//        print("Removed station at : " , indexPath)
+
+        
+        let stationIndex = indexPath.item
+        let stationToRemove = currentStations[stationIndex]
+        
+        // Change referee to unassign
+
+        let refereeToRemove = stationToRemove.referee
+        
+        await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+        S.removeStation(gamecode!, stationToRemove)
+        
+        // Remove the station from data source
+        currentStations.remove(at: stationIndex)
+        
+        // Reload the table view on the main thread
+        DispatchQueue.main.async {
+            self.stationTable.reloadData()
+        }
+        print("CURRENT stations List: ", currentStations)
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
+
+        return 3
+    }
+    
 }
 
 extension StationsTableViewController: UITableViewDataSource {
@@ -77,20 +139,13 @@ extension StationsTableViewController: UITableViewDataSource {
         let cell = stationTable.dequeueReusableCell(withIdentifier: "HostStationsTableViewCell", for: indexPath) as! HostStationsTableViewCell
         let curr_cellname = currentStations[indexPath.row].name
         cell.configureStationCell(stationName: curr_cellname)
-        cell.backgroundView = UIImageView(image: UIImage(named: "cell-with-transparent"))
+//        cell.backgroundView = UIImageView(image: UIImage(named: "cell-with-transparent"))
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddStationViewController") as? AddStationViewController {
-            vc.stationExists = true
-            vc.station = currentStations[indexPath.row]
-            
-            
-            self.navigationController?.present(vc, animated: true)
-            
-        }
+        performSegue(withIdentifier: "AddStationSegue", sender: currentStations[indexPath.row])
     }
     
     
@@ -99,7 +154,21 @@ extension StationsTableViewController: UITableViewDataSource {
 extension StationsTableViewController: StationList {
     func listOfStations(_ stations: [Station]) {
         currentStations = stations
-        reloadStationTable()
+        
+        DispatchQueue.main.async {
+            self.stationTable.reloadData()
+            self.refreshController.endRefreshing()
+        }
     }
-    
+}
+
+extension StationsTableViewController: AddStationDelegate {
+    func didUpdateStationData() {
+        S.getStationList(self.gamecode!)
+            DispatchQueue.main.async {
+                print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
+                self.stationTable.reloadData()
+            }
+        
+    }
 }

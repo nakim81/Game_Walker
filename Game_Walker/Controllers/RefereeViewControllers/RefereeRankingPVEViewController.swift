@@ -20,7 +20,7 @@ class RefereeRankingPVEViewController: UIViewController {
     static var messages: [String] = []
     private let cellSpacingHeight: CGFloat = 1
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
-    private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private var gameCode: String = UserData.readGamecode("refereeGameCode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     

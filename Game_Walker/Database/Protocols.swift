@@ -54,6 +54,10 @@ protocol ModalViewControllerDelegate: AnyObject {
     func modalViewControllerDidRequestPush()
 }
 
+protocol AddStationDelegate: AnyObject {
+    func didUpdateStationData()
+}
+
 //MARK: - Errors
 
 enum GamecodeError: Error {
