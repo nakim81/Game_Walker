@@ -15,6 +15,8 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var nextGameButton: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
+    
     private var messages: [String] = []
     
     private let readAll = UIImage(named: "announcement")
@@ -106,6 +108,31 @@ class TimerViewController: UIViewController {
         return label
     }()
     
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
@@ -123,6 +150,7 @@ class TimerViewController: UIViewController {
         H.delegate_getHost = self
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.delegate_getTeam = self
+        configureGamecodeLabel()
         Task {
             H.getHost(gameCode)
             T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
@@ -162,10 +190,61 @@ class TimerViewController: UIViewController {
     @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
-    func configureAnnouncementbuttonImage(){
+    @IBAction func infoButtonPressed(_ sender: UIButton) {
+        showOverlay()
+    }
+    
+    private func showOverlay() {
+        let overlayViewController = OverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["press the circle to see how it changes", "check to see the members in your team", "check to see the ranking", "check to see the timer"]
+        var componentPositions: [CGPoint] = []
+        let component1Frame = timerCircle.frame
+        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.minY))
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        print(componentPositions)
+        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 4, tabBarTop: tabBarTop)
+        
+        present(overlayViewController, animated: true, completion: nil)
+    }
+
+    
+    private func configureAnnouncementbuttonImage(){
         announcementButton.setImage(readAll, for: .normal)
     }
     
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.058),
+            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.04),
+            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2)
+        ])
+    }
+    
+// MARK: - Timer
     func findStation() {
         for station in self.stationsList {
             if station.number == self.stationOrder[round - 1] {

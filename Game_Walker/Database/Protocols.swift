@@ -50,6 +50,10 @@ protocol GetHost {
     func getHost(_ host: Host)
 }
 
+protocol ModalViewControllerDelegate: AnyObject {
+    func modalViewControllerDidRequestPush()
+}
+
 protocol AddStationDelegate: AnyObject {
     func didUpdateStationData()
 }

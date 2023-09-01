@@ -37,14 +37,22 @@ class JoinGameViewController: BaseViewController {
     private func setUpTextFields() {
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
+        gamecodeTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
         usernameTextField.placeholder = storedUsername != "" ? storedUsername : "username"
+        gamecodeTextField.layer.borderWidth = 5
+        gamecodeTextField.layer.borderColor = UIColor.black.cgColor
+        gamecodeTextField.layer.cornerRadius = 12
+        usernameTextField.layer.borderWidth = 5
+        usernameTextField.layer.borderColor = UIColor.black.cgColor
+        usernameTextField.layer.cornerRadius = 12
     }
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(CreateOrJoinTeamViewController.back(sender:)))
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
@@ -63,8 +71,20 @@ class JoinGameViewController: BaseViewController {
         guard let username = usernameTextField.text else { return }
         guard let uuid = UserData.readUUID() else { return }
         
-        if (gamecode.isEmpty || gamecode == savedGameCode) && (username.isEmpty || username == savedUserName) {
-            
+        if gamecode.isEmpty && username.isEmpty {
+            if !savedGameCode.isEmpty && !savedUserName.isEmpty {
+                if (UserData.readTeam("team") != nil) {
+                    // User wants to join the game with the stored game code, username, and player object
+                    performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+                } else {
+                    // User chooses between creating or joining a team
+                    performSegue(withIdentifier: "goToPF2VC", sender: self)
+                }
+            } else {
+                alert(title: "", message: "Please enter gamecode and username")
+                return
+            }
+        } else if gamecode == savedGameCode && username == savedUserName {
             if (UserData.readTeam("team") != nil) {
                 // User wants to join the game with the stored game code, username, and player object
                 performSegue(withIdentifier: "ResumeGameSegue", sender: self)
@@ -81,7 +101,7 @@ class JoinGameViewController: BaseViewController {
                 
                 // Join the game
                 Task { @MainActor in
-                    //                    try await P.addPlayer(gamecode, player, uuid)
+                    // Try await P.addPlayer(gamecode, player, uuid)
                     do {
                         try await P.addPlayer(gamecode, player, uuid)
                         UserData.writeGamecode(gamecode, "gamecode")

@@ -117,8 +117,27 @@ extension UIViewController {
 extension UIViewController {
     func showAwardPopUp() {
         let awardViewController = AwardViewController()
-//        present(awardViewController, animated: true, completion: nil)
         self.navigationController?.pushViewController(awardViewController, animated: true)
+    }
+}
+// MARK: - WarningPopUp
+extension UIViewController {
+    func showEndGamePopUp(announcement: String, source: String, gamecode: String) {
+        let popUpViewController = EndGameViewController(announcement: announcement, source: source, gamecode: gamecode)
+        showEndGamePopUp(popUpViewController: popUpViewController)
+    }
+    
+    private func showEndGamePopUp(popUpViewController: EndGameViewController) {
+        present(popUpViewController, animated: false, completion: nil)
+    }
+    
+    func showStartGamePopUp(announcement: String, source: String, gamecode: String) {
+        let popUpViewController = StartGameViewController(announcement: announcement, source: source, gamecode: gamecode)
+        showStartGamePopUp(popUpViewController: popUpViewController)
+    }
+    
+    private func showStartGamePopUp(popUpViewController: StartGameViewController) {
+        present(popUpViewController, animated: true)
     }
 }
 // MARK: - textField

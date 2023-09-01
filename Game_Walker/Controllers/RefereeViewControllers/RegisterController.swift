@@ -38,7 +38,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
-    
     @objc override func onBackPressed() {
         performSegue(withIdentifier: "toMainVC", sender: self)
     }

@@ -1,14 +1,14 @@
 //
-//  EndGameViewController.swift
+//  startGameViewController.swift
 //  Game_Walker
 //
-//  Created by Noah Kim on 4/19/23.
+//  Created by Noah Kim on 8/29/23.
 //
 
 import Foundation
 import UIKit
 
-class EndGameViewController: UIViewController {
+class StartGameViewController: UIViewController {
     
     private let fontColor: UIColor = UIColor(red: 0.98, green: 0.204, blue: 0, alpha: 1)
     private var gameCode = ""
@@ -36,20 +36,42 @@ class EndGameViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: 25)
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
         return label
     }()
     
-    private lazy var noButton: UIButton = {
+    private lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
         // enable
-        button.setTitle("NO", for: .normal)
+        button.setTitle("Dismiss", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIColor.clear.image(), for: .normal)
+
+        // disable
+        button.setTitleColor(fontColor, for: .disabled)
+        button.setBackgroundImage(UIColor.white.image(), for: .disabled)
+
+        // layer
+        button.layer.cornerRadius = 10.0
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 3.0
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        // enable
+        button.setTitle("Confirm", for: .normal)
+        button.setTitleColor(fontColor, for: .normal)
+        button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
         // disable
         button.setTitleColor(fontColor, for: .disabled)
@@ -64,46 +86,21 @@ class EndGameViewController: UIViewController {
         return button
     }()
     
-    private lazy var yesButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
-        // enable
-        button.setTitle("YES", for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
-        button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
-        // disable
-        button.setTitleColor(.gray, for: .disabled)
-        button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-
-        // layer
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(endGame), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func closeView() {
+    @objc func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func endGame() {
-        //TODO- End Game and post it to the firebase and move to the awardViewController
-        Task {@MainActor in
-            await H.endGame(self.gameCode)
-            dismiss(animated: true, completion: nil)
-            delegate?.modalViewControllerDidRequestPush()
-        }
-        
+    @objc func closeView() {
+        dismiss(animated: true, completion: nil)
+        delegate?.modalViewControllerDidRequestPush()
     }
     
     private lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
         view.spacing = 14.0
         view.distribution = .fillEqually
+        view.addArrangedSubview(dismissButton)
+        view.addArrangedSubview(confirmButton)
         return view
     }()
     
@@ -117,7 +114,7 @@ class EndGameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         //curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
@@ -137,14 +134,8 @@ class EndGameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureButtons()
         setUpViews()
         makeConstraints()
-    }
-    
-    private func configureButtons() {
-        buttonStackView.addArrangedSubview(noButton)
-        buttonStackView.addArrangedSubview(yesButton)
     }
     
     private func setUpViews() {
