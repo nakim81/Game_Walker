@@ -50,6 +50,10 @@ protocol GetHost {
     func getHost(_ host: Host)
 }
 
+protocol AddStationDelegate: AnyObject {
+    func didUpdateStationData()
+}
+
 //MARK: - Errors
 
 enum GamecodeError: Error {
