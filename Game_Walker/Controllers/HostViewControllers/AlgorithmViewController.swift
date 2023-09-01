@@ -97,7 +97,6 @@ class AlgorithmViewController: BaseViewController {
     
     private func fetchDataAndInitialize() {
         S.delegate_stationList = self
-//        S.getStationList(gamecode)
         S.getStationList(gamecode)
         H.delegate_getHost = self
         H.getHost(gamecode)
@@ -149,7 +148,7 @@ class AlgorithmViewController: BaseViewController {
             let topCellIndexPath = IndexPath(item: 0, section: 0)
             var bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
             if smallerThanEight {
-                bottomCellIndexPath  = IndexPath(item: 0, section: collectionView.numberOfSections - 1 - verticalEmptyCells)
+                bottomCellIndexPath  = IndexPath(item: 0, section: 8 - 1 - verticalEmptyCells)
             }
             if let topAttributes = layout.layoutAttributesForItem(at: topCellIndexPath),
                let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
@@ -173,8 +172,7 @@ class AlgorithmViewController: BaseViewController {
     
     func createGrid() {
         num_stations = pvpGameCount * 2 + pveGameCount
-        var moreTeamsThanStations = 0
-        var moreStationsThanTeams = 0
+
         omittedTeamCells = hasOmittedTeamCells()
         
         if (num_stations < 8) {
@@ -194,24 +192,38 @@ class AlgorithmViewController: BaseViewController {
             excessOf = "stations"
             excessCells = num_stations - num_teams
         }
-        totalcolumn = max(num_stations, 8)
-        totalrow = max(num_rounds, 8)
+
+        totalcolumn = max(num_stations, num_teams)
+        totalrow = num_rounds
         
-//        num_cols = totalcolumn
-//        num_rows = totalrow
-        //        print(totalrow)
-        
-        for r in 0...(totalrow - 1) {
-            var curr_row = [Int]()
-            for t in 0...(totalcolumn - 1) {
-                var number = (t + (r + 1))%totalcolumn
-                if (number == 0) {
+        for r in 0..<totalrow {
+            var currRow: [Int] = []
+            
+            for t in 0..<totalcolumn {
+                var number = (t + (r + 1)) % totalcolumn
+                if number == 0 {
                     number = totalcolumn
                 }
-                curr_row.append(number)
+                
+
+                if excessOf == "stations" || excessOf == "teams" {
+                    if t >= totalcolumn - excessCells {
+                        if excessOf == "stations" {
+                            number = 0
+                        } else if excessOf == "teams" {
+                            number = -1
+                        }
+                    }
+                }
+                
+                currRow.append(number)
             }
-            grid.append(curr_row)
-            curr_row.removeAll()
+            
+            while currRow.count < 8 {
+                currRow.append(-1)
+            }
+            
+            grid.append(currRow)
         }
         
         // case when considering pvp cases
@@ -222,39 +234,13 @@ class AlgorithmViewController: BaseViewController {
         
         for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
             for i in 0..<(pvpGameCount * 2) {
-                grid[rowIndex][i] = 0
-            }
-        }
-        
-        // case when we need empty cells vertically
-        if needVerticalEmptyCells {
-            if verticalEmptyCells <= grid.count {
-                let startIndex = grid.count - verticalEmptyCells
-                
-                for index in startIndex..<grid.count {
-                    grid[index] = Array(repeating: 0, count: grid[index].count)
-                }
-            } else {
-                print("Invalid value for vertical empty cells")
-            }
-        }
-        
-        
-        // case when we need empty cells horizontally
-        if needHorizontalEmptyCells {
-            for rowIndex in 0..<grid.count {
-                let row = grid[rowIndex]
-                
-                if horizontalEmptyCells <= row.count {
-                    let startIndex = row.count - horizontalEmptyCells
-                    for index in startIndex..<row.count {
-                        grid[rowIndex][index] = -1
-                    }
-                } else {
-                    print("Invalid value for horizontal empty cells")
+                if grid[rowIndex][i]  != -1 {
+                    grid[rowIndex][i] = 0
                 }
             }
         }
+
+
         
         print("This is my grid: ", grid)
 //        grid = [[1, 2, 3, 4, 5, 6, 7, 9, 9, 10], [0, 0, 0, 0, 6, 7, 9, 8, 10, 1], [3, 4, 5, 6, 7, 8, 9, 10, 1, 2], [0, 0, 0, 0, 9, 8, 10, 1, 2, 3], [5, 6, 7, 8, 9, 10, 1, 2, 3, 4], [0, 0, 0, 0, 10, 1, 2, 3, 4, 5], [7, 8, 9, 10, 1, 2, 3, 4, 5, 6], [0, 0, 0, 0, 2, 3, 4, 5, 6, 7], [9, 10, 1, 2, 3, 4, 5, 6, 7, 8]]

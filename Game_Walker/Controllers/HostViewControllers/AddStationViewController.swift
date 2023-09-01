@@ -88,7 +88,7 @@ class AddStationViewController: BaseViewController {
             gamepoints = station!.points
             
             pvpnotchosen = false
-            if ((station?.pvp) != nil) {
+            if (station?.pvp == true) {
                 pvpButton.sendActions(for: .touchUpInside)
                 isPvp = true
                 modified = true
@@ -393,7 +393,7 @@ extension AddStationViewController: RefereeList {
         for referee in referees {
             if (!referee.assigned) {
                 availableReferees.append(referee)
-                print(availableReferees)
+//                print(availableReferees)
             }
             allReferees.append(referee)
         }
