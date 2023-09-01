@@ -30,6 +30,7 @@ class WaitingController: BaseViewController {
     private var updatedTeamOrder : [Team] = []
     
     override func viewDidLoad() {
+        configureNavItem()
         callProtocols()
         Task {
             S.getStationList(gameCode)
@@ -39,6 +40,19 @@ class WaitingController: BaseViewController {
         makeConstraints()
         animateWaitingScreen()
         super.viewDidLoad()
+    }
+    
+    private func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(WaitingController.onBackPressed))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc override func onBackPressed() {
+        R.removeReferee(gameCode, referee.uuid)
+        UserDefaults.standard.removeObject(forKey: "refereeGameCode")
+        UserDefaults.standard.removeObject(forKey: "refereeName")
+        performSegue(withIdentifier: "toRegister", sender: self)
     }
     
 // MARK: - SetTeamOrder
@@ -86,7 +100,7 @@ class WaitingController: BaseViewController {
         }
     }
     
-    //MARK: - Animating Screen
+//MARK: - Animating Screen
     func animateWaitingScreen() {
         if timer != nil {
             return
@@ -177,7 +191,7 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
                 self.station = station
             }
         }
-        //setTeamOrder()
+        //self.setTeamOrder()
     }
     
     func updateHost(_ host: Host) {
@@ -185,7 +199,7 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
         if self.algorithm != [] {
             //T.getTeamList(gameCode)
             //S.getStationList(gameCode)
-            setTeamOrder()
+            self.setTeamOrder()
         }
     }
     

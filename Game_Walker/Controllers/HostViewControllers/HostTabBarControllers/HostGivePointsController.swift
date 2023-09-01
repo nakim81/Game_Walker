@@ -27,41 +27,9 @@ class HostGivePointsController : UIViewController {
     }
     
     override func viewDidLoad() {
+        addConstraints()
+        addSubViews()
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        self.view.addSubview(containerView)
-        self.view.addSubview(givepointsLabel)
-        self.view.bringSubviewToFront(givepointsLabel)
-        self.view.addSubview(closeButton)
-        self.view.addSubview(stepper)
-        self.view.addSubview(confirmButton)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.widthAnchor.constraint(equalToConstant: 338).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: 338).isActive = true
-        containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        containerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 220).isActive = true
-        givepointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        givepointsLabel.widthAnchor.constraint(equalToConstant: 267.74).isActive = true
-        givepointsLabel.heightAnchor.constraint(equalToConstant: 61).isActive = true
-        givepointsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        givepointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 55).isActive = true
-        stepper.translatesAutoresizingMaskIntoConstraints = false
-        stepper.widthAnchor.constraint(equalToConstant: 265).isActive = true
-        stepper.heightAnchor.constraint(equalToConstant: 134).isActive = true
-        stepper.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        stepper.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 116).isActive = true
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        closeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 284).isActive = true
-        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        confirmButton.translatesAutoresizingMaskIntoConstraints = false
-        confirmButton.widthAnchor.constraint(equalToConstant: 175.8).isActive = true
-        confirmButton.heightAnchor.constraint(equalToConstant: 57).isActive = true
-        confirmButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        confirmButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 265).isActive = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popupClosed))
-        self.view.addGestureRecognizer(tapGesture)
     }
     
     private lazy var containerView: UIView = {
@@ -73,7 +41,7 @@ class HostGivePointsController : UIViewController {
         return view
     }()
     
-    private lazy var givepointsLabel: UILabel = {
+    private lazy var givePointsLabel: UILabel = {
         var view = UILabel()
         view.frame = CGRect(x: 0, y: 0, width: 267.74, height: 61)
         let image0 = UIImage(named: "white!give points 1.png")?.cgImage
@@ -113,12 +81,48 @@ class HostGivePointsController : UIViewController {
     
     @objc func buttonTapped() {
         Task { @MainActor in
-            try await T.givePoints(gameCode, team.name, Int(stepper.value))
+            await T.givePoints(gameCode, team.name, Int(stepper.value))
         }
         self.presentingViewController?.dismiss(animated: true)
     }
     
     @objc func popupClosed() {
         self.presentingViewController?.dismiss(animated: true)
+    }
+    
+    func addConstraints() {
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.widthAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.416).isActive = true
+        containerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.416).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        givePointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        givePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.714).isActive = true
+        givePointsLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.15).isActive = true
+        givePointsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: containerView.bounds.width * 0.1).isActive = true
+        givePointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: containerView.bounds.height * 0.12).isActive = true
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125).isActive = true
+        closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.125).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: containerView.bounds.width * 0.85).isActive = true
+        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: containerView.bounds.height * 0.0110).isActive = true
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        stepper.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8).isActive = true
+        stepper.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.35).isActive = true
+        stepper.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        stepper.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        confirmButton.translatesAutoresizingMaskIntoConstraints = false
+        confirmButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.469).isActive = true
+        confirmButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.4).isActive = true
+        confirmButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        confirmButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: containerView.bounds.height * 0.6).isActive = true
+    }
+    
+    func addSubViews() {
+        self.view.addSubview(containerView)
+        containerView.addSubview(givePointsLabel)
+        containerView.addSubview(closeButton)
+        containerView.addSubview(stepper)
+        containerView.addSubview(confirmButton)
     }
 }
