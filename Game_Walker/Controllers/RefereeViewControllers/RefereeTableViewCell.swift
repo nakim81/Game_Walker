@@ -11,6 +11,7 @@ import UIKit
 class RefereeTableViewCell: UITableViewCell {
     
     static let identifier = "RefereeTableViewCell"
+    private let blindImage = UIImage(named: "blindScore")
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -118,7 +119,9 @@ class RefereeTableViewCell: UITableViewCell {
         if (showScore) {
             scoreLabel.textColor = .black
         } else {
-            scoreLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.35)
+            scoreLabel.text = ""
+            scoreLabel.backgroundColor = UIColor(patternImage: blindImage!)
+            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.5).isActive = true
         }
     }
 

@@ -26,6 +26,17 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         gamecodeTextField.delegate = self
         gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "game code #"
         usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "game id text"
+        configureNavItem()
+    }
+    
+    private func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(back))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "ToMainVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

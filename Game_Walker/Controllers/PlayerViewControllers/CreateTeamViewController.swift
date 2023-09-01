@@ -38,6 +38,31 @@ class CreateTeamViewController: BaseViewController {
         }
     }
     
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var selectedIndex : Int?
     
     override func viewDidLoad() {
@@ -46,7 +71,7 @@ class CreateTeamViewController: BaseViewController {
         teamNameTextField.delegate = self
         configureCollectionView()
         configureDelegates()
-        //        S.getStationList(gameCode)
+        configureGamecodeLabel()
         self.stationList = [Station(name: "game1", number: 1, pvp: true), Station(name: "game2", number: 2, pvp: true), Station(name: "game3", number: 3, pvp: true)]
         print(self.stationList)
         print(self.algorithm, self.algorithm.count)
@@ -69,33 +94,15 @@ class CreateTeamViewController: BaseViewController {
         collectionView.clipsToBounds = false
     }
     
-    ///    //methods for generating random 2d array for local testing
-    //    func generateRandomNonRepeatingArray(_ count: Int, _ num: Int) -> [Int] {
-    //        var array = Array(0..<count)
-    //        array.shuffle()
-    //        if num % 2 == 0 {
-    //            for i in 0..<count {
-    //                if array[i] == 3 {
-    //                    array[i] = -1
-    //                    break
-    //                }
-    //            }
-    //        }
-    //        return array
-    //    }
-    //
-    ///    //methods for generating random 2d array for local testing
-    //    func generateRandomNonRepeating2DArray(rows: Int, columns: Int) -> [[Int]] {
-    //        var randomArray = [[Int]]()
-    //        var num = 0
-    //        for _ in 0..<rows {
-    //            let row = generateRandomNonRepeatingArray(columns, num)
-    //            randomArray.append(row)
-    //            num += 1
-    //        }
-    //
-    //        return randomArray
-    //    }
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.058),
+            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.04),
+            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2)
+        ])
+    }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")

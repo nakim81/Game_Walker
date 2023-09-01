@@ -52,12 +52,14 @@ class HostRankingViewcontroller: UIViewController {
     
     @IBAction func switchBtnPressed(_ sender: CustomSwitchButton) {
         //Update showScoreBoard of host on the server
-        //leaderBoard.reloadData()
     }
     
     @IBAction func endGameBtnPressed(_ sender: UIButton) {
         //present end game warning popup
-        showWarningPopUp(announcement: "", source: "")
+//        showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        endGamePopUp.delegate = self
+        present(endGamePopUp, animated: true)
     }
     
     private func setDelegates() {
@@ -143,14 +145,9 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
       leaderBoard.reloadData()
   }
 }
-// MARK: - WarningViewPopUp
-extension HostRankingViewcontroller {
-    func showWarningPopUp(announcement: String, source: String) {
-        let popUpViewController = endGameViewController(announcement: announcement, source: source)
-        showWarningPopUp(popUpViewController: popUpViewController)
-    }
-    
-    private func showWarningPopUp(popUpViewController: endGameViewController) {
-        present(popUpViewController, animated: false, completion: nil)
+// MARK: - ModalViewControllerDelegate
+extension HostRankingViewcontroller: ModalViewControllerDelegate {
+    func modalViewControllerDidRequestPush() {
+        self.showAwardPopUp()
     }
 }

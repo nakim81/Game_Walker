@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,16 @@
         </array>
     </customFonts>
     <scenes>
+        <!--MainViewController-->
+        <scene sceneID="T5X-D5-ccl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainViewController" id="lZX-1V-dLV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="5gF-DT-tGS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TxY-6b-zjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2907" y="129"/>
+        </scene>
         <!--Register Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -116,6 +126,7 @@
                         <segue destination="d9X-u1-YmW" kind="show" identifier="goToWait" id="ylf-AR-8el"/>
                         <segue destination="4eu-zS-s9n" kind="show" identifier="toPVE" id="qww-74-glH"/>
                         <segue destination="R55-PH-MbY" kind="show" identifier="toPVP" id="SEr-t1-evM"/>
+                        <segue destination="lZX-1V-dLV" kind="show" identifier="ToMainVC" id="ABp-UB-nbC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

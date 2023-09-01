@@ -83,8 +83,10 @@
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
+		FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */; };
 		FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */; };
 		FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC18D25A2A9899E100E6B144 /* Assets.xcassets */; };
+		FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */; };
 		FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
@@ -189,8 +191,10 @@
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC18D25A2A9899E100E6B144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,13 @@
 		FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Bold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Bold.ttf"; sourceTree = "<group>"; };
+		FCF6A5F82AA0A45A001683EA /* GemunuLibre-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Light.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Light.ttf"; sourceTree = "<group>"; };
+		FCF6A5F92AA0A45A001683EA /* GemunuLibre-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-ExtraLight.ttf"; path = "Supporting Files/Fonts/GemunuLibre-ExtraLight.ttf"; sourceTree = "<group>"; };
+		FCF6A5FA2AA0A45A001683EA /* GemunuLibre-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-ExtraBold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-ExtraBold.ttf"; sourceTree = "<group>"; };
+		FCF6A5FB2AA0A45A001683EA /* GemunuLibre-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Regular.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Regular.ttf"; sourceTree = "<group>"; };
+		FCF6A5FC2AA0A45A001683EA /* GemunuLibre-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Medium.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Medium.ttf"; sourceTree = "<group>"; };
+		FCF6A5FD2AA0A45A001683EA /* GemunuLibre-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-SemiBold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-SemiBold.ttf"; sourceTree = "<group>"; };
 		FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingViewcontroller.swift; sourceTree = "<group>"; };
 		FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTimerViewController.swift; sourceTree = "<group>"; };
 		FCF6FB47298A9FC700473FCE /* HostTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostTabBarController.swift; sourceTree = "<group>"; };
@@ -298,6 +309,7 @@
 				FC152E6D29C4C423007A85CA /* HostTabBarControllers */,
 				FC44B65729B76B480072946F /* HostMessageViews */,
 				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
+				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -405,6 +417,13 @@
 		FC1AE24D28E9769B00D8C9D9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */,
+				FCF6A5FA2AA0A45A001683EA /* GemunuLibre-ExtraBold.ttf */,
+				FCF6A5F92AA0A45A001683EA /* GemunuLibre-ExtraLight.ttf */,
+				FCF6A5F82AA0A45A001683EA /* GemunuLibre-Light.ttf */,
+				FCF6A5FC2AA0A45A001683EA /* GemunuLibre-Medium.ttf */,
+				FCF6A5FB2AA0A45A001683EA /* GemunuLibre-Regular.ttf */,
+				FCF6A5FD2AA0A45A001683EA /* GemunuLibre-SemiBold.ttf */,
 				A1A4CD2F2A371C0400704BF8 /* Dosis-Bold.ttf */,
 				A1A4CD302A371C0400704BF8 /* Dosis-ExtraBold.ttf */,
 				A1A4CD322A371C0500704BF8 /* Dosis-ExtraLight.ttf */,
@@ -485,6 +504,7 @@
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */,
 				FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */,
+				FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -649,6 +669,8 @@
 				A1A4CD202A371AA100704BF8 /* Host_Database.swift in Sources */,
 				61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */,
 				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
+				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
+				FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */,
 				FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */,
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,

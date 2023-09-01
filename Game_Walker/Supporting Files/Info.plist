@@ -4,6 +4,13 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>GemunuLibre-Bold.ttf</string>
+		<string>GemunuLibre-ExtraBold.ttf</string>
+		<string>GemunuLibre-ExtraLight.ttf</string>
+		<string>GemunuLibre-Light.ttf</string>
+		<string>GemunuLibre-Medium.ttf</string>
+		<string>GemunuLibre-Regular.ttf</string>
+		<string>GemunuLibre-SemiBold.ttf</string>
 		<string>Dosis-Bold.ttf</string>
 		<string>Dosis-ExtraBold.ttf</string>
 		<string>Dosis-ExtraLight.ttf</string>

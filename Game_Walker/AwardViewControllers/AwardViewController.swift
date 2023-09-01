@@ -234,7 +234,7 @@ class AwardViewController: UIViewController {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
+    private lazy var secondAndThirdPlaceStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -243,6 +243,61 @@ class AwardViewController: UIViewController {
         stackView.addArrangedSubview(thirdPlaceView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var logoImage: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "logo")
+        
+        return view
+    }()
+    
+    private lazy var homeBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "homeBtn"), for: .normal)
+        button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
+        button.backgroundColor = .clear
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var navStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .equalSpacing
+        view.spacing = 0
+        view.addArrangedSubview(logoImage)
+        view.addArrangedSubview(gameCodeLabel)
+        view.addArrangedSubview(homeBtn)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -255,7 +310,6 @@ class AwardViewController: UIViewController {
         T.delegate_teamList = self
         T.getTeamList(gameCode)
         configureViews()
-        print(teamList)
         Task {
             try await Task.sleep(nanoseconds: 300_000_000)
             self.firstPlace = teamList.first
@@ -271,8 +325,9 @@ class AwardViewController: UIViewController {
         view.addSubview(containerView)
         containerView.addSubview(congratulationLabel)
         containerView.addSubview(firstPlaceView)
-        containerView.addSubview(stackView)
+        containerView.addSubview(secondAndThirdPlaceStackView)
         containerView.addSubview(leaderBoard)
+        containerView.addSubview(navStackView)
         leaderBoard.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -283,24 +338,29 @@ class AwardViewController: UIViewController {
             containerView.topAnchor.constraint(equalTo: self.view.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
+            navStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            navStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
+            navStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.05),
+            NSLayoutConstraint(item: navStackView, attribute: .centerY, relatedBy: .equal, toItem: containerView, attribute: .centerY, multiplier: 0.2, constant: 0),
+            
             congratulationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             congratulationLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
             congratulationLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.0658762),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .centerY, relatedBy: .equal, toItem: containerView, attribute: .centerY, multiplier: 0.2, constant: 0),
+            NSLayoutConstraint(item: congratulationLabel, attribute: .top, relatedBy: .equal, toItem: navStackView, attribute: .bottom, multiplier: 1.1, constant: 0),
             
             firstPlaceView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             firstPlaceView.widthAnchor.constraint(equalTo: congratulationLabel.widthAnchor, multiplier: 0.47),
             firstPlaceView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.25),
-            NSLayoutConstraint(item: firstPlaceView, attribute: .top, relatedBy: .equal, toItem: congratulationLabel, attribute: .bottom, multiplier: 1.2, constant: 0),
+            NSLayoutConstraint(item: firstPlaceView, attribute: .top, relatedBy: .equal, toItem: congratulationLabel, attribute: .bottom, multiplier: 0.9, constant: 0),
             
-            stackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.64),
-            stackView.heightAnchor.constraint(equalTo: firstPlaceView.heightAnchor, multiplier: 0.7),
-            NSLayoutConstraint(item: stackView, attribute: .top, relatedBy: .equal, toItem: firstPlaceView, attribute: .bottom, multiplier: 1.02, constant: 0),
+            secondAndThirdPlaceStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            secondAndThirdPlaceStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.64),
+            secondAndThirdPlaceStackView.heightAnchor.constraint(equalTo: firstPlaceView.heightAnchor, multiplier: 0.7),
+            NSLayoutConstraint(item: secondAndThirdPlaceStackView, attribute: .top, relatedBy: .equal, toItem: firstPlaceView, attribute: .bottom, multiplier: 1.02, constant: 0),
             
             leaderBoard.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             leaderBoard.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.712468),
-            leaderBoard.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 15),
+            leaderBoard.topAnchor.constraint(equalTo: secondAndThirdPlaceStackView.bottomAnchor, constant: 15),
             leaderBoard.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0)
         ])
     }
@@ -344,6 +404,14 @@ class AwardViewController: UIViewController {
         }
         newList.sort(by: order)
         return newList
+    }
+    
+    @objc func callMainVC() {
+        audioPlayerManager.stop()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let storyboardViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            self.navigationController?.pushViewController(storyboardViewController, animated: true)
+        }
     }
     
     init() {

@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,16 @@
         </array>
     </customFonts>
     <scenes>
+        <!--MainViewController-->
+        <scene sceneID="l6v-tF-t0M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainViewController" id="mef-gJ-a9R" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LVe-7w-c8E"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cj6-jD-uHD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1359" y="142"/>
+        </scene>
         <!--Host Create Or Join View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -60,6 +70,7 @@
                         <outlet property="joinButton" destination="cf7-AC-7yj" id="SOQ-le-voL"/>
                         <segue destination="4gK-PM-WO8" kind="show" identifier="HostGamecodeSegue" id="AVX-s8-MVB"/>
                         <segue destination="1L0-Oz-afr" kind="show" identifier="CreateGameSegue" id="Yeq-Vg-rew"/>
+                        <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="YyJ-Bo-JHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -272,7 +283,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="139.5" y="375.5" width="127.5" height="23.5"/>
+                                        <rect key="frame" x="149" y="375.5" width="108" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -460,13 +471,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="34.5" y="4.5" width="47" height="49"/>
+                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="4.5" width="47" height="49"/>
+                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -505,13 +516,13 @@
                                         <rect key="frame" x="87" y="-4.5" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="34.5" y="4" width="47" height="49"/>
+                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="100" y="4" width="47" height="49"/>
+                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -777,7 +788,7 @@
         <!--Host Timer View Controller-->
         <scene sceneID="wco-y0-K7R">
             <objects>
-                <viewController id="XpD-HK-1hf" customClass="HostTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HostTimerViewController" id="XpD-HK-1hf" customClass="HostTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a7a-eq-zES">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -848,33 +859,16 @@
                         <outlet property="announcementBtn" destination="xgH-dT-cdH" id="G7F-Lk-uSZ"/>
                         <outlet property="pauseOrPlayButton" destination="NaI-KP-VEh" id="WSS-oX-zDp"/>
                         <outlet property="settingBtn" destination="C4W-ai-af5" id="zeH-wO-2lG"/>
-                        <segue destination="vz9-ix-edq" kind="presentation" identifier="toEnd" id="gEO-cn-pHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kiu-WL-Pfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5257" y="142"/>
         </scene>
-        <!--End Game View Controller-->
-        <scene sceneID="5fS-Gi-FRU">
-            <objects>
-                <viewController id="vz9-ix-edq" customClass="endGameViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uUh-lj-sN5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="QX7-e7-rjs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="8fi-k1-0VF"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fUR-ra-AoW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6381" y="142"/>
-        </scene>
         <!--Host Ranking Viewcontroller-->
         <scene sceneID="iWW-qw-fZX">
             <objects>
-                <viewController id="L51-9x-cCC" customClass="HostRankingViewcontroller" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HostRankingViewController" id="L51-9x-cCC" customClass="HostRankingViewcontroller" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8nu-hd-YkZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -980,7 +974,7 @@
         <!--Host Tab Bar Controller-->
         <scene sceneID="nh8-B6-gQg">
             <objects>
-                <tabBarController id="iWj-Yx-nuv" customClass="HostTabBarController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HostTabBarController" id="iWj-Yx-nuv" customClass="HostTabBarController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="E6a-lZ-TVw"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZTp-WJ-0au">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>

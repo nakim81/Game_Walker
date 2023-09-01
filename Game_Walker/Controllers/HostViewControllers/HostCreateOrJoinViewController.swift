@@ -10,10 +10,22 @@ import UIKit
 class HostCreateOrJoinViewController: BaseViewController {
 
     @IBOutlet weak var joinButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         T.delegates.append(self)
+        configureNavItem()
+    }
+    
+    private func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(back))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "ToMainVC", sender: self)
     }
 
     @IBAction func createButtonPressed(_ sender: UIButton) {

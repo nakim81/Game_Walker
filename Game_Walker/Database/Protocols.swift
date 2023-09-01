@@ -50,6 +50,10 @@ protocol GetHost {
     func getHost(_ host: Host)
 }
 
+protocol ModalViewControllerDelegate: AnyObject {
+    func modalViewControllerDidRequestPush()
+}
+
 //MARK: - Errors
 
 enum GamecodeError: Error {
