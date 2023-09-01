@@ -19,16 +19,15 @@ class RefereePVEController: BaseViewController {
     private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
     private var team : Team = Team()
-    private var teamOrder : [Team] = [Team(gamecode: "333333", name: "Team 1", number: 1, players: [], points: 0, stationOrder: [], iconName: "iconAir"),
-                                      Team(gamecode: "333333", name: "Team 3", number: 3, players: [], points: 0, stationOrder: [], iconName: "iconBlue"),
-                                      Team(gamecode: "333333", name: "Team 4", number: 4, players: [], points: 0, stationOrder: [], iconName: "iconBoy"), Team(gamecode: "333333", name: "Team 2", number: 2, players: [], points: 0, stationOrder: [], iconName: "iconBear")]
+    private var teams : [Team] = [Team()]
+    private var teamOrder : [Team] = [Team()]
     
-    private var stationUuid : String = ""
     private var points : Int = 0
     private var name : String = ""
     private var location : String = ""
     private var rule : String = ""
     
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     private let audioPlayerManager = AudioPlayerManager()
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -52,15 +51,14 @@ class RefereePVEController: BaseViewController {
     
     override func viewDidLoad() {
         callProtocols()
+        T.getTeamList(gameCode)
         H.getHost(gameCode)
-        S.getStationList(gameCode)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         super.viewDidLoad()
     }
 
 //MARK: - Messages
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
@@ -103,7 +101,7 @@ class RefereePVEController: BaseViewController {
         
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: "", message: "The Team doesn't exist")
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
@@ -159,6 +157,8 @@ class RefereePVEController: BaseViewController {
         label.attributedText = attributedText
         label.numberOfLines = 3
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
     
@@ -297,9 +297,21 @@ class RefereePVEController: BaseViewController {
             .font: UIFont(name: "Dosis-Regular", size: 25) ?? UIFont.systemFont(ofSize: 25),
             .foregroundColor: UIColor.black
         ]
-        let teamNameAttributedString = NSAttributedString(string: teamName + "\n", attributes: teamNameAttributes)
+        let teamNameAttributedString = NSAttributedString(string: teamName, attributes: teamNameAttributes)
         attributedText.append(teamNameAttributedString)
         self.teamInfoLabel.attributedText = attributedText
+    }
+    
+    func makeScoreLabel() {
+        let attributedText = NSMutableAttributedString()
+        let score = "\(self.teamOrder[self.round - 1].points)"
+        let scoreAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 50) ?? UIFont.boldSystemFont(ofSize: 50),
+            .foregroundColor: UIColor.black
+        ]
+        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
+        attributedText.append(scoreAttributedString)
+        self.scoreLabel.attributedText = attributedText
     }
     
     func addSubviews() {
@@ -330,7 +342,7 @@ class RefereePVEController: BaseViewController {
         iconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
         iconButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
         iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.246).isActive = true
+        iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.240).isActive = true
         
         teamInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         teamInfoLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.464).isActive = true
@@ -370,38 +382,44 @@ class RefereePVEController: BaseViewController {
                 return
             }
             if !strongSelf.isPaused {
-                if strongSelf.rounds < 1 {
-                    strongSelf.audioPlayerManager.stop()
-                    timer.invalidate()
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
-//                if strongSelf.remainingTime <= 5 {
-//                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-//                }
+                if strongSelf.remainingTime <= 3 {
+                    strongSelf.impactFeedbackGenerator.impactOccurred()
+                }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
                         strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.moving = false
                     } else {
-                        strongSelf.time = strongSelf.moveSeconds
-                        strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
-                        strongSelf.moving = true
-                        strongSelf.winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                            gestureRecognizer.isEnabled = true
-                        }
-                        strongSelf.winButton.image = UIImage(named: "Win Blue Button")
-                        strongSelf.loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                            gestureRecognizer.isEnabled = true
-                        }
-                        strongSelf.loseButton.image = UIImage(named: "Lose Yellow Button")
-                        // Testing Purpose
-                        strongSelf.round += 1
-                        strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
-                        strongSelf.team = strongSelf.teamOrder[strongSelf.round]
-                        //
-                        strongSelf.makeTeamInfoLabel()
-                        strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
                         strongSelf.rounds -= 1
+                        if strongSelf.rounds < 1 {
+                            strongSelf.audioPlayerManager.stop()
+                            timer.invalidate()
+                        }
+                        else {
+                            strongSelf.time = strongSelf.moveSeconds
+                            strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
+                            strongSelf.moving = true
+                            strongSelf.winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                                gestureRecognizer.isEnabled = true
+                            }
+                            strongSelf.winButton.image = UIImage(named: "Win Blue Button")
+                            strongSelf.loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                                gestureRecognizer.isEnabled = true
+                            }
+                            strongSelf.loseButton.image = UIImage(named: "Lose Yellow Button")
+                            // Testing Purpose
+                            strongSelf.round += 1
+                            strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
+                            strongSelf.team = strongSelf.teamOrder[strongSelf.round-1]
+                            //
+                            strongSelf.makeScoreLabel()
+                            strongSelf.makeTeamInfoLabel()
+                            strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
+                        }
                     }
                 }
                 else {
@@ -446,32 +464,42 @@ class RefereePVEController: BaseViewController {
             let second = (seconds - remainder) % 60
             self.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
         }
-        self.rounds = self.rounds - self.round
+        self.remainingTime = self.remainingTime - t
+        self.rounds = self.rounds - self.round + 1
+    }
+    //MARK: - Score Update
+    func updateScore() {
+        for old_team in self.teamOrder {
+            for updated_team in self.teams {
+                if old_team.number == updated_team.number && old_team.points != updated_team.points {
+                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
+                        self.teamOrder[index] = updated_team
+                    }
+                    break;
+                }
+            }
+        }
+        self.team = self.teamOrder[self.round - 1]
+        makeScoreLabel()
     }
 }
 
 //MARK: - Protocols
-extension RefereePVEController: GetStation, StationList, GetHost, TeamUpdateListener, HostUpdateListener {
-    func getStation(_ station: Station) {
-        self.teamOrder = station.teamOrder
-        self.team = self.teamOrder[self.round - 1]
-        self.name = station.name
-        self.location = station.place
-        self.rule = station.description
-        self.points = station.points
-        addSubviews()
-        addConstraints()
-        calculateTime()
-        runTimer()
-    }
-    
+extension RefereePVEController: StationList, GetHost, TeamList, TeamUpdateListener, HostUpdateListener {
     func listOfStations(_ stations: [Station]) {
         for station in stations {
             if station.name == referee.stationName {
-                self.stationUuid = station.uuid
-                S.getStation(gameCode, station.uuid)
+                self.teamOrder = station.teamOrder
+                self.name = station.name
+                self.location = station.place
+                self.rule = station.description
+                self.points = station.points
+                break;
             }
         }
+        updateScore()
+        addSubviews()
+        addConstraints()
     }
     
     func getHost(_ host: Host) {
@@ -482,8 +510,16 @@ extension RefereePVEController: GetStation, StationList, GetHost, TeamUpdateList
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
         self.messages = host.announcements
+        calculateTime()
+        runTimer()
+    }
+    
+    func listOfTeams(_ teams: [Team]) {
+        self.teams = teams
+        S.getStationList(gameCode)
     }
     
     func updateTeams(_ teams: [Team]) {
@@ -511,8 +547,8 @@ extension RefereePVEController: GetStation, StationList, GetHost, TeamUpdateList
     func callProtocols() {
         H.delegate_getHost = self
         H.delegates.append(self)
-        S.delegate_getStation = self
         S.delegate_stationList = self
+        T.delegate_teamList = self
         T.delegates.append(self)
     }
 }

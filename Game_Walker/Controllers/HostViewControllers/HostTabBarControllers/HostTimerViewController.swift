@@ -32,6 +32,7 @@ class HostTimerViewController: UIViewController {
     private var isPaused = true
     private var t : Int = 0
     
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
@@ -232,6 +233,9 @@ class HostTimerViewController: UIViewController {
                 if strongSelf.remainingTime <= 5 {
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
+                if strongSelf.remainingTime <= 3 {
+                    //strongSelf.impactFeedbackGenerator.impactOccurred()
+                }
                 if strongSelf.time! < 1 {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
@@ -252,6 +256,7 @@ class HostTimerViewController: UIViewController {
                     }
                 }
                 strongSelf.time! -= 1
+                strongSelf.remainingTime -= 1
                 let minute = strongSelf.time!/60
                 let second = strongSelf.time! % 60
                 strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
@@ -263,7 +268,6 @@ class HostTimerViewController: UIViewController {
                 strongSelf.totalTimeLabel.attributedText = attributedString
             }
         }
-        
     }
     
     func calculateTime() {

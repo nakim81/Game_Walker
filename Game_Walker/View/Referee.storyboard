@@ -14,6 +14,16 @@
         </array>
     </customFonts>
     <scenes>
+        <!--MainViewController-->
+        <scene sceneID="UMM-DO-slF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="MainViewController" id="dnK-uh-cbX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Drh-tX-SsD"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="185-jm-rRl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2918" y="142"/>
+        </scene>
         <!--Register Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -36,16 +46,37 @@
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fe6-Ju-w32">
+                                                <rect key="frame" x="34" y="179.5" width="252" height="17.5"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="※">
+                                                        <attributes>
+                                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                                            <font key="NSOriginalFont" size="13" name="Dosis-Bold"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" Game Code will be provided by the host.">
+                                                        <attributes>
+                                                            <font key="NSFont" size="13" name="Dosis-Bold"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="R2P-Hb-2ch" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="0.7" id="2Ra-GF-ezy"/>
                                             <constraint firstItem="4M3-nc-0rD" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.433" id="2a8-Pw-XHG"/>
                                             <constraint firstItem="4M3-nc-0rD" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="1.4" id="4jr-OC-mSL"/>
+                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.09" id="Au3-2Q-jLg"/>
                                             <constraint firstItem="R2P-Hb-2ch" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="IEg-Bt-dMW"/>
+                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="JHg-sz-Zs2"/>
                                             <constraint firstItem="4M3-nc-0rD" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="Uhq-ch-jGO"/>
                                             <constraint firstItem="R2P-Hb-2ch" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.472" id="aAv-4l-VFb"/>
                                             <constraint firstItem="R2P-Hb-2ch" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.175" id="iXS-5y-Yv0"/>
+                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.7875" id="kH1-tb-0sE"/>
+                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="1.9" id="mtn-7B-DVJ"/>
                                             <constraint firstItem="4M3-nc-0rD" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.76" id="yoT-Q0-u8t"/>
                                         </constraints>
                                     </view>
@@ -116,6 +147,7 @@
                         <segue destination="d9X-u1-YmW" kind="show" identifier="goToWait" id="ylf-AR-8el"/>
                         <segue destination="4eu-zS-s9n" kind="show" identifier="toPVE" id="qww-74-glH"/>
                         <segue destination="R55-PH-MbY" kind="show" identifier="toPVP" id="SEr-t1-evM"/>
+                        <segue destination="dnK-uh-cbX" kind="show" identifier="toMainVC" animates="NO" id="DUG-by-QlL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -136,6 +168,7 @@
                     <connections>
                         <segue destination="4eu-zS-s9n" kind="show" identifier="goToPVE" id="nu7-bb-fST"/>
                         <segue destination="R55-PH-MbY" kind="show" identifier="goToPVP" id="S3m-98-REn"/>
+                        <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="prp-YP-ubG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJ1-28-Y2a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -505,7 +538,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="S3m-98-REn"/>
-        <segue reference="qww-74-glH"/>
+        <segue reference="nu7-bb-fST"/>
         <segue reference="GxM-Ra-Tyo"/>
         <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>

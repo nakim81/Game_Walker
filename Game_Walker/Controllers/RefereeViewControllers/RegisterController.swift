@@ -19,18 +19,28 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedStation: Station?
     private var pvp : Bool?
     private let audioPlayerManager = AudioPlayerManager()
-    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
     override func viewDidLoad() {
+        configureNavItem()
         callProtocols()
         if storedGameCode != "" {
             S.getStationList(storedGameCode)
         }
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.delegate = self
-        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "game code #"
-        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "game id text"
+        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
+        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
         super.viewDidLoad()
+    }
+    
+    private func configureNavItem() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc override func onBackPressed() {
+        performSegue(withIdentifier: "toMainVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -52,12 +62,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             if storedGameCode.isEmpty && storedRefereeName.isEmpty {
                 if !gameCode.isEmpty && !name.isEmpty {
                     let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                    print("A")
                     Task { @MainActor in
                         do {
                             try await R.addReferee(gameCode, newReferee, refereeUserID)
-                        } catch GamecodeError.invalidGamecode {
-                            alert(title: "", message: "Invalid GameCode")
+                        } catch GamecodeError.invalidGamecode(let text) {
+                            alert(title: "Invalid GameCode", message: text)
                             return
                         }
                         UserData.writeGamecode(gameCode, "refereeGameCode")
@@ -72,7 +81,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             // Rejoining the game.
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
-                print("B")
                 if oldReferee.assigned {
                     if self.pvp! {
                         performSegue(withIdentifier: "toPVP", sender: self)
@@ -87,12 +95,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             else if (gameCode != storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
-                print("C")
                 Task { @MainActor in
                     do {
                         try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GamecodeError.invalidGamecode {
-                        alert(title: "", message: "Invalid GameCode")
+                    } catch GamecodeError.invalidGamecode(let text) {
+                        alert(title: "Invalid GameCode", message: text)
                         return
                     }
                     UserData.writeGamecode(gameCode, "refereeGameCode")
@@ -105,12 +112,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name != storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
-                print("D")
                 Task { @MainActor in
                     do {
                         try await R.modifyName(storedGameCode, refereeUserID, name)
-                    } catch GamecodeError.invalidGamecode {
-                        alert(title: "", message: "Invalid GameCode")
+                    } catch GamecodeError.invalidGamecode(let text) {
+                        alert(title: "Invalid GameCode", message: text)
                         return
                     }
                 }
@@ -130,12 +136,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             //Joining a completely new game with a different name on the same machine.
             else {
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                print("E")
                 Task { @MainActor in
                     do {
                         try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GamecodeError.invalidGamecode {
-                        alert(title: "", message: "Invalid GameCode")
+                    } catch GamecodeError.invalidGamecode(let text) {
+                        alert(title: "Invalid GameCode", message: text)
                         return
                     }
                     UserData.writeGamecode(gameCode, "refereeGameCode")
