@@ -432,7 +432,7 @@ class AlgorithmViewController: BaseViewController {
                             if scannedRed || scanForRedVertically(inColumn: column, with: cell.number!) {
                                 cell.makeRedWarning()
                             } else {
-                                cell.makeOrangeWarning()
+                                cell.makeYellowWarning()
                             }
                         }
                         
@@ -500,6 +500,7 @@ class AlgorithmViewController: BaseViewController {
     
     func updatePvpCellDuplicates(_ duplicates: [[Int]]) {
         for (pairIndex, duplicateValues) in duplicates.enumerated() {
+            var indexPathsByNumber = [Int: Set<IndexPath>]()
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
             
@@ -510,17 +511,56 @@ class AlgorithmViewController: BaseViewController {
                     
                     if grid[indexPathStartColumn.section][indexPathStartColumn.item] == value {
                         let cell = collectionView.cellForItem(at: indexPathStartColumn) as? AlgorithmCollectionViewCell
-                        cell?.makeOrangeWarning()
+                        cell?.makeYellowWarning()
+                        
+                        //adding indexpaths affiliated to each value, or integer key
+                        if var indexPathSet = indexPathsByNumber[value] {
+                            indexPathSet.insert(indexPathStartColumn)
+                            indexPathsByNumber[value] = indexPathSet
+                        } else {
+                            var newIndexPathSet = Set<IndexPath>()
+                            newIndexPathSet.insert(indexPathStartColumn)
+                            indexPathsByNumber[value] = newIndexPathSet
+                        }
                     }
                     
                     if grid[indexPathEndColumn.section][indexPathEndColumn.item] == value {
                         let cell = collectionView.cellForItem(at: indexPathEndColumn) as? AlgorithmCollectionViewCell
-                        cell?.makeOrangeWarning()
+                        cell?.makeYellowWarning()
+                        
+                        //adding indexpaths affiliated to each value, or integer key
+                        if var indexPathSet = indexPathsByNumber[value] {
+                            indexPathSet.insert(indexPathEndColumn)
+                            indexPathsByNumber[value] = indexPathSet
+                        } else {
+                            var newIndexPathSet = Set<IndexPath>()
+                            newIndexPathSet.insert(indexPathEndColumn)
+                            indexPathsByNumber[value] = newIndexPathSet
+                        }
+
                     }
+                }
+            }
+            for value in duplicateValues {
+                addCellIndexPaths(value, startColumn: startColumn, endColumn: endColumn, indexPathDictionary: indexPathsByNumber)
+            }
+        }
+    }
+    
+    func addCellIndexPaths(_ integerKey: Int, startColumn: Int, endColumn: Int, indexPathDictionary: [Int: Set<IndexPath>]) {
+        for section in 0..<collectionView.numberOfSections {
+            for column in startColumn...endColumn {
+                let indexPath = IndexPath(item: column, section: section)
+                
+                if let indexPathSet = indexPathDictionary[integerKey],
+                    let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
+                    cell.number == integerKey {
+                    cell.addIndexPathsToCell(indexPathSet)
                 }
             }
         }
     }
+
     
     func resetAll() {
         if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {

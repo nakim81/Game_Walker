@@ -16,8 +16,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var emptyCellBoxImage = UIImage(named: "emptycell")
     private var redWarningBoxImage = UIImage(named: "red-warning")
     private var purpleWarningBoxImage = UIImage(named: "purple-warning")
-    private var blueWarningBoxImage = UIImage(named: "blue-warning")
-    private var yellowWarningBoxImage = UIImage(named: "yellow-warning")
+    private var blueWarningBoxImage = UIImage(named: "blue-warning 1")
+    private var yellowWarningBoxImage = UIImage(named: "yellow-warning 1")
     private var orangeWarningBoxImage = UIImage(named: "orange-warning")
     var visible : Bool = true
     var warningColor : String = ""
@@ -25,6 +25,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var hasPvpWarning : Bool = false
     var number : Int?
 
+    var affiliatedIndexPaths = Set<IndexPath>()
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -72,6 +73,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         hasWarning = false
         hasPvpWarning = false
         warningColor = ""
+        affiliatedIndexPaths.removeAll()
     }
     
     func makeCellInvisible() {
@@ -128,5 +130,13 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.textColor = UIColor.white
         hasWarning = true
         warningColor = "purple"
+    }
+    
+    func addIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
+        if !affiliatedIndexPaths.isEmpty {
+            affiliatedIndexPaths.formUnion(indexPathSet)
+        } else {
+            affiliatedIndexPaths = indexPathSet
+        }
     }
 }
