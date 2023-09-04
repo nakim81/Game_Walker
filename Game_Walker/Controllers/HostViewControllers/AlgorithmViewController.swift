@@ -243,7 +243,7 @@ class AlgorithmViewController: BaseViewController {
 
         
         print("This is my grid: ", grid)
-       grid = [[1, 2, 3, 4, 5, 6, 7, -1], [0, 0, 0, 0, 6, 7, 1, -1], [3, 4, 5, 6, 7, 1, 2, -1], [0, 0, 0, 0, 1, 2, 3, -1], [5, 6, 7, 1, 4, 3, 4, -1], [0, 0, 0, 0, 2, 4, 5, -1], [7, 1, 2, 3, 4, 5, 6, -1]]
+//      grid = [[1, 2, 4, 4, 5, 4, -1, -1], [0, 0, 4, 5, 6, 1, -1, -1]]
     }
     
     
@@ -297,8 +297,8 @@ class AlgorithmViewController: BaseViewController {
                 
             }
             
-        }
-        
+         }
+        var scannedRedAlready = false
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
 
@@ -312,7 +312,8 @@ class AlgorithmViewController: BaseViewController {
                         let scannedRed = scanItems(inColumn: item, with: number, until: section)
 //                        print("checkandchange duplicates after scanning red for : " , number)
 
-                        if scannedRed {
+                        if scannedRed || scannedRedAlready {
+                            scannedRedAlready = true
                             cell.makeRedWarning()
                         } else {
                             cell.makePurpleWarning()
@@ -690,6 +691,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                         let section = indexPath.section
                         let item = indexPath.item
                         self.grid[section][item] = number
+                        cell.number = number
                     }
                     self.resetAll()
                     self.updateCellBackgroundImages()
@@ -767,4 +769,19 @@ extension AlgorithmViewController: UIScrollViewDelegate {
 //        }
     }
 }
+
+extension  AlgorithmViewController : ModalViewControllerDelegate {
+    func modalViewControllerDidRequestPush() {
+        pushTabBarController()
+    }
+    
+    private func pushTabBarController() {
+        let storyboard = UIStoryboard(name: "Host", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "HostTabBarController") as? UITabBarController {
+            tabBarController.selectedIndex = 0
+            navigationController?.pushViewController(tabBarController, animated: true)
+        }
+    }
+}
+
 
