@@ -102,6 +102,19 @@ struct R {
         }
     }
     
+    static func getReferee2(_ gamecode: String, _ uuid: String) async throws -> Referee? {
+        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
+        let document = try await docRef.getDocument()
+        if document.exists {
+            guard let data = document.data() else { return nil }
+            let referee = convertDataToReferee(data)
+            return referee
+        } else {
+            print("Error in getting Referee")
+            return nil
+        }
+    }
+    
     static func getRefereeList(_ gamecode: String) {
         db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -118,6 +131,19 @@ struct R {
             }
         }
     }
+    
+    static func getRefereeList2(_ gamecode: String) async throws -> [Referee] {
+        let querySnapshot = try await db.collection("\(gamecode) : Referees").getDocuments()
+        var referees: [Referee] = []
+        for document in querySnapshot.documents {
+            let data = document.data()
+            let referee = convertDataToReferee(data)
+            referees.append(referee)
+        }
+        referees.sort { $0.name < $1.name }
+        return referees
+    }
+
     
     static func convertDataToReferee(_ data : [String : Any]) -> Referee {
         do {

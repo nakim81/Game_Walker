@@ -143,6 +143,19 @@ struct T {
         }
     }
     
+    static func getTeam2(_ gamecode: String, _ teamName: String) async throws -> Team? {
+        let docRef = db.collection("\(gamecode) : Teams").document(teamName)
+        let document = try await docRef.getDocument()
+        if document.exists {
+            guard let data = document.data() else { return nil }
+            let team = convertDataToTeam(data)
+            return team
+        } else {
+            print("Error getting Team")
+            return nil
+        }
+    }
+    
     static func getTeamList(_ gamecode: String) {
         //sort by points
         db.collection("\(gamecode) : Teams")
@@ -160,6 +173,19 @@ struct T {
                     delegate_teamList?.listOfTeams(teams)
                 }
             }
+    }
+    
+    static func getTeamList2(_ gamecode: String) async throws -> [Team] {
+        let querySnapshot = try await db.collection("\(gamecode) : Teams").getDocuments()
+        var teams: [Team] = []
+        
+        for document in querySnapshot.documents {
+            let data = document.data()
+            let team = convertDataToTeam(data)
+            teams.append(team)
+        }
+        teams.sort { $0.points > $1.points }
+        return teams
     }
     
     static func updateTeam(_ gamecode: String, _ team: Team) {

@@ -94,6 +94,19 @@ struct S {
         }
     }
     
+    static func getStation2(_ gamecode: String, _ uuid: String) async throws -> Station? {
+        let docRef = db.collection("\(gamecode) : Stations").document(uuid)
+        let document = try await docRef.getDocument()
+        if document.exists {
+            guard let data = document.data() else { return nil }
+            let station = convertDataToStation(data)
+            return station
+        } else {
+            print("Error getting Station")
+            return nil
+        }
+    }
+    
     static func getStationList(_ gamecode: String) {
         //sorted by station number and station is numbered priority to pvp
         db.collection("\(gamecode) : Stations")
@@ -118,6 +131,28 @@ struct S {
                 }
             }
     }
+    
+    static func getStationList2(_ gamecode: String) async throws -> [Station] {
+        //sorted by station number and station is numbered priority to pvp
+        let querySnapshot = try await db.collection("\(gamecode) : Stations").getDocuments()
+        var stations: [Station] = []
+        
+        for document in querySnapshot.documents {
+            let data = document.data()
+            let station = convertDataToStation(data)
+            stations.append(station)
+        }
+        
+        stations.sort { $0.pvp && !$1.pvp }
+        if stations.first?.number == 0 {
+            for i in 0..<stations.count {
+                stations[i].number = i + 1
+            }
+        }
+        stations.sort { $0.number < $1.number }
+        return stations
+    }
+    
     
     static func updateStation(_ gamecode: String, _ station: Station) {
         do {
