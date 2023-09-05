@@ -451,12 +451,12 @@ class AlgorithmViewController: BaseViewController {
                     }
                 } else {
                     // Reset the background image of the cell to nil (no warningImage)
-                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
-                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
-                            cell.makeCellOriginal()
-                        }
-                        
-                    }
+//                    if let cell = collectionView.cellForItem(at: IndexPath(item: item, section: section)) as? AlgorithmCollectionViewCell {
+//                        if let text = cell.teamnumLabel.text, text != "0", text != "-1", text != "", !hadRowDuplicates {
+//                            cell.makeCellOriginal()
+//                        }
+//                        
+//                    }
                 }
             }
         }
@@ -597,6 +597,7 @@ class AlgorithmViewController: BaseViewController {
                         if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
                             cell.addIndexPathsToCell(indexPathSet, pvpYellowWarning: true, pvpBlueWarning: false)
                             cell.makeYellowWarning()
+                            print("should make yellow warning")
                         }
                     }
                 }
@@ -650,7 +651,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if ((num_stations < 8) && (num_teams < 8)) {
+        if num_stations < 8 {
             return 8
         } else {
             return grid[section].count
