@@ -212,6 +212,19 @@ struct H {
         }
     }
     
+    static func getHost2(_ gamecode: String) async throws -> Host? {
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
+        let document = try await docRef.getDocument()
+        if document.exists {
+            guard let data = document.data() else { return nil }
+            let host = convertDataToHost(data)
+            return host
+        } else {
+            print("Error getting Host")
+            return nil
+        }
+    }
+
     static func updateHost(_ gamecode: String, _ host: Host) {
         do {
             try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)

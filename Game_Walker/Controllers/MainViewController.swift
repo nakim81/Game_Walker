@@ -62,6 +62,12 @@ class MainViewController: BaseViewController {
 //                }
 //            }
 //        }
+//        var teams : Team?
+//        Task {
+//            teams = try await T.getTeam2("333333", "Team 1")
+//            print(teams)
+//        }
+        
         
         super.viewDidLoad()
         self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
