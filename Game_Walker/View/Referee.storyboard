@@ -52,12 +52,12 @@
                                                     <fragment content="※">
                                                         <attributes>
                                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                                            <font key="NSOriginalFont" size="13" name="Dosis-Bold"/>
+                                                            <font key="NSOriginalFont" metaFont="system"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" Game Code will be provided by the host.">
                                                         <attributes>
-                                                            <font key="NSFont" size="13" name="Dosis-Bold"/>
+                                                            <font key="NSFont" metaFont="system"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -148,7 +148,6 @@
                         <segue destination="4eu-zS-s9n" kind="show" identifier="toPVE" id="qww-74-glH"/>
                         <segue destination="R55-PH-MbY" kind="show" identifier="toPVP" id="SEr-t1-evM"/>
                         <segue destination="dnK-uh-cbX" kind="show" identifier="toMainVC" animates="NO" id="DUG-by-QlL"/>
-
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
