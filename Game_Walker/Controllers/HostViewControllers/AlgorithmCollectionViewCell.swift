@@ -17,12 +17,13 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     private var redWarningBoxImage = UIImage(named: "red-warning")
     private var purpleWarningBoxImage = UIImage(named: "purple-warning")
     private var blueWarningBoxImage = UIImage(named: "blue-warning 1")
-    private var yellowWarningBoxImage = UIImage(named: "yellow-warning 1")
+    private var yellowWarningBoxImage = UIImage(named: "yellow-warning")
     private var orangeWarningBoxImage = UIImage(named: "orange-warning")
     var visible : Bool = true
     var warningColor : String = ""
     var hasWarning : Bool = false
-    var hasPvpWarning : Bool = false
+    var hasPvpYellowWarning : Bool = false
+    var hasPvpBlueWarning : Bool = false
     var number : Int?
 
     var affiliatedIndexPaths = Set<IndexPath>()
@@ -71,7 +72,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = originalCellBoxImage
         isUserInteractionEnabled = true
         hasWarning = false
-        hasPvpWarning = false
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
         warningColor = ""
         affiliatedIndexPaths.removeAll()
     }
@@ -83,7 +85,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.text = ""
         warningColor = ""
         hasWarning = false
-        hasPvpWarning = false
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
     }
     
     func makeCellEmpty() {
@@ -91,7 +94,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = ""
         hasWarning = false
         algorithmCellBox.image = originalCellBoxImage
-        hasPvpWarning = false
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
     }
     
     func makeRedWarning() {
@@ -107,21 +111,21 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = blueWarningBoxImage
         teamnumLabel.textColor = UIColor.white
         hasWarning = true
+        hasPvpBlueWarning = false
         warningColor = "blue"
     }
     
-    func makeOrangeWarning() {
-        algorithmCellBox.image = orangeWarningBoxImage
-        teamnumLabel.textColor = UIColor.white
-        hasWarning = true
-        warningColor = "orange"
-    }
+//    func makeOrangeWarning() {
+//        algorithmCellBox.image = orangeWarningBoxImage
+//        teamnumLabel.textColor = UIColor.white
+//        hasWarning = true
+//        warningColor = "orange"
+//    }
     
     func makeYellowWarning() {
         algorithmCellBox.image = yellowWarningBoxImage
         teamnumLabel.textColor = UIColor.white
         hasWarning = false
-        hasPvpWarning = true
         warningColor = "yellow"
     }
     
@@ -132,7 +136,9 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = "purple"
     }
     
-    func addIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
+    func addIndexPathsToCell(_ indexPathSet: Set<IndexPath>, pvpYellowWarning: Bool, pvpBlueWarning : Bool) {
+        hasPvpBlueWarning = pvpBlueWarning
+        hasPvpYellowWarning = pvpYellowWarning
         if !affiliatedIndexPaths.isEmpty {
             affiliatedIndexPaths.formUnion(indexPathSet)
         } else {

@@ -379,8 +379,13 @@ class AlgorithmViewController: BaseViewController {
                     cell.makeRedWarning()
                     scannedRed = true
                     _ = scanItems(inColumn: indexPath.item, with: targetNumber, until: section)
-                } else if cell.number == targetNumber && cell.warningColor == "yellow" {
-                    // have to check the column next toit
+                } else if cell.number == targetNumber && cell.hasPvpYellowWarning {
+                    for yellowIndexPath in cell.affiliatedIndexPaths {
+                        if let cell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
+                            cell.makeRedWarning()
+                            scannedRed = true
+                        }
+                    }
                 }
             }
         }
@@ -399,7 +404,14 @@ class AlgorithmViewController: BaseViewController {
                     cell.makeRedWarning()
                     scannedRed = true
                     _ = scanItems(inRow: section, with: targetNumber, until: column)
-                } else if cell.number == targetNumber && cell.warningColor == "yellow" {
+                } else if cell.number == targetNumber && cell.hasPvpYellowWarning {
+                    for yellowIndexPath in cell.affiliatedIndexPaths {
+                        if let cell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
+                            cell.makeRedWarning()
+                            scannedRed = true
+                        }
+                    }
+                } else if cell.number == targetNumber && cell.hasPvpBlueWarning {
                     // have to check the column next to it
                 }
             }
@@ -542,12 +554,57 @@ class AlgorithmViewController: BaseViewController {
                 }
             }
             for value in duplicateValues {
-                addCellIndexPaths(value, startColumn: startColumn, endColumn: endColumn, indexPathDictionary: indexPathsByNumber)
+                addCellIndexPaths(value, startColumn: startColumn, endColumn: endColumn, indexPathDictionary: indexPathsByNumber, pvpYellow: true, pvpBlue: false)
             }
         }
     }
     
-    func addCellIndexPaths(_ integerKey: Int, startColumn: Int, endColumn: Int, indexPathDictionary: [Int: Set<IndexPath>]) {
+    func processPvpYellowCells () {
+
+        for pairIndex in 0..<pvpGameCount {
+            let startColumn = pairIndex * 2
+            let endColumn = startColumn + 1
+            var indexPathsByNumber = [Int: Set<IndexPath>]()
+            // Iterate through all sections (rows)
+            for section in 0..<collectionView.numberOfSections {
+                // Iterate through columns in startColumn and endColumn
+                for column in startColumn...endColumn {
+                    let indexPath = IndexPath(item: column, section: section)
+
+                    // Check if the cell exists at the current indexPath
+                    if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+                        let numberKey = cell.number
+                        
+                        if numberKey != nil && numberKey != 0 && numberKey != -1 {
+                            // Check if indexPathsByNumber already has the numberKey
+                            if var indexPathSet = indexPathsByNumber[numberKey!] {
+                                indexPathSet.insert(indexPath)
+                                indexPathsByNumber[numberKey!] = indexPathSet
+                            } else {
+                                var newIndexPathSet = Set<IndexPath>()
+                                newIndexPathSet.insert(indexPath)
+                                indexPathsByNumber[numberKey!] = newIndexPathSet
+                            }
+                        }
+                    }
+                }
+            }
+            // Now, iterate through indexPathsByNumber and check for keys with multiple indexPaths
+            for (_, indexPathSet) in indexPathsByNumber {
+                if indexPathSet.count >= 2 {
+                    // Call cell.addIndexPathsToCell(indexPathSet) on each cell with the numberKey
+                    for indexPath in indexPathSet {
+                        if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+                            cell.addIndexPathsToCell(indexPathSet, pvpYellowWarning: true, pvpBlueWarning: false)
+                            cell.makeYellowWarning()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func addCellIndexPaths(_ integerKey: Int, startColumn: Int, endColumn: Int, indexPathDictionary: [Int: Set<IndexPath>], pvpYellow : Bool, pvpBlue : Bool) {
         for section in 0..<collectionView.numberOfSections {
             for column in startColumn...endColumn {
                 let indexPath = IndexPath(item: column, section: section)
@@ -555,7 +612,7 @@ class AlgorithmViewController: BaseViewController {
                 if let indexPathSet = indexPathDictionary[integerKey],
                     let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
                     cell.number == integerKey {
-                    cell.addIndexPathsToCell(indexPathSet)
+                    cell.addIndexPathsToCell(indexPathSet, pvpYellowWarning: pvpYellow, pvpBlueWarning: pvpBlue)
                 }
             }
         }
@@ -652,9 +709,11 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 print("RESET!______________")
                 self.resetAll()
 
+//                print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
+//                self.updatePvpCellDuplicates(self.findPvpDuplicates())
+                self.processPvpYellowCells()
                 self.updateCellBackgroundImages()
-                print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
-                self.updatePvpCellDuplicates(self.findPvpDuplicates())
+
 
 
             })
@@ -683,8 +742,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
         resetAll()
+//        updatePvpCellDuplicates(findPvpDuplicates())
+        processPvpYellowCells()
         updateCellBackgroundImages()
-        updatePvpCellDuplicates(findPvpDuplicates())
+
         return cell
     }
     
@@ -734,8 +795,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                         cell.number = number
                     }
                     self.resetAll()
+//                    self.updatePvpCellDuplicates(self.findPvpDuplicates())
+                    self.processPvpYellowCells()
                     self.updateCellBackgroundImages()
-                    self.updatePvpCellDuplicates(self.findPvpDuplicates())
+
                     cell.isSelected = false
                 }
             
