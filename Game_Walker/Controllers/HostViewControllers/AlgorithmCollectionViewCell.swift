@@ -26,7 +26,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var hasPvpBlueWarning : Bool = false
     var number : Int?
 
-    var affiliatedIndexPaths = Set<IndexPath>()
+    var yellowPvpIndexPaths = Set<IndexPath>()
+    var bluePvpIndexPaths = Set<IndexPath>()
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -75,7 +76,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         hasPvpYellowWarning = false
         hasPvpBlueWarning = false
         warningColor = ""
-        affiliatedIndexPaths.removeAll()
+        yellowPvpIndexPaths.removeAll()
+        bluePvpIndexPaths.removeAll()
     }
     
     func makeCellInvisible() {
@@ -115,13 +117,6 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = "blue"
     }
     
-//    func makeOrangeWarning() {
-//        algorithmCellBox.image = orangeWarningBoxImage
-//        teamnumLabel.textColor = UIColor.white
-//        hasWarning = true
-//        warningColor = "orange"
-//    }
-    
     func makeYellowWarning() {
         algorithmCellBox.image = yellowWarningBoxImage
         teamnumLabel.textColor = UIColor.white
@@ -136,13 +131,22 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = "purple"
     }
     
-    func addIndexPathsToCell(_ indexPathSet: Set<IndexPath>, pvpYellowWarning: Bool, pvpBlueWarning : Bool) {
-        hasPvpBlueWarning = pvpBlueWarning
-        hasPvpYellowWarning = pvpYellowWarning
-        if !affiliatedIndexPaths.isEmpty {
-            affiliatedIndexPaths.formUnion(indexPathSet)
+    func addYellowIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
+        hasPvpYellowWarning = true
+        if !yellowPvpIndexPaths.isEmpty {
+            yellowPvpIndexPaths.formUnion(indexPathSet)
         } else {
-            affiliatedIndexPaths = indexPathSet
+            yellowPvpIndexPaths = indexPathSet
+        }
+    }
+    func addBlueIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
+        hasPvpBlueWarning = true
+        if !bluePvpIndexPaths.isEmpty {
+            bluePvpIndexPaths.formUnion(indexPathSet)
+        } else {
+            bluePvpIndexPaths = indexPathSet
         }
     }
 }
+
+
