@@ -274,13 +274,8 @@ class AlgorithmViewController: BaseViewController {
         
         //new//
         
-//        var didHaveDuplicate = false
-        
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: section)
-//            print(indexPath, "<----- INDEXPATH   "  )
-//            let validity = isIndexPathValid(indexPath)
-//            print(validity)
             let number = grid[section][item]
             
             if existingNumbers.contains(number) {
@@ -380,8 +375,17 @@ class AlgorithmViewController: BaseViewController {
                     scannedRed = true
                     _ = scanItems(inColumn: indexPath.item, with: targetNumber, until: section)
                 } else if cell.number == targetNumber && cell.hasPvpYellowWarning {
+                    cell.makeRedWarning()
                     for yellowIndexPath in cell.yellowPvpIndexPaths {
                         if let cell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
+                            cell.makeRedWarning()
+                            scannedRed = true
+                        }
+                    }
+                } else if cell.number == targetNumber && cell.hasPvpBlueWarning {
+                    cell.makeRedWarning()
+                    for blueIndexPath in cell.bluePvpIndexPaths {
+                        if let cell = collectionView.cellForItem(at: blueIndexPath) as? AlgorithmCollectionViewCell {
                             cell.makeRedWarning()
                             scannedRed = true
                         }
@@ -405,14 +409,21 @@ class AlgorithmViewController: BaseViewController {
                     scannedRed = true
                     _ = scanItems(inRow: section, with: targetNumber, until: column)
                 } else if cell.number == targetNumber && cell.hasPvpYellowWarning {
+                    cell.makeRedWarning()
+                    scannedRed = true
                     for yellowIndexPath in cell.yellowPvpIndexPaths {
                         if let cell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
                             cell.makeRedWarning()
-                            scannedRed = true
                         }
                     }
                 } else if cell.number == targetNumber && cell.hasPvpBlueWarning {
-                    // have to check the column next to it
+                    cell.makeRedWarning()
+                    scannedRed = true
+                    for blueIndexPath in cell.bluePvpIndexPaths {
+                        if let cell = collectionView.cellForItem(at: blueIndexPath) as? AlgorithmCollectionViewCell {
+                            cell.makeRedWarning()
+                        }
+                    }
                 }
             }
         }
@@ -497,54 +508,7 @@ class AlgorithmViewController: BaseViewController {
     }
 
     
-//    func updatePvpCellDuplicates(_ duplicates: [[Int]]) {
-//        for (pairIndex, duplicateValues) in duplicates.enumerated() {
-//            var indexPathsByNumber = [Int: Set<IndexPath>]()
-//            let startColumn = pairIndex * 2
-//            let endColumn = startColumn + 1
-//
-//            for value in duplicateValues {
-//                for section in 0..<collectionView.numberOfSections {
-//                    let indexPathStartColumn = IndexPath(item: startColumn, section: section)
-//                    let indexPathEndColumn = IndexPath(item: endColumn, section: section)
-//
-//                    if grid[indexPathStartColumn.section][indexPathStartColumn.item] == value {
-//                        let cell = collectionView.cellForItem(at: indexPathStartColumn) as? AlgorithmCollectionViewCell
-//                        cell?.makeYellowWarning()
-//
-//                        //adding indexpaths affiliated to each value, or integer key
-//                        if var indexPathSet = indexPathsByNumber[value] {
-//                            indexPathSet.insert(indexPathStartColumn)
-//                            indexPathsByNumber[value] = indexPathSet
-//                        } else {
-//                            var newIndexPathSet = Set<IndexPath>()
-//                            newIndexPathSet.insert(indexPathStartColumn)
-//                            indexPathsByNumber[value] = newIndexPathSet
-//                        }
-//                    }
-//
-//                    if grid[indexPathEndColumn.section][indexPathEndColumn.item] == value {
-//                        let cell = collectionView.cellForItem(at: indexPathEndColumn) as? AlgorithmCollectionViewCell
-//                        cell?.makeYellowWarning()
-//
-//                        //adding indexpaths affiliated to each value, or integer key
-//                        if var indexPathSet = indexPathsByNumber[value] {
-//                            indexPathSet.insert(indexPathEndColumn)
-//                            indexPathsByNumber[value] = indexPathSet
-//                        } else {
-//                            var newIndexPathSet = Set<IndexPath>()
-//                            newIndexPathSet.insert(indexPathEndColumn)
-//                            indexPathsByNumber[value] = newIndexPathSet
-//                        }
-//
-//                    }
-//                }
-//            }
-//            for value in duplicateValues {
-//                addCellIndexPaths(value, startColumn: startColumn, endColumn: endColumn, indexPathDictionary: indexPathsByNumber, pvpYellow: true, pvpBlue: false)
-//            }
-//        }
-//    }
+
     
     func numberIsValid(_ number: Int?) -> Bool {
         if number != nil && number != 0 && number != -1 {
@@ -696,21 +660,6 @@ class AlgorithmViewController: BaseViewController {
             }
         }
     }
-    
-//    func addCellIndexPaths(_ integerKey: Int, startColumn: Int, endColumn: Int, indexPathDictionary: [Int: Set<IndexPath>], pvpYellow : Bool, pvpBlue : Bool) {
-//        for section in 0..<collectionView.numberOfSections {
-//            for column in startColumn...endColumn {
-//                let indexPath = IndexPath(item: column, section: section)
-//
-//                if let indexPathSet = indexPathDictionary[integerKey],
-//                    let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
-//                    cell.number == integerKey {
-//                    cell.addYellowIndexPathsToCell(indexPathSet)
-//                }
-//            }
-//        }
-//    }
-
     
     func resetAll() {
         if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {

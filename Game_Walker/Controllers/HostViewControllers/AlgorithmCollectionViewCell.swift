@@ -113,7 +113,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = blueWarningBoxImage
         teamnumLabel.textColor = UIColor.white
         hasWarning = true
-        hasPvpBlueWarning = false
+        hasPvpBlueWarning = true
         warningColor = "blue"
     }
     
