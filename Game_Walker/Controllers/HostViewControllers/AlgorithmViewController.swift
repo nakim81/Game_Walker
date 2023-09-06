@@ -573,8 +573,6 @@ class AlgorithmViewController: BaseViewController {
                             if var seenNumbers = numbersSeenByNumber[numberKey!]{
                                 if numberIsValid(numberKey2) {
                                     if seenNumbers.contains(numberKey2!) {
-//                                        cell.addBlueIndexPathsToCell(indexPath2)
-//                                        cell.makeBlueWarning()
                                         duplicatedPairs.insert(IntPair(first: numberKey!, second: numberKey2!))
                                     } else {
                                         seenNumbers.insert(numberKey2!)
@@ -597,6 +595,7 @@ class AlgorithmViewController: BaseViewController {
     
     func makeAllDuplicatePairsBlue(_ duplicatedPairs : Set<IntPair>) {
         var indexPathsByPairs = [IntPair: Set<IndexPath>]()
+        print(duplicatedPairs, "DUPLICATEDPAIRS")
         for pairIndex in 0...(pvpGameCount-1) {
             let evenColumn = pairIndex * 2
             for section in 0..<collectionView.numberOfSections {
@@ -622,6 +621,7 @@ class AlgorithmViewController: BaseViewController {
                         if var indexPathSet = indexPathsByPairs[currPairKey] {
                             indexPathSet.insert(indexPath1)
                             indexPathSet.insert(indexPath2)
+                            indexPathsByPairs[currPairKey] = indexPathSet
                         } else {
                             var newIndexPathSet = Set<IndexPath>()
                             newIndexPathSet.insert(indexPath1)
