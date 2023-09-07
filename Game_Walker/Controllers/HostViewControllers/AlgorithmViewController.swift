@@ -12,6 +12,7 @@ class AlgorithmViewController: BaseViewController {
     @IBOutlet weak var startGameButton: UIButton!
     private var stationList: [Station]? = nil
     private var grid: [[Int]] = [[Int]]()
+    private var cellDataGrid : [[CellData]] = [[CellData]]()
     private var totalrow : Int =  0
     private var totalcolumn : Int = 0
     
@@ -199,6 +200,9 @@ class AlgorithmViewController: BaseViewController {
         for r in 0..<totalrow {
             var currRow: [Int] = []
             
+            // adding grid with celldata
+            var currCellDataRow: [CellData] = []
+            
             for t in 0..<totalcolumn {
                 var number = (t + (r + 1)) % totalcolumn
                 if number == 0 {
@@ -206,36 +210,40 @@ class AlgorithmViewController: BaseViewController {
                 }
                 
 
+                var visible = true
                 if excessOf == "stations" || excessOf == "teams" {
                     if t >= totalcolumn - excessCells {
                         if excessOf == "stations" {
                             number = 0
                         } else if excessOf == "teams" {
                             number = -1
+                            visible = false
                         }
                     }
                 }
-                
+                let celldata = CellData(number: number, visible: visible)
                 currRow.append(number)
+                currCellDataRow.append(celldata)
             }
             
             while currRow.count < 8 {
                 currRow.append(-1)
+                let celldata = CellData(number: -1, visible: false)
+                currCellDataRow.append(celldata)
             }
             
             grid.append(currRow)
+            cellDataGrid.append(currCellDataRow)
         }
         
-        // case when considering pvp cases
-//        guard pvpGameCount >= 0 && pvpGameCount <= grid.count / 2 else {
-//            print("Invalid number of pvp games compared to number of teams")
-//            return
-//        }
         
         for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
             for i in 0..<(pvpGameCount * 2) {
                 if grid[rowIndex][i]  != -1 {
                     grid[rowIndex][i] = 0
+                }
+                if cellDataGrid[rowIndex][i].number != -1 {
+                    
                 }
             }
         }
@@ -760,12 +768,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                 
                 print("RESET!______________")
                 self.resetAll()
-
-//                print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
-//                self.updatePvpCellDuplicates(self.findPvpDuplicates())
-//                self.processPvpYellowCells()
-//                self.processPvpBlueCells()
-//                self.updateCellBackgroundImages()
                 self.reloadAll()
 
 
@@ -796,10 +798,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
         }
         resetAll()
-//        updatePvpCellDuplicates(findPvpDuplicates())
-//        processPvpYellowCells()
-//        processPvpBlueCells()
-//        updateCellBackgroundImages()
         reloadAll()
 
         return cell
@@ -852,10 +850,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                         cell.number = number
                     }
                     self.resetAll()
-//                    self.updatePvpCellDuplicates(self.findPvpDuplicates())
-//                    self.processPvpYellowCells()
-//                    self.processPvpBlueCells()
-//                    self.updateCellBackgroundImages()
                     self.reloadAll()
 
                     cell.isSelected = false

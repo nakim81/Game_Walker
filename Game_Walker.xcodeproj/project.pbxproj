@@ -25,6 +25,7 @@
 		61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTableViewCell.swift */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
+		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
 		A1A4CD202A371AA100704BF8 /* Host_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1F2A371AA100704BF8 /* Host_Database.swift */; };
 		A1A4CD222A371AC700704BF8 /* Player_Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD212A371AC700704BF8 /* Player_Database.swift */; };
@@ -133,6 +134,7 @@
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
 		A1A4CD1F2A371AA100704BF8 /* Host_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host_Database.swift; path = Database/Host_Database.swift; sourceTree = "<group>"; };
 		A1A4CD212A371AC700704BF8 /* Player_Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player_Database.swift; path = Database/Player_Database.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				FC44B65729B76B480072946F /* HostMessageViews */,
 				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
 				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
+				A1521DD62AA9B81C00B7BD8A /* CellData.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -693,6 +696,7 @@
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */,
+				A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */,
 				6159252829694A0600BC6D7F /* RegisterController.swift in Sources */,
 				FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
