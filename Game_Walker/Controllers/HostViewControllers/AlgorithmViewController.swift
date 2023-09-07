@@ -602,6 +602,16 @@ class AlgorithmViewController: BaseViewController {
                 if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
                     cell.addBlueIndexPathsToCell(indexPathSet)
                     cell.makeBlueWarning()
+                    
+                    //this is for the case where cells with blue warnings already has yellow pvp warnings
+                    if cell.hasPvpYellowWarning {
+                        cell.makeRedWarning()
+                        for yellowIndexPath in cell.yellowPvpIndexPaths {
+                            if let yellowCell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
+                                yellowCell.makeRedWarning()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -753,9 +763,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 
 //                print("FIND PVP DUPLICATES : ", self.findPvpDuplicates())
 //                self.updatePvpCellDuplicates(self.findPvpDuplicates())
-                self.processPvpYellowCells()
-                self.processPvpBlueCells()
-                self.updateCellBackgroundImages()
+//                self.processPvpYellowCells()
+//                self.processPvpBlueCells()
+//                self.updateCellBackgroundImages()
+                self.reloadAll()
 
 
 
@@ -786,9 +797,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         resetAll()
 //        updatePvpCellDuplicates(findPvpDuplicates())
-        processPvpYellowCells()
-        processPvpBlueCells()
-        updateCellBackgroundImages()
+//        processPvpYellowCells()
+//        processPvpBlueCells()
+//        updateCellBackgroundImages()
+        reloadAll()
 
         return cell
     }
@@ -807,6 +819,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         return cellNumber == -1
     }
 
+ 
 
     
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
@@ -840,9 +853,10 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     }
                     self.resetAll()
 //                    self.updatePvpCellDuplicates(self.findPvpDuplicates())
-                    self.processPvpYellowCells()
-                    self.processPvpBlueCells()
-                    self.updateCellBackgroundImages()
+//                    self.processPvpYellowCells()
+//                    self.processPvpBlueCells()
+//                    self.updateCellBackgroundImages()
+                    self.reloadAll()
 
                     cell.isSelected = false
                 }
@@ -853,6 +867,11 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
 
+    func reloadAll() {
+        processPvpYellowCells()
+        processPvpBlueCells()
+        updateCellBackgroundImages()
+    }
 }
         
 
@@ -910,11 +929,12 @@ extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
 extension AlgorithmViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView == collectionView {
-//            print("------Collection view scrolling-----")
-//        } else if scrollView == self.scrollView {
-//            print("------Scroll view scrolling-------")
-//        }
+        if scrollView == collectionView {
+            print("------Collection view scrolling-----")
+        } else if scrollView == self.scrollView {
+            print("------Scroll view scrolling-------")
+        }
+        reloadAll()
     }
 }
 
