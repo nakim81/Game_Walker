@@ -67,22 +67,31 @@ class CreateTeamViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        teamNameTextField.delegate = self
-        teamNameTextField.delegate = self
-        configureCollectionView()
         configureDelegates()
+        configureTextField()
+        configureCollectionView()
         configureGamecodeLabel()
-        self.stationList = [Station(name: "game1", number: 1, pvp: true), Station(name: "game2", number: 2, pvp: true), Station(name: "game3", number: 3, pvp: true)]
-        print(self.stationList)
-        print(self.algorithm, self.algorithm.count)
+        configureBtn()
+//        self.stationList = [Station(name: "game1", number: 1, pvp: true), Station(name: "game2", number: 2, pvp: true), Station(name: "game3", number: 3, pvp: true)]
+//        print(self.stationList)
+//        print(self.algorithm, self.algorithm.count)
+    }
+    
+    private func configureTextField(){
+        teamNameTextField.layer.cornerRadius = 10
+        teamNameTextField.layer.borderWidth = 3
+        teamNameTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
+        teamNumberTextField.layer.cornerRadius = 10
+        teamNumberTextField.layer.borderWidth = 3
+        teamNumberTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
     }
     
     private func configureDelegates() {
+        teamNameTextField.delegate = self
+        teamNumberTextField.delegate = self
         H.delegate_getHost = self
         S.delegate_stationList = self
     }
-    
-    private func listen(_ _ : [String : Any]){}
     
     private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -102,6 +111,10 @@ class CreateTeamViewController: BaseViewController {
             gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.04),
             gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2)
         ])
+    }
+    private func configureBtn(){
+        createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        createTeamButton.layer.cornerRadius = 8
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
@@ -142,6 +155,10 @@ class CreateTeamViewController: BaseViewController {
         }
     }
     
+    private func listen(_ _ : [String : Any]){}
+}
+// MARK: - Function for checking if the game started
+extension CreateTeamViewController {
     ///return the order of staions for the team
     private func getStationOrder(_ algorithm: [[Int]], _ teamNumber: Int) -> [Int] {
         var index = 0 ///represents the column index in the row
@@ -209,7 +226,6 @@ class CreateTeamViewController: BaseViewController {
         return pvp
     }
 }
-
 // MARK: - UICollectionViewDelegate
 extension CreateTeamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

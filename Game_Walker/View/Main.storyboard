@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GemunuLibre-Bold.ttf">
+            <string>GemunuLibre-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -20,43 +25,36 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Typography 1" translatesAutoresizingMaskIntoConstraints="NO" id="h4J-RS-OY5">
                                 <rect key="frame" x="68" y="154.5" width="278" height="170"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="5Xf-VN-j8k">
-                                <rect key="frame" x="72.5" y="443.5" width="269" height="291"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15D-kC-3Ti">
-                                        <rect key="frame" x="0.0" y="0.0" width="269" height="80.5"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="player button 2 1"/>
-                                        <connections>
-                                            <action selector="playerBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m4c-Cd-LF9"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tL-zp-Xl0">
-                                        <rect key="frame" x="0.0" y="105.5" width="269" height="80"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="Referee button2 1"/>
-                                        <connections>
-                                            <action selector="refereeBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rkj-6C-5GK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHc-CG-zIU">
-                                        <rect key="frame" x="0.0" y="210.5" width="269" height="80.5"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="Host button 2 1"/>
-                                        <connections>
-                                            <action selector="hostBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="An1-ks-cJP"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15D-kC-3Ti">
+                                <rect key="frame" x="84.5" y="406" width="245" height="80"/>
                                 <constraints>
-                                    <constraint firstItem="3tL-zp-Xl0" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="4nr-mF-TbD"/>
-                                    <constraint firstItem="fHc-CG-zIU" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="H4U-qd-FNz"/>
-                                    <constraint firstItem="15D-kC-3Ti" firstAttribute="width" secondItem="5Xf-VN-j8k" secondAttribute="width" id="JfT-YR-kF2"/>
-                                    <constraint firstItem="3tL-zp-Xl0" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="XwE-RX-yle"/>
-                                    <constraint firstItem="15D-kC-3Ti" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="Zvw-2I-Rq2"/>
-                                    <constraint firstItem="fHc-CG-zIU" firstAttribute="centerX" secondItem="5Xf-VN-j8k" secondAttribute="centerX" id="c3w-st-LfH"/>
+                                    <constraint firstAttribute="height" constant="80" id="LeY-KR-DJp"/>
+                                    <constraint firstAttribute="width" constant="245" id="uK8-Cf-48K"/>
                                 </constraints>
-                            </stackView>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Player">
+                                    <color key="titleColor" red="0.0" green="0.68249976634979248" blue="0.97845929861068726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="playerBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m4c-Cd-LF9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tL-zp-Xl0">
+                                <rect key="frame" x="84.5" y="521" width="245" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="245" id="57r-zN-jov"/>
+                                    <constraint firstAttribute="height" constant="80" id="ZhY-lu-UAR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Referee">
+                                    <color key="titleColor" red="0.0" green="0.83465701341629028" blue="0.39680701494216919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="refereeBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rkj-6C-5GK"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARh-P8-ekY">
                                 <rect key="frame" x="294" y="58" width="74.5" height="36.5"/>
                                 <subviews>
@@ -89,22 +87,39 @@
                                     <constraint firstItem="KxF-qh-j9n" firstAttribute="centerX" secondItem="ARh-P8-ekY" secondAttribute="centerX" multiplier="1.5" id="vlb-yn-kYh"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHc-CG-zIU">
+                                <rect key="frame" x="84.5" y="636" width="245" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="245" id="HFc-Yn-una"/>
+                                    <constraint firstAttribute="height" constant="80" id="n4w-TG-s95"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Host">
+                                    <color key="titleColor" red="0.89803969860076904" green="0.4804694652557373" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="hostBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="An1-ks-cJP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.502" id="6C3-9A-NHV"/>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.671498" id="6Dc-wd-Zpa"/>
-                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.377751" id="BCA-BV-SGE"/>
+                            <constraint firstItem="fHc-CG-zIU" firstAttribute="top" secondItem="3tL-zp-Xl0" secondAttribute="bottom" constant="35" id="BEW-gn-VaO"/>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="H8A-i2-aq4"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.0475" id="Hnw-co-yeM"/>
-                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.649758" id="L7m-XJ-XkV"/>
+                            <constraint firstItem="3tL-zp-Xl0" firstAttribute="top" secondItem="15D-kC-3Ti" secondAttribute="bottom" constant="35" id="Jdw-h1-RRg"/>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.221271" id="VSP-jP-jeV"/>
-                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.235" id="aCd-9a-coZ"/>
+                            <constraint firstItem="fHc-CG-zIU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WgB-44-q3t"/>
+                            <constraint firstItem="15D-kC-3Ti" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="X1D-Ba-qoo"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.6" id="dH3-7g-E9v"/>
+                            <constraint firstItem="3tL-zp-Xl0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="h3d-Tx-N5z"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.16" id="ktE-ae-DJe"/>
-                            <constraint firstItem="5Xf-VN-j8k" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="r7i-kk-dIt"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.18" id="se9-Y4-AmG"/>
+                            <constraint firstItem="15D-kC-3Ti" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.935" id="tbW-Cp-MdQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Nj-Y1-Ljk"/>
@@ -193,10 +208,7 @@
     </scenes>
     <resources>
         <image name="Group 344" width="28.5" height="30"/>
-        <image name="Host button 2 1" width="245" height="79"/>
-        <image name="Referee button2 1" width="245" height="79"/>
         <image name="Typography 1" width="278" height="181"/>
-        <image name="player button 2 1" width="245" height="79"/>
         <image name="settingIcon" width="53.5" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

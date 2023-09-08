@@ -70,6 +70,7 @@ class MainViewController: BaseViewController {
         
         
         super.viewDidLoad()
+        configureButtons()
         self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
     }
 
@@ -79,6 +80,19 @@ class MainViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func configureButtons(){
+        playerButton.layer.cornerRadius = 10
+        playerButton.layer.borderWidth = 3
+        playerButton.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        refereeButton.layer.cornerRadius = 10
+        refereeButton.layer.borderWidth = 3
+        refereeButton.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        hostButton.layer.cornerRadius = 10
+        hostButton.layer.borderWidth = 3
+        hostButton.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
+        
     }
     
     @IBAction func playerBtnPressed(_ sender: Any) {
@@ -97,11 +111,29 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {
-        showInfoPopUp()
+        showOverlay()
     }
     
     @IBAction func settingBtnPressed(_ sender: UIButton) {
 
+    }
+    
+    private func showOverlay(){
+        let overlayViewController = OverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
+        var componentPositions: [CGPoint] = []
+        
+        let player = playerButton.frame
+        let referee = refereeButton.frame
+        let host = hostButton.frame
+        componentPositions.append(CGPoint(x: player.midX, y: player.midY))
+        componentPositions.append(CGPoint(x: referee.midX, y: referee.midY))
+        componentPositions.append(CGPoint(x: host.midX, y: host.midY))
+        
+        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: self.view.frame.maxY)
+        present(overlayViewController, animated: true, completion: nil)
     }
 }
 

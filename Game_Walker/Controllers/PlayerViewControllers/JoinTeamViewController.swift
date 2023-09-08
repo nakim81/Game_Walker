@@ -53,6 +53,12 @@ class JoinTeamViewController: BaseViewController {
         T.getTeamList(gameCode)
         configureCollectionView()
         configureGamecodeLabel()
+        configureBtn()
+    }
+    
+    private func configureBtn(){
+        joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        joinTeamButton.layer.cornerRadius = 8
     }
     
     private func configureCollectionView() {
