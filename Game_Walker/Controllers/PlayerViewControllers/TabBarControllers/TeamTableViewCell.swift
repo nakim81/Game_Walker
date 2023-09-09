@@ -18,7 +18,7 @@ class TeamTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 25)
         label.numberOfLines = 0
         return label
     }()
@@ -28,8 +28,10 @@ class TeamTableViewCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "name box fill 1")
-        view.alpha = 0.5
+        view.backgroundColor = .clear
+        view.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        view.layer.borderWidth = 3
+        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -99,7 +101,7 @@ class TeamTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 330),
+            containerView.widthAnchor.constraint(equalToConstant: 315),
             containerView.heightAnchor.constraint(equalToConstant: 50),
             
             nameLabel.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
@@ -109,7 +111,7 @@ class TeamTableViewCell: UITableViewCell {
             
             backGroundView.centerXAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerXAnchor),
             backGroundView.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            backGroundView.widthAnchor.constraint(equalToConstant: 328),
+            backGroundView.widthAnchor.constraint(equalToConstant: 314),
             backGroundView.heightAnchor.constraint(equalToConstant: 47)
         ])
         nameLabel.text = name

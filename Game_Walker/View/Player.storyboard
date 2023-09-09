@@ -20,6 +20,9 @@
         <array key="GemunuLibre-Bold.ttf">
             <string>GemunuLibre-Bold</string>
         </array>
+        <array key="GemunuLibre-Regular.ttf">
+            <string>GemunuLibre-Regular</string>
+        </array>
         <array key="GemunuLibre-SemiBold.ttf">
             <string>GemunuLibre-SemiBold</string>
         </array>
@@ -439,13 +442,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="members 1" translatesAutoresizingMaskIntoConstraints="NO" id="fbZ-Ba-269">
-                                <rect key="frame" x="30.666666666666671" y="84.666666666666657" width="217.33333333333331" height="64.666666666666657"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="40.666666666666657" y="173.33333333333337" width="347" height="607"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdP-DM-uNL">
                                 <rect key="frame" x="30.666666666666671" y="53" width="60" height="32.666666666666657"/>
                                 <state key="normal" title="Button"/>
@@ -489,8 +485,25 @@
                                     <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="centerY" secondItem="Pfz-mn-NZG" secondAttribute="centerY" id="y9N-ns-M14"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTv-HE-hya">
+                                <rect key="frame" x="30.666666666666657" y="105.66666666666667" width="357" height="44.000000000000014"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-sP-dTp">
+                                <rect key="frame" x="30.666666666666657" y="152.66666666666666" width="357" height="33"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
+                                <rect key="frame" x="40.666666666666657" y="190.66666666666669" width="347" height="661.33333333333326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52M-V5-ZRM">
-                                <rect key="frame" x="308" y="108" width="72" height="35"/>
+                                <rect key="frame" x="304" y="110" width="72" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Award"/>
@@ -502,22 +515,26 @@
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fbZ-Ba-269" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0745721" id="1zM-Ds-yoQ"/>
-                            <constraint firstItem="fbZ-Ba-269" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.507246" id="5D1-DJ-gLO"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="1.6" id="9h4-6S-6zH"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.140187" id="AFU-hd-rmF"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.810748" id="CC9-x8-ioI"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.18" id="DE9-8x-3VR"/>
+                            <constraint firstItem="vx8-sP-dTp" firstAttribute="top" secondItem="oTv-HE-hya" secondAttribute="bottom" constant="3" id="F4n-UV-Y3Q"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="FNZ-PN-dnp"/>
-                            <constraint firstItem="fbZ-Ba-269" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.651" id="Sa7-5z-ZG3"/>
-                            <constraint firstItem="fbZ-Ba-269" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.27" id="TaY-eK-Nsa"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.7" id="WeU-ic-fbf"/>
+                            <constraint firstItem="vx8-sP-dTp" firstAttribute="leading" secondItem="oTv-HE-hya" secondAttribute="leading" id="GWq-lq-1UW"/>
+                            <constraint firstItem="vx8-sP-dTp" firstAttribute="height" secondItem="oTv-HE-hya" secondAttribute="height" multiplier="0.75" id="HaG-0L-npF"/>
+                            <constraint firstItem="ojk-Pl-An6" firstAttribute="bottom" secondItem="vrd-Ze-eKQ" secondAttribute="bottom" constant="15" id="Hig-X9-H5T"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="top" secondItem="vx8-sP-dTp" secondAttribute="bottom" constant="5" id="JHR-d0-CAO"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" id="Mh6-bf-Sil"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0507497" id="S7n-Af-YV6"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0475" id="WwQ-YD-q2P"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="ZwR-9C-rKf"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="0.284" id="aMs-iQ-M7C"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0378049" id="ak0-Nc-oww"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="top" secondItem="qdP-DM-uNL" secondAttribute="bottom" constant="20" id="eT1-QV-Zap"/>
+                            <constraint firstItem="vx8-sP-dTp" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" id="efi-Pw-jEf"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="leading" secondItem="qdP-DM-uNL" secondAttribute="leading" id="hT4-FL-g5k"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="jag-WH-U88"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="1.1" id="qyz-91-rpR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>
@@ -528,12 +545,14 @@
                         <outlet property="leaveButton" destination="qdP-DM-uNL" id="DXO-uU-QqS"/>
                         <outlet property="settingButton" destination="oaC-ZZ-TQ6" id="o6q-FR-xoW"/>
                         <outlet property="table" destination="vrd-Ze-eKQ" id="2dK-sj-K7o"/>
+                        <outlet property="teamNameLbl" destination="vx8-sP-dTp" id="QPw-VN-rPL"/>
+                        <outlet property="teamNumLbl" destination="oTv-HE-hya" id="yqQ-eg-DLp"/>
                         <outlet property="testBtn" destination="52M-V5-ZRM" id="HOb-4M-O9U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1570" y="2724"/>
+            <point key="canvasLocation" x="-1570.0934579439252" y="2723.9740820734341"/>
         </scene>
         <!--Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">
@@ -731,9 +750,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lz2-86-c74"/>
         <segue reference="29y-2J-Hks"/>
-        <segue reference="NyH-V6-DS8"/>
+        <segue reference="KAQ-jp-596"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Group 344" width="28.333333969116211" height="30"/>
@@ -741,7 +759,6 @@
         <image name="announcement" width="46" height="35"/>
         <image name="current station info 2" width="169.66667175292969" height="55"/>
         <image name="leave 1" width="60" height="31"/>
-        <image name="members 1" width="210" height="61"/>
         <image name="next station info 1" width="169.66667175292969" height="55"/>
         <image name="ranking 1" width="187" height="61"/>
         <image name="score 2" width="84" height="112"/>

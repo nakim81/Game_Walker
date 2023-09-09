@@ -23,7 +23,9 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = UIFont(name: "Dosis-Regular", size: 12)
+        label.font = UIFont(name: "Dosis-Regular", size: 10)
+        label.textAlignment = .center
+        label.numberOfLines = 2
         label.textAlignment = .center
         return label
     }()
@@ -31,7 +33,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = UIFont(name: "Dosis-Bold", size: 15)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 13)
         label.textAlignment = .center
         return label
     }()
@@ -85,22 +87,21 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15),
-            imageView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.66),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1),
             
             teamNumLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            teamNumLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 2),
+            teamNumLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),
             teamNumLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             teamNumLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-            teamNumLabel.heightAnchor.constraint(equalTo: teamNumLabel.widthAnchor, multiplier: 0.37),
+            teamNumLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.13),
             
             teamNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            teamNameLabel.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: 2),
+            teamNameLabel.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: 0),
             teamNameLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 2),
             teamNameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: -2),
-            teamNameLabel.heightAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35)
+            teamNameLabel.heightAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.214)
         ])
         
         imageView.image = UIImage(named: imageName)

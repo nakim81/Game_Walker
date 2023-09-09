@@ -15,6 +15,8 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var testBtn: UIButton!
+    @IBOutlet weak var teamNumLbl: UILabel!
+    @IBOutlet weak var teamNameLbl: UILabel!
     
     static var readMsgList: [String] = []
     static var messages: [String] = []
@@ -68,6 +70,7 @@ class TeamViewController: UIViewController {
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         configureTableView()
         configureGamecodeLabel()
+        configureLabel()
         T.getTeam(gameCode, teamName)
         // timer checks if all the announcements are read or not
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
@@ -92,7 +95,10 @@ class TeamViewController: UIViewController {
         }
     }
     
-    func listen(_ _ : [String : Any]){
+    private func configureLabel(){
+        let team = UserData.readTeam("team") ?? Team()
+        teamNumLbl.text = "Team \(String(describing: team.number))"
+        teamNameLbl.text = team.name
     }
     
     private func configureTableView() {
@@ -160,6 +166,9 @@ class TeamViewController: UIViewController {
         T.getTeam(gameCode, teamName)
         refreshController.endRefreshing()
         table.reloadData()
+    }
+    
+    func listen(_ _ : [String : Any]){
     }
 }
 // MARK: - TableView

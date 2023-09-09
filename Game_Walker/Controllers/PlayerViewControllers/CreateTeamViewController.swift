@@ -100,7 +100,7 @@ class CreateTeamViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
-        collectionView.clipsToBounds = false
+        collectionView.clipsToBounds = true
     }
     
     private func configureGamecodeLabel() {
