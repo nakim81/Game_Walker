@@ -602,13 +602,13 @@ class AlgorithmViewController: BaseViewController {
                 
                 //Case where cells that need blue warnings already has yellow pvp warnings
                 if cellData.hasPvpYellowWarning {
-                    cellData.changeState(to: "red")
+                    changeCellGridData(cellDataInstance: cellData, to: "red")
                     for yellowCellData in cellData.cellsWithSameYellowPvpWarning {
-                        yellowCellData.changeState(to: "red")
+                        changeCellGridData(cellDataInstance: yellowCellData, to: "red")
                     }
                 } else {
-                    cellData.addBlueIndexToCellData(cellDataSet)
-                    cellData.changeState(to: "blue")
+                    changeCellGridData(cellDataInstance: cellData, to: "blue")
+                    addCellSetsToCellGridData(cellDataInstance: cellData, to: "blue", set: cellDataSet)
                 }
                 
             }
@@ -652,18 +652,34 @@ class AlgorithmViewController: BaseViewController {
                     
                 }
             }
-            
+        
             // Check number keys with multiple cells.
             // This will tell if there are duplicates in the two pvp column pairs.
-            
             for (_, cellDataset) in matchedCellsByNumber {
                 if cellDataset.count >= 2 {
                     for cellData in cellDataset {
-                        cellData.changeState(to: "yellowPvp")
+                        changeCellGridData(cellDataInstance: cellData, to: "yellowPvp")
+                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellow", set: cellDataset)
                         print("Cell Data that has duplicates in pvp changed to yellow.")
                     }
                 }
             }
+        }
+    }
+    
+    func changeCellGridData(cellDataInstance: CellData, to state: String) {
+        let section = cellDataInstance.cellIndex?.first
+        let column = cellDataInstance.cellIndex?.second
+        cellDataGrid[section!][column!].changeState(to: state)
+    }
+    
+    func addCellSetsToCellGridData(cellDataInstance: CellData, to color: String, set: Set<CellData>) {
+        let section = cellDataInstance.cellIndex?.first
+        let column = cellDataInstance.cellIndex?.second
+        if color == "blue" {
+            cellDataGrid[section!][column!].addBlueIndexToCellData(set)
+        } else if color == "yellow" {
+            cellDataGrid[section!][column!].addYellowIndexToCellData(set)
         }
     }
     
