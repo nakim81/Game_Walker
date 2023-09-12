@@ -7,9 +7,13 @@
 
 import UIKit
 
-class CellData {
-    var yellowPvpIndexSet = Set<IntPair>()
-    var bluePvpIndexSet = Set<IntPair>()
+class CellData: Hashable {
+//    var yellowPvpIndexSet = Set<IntPair>()
+//    var bluePvpIndexSet = Set<IntPair>()
+    
+    var cellsWithSameYellowPvpWarning  = Set<CellData>()
+    var cellsWithSameBluePvpWarning = Set<CellData>()
+    
     
     var cellIndex : IntPair?
     
@@ -80,7 +84,7 @@ class CellData {
             hasRedWarning = false
             hasYellowWarning = false
             
-        case "none":
+        case "empty":
             hasWarning = false
             visible = true
             warningColor = ""
@@ -105,27 +109,39 @@ class CellData {
         }
     }
     
-    func addYellowIndexToCellData(_ indexSet: Set<IntPair>) {
+    func addYellowIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpYellowWarning = true
-        if !yellowPvpIndexSet.isEmpty {
-            yellowPvpIndexSet.formUnion(indexSet)
+        if !cellsWithSameYellowPvpWarning.isEmpty {
+            cellsWithSameYellowPvpWarning.formUnion(indexSet)
         } else {
-            yellowPvpIndexSet = indexSet
+            cellsWithSameYellowPvpWarning = indexSet
         }
     }
     
-    func addBlueIndexToCellData(_ indexSet: Set<IntPair>) {
+    func addBlueIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpBlueWarning = true
-        if !bluePvpIndexSet.isEmpty {
-            bluePvpIndexSet.formUnion(indexSet)
+        if !cellsWithSameBluePvpWarning.isEmpty {
+            cellsWithSameBluePvpWarning.formUnion(indexSet)
         } else {
-            bluePvpIndexSet = indexSet
+            cellsWithSameBluePvpWarning = indexSet
         }
     }
     
     func emptyIndexData() {
-        bluePvpIndexSet.removeAll()
-        yellowPvpIndexSet.removeAll()
+        cellsWithSameBluePvpWarning .removeAll()
+        cellsWithSameYellowPvpWarning .removeAll()
+    }
+    
+
+    
+    //Hashable Methods Implementation
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(cellIndex)
+        hasher.combine(number)
+    }
+
+    static func == (lhs: CellData, rhs: CellData) -> Bool {
+        return lhs.cellIndex == rhs.cellIndex && lhs.number == rhs.number
     }
     
 }

@@ -639,45 +639,39 @@ class AlgorithmViewController: BaseViewController {
         for pairIndex in 0..<pvpGameCount {
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
-//old            var indexPathsByNumber = [Int: Set<IndexPath>]()
-            var IntPairsByNumber = [Int: Set<IntPair>]()
-
+            
+            var matchedCellsByNumber = [Int: Set<CellData>]()
 
             for section in 0..<collectionView.numberOfSections {
                 for column in startColumn...endColumn {
-//old                   let indexPath = IndexPath(item: column, section: section)
-                    let intpair = IntPair(first: section, second: column)
-
-//                    if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-//                        let numberKey = cell.number
-//
-//                        if numberKey != nil && numberKey != 0 && numberKey != -1 {
-//                            // Check if indexPathsByNumber already has the numberKey
-//                            if var indexPathSet = indexPathsByNumber[numberKey!] {
-//                                indexPathSet.insert(indexPath)
-//                                indexPathsByNumber[numberKey!] = indexPathSet
-//                            } else {
-//                                var newIndexPathSet = Set<IndexPath>()
-//                                newIndexPathSet.insert(indexPath)
-//                                indexPathsByNumber[numberKey!] = newIndexPathSet
-//                            }
-//                        }
-//                    }
+                    let cellData = cellDataGrid[section][column]
+                    let numberKey = cellData.number
+                        
+                    if numberIsValid(numberKey) {
+                        //Checking if IntPairsByNumbers already has the numberkey
+                        if var cellDataSet = matchedCellsByNumber[numberKey!] {
+                            cellDataSet.insert(cellData)
+                        } else {
+                            var newCellDataSet = Set<CellData>()
+                            newCellDataSet.insert(cellData)
+                            matchedCellsByNumber[numberKey!] = newCellDataSet
+                        }
+                    }
                     
                 }
             }
-            // Check keys with multiple indexpaths. This will tell if there are duplicates in the two pvp column pairs.
-//            for (_, indexPathSet) in indexPathsByNumber {
-//                if indexPathSet.count >= 2 {
-//                    for indexPath in indexPathSet {
-//                        if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-//                            cell.addYellowIndexPathsToCell(indexPathSet)
-//                            cell.makeYellowWarning()
-//                            print("should make yellow warning")
-//                        }
-//                    }
-//                }
-//            }
+            
+            // Check number keys with multiple cells.
+            // This will tell if there are duplicates in the two pvp column pairs.
+            
+            for (_, cellDataset) in matchedCellsByNumber {
+                if cellDataset.count >= 2 {
+                    for cellData in cellDataset {
+                        cellData.changeState(to: "yellow")
+                        print("Cell Data that has duplicates in pvp changed to yellow.")
+                    }
+                }
+            }
         }
     }
     
@@ -687,17 +681,16 @@ class AlgorithmViewController: BaseViewController {
                 self.collectionView.deselectItem(at: indexPath, animated: true)
             }
         }
-        for section in 0..<collectionView.numberOfSections {
-            for item in 0..<collectionView.numberOfItems(inSection: section) {
-                let indexPath = IndexPath(item: item, section: section)
-                if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                    if cell.visible == true {
-                        cell.makeCellOriginal()
-                    }
-                }
-            }
-        }
-        
+//        for section in 0..<collectionView.numberOfSections {
+//            for item in 0..<collectionView.numberOfItems(inSection: section) {
+//                let indexPath = IndexPath(item: item, section: section)
+//                if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+//                    if cell.visible == true {
+//                        cell.makeCellOriginal()
+//                    }
+//                }
+//            }
+//        }
     }
 
 
