@@ -11,11 +11,13 @@ class CellData: Hashable {
 //    var yellowPvpIndexSet = Set<IntPair>()
 //    var bluePvpIndexSet = Set<IntPair>()
     
+    var cellIndex : IntPair?
+    var number : Int?
+
     var cellsWithSameYellowPvpWarning  = Set<CellData>()
     var cellsWithSameBluePvpWarning = Set<CellData>()
     
     
-    var cellIndex : IntPair?
     
     var visible : Bool = true
     var warningColor : String?
@@ -28,8 +30,8 @@ class CellData: Hashable {
     var hasRedWarning: Bool = false
     
     
-    var number : Int?
-
+    
+    
     init(number: Int, visible: Bool = true, index: IntPair) {
         self.number = number
         self.visible = visible
@@ -43,6 +45,17 @@ class CellData: Hashable {
     
     func changeState(to color: String) {
         switch color {
+            
+        case "yellowPvp":
+            hasWarning = true
+            visible = true
+            warningColor = "yellow"
+            hasPvpBlueWarning = false
+            hasPurpleWarning = false
+            hasRedWarning = false
+            hasYellowWarning = true
+            hasPvpYellowWarning = true
+            
         case "yellow":
             hasWarning = true
             visible = true
@@ -130,6 +143,18 @@ class CellData: Hashable {
     func emptyIndexData() {
         cellsWithSameBluePvpWarning .removeAll()
         cellsWithSameYellowPvpWarning .removeAll()
+    }
+    
+    func resetCellToDefault() {
+        cellsWithSameYellowPvpWarning.removeAll()
+        cellsWithSameBluePvpWarning.removeAll()
+        visible = true
+        warningColor = ""
+        hasWarning = false
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
+        hasPurpleWarning = false
+        hasRedWarning = false
     }
     
 

@@ -533,27 +533,25 @@ class AlgorithmViewController: BaseViewController {
             
             for section in 0..<collectionView.numberOfSections {
                 for column in startColumn...endColumn {
-                    let indexPath = IndexPath(item:column, section: section)
-                    let indexPath2 = getCellCurrPlayingWith(indexPath)
-                    if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell,
-                        let cell2 = collectionView.cellForItem(at: indexPath2) as? AlgorithmCollectionViewCell {
-                        let numberKey = cell.number
-                        let numberKey2 = cell2.number
-                        if numberIsValid(numberKey) {
-                            if var seenNumbers = numbersSeenByNumber[numberKey!]{
-                                if numberIsValid(numberKey2) {
-                                    if seenNumbers.contains(numberKey2!) {
-                                        duplicatedPairs.insert(IntPair(first: numberKey!, second: numberKey2!))
-                                    } else {
-                                        seenNumbers.insert(numberKey2!)
-                                    }
+                    let cellData1 = cellDataGrid[section][column]
+                    let cellData2 = getCellCurrPlayingWith(cellData1)
+                    let numberKey1 = cellData1.number
+                    let numberKey2 = cellData2.number
+                    
+                    if numberIsValid(numberKey1) {
+                        if var seenNumbers = numbersSeenByNumber[numberKey1!] {
+                            if numberIsValid(numberKey2) {
+                                if seenNumbers.contains(numberKey2!) {
+                                    duplicatedPairs.insert(IntPair(first: numberKey1!, second: numberKey2!))
+                                } else {
+                                    seenNumbers.insert(numberKey2!)
                                 }
-                            } else {
-                                if numberIsValid(numberKey2) {
-                                    var newNumberSet = Set<Int>()
-                                    newNumberSet.insert(numberKey2!)
-                                    numbersSeenByNumber[numberKey!] = newNumberSet
-                                }
+                            }
+                        } else {
+                            if numberIsValid(numberKey2) {
+                                var newNumberSet = Set<Int>()
+                                newNumberSet.insert(numberKey2!)
+                                numbersSeenByNumber[numberKey1!] = newNumberSet
                             }
                         }
                     }
@@ -566,69 +564,63 @@ class AlgorithmViewController: BaseViewController {
     func makeAllDuplicatePairsBlue(_ duplicatedPairs : Set<IntPair>) {
         var indexPathsByPairs = [IntPair: Set<IndexPath>]()
         print(duplicatedPairs, "DUPLICATEDPAIRS")
+        
+        var allCellsWithDuplicatedMatchesByPairs = [IntPair: Set<CellData>]()
+        
         for pairIndex in 0...(pvpGameCount-1) {
             let evenColumn = pairIndex * 2
             for section in 0..<collectionView.numberOfSections {
-                let indexPath1 = IndexPath(item: evenColumn, section: section)
-                let indexPath2 = getCellCurrPlayingWith(indexPath1)
-                var number1 = 0
-                var number2 = 0
-                if let cell1 = collectionView.cellForItem(at: indexPath1) as? AlgorithmCollectionViewCell,
-                   let cell2 = collectionView.cellForItem(at: indexPath2) as? AlgorithmCollectionViewCell {
-                    if numberIsValid(cell1.number) {
-                        number1 = cell1.number!
-                    }
-                    if numberIsValid(cell2.number) {
-                        number2 = cell2.number!
-                    }
-                    
-                    // indexPathsByPairs with have the same IntPair value for either switched or not switched pairs.
-                    // example: IntPair(1,2) and IntPair(2,1) will have the Key of IntPair(1,2)
-                    let currPair = IntPair(first:number1, second: number2)
-                    let currPairSwitched = currPair.switchPair(currPair)
-                    let currPairKey = currPair.cleanOrderPair(currPair)
-                    if duplicatedPairs.contains(currPair) || duplicatedPairs.contains(currPairSwitched) {
-                        if var indexPathSet = indexPathsByPairs[currPairKey] {
-                            indexPathSet.insert(indexPath1)
-                            indexPathSet.insert(indexPath2)
-                            indexPathsByPairs[currPairKey] = indexPathSet
-                        } else {
-                            var newIndexPathSet = Set<IndexPath>()
-                            newIndexPathSet.insert(indexPath1)
-                            newIndexPathSet.insert(indexPath2)
-                            indexPathsByPairs[currPairKey] = newIndexPathSet
-                        }
+                
+                let cellData1 = cellDataGrid[section][evenColumn]
+                let cellData2 = getCellCurrPlayingWith(cellData1)
+                let number1 = cellData1.number
+                let number2 = cellData2.number
+                
+                // indexPathsByPairs with have the same IntPair value for either switched or not switched pairs.
+                // example: IntPair(1,2) and IntPair(2,1) will have the Key of IntPair(1,2)
+                let currPair = IntPair(first: number1!, second: number2!)
+                let currPairSwitched = currPair.switchPair(currPair)
+                let currPairKey = currPair.cleanOrderPair(currPair)
+                
+                if duplicatedPairs.contains(currPair) || duplicatedPairs.contains(currPairSwitched) {
+                    if var cellDataSet = allCellsWithDuplicatedMatchesByPairs[currPairKey] {
+                        cellDataSet.insert(cellData1)
+                        cellDataSet.insert(cellData2)
+                        allCellsWithDuplicatedMatchesByPairs[currPairKey] = cellDataSet
+                    } else {
+                        var newCellDataSet = Set<CellData>()
+                        newCellDataSet.insert(cellData1)
+                        newCellDataSet.insert(cellData2)
+                        allCellsWithDuplicatedMatchesByPairs[currPairKey] = newCellDataSet
                     }
                 }
             }
         }
         
-        for (_, indexPathSet) in indexPathsByPairs {
-            for indexPath in indexPathSet {
-                if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                    cell.addBlueIndexPathsToCell(indexPathSet)
-                    cell.makeBlueWarning()
-                    
-                    //this is for the case where cells with blue warnings already has yellow pvp warnings
-                    if cell.hasPvpYellowWarning {
-                        cell.makeRedWarning()
-                        for yellowIndexPath in cell.yellowPvpIndexPaths {
-                            if let yellowCell = collectionView.cellForItem(at: yellowIndexPath) as? AlgorithmCollectionViewCell {
-                                yellowCell.makeRedWarning()
-                            }
-                        }
+        for (_, cellDataSet) in allCellsWithDuplicatedMatchesByPairs {
+            for cellData in cellDataSet {
+                
+                //Case where cells that need blue warnings already has yellow pvp warnings
+                if cellData.hasPvpYellowWarning {
+                    cellData.changeState(to: "red")
+                    for yellowCellData in cellData.cellsWithSameYellowPvpWarning {
+                        yellowCellData.changeState(to: "red")
                     }
+                } else {
+                    cellData.addBlueIndexToCellData(cellDataSet)
+                    cellData.changeState(to: "blue")
                 }
+                
             }
         }
     }
     
                               
-    func getCellCurrPlayingWith(_ indexpath: IndexPath) -> IndexPath {
-        if indexpath.item % 2 == 0 {
-            return IndexPath(item: indexpath.item + 1, section: indexpath.section)
+    func getCellCurrPlayingWith(_ cellData: CellData) -> CellData {
+        if cellData.cellIndex!.second % 2 == 0 {
+            return cellDataGrid[cellData.cellIndex!.first][cellData.cellIndex!.second + 1]
         } else {
-            return IndexPath(item: indexpath.item - 1, section: indexpath.section)
+            return cellDataGrid[cellData.cellIndex!.first][cellData.cellIndex!.second - 1]
         }
     }
     
@@ -667,7 +659,7 @@ class AlgorithmViewController: BaseViewController {
             for (_, cellDataset) in matchedCellsByNumber {
                 if cellDataset.count >= 2 {
                     for cellData in cellDataset {
-                        cellData.changeState(to: "yellow")
+                        cellData.changeState(to: "yellowPvp")
                         print("Cell Data that has duplicates in pvp changed to yellow.")
                     }
                 }
@@ -696,7 +688,6 @@ class AlgorithmViewController: BaseViewController {
 
 }
 
-//checking pvp pair duplicates
 
 extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     
