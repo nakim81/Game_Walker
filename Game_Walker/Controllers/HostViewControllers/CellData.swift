@@ -11,6 +11,8 @@ class CellData {
     var yellowPvpIndexSet = Set<IntPair>()
     var bluePvpIndexSet = Set<IntPair>()
     
+    var cellIndex : IntPair?
+    
     var visible : Bool = true
     var warningColor : String?
     
@@ -24,9 +26,10 @@ class CellData {
     
     var number : Int?
 
-    init(number: Int, visible: Bool = true) {
+    init(number: Int, visible: Bool = true, index: IntPair) {
         self.number = number
         self.visible = visible
+        self.cellIndex = index
     }
     
     func changeCellData(number: Int, visible: Bool) {

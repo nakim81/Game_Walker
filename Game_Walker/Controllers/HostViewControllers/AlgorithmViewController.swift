@@ -34,9 +34,6 @@ class AlgorithmViewController: BaseViewController {
     private var collectionViewCellWidth : Int = 0
     private var collectionViewCellSpacing = 4
     
-//    private var num_cols : Int = 8
-//    private var num_rows : Int = 8
-    
     private var gamecode = UserData.readGamecode("gamecode")!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -64,8 +61,7 @@ class AlgorithmViewController: BaseViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-//        let widthConstraint = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil,attribute: .notAnAttribute, multiplier: 1.0, constant: 400)
+
         if collectionViewCellWidth > 0  {
             createBorderLines()
         }
@@ -108,7 +104,8 @@ class AlgorithmViewController: BaseViewController {
     }
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
-        alert2(title: "", message: "Everything set?")
+//        alert2(title: "", message: "Everything set?")
+        modalViewControllerDidRequestPush()
     }
     
     func createBorderLines() {
@@ -221,14 +218,14 @@ class AlgorithmViewController: BaseViewController {
                         }
                     }
                 }
-                let celldata = CellData(number: number, visible: visible)
+                let celldata = CellData(number: number, visible: visible, index: IntPair(first: r, second: t))
                 currRow.append(number)
                 currCellDataRow.append(celldata)
             }
             
             while currRow.count < 8 {
                 currRow.append(-1)
-                let celldata = CellData(number: -1, visible: false)
+                let celldata = CellData(number: -1, visible: false, index: IntPair(first:r, second:currRow.count))
                 currCellDataRow.append(celldata)
             }
             
@@ -243,7 +240,7 @@ class AlgorithmViewController: BaseViewController {
                     grid[rowIndex][i] = 0
                 }
                 if cellDataGrid[rowIndex][i].number != -1 {
-                    
+                    cellDataGrid[rowIndex][i].number = 0
                 }
             }
         }
@@ -251,6 +248,7 @@ class AlgorithmViewController: BaseViewController {
 
         
         print("This is my grid: ", grid)
+        print("This is my cellDataGrid: ", cellDataGrid)
 //      grid = [[1, 2, 4, 4, 5, 4, -1, -1], [0, 0, 4, 5, 6, 1, -1, -1]]
     }
     
@@ -641,41 +639,45 @@ class AlgorithmViewController: BaseViewController {
         for pairIndex in 0..<pvpGameCount {
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
-            var indexPathsByNumber = [Int: Set<IndexPath>]()
+//old            var indexPathsByNumber = [Int: Set<IndexPath>]()
+            var IntPairsByNumber = [Int: Set<IntPair>]()
+
 
             for section in 0..<collectionView.numberOfSections {
                 for column in startColumn...endColumn {
-                    let indexPath = IndexPath(item: column, section: section)
+//old                   let indexPath = IndexPath(item: column, section: section)
+                    let intpair = IntPair(first: section, second: column)
 
-                    if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                        let numberKey = cell.number
-                        
-                        if numberKey != nil && numberKey != 0 && numberKey != -1 {
-                            // Check if indexPathsByNumber already has the numberKey
-                            if var indexPathSet = indexPathsByNumber[numberKey!] {
-                                indexPathSet.insert(indexPath)
-                                indexPathsByNumber[numberKey!] = indexPathSet
-                            } else {
-                                var newIndexPathSet = Set<IndexPath>()
-                                newIndexPathSet.insert(indexPath)
-                                indexPathsByNumber[numberKey!] = newIndexPathSet
-                            }
-                        }
-                    }
+//                    if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+//                        let numberKey = cell.number
+//
+//                        if numberKey != nil && numberKey != 0 && numberKey != -1 {
+//                            // Check if indexPathsByNumber already has the numberKey
+//                            if var indexPathSet = indexPathsByNumber[numberKey!] {
+//                                indexPathSet.insert(indexPath)
+//                                indexPathsByNumber[numberKey!] = indexPathSet
+//                            } else {
+//                                var newIndexPathSet = Set<IndexPath>()
+//                                newIndexPathSet.insert(indexPath)
+//                                indexPathsByNumber[numberKey!] = newIndexPathSet
+//                            }
+//                        }
+//                    }
+                    
                 }
             }
             // Check keys with multiple indexpaths. This will tell if there are duplicates in the two pvp column pairs.
-            for (_, indexPathSet) in indexPathsByNumber {
-                if indexPathSet.count >= 2 {
-                    for indexPath in indexPathSet {
-                        if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-                            cell.addYellowIndexPathsToCell(indexPathSet)
-                            cell.makeYellowWarning()
-                            print("should make yellow warning")
-                        }
-                    }
-                }
-            }
+//            for (_, indexPathSet) in indexPathsByNumber {
+//                if indexPathSet.count >= 2 {
+//                    for indexPath in indexPathSet {
+//                        if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
+//                            cell.addYellowIndexPathsToCell(indexPathSet)
+//                            cell.makeYellowWarning()
+//                            print("should make yellow warning")
+//                        }
+//                    }
+//                }
+//            }
         }
     }
     
@@ -943,22 +945,5 @@ extension  AlgorithmViewController : ModalViewControllerDelegate {
             tabBarController.selectedIndex = 0
             navigationController?.pushViewController(tabBarController, animated: true)
         }
-    }
-}
-
-
-struct IntPair: Hashable {
-    let first: Int
-    let second: Int
-    
-    func switchPair(_ intPair: IntPair) -> IntPair {
-        return IntPair(first: intPair.second, second: intPair.first)
-    }
-    
-    func cleanOrderPair(_ intPair: IntPair) -> IntPair {
-        if intPair.first > intPair.second {
-            return IntPair(first: intPair.second, second: intPair.first)
-        }
-        return intPair
     }
 }
