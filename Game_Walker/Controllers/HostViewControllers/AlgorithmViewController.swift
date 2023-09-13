@@ -44,8 +44,11 @@ class AlgorithmViewController: BaseViewController {
     
     private var omittedTeamCells = 0
     
-    var indexPathA: IndexPath?
-    var indexPathB: IndexPath?
+//    var indexPathA: IndexPath?
+//    var indexPathB: IndexPath?
+    
+    var cellDataA : CellData?
+    var cellDataB : CellData?
     
     var originalcellAimage: UIImage?
     var originalcellAcolor: String?
@@ -234,16 +237,29 @@ class AlgorithmViewController: BaseViewController {
         }
         
         
-        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
-            for i in 0..<(pvpGameCount * 2) {
-                if grid[rowIndex][i]  != -1 {
-                    grid[rowIndex][i] = 0
+        for rowIndex in stride(from: 1, through: cellDataGrid.count - 1, by: 2) {
+            for column in 0..<(pvpGameCount * 2) {
+                if grid[rowIndex][column]  != -1 {
+                grid[rowIndex][column] = 0
                 }
-                if cellDataGrid[rowIndex][i].number != -1 {
-                    cellDataGrid[rowIndex][i].number = 0
+                
+                let cellData = cellDataGrid[rowIndex][column]
+                if cellData.number != -1 {
+                    changeCellGridData(cellDataInstance: cellData, to: "empty")
                 }
             }
         }
+        
+//        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
+//            for i in 0..<(pvpGameCount * 2) {
+//                if grid[rowIndex][i]  != -1 {
+//                    grid[rowIndex][i] = 0
+//                }
+//                if cellDataGrid[rowIndex][i].number != -1 {
+//                    cellDataGrid[rowIndex][i].number = 0
+//                }
+//            }
+//        }
 
 
         
@@ -271,7 +287,7 @@ class AlgorithmViewController: BaseViewController {
     //checked the section (row)'s duplicates and callled warning
     func checkAndChangeDuplicatesInRow(section: Int) -> [Int] {
         // Get the number of items in the section (row)
-        let numberOfItems = collectionView.numberOfItems(inSection: section)
+        let numberOfItems = cellDataGrid[section].count
         var existingNumbers = Set<Int>()
         var duplicates = [Int]()
         
@@ -333,7 +349,7 @@ class AlgorithmViewController: BaseViewController {
     
     func scanForRedVertically(inColumn column: Int, with targetNumber: Int) -> Bool {
         var foundRedCell = false
-        let sections = collectionView.numberOfSections
+        let sections = cellDataGrid.count
         
         for section in 0..<sections {
             let cellData = cellDataGrid[section][column]
@@ -376,9 +392,8 @@ class AlgorithmViewController: BaseViewController {
     
     func scanItems(inColumn column: Int, with targetNumber: Int, until stopSection: Int) -> Bool{
         var scannedRed = false
-        let sections = collectionView.numberOfSections
         
-        for section in 0..<sections {
+        for section in 0..<cellDataGrid.count {
             let cellData = cellDataGrid[section][column]
             let number = cellData.number
             
@@ -449,7 +464,7 @@ class AlgorithmViewController: BaseViewController {
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
             
-            for section in 0..<collectionView.numberOfSections {
+            for section in 0..<cellDataGrid.count {
                 for column in startColumn...endColumn {
                     let cellData1 = cellDataGrid[section][column]
                     let cellData2 = getCellCurrPlayingWith(cellData1)
@@ -487,7 +502,7 @@ class AlgorithmViewController: BaseViewController {
         
         for pairIndex in 0...(pvpGameCount-1) {
             let evenColumn = pairIndex * 2
-            for section in 0..<collectionView.numberOfSections {
+            for section in 0..<cellDataGrid.count {
                 
                 let cellData1 = cellDataGrid[section][evenColumn]
                 let cellData2 = getCellCurrPlayingWith(cellData1)
@@ -552,7 +567,7 @@ class AlgorithmViewController: BaseViewController {
             
             var matchedCellsByNumber = [Int: Set<CellData>]()
 
-            for section in 0..<collectionView.numberOfSections {
+            for section in 0..<cellDataGrid.count {
                 for column in startColumn...endColumn {
                     let cellData = cellDataGrid[section][column]
                     let numberKey = cellData.number
@@ -570,15 +585,108 @@ class AlgorithmViewController: BaseViewController {
                     
                 }
             }
-        
             // Check number keys with multiple cells.
             // This will tell if there are duplicates in the two pvp column pairs.
             for (_, cellDataset) in matchedCellsByNumber {
                 if cellDataset.count >= 2 {
                     for cellData in cellDataset {
                         changeCellGridData(cellDataInstance: cellData, to: "yellowPvp")
-                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellow", set: cellDataset)
+                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellowPvp", set: cellDataset)
                         print("Cell Data that has duplicates in pvp changed to yellow.")
+                    }
+                }
+            }
+        }
+    }
+    
+    func processPurpleSameRoundCells() {
+        
+        for row in cellDataGrid {
+            var rowNumbers = [Int: Set<CellData>]()
+            for cellData in row {
+                let number = cellData.number
+                
+                if numberIsValid(number) {
+                    if var cellDataSet = rowNumbers[number!] {
+                        cellDataSet.insert(cellData)
+                    }
+                } else {
+                    var newCellDataSet = Set<CellData>()
+                    newCellDataSet.insert(cellData)
+                    rowNumbers[number!] = newCellDataSet
+                }
+                
+            }
+            //Now mark each cell with more than two counts in sets in each row
+            for (_, cellDataSet) in rowNumbers {
+                if cellDataSet.count >= 2 {
+                    for cellData in cellDataSet {
+                        changeCellGridData(cellDataInstance: cellData, to: "purple")
+                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "purple", set: cellDataSet)
+                        if cellData.hasYellowWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for yellowCellData in cellData.cellsWithSameYellowWarning {
+                                changeCellGridData(cellDataInstance: yellowCellData, to: "red")
+                            }
+                        } else if cellData.hasRedWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                        } else if cellData.hasPvpBlueWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for pvpBlueCellData in cellData.cellsWithSameBluePvpWarning {
+                                changeCellGridData(cellDataInstance: pvpBlueCellData, to: "red")
+                            }
+                        } else if cellData.hasPvpYellowWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for pvpYellowCellData in cellData.cellsWithSameYellowPvpWarning {
+                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func processYellowSameStationCells() {
+        for col in 0..<cellDataGrid[0].count {
+            var columnNumbers = [Int: Set<CellData>]()
+            for sect in 0..<cellDataGrid.count {
+                let cellData = cellDataGrid[sect][col]
+                let number = cellData.number
+                
+                if numberIsValid(number) {
+                    if var cellDataSet = columnNumbers[number!] {
+                        cellDataSet.insert(cellData)
+                    }
+                } else {
+                    var newCellDataSet = Set<CellData>()
+                    newCellDataSet.insert(cellData)
+                    columnNumbers[number!] = newCellDataSet
+                }
+            }
+            for (_, cellDataSet) in columnNumbers {
+                if cellDataSet.count >= 2 {
+                    for cellData in cellDataSet {
+                        changeCellGridData(cellDataInstance: cellData, to: "yellow")
+                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellow", set: cellDataSet)
+                        if cellData.hasPurpleWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for purpleCellData in cellData.cellsWithSamePurpleWarning {
+                                changeCellGridData(cellDataInstance: purpleCellData, to: "red")
+                            }
+                        } else if cellData.hasRedWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                        } else if cellData.hasPvpBlueWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for pvpBlueCellData in cellData.cellsWithSameBluePvpWarning {
+                                changeCellGridData(cellDataInstance: pvpBlueCellData, to: "red")
+                            }
+                        } else if cellData.hasPvpYellowWarning {
+                            changeCellGridData(cellDataInstance: cellData, to: "red")
+                            for pvpYellowCellData in cellData.cellsWithSameYellowPvpWarning {
+                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
+                            }
+                        }
                     }
                 }
             }
@@ -595,26 +703,19 @@ class AlgorithmViewController: BaseViewController {
         let section = cellDataInstance.cellIndex?.first
         let column = cellDataInstance.cellIndex?.second
         if color == "blue" {
-            cellDataGrid[section!][column!].addBlueIndexToCellData(set)
+            cellDataGrid[section!][column!].addBluePvpIndexToCellData(set)
+        } else if color == "yellowPvp" {
+            cellDataGrid[section!][column!].addYellowPvpIndexToCellData(set)
         } else if color == "yellow" {
             cellDataGrid[section!][column!].addYellowIndexToCellData(set)
+        } else if color == "purple" {
+            cellDataGrid[section!][column!].addPurpleIndexToCellData(set)
+        } else {
+            print("NO CELL DATA SET HAS BEEN ADDED.")
         }
     }
+
     
-    func resetAll() {
-        if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
-            for indexPath in indexPaths {
-                self.collectionView.deselectItem(at: indexPath, animated: true)
-            }
-        }
-        for section in 0..<cellDataGrid.count {
-            for column in 0..<cellDataGrid[0].count {
-                if cellDataGrid[section][column].visible {
-                    cellDataGrid[section][column].resetCellToDefault()
-                }
-            }
-        }
-    }
 }
 
 
@@ -634,61 +735,80 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell at IndexPath: \(indexPath)")
-        if indexPathA == nil {
+        if cellDataA == nil {
             // First selection
-            indexPathA = indexPath
+//            indexPathA = indexPath
+            cellDataA = cellDataGrid[indexPath.section][indexPath.item]
+            changeCellGridData(cellDataInstance: cellDataA!, to: "selected")
+            let indexPathA = IndexPath(item: indexPath.item, section: indexPath.section )
+            if let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
+                selectedCellA.makeCellSelected()
+            }
             
-            let selectedCellA = collectionView.cellForItem(at: indexPathA!) as? AlgorithmCollectionViewCell
-            originalcellAimage = selectedCellA?.algorithmCellBox.image
-            originalcellAcolor = selectedCellA?.warningColor
-
-            selectedCellA?.makeCellSelected()
-
-            
-        } else if indexPathB == nil {
+        } else if cellDataB == nil {
             // Second selection
-            indexPathB = indexPath
-            
-            
-            let selectedCellB = collectionView.cellForItem(at: indexPathB!) as? AlgorithmCollectionViewCell
-            originalcellBimage = selectedCellB?.algorithmCellBox.image
-            originalcellBcolor = selectedCellB?.warningColor
-            selectedCellB?.makeCellSelected()
+//            indexPathB = indexPath
+            cellDataB = cellDataGrid[indexPath.section][indexPath.item]
+            changeCellGridData(cellDataInstance: cellDataB!, to: "selected")
+            let indexPathB = IndexPath(item: indexPath.item, section: indexPath.section )
+            if let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell {
+                selectedCellB.makeCellSelected()
+            }
 
         }
-        
-        if let indexPathA = indexPathA, let indexPathB = indexPathB {
-            let itemA = grid[indexPathA.section][indexPathA.item]
-            let itemB = grid[indexPathB.section][indexPathB.item]
-            
+        if let cellDataAIndex = cellDataA?.cellIndex, let cellDataBIndex = cellDataB?.cellIndex {
+            let indexPathA = IndexPath(item: cellDataAIndex.second, section: cellDataAIndex.first)
+            let indexPathB = IndexPath(item: cellDataBIndex.second, section: cellDataBIndex.first)
 
-            
-            grid[indexPathA.section][indexPathA.item] = itemB
-            grid[indexPathB.section][indexPathB.item] = itemA
             
             collectionView.performBatchUpdates({
-
-                
                 collectionView.moveItem(at: indexPathA, to: indexPathB)
                 collectionView.moveItem(at: indexPathB, to: indexPathA)
-            }, completion: { _ in
-                // Swap completed
-                print("swap completed:", self.grid)
-                let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
-                let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
-                selectedCellA?.makeCellImageOriginal()
-                selectedCellB?.makeCellImageOriginal()
-                
-                self.indexPathA = nil
-                self.indexPathB = nil
-                
-                print("RESET!______________")
-                self.resetAll()
-                self.reloadAll()
 
+                }, completion: { _ in
+                    self.cellDataA?.changeCellIndex(section: (self.cellDataB?.cellIndex?.first)!, column: (self.cellDataB?.cellIndex?.second)!)
+                    self.cellDataB?.changeCellIndex(section: (self.cellDataA?.cellIndex?.first)!, column: (self.cellDataA?.cellIndex?.second)!)
+                    self.cellDataGrid[cellDataAIndex.first][cellDataAIndex.second] = self.cellDataB!
+                    self.cellDataGrid[cellDataBIndex.first][cellDataBIndex.second] = self.cellDataA!
+                    
+                    self.changeCellGridData(cellDataInstance: self.cellDataA!, to: "deselected")
+                    self.changeCellGridData(cellDataInstance: self.cellDataB!, to: "deselected")
+                    
+                    print("CELL SWAPPED: CELL NUMBER IN INDEX: ", self.cellDataGrid[0][3].cellIndex!, " with number: ", self.cellDataGrid[0][3].number!)
+                    print("CELL SWAPPED: CELL NUMBER IN INDEX: ", self.cellDataGrid[1][3].cellIndex!, " with number: ", self.cellDataGrid[1][3].number!)
+//                self.grid[indexPathA.section][indexPathA.item] = self.cellDataB!.number!
+//                self.grid[indexPathB.section][indexPathB.item] = self.cellDataA!.number!
 
+                    let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell
+                    let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell
+                    selectedCellA?.makeCellOriginal()
+                    selectedCellB?.makeCellOriginal()
+                    print("swap completed")
+                
+                    self.cellDataA = nil
+                    self.cellDataB = nil
+                
+                    self.resetAll()
+                    self.reloadAll()
+                    self.collectionView.reloadData()
+                
+                    var printgrid = [[String]]()
+                    for row in self.cellDataGrid {
+                        var printrow = [String]()
+                        for cellData in row {
+                            let number = String(describing: cellData.number ?? -2)
+                            let warningcolor = cellData.warningColor ?? "-- Nil"
+                            let printstatement = number + " " + warningcolor
+                            printrow.append(printstatement)
+                        }
+                        printgrid.append(printrow)
+                    }
+                    print("PRINTING CELLDATA GRID: ", printgrid)
 
             })
+
+
+//            collectionView.reloadData()
         }
     }
     
@@ -702,27 +822,40 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         cell.addGestureRecognizer(doubleTapGestureRecognizer)
-
-        let teamNumberLabel = grid[indexPath.section][indexPath.item]
-
+        
+//        resetAll()
+//        reloadAll()
+        
+        let cellData = cellDataGrid[indexPath.section][indexPath.item]
+        let teamNumberLabel = cellData.number
         
         if teamNumberLabel == -1 {
             cell.makeCellInvisible()
         } else if teamNumberLabel == 0 {
             cell.makeCellEmpty()
-        }else {
-            cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel)
+        }  else {
+            cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
+            
+            if cellData.hasPvpBlueWarning {
+                cell.makeBlueWarning()
+            } else if cellData.hasPvpYellowWarning || cellData.hasYellowWarning {
+                cell.makeYellowWarning()
+            } else if cellData.hasPurpleWarning {
+                cell.makePurpleWarning()
+            } else if cellData.hasRedWarning {
+                cell.makeRedWarning()
+            }
         }
-        resetAll()
-        reloadAll()
+
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let cellNumber = grid[indexPath.section][indexPath.item]
+//        let cellNumber = grid[indexPath.section][indexPath.item]
+        let cellNumber = cellDataGrid[indexPath.section][indexPath.item].number
         
-        if shouldDisableInteraction(for: cellNumber) {
+        if shouldDisableInteraction(for: cellNumber!) {
             return false
         }
         
@@ -762,7 +895,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     if let indexPath = self.collectionView.indexPath(for: cell) {
                         let section = indexPath.section
                         let item = indexPath.item
-                        self.grid[section][item] = number
+                        self.cellDataGrid[section][item].changeCellData(number: number, visible: true)
                         cell.number = number
                     }
                     self.resetAll()
@@ -778,9 +911,32 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func reloadAll() {
-        processPvpYellowCells()
-        processPvpBlueCells()
-        updateCellBackgroundImages()
+        if pvpGameCount > 0 {
+            processPvpYellowCells()
+            processPvpBlueCells()
+        }
+//        updateCellBackgroundImages()
+        processPurpleSameRoundCells()
+        processYellowSameStationCells()
+        collectionView.reloadData()
+    }
+    
+    func resetAll() {
+        if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
+            for indexPath in indexPaths {
+                self.collectionView.deselectItem(at: indexPath, animated: true)
+            }
+        }
+        for section in 0..<cellDataGrid.count {
+            for column in 0..<cellDataGrid[0].count {
+                if cellDataGrid[section][column].visible {
+                    cellDataGrid[section][column].resetCellToDefault()
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: column, section: section)) as? AlgorithmCollectionViewCell {
+                        cell.makeCellOriginal()
+                    }
+                }
+            }
+        }
     }
 }
         
@@ -844,7 +1000,7 @@ extension AlgorithmViewController: UIScrollViewDelegate {
         } else if scrollView == self.scrollView {
             print("------Scroll view scrolling-------")
         }
-        reloadAll()
+//        reloadAll()
     }
 }
 

@@ -16,13 +16,14 @@ class CellData: Hashable {
 
     var cellsWithSameYellowPvpWarning  = Set<CellData>()
     var cellsWithSameBluePvpWarning = Set<CellData>()
+    var cellsWithSamePurpleWarning = Set<CellData>()
+    var cellsWithSameYellowWarning = Set<CellData>()
     
-    
+    var isSelected : Bool = false
     
     var visible : Bool = true
     var warningColor : String?
     
-    var hasWarning : Bool = false
     var hasPvpYellowWarning : Bool = false
     var hasYellowWarning : Bool = false
     var hasPvpBlueWarning : Bool = false
@@ -43,42 +44,43 @@ class CellData: Hashable {
         self.visible = visible
     }
     
+    func changeCellIndex(section: Int, column: Int) {
+        self.cellIndex = IntPair(first: section, second: column)
+    }
+    
     func changeState(to color: String) {
         switch color {
             
         case "yellowPvp":
-            hasWarning = true
             visible = true
             warningColor = "yellow"
             hasPvpBlueWarning = false
             hasPurpleWarning = false
             hasRedWarning = false
-            hasYellowWarning = true
+            hasYellowWarning = false
             hasPvpYellowWarning = true
             
         case "yellow":
-            hasWarning = true
             visible = true
             warningColor = "yellow"
             hasPvpBlueWarning = false
             hasPurpleWarning = false
             hasRedWarning = false
             hasYellowWarning = true
+            hasPvpYellowWarning = false
             
             
         case "red":
             // Code to execute when color is "red"
-            hasWarning = true
             visible = true
             warningColor = "red"
-            hasPvpYellowWarning = false
-            hasPvpBlueWarning = false
-            hasPurpleWarning = false
+//            hasPvpYellowWarning = false
+//            hasPvpBlueWarning = false
+//            hasPurpleWarning = false
             hasRedWarning = true
-            hasYellowWarning = false
+//            hasYellowWarning = false
             
         case "blue":
-            hasWarning = true
             visible = true
             warningColor = "purple"
             hasPvpYellowWarning = false
@@ -88,7 +90,6 @@ class CellData: Hashable {
             hasYellowWarning = false
             
         case "purple":
-            hasWarning = true
             visible = true
             warningColor = "purple"
             hasPvpYellowWarning = false
@@ -98,7 +99,6 @@ class CellData: Hashable {
             hasYellowWarning = false
             
         case "empty":
-            hasWarning = false
             visible = true
             warningColor = ""
             hasPvpYellowWarning = false
@@ -106,24 +106,37 @@ class CellData: Hashable {
             hasPurpleWarning = false
             hasRedWarning = false
             hasYellowWarning = false
+            number = 0
             
         case "invisible":
-            hasWarning = false
             visible = false
             warningColor = ""
+            hasYellowWarning = false
             hasPvpYellowWarning = false
             hasPvpBlueWarning = false
             hasPurpleWarning = false
             hasRedWarning = false
             hasYellowWarning = false
+            number = -1
+            
+        case "selected":
+            isSelected = true
+            
+        case "deselected":
+            isSelected = false
             
         default:
             print("No State Change Has Been Made")
         }
     }
     
-    func addYellowIndexToCellData(_ indexSet: Set<CellData>) {
+    func addYellowPvpIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpYellowWarning = true
+        hasPvpBlueWarning = false
+        hasPurpleWarning = false
+        hasRedWarning = false
+        hasYellowWarning = false
+        
         if !cellsWithSameYellowPvpWarning.isEmpty {
             cellsWithSameYellowPvpWarning.formUnion(indexSet)
         } else {
@@ -131,30 +144,64 @@ class CellData: Hashable {
         }
     }
     
-    func addBlueIndexToCellData(_ indexSet: Set<CellData>) {
+    func addBluePvpIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpBlueWarning = true
+        hasPvpYellowWarning = false
+        hasPurpleWarning = false
+        hasRedWarning = false
+        hasYellowWarning = false
+        
         if !cellsWithSameBluePvpWarning.isEmpty {
             cellsWithSameBluePvpWarning.formUnion(indexSet)
         } else {
             cellsWithSameBluePvpWarning = indexSet
         }
     }
+    func addPurpleIndexToCellData(_ indexSet: Set<CellData>) {
+        hasPurpleWarning = true
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
+        hasRedWarning = false
+        
+        if !cellsWithSamePurpleWarning.isEmpty {
+            cellsWithSamePurpleWarning.formUnion(indexSet)
+        } else {
+            cellsWithSamePurpleWarning = indexSet
+        }
+    }
+    func addYellowIndexToCellData(_ indexSet: Set<CellData>) {
+        hasYellowWarning = true
+        hasPvpYellowWarning = false
+        hasPvpBlueWarning = false
+        hasPurpleWarning = false
+        hasRedWarning = false
+        
+        if !cellsWithSameYellowWarning.isEmpty {
+            cellsWithSameYellowWarning.formUnion(indexSet)
+        } else {
+            cellsWithSameYellowWarning = indexSet
+        }
+    }
     
     func emptyIndexData() {
-        cellsWithSameBluePvpWarning .removeAll()
-        cellsWithSameYellowPvpWarning .removeAll()
+        cellsWithSameYellowPvpWarning.removeAll()
+        cellsWithSameBluePvpWarning.removeAll()
+        cellsWithSamePurpleWarning.removeAll()
+        cellsWithSameYellowWarning.removeAll()
     }
     
     func resetCellToDefault() {
         cellsWithSameYellowPvpWarning.removeAll()
         cellsWithSameBluePvpWarning.removeAll()
+        cellsWithSamePurpleWarning.removeAll()
+        cellsWithSameYellowWarning.removeAll()
         visible = true
         warningColor = ""
-        hasWarning = false
         hasPvpYellowWarning = false
         hasPvpBlueWarning = false
         hasPurpleWarning = false
         hasRedWarning = false
+        isSelected = false
     }
     
 

@@ -24,6 +24,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var hasWarning : Bool = false
     var hasPvpYellowWarning : Bool = false
     var hasPvpBlueWarning : Bool = false
+    var hasYellowWarning : Bool = false
+    var hasPurpleWarning : Bool = false
     var number : Int?
 
     var yellowPvpIndexPaths = Set<IndexPath>()
@@ -49,7 +51,13 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         
         teamnumLabel.text = String(cellteamnum)
         number = cellteamnum
+        algorithmCellBox.image = originalCellBoxImage
+        teamnumLabel.textColor = UIColor.black
+        isUserInteractionEnabled = true
+        yellowPvpIndexPaths.removeAll()
+        bluePvpIndexPaths.removeAll()
     }
+    
     
     
     func changeRed() {
@@ -131,22 +139,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = "purple"
     }
     
-    func addYellowIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
-        hasPvpYellowWarning = true
-        if !yellowPvpIndexPaths.isEmpty {
-            yellowPvpIndexPaths.formUnion(indexPathSet)
-        } else {
-            yellowPvpIndexPaths = indexPathSet
-        }
-    }
-    func addBlueIndexPathsToCell(_ indexPathSet: Set<IndexPath>) {
-        hasPvpBlueWarning = true
-        if !bluePvpIndexPaths.isEmpty {
-            bluePvpIndexPaths.formUnion(indexPathSet)
-        } else {
-            bluePvpIndexPaths = indexPathSet
-        }
-    }
+
 }
 
 
