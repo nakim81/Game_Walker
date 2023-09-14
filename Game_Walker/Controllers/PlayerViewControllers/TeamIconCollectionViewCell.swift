@@ -10,7 +10,7 @@ import UIKit
 class TeamIconCollectionViewCell: UICollectionViewCell {
     
     private var imageName: String?
-    
+
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +69,8 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
             
             imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 50),
-            imageView.heightAnchor.constraint(equalToConstant: 50)
+            imageView.widthAnchor.constraint(equalToConstant: 40),
+            imageView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         self.imageName = imageName
@@ -86,10 +86,10 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(teamNumLabel)
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.66),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height * 0.1),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
             
             teamNumLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             teamNumLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),

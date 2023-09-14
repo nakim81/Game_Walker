@@ -30,47 +30,41 @@ class RefereeMessageViewController: UIViewController {
         return view
     }()
     
-    private lazy var  messageLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "message 1")
-        return imageView
+    private lazy var  messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Announcement"
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 40)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private lazy var buttonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Regular", size: 17)
-
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        
         // enable
-        button.setTitle(title, for: .normal)
+        button.setTitle("Close", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
+        
         // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-
+        
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
-
-        button.addAction(for: .touchUpInside) { _ in
+        
+        return button
+    }()
+    
+    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+        self.closeButton.addAction(for: .touchUpInside) { _ in
             completion?()
         }
-        buttonView.addSubview(button)
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 100),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -100),
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.4),
-            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
-        ])
     }
     
     convenience init(messages: [String]) {
@@ -122,7 +116,7 @@ class RefereeMessageViewController: UIViewController {
         self.view.addSubview(containerView)
         containerView.addSubview(messageLabel)
         containerView.addSubview(messageTableView)
-        containerView.addSubview(buttonView)
+        containerView.addSubview(closeButton)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
     
@@ -130,7 +124,7 @@ class RefereeMessageViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageTableView.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -140,23 +134,21 @@ class RefereeMessageViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 80),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -80),
             messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.23),
+            messageLabel.widthAnchor.constraint(equalToConstant: 250),
+            messageLabel.heightAnchor.constraint(equalToConstant: 45),
             messageLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
-            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -25),
-            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
-            messageTableView.bottomAnchor.constraint(equalTo: buttonView.topAnchor, constant: -15),
+            messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
+            messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
+            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 5),
+            messageTableView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1),
-            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5),
-            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.2),
-            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
+            closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),
+            closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.12424),
+            closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
 }

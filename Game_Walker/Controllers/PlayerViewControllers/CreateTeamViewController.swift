@@ -17,8 +17,7 @@ class CreateTeamViewController: BaseViewController {
     
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
-    private var stationList: [Station] = []
-    private var algorithm: [[Int]] = []
+    private var host: Host?
     
     private let audioPlayerManager = AudioPlayerManager()
     
@@ -89,8 +88,8 @@ class CreateTeamViewController: BaseViewController {
     private func configureDelegates() {
         teamNameTextField.delegate = self
         teamNumberTextField.delegate = self
-        H.delegate_getHost = self
-        S.delegate_stationList = self
+        //H.delegate_getHost = self
+        //S.delegate_stationList = self
     }
     
     private func configureCollectionView() {
@@ -128,22 +127,38 @@ class CreateTeamViewController: BaseViewController {
             alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
             return
         }
-        H.getHost(gameCode)
+        Task { @MainActor in
+            do {
+                self.host = try await H.getHost2(gameCode)
+            } catch(let e) {
+                print(e)
+                alert(title: "Connection Error", message: e.localizedDescription)
+                return
+            }
+        }
+        //H.getHost(gameCode)
         if Int(teamNumber) ?? 0 > 0 {
-            if !self.algorithm.isEmpty {
+            let algorithm = self.host?.algorithm
+            if !(algorithm?.isEmpty ?? true) {
                 teamNameTextField.resignFirstResponder()
                 guard let selectedIconName = selectedIconName else {
                     alert(title: "No Icon Selected", message: "Please select a team icon")
                     return
                 }
                 ///find the order of stations for player's team
-                let stationOrder = self.getStationOrder(self.algorithm, Int(teamNumber) ?? 0)
-                print("stationorder\(stationOrder)")
+                let stationOrder = self.getStationOrder(algorithm ?? [[]], Int(teamNumber) ?? 0)
+                print("stationorder: \(stationOrder)")
                 let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                 UserData.writeTeam(newTeam, "team")
                 Task { @MainActor in
-                    await T.addTeam(gameCode, newTeam)
-                    performSegue(withIdentifier: "goToTPF4", sender: self)
+                    do {
+                        try await T.addTeam(gameCode, newTeam)
+                        performSegue(withIdentifier: "goToTPF4", sender: self)
+                    } catch(let e) {
+                        print(e)
+                        alert(title: "Connection Error", message: e.localizedDescription)
+                        return
+                    }
                 }
             } else {
                 alert(title: "", message: "The game has not started yet. Please try few minutes later!")
@@ -157,10 +172,21 @@ class CreateTeamViewController: BaseViewController {
     
     private func listen(_ _ : [String : Any]){}
 }
-// MARK: - Function for checking if the game started
+// MARK: - Methods for checking if the game started
 extension CreateTeamViewController {
+    
     ///return the order of staions for the team
     private func getStationOrder(_ algorithm: [[Int]], _ teamNumber: Int) -> [Int] {
+        var stationList: [Station] = []
+        Task { @MainActor in
+            do {
+                stationList = try await S.getStationList2(gameCode)
+            } catch(let e) {
+                print(e)
+                alert(title: "Connection Error", message: e.localizedDescription)
+                return
+            }
+        }
         var index = 0 ///represents the column index in the row
         var order: [Int] = []
         ///each row of the algorithm = teams
@@ -183,7 +209,7 @@ extension CreateTeamViewController {
             index = 0
         }
         print("column order: \(order)")
-        let pvp = self.findNumberOfPVP() ///number of pvp games
+        let pvp = self.findNumberOfPVP(stationList) ///number of pvp games
         var actualOrder: [Int] = [] //array of station.numbers
         
         /// if no pvp game, then order = actualOrder
@@ -192,7 +218,7 @@ extension CreateTeamViewController {
                 if column == -1 {
                     actualOrder.append(-1)
                 } else {
-                    actualOrder.append(self.stationList[column].number)
+                    actualOrder.append(stationList[column].number)
                 }
             }
         } else { /// if there are pvp games
@@ -204,11 +230,11 @@ extension CreateTeamViewController {
                 }
                 /// pvp games
                 else if column < limit {
-                    actualOrder.append(self.stationList[column / 2].number)
+                    actualOrder.append(stationList[column / 2].number)
                 }
                 /// pve games
                 else {
-                    actualOrder.append(self.stationList[column - pvp].number)
+                    actualOrder.append(stationList[column - pvp].number)
                 }
             }
         }
@@ -216,9 +242,9 @@ extension CreateTeamViewController {
     }
     
     /// find the number of pvp games
-    private func findNumberOfPVP() -> Int {
+    private func findNumberOfPVP(_ stationList: [Station]) -> Int {
         var pvp = 0
-        for station in self.stationList {
+        for station in stationList {
             if station.pvp {
                 pvp += 1
             }
@@ -295,12 +321,12 @@ extension CreateTeamViewController: UITextFieldDelegate {
 }
 
 // MARK: - Station Protocol
-extension CreateTeamViewController: StationList, GetHost {
-    func getHost(_ host: Host) {
-        self.algorithm = host.algorithm
-    }
-    
-    func listOfStations(_ stations: [Station]) {
-        self.stationList = stations
-    }
-}
+//extension CreateTeamViewController: StationList, GetHost {
+//    func getHost(_ host: Host) {
+//        self.algorithm = host.algorithm
+//    }
+//
+//    func listOfStations(_ stations: [Station]) {
+//        self.stationList = stations
+//    }
+//}

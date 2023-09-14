@@ -17,7 +17,6 @@ class RankingViewController: UIViewController {
     private var showScore: Bool = true
     private var teamList: [Team] = []
     private var selectedIndex: Int?
-    private let cellSpacingHeight: CGFloat = 1
     
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
@@ -59,14 +58,18 @@ class RankingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        T.delegates.append(self)
-        H.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        configureListeners()
         configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
         configureAlertIcon()
         configureGamecodeLabel()
+    }
+    
+    private func configureListeners(){
+        T.delegates.append(self)
+        H.delegates.append(self)
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
     }
     
     private func configureGamecodeLabel() {
@@ -122,7 +125,7 @@ class RankingViewController: UIViewController {
 extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
-        let team = teamList[indexPath.section]
+        let team = teamList[indexPath.row]
         let teamNum = String(team.number)
         let points = String(team.points)
         cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points, showScore: self.showScore)
@@ -130,25 +133,16 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return teamList.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return teamList.count
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+        return 85
     }
 }
 // MARK: - TeamProtocol

@@ -562,11 +562,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="BDC-4Y-7gV">
-                                <rect key="frame" x="30" y="84.666666666666657" width="192.66666666666666" height="64.666666666666657"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhR-xt-DuL">
+                                <rect key="frame" x="36.666666666666657" y="107" width="355" height="55"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
-                                <rect key="frame" x="36.666666666666657" y="151.66666666666663" width="355" height="607"/>
+                                <rect key="frame" x="36.666666666666657" y="177" width="355" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZ6-J9-loV">
@@ -607,18 +610,18 @@
                         <viewLayoutGuide key="safeArea" id="qT9-g7-uz0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="qT9-g7-uz0" firstAttribute="bottom" secondItem="QR7-Tt-ih6" secondAttribute="bottom" constant="15" id="1fp-ow-dsQ"/>
+                            <constraint firstItem="QhR-xt-DuL" firstAttribute="trailing" secondItem="QR7-Tt-ih6" secondAttribute="trailing" id="2dj-H3-lCF"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="1.6" id="5f0-hl-h8n"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" id="8k9-Ut-RfQ"/>
-                            <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.27" id="8x6-Hb-s0V"/>
-                            <constraint firstItem="BDC-4Y-7gV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0745721" id="B9d-c9-cuK"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.18" id="C9b-qO-3Uu"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.829439" id="F9a-eD-U9z"/>
-                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.7" id="Je0-WM-88q"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.16" id="LAm-vL-Vn4"/>
                             <constraint firstItem="nZ6-J9-loV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0475" id="XPu-hZ-Wm9"/>
-                            <constraint firstItem="BDC-4Y-7gV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="0.59" id="Zf9-wO-SWd"/>
-                            <constraint firstItem="BDC-4Y-7gV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.45" id="hiH-ka-e9w"/>
-                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="1.05" id="jM2-Ba-iXf"/>
+                            <constraint firstItem="QR7-Tt-ih6" firstAttribute="top" secondItem="QhR-xt-DuL" secondAttribute="bottom" constant="15" id="b6K-Ab-7Pp"/>
+                            <constraint firstItem="QhR-xt-DuL" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.31" id="hUj-am-TbG"/>
+                            <constraint firstItem="QhR-xt-DuL" firstAttribute="leading" secondItem="QR7-Tt-ih6" secondAttribute="leading" id="iPa-ly-kUu"/>
+                            <constraint firstItem="QhR-xt-DuL" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0634371" id="rdF-FN-C6E"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
@@ -760,7 +763,6 @@
         <image name="current station info 2" width="169.66667175292969" height="55"/>
         <image name="leave 1" width="60" height="31"/>
         <image name="next station info 1" width="169.66667175292969" height="55"/>
-        <image name="ranking 1" width="187" height="61"/>
         <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="53.666667938232422" height="40"/>
         <image name="team member icon 1" width="84" height="112"/>

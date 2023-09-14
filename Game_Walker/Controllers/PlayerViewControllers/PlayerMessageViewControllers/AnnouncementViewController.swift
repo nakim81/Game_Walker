@@ -23,18 +23,12 @@ class AnnouncementViewController: UIViewController {
         return view
     }()
     
-    private lazy var announcmentScrollView: UIScrollView = {
+    private lazy var announcementScrollView: UIScrollView = {
         let view = UIScrollView()
         view.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         view.layer.borderWidth = 3
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 10
         return view
-    }()
-    
-    private lazy var  announcementLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "announcement 3")
-        return imageView
     }()
     
     private lazy var announcementTextLabel: UILabel = {
@@ -42,25 +36,19 @@ class AnnouncementViewController: UIViewController {
         label.text = self.announcement
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
     }()
     
-    private lazy var buttonView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         
         // enable
-        button.setTitle(title, for: .normal)
+        button.setTitle("Close", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
@@ -69,20 +57,16 @@ class AnnouncementViewController: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
         
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
         
-        button.addAction(for: .touchUpInside) { _ in
+        return button
+    }()
+    
+    public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
+        self.closeButton.addAction(for: .touchUpInside) { _ in
             completion?()
         }
-        buttonView.addSubview(button)
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 73),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -73),
-            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.3),
-            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
-        ])
     }
     
     convenience init(announcement: String?) {
@@ -120,19 +104,17 @@ class AnnouncementViewController: UIViewController {
     
     private func setUpViews() {
         self.view.addSubview(containerView)
-        containerView.addSubview(announcementLabel)
-        containerView.addSubview(announcmentScrollView)
-        announcmentScrollView.addSubview(announcementTextLabel)
-        containerView.addSubview(buttonView)
+        containerView.addSubview(announcementScrollView)
+        announcementScrollView.addSubview(announcementTextLabel)
+        containerView.addSubview(closeButton)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
     
     private func makeConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        announcementLabel.translatesAutoresizingMaskIntoConstraints = false
-        announcmentScrollView.translatesAutoresizingMaskIntoConstraints = false
+        announcementScrollView.translatesAutoresizingMaskIntoConstraints = false
         announcementTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
@@ -142,28 +124,21 @@ class AnnouncementViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            announcementLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
-            announcementLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -15),
-            announcementLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
-            announcementLabel.heightAnchor.constraint(equalTo: announcementLabel.widthAnchor, multiplier: 0.178),
-            announcementLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            announcementScrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            announcementScrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            announcementScrollView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            announcementScrollView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -20),
+            announcementScrollView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            announcmentScrollView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
-            announcmentScrollView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            announcmentScrollView.topAnchor.constraint(equalTo: announcementLabel.bottomAnchor, constant: 2),
-            announcmentScrollView.bottomAnchor.constraint(equalTo: buttonView.topAnchor, constant: -5),
-            announcmentScrollView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            announcementTextLabel.topAnchor.constraint(equalTo: announcementScrollView.topAnchor),
+            announcementTextLabel.bottomAnchor.constraint(equalTo: announcementScrollView.bottomAnchor),
+            announcementTextLabel.centerXAnchor.constraint(equalTo: announcementScrollView.centerXAnchor),
+            announcementTextLabel.widthAnchor.constraint(equalTo: announcementScrollView.widthAnchor),
             
-            announcementTextLabel.topAnchor.constraint(equalTo: announcmentScrollView.topAnchor),
-            announcementTextLabel.bottomAnchor.constraint(equalTo: announcmentScrollView.bottomAnchor),
-            announcementTextLabel.centerXAnchor.constraint(equalTo: announcmentScrollView.centerXAnchor),
-            announcementTextLabel.widthAnchor.constraint(equalTo: announcmentScrollView.widthAnchor),
-            
-            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1.0),
-            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1.0),
-            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5.0),
-            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.27),
-            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
+            closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),
+            closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.12424),
+            closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
 }

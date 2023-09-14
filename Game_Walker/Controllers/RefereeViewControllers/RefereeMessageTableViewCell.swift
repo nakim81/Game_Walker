@@ -41,9 +41,9 @@ class RefereeMessageTableViewCell: UITableViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         messageNameLabel.backgroundColor = .clear
-        messageNameLabel.textAlignment = .center
-        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 18)
-        messageNameLabel.numberOfLines = 0
+        messageNameLabel.textAlignment = .left
+        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 20)
+        messageNameLabel.numberOfLines = 1
         messageNameLabel.translatesAutoresizingMaskIntoConstraints = false
         messageNameLabel.clipsToBounds = true
         
