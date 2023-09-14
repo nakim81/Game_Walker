@@ -333,19 +333,6 @@ class AlgorithmViewController: BaseViewController {
         return isSectionValid && isItemValid
     }
 
-//    func scanForRedHorizontally(inRow section: Int, with targetNumber: Int) -> Bool {
-//        var foundRedCell = false
-//        let indexPathsInSection = collectionView.indexPathsForVisibleItems.filter { $0.section == section }
-//
-//        for indexPath in indexPathsInSection {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? AlgorithmCollectionViewCell {
-//                if cell.number == targetNumber && cell.warningColor == "red"{
-//                    foundRedCell = true
-//                }
-//            }
-//        }
-//        return foundRedCell
-//    }
     
     func scanForRedVertically(inColumn column: Int, with targetNumber: Int) -> Bool {
         var foundRedCell = false
@@ -532,6 +519,7 @@ class AlgorithmViewController: BaseViewController {
         
         for (_, cellDataSet) in allCellsWithDuplicatedMatchesByPairs {
             for cellData in cellDataSet {
+                addCellSetsToCellGridData(cellDataInstance: cellData, to: "blue", set: cellDataSet)
                 
                 //Case where cells that need blue warnings already has yellow pvp warnings
                 if cellData.hasPvpYellowWarning {
@@ -539,9 +527,12 @@ class AlgorithmViewController: BaseViewController {
                     for yellowCellData in cellData.cellsWithSameYellowPvpWarning {
                         changeCellGridData(cellDataInstance: yellowCellData, to: "red")
                     }
+                    for currCellData in cellData.cellsWithSameBluePvpWarning {
+                        changeCellGridData(cellDataInstance: currCellData, to: "red")
+                    }
                 } else {
                     changeCellGridData(cellDataInstance: cellData, to: "blue")
-                    addCellSetsToCellGridData(cellDataInstance: cellData, to: "blue", set: cellDataSet)
+                
                 }
                 
             }
@@ -609,38 +600,47 @@ class AlgorithmViewController: BaseViewController {
                 if numberIsValid(number) {
                     if var cellDataSet = rowNumbers[number!] {
                         cellDataSet.insert(cellData)
+                        rowNumbers[number!] = cellDataSet
+                    } else {
+                        var newCellDataSet = Set<CellData>()
+                        newCellDataSet.insert(cellData)
+                        rowNumbers[number!] = newCellDataSet
                     }
-                } else {
-                    var newCellDataSet = Set<CellData>()
-                    newCellDataSet.insert(cellData)
-                    rowNumbers[number!] = newCellDataSet
                 }
-                
             }
             //Now mark each cell with more than two counts in sets in each row
             for (_, cellDataSet) in rowNumbers {
                 if cellDataSet.count >= 2 {
-                    for cellData in cellDataSet {
-                        changeCellGridData(cellDataInstance: cellData, to: "purple")
-                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "purple", set: cellDataSet)
-                        if cellData.hasYellowWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for yellowCellData in cellData.cellsWithSameYellowWarning {
-                                changeCellGridData(cellDataInstance: yellowCellData, to: "red")
-                            }
-                        } else if cellData.hasRedWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                        } else if cellData.hasPvpBlueWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for pvpBlueCellData in cellData.cellsWithSameBluePvpWarning {
+                    for cellDataDuplicates in cellDataSet {
+                        addCellSetsToCellGridData(cellDataInstance: cellDataDuplicates, to: "purple", set: cellDataSet)
+                        
+                        if cellDataDuplicates.hasYellowWarning {
+//                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
+//                            for yellowCellData in cellDataDuplicates.cellsWithSameYellowWarning {
+//                                changeCellGridData(cellDataInstance: yellowCellData, to: "red")
+//                            }
+                        } else if cellDataDuplicates.hasRedWarning {
+                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
+                        } else if cellDataDuplicates.hasPvpBlueWarning {
+                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
+                            for pvpBlueCellData in cellDataDuplicates.cellsWithSameBluePvpWarning {
                                 changeCellGridData(cellDataInstance: pvpBlueCellData, to: "red")
                             }
-                        } else if cellData.hasPvpYellowWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for pvpYellowCellData in cellData.cellsWithSameYellowPvpWarning {
+                            for currCellData in cellDataDuplicates.cellsWithSamePurpleWarning   {
+                                changeCellGridData(cellDataInstance: currCellData, to: "red")
+                            }
+                        } else if cellDataDuplicates.hasPvpYellowWarning {
+                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
+                            for pvpYellowCellData in cellDataDuplicates.cellsWithSameYellowPvpWarning {
                                 changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
                             }
+                            for currCellData in cellDataDuplicates.cellsWithSamePurpleWarning   {
+                                changeCellGridData(cellDataInstance: currCellData, to: "red")
+                            }
+                        } else {
+                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "purple")
                         }
+
                     }
                 }
             }
@@ -657,35 +657,44 @@ class AlgorithmViewController: BaseViewController {
                 if numberIsValid(number) {
                     if var cellDataSet = columnNumbers[number!] {
                         cellDataSet.insert(cellData)
+                        columnNumbers[number!] = cellDataSet
+                    } else {
+                        var newCellDataSet = Set<CellData>()
+                        newCellDataSet.insert(cellData)
+                        columnNumbers[number!] = newCellDataSet
                     }
-                } else {
-                    var newCellDataSet = Set<CellData>()
-                    newCellDataSet.insert(cellData)
-                    columnNumbers[number!] = newCellDataSet
                 }
             }
             for (_, cellDataSet) in columnNumbers {
                 if cellDataSet.count >= 2 {
-                    for cellData in cellDataSet {
-                        changeCellGridData(cellDataInstance: cellData, to: "yellow")
-                        addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellow", set: cellDataSet)
-                        if cellData.hasPurpleWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for purpleCellData in cellData.cellsWithSamePurpleWarning {
+                    for cellDataWithWarning in cellDataSet {
+                        addCellSetsToCellGridData(cellDataInstance: cellDataWithWarning, to: "yellow", set: cellDataSet)
+                        if cellDataWithWarning.hasPurpleWarning {
+                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
+                            for purpleCellData in cellDataWithWarning.cellsWithSamePurpleWarning {
                                 changeCellGridData(cellDataInstance: purpleCellData, to: "red")
                             }
-                        } else if cellData.hasRedWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                        } else if cellData.hasPvpBlueWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for pvpBlueCellData in cellData.cellsWithSameBluePvpWarning {
+                            for currCellData in cellDataWithWarning.cellsWithSameYellowWarning   {
+                                changeCellGridData(cellDataInstance: currCellData, to: "red")
+                            }
+                        } else if cellDataWithWarning.hasRedWarning {
+                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
+                            
+                        } else if cellDataWithWarning.hasPvpBlueWarning {
+                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
+                            for pvpBlueCellData in cellDataWithWarning.cellsWithSameBluePvpWarning {
                                 changeCellGridData(cellDataInstance: pvpBlueCellData, to: "red")
                             }
-                        } else if cellData.hasPvpYellowWarning {
-                            changeCellGridData(cellDataInstance: cellData, to: "red")
-                            for pvpYellowCellData in cellData.cellsWithSameYellowPvpWarning {
-                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
+                            for currCellData in cellDataWithWarning.cellsWithSameYellowWarning   {
+                                changeCellGridData(cellDataInstance: currCellData, to: "red")
                             }
+                        } else if cellDataWithWarning.hasPvpYellowWarning {
+//                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
+//                            for pvpYellowCellData in cellDataWithWarning.cellsWithSameYellowPvpWarning {
+//                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
+//                            }
+                        } else {
+                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "yellow")
                         }
                     }
                 }
@@ -744,7 +753,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             if let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
                 selectedCellA.makeCellSelected()
             }
-            
         } else if cellDataB == nil {
             // Second selection
 //            indexPathB = indexPath
@@ -754,22 +762,22 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             if let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgorithmCollectionViewCell {
                 selectedCellB.makeCellSelected()
             }
-
         }
         if let cellDataAIndex = cellDataA?.cellIndex, let cellDataBIndex = cellDataB?.cellIndex {
             let indexPathA = IndexPath(item: cellDataAIndex.second, section: cellDataAIndex.first)
             let indexPathB = IndexPath(item: cellDataBIndex.second, section: cellDataBIndex.first)
 
-            
             collectionView.performBatchUpdates({
                 collectionView.moveItem(at: indexPathA, to: indexPathB)
                 collectionView.moveItem(at: indexPathB, to: indexPathA)
 
                 }, completion: { _ in
-                    self.cellDataA?.changeCellIndex(section: (self.cellDataB?.cellIndex?.first)!, column: (self.cellDataB?.cellIndex?.second)!)
-                    self.cellDataB?.changeCellIndex(section: (self.cellDataA?.cellIndex?.first)!, column: (self.cellDataA?.cellIndex?.second)!)
+//                    self.cellDataA?.changeCellIndex(section: (self.cellDataB?.cellIndex?.first)!, column: (self.cellDataB?.cellIndex?.second)!)
+//                    self.cellDataB?.changeCellIndex(section: (self.cellDataA?.cellIndex?.first)!, column: (self.cellDataA?.cellIndex?.second)!)
                     self.cellDataGrid[cellDataAIndex.first][cellDataAIndex.second] = self.cellDataB!
                     self.cellDataGrid[cellDataBIndex.first][cellDataBIndex.second] = self.cellDataA!
+                    self.cellDataGrid[cellDataAIndex.first][cellDataAIndex.second].cellIndex = cellDataAIndex
+                    self.cellDataGrid[cellDataBIndex.first][cellDataBIndex.second].cellIndex = cellDataBIndex
                     
                     self.changeCellGridData(cellDataInstance: self.cellDataA!, to: "deselected")
                     self.changeCellGridData(cellDataInstance: self.cellDataB!, to: "deselected")
@@ -806,8 +814,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     print("PRINTING CELLDATA GRID: ", printgrid)
 
             })
-
-
 //            collectionView.reloadData()
         }
     }
@@ -822,9 +828,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
         cell.addGestureRecognizer(doubleTapGestureRecognizer)
-        
-//        resetAll()
-//        reloadAll()
+
         
         let cellData = cellDataGrid[indexPath.section][indexPath.item]
         let teamNumberLabel = cellData.number
@@ -836,18 +840,16 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }  else {
             cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
             
-            if cellData.hasPvpBlueWarning {
+            if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
                 cell.makeBlueWarning()
-            } else if cellData.hasPvpYellowWarning || cellData.hasYellowWarning {
+            } else if (cellData.hasPvpYellowWarning || cellData.hasYellowWarning) && !cellData.hasRedWarning {
                 cell.makeYellowWarning()
-            } else if cellData.hasPurpleWarning {
+            } else if cellData.hasPurpleWarning && !cellData.hasRedWarning {
                 cell.makePurpleWarning()
             } else if cellData.hasRedWarning {
                 cell.makeRedWarning()
             }
         }
-
-
         return cell
     }
     
@@ -866,9 +868,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         return cellNumber == -1
     }
 
- 
 
-    
     @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
         guard let cell = sender.view as? AlgorithmCollectionViewCell else { return }
         
@@ -911,6 +911,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func reloadAll() {
+        collectionView.isUserInteractionEnabled = false
         if pvpGameCount > 0 {
             processPvpYellowCells()
             processPvpBlueCells()
@@ -919,6 +920,9 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         processPurpleSameRoundCells()
         processYellowSameStationCells()
         collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.isUserInteractionEnabled = true
+        }
     }
     
     func resetAll() {
@@ -939,10 +943,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
 }
-        
-
-
-
 
 
 extension AlgorithmViewController: StationList {

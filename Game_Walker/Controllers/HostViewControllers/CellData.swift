@@ -132,10 +132,9 @@ class CellData: Hashable {
     
     func addYellowPvpIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpYellowWarning = true
-        hasPvpBlueWarning = false
-        hasPurpleWarning = false
-        hasRedWarning = false
-        hasYellowWarning = false
+//        hasPvpBlueWarning = false
+//        hasPurpleWarning = false
+//        hasYellowWarning = false
         
         if !cellsWithSameYellowPvpWarning.isEmpty {
             cellsWithSameYellowPvpWarning.formUnion(indexSet)
@@ -146,10 +145,9 @@ class CellData: Hashable {
     
     func addBluePvpIndexToCellData(_ indexSet: Set<CellData>) {
         hasPvpBlueWarning = true
-        hasPvpYellowWarning = false
-        hasPurpleWarning = false
-        hasRedWarning = false
-        hasYellowWarning = false
+//        hasPvpYellowWarning = false
+//        hasPurpleWarning = false
+//        hasYellowWarning = false
         
         if !cellsWithSameBluePvpWarning.isEmpty {
             cellsWithSameBluePvpWarning.formUnion(indexSet)
@@ -159,9 +157,10 @@ class CellData: Hashable {
     }
     func addPurpleIndexToCellData(_ indexSet: Set<CellData>) {
         hasPurpleWarning = true
-        hasPvpYellowWarning = false
-        hasPvpBlueWarning = false
-        hasRedWarning = false
+//        hasPvpYellowWarning = false
+//        hasPvpBlueWarning = false
+//        hasYellowWarning = false
+
         
         if !cellsWithSamePurpleWarning.isEmpty {
             cellsWithSamePurpleWarning.formUnion(indexSet)
@@ -171,10 +170,10 @@ class CellData: Hashable {
     }
     func addYellowIndexToCellData(_ indexSet: Set<CellData>) {
         hasYellowWarning = true
-        hasPvpYellowWarning = false
-        hasPvpBlueWarning = false
-        hasPurpleWarning = false
-        hasRedWarning = false
+//        hasPvpYellowWarning = false
+//        hasPvpBlueWarning = false
+//        hasPurpleWarning = false
+
         
         if !cellsWithSameYellowWarning.isEmpty {
             cellsWithSameYellowWarning.formUnion(indexSet)
@@ -200,6 +199,7 @@ class CellData: Hashable {
         hasPvpYellowWarning = false
         hasPvpBlueWarning = false
         hasPurpleWarning = false
+        hasYellowWarning = false
         hasRedWarning = false
         isSelected = false
     }
