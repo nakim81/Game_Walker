@@ -60,8 +60,6 @@ class HostRankingTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Medium", size: 13)
         label.numberOfLines = 2
-//        label.adjustsFontSizeToFitWidth = true
-//        label.minimumScaleFactor = 0.5
         return label
     }()
 

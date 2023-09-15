@@ -319,14 +319,3 @@ extension CreateTeamViewController: UITextFieldDelegate {
         return true
     }
 }
-
-// MARK: - Station Protocol
-//extension CreateTeamViewController: StationList, GetHost {
-//    func getHost(_ host: Host) {
-//        self.algorithm = host.algorithm
-//    }
-//
-//    func listOfStations(_ stations: [Station]) {
-//        self.stationList = stations
-//    }
-//}

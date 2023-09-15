@@ -15,7 +15,7 @@ class AnnouncementViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
-        view.layer.cornerRadius = 13
+        view.layer.cornerRadius = 20
         
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
