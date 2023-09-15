@@ -74,7 +74,7 @@ class HostTimerViewController: UIViewController {
                         try await H.startGame(gameCode)
                     } catch ServerError.serverError(let text){
                         print(text)
-                        //serverAlert(text)
+                        serverAlert(text)
                         return
                     }
                     sender.setImage(pause, for: .normal)
@@ -83,7 +83,7 @@ class HostTimerViewController: UIViewController {
                         try await H.pause_resume_game(gameCode)
                     } catch ServerError.serverError(let text){
                         print(text)
-                        //serverAlert(text)
+                        serverAlert(text)
                         return
                     }
                 }
@@ -101,7 +101,7 @@ class HostTimerViewController: UIViewController {
                         try await H.pause_resume_game(gameCode)
                     } catch ServerError.serverError(let text){
                         print(text)
-                        //serverAlert(text)
+                        serverAlert(text)
                         return
                     }
                 }
@@ -278,7 +278,7 @@ class HostTimerViewController: UIViewController {
                                 try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
                             } catch ServerError.serverError(let text){
                                 print(text)
-                                //serverAlert(text)
+                                serverAlert(text)
                                 return
                             }
                         }
@@ -343,7 +343,7 @@ class HostTimerViewController: UIViewController {
                 try await H.updateCurrentRound(gameCode, self.round)
             } catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }
         }

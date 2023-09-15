@@ -97,7 +97,7 @@ class EndGameViewController: UIViewController {
                 try await H.endGame(self.gameCode)
             } catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }
             dismiss(animated: true, completion: nil)
