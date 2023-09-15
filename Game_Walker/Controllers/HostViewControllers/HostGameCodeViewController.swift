@@ -16,9 +16,6 @@ class HostGameCodeViewController: BaseViewController {
     private var gamecode = UserData.readGamecode("gamecode")
     
     private var usestoredcode = true
-//    var host : Host?
-    
-    // This will be the game code entered by the user.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +60,3 @@ class HostGameCodeViewController: BaseViewController {
 extension HostGameCodeViewController: UITextFieldDelegate {
 
 }
-
-//extension HostGameCodeViewController: GetHost {
-//    func getHost(_ host: Host) {
-//        self.host = host
-//        print("host protocol: could get host")
-//    }
-//}
