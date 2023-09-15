@@ -85,7 +85,7 @@ class GivePointsController: UIViewController {
                 try await T.givePoints(gameCode, team.name, Int(stepper.value))
             } catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }
         }

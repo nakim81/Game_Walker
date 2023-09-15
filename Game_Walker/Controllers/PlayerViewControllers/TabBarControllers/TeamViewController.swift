@@ -153,7 +153,7 @@ class TeamViewController: UIViewController {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
                 } catch ServerError.serverError(let text){
                     print(text)
-                    //serverAlert(text)
+                    serverAlert(text)
                     return
                 }
             }

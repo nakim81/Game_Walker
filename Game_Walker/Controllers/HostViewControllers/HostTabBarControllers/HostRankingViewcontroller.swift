@@ -134,7 +134,7 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
               try await H.hide_show_score(gameCode, self.showScore)
           } catch ServerError.serverError(let text){
               print(text)
-              //serverAlert(text)
+              serverAlert(text)
               return
           }
       }

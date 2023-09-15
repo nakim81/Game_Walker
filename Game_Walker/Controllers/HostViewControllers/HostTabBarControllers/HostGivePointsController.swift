@@ -86,7 +86,7 @@ class HostGivePointsController : UIViewController {
             }
             catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }
         }

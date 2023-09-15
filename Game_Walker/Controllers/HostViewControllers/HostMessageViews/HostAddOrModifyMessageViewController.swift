@@ -112,7 +112,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }  catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }
             
@@ -127,7 +127,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             } catch ServerError.serverError(let text){
                 print(text)
-                //serverAlert(text)
+                serverAlert(text)
                 return
             }            
         }
