@@ -95,8 +95,15 @@ extension StationsTableViewController: UITableViewDelegate {
         // Change referee to unassign
 
         let refereeToRemove = stationToRemove.referee
-        
-        await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+        Task{
+            do{
+                try await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
         S.removeStation(gamecode!, stationToRemove)
         
         // Remove the station from data source

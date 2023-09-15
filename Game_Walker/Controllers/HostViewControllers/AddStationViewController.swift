@@ -248,16 +248,32 @@ class AddStationViewController: BaseViewController {
                 var tempReferee = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
 
                 if (refereeModified) {
-                    await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-
-                    await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
-                    
+                    do{
+                        try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                    do{
+                        try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                     tempReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: newReferee!.uuid)
                 }
                 
                 
                 let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
-                await S.saveStation(gamecode, modifiedStation)
+                do {
+                    try await S.saveStation(gamecode, modifiedStation)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
             }
 
 
@@ -267,7 +283,13 @@ class AddStationViewController: BaseViewController {
             let selectedReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: refereeUuid)
             Task { @MainActor in
 //               try await R.assignStation(gamecode, refereeUuid, gamename, true)
-                await R.assignStation(gamecode, refereeUuid, gamename, true)
+                do {
+                    try await R.assignStation(gamecode, refereeUuid, gamename, true)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
                 
                 let uuid = UUID()
                 stationUuid = uuid.uuidString
@@ -275,11 +297,15 @@ class AddStationViewController: BaseViewController {
                 let stationToAdd = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
                 
 //                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
-                await S.saveStation(gamecode, stationToAdd)
+                do {
+                    try await S.saveStation(gamecode, stationToAdd)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
             }
         }
-        
-
         
         delegate?.didUpdateStationData()
         self.dismiss(animated: true, completion: nil)

@@ -96,7 +96,11 @@ class WaitingController: BaseViewController {
         }
         self.updatedTeamOrder = teamOrder
         Task {
-            await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
+            do{
+                try await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
+            }
+            
+            
         }
     }
     

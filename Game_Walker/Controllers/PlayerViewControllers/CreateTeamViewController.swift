@@ -129,7 +129,13 @@ class CreateTeamViewController: BaseViewController {
                 let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                 UserData.writeTeam(newTeam, "team")
                 Task { @MainActor in
-                    await T.addTeam(gameCode, newTeam)
+                    do {
+                        try await T.addTeam(gameCode, newTeam)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                     performSegue(withIdentifier: "goToTPF4", sender: self)
                 }
             } else {

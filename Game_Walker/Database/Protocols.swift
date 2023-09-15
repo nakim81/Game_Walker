@@ -63,3 +63,7 @@ protocol AddStationDelegate: AnyObject {
 enum GamecodeError: Error {
     case invalidGamecode(String)
 }
+
+enum ServerError: Error {
+    case serverError(String)
+}

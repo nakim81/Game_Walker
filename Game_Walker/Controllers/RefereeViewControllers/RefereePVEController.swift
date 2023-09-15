@@ -188,7 +188,13 @@ class RefereePVEController: BaseViewController {
     @objc func winButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.team.name, self.points)
+            do {
+                try await T.givePoints(gameCode, self.team.name, self.points)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
         }
         winButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false

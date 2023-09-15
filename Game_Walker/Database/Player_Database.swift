@@ -30,10 +30,9 @@ struct P {
                 print("Gamecode does not exist")
                 throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
-        } catch let gamecodeError as GamecodeError{
-            throw gamecodeError
         } catch {
             print("Error adding Player: \(error)")
+            throw ServerError.serverError("Something went wrong while adding Player")
         }
     }
     
@@ -55,8 +54,8 @@ struct P {
             ])
             print("Player name modified")
         } catch {
-            print("Gamecode does not exist")
-            throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+            print("Error modifying Player name: \(error)")
+            throw ServerError.serverError("Something went wrong while modifying Player Name")
         }
     }
     

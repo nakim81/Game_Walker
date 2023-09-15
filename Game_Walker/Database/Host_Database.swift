@@ -20,16 +20,17 @@ struct H {
     
     //MARK: - Game Control Functions
     
-    static func createGame(_ gamecode: String, _ host: Host) {
+    static func createGame(_ gamecode: String, _ host: Host) throws {
         do {
             try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
             print("Created Game")
         } catch {
             print("Error creating Game: \(error)")
+            throw ServerError.serverError("Something went wrong while creating Host")
         }
     }
     
-    static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async {
+    static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -41,10 +42,11 @@ struct H {
             print("Host setted Settings")
         } catch {
             print("Error setting settings Host: \(error)")
+            throw ServerError.serverError("Something went wrong while setting Settings")
         }
     }
     
-    static func startGame(_ gamecode: String) async {
+    static func startGame(_ gamecode: String) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -55,10 +57,11 @@ struct H {
             print("Started Game")
         } catch {
             print("Error starting Game: \(error)")
+            throw ServerError.serverError("Something went wrong while starting Game")
         }
     }
     
-    static func pause_resume_game(_ gamecode: String) async {
+    static func pause_resume_game(_ gamecode: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -79,13 +82,15 @@ struct H {
                 print("Paused/Resumed Game")
             } else {
                 print("Host does not exist")
+                throw ServerError.serverError("Something went wrong while pauseing/resuming Game")
             }
         } catch {
             print("Error pausing/resuming Game: \(error)")
+            throw ServerError.serverError("Something went wrong while pauseing/resuming Game")
         }
     }
     
-    static func endGame(_ gamecode: String) async {
+    static func endGame(_ gamecode: String) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -94,10 +99,11 @@ struct H {
             print("End Game")
         } catch {
             print("Error ending Game: \(error)")
+            throw ServerError.serverError("Something went wrong while ending Host")
         }
     }
     
-    static func updateCurrentRound(_ gamecode: String, _ currentRound: Int) async {
+    static func updateCurrentRound(_ gamecode: String, _ currentRound: Int) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -106,11 +112,12 @@ struct H {
             print("Updated Current Round")
         } catch {
             print("Error updating Current Round: \(error)")
+            throw ServerError.serverError("Something went wrong while updating Current Round")
         }
     }
     
     //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
-    static func hide_show_score(_ gamecode: String, _ show: Bool) async {
+    static func hide_show_score(_ gamecode: String, _ show: Bool) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             try await server.updateData([
@@ -119,12 +126,13 @@ struct H {
             print("Hid/Showed Score")
         } catch {
             print("Error hiding/showing score: \(error)")
+            throw ServerError.serverError("Something went wrong while hiding/showing Score")
         }
     }
     
     //MARK: - Announcment Functions
     
-    static func addAnnouncement(_ gamecode: String, _ announcement: String) async {
+    static func addAnnouncement(_ gamecode: String, _ announcement: String) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -136,13 +144,15 @@ struct H {
                 print("Added Announcement")
             } else {
                 print("Host does not exist")
+                throw ServerError.serverError("Something went wrong while adding Announcement")
             }
         } catch {
             print("Error adding Announcement: \(error)")
+            throw ServerError.serverError("Something went wrong while adding Announcement")
         }
     }
     
-    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async {
+    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -155,16 +165,19 @@ struct H {
                     print("Modified Announcement")
                 } else {
                     print("Invalid index of announcement")
+                    throw ServerError.serverError("Wrong index while modifying Announcement")
                 }
             } else {
                 print("Host does not exist")
+                throw ServerError.serverError("Something went wrong while modifying Announcement")
             }
         } catch {
             print("Error modfiying Announcement: \(error)")
+            throw ServerError.serverError("Something went wrong while modifying Announcement")
         }
     }
     
-    static func removeAnnouncement(_ gamecode: String, _ index: Int) async {
+    static func removeAnnouncement(_ gamecode: String, _ index: Int) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -177,12 +190,15 @@ struct H {
                     print("Removed Announcement")
                 } else {
                     print("Invalid announcement index")
+                    throw ServerError.serverError("Wrong index while removing Announcement")
                 }
             } else {
                 print("Host does not exist")
+                throw ServerError.serverError("Something went wrong while removing Announcement")
             }
         } catch {
             print("Error removing Announcement: \(error)")
+            throw ServerError.serverError("Something went wrong while removing Announcement")
         }
     }
     
@@ -208,6 +224,7 @@ struct H {
                 delegate_getHost?.getHost(host)
             } else {
                 print("Error getting Host")
+                
             }
         }
     }
@@ -221,7 +238,7 @@ struct H {
             return host
         } else {
             print("Error getting Host")
-            return nil
+            throw ServerError.serverError("Something went wrong while rgetting Host")
         }
     }
 

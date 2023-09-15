@@ -20,7 +20,7 @@ struct S {
     
     //MARK: - Station Control Functions
     
-    static func saveStation(_ gamecode: String, _ station: Station) async {
+    static func saveStation(_ gamecode: String, _ station: Station) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -32,6 +32,7 @@ struct S {
             }
         } catch {
             print("Error adding Station: \(error)")
+            throw ServerError.serverError("Something went wrong while saving Station")
         }
     }
     
@@ -45,7 +46,7 @@ struct S {
         }
     }
     
-    static func assignReferee(_ gamecode: String, _ stationto: Station, _ referee: Referee) async {
+    static func assignReferee(_ gamecode: String, _ stationto: Station, _ referee: Referee) async throws{
         let docRef = db.collection("\(gamecode) : Stations").document(stationto.uuid)
         do {
             let document = try await docRef.getDocument()
@@ -59,10 +60,11 @@ struct S {
             }
         } catch {
             print("Error assigning Referee: \(error)")
+            throw ServerError.serverError("Something went wrong while assigning Station a referee")
         }
     }
     
-    static func updateTeamOrder(_ gamecode: String, _ uuid: String, _ teamOrder: [Team]) async {
+    static func updateTeamOrder(_ gamecode: String, _ uuid: String, _ teamOrder: [Team]) async throws {
         let docRef = db.collection("\(gamecode) : Stations").document(uuid)
         do {
             let document = try await docRef.getDocument()
@@ -76,6 +78,7 @@ struct S {
             }
         } catch {
             print("Error updating team order: \(error)")
+            throw ServerError.serverError("Something went wrong while updating Team Order of Station")
         }
     }
     
@@ -103,7 +106,7 @@ struct S {
             return station
         } else {
             print("Error getting Station")
-            return nil
+            throw ServerError.serverError("Something went wrong while getting Station")
         }
     }
     
@@ -134,23 +137,29 @@ struct S {
     
     static func getStationList2(_ gamecode: String) async throws -> [Station] {
         //sorted by station number and station is numbered priority to pvp
-        let querySnapshot = try await db.collection("\(gamecode) : Stations").getDocuments()
-        var stations: [Station] = []
-        
-        for document in querySnapshot.documents {
-            let data = document.data()
-            let station = convertDataToStation(data)
-            stations.append(station)
-        }
-        
-        stations.sort { $0.pvp && !$1.pvp }
-        if stations.first?.number == 0 {
-            for i in 0..<stations.count {
-                stations[i].number = i + 1
+        do{
+            let querySnapshot = try await db.collection("\(gamecode) : Stations").getDocuments()
+            var stations: [Station] = []
+            
+            for document in querySnapshot.documents {
+                let data = document.data()
+                let station = convertDataToStation(data)
+                stations.append(station)
             }
+            
+            stations.sort { $0.pvp && !$1.pvp }
+            if stations.first?.number == 0 {
+                for i in 0..<stations.count {
+                    stations[i].number = i + 1
+                }
+            }
+            stations.sort { $0.number < $1.number }
+            return stations
         }
-        stations.sort { $0.number < $1.number }
-        return stations
+        catch{
+            print("Error getting StationList")
+            throw ServerError.serverError("Something went wrong while getting StationList")
+        }
     }
     
     
