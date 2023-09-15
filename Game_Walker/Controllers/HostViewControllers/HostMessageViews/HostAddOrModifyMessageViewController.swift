@@ -32,9 +32,9 @@ class HostAddOrModifyMessageViewController: UIViewController {
         textView.backgroundColor = .clear
         textView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         textView.layer.borderWidth = 3
-        textView.layer.cornerRadius = 8
-        textView.textAlignment = .left
-        textView.font = UIFont(name: "Dosis-Regular", size: 17)
+        textView.layer.cornerRadius = 10
+        textView.textAlignment = .center
+        textView.font = UIFont(name: "Dosis-Regular", size: 15)
         textView.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
         return textView
@@ -43,7 +43,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
         button.setTitle("Close", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -54,7 +54,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         return button
@@ -63,7 +63,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     private lazy var sendButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
         button.setTitle("Send", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -74,7 +74,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         return button
@@ -83,7 +83,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     private lazy var modifyButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
         button.setTitle("Edit", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -94,7 +94,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(modifyMessage), for: .touchUpInside)
         return button
@@ -108,30 +108,29 @@ class HostAddOrModifyMessageViewController: UIViewController {
         Task { @MainActor in
             do {
                 try await H.addAnnouncement(gameCode, announcementTextView.text)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                self.dismiss(animated: true, completion: nil)
             }  catch ServerError.serverError(let text){
                 print(text)
                 //serverAlert(text)
                 return
             }
-            try await Task.sleep(nanoseconds: 200_000_000)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+            
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func modifyMessage() {
         Task { @MainActor in
             do {
                 try await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                self.dismiss(animated: true, completion: nil)
             } catch ServerError.serverError(let text){
                 print(text)
                 //serverAlert(text)
                 return
-            }
-            try await Task.sleep(nanoseconds: 200_000_000)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+            }            
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     private lazy var buttonStackView: UIStackView = {

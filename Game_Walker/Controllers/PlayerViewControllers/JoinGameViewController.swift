@@ -27,6 +27,12 @@ class JoinGameViewController: BaseViewController {
         setDelegates()
         setUpTextFields()
         configureNavItem()
+        configureJoinBtn()
+    }
+    
+    private func configureJoinBtn(){
+        nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        nextButton.layer.cornerRadius = 8
     }
     
     private func setDelegates() {
@@ -42,12 +48,12 @@ class JoinGameViewController: BaseViewController {
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
         gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
         usernameTextField.placeholder = storedUsername != "" ? storedUsername : "username"
-        gamecodeTextField.layer.borderWidth = 5
+        gamecodeTextField.layer.borderWidth = 3
         gamecodeTextField.layer.borderColor = UIColor.black.cgColor
-        gamecodeTextField.layer.cornerRadius = 12
-        usernameTextField.layer.borderWidth = 5
+        gamecodeTextField.layer.cornerRadius = 10
+        usernameTextField.layer.borderWidth = 3
         usernameTextField.layer.borderColor = UIColor.black.cgColor
-        usernameTextField.layer.cornerRadius = 12
+        usernameTextField.layer.cornerRadius = 10
     }
     
     private func configureNavItem() {

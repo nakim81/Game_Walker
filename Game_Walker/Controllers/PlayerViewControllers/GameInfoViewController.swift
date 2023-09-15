@@ -20,48 +20,71 @@ class GameInfoViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
-        view.layer.cornerRadius = 13
-        
+        view.layer.cornerRadius = 20
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         
         return view
     }()
     
-    private lazy var  gameInfoLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Station Info 2")
-        return imageView
+    private lazy var  gameInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Info"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 40)
+        return label
     }()
     
-    private lazy var gameNameLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "station name 1")
-        return imageView
+    private lazy var gameNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Name"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gameLocationLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Station location 1")
-        return imageView
+    private lazy var gameLocationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Location"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gamePointsLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "station points 3")
-        return imageView
+    private lazy var gamePointsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Points"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var refereeNameLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Referee")
-        return imageView
+    private lazy var refereeNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Referee"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gameRuleLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "rules 2")
-        return imageView
+    private lazy var gameRuleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Rules"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
     private lazy var gameNameLabel1: UILabel = {
@@ -70,9 +93,9 @@ class GameInfoViewController: UIViewController {
         label.backgroundColor = .clear
         label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -85,9 +108,9 @@ class GameInfoViewController: UIViewController {
         label.backgroundColor = .clear
         label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -100,9 +123,9 @@ class GameInfoViewController: UIViewController {
         label.backgroundColor = .clear
         label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -115,9 +138,9 @@ class GameInfoViewController: UIViewController {
         label.backgroundColor = .clear
         label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 17)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -130,9 +153,9 @@ class GameInfoViewController: UIViewController {
         label.backgroundColor = .clear
         label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.layer.borderWidth = 3
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label
@@ -253,72 +276,60 @@ class GameInfoViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            gameInfoLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 66.0),
-            gameInfoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -66.0),
-            gameInfoLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10.0),
-            gameInfoLabel.bottomAnchor.constraint(equalTo: gameNameLabel.topAnchor, constant: 10.0),
-            gameInfoLabel.heightAnchor.constraint(equalTo: gameInfoLabel.widthAnchor, multiplier: 0.25),
+            gameInfoLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57),
+            gameInfoLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            gameInfoLabel.heightAnchor.constraint(equalTo: gameInfoLabel.widthAnchor, multiplier: 0.232),
             gameInfoLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gameNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -190.2),
+            gameNameLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.45),
             gameNameLabel.topAnchor.constraint(equalTo: gameInfoLabel.bottomAnchor, constant: 10.0),
-            gameNameLabel.heightAnchor.constraint(equalTo: gameNameLabel.widthAnchor, multiplier: 0.21),
-            gameNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gameNameLabel.heightAnchor.constraint(equalTo: gameNameLabel.widthAnchor, multiplier: 0.205),
+            gameNameLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gameNameLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22),
-            gameNameLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22),
+            gameNameLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gameNameLabel1.topAnchor.constraint(equalTo: gameNameLabel.bottomAnchor, constant: 5.0),
             gameNameLabel1.heightAnchor.constraint(equalTo: gameNameLabel1.widthAnchor, multiplier: 0.12),
             gameNameLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameLocationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gameLocationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -165.2),
+            gameLocationLabel.widthAnchor.constraint(equalTo: gameNameLabel.widthAnchor),
             gameLocationLabel.topAnchor.constraint(equalTo: gameNameLabel1.bottomAnchor, constant: 10.0),
-            gameLocationLabel.heightAnchor.constraint(equalTo: gameLocationLabel.widthAnchor, multiplier: 0.16),
-            gameLocationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gameLocationLabel.heightAnchor.constraint(equalTo: gameLocationLabel.widthAnchor, multiplier: 0.205),
+            gameLocationLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gameLocationLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gameLocationLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22.0),
+            gameLocationLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gameLocationLabel1.topAnchor.constraint(equalTo: gameLocationLabel.bottomAnchor, constant: 5.0),
             gameLocationLabel1.heightAnchor.constraint(equalTo: gameNameLabel1.widthAnchor, multiplier: 0.12),
-            gameLocationLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gameLocationLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gamePointsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gamePointsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -181.0),
+            gamePointsLabel.widthAnchor.constraint(equalTo: gameNameLabel.widthAnchor),
             gamePointsLabel.topAnchor.constraint(equalTo: gameLocationLabel1.bottomAnchor, constant: 10.0),
-            gamePointsLabel.heightAnchor.constraint(equalTo: gamePointsLabel.widthAnchor, multiplier: 0.19),
-            gamePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gamePointsLabel.heightAnchor.constraint(equalTo: gamePointsLabel.widthAnchor, multiplier: 0.205),
+            gamePointsLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gamePointsLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gamePointsLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22.0),
+            gamePointsLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gamePointsLabel1.topAnchor.constraint(equalTo: gamePointsLabel.bottomAnchor, constant: 5.0),
             gamePointsLabel1.heightAnchor.constraint(equalTo: gamePointsLabel1.widthAnchor, multiplier: 0.12),
-            gamePointsLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gamePointsLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            refereeNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            refereeNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -230.0),
+            refereeNameLabel.widthAnchor.constraint(equalTo: gameNameLabel.widthAnchor),
             refereeNameLabel.topAnchor.constraint(equalTo: gamePointsLabel1.bottomAnchor, constant: 10.0),
-            refereeNameLabel.heightAnchor.constraint(equalTo: refereeNameLabel.widthAnchor, multiplier: 0.32),
-            refereeNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            refereeNameLabel.heightAnchor.constraint(equalTo: refereeNameLabel.widthAnchor, multiplier: 0.205),
+            refereeNameLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            refereeNameLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22),
-            refereeNameLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22),
+            refereeNameLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             refereeNameLabel1.topAnchor.constraint(equalTo: refereeNameLabel.bottomAnchor, constant: 5.0),
             refereeNameLabel1.heightAnchor.constraint(equalTo: refereeNameLabel1.widthAnchor, multiplier: 0.12),
-            refereeNameLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            refereeNameLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gameRuleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22),
-            gameRuleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -245),
+            gameRuleLabel.widthAnchor.constraint(equalTo: gameNameLabel.widthAnchor),
             gameRuleLabel.topAnchor.constraint(equalTo: refereeNameLabel1.bottomAnchor, constant: 10.0),
-            gameRuleLabel.heightAnchor.constraint(equalTo: gameRuleLabel.widthAnchor, multiplier: 0.4),
-            gameRuleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gameRuleLabel.heightAnchor.constraint(equalTo: gameRuleLabel.widthAnchor, multiplier: 0.205),
+            gameRuleLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gameRuleLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
-            gameRuleLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -22.0),
+            gameRuleLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gameRuleLabel1.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor, constant: 5.0),
             gameRuleLabel1.heightAnchor.constraint(equalTo: gameRuleLabel1.widthAnchor, multiplier: 0.25),
-            gameRuleLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            gameRuleLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
             buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1.0),
             buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1.0),

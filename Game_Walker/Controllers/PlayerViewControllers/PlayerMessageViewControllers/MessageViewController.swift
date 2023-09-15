@@ -22,7 +22,7 @@ class MessageViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
-        view.layer.cornerRadius = 13
+        view.layer.cornerRadius = 20
         
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
@@ -30,16 +30,20 @@ class MessageViewController: UIViewController {
         return view
     }()
     
-    private lazy var  messageLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "announcement 3")
-        return imageView
+    private lazy var  messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Announcement"
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 40)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         
         // enable
         button.setTitle("Close", for: .normal)
@@ -51,7 +55,7 @@ class MessageViewController: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
         
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
         
         return button
@@ -130,21 +134,20 @@ class MessageViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 80),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -80),
             messageLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            messageLabel.heightAnchor.constraint(equalTo: messageLabel.widthAnchor, multiplier: 0.19),
+            messageLabel.widthAnchor.constraint(equalToConstant: 250),
+            messageLabel.heightAnchor.constraint(equalToConstant: 45),
             messageLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
-            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 2),
+            messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 5),
             messageTableView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            NSLayoutConstraint(item: closeButton, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -30),
-            closeButton.widthAnchor.constraint(equalToConstant: 200),
-            closeButton.heightAnchor.constraint(equalToConstant: 64.85),
+            closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
+            closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),
+            closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.12424),
             closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }

@@ -30,9 +30,9 @@ class RefereeTableViewCell: UITableViewCell {
     
     private let teamNumLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 20)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
         label.numberOfLines = 1
         return label
         
@@ -40,7 +40,7 @@ class RefereeTableViewCell: UITableViewCell {
     
     private var teamNameLabel: UILabel = {
        let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.numberOfLines = 1
@@ -51,14 +51,14 @@ class RefereeTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 23)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 25)
         label.numberOfLines = 0
         return label
     }()
 
     private let borderView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 85, width: 330, height: 2))
-        view.layer.borderWidth = 1
+        let view = UIView()
+        view.layer.borderWidth = 3
         view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -74,7 +74,7 @@ class RefereeTableViewCell: UITableViewCell {
     
     func configureRankTableViewCell(imageName: String, teamNum: String, teamName: String, points: String, showScore: Bool) {
         contentView.addSubview(containerView)
-        contentView.addSubview(borderView)
+        containerView.addSubview(borderView)
         containerView.addSubview(teamIconImage)
         containerView.addSubview(scoreLabel)
         containerView.addSubview(teamNumLabel)
@@ -88,18 +88,18 @@ class RefereeTableViewCell: UITableViewCell {
             
             teamIconImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             teamIconImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            teamIconImage.heightAnchor.constraint(equalTo: containerView.heightAnchor),
-            teamIconImage.widthAnchor.constraint(equalTo: teamIconImage.heightAnchor),
+            teamIconImage.heightAnchor.constraint(equalToConstant: 70),
+            teamIconImage.widthAnchor.constraint(equalToConstant: 70),
             
-            teamNumLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            NSLayoutConstraint(item: teamNumLabel, attribute: .leading, relatedBy: .equal, toItem: teamIconImage, attribute: .trailing, multiplier: 1, constant: 8),
+            NSLayoutConstraint(item: teamNumLabel, attribute: .trailing, relatedBy: .equal, toItem: scoreLabel, attribute: .leading, multiplier: 1, constant: 0),
             teamNumLabel.topAnchor.constraint(equalTo: teamIconImage.topAnchor, constant: 5),
             teamNumLabel.heightAnchor.constraint(equalTo: teamIconImage.heightAnchor, multiplier: 0.5),
-            teamNumLabel.widthAnchor.constraint(equalToConstant: 120),
             
-            teamNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             teamNameLabel.bottomAnchor.constraint(equalTo: teamIconImage.bottomAnchor, constant: -5),
             teamNameLabel.heightAnchor.constraint(equalTo: teamIconImage.heightAnchor, multiplier: 0.5),
-            teamNameLabel.widthAnchor.constraint(equalToConstant: 120),
+            teamNameLabel.leadingAnchor.constraint(equalTo: teamNumLabel.leadingAnchor),
+            teamNameLabel.trailingAnchor.constraint(equalTo: teamNumLabel.trailingAnchor),
             
             scoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             scoreLabel.centerYAnchor.constraint(equalTo: teamIconImage.centerYAnchor),
@@ -107,9 +107,9 @@ class RefereeTableViewCell: UITableViewCell {
             scoreLabel.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             
             borderView.widthAnchor.constraint(equalTo: contentView.layoutMarginsGuide.widthAnchor),
-            borderView.heightAnchor.constraint(equalToConstant: 2.0),
+            borderView.heightAnchor.constraint(equalToConstant: 3.0),
             borderView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            borderView.topAnchor.constraint(equalTo: teamIconImage.bottomAnchor, constant: 6)
+            borderView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         
         teamIconImage.image = UIImage(named: imageName)

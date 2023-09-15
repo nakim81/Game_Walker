@@ -86,6 +86,13 @@
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
+		FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */; };
+		FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FA2AA0A45A001683EA /* GemunuLibre-ExtraBold.ttf */; };
+		FC03BA122AAB6DE5005E11BD /* GemunuLibre-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F92AA0A45A001683EA /* GemunuLibre-ExtraLight.ttf */; };
+		FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F82AA0A45A001683EA /* GemunuLibre-Light.ttf */; };
+		FC03BA142AAB6DE9005E11BD /* GemunuLibre-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FC2AA0A45A001683EA /* GemunuLibre-Medium.ttf */; };
+		FC03BA152AAB6DEC005E11BD /* GemunuLibre-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FB2AA0A45A001683EA /* GemunuLibre-Regular.ttf */; };
+		FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FD2AA0A45A001683EA /* GemunuLibre-SemiBold.ttf */; };
 		FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */; };
 		FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */; };
 		FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC18D25A2A9899E100E6B144 /* Assets.xcassets */; };
@@ -592,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
+				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
 				FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */,
 				A1A4CD352A371C0500704BF8 /* Dosis-SemiBold.ttf in Resources */,
@@ -600,6 +608,7 @@
 				A1A4CD362A371C0500704BF8 /* Dosis-Bold.ttf in Resources */,
 				A1A4CD372A371C0500704BF8 /* Dosis-ExtraBold.ttf in Resources */,
 				A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */,
+				FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */,
 				A1A4CD392A371C0500704BF8 /* Dosis-ExtraLight.ttf in Resources */,
 				A1A4CD3A2A371C0500704BF8 /* Dosis-Medium.ttf in Resources */,
 				FCB13E182A97A04B00F4AE99 /* bgm.wav in Resources */,
@@ -607,17 +616,22 @@
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
+				FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */,
 				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
 				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
+				FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */,
 				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
 				FCB13E192A97A04B00F4AE99 /* timer_end.wav in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
+				FC03BA122AAB6DE5005E11BD /* GemunuLibre-ExtraLight.ttf in Resources */,
+				FC03BA152AAB6DEC005E11BD /* GemunuLibre-Regular.ttf in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
 				FCB13E172A97A04B00F4AE99 /* green.wav in Resources */,
 				FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */,
 				A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */,
+				FC03BA142AAB6DE9005E11BD /* GemunuLibre-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

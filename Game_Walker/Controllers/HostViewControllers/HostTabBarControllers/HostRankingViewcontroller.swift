@@ -85,8 +85,8 @@ class HostRankingViewcontroller: UIViewController {
 extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
-        let teamNum = String(teamList[indexPath.section].number)
-        let team = teamList[indexPath.section]
+        let teamNum = String(teamList[indexPath.row].number)
+        let team = teamList[indexPath.row]
         //comeback later: stationName
         cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: "team.currentStation", points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
@@ -94,30 +94,20 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return teamList.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return 1
+        return teamList.count
      }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+        return 85
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.section)
-        let team = teamList[indexPath.section]
+        let team = teamList[indexPath.row]
         let svc = HostGivePointsController(team: team, gameCode: self.gameCode)
         svc.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         self.present(svc, animated: true)

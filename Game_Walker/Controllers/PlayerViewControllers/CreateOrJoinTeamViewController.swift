@@ -46,6 +46,14 @@ class CreateOrJoinTeamViewController: BaseViewController {
         super.viewDidLoad()
         configureNavItem()
         configureGamecodeLabel()
+        configureBtns()
+    }
+    
+    private func configureBtns(){
+        creatTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        creatTeamButton.layer.cornerRadius = 8
+        joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        joinTeamButton.layer.cornerRadius = 8
     }
     
     private func configureGamecodeLabel() {
