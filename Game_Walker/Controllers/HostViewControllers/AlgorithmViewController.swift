@@ -102,6 +102,7 @@ class AlgorithmViewController: BaseViewController {
         H.getHost(gamecode)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.createGrid()
+            self.reloadAll()
             self.collectionView.reloadData()
         }
     }
@@ -567,6 +568,7 @@ class AlgorithmViewController: BaseViewController {
                         //Checking if IntPairsByNumbers already has the numberkey
                         if var cellDataSet = matchedCellsByNumber[numberKey!] {
                             cellDataSet.insert(cellData)
+                            matchedCellsByNumber[numberKey!] = cellDataSet
                         } else {
                             var newCellDataSet = Set<CellData>()
                             newCellDataSet.insert(cellData)
