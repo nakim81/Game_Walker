@@ -129,7 +129,13 @@ class JoinGameViewController: BaseViewController {
         } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
             Task { @MainActor in
                 if (UserData.readTeam("team") != nil) {
-                    await T.leaveTeam(savedGameCode, savedUserName, player)
+                    do {
+                        try await T.leaveTeam(savedGameCode, savedUserName, player)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                 }
                 P.removePlayer(savedGameCode, uuid)
                 player = Player(gamecode: gamecode, name: savedUserName)
@@ -165,7 +171,13 @@ class JoinGameViewController: BaseViewController {
         } else if gamecode != savedGameCode && username != savedUserName {
             Task {@MainActor in
                 if UserData.readTeam("team") != nil {
-                    await T.leaveTeam(savedGameCode, savedUserName, player)
+                    do {
+                        try await T.leaveTeam(savedGameCode, savedUserName, player)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                 }
                 P.removePlayer(savedGameCode, uuid)
                 player = Player(gamecode: gamecode, name: username)

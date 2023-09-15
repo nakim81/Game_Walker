@@ -16,20 +16,21 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedGameCode = UserData.readGamecode("refereeGameCode") ?? ""
     private var storedRefereeName = UserData.readUsername("refereeName") ?? ""
     private var refereeUserID = UserData.readUUID()!
-    private var storedStation: Station?
+    private var stations : [Station] = []
     private var pvp : Bool?
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
-        configureNavItem()
-        callProtocols()
-        if storedGameCode != "" {
-            S.getStationList(storedGameCode)
+        Task {
+            if storedGameCode != "" {
+                stations = try await S.getStationList2(storedGameCode)
+            }
+            configureNavItem()
+            gamecodeTextField.keyboardType = .asciiCapableNumberPad
+            gamecodeTextField.delegate = self
+            gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
+            usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
         }
-        gamecodeTextField.keyboardType = .asciiCapableNumberPad
-        gamecodeTextField.delegate = self
-        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
-        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
         super.viewDidLoad()
     }
     
@@ -38,6 +39,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
+    
     @objc override func onBackPressed() {
         performSegue(withIdentifier: "toMainVC", sender: self)
     }
@@ -56,8 +58,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
             //Joining the game for the first time
-//            UserDefaults.standard.removeObject(forKey: "refereeGameCode")
-//            UserDefaults.standard.removeObject(forKey: "refereeName")
             if storedGameCode.isEmpty && storedRefereeName.isEmpty {
                 if !gameCode.isEmpty && !name.isEmpty {
                     let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -81,6 +81,12 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                 let oldReferee = UserData.readReferee("Referee")!
                 if oldReferee.assigned {
+                    for station in stations {
+                        if station.name == oldReferee.stationName {
+                            self.pvp = station.pvp
+                            break;
+                        }
+                    }
                     if self.pvp! {
                         performSegue(withIdentifier: "toPVP", sender: self)
                     } else {
@@ -123,6 +129,12 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 UserData.writeUsername(newReferee.name, "refereeName")
                 UserData.writeReferee(newReferee, "Referee")
                 if oldReferee.assigned {
+                    for station in stations {
+                        if station.name == oldReferee.stationName {
+                            self.pvp = station.pvp
+                            break;
+                        }
+                    }
                     if self.pvp! {
                         performSegue(withIdentifier: "toPVP", sender: self)
                     } else {
@@ -149,20 +161,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
-    }
-}
-// MARK: - Protocols
-extension RegisterController: StationList {
-    func listOfStations(_ stations: [Station]) {
-        for station in stations {
-            if station.name == UserData.readReferee("Referee")!.stationName {
-                self.pvp = station.pvp
-            }
-        }
-    }
-    
-    func callProtocols() {
-        S.delegate_stationList = self
     }
 }
 

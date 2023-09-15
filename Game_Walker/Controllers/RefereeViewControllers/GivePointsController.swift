@@ -81,7 +81,13 @@ class GivePointsController: UIViewController {
     
     @objc func buttonTapped() {
         Task { @MainActor in
-            await T.givePoints(gameCode, team.name, Int(stepper.value))
+            do {
+                try await T.givePoints(gameCode, team.name, Int(stepper.value))
+            } catch ServerError.serverError(let text){
+                print(text)
+                //serverAlert(text)
+                return
+            }
         }
         self.presentingViewController?.dismiss(animated: true)
     }

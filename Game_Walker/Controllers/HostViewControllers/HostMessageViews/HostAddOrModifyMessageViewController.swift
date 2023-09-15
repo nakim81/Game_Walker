@@ -106,17 +106,30 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     @objc func sendMessage() {
         Task { @MainActor in
-            await H.addAnnouncement(gameCode, announcementTextView.text)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-            self.dismiss(animated: true, completion: nil)
+            do {
+                try await H.addAnnouncement(gameCode, announcementTextView.text)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                self.dismiss(animated: true, completion: nil)
+            }  catch ServerError.serverError(let text){
+                print(text)
+                //serverAlert(text)
+                return
+            }
+            
         }
     }
     
     @objc func modifyMessage() {
         Task { @MainActor in
-            await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-            self.dismiss(animated: true, completion: nil)
+            do {
+                try await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                self.dismiss(animated: true, completion: nil)
+            } catch ServerError.serverError(let text){
+                print(text)
+                //serverAlert(text)
+                return
+            }            
         }
     }
     

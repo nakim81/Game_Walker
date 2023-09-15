@@ -32,10 +32,9 @@ struct R {
                 print("Gamecode does not exist")
                 throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
-        } catch let gamecodeError as GamecodeError{
-            throw gamecodeError
         } catch {
             print("Gamecode does not exist")
+            throw ServerError.serverError("Something went wrong while adding Referee")
         }
     }
     
@@ -58,12 +57,12 @@ struct R {
             print("Referee name modified")
         } catch {
             print("Gamecode does not exist")
-            throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+            throw ServerError.serverError("Something went wrong while modifying Referee name")
         }
     }
     
     
-    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async {
+    static func assignStation(_ gamecode: String, _ uuid: String, _ stationName: String, _ assigned: Bool) async throws {
         let refDoc = db.collection("\(gamecode) : Referees").document(uuid)
         do {
             try await refDoc.updateData([
@@ -73,6 +72,7 @@ struct R {
             print("Referee assigned station")
         } catch {
             print("Error assigning Referee a station: \(error)")
+            throw ServerError.serverError("Something went wrong while assigning Referee a station")
         }
     }
     
@@ -111,7 +111,7 @@ struct R {
             return referee
         } else {
             print("Error in getting Referee")
-            return nil
+            throw ServerError.serverError("Something went wrong while getting Referee")
         }
     }
     
@@ -133,15 +133,21 @@ struct R {
     }
     
     static func getRefereeList2(_ gamecode: String) async throws -> [Referee] {
-        let querySnapshot = try await db.collection("\(gamecode) : Referees").getDocuments()
-        var referees: [Referee] = []
-        for document in querySnapshot.documents {
-            let data = document.data()
-            let referee = convertDataToReferee(data)
-            referees.append(referee)
+        do{
+            let querySnapshot = try await db.collection("\(gamecode) : Referees").getDocuments()
+            var referees: [Referee] = []
+            for document in querySnapshot.documents {
+                let data = document.data()
+                let referee = convertDataToReferee(data)
+                referees.append(referee)
+            }
+            referees.sort { $0.name < $1.name }
+            return referees
         }
-        referees.sort { $0.name < $1.name }
-        return referees
+        catch{
+            print("Error in getting RefereeList")
+            throw ServerError.serverError("Something went wrong while getting RefereeList")
+        }
     }
 
     

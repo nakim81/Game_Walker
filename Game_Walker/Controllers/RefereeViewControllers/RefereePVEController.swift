@@ -11,50 +11,36 @@ import AVFoundation
 
 class RefereePVEController: BaseViewController {
     
-    @IBOutlet weak var stationinfoButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
     
     private var gameCode = UserData.readGamecode("refereeGameCode")!
     private var referee = UserData.readReferee("Referee")!
+    private var host: Host = Host()
     private var team : Team = Team()
-    private var teams : [Team] = [Team()]
-    private var teamOrder : [Team] = [Team()]
-    
+    private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy")]
+    private var stations : [Station] = [Station()]
+    private var teamOrder : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy")]
+    private var round : Int = 1
     private var points : Int = 0
-    private var name : String = ""
-    private var location : String = ""
-    private var rule : String = ""
     
-    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     private let audioPlayerManager = AudioPlayerManager()
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
     
-    private var gameStart : Bool = false
-    private var gameOver : Bool = false
-    private var startTime : Int = 0
-    private var pauseTime : Int = 0
-    private var pausedTime : Int = 0
-    private var timer = Timer()
-    private var remainingTime: Int = 0
-    private var time: Int?
-    private var seconds: Int = 0
-    private var moveSeconds: Int = 0
-    private var moving: Bool = true
-    private var round: Int = 1
-    private var rounds: Int = 8
-    private var isPaused = true
-    private var t : Int = 0
-    
     override func viewDidLoad() {
-        callProtocols()
-        T.getTeamList(gameCode)
-        H.getHost(gameCode)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        Task {
+            callProtocols()
+            stations = try await S.getStationList2(gameCode)
+            teams = try await T.getTeamList2(gameCode)
+            host = try await H.getHost2(gameCode) ?? Host()
+            getTeamOrder()
+            updateScore()
+            addSubviews()
+            addConstraints()
+        }
         super.viewDidLoad()
     }
 
@@ -82,11 +68,6 @@ class RefereePVEController: BaseViewController {
     }
     
 //MARK: - Buttons Pressed
-    @IBAction func stationinfoButtonPressed(_ sender: Any) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
-        showRefereeGameInfoPopUp(gameName: self.name, gameLocation: self.location, gamePoitns: String(self.points), gameRule: self.rule)
-    }
-    
     @IBAction func messageButtonPressed(_ sender: Any) {
         showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
     }
@@ -110,6 +91,43 @@ class RefereePVEController: BaseViewController {
     }
 
 //MARK: - UI elements
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 13)) ?? UIFont.systemFont(ofSize: fontSize(size: 13)),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 20)) ?? UIFont.systemFont(ofSize: fontSize(size: 20)),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var roundLabel: UILabel = {
+        var view = UILabel()
+        view.frame = CGRect(x: 0, y: 0, width: 149.17, height: 61)
+        view.backgroundColor = .white
+        view.textColor = .black
+        view.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Dosis-SemiBold", size: fontSize(size: 50)) ?? UIFont.systemFont(ofSize: fontSize(size: 50)))
+        view.textAlignment = .center
+        view.text = "Round " + "\(self.round)"
+        view.adjustsFontForContentSizeCategory = true
+        return view
+    }()
+    
     private lazy var iconButton: UIImageView = {
         var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
         view.image = UIImage(named: self.teamOrder[self.round - 1].iconName)
@@ -119,46 +137,38 @@ class RefereePVEController: BaseViewController {
         return view
     }()
     
-    private lazy var teamInfoLabel: UILabel = {
-        let teamNumber = "Team \(self.teamOrder[self.round - 1].number)"
-        let teamName = self.teamOrder[self.round - 1].name
-        let attributedText = NSMutableAttributedString()
-        let teamNumberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-SemiBold", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNumberAttributedString = NSAttributedString(string: teamNumber + "\n", attributes: teamNumberAttributes)
-        attributedText.append(teamNumberAttributedString)
-        let teamNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNameAttributedString = NSAttributedString(string: teamName, attributes: teamNameAttributes)
-        attributedText.append(teamNameAttributedString)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 174, height: 78))
+    private lazy var teamNumLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 115, height: 38))
         label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.numberOfLines = 2
+        label.textColor = .black
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 25))
+        label.text = "Team \(self.teamOrder[self.round - 1].number)"
+        label.numberOfLines = 1
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var scoreLabel: UILabel = {
-        let attributedText = NSMutableAttributedString()
-        let score = "\(self.teamOrder[self.round - 1].points)"
-        let scoreAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 50) ?? UIFont.boldSystemFont(ofSize: 50),
-            .foregroundColor: UIColor.black
-        ]
-        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
-        attributedText.append(scoreAttributedString)
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 53))
+    private lazy var teamNameLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
         label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.numberOfLines = 3
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 25))
+        label.text = "Team name is" + "\n" + "\(self.teamOrder[self.round - 1].name)"
+        label.textColor = .black
+        label.numberOfLines = 2
         label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 53))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 50))
+        label.text = "\(self.teamOrder[self.round - 1].points)"
+        label.textColor = .black
+        label.backgroundColor = .white
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     
@@ -167,10 +177,10 @@ class RefereePVEController: BaseViewController {
         view.image = UIImage(named: "Win Blue Button")
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Win"
+        label.text = "WIN"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont(name: "Dosis-Bold", size: 13)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -188,7 +198,13 @@ class RefereePVEController: BaseViewController {
     @objc func winButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.team.name, self.points)
+            do {
+                try await T.givePoints(gameCode, self.team.name, self.points)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
         }
         winButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false
@@ -205,10 +221,10 @@ class RefereePVEController: BaseViewController {
         view.image = UIImage(named: "Lose Yellow Button")
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Lose"
+        label.text = "LOSE"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont(name: "Dosis-Bold", size: 13)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -235,239 +251,76 @@ class RefereePVEController: BaseViewController {
         loseButton.image = UIImage(named: "Lose Gray Button")
     }
     
-    private lazy var roundLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 149.17, height: 61)
-        view.backgroundColor = .white
-        view.textColor = .black
-        view.font = UIFont(name: "Dosis-SemiBold", size: 45)
-        view.textAlignment = .center
-        view.text = "Round " + "\(self.round)"
-        return view
-    }()
-    
-    private lazy var timerLabel: UILabel = {
-        var view = UILabel()
-        view.frame = CGRect(x: 0, y: 0, width: 179, height: 53)
-        view.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        view.font = UIFont(name: "Dosis-Regular", size: 25)
-        view.textAlignment = .center
-        view.text = "Moving Time" + String(format:"%02i : %02i", self.moveSeconds/60, self.moveSeconds % 60)
-        view.adjustsFontSizeToFitWidth = true
-        view.minimumScaleFactor = 0.5
-        view.numberOfLines = 0
-        return view
-    }()
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        return label
-    }()
-    
-    func makeTeamInfoLabel() {
-        let teamNumber = "Team \(self.teamOrder[self.round - 1].number)"
-        let teamName = self.teamOrder[self.round - 1].name
-        let attributedText = NSMutableAttributedString()
-        let teamNumberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-SemiBold", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNumberAttributedString = NSAttributedString(string: teamNumber + "\n", attributes: teamNumberAttributes)
-        attributedText.append(teamNumberAttributedString)
-        let teamNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: 25) ?? UIFont.systemFont(ofSize: 25),
-            .foregroundColor: UIColor.black
-        ]
-        let teamNameAttributedString = NSAttributedString(string: teamName, attributes: teamNameAttributes)
-        attributedText.append(teamNameAttributedString)
-        self.teamInfoLabel.attributedText = attributedText
-    }
-    
-    func makeScoreLabel() {
-        let attributedText = NSMutableAttributedString()
-        let score = "\(self.teamOrder[self.round - 1].points)"
-        let scoreAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 50) ?? UIFont.boldSystemFont(ofSize: 50),
-            .foregroundColor: UIColor.black
-        ]
-        let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
-        attributedText.append(scoreAttributedString)
-        self.scoreLabel.attributedText = attributedText
+    func fontSize(size: CGFloat) -> CGFloat {
+        let size_formatter = size/390
+        let result = UIScreen.main.bounds.size.width * size_formatter
+        return result
     }
     
     func addSubviews() {
         self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
+        self.view.addSubview(teamNumLabel)
         self.view.addSubview(iconButton)
-        self.view.addSubview(teamInfoLabel)
+        self.view.addSubview(teamNameLabel)
         self.view.addSubview(scoreLabel)
         self.view.addSubview(winButton)
         self.view.addSubview(loseButton)
-        self.view.addSubview(timerLabel)
     }
     
     func addConstraints() {
         gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.0541).isActive = true
-        gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.04).isActive = true
-        gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2).isActive = true
-        
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
-        roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579).isActive = true
-        roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751).isActive = true
-        roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        roundLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.124).isActive = true
-        
+        teamNumLabel.translatesAutoresizingMaskIntoConstraints = false
         iconButton.translatesAutoresizingMaskIntoConstraints = false
-        iconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
-        iconButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467).isActive = true
-        iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        iconButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.240).isActive = true
-        
-        teamInfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        teamInfoLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.464).isActive = true
-        teamInfoLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        teamInfoLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamInfoLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.445).isActive = true
-        
+        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4).isActive = true
-        scoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0653).isActive = true
-        scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        scoreLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.542).isActive = true
-        
         winButton.translatesAutoresizingMaskIntoConstraints = false
-        winButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
-        winButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
-        winButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.315).isActive = true
-        winButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.619).isActive = true
-        
         loseButton.translatesAutoresizingMaskIntoConstraints = false
-        loseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176).isActive = true
-        loseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032).isActive = true
-        loseButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: self.view.bounds.width * 0.525).isActive = true
-        loseButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.619).isActive = true
-        
-        timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        timerLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.477).isActive = true
-        timerLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0394).isActive = true
-        timerLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        timerLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.70).isActive = true
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
+            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
+            
+            roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.002),
+            roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
+            roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
+            
+            teamNumLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            teamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01),
+            teamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
+            teamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
+            
+            iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            iconButton.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
+            iconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+            iconButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+            
+            teamNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            teamNameLabel.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
+            teamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.492),
+            teamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
+            
+            scoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.370),
+            scoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            scoreLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            
+            winButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            winButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            winButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.315),
+            winButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5),
+            
+            loseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            loseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            loseButton.leadingAnchor.constraint(equalTo: winButton.trailingAnchor, constant: 5),
+            loseButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5)
+        ])
     }
     
-//MARK: - Timer
-    func runTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            if !strongSelf.isPaused {
-                if strongSelf.remainingTime <= 5 {
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
-                    strongSelf.impactFeedbackGenerator.impactOccurred()
-                }
-                if strongSelf.time! < 1 {
-                    if strongSelf.moving {
-                        strongSelf.time = strongSelf.seconds
-                        strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
-                        strongSelf.moving = false
-                    } else {
-                        strongSelf.rounds -= 1
-                        if strongSelf.rounds < 1 {
-                            strongSelf.audioPlayerManager.stop()
-                            timer.invalidate()
-                        }
-                        else {
-                            strongSelf.time = strongSelf.moveSeconds
-                            strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
-                            strongSelf.moving = true
-                            strongSelf.winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                                gestureRecognizer.isEnabled = true
-                            }
-                            strongSelf.winButton.image = UIImage(named: "Win Blue Button")
-                            strongSelf.loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                                gestureRecognizer.isEnabled = true
-                            }
-                            strongSelf.loseButton.image = UIImage(named: "Lose Yellow Button")
-                            // Testing Purpose
-                            strongSelf.round += 1
-                            strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
-                            strongSelf.team = strongSelf.teamOrder[strongSelf.round-1]
-                            //
-                            strongSelf.makeScoreLabel()
-                            strongSelf.makeTeamInfoLabel()
-                            strongSelf.iconButton.image = UIImage(named: strongSelf.teamOrder[strongSelf.round - 1].iconName)
-                        }
-                    }
-                }
-                else {
-                    strongSelf.time! -= 1
-                    strongSelf.remainingTime -= 1
-                    let minute = strongSelf.time!/60
-                    let second = strongSelf.time! % 60
-                    if strongSelf.moving {
-                        strongSelf.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", minute, second)
-                    } else {
-                        strongSelf.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
-                    }
-                }
-            }
-        }
-    }
-    
-    func calculateTime() {
-        if isPaused {
-            t = pauseTime - startTime - pausedTime
-        }
-        else {
-            if pausedTime != 0 {
-                t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
-            }
-            else {
-                t = 0
-            }
-        }
-        let remainder = t%(moveSeconds + seconds)
-        if (remainder/moveSeconds) == 0 {
-            self.time = (moveSeconds - remainder)
-            self.moving = true
-            let minute = (moveSeconds - remainder)/60
-            let second = (moveSeconds - remainder) % 60
-            self.timerLabel.text = "Moving Time  " + String(format:"%02i : %02i", minute, second)
-        }
-        else {
-            self.time = (seconds - remainder)
-            self.moving = false
-            let minute = (seconds - remainder)/60
-            let second = (seconds - remainder) % 60
-            self.timerLabel.text = "Game Time  " + String(format:"%02i : %02i", minute, second)
-        }
-        self.remainingTime = self.remainingTime - t
-        self.rounds = self.rounds - self.round + 1
-    }
-    //MARK: - Score Update
+    //MARK: - Update Score
     func updateScore() {
         for old_team in self.teamOrder {
             for updated_team in self.teams {
@@ -480,48 +333,23 @@ class RefereePVEController: BaseViewController {
             }
         }
         self.team = self.teamOrder[self.round - 1]
-        makeScoreLabel()
+        scoreLabel.text = "\(self.team.points)"
     }
-}
-
-//MARK: - Protocols
-extension RefereePVEController: StationList, GetHost, TeamList, TeamUpdateListener, HostUpdateListener {
-    func listOfStations(_ stations: [Station]) {
+    
+    //MARK: - Get TeamOrder
+    func getTeamOrder() {
         for station in stations {
             if station.name == referee.stationName {
                 self.teamOrder = station.teamOrder
-                self.name = station.name
-                self.location = station.place
-                self.rule = station.description
                 self.points = station.points
                 break;
             }
         }
-        updateScore()
-        addSubviews()
-        addConstraints()
     }
-    
-    func getHost(_ host: Host) {
-        self.seconds = host.gameTime
-        self.moveSeconds = host.movingTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.rounds = host.rounds
-        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-        self.round = host.currentRound
-        self.messages = host.announcements
-        calculateTime()
-        runTimer()
-    }
-    
-    func listOfTeams(_ teams: [Team]) {
-        self.teams = teams
-        S.getStationList(gameCode)
-    }
-    
+}
+
+//MARK: - Protocols
+extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
     func updateTeams(_ teams: [Team]) {
         for team in teams {
             if self.team.name == team.name {
@@ -532,24 +360,32 @@ extension RefereePVEController: StationList, GetHost, TeamList, TeamUpdateListen
     }
     
     func updateHost(_ host: Host) {
-        self.gameStart = host.gameStart
-        self.gameOver = host.gameover
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-//        self.roundLabel.text = "Round \(host.currentRound)"
-//        self.round = host.currentRound
+        roundLabel.text = "Round " + "\(host.currentRound)"
+        teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
+        iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
+        teamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
+        if self.round != host.currentRound {
+            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            winButton.image = UIImage(named: "Win Blue Button")
+            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            loseButton.image = UIImage(named: "Lose Yellow Button")
+            self.round = host.currentRound
+        }
     }
     
     func listen(_ _ : [String : Any]){
+        
     }
     
     func callProtocols() {
-        H.delegate_getHost = self
-        H.delegates.append(self)
-        S.delegate_stationList = self
-        T.delegate_teamList = self
         T.delegates.append(self)
+        H.delegates.append(self)
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
     }
 }
 

@@ -149,7 +149,13 @@ class TeamViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             Task { @MainActor in
-                await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
+                do {
+                    try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    //serverAlert(text)
+                    return
+                }
             }
             if let team = self.team {
                 if (team.players.count == 1) {

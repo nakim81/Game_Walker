@@ -22,6 +22,9 @@ class TimerViewController: UIViewController {
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
     
+    private var host : Host = Host()
+    private var team : Team = Team()
+    private var stations : [Station] = [Station()]
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
@@ -39,7 +42,6 @@ class TimerViewController: UIViewController {
     private var t : Int = 0
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private var stationsList : [Station] = []
     private var stationOrder : [Int] = []
     
     private var gameName: String?
@@ -65,7 +67,7 @@ class TimerViewController: UIViewController {
         view.alpha = 0.6
         view.layer.borderWidth = 15
         view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        view.layer.cornerRadius = 130
+        view.layer.cornerRadius = 0.68 * UIScreen.main.bounds.size.width / 2.0
         return view
     }()
     
@@ -145,16 +147,14 @@ class TimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        S.delegate_stationList = self
-        H.delegates.append(self)
-        H.delegate_getHost = self
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        T.delegate_getTeam = self
-        configureGamecodeLabel()
         Task {
-            H.getHost(gameCode)
-            T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "")
-            S.getStationList(gameCode)
+            callProtocols()
+            configureGamecodeLabel()
+            host = try await H.getHost2(gameCode) ?? Host()
+            team = try await T.getTeam2(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
+            stations = try await S.getStationList2(gameCode)
+            setSettings()
+            configureTimerLabel()
         }
     }
     
@@ -183,7 +183,6 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        H.getHost(gameCode)
         showMessagePopUp(messages: TeamViewController.messages)
     }
     
@@ -246,15 +245,15 @@ class TimerViewController: UIViewController {
     
 // MARK: - Timer
     func findStation() {
-        for station in self.stationsList {
-            if station.number == self.stationOrder[round - 1] {
+        for station in self.stations {
+            if station.number == self.team.stationOrder[round - 1] {
                 self.gameName = station.name
                 self.gameLocation = station.place
                 self.gamePoints = String(station.points)
                 self.refereeName = station.referee!.name
                 self.gameRule = station.description
             }
-            else if station.number == self.stationOrder[round] {
+            else if station.number == self.team.stationOrder[round] {
                 self.nextGameName = station.name
                 self.nextGameLocation = station.place
                 self.nextGamePoints = String(station.points)
@@ -407,21 +406,24 @@ class TimerViewController: UIViewController {
         let seconds = Int(time) % 60
         return String(format:"%02i : %02i", minutes, seconds)
     }
+}
+//MARK: - UIUpdate
+extension TimerViewController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.round = host.currentRound
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+    }
     
     func listen(_ _ : [String : Any]){
     }
-}
-//MARK: - UIUpdate
-extension TimerViewController: GetHost, GetTeam, StationList, HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.roundLabel.text = "Round \(host.currentRound)"
-        self.round = host.currentRound
+    
+    func callProtocols() {
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
     }
     
-    func getHost(_ host: Host) {
+    func setSettings() {
         self.seconds = host.gameTime
         self.moveSeconds = host.movingTime
         self.startTime = host.startTimestamp
@@ -432,14 +434,5 @@ extension TimerViewController: GetHost, GetTeam, StationList, HostUpdateListener
         self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
         self.messages = host.announcements
-        configureTimerLabel()
-    }
-    
-    func listOfStations(_ stations: [Station]) {
-        self.stationsList = stations
-    }
-    
-    func getTeam(_ team: Team) {
-        self.stationOrder = team.stationOrder
     }
 }

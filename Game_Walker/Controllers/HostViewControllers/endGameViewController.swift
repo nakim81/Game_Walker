@@ -93,7 +93,13 @@ class EndGameViewController: UIViewController {
     @objc func endGame() {
         //TODO- End Game and post it to the firebase and move to the awardViewController
         Task {@MainActor in
-            await H.endGame(self.gameCode)
+            do {
+                try await H.endGame(self.gameCode)
+            } catch ServerError.serverError(let text){
+                print(text)
+                //serverAlert(text)
+                return
+            }
             dismiss(animated: true, completion: nil)
             delegate?.modalViewControllerDidRequestPush()
         }

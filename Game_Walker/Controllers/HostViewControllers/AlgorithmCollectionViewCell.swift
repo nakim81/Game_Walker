@@ -24,9 +24,12 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
     var hasWarning : Bool = false
     var hasPvpYellowWarning : Bool = false
     var hasPvpBlueWarning : Bool = false
+    var hasYellowWarning : Bool = false
+    var hasPurpleWarning : Bool = false
     var number : Int?
 
-    var affiliatedIndexPaths = Set<IndexPath>()
+    var yellowPvpIndexPaths = Set<IndexPath>()
+    var bluePvpIndexPaths = Set<IndexPath>()
     
     static let identifier = "AlgorithmCollectionViewCell"
     
@@ -48,7 +51,13 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         
         teamnumLabel.text = String(cellteamnum)
         number = cellteamnum
+        algorithmCellBox.image = originalCellBoxImage
+        teamnumLabel.textColor = UIColor.black
+        isUserInteractionEnabled = true
+        yellowPvpIndexPaths.removeAll()
+        bluePvpIndexPaths.removeAll()
     }
+    
     
     
     func changeRed() {
@@ -75,7 +84,8 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         hasPvpYellowWarning = false
         hasPvpBlueWarning = false
         warningColor = ""
-        affiliatedIndexPaths.removeAll()
+        yellowPvpIndexPaths.removeAll()
+        bluePvpIndexPaths.removeAll()
     }
     
     func makeCellInvisible() {
@@ -111,16 +121,9 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         algorithmCellBox.image = blueWarningBoxImage
         teamnumLabel.textColor = UIColor.white
         hasWarning = true
-        hasPvpBlueWarning = false
+        hasPvpBlueWarning = true
         warningColor = "blue"
     }
-    
-//    func makeOrangeWarning() {
-//        algorithmCellBox.image = orangeWarningBoxImage
-//        teamnumLabel.textColor = UIColor.white
-//        hasWarning = true
-//        warningColor = "orange"
-//    }
     
     func makeYellowWarning() {
         algorithmCellBox.image = yellowWarningBoxImage
@@ -136,13 +139,7 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         warningColor = "purple"
     }
     
-    func addIndexPathsToCell(_ indexPathSet: Set<IndexPath>, pvpYellowWarning: Bool, pvpBlueWarning : Bool) {
-        hasPvpBlueWarning = pvpBlueWarning
-        hasPvpYellowWarning = pvpYellowWarning
-        if !affiliatedIndexPaths.isEmpty {
-            affiliatedIndexPaths.formUnion(indexPathSet)
-        } else {
-            affiliatedIndexPaths = indexPathSet
-        }
-    }
+
 }
+
+

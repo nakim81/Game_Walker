@@ -122,9 +122,9 @@ class JoinTeamViewController: BaseViewController {
                 do {
                     try await T.joinTeam(strongSelf.gameCode, selectedTeam.name, strongSelf.currentPlayer)
                     strongSelf.performSegue(withIdentifier: "goToPF44", sender: strongSelf)
-                } catch(let e) {
-                    print(e)
-                    alert(title: "Connection Error", message: e.localizedDescription)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
                     return
                 }
             }

@@ -154,9 +154,9 @@ class CreateTeamViewController: BaseViewController {
                     do {
                         try await T.addTeam(gameCode, newTeam)
                         performSegue(withIdentifier: "goToTPF4", sender: self)
-                    } catch(let e) {
-                        print(e)
-                        alert(title: "Connection Error", message: e.localizedDescription)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
                         return
                     }
                 }

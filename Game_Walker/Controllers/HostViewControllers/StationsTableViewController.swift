@@ -18,10 +18,15 @@ class StationsTableViewController: BaseViewController {
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        S.delegate_stationList = self
+//        S.delegate_stationList = self
 //        S.getStationList(gamecode!)
-        S.getStationList(gamecode!)
-        
+//        S.getStationList(gamecode!)
+        do {
+            currentStations = try S.getStationList2(gamecode!)
+        } catch {
+            print("getting station error occured: \(error)")
+        }
+
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.delegate = self
         stationTable.dataSource = self
@@ -40,6 +45,7 @@ class StationsTableViewController: BaseViewController {
             addStationVC.stationExists = true
             addStationVC.station = selectedStation
             addStationVC.delegate = self
+            
         }
     }
     
@@ -95,8 +101,15 @@ extension StationsTableViewController: UITableViewDelegate {
         // Change referee to unassign
 
         let refereeToRemove = stationToRemove.referee
-        
-        await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+        Task{
+            do{
+                try await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
         S.removeStation(gamecode!, stationToRemove)
         
         // Remove the station from data source
@@ -150,17 +163,17 @@ extension StationsTableViewController: UITableViewDataSource {
     
     
 }
-
-extension StationsTableViewController: StationList {
-    func listOfStations(_ stations: [Station]) {
-        currentStations = stations
-        
-        DispatchQueue.main.async {
-            self.stationTable.reloadData()
-            self.refreshController.endRefreshing()
-        }
-    }
-}
+//
+//extension StationsTableViewController: StationList {
+//    func listOfStations(_ stations: [Station]) {
+//        currentStations = stations
+//
+//        DispatchQueue.main.async {
+//            self.stationTable.reloadData()
+//            self.refreshController.endRefreshing()
+//        }
+//    }
+//}
 
 extension StationsTableViewController: AddStationDelegate {
     func didUpdateStationData() {
@@ -172,3 +185,4 @@ extension StationsTableViewController: AddStationDelegate {
         
     }
 }
+
