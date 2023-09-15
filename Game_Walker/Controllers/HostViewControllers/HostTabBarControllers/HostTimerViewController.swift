@@ -70,10 +70,22 @@ class HostTimerViewController: UIViewController {
         if sender.image(for: .normal) != end {
             if !gameStart {
                 Task { @MainActor in
-                    await H.startGame(gameCode)
+                    do {
+                        try await H.startGame(gameCode)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        //serverAlert(text)
+                        return
+                    }
                     sender.setImage(pause, for: .normal)
                     isPaused = !isPaused
-                    await H.pause_resume_game(gameCode)
+                    do {
+                        try await H.pause_resume_game(gameCode)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        //serverAlert(text)
+                        return
+                    }
                 }
             }
             else {
@@ -85,7 +97,13 @@ class HostTimerViewController: UIViewController {
                 }
                 isPaused = !isPaused
                 Task { @MainActor in
-                    await H.pause_resume_game(gameCode)
+                    do {
+                        try await H.pause_resume_game(gameCode)
+                    } catch ServerError.serverError(let text){
+                        print(text)
+                        //serverAlert(text)
+                        return
+                    }
                 }
             }
         }
@@ -256,7 +274,13 @@ class HostTimerViewController: UIViewController {
                         strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         strongSelf.round += 1
                         Task {
-                            await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
+                            do {
+                                try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
+                            } catch ServerError.serverError(let text){
+                                print(text)
+                                //serverAlert(text)
+                                return
+                            }
                         }
                         strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         strongSelf.rounds! -= 1
@@ -315,7 +339,13 @@ class HostTimerViewController: UIViewController {
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         Task {
-            await H.updateCurrentRound(gameCode, self.round)
+            do {
+                try await H.updateCurrentRound(gameCode, self.round)
+            } catch ServerError.serverError(let text){
+                print(text)
+                //serverAlert(text)
+                return
+            }
         }
         if self.rounds! <= self.round {
             self.timeTypeLabel.text = "Game Time"

@@ -181,7 +181,13 @@ class RefereePVPController: BaseViewController {
     @objc func leftWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamA.name, self.points)
+            do {
+                try await T.givePoints(gameCode, self.teamA.name, self.points)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
         }
         leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false
@@ -313,7 +319,13 @@ class RefereePVPController: BaseViewController {
     @objc func rightWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         Task {
-            await T.givePoints(gameCode, self.teamB.name, self.points)
+            do {
+                try await T.givePoints(gameCode, self.teamB.name, self.points)
+            } catch ServerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
         }
         rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
             gestureRecognizer.isEnabled = false

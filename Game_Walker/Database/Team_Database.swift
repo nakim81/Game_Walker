@@ -21,7 +21,7 @@ struct T {
     
     //MARK: - Team Control Functions
     
-    static func addTeam(_ gamecode: String, _ team: Team) async {
+    static func addTeam(_ gamecode: String, _ team: Team) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -33,6 +33,7 @@ struct T {
             }
         } catch {
             print("Error adding Team: \(error)")
+            throw ServerError.serverError("Something went wrong while adding Team")
         }
     }
     
@@ -46,7 +47,7 @@ struct T {
         }
     }
     
-    static func joinTeam(_ gamecode: String, _ teamName: String, _ player: Player) async {
+    static func joinTeam(_ gamecode: String, _ teamName: String, _ player: Player) async throws {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         do {
             let document = try await docRef.getDocument()
@@ -59,13 +60,15 @@ struct T {
                 print("Team joined")
             } else {
                 print("Team does not exist")
+                throw ServerError.serverError("Something went wrong while joining Team")
             }
         } catch {
             print("Error joining Team: \(error)")
+            throw ServerError.serverError("Something went wrong while joining Team")
         }
     }
     
-    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player) async {
+    static func leaveTeam(_ gamecode: String, _ teamName: String, _ player: Player) async throws {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         do {
             let document = try await docRef.getDocument()
@@ -79,13 +82,15 @@ struct T {
                 print("Left Team")
             } else {
                 print("Team does not exist")
+                throw ServerError.serverError("Something went wrong while leaving Team")
             }
         } catch {
             print("Error leaving team: \(error)")
+            throw ServerError.serverError("Something went wrong while leaving Team")
         }
     }
     
-    static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int) async {
+    static func givePoints(_ gamecode: String, _ teamName: String, _ points: Int) async throws {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         do {
             let document = try await docRef.getDocument()
@@ -96,9 +101,11 @@ struct T {
                 updateTeam(gamecode, team)
             } else {
                 print("Team does not exist")
+                throw ServerError.serverError("Something went wrong while giving points to a Team")
             }
         } catch {
             print("Error giving points to Team: \(error)")
+            throw ServerError.serverError("Something went wrong while giving points to a Team")
         }
     }
     
@@ -152,7 +159,7 @@ struct T {
             return team
         } else {
             print("Error getting Team")
-            return nil
+            throw ServerError.serverError("Something went wrong while getting Team")
         }
     }
     
@@ -176,16 +183,22 @@ struct T {
     }
     
     static func getTeamList2(_ gamecode: String) async throws -> [Team] {
-        let querySnapshot = try await db.collection("\(gamecode) : Teams").getDocuments()
-        var teams: [Team] = []
-        
-        for document in querySnapshot.documents {
-            let data = document.data()
-            let team = convertDataToTeam(data)
-            teams.append(team)
+        do{
+            let querySnapshot = try await db.collection("\(gamecode) : Teams").getDocuments()
+            var teams: [Team] = []
+            
+            for document in querySnapshot.documents {
+                let data = document.data()
+                let team = convertDataToTeam(data)
+                teams.append(team)
+            }
+            teams.sort { $0.points > $1.points }
+            return teams
         }
-        teams.sort { $0.points > $1.points }
-        return teams
+        catch {
+            print("Error getting TeamList")
+            throw ServerError.serverError("Something went wrong while getting TeamList")
+        }
     }
     
     static func updateTeam(_ gamecode: String, _ team: Team) {

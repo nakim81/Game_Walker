@@ -97,7 +97,13 @@ class JoinTeamViewController: BaseViewController {
                 guard let strongSelf = self else {
                     return
                 }
-                await T.joinTeam(strongSelf.gameCode, selectedTeam.name, strongSelf.currentPlayer)
+                do {
+                    try await T.joinTeam(strongSelf.gameCode, selectedTeam.name, strongSelf.currentPlayer)
+                } catch ServerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
                 strongSelf.performSegue(withIdentifier: "goToPF44", sender: strongSelf)
             }
         } else {
