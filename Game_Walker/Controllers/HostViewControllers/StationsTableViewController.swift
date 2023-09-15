@@ -21,12 +21,7 @@ class StationsTableViewController: BaseViewController {
 //        S.delegate_stationList = self
 //        S.getStationList(gamecode!)
 //        S.getStationList(gamecode!)
-        do {
-            currentStations = try S.getStationList2(gamecode!)
-        } catch {
-            print("getting station error occured: \(error)")
-        }
-
+        getStationList()
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.delegate = self
         stationTable.dataSource = self
@@ -46,6 +41,22 @@ class StationsTableViewController: BaseViewController {
             addStationVC.station = selectedStation
             addStationVC.delegate = self
             
+        }
+    }
+    
+    private func getStationList() {
+        Task { @MainActor in
+            do {
+                currentStations = try await S.getStationList2(gamecode!)
+            } catch(let e) {
+                print(e)
+                alert(title: "Connection Error", message: e.localizedDescription)
+                return
+            }
+        }
+        DispatchQueue.main.async {
+            self.stationTable.reloadData()
+            self.refreshController.endRefreshing()
         }
     }
     

@@ -422,8 +422,8 @@
 			children = (
 				FCF6FB47298A9FC700473FCE /* HostTabBarController.swift */,
 				FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */,
-				FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */,
 				FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */,
+				FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */,
 				6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */,
 				FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */,
 			);

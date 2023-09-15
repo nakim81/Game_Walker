@@ -69,8 +69,21 @@ class AddStationViewController: BaseViewController {
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
         refereeTableView.dataSource = self
-        R.delegate_refereeList = self
-        R.getRefereeList(gamecode)
+//        R.delegate_refereeList = self
+//        R.getRefereeList(gamecode)
+        Task { @MainActor in
+            do {
+                allReferees = try await R.getRefereeList2(gamecode)
+                for referee in allReferees {
+                    if (!referee.assigned) {
+                        availableReferees.append(referee)
+                    }
+                }
+            } catch(let e) {
+                print(e)
+                return
+            }
+        }
 
 
         if stationExists {
@@ -411,30 +424,5 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
 }
-
-
-
-extension AddStationViewController: RefereeList {
-    func listOfReferees(_ referees: [Referee]) {
-        for referee in referees {
-            if (!referee.assigned) {
-                availableReferees.append(referee)
-//                print(availableReferees)
-            }
-            allReferees.append(referee)
-        }
-    }
-}
-
-//
-//extension AddStationViewController : GetStation {
-//    func getStation(_ station: Station) {
-//        if stationExists {
-//            self.station = station
-//        }
-//    }
-//    
-//}
-
 
 

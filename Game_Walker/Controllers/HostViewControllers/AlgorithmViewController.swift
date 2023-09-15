@@ -96,10 +96,46 @@ class AlgorithmViewController: BaseViewController {
     }
     
     private func fetchDataAndInitialize() {
-        S.delegate_stationList = self
-        S.getStationList(gamecode)
-        H.delegate_getHost = self
-        H.getHost(gamecode)
+//        S.delegate_stationList = self
+//        S.getStationList(gamecode)
+        
+        Task { @MainActor in
+            do {
+                stationList = try await S.getStationList2(gamecode)
+                self.num_stations = stationList!.count
+                self.collectionView?.reloadData()
+                var pvpCount = 0
+                
+                if let unwrappedStationList = stationList {
+                    for station in unwrappedStationList {
+                        if station.pvp {
+                            pvpCount += 1
+                        }
+                    }
+                }
+                
+                self.pvpGameCount = pvpCount
+                self.pveGameCount = stationList!.count - pvpCount
+                
+            } catch(let e) {
+                print(e)
+                return
+            }
+        }
+//        H.delegate_getHost = self
+//        H.getHost(gamecode)
+        Task { @MainActor in
+            do {
+                let host = try await H.getHost2(gamecode)
+                self.num_teams = host!.teams
+                self.num_rounds = host!.rounds
+                self.collectionView?.reloadData()
+                
+            } catch(let e) {
+                print(e)
+                return
+            }
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.createGrid()
             self.reloadAll()
@@ -109,7 +145,9 @@ class AlgorithmViewController: BaseViewController {
     
     @IBAction func startGameButtonPressed(_ sender: UIButton) {
 //        alert2(title: "", message: "Everything set?")
-        modalViewControllerDidRequestPush()
+        let startGameViewController = StartGameViewController(announcement: "Once the game is created, you won't be able to change the game settings", source: "", gamecode: gamecode)
+        startGameViewController.delegate = self
+        present(startGameViewController, animated: true)
     }
     
     func createBorderLines() {
@@ -961,22 +999,10 @@ extension AlgorithmViewController: StationList {
         self.pvpGameCount = pvpCount
         self.pveGameCount = stations.count - pvpCount
 
-//        print("stationsList is empty? : " , stations.count , " and ", self.stationList!.count)
     }
     
 }
 
-
-extension AlgorithmViewController: GetHost {
-    func getHost(_ host: Host) {
-//        print("algorithm protocol")
-        self.num_teams = host.teams
-        self.num_rounds = host.rounds
-
-        self.collectionView?.reloadData()
-        
-    }
-}
 
 
 extension AlgorithmViewController: UICollectionViewDelegateFlowLayout {
