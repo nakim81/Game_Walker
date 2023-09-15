@@ -16,6 +16,7 @@ class HostTimerViewController: UIViewController {
     @IBOutlet weak var settingBtn: UIButton!
     private var messages: [String] = []
     
+    private var host : Host = Host()
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
@@ -45,10 +46,12 @@ class HostTimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        H.delegate_getHost = self
-        H.getHost(gameCode)
-        H.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        Task {
+            callProtocols()
+            host = try await H.getHost2(gameCode) ?? Host()
+            setSettings()
+            configureTimerLabel()
+        }
     }
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
@@ -56,6 +59,11 @@ class HostTimerViewController: UIViewController {
     }
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
+        Task {
+            await H.startGame(gameCode)
+            await H.pause_resume_game(gameCode)
+            pauseOrPlayButton.setImage(UIImage(named: "Game Start Button"), for: .normal)
+        }
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
@@ -82,7 +90,7 @@ class HostTimerViewController: UIViewController {
             }
         }
         else {
-            performSegue(withIdentifier: "toEnd", sender: self)
+            showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
         }
     }
     //MARK: - Music
@@ -118,7 +126,7 @@ class HostTimerViewController: UIViewController {
         view.alpha = 0.6
         view.layer.borderWidth = 15
         view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        view.layer.cornerRadius = view.frame.width / 2.0
+        view.layer.cornerRadius = 0.68 * UIScreen.main.bounds.size.width / 2.0
         return view
     }()
     
@@ -215,7 +223,6 @@ class HostTimerViewController: UIViewController {
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
         calculateTime()
-        runTimer()
     }
     
     //MARK: - Timer Algorithm
@@ -310,28 +317,25 @@ class HostTimerViewController: UIViewController {
         Task {
             await H.updateCurrentRound(gameCode, self.round)
         }
-        self.rounds! = self.rounds! - self.round
-        self.roundLabel.text = "Round \(quotient + 1)"
+        if self.rounds! <= self.round {
+            self.timeTypeLabel.text = "Game Time"
+            self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
+            self.totalTime = (moveSeconds + seconds) * self.rounds!
+            let totalMinute = totalTime/60
+            let totalSecond = totalTime % 60
+            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+            self.totalTimeLabel.attributedText = attributedString
+            self.roundLabel.text = "Round \(self.rounds!)"
+        } else {
+            self.rounds! = self.rounds! - self.round
+            self.roundLabel.text = "Round \(quotient + 1)"
+            runTimer()
+        }
     }
-    
 }
 //MARK: - Protocol
-extension HostTimerViewController: GetHost, HostUpdateListener {
-    func getHost(_ host: Host) {
-        self.seconds = host.gameTime
-        self.moveSeconds = host.movingTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.rounds = host.rounds
-        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-        self.messages = host.announcements
-        self.gameStart = host.gameStart
-        self.gameOver = host.gameover
-        configureTimerLabel()
-    }
-    
+extension HostTimerViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
@@ -340,5 +344,26 @@ extension HostTimerViewController: GetHost, HostUpdateListener {
     }
     
     func listen(_ _ : [String : Any]){
+    }
+    
+    func callProtocols() {
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+    }
+    
+    func setSettings() {
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
+        self.messages = host.announcements
+        self.messages = host.announcements
+        self.gameStart = host.gameStart
+        self.gameOver = host.gameover
     }
 }

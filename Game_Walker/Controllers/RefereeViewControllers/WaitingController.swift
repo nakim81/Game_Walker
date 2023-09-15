@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import PromiseKit
 
 class WaitingController: BaseViewController {
     
@@ -24,7 +23,7 @@ class WaitingController: BaseViewController {
     private var algorithm : [[Int]] = []
     private var stationList : [Station] = []
     private var station : Station = Station()
-    private var pvp : Bool = true
+    private var pvp : Bool = false
     private var number : Int = 0
     private var teams : [Team] = []
     private var updatedTeamOrder : [Team] = []
@@ -32,10 +31,6 @@ class WaitingController: BaseViewController {
     override func viewDidLoad() {
         configureNavItem()
         callProtocols()
-        Task {
-            S.getStationList(gameCode)
-            T.getTeamList(gameCode)
-        }
         addSubviews()
         makeConstraints()
         animateWaitingScreen()
@@ -57,13 +52,14 @@ class WaitingController: BaseViewController {
     
 // MARK: - SetTeamOrder
     func setTeamOrder() {
-        //Function is being called after S.getStation(referee.stationName) called and that referee is assigned.
         var pvp_count : Int = 0
         var column_number_index : Int = 0
-        var left : [Int] = []
-        var right : [Int] = []
         var teamNumOrder : [Int] = []
         var teamOrder : [Team] = []
+        Task {
+            stationList = try await S.getStationList2(gameCode)
+            teams = try await T.getTeamList2(gameCode)
+        }
         for station in self.stationList {
             if station.pvp == true {
                 pvp_count += 1
@@ -71,8 +67,8 @@ class WaitingController: BaseViewController {
         }
         if self.station.pvp {
             column_number_index = 2 * station.number - 2
-            var left = self.algorithm.map({ $0[column_number_index] })
-            var right = self.algorithm.map({ $0[column_number_index + 1] })
+            let left = self.algorithm.map({ $0[column_number_index] })
+            let right = self.algorithm.map({ $0[column_number_index + 1] })
             var right_index : Int = 0
             for left_index in left {
                 teamNumOrder.append(left_index)
@@ -178,33 +174,17 @@ class WaitingController: BaseViewController {
 }
 
 // MARK: - Protocols
-extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListener, TeamList {
+extension WaitingController: RefereeUpdateListener, HostUpdateListener {
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "Referee")
         self.referee = UserData.readReferee("Referee")!
     }
     
-    func listOfStations(_ stations: [Station]) {
-        self.stationList = stations
-        for station in self.stationList {
-            if self.referee.stationName == station.name {
-                self.station = station
-            }
-        }
-        //self.setTeamOrder()
-    }
-    
     func updateHost(_ host: Host) {
         self.algorithm = host.algorithm
         if self.algorithm != [] {
-            //T.getTeamList(gameCode)
-            //S.getStationList(gameCode)
             self.setTeamOrder()
         }
-    }
-    
-    func listOfTeams(_ teams: [Team]) {
-        self.teams = teams
     }
     
     func listen(_ _ : [String : Any]){
@@ -213,10 +193,8 @@ extension WaitingController: RefereeUpdateListener, StationList, HostUpdateListe
     func callProtocols() {
         R.delegates.append(self)
         R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
-        S.delegate_stationList = self
         H.delegates.append(self)
         H.listenHost(self.gameCode, onListenerUpdate: listen(_:))
-        T.delegate_teamList = self
     }
 }
 

@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,26 +38,30 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-Gh-99w">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code 1" translatesAutoresizingMaskIntoConstraints="NO" id="R2P-Hb-2ch">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Code" translatesAutoresizingMaskIntoConstraints="NO" id="R2P-Hb-2ch">
                                                 <rect key="frame" x="84.5" y="52" width="151" height="34.5"/>
                                             </imageView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode #" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="4M3-nc-0rD">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode #" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="4M3-nc-0rD">
                                                 <rect key="frame" x="38.5" y="96" width="243" height="85.5"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fe6-Ju-w32">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Fe6-Ju-w32">
                                                 <rect key="frame" x="34" y="179.5" width="252" height="17.5"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="※">
                                                         <attributes>
-                                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                                            <font key="NSOriginalFont" metaFont="system"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                                            <font key="NSOriginalFont" size="13" name="Dosis-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content=" Game Code will be provided by the host.">
                                                         <attributes>
-                                                            <font key="NSFont" metaFont="system"/>
+                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <font key="NSFont" size="13" name="Dosis-Bold"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
@@ -83,10 +87,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ede-ac-NpO">
                                         <rect key="frame" x="0.0" y="198" width="320" height="198"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="username 1" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-cB-HGA">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Username" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-cB-HGA">
                                                 <rect key="frame" x="93.5" y="82" width="133" height="34.5"/>
                                             </imageView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="game id text" textAlignment="center" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-sD-k2a">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="game id text" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-sD-k2a">
                                                 <rect key="frame" x="38.5" y="125.5" width="243" height="86"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -190,36 +194,6 @@
             </objects>
             <point key="canvasLocation" x="5578" y="-1522"/>
         </scene>
-        <!--Host Give Points Controller-->
-        <scene sceneID="pER-eW-hDf">
-            <objects>
-                <viewController id="4ne-ui-1tf" customClass="HostGivePointsController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dck-IU-sln">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="7ek-F5-7YR"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9th-RT-CQ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5858" y="-340"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="PCc-oV-aIa">
-            <objects>
-                <viewController id="L9I-bT-gaG" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RjP-XH-zcI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Ajx-K7-pW9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ppb-eS-pDj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5859" y="621"/>
-        </scene>
         <!--Referee Tab BarPVE Controller-->
         <scene sceneID="58K-jT-5gZ">
             <objects>
@@ -233,6 +207,7 @@
                     <connections>
                         <segue destination="Zoa-T9-beL" kind="relationship" relationship="viewControllers" id="Yev-Pi-Mn0"/>
                         <segue destination="05k-AC-OW6" kind="relationship" relationship="viewControllers" id="aMM-jN-jlm"/>
+                        <segue destination="hzK-Wl-SYs" kind="relationship" relationship="viewControllers" id="SHh-Eb-iJT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tct-dh-Exx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -247,14 +222,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VwA-wW-Qtj">
-                                <rect key="frame" x="131.5" y="653" width="151" height="58"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Green Station Info"/>
-                                <connections>
-                                    <action selector="stationinfoButtonPressed:" destination="Zoa-T9-beL" eventType="touchUpInside" id="Vco-ps-cRo"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KB4-TO-xR6">
                                 <rect key="frame" x="324" y="39.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
@@ -283,12 +250,9 @@
                         <viewLayoutGuide key="safeArea" id="q1A-ob-tej"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="VwA-wW-Qtj" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" id="4Wo-Ih-C6P"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="width" secondItem="iJp-w0-aMs" secondAttribute="width" multiplier="0.085" id="57l-oU-S0y"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="width" secondItem="q1A-ob-tej" secondAttribute="width" multiplier="0.0845" id="8l7-8y-cvN"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="0.284" id="B4p-kJ-Cgb"/>
-                            <constraint firstItem="VwA-wW-Qtj" firstAttribute="height" secondItem="iJp-w0-aMs" secondAttribute="height" multiplier="0.0653207" id="Idi-AB-YG4"/>
-                            <constraint firstItem="VwA-wW-Qtj" firstAttribute="width" secondItem="iJp-w0-aMs" secondAttribute="width" multiplier="0.364734" id="Kes-vV-go6"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="height" secondItem="iJp-w0-aMs" secondAttribute="height" multiplier="0.04" id="OIw-wO-fVq"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.65" id="OJD-zx-dIO"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.0455" id="Py7-Bw-gbV"/>
@@ -296,7 +260,6 @@
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.85" id="Wam-Ll-PGY"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.145" id="igs-5Y-G7S"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.14" id="mRQ-NW-a8w"/>
-                            <constraint firstItem="VwA-wW-Qtj" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="1.63" id="q78-oG-Axz"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.0537634" id="wku-p3-QWl"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.14" id="xxk-h0-DFZ"/>
                         </constraints>
@@ -307,14 +270,30 @@
                         <outlet property="leaveButton" destination="8CS-DM-8s8" id="tp0-99-A3b"/>
                         <outlet property="messageButton" destination="KB4-TO-xR6" id="rXI-80-h4q"/>
                         <outlet property="settingsButton" destination="eE9-Oa-bu2" id="K18-zm-7E7"/>
-                        <outlet property="stationinfoButton" destination="VwA-wW-Qtj" id="AUY-KX-ERM"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVE" id="bfG-fW-iGy"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="KeI-Qk-QLQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42f-rM-rtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2947.826086956522" y="-1818.0803571428571"/>
+            <point key="canvasLocation" x="2948" y="-2188"/>
+        </scene>
+        <!--Referee Timer Controller-->
+        <scene sceneID="hrQ-3F-Pe5">
+            <objects>
+                <viewController id="hzK-Wl-SYs" customClass="RefereeTimerController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e5s-g5-Ji1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="212-75-2aX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="KwV-GR-Ld8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xRy-bP-zLX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2948" y="-563"/>
         </scene>
         <!--Referee RankingPVE View Controller-->
         <scene sceneID="enc-Xm-1fl">
@@ -378,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFU-wt-84y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2947.826086956522" y="-913.39285714285711"/>
+            <point key="canvasLocation" x="2948" y="-1392"/>
         </scene>
         <!--Referee Tab BarPVP Controller-->
         <scene sceneID="4mg-aa-Oyx">
@@ -393,6 +372,7 @@
                     <connections>
                         <segue destination="Hmo-3x-snH" kind="relationship" relationship="viewControllers" id="jK5-Se-haV"/>
                         <segue destination="5aH-sB-meb" kind="relationship" relationship="viewControllers" id="eiJ-QN-gbd"/>
+                        <segue destination="NZX-3l-nEo" kind="relationship" relationship="viewControllers" id="t3i-dy-oZv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gdk-XE-qHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -407,14 +387,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYW-oF-NVH">
-                                <rect key="frame" x="131.5" y="639.5" width="151" height="60"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Green Station Info"/>
-                                <connections>
-                                    <action selector="stationinfoButtonPressed:" destination="Hmo-3x-snH" eventType="touchUpInside" id="WrA-EG-zkZ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYT-Ko-9eQ">
                                 <rect key="frame" x="324" y="39.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
@@ -443,9 +415,6 @@
                         <viewLayoutGuide key="safeArea" id="GFd-Dx-WLW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EYW-oF-NVH" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="1.6" id="09v-n7-CjR"/>
-                            <constraint firstItem="EYW-oF-NVH" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" id="5z5-U2-rP4"/>
-                            <constraint firstItem="EYW-oF-NVH" firstAttribute="width" secondItem="GFd-Dx-WLW" secondAttribute="width" multiplier="0.364734" id="6Tx-3Q-iEa"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.85" id="6eE-hC-h96"/>
                             <constraint firstItem="qYT-Ko-9eQ" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.65" id="D19-Bc-aMe"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.04" id="EzC-dP-8oq"/>
@@ -456,7 +425,6 @@
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="0.284" id="dmp-Rh-s14"/>
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="0.145" id="e8k-BV-CyN"/>
                             <constraint firstItem="qYT-Ko-9eQ" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.0455" id="faZ-hY-kHn"/>
-                            <constraint firstItem="EYW-oF-NVH" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.0715215" id="kjs-25-GMm"/>
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.0537" id="nMv-Jx-kD6"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="width" secondItem="GFd-Dx-WLW" secondAttribute="width" multiplier="0.085" id="ylM-Kq-rD4"/>
                         </constraints>
@@ -466,16 +434,29 @@
                         <outlet property="annnouncementButton" destination="qYT-Ko-9eQ" id="28G-oK-H4g"/>
                         <outlet property="leaveButton" destination="36t-aj-G8Y" id="Mwe-rV-Pm4"/>
                         <outlet property="settingsButton" destination="ECZ-cN-lrq" id="Qh3-dE-dTB"/>
-                        <outlet property="stationinfoButton" destination="EYW-oF-NVH" id="6Eg-qA-Qi5"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVP" id="GxM-Ra-Tyo"/>
-                        <segue destination="4ne-ui-1tf" kind="presentation" identifier="HostTesting" id="XX4-lf-zyp"/>
-                        <segue destination="L9I-bT-gaG" kind="presentation" identifier="warning" id="bt3-RT-8hR"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="ef2-ZC-eYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUJ-SR-8WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2948" y="672"/>
+            <point key="canvasLocation" x="2739" y="621"/>
+        </scene>
+        <!--Referee Timer Controller-->
+        <scene sceneID="9h5-v4-JfK">
+            <objects>
+                <viewController id="NZX-3l-nEo" customClass="RefereeTimerController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qzm-HO-mAJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yDZ-oz-LGx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="BbY-Ko-IuE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eds-Os-F8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2738" y="2464"/>
         </scene>
         <!--Referee RankingPVP View Controller-->
         <scene sceneID="3PV-0A-gmf">
@@ -533,19 +514,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysl-vZ-JBz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2822" y="1594"/>
+            <point key="canvasLocation" x="2738" y="1519"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S3m-98-REn"/>
-        <segue reference="nu7-bb-fST"/>
+        <segue reference="SEr-t1-evM"/>
+        <segue reference="qww-74-glH"/>
         <segue reference="GxM-Ra-Tyo"/>
         <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Green Station Info" width="126.5" height="41"/>
+        <image name="Game Code" width="168" height="27.5"/>
+        <image name="Username" width="152" height="26.5"/>
         <image name="announcement" width="46" height="35"/>
-        <image name="game code 1" width="151.5" height="35"/>
         <image name="join button 2" width="176" height="57"/>
         <image name="leave 1" width="60" height="31"/>
         <image name="next button 1" width="175.5" height="57"/>
@@ -554,7 +535,7 @@
         <image name="settingIcon" width="53.5" height="40"/>
         <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
-        <image name="username 1" width="131.5" height="35"/>
+        <image name="timer icon 1" width="85" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
