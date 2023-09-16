@@ -96,8 +96,7 @@ class AlgorithmViewController: BaseViewController {
     }
     
     private func fetchDataAndInitialize() {
-//        S.delegate_stationList = self
-//        S.getStationList(gamecode)
+
         
         Task { @MainActor in
             do {

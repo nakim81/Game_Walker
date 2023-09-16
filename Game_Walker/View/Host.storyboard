@@ -164,6 +164,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="newaddbutton"/>
                                 <connections>
+                                    <action selector="addButtonPressed:" destination="1L0-Oz-afr" eventType="touchUpInside" id="SH7-KA-CBf"/>
                                     <segue destination="EDq-oM-bgK" kind="presentation" identifier="AddStationSegue" id="8x5-g0-ems"/>
                                 </connections>
                             </button>
@@ -187,6 +188,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="DML-sP-Zbz"/>
                     <connections>
+                        <outlet property="addButton" destination="0cn-lG-6rY" id="Mzb-us-q2q"/>
                         <outlet property="stationTable" destination="LOv-V0-Zcn" id="D5J-Du-ZrP"/>
                     </connections>
                 </viewController>

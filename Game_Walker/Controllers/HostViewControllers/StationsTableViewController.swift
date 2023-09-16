@@ -15,49 +15,56 @@ class StationsTableViewController: BaseViewController {
     
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
+    
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        S.delegate_stationList = self
-//        S.getStationList(gamecode!)
-//        S.getStationList(gamecode!)
-        getStationList()
-        stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
+
         stationTable.delegate = self
         stationTable.dataSource = self
+        stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.separatorStyle = UITableViewCell.SeparatorStyle.none
+        getStationList()
         
         stationTable.refreshControl = refreshController
         settingRefreshControl()
+        
         
     }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddStationSegue",
-            let addStationVC = segue.destination as? AddStationViewController,
-            let selectedStation = sender as? Station {
-            addStationVC.stationExists = true
-            addStationVC.station = selectedStation
-            addStationVC.delegate = self
-            
+        if segue.identifier == "AddStationSegue" {
+            if let addStationVC = segue.destination as? AddStationViewController {
+                if let selectedStation = sender as? Station {
+                    addStationVC.stationExists = true
+                    addStationVC.station = selectedStation
+                }
+
+                addStationVC.delegate = self
+            }
         }
+    }
+    
+    @IBAction func addButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "AddStationSegue", sender: self)
     }
     
     private func getStationList() {
         Task { @MainActor in
             do {
                 currentStations = try await S.getStationList2(gamecode!)
+                DispatchQueue.main.async {
+                    self.stationTable.reloadData()
+                    self.refreshController.endRefreshing()
+                }
             } catch(let e) {
                 print(e)
-                alert(title: "Connection Error", message: e.localizedDescription)
                 return
             }
         }
-        DispatchQueue.main.async {
-            self.stationTable.reloadData()
-            self.refreshController.endRefreshing()
-        }
+
     }
     
     private func settingRefreshControl() {
@@ -66,17 +73,19 @@ class StationsTableViewController: BaseViewController {
         refreshController.attributedTitle = NSAttributedString(string: "", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.92, green: 0.75, blue: 0.99, alpha: 1.00), NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
     }
     
+    
     @objc func refreshFunction() {
-        reloadStationTable()
-
+        Task { @MainActor in
+            do {
+                self.currentStations = try await S.getStationList2(gamecode!)
+                refreshController.endRefreshing()
+                stationTable.reloadData()
+            } catch (let e){
+                print(e)
+                return
+            }
+        }
     }
-    
-   func reloadStationTable() {
-       S.getStationList(self.gamecode!)
-        self.stationTable.reloadData()
-    }
-    
-    
 
 }
 
@@ -103,9 +112,7 @@ extension StationsTableViewController: UITableViewDelegate {
     func deleteStation(at indexPath: IndexPath) async {
 
         print("stationList before Removal: ", currentStations)
-//        print("Removed station at : " , indexPath)
 
-        
         let stationIndex = indexPath.item
         let stationToRemove = currentStations[stationIndex]
         
@@ -174,26 +181,23 @@ extension StationsTableViewController: UITableViewDataSource {
     
     
 }
-//
-//extension StationsTableViewController: StationList {
-//    func listOfStations(_ stations: [Station]) {
-//        currentStations = stations
-//
-//        DispatchQueue.main.async {
-//            self.stationTable.reloadData()
-//            self.refreshController.endRefreshing()
-//        }
-//    }
-//}
 
 extension StationsTableViewController: AddStationDelegate {
-    func didUpdateStationData() {
-        S.getStationList(self.gamecode!)
-            DispatchQueue.main.async {
-                print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
-                self.stationTable.reloadData()
+    
+    func didUpdateStationData(completion: @escaping () -> Void) {
+        Task { @MainActor in
+            do {
+                self.currentStations = try await S.getStationList2(gamecode!)
+                DispatchQueue.main.async {
+                    print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
+                    self.dismiss(animated: true)
+                    completion() // Call the completion handler after data update
+                }
+            } catch (let e){
+                print(e)
+                return
             }
-        
+        }
     }
 }
 
