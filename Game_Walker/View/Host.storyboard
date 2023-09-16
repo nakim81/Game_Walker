@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -283,7 +283,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="149" y="375.5" width="108" height="23.5"/>
+                                        <rect key="frame" x="139.5" y="375.5" width="127.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -471,13 +471,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="34.5" y="4.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="4.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -516,13 +516,13 @@
                                         <rect key="frame" x="87" y="-4.5" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="34.5" y="4" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
+                                        <rect key="frame" x="100" y="4" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -793,13 +793,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer 1" translatesAutoresizingMaskIntoConstraints="NO" id="S0z-Qo-01x">
-                                <rect key="frame" x="27" y="80.5" width="134" height="65"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NaI-KP-VEh">
-                                <rect key="frame" x="162" y="619.5" width="90" height="58.5"/>
+                                <rect key="frame" x="162" y="515" width="90" height="58"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Game Start Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="GameStartButton"/>
                                 <connections>
                                     <action selector="pauseOrPlayButtonPressed:" destination="XpD-HK-1hf" eventType="touchUpInside" id="hbX-py-8Yf"/>
                                 </connections>
@@ -836,29 +833,46 @@
                                     <constraint firstItem="xgH-dT-cdH" firstAttribute="centerX" secondItem="mtV-fz-sEF" secondAttribute="centerX" multiplier="0.5" id="qgD-7z-EgK"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vl-0Q-0Cj">
+                                <rect key="frame" x="132" y="600.5" width="150" height="55"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="EndGameButton"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ama-Wu-a0u">
+                                <rect key="frame" x="114" y="96" width="186" height="59"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="s6r-8J-ljp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="S0z-Qo-01x" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.323671" id="2k3-da-EVb"/>
-                            <constraint firstItem="NaI-KP-VEh" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="1.55" id="2nc-Da-IIa"/>
-                            <constraint firstItem="S0z-Qo-01x" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0777355" id="4j5-vp-tRu"/>
+                            <constraint firstItem="NaI-KP-VEh" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="1.3" id="2nc-Da-IIa"/>
+                            <constraint firstItem="Ama-Wu-a0u" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" id="3MZ-AP-TM3"/>
                             <constraint firstItem="NaI-KP-VEh" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.217391" id="76u-U3-smL"/>
                             <constraint firstItem="mtV-fz-sEF" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0475" id="7ft-g5-xud"/>
+                            <constraint firstItem="4vl-0Q-0Cj" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0657109" id="87X-CT-0yN"/>
                             <constraint firstItem="mtV-fz-sEF" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="0.16" id="CTl-xy-C3w"/>
+                            <constraint firstItem="Ama-Wu-a0u" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="0.3" id="FFw-mE-YAU"/>
                             <constraint firstItem="NaI-KP-VEh" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" id="Fj4-ax-dMG"/>
-                            <constraint firstItem="S0z-Qo-01x" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" multiplier="0.455" id="Ja4-a2-WGa"/>
                             <constraint firstItem="mtV-fz-sEF" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" multiplier="1.6" id="XfI-bC-Ao9"/>
+                            <constraint firstItem="Ama-Wu-a0u" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0704898" id="YsH-bI-uDH"/>
                             <constraint firstItem="mtV-fz-sEF" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.18" id="lTx-kZ-WpQ"/>
-                            <constraint firstItem="S0z-Qo-01x" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="0.27" id="vsm-2C-ga2"/>
+                            <constraint firstItem="4vl-0Q-0Cj" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.362319" id="mC7-Ib-kIg"/>
+                            <constraint firstItem="4vl-0Q-0Cj" firstAttribute="centerX" secondItem="s6r-8J-ljp" secondAttribute="centerX" id="ms2-Un-MEb"/>
+                            <constraint firstItem="Ama-Wu-a0u" firstAttribute="width" secondItem="s6r-8J-ljp" secondAttribute="width" multiplier="0.45" id="pyI-7M-4go"/>
                             <constraint firstItem="NaI-KP-VEh" firstAttribute="height" secondItem="s6r-8J-ljp" secondAttribute="height" multiplier="0.0697085" id="wCm-b4-lux"/>
+                            <constraint firstItem="4vl-0Q-0Cj" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="1.5" id="xic-vc-20M"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="zS1-ab-lZI"/>
                     <connections>
                         <outlet property="announcementBtn" destination="xgH-dT-cdH" id="G7F-Lk-uSZ"/>
+                        <outlet property="endGameBtn" destination="4vl-0Q-0Cj" id="gFJ-vj-Em6"/>
                         <outlet property="pauseOrPlayButton" destination="NaI-KP-VEh" id="WSS-oX-zDp"/>
                         <outlet property="settingBtn" destination="C4W-ai-af5" id="zeH-wO-2lG"/>
+                        <outlet property="titleLabel" destination="Ama-Wu-a0u" id="1I5-Bm-xgU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kiu-WL-Pfx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -996,11 +1010,11 @@
         <segue reference="ba3-G3-TlT"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Game Start Button" width="176" height="57"/>
+        <image name="EndGameButton" width="126" height="41"/>
+        <image name="GameStartButton" width="126" height="41"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
         <image name="Start game button" width="176" height="57"/>
-        <image name="Timer 1" width="128" height="61"/>
         <image name="algorithm 1" width="221.5" height="61"/>
         <image name="announcement" width="46" height="35"/>
         <image name="chosse referee 1" width="147.5" height="25"/>

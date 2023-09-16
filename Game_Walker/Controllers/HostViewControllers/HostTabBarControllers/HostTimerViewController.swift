@@ -14,6 +14,9 @@ class HostTimerViewController: UIViewController {
     @IBOutlet weak var pauseOrPlayButton: UIButton!
     @IBOutlet weak var announcementBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
+    
+    @IBOutlet weak var endGameBtn: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     private var messages: [String] = []
     
     private var host : Host = Host()
@@ -60,8 +63,8 @@ class HostTimerViewController: UIViewController {
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
         Task {
-            await H.startGame(gameCode)
-            await H.pause_resume_game(gameCode)
+//            await H.startGame(gameCode)
+//            await H.pause_resume_game(gameCode)
             pauseOrPlayButton.setImage(UIImage(named: "Game Start Button"), for: .normal)
         }
     }
@@ -278,7 +281,7 @@ class HostTimerViewController: UIViewController {
                                 try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
                             } catch ServerError.serverError(let text){
                                 print(text)
-                                serverAlert(text)
+                                strongSelf.serverAlert(text)
                                 return
                             }
                         }

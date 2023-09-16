@@ -17,6 +17,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
     
+    @IBOutlet weak var titleLabel: UILabel!
     private var messages: [String] = []
     
     private let readAll = UIImage(named: "announcement")

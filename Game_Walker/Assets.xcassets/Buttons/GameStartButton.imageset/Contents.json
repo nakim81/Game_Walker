@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Game Start Button.png",
+      "filename" : "GameStartButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Game Start Button 1.png",
+      "filename" : "GameStartButton (1).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Game Start Button 2.png",
+      "filename" : "GameStartButton (2).png",
       "idiom" : "universal",
       "scale" : "3x"
     }
