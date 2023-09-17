@@ -23,7 +23,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Typography 1" translatesAutoresizingMaskIntoConstraints="NO" id="h4J-RS-OY5">
-                                <rect key="frame" x="68" y="154.5" width="278" height="170"/>
+                                <rect key="frame" x="68" y="149" width="278" height="181"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="278" id="j38-Fj-FyV"/>
+                                    <constraint firstAttribute="height" constant="181" id="tAD-Xb-UXq"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15D-kC-3Ti">
                                 <rect key="frame" x="84.5" y="406" width="245" height="80"/>
@@ -107,12 +111,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.502" id="6C3-9A-NHV"/>
-                            <constraint firstItem="h4J-RS-OY5" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.671498" id="6Dc-wd-Zpa"/>
                             <constraint firstItem="fHc-CG-zIU" firstAttribute="top" secondItem="3tL-zp-Xl0" secondAttribute="bottom" constant="35" id="BEW-gn-VaO"/>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="H8A-i2-aq4"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.0475" id="Hnw-co-yeM"/>
                             <constraint firstItem="3tL-zp-Xl0" firstAttribute="top" secondItem="15D-kC-3Ti" secondAttribute="bottom" constant="35" id="Jdw-h1-RRg"/>
-                            <constraint firstItem="h4J-RS-OY5" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.221271" id="VSP-jP-jeV"/>
                             <constraint firstItem="fHc-CG-zIU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WgB-44-q3t"/>
                             <constraint firstItem="15D-kC-3Ti" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="X1D-Ba-qoo"/>
                             <constraint firstItem="ARh-P8-ekY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.6" id="dH3-7g-E9v"/>

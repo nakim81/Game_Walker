@@ -24,15 +24,18 @@ class AwardViewController: UIViewController {
     private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "AwardBackground") ?? UIColor.white.image())
+        view.contentMode = .scaleAspectFit
         return view
     }()
     
-    private lazy var congratulationLabel: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "CONGRATULATIONS 1")
+    private lazy var congratulationLabel: UILabel = {
+        var view = UILabel()
+        view.textColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1)
+        view.font = UIFont(name: "GemunuLibre-SemiBold", size: 40)
+        view.text = "CONGRATULATIONS"
+        view.textAlignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.clipsToBounds = true
         return view
     }()
     
@@ -80,8 +83,8 @@ class AwardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             firstPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            firstPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.884354),
-            firstPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
+            firstPlaceImage.widthAnchor.constraint(equalTo: firstPlaceImage.heightAnchor, multiplier: 1),
+            firstPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
             NSLayoutConstraint(item: firstPlaceImage, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
             
             firstPlaceTeamNum.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -91,12 +94,12 @@ class AwardViewController: UIViewController {
             
             firstPlaceTeamName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             firstPlaceTeamName.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
-            firstPlaceTeamName.heightAnchor.constraint(equalTo: firstPlaceImage.heightAnchor, multiplier: 0.176923),
+            firstPlaceTeamName.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.122642),
             NSLayoutConstraint(item: firstPlaceTeamName, attribute: .top, relatedBy: .equal, toItem: firstPlaceTeamNum, attribute: .bottom, multiplier: 1, constant: 0),
             
             firstPlacePoints.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             firstPlacePoints.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1),
-            firstPlacePoints.heightAnchor.constraint(equalTo: firstPlaceImage.heightAnchor, multiplier: 0.230769),
+            firstPlacePoints.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.122642),
             NSLayoutConstraint(item: firstPlacePoints, attribute: .top, relatedBy: .equal, toItem: firstPlaceTeamName, attribute: .bottom, multiplier: 1, constant: 0)
         ])
         return view
@@ -146,7 +149,7 @@ class AwardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             secondPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            secondPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.78),
+            secondPlaceImage.widthAnchor.constraint(equalTo: secondPlaceImage.heightAnchor, multiplier: 1),
             secondPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
             NSLayoutConstraint(item: secondPlaceImage, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
             
@@ -212,7 +215,7 @@ class AwardViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             thirdPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            thirdPlaceImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.78),
+            thirdPlaceImage.widthAnchor.constraint(equalTo: thirdPlaceImage.heightAnchor, multiplier: 1),
             thirdPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
             NSLayoutConstraint(item: thirdPlaceImage, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
             
@@ -307,21 +310,35 @@ class AwardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
-        T.delegate_teamList = self
-        T.getTeamList(gameCode)
         configureViews()
-        Task {
-            try await Task.sleep(nanoseconds: 300_000_000)
-            self.firstPlace = teamList.first
-            self.secondPlace = teamList[1]
-            self.thirdPlace = teamList[2]
-            configureTopThree()
-            newTeamList = getNewTeamList(teamList)
-            configureLeaderboard()
+        getTeamList(gameCode)
+    }
+    
+    private func getTeamList(_ gamecode: String) {
+        Task { @MainActor in
+            do {
+                self.teamList = try await T.getTeamList2(gamecode)
+                let order: (Team, Team) -> Bool = {(lhs, rhs) in
+                    return lhs.points > rhs.points
+                }
+                self.teamList.sort(by: order)
+                self.firstPlace = teamList.first
+                self.secondPlace = teamList[1]
+                self.thirdPlace = teamList[2]
+                configureTopThree()
+                newTeamList = getNewTeamList(teamList)
+                configureLeaderboard()
+            } catch GamecodeError.invalidGamecode(let text) {
+                print(text)
+                alert(title: "Invalid Gamecode", message: text)
+                return
+            }
         }
     }
     
-    func configureViews() {
+    
+    
+    private func configureViews() {
         view.addSubview(containerView)
         containerView.addSubview(congratulationLabel)
         containerView.addSubview(firstPlaceView)
@@ -331,8 +348,6 @@ class AwardViewController: UIViewController {
         leaderBoard.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             containerView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -340,23 +355,23 @@ class AwardViewController: UIViewController {
             
             navStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             navStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
-            navStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.05),
-            NSLayoutConstraint(item: navStackView, attribute: .centerY, relatedBy: .equal, toItem: containerView, attribute: .centerY, multiplier: 0.2, constant: 0),
+            navStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.04),
+            navStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 40),
             
             congratulationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             congratulationLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
             congratulationLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.0658762),
-            NSLayoutConstraint(item: congratulationLabel, attribute: .top, relatedBy: .equal, toItem: navStackView, attribute: .bottom, multiplier: 1.1, constant: 0),
+            congratulationLabel.topAnchor.constraint(equalTo: navStackView.bottomAnchor, constant: 10),
             
             firstPlaceView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             firstPlaceView.widthAnchor.constraint(equalTo: congratulationLabel.widthAnchor, multiplier: 0.47),
             firstPlaceView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.25),
-            NSLayoutConstraint(item: firstPlaceView, attribute: .top, relatedBy: .equal, toItem: congratulationLabel, attribute: .bottom, multiplier: 0.9, constant: 0),
+            firstPlaceView.topAnchor.constraint(equalTo: congratulationLabel.bottomAnchor, constant: 5),
             
             secondAndThirdPlaceStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             secondAndThirdPlaceStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.64),
             secondAndThirdPlaceStackView.heightAnchor.constraint(equalTo: firstPlaceView.heightAnchor, multiplier: 0.7),
-            NSLayoutConstraint(item: secondAndThirdPlaceStackView, attribute: .top, relatedBy: .equal, toItem: firstPlaceView, attribute: .bottom, multiplier: 1.02, constant: 0),
+            secondAndThirdPlaceStackView.topAnchor.constraint(equalTo: firstPlaceView.bottomAnchor, constant: 15),
             
             leaderBoard.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             leaderBoard.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.712468),
@@ -365,16 +380,16 @@ class AwardViewController: UIViewController {
         ])
     }
     
-    func configureLeaderboard() {
+    private func configureLeaderboard() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
         leaderBoard.register(AwardTableViewCell.self, forCellReuseIdentifier: AwardTableViewCell.identifier)
-        leaderBoard.backgroundColor = .white
+        leaderBoard.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
     }
     
-    func configureTopThree() {
+    private func configureTopThree() {
         guard let firstPlace = firstPlace, let secondPlace = secondPlace, let thirdPlace = thirdPlace else { return }
         firstPlaceImage.image = UIImage(named: firstPlace.iconName)
         firstPlaceTeamNum.text = "Team \(firstPlace.number)"
@@ -392,7 +407,7 @@ class AwardViewController: UIViewController {
         thirdPlacePoints.text = String(thirdPlace.points)
     }
     
-    func getNewTeamList(_ teamList: [Team]) -> [Team] {
+    private func getNewTeamList(_ teamList: [Team]) -> [Team] {
         var i = 0
         var newList = teamList
         while (i <= 2) {
@@ -423,41 +438,24 @@ class AwardViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 }
-// MARK: - teamList
-extension AwardViewController: TeamList {
-    func listOfTeams(_ teams: [Team]) {
-        self.teamList = teams
-        let order: (Team, Team) -> Bool = {(lhs, rhs) in
-            return lhs.points > rhs.points
-        }
-        self.teamList.sort(by: order)
-        leaderBoard.reloadData()
-    }
-}
 // MARK: - tableView
 extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: AwardTableViewCell.identifier, for: indexPath) as! AwardTableViewCell
-        let teamNum = String(newTeamList[indexPath.section].number)
-        cell.configureRankTableViewCell(imageName: newTeamList[indexPath.section].iconName, teamNum: "Team \(teamNum)", teamName: newTeamList[indexPath.section].name, points: newTeamList[indexPath.section].points)
+        let team = newTeamList[indexPath.row]
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(String(team.number))", teamName: team.name, points: team.points)
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return newTeamList.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacingHeight
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newTeamList.count
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }

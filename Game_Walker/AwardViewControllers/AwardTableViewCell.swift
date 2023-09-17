@@ -15,16 +15,15 @@ class AwardTableViewCell: UITableViewCell {
     private let teamNumLabel: UILabel = {
         let label = UILabel()
         label.clipsToBounds = true
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
         label.numberOfLines = 0
         return label
     }()
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFill
@@ -42,9 +41,9 @@ class AwardTableViewCell: UITableViewCell {
     private var teamNameLabel: UILabel = {
        let label = UILabel()
         label.clipsToBounds = true
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 13)
+        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.numberOfLines = 0
         return label
     }()
@@ -54,16 +53,9 @@ class AwardTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Bold", size: 18)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 25)
         label.numberOfLines = 0
         return label
-    }()
-
-    public let borderView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 85, width: 255, height: 2))
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(red: 0.98, green: 0.204, blue: 0, alpha: 1).cgColor
-        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -80,36 +72,35 @@ class AwardTableViewCell: UITableViewCell {
         containerView.addSubview(teamIconImage)
         containerView.addSubview(teamNameLabel)
         containerView.addSubview(scoreLabel)
-        containerView.addSubview(borderView)
         containerView.addSubview(teamNumLabel)
         
         NSLayoutConstraint.activate([
-            containerView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 270),
-            containerView.heightAnchor.constraint(equalToConstant: 100),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            teamNumLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            teamNumLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: teamIconImage.layoutMarginsGuide.trailingAnchor, multiplier: 1),
-            teamNumLabel.widthAnchor.constraint(equalToConstant: 65),
-            teamNumLabel.heightAnchor.constraint(equalToConstant: 25),
+            teamIconImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            teamIconImage.widthAnchor.constraint(equalToConstant: 70),
+            teamIconImage.heightAnchor.constraint(equalTo: teamIconImage.widthAnchor, multiplier: 1),
+            teamIconImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             
-            teamNameLabel.leadingAnchor.constraint(equalTo: teamNumLabel.layoutMarginsGuide.trailingAnchor, constant: 15),
-            teamNameLabel.trailingAnchor.constraint(equalTo: scoreLabel.layoutMarginsGuide.leadingAnchor, constant: -15),
-            teamNameLabel.widthAnchor.constraint(equalToConstant: 85),
-            teamNameLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
-            teamNameLabel.heightAnchor.constraint(equalToConstant: 25),
+            teamNumLabel.topAnchor.constraint(equalTo: teamIconImage.topAnchor, constant: 5),
+            teamNumLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: teamIconImage.trailingAnchor, multiplier: 1),
+            teamNumLabel.trailingAnchor.constraint(equalTo: scoreLabel.leadingAnchor),
+            teamNumLabel.heightAnchor.constraint(equalTo: teamIconImage.heightAnchor, multiplier: 0.5),
+    
+            teamNameLabel.leadingAnchor.constraint(equalTo: teamNumLabel.leadingAnchor),
+            teamNameLabel.trailingAnchor.constraint(equalTo: teamNumLabel.trailingAnchor),
+            teamNameLabel.heightAnchor.constraint(equalTo: teamNumLabel.heightAnchor, multiplier: 1),
+            teamNameLabel.bottomAnchor.constraint(equalTo: teamIconImage.bottomAnchor, constant: -5),
             
-            scoreLabel.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor, constant: 0),
+            scoreLabel.trailingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.trailingAnchor),
             scoreLabel.centerYAnchor.constraint(equalTo: containerView.layoutMarginsGuide.centerYAnchor),
             scoreLabel.widthAnchor.constraint(equalToConstant: 35),
             scoreLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
-        
-        teamIconImage.leadingAnchor.constraint(equalTo: containerView.layoutMarginsGuide.leadingAnchor).isActive = true
-        teamIconImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        teamIconImage.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        teamIconImage.heightAnchor.constraint(equalToConstant: 60).isActive = true
+
         teamIconImage.image = UIImage(named: imageName)
         teamNameLabel.text = teamName
         teamNumLabel.text = teamNum
