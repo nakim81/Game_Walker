@@ -789,9 +789,14 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             cellDataA = cellDataGrid[indexPath.section][indexPath.item]
             changeCellGridData(cellDataInstance: cellDataA!, to: "selected")
             let indexPathA = IndexPath(item: indexPath.item, section: indexPath.section )
+            let blue = cellDataA!.cellsWithSameBluePvpWarning
+            for celldata in blue {
+                print(celldata.number ?? "no number", "at index path section: ", celldata.cellIndex?.first ?? "no section"," and column: ", celldata.cellIndex?.second ?? "no column")
+            }
             if let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
                 selectedCellA.makeCellSelected()
             }
+
         } else if cellDataB == nil {
             // Second selection
 //            indexPathB = indexPath
@@ -839,18 +844,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     self.reloadAll()
                     self.collectionView.reloadData()
                 
-                    var printgrid = [[String]]()
-                    for row in self.cellDataGrid {
-                        var printrow = [String]()
-                        for cellData in row {
-                            let number = String(describing: cellData.number ?? -2)
-                            let warningcolor = cellData.warningColor ?? "-- Nil"
-                            let printstatement = number + " " + warningcolor
-                            printrow.append(printstatement)
-                        }
-                        printgrid.append(printrow)
-                    }
-                    print("PRINTING CELLDATA GRID: ", printgrid)
 
             })
 //            collectionView.reloadData()
