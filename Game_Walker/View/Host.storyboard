@@ -9,8 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Dosis-Bold.ttf">
+            <string>Dosis-Bold</string>
+        </array>
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
+        </array>
+        <array key="GemunuLibre-SemiBold.ttf">
+            <string>GemunuLibre-SemiBold</string>
         </array>
     </customFonts>
     <scenes>
@@ -33,23 +39,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf7-AC-7yj">
-                                <rect key="frame" x="83" y="556" width="248" height="71"/>
+                                <rect key="frame" x="83" y="551" width="248" height="81"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="cf7-AC-7yj" secondAttribute="height" multiplier="3.5:1" id="szy-uf-51D"/>
+                                    <constraint firstAttribute="width" secondItem="cf7-AC-7yj" secondAttribute="height" multiplier="245:80" id="szy-uf-51D"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="resumegamebutton_modified"/>
+                                <state key="normal" backgroundImage="HostResumeGameButton"/>
                                 <connections>
                                     <action selector="joinButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ssN-9B-Ii4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjH-HA-b1K" userLabel="CreateButton">
-                                <rect key="frame" x="83" y="283" width="248" height="71"/>
+                                <rect key="frame" x="83" y="278" width="248" height="81"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="fjH-HA-b1K" secondAttribute="height" multiplier="3.5:1" id="MLO-JZ-zd0"/>
+                                    <constraint firstAttribute="width" secondItem="fjH-HA-b1K" secondAttribute="height" multiplier="245:80" id="MLO-JZ-zd0"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="creategamebutton_modified"/>
+                                <state key="normal" backgroundImage="HostCreateGameButtonLarge"/>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
                                 </connections>
@@ -85,40 +91,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="game code 1" translatesAutoresizingMaskIntoConstraints="NO" id="ust-Tq-mj7">
-                                <rect key="frame" x="126.5" y="337" width="161" height="35"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" minimumFontSize="17" background="BoxOne" translatesAutoresizingMaskIntoConstraints="NO" id="8bU-vL-2hU">
+                                <rect key="frame" x="85.5" y="364.5" width="243" height="79"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="161" id="4Lm-Tl-YWN"/>
-                                    <constraint firstAttribute="height" constant="35" id="83n-SR-qpY"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="8bU-vL-2hU">
-                                <rect key="frame" x="82" y="382" width="250" height="79"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="3wf-V6-dph"/>
-                                    <constraint firstAttribute="height" constant="79" id="5Ve-Dk-fND"/>
+                                    <constraint firstAttribute="width" secondItem="8bU-vL-2hU" secondAttribute="height" multiplier="245:80" id="hBc-CJ-HEn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U83-h1-qtH">
-                                <rect key="frame" x="107" y="724.5" width="200" height="57"/>
+                                <rect key="frame" x="107" y="720.5" width="200" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="U83-h1-qtH" secondAttribute="height" multiplier="175:57" id="1g7-As-aRW"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="join button 3"/>
+                                <state key="normal" title="" backgroundImage="HostResumeButton"/>
                                 <connections>
                                     <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="6jZ-bb-bpg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-o1-Ip2">
+                                <rect key="frame" x="126" y="310.5" width="162" height="44"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
+                                <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwR-LK-PpZ">
+                                <rect key="frame" x="95.5" y="448.5" width="223" height="17"/>
+                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="13"/>
+                                <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hB5-b1-9hu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="3Jh-Be-tPN"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="6Oh-iN-Kxl"/>
-                            <constraint firstItem="8bU-vL-2hU" firstAttribute="top" secondItem="ust-Tq-mj7" secondAttribute="bottom" constant="10" id="AKN-fj-H1w"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="width" secondItem="hB5-b1-9hu" secondAttribute="width" multiplier="0.483092" id="JkU-5b-d8C"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="KYx-IJ-e3n"/>
-                            <constraint firstItem="ust-Tq-mj7" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="pMv-0a-cHC"/>
-                            <constraint firstItem="ust-Tq-mj7" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="0.8" id="pqM-aT-nZu"/>
+                            <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="0.75" id="iJr-OO-NFh"/>
+                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="centerX" secondItem="8bU-vL-2hU" secondAttribute="centerX" id="j6z-ms-H6X"/>
+                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="top" secondItem="8bU-vL-2hU" secondAttribute="bottom" constant="5" id="lPt-VG-1sa"/>
+                            <constraint firstItem="8bU-vL-2hU" firstAttribute="top" secondItem="CTP-o1-Ip2" secondAttribute="bottom" constant="10" id="oCA-dn-QzG"/>
+                            <constraint firstItem="8bU-vL-2hU" firstAttribute="width" secondItem="CTP-o1-Ip2" secondAttribute="width" multiplier="1.5" id="pgt-qc-0n6"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="1.7" id="xpK-2x-qZS"/>
                         </constraints>
                     </view>
@@ -141,28 +157,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations 1" translatesAutoresizingMaskIntoConstraints="NO" id="sw2-tB-jas" userLabel="Stations">
-                                <rect key="frame" x="31" y="100.5" width="207" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="sw2-tB-jas" secondAttribute="height" multiplier="195:61" id="M6W-3h-G4b"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
+                                <rect key="frame" x="116" y="105.5" width="182.5" height="55"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="STATIONS">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="50" name="GemunuLibre-SemiBold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="119.5" y="774" width="175" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="Next button 1-1"/>
+                                <state key="normal" title="" backgroundImage="HostNextButton"/>
                                 <connections>
                                     <segue destination="KzH-J8-5vd" kind="show" identifier="SettingTimerSegue" id="fjX-uf-Q5w"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
-                                <rect key="frame" x="41.5" y="177.5" width="331" height="487"/>
+                                <rect key="frame" x="31" y="180.5" width="352" height="487"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-lG-6rY" userLabel="Add Button">
-                                <rect key="frame" x="32.5" y="679.5" width="349" height="46"/>
+                                <rect key="frame" x="49.5" y="682.5" width="315" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0cn-lG-6rY" secondAttribute="height" multiplier="315:50" id="Dbi-1s-kEz"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="newaddbutton"/>
+                                <state key="normal" title="" backgroundImage="Add Station Button Host"/>
                                 <connections>
                                     <action selector="addButtonPressed:" destination="1L0-Oz-afr" eventType="touchUpInside" id="SH7-KA-CBf"/>
                                     <segue destination="EDq-oM-bgK" kind="presentation" identifier="AddStationSegue" id="8x5-g0-ems"/>
@@ -172,17 +198,15 @@
                         <viewLayoutGuide key="safeArea" id="txZ-n6-kgn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LOv-V0-Zcn" firstAttribute="width" secondItem="OQk-vm-7Sx" secondAttribute="width" multiplier="0.8" id="8Jk-gp-rVj"/>
+                            <constraint firstItem="LOv-V0-Zcn" firstAttribute="width" secondItem="OQk-vm-7Sx" secondAttribute="width" multiplier="0.85" id="8Jk-gp-rVj"/>
                             <constraint firstItem="0cn-lG-6rY" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" id="AiV-nj-ykL"/>
                             <constraint firstItem="0cn-lG-6rY" firstAttribute="top" secondItem="LOv-V0-Zcn" secondAttribute="bottom" constant="15" id="Ajs-Xh-adw"/>
-                            <constraint firstItem="LOv-V0-Zcn" firstAttribute="top" secondItem="sw2-tB-jas" secondAttribute="bottom" constant="12" id="Bwg-oJ-sgN"/>
-                            <constraint firstItem="0cn-lG-6rY" firstAttribute="width" secondItem="LOv-V0-Zcn" secondAttribute="width" multiplier="1.05438" id="LNn-ts-w3l"/>
+                            <constraint firstItem="427-kj-OdI" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" id="Cy8-pu-CNJ"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="height" secondItem="txZ-n6-kgn" secondAttribute="height" multiplier="0.55" id="PPH-SR-rCd"/>
+                            <constraint firstItem="427-kj-OdI" firstAttribute="centerY" secondItem="txZ-n6-kgn" secondAttribute="centerY" multiplier="0.3" id="S7H-KQ-gFa"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" id="VV8-fQ-jPl"/>
-                            <constraint firstItem="sw2-tB-jas" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" multiplier="0.65" id="qIP-Kt-Fe8"/>
+                            <constraint firstItem="LOv-V0-Zcn" firstAttribute="top" secondItem="427-kj-OdI" secondAttribute="bottom" constant="20" id="pIM-4c-VFI"/>
                             <constraint firstItem="0cn-lG-6rY" firstAttribute="centerX" secondItem="Rd9-KY-2cP" secondAttribute="centerX" id="qlu-tP-Pup"/>
-                            <constraint firstItem="sw2-tB-jas" firstAttribute="width" secondItem="OQk-vm-7Sx" secondAttribute="width" multiplier="0.5" id="sSq-3M-Y9W"/>
-                            <constraint firstItem="sw2-tB-jas" firstAttribute="centerY" secondItem="txZ-n6-kgn" secondAttribute="centerY" multiplier="0.3" id="sfu-bN-jGR"/>
                             <constraint firstItem="txZ-n6-kgn" firstAttribute="bottom" secondItem="Rd9-KY-2cP" secondAttribute="bottom" constant="55" id="zve-b7-A7a"/>
                         </constraints>
                     </view>
@@ -190,6 +214,7 @@
                     <connections>
                         <outlet property="addButton" destination="0cn-lG-6rY" id="Mzb-us-q2q"/>
                         <outlet property="stationTable" destination="LOv-V0-Zcn" id="D5J-Du-ZrP"/>
+                        <outlet property="stationsLabel" destination="427-kj-OdI" id="p7U-hs-swJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODF-Pp-UBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -998,7 +1023,13 @@
         <segue reference="ba3-G3-TlT"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Add Station Button Host" width="315" height="50"/>
+        <image name="BoxOne" width="245" height="80"/>
         <image name="Game Start Button" width="176" height="57"/>
+        <image name="HostCreateGameButtonLarge" width="245" height="80"/>
+        <image name="HostNextButton" width="175" height="57"/>
+        <image name="HostResumeButton" width="175" height="57"/>
+        <image name="HostResumeGameButton" width="245" height="80"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
         <image name="Start game button" width="176" height="57"/>
@@ -1006,22 +1037,17 @@
         <image name="algorithm 1" width="221.5" height="61"/>
         <image name="announcement" width="46" height="35"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
-        <image name="creategamebutton_modified" width="244" height="79"/>
         <image name="endGameBtn" width="207" height="50"/>
-        <image name="game code 1" width="151.5" height="35"/>
         <image name="game location 2" width="138.5" height="25"/>
         <image name="game name 2" width="112.5" height="25"/>
         <image name="game points 2" width="122.5" height="25.5"/>
         <image name="game time per round 3" width="187" height="25"/>
         <image name="info textbox white 1" width="280" height="40"/>
-        <image name="join button 3" width="176" height="57"/>
         <image name="moving time 1" width="122" height="25"/>
-        <image name="newaddbutton" width="325" height="46"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="pve 1" width="131" height="40"/>
         <image name="pvp 1" width="130.5" height="40"/>
         <image name="ranking 1" width="187" height="61"/>
-        <image name="resumegamebutton_modified" width="244" height="79"/>
         <image name="rounds" width="29" height="85"/>
         <image name="rounds 1" width="101" height="35"/>
         <image name="rules 2" width="59" height="25.5"/>
@@ -1030,8 +1056,6 @@
         <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="53.5" height="40"/>
         <image name="stations" width="94" height="30"/>
-        <image name="stations 1" width="195" height="61"/>
-        <image name="text box 1" width="244" height="79"/>
         <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>
         <image name="timer icon 1" width="85" height="112"/>

@@ -16,16 +16,20 @@ class StationsTableViewController: BaseViewController {
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
     
+    @IBOutlet weak var stationsLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stationTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        addLetterSpacing(to: stationsLabel, spacing: 3)
         stationTable.delegate = self
         stationTable.dataSource = self
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         getStationList()
+        
+        adjustAddButtonWidth()
         
         stationTable.refreshControl = refreshController
         settingRefreshControl()
@@ -51,6 +55,17 @@ class StationsTableViewController: BaseViewController {
         performSegue(withIdentifier: "AddStationSegue", sender: self)
     }
     
+    private func adjustAddButtonWidth() {
+        if let firstCell = stationTable.visibleCells.first {
+            addButton.translatesAutoresizingMaskIntoConstraints = false
+
+            // Add constraints to make the button have the same width as the first cell
+            NSLayoutConstraint.activate([
+                addButton.leadingAnchor.constraint(equalTo: firstCell.leadingAnchor),
+                addButton.trailingAnchor.constraint(equalTo: firstCell.trailingAnchor)
+            ])
+        }
+    }
     private func getStationList() {
         Task { @MainActor in
             do {

@@ -34,4 +34,15 @@ class BaseViewController: UIViewController {
         })
         present(alert, animated: true)
     }
+    
+    func addLetterSpacing(to label: UILabel, spacing: CGFloat) {
+        
+        let labelText = NSMutableAttributedString(string: label.text ?? "")
+
+        labelText.addAttribute(NSAttributedString.Key.kern,
+                                    value: spacing,
+                                    range: NSRange(location: 0, length: labelText.length))
+
+        label.attributedText = labelText
+    }
 }
