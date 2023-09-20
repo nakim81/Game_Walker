@@ -60,15 +60,25 @@
                                     <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-PE-ylw">
+                                <rect key="frame" x="169.5" y="739" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <segue destination="Vjg-e5-r3Z" kind="show" identifier="AlgorithmTestingSegue" id="N2c-KI-9wD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="4MZ-FB-Fhl"/>
+                            <constraint firstItem="ZEc-PE-ylw" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="7BE-11-XH1"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.6" id="PBF-TX-gfT"/>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.6" id="T1U-j8-fCt"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ZdS-b9-9tO"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="1.3" id="r07-bE-grh"/>
+                            <constraint firstItem="ZEc-PE-ylw" firstAttribute="top" secondItem="cf7-AC-7yj" secondAttribute="bottom" constant="107" id="sEe-kP-ZUS"/>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="vm6-B7-U1w"/>
                         </constraints>
                     </view>
@@ -792,28 +802,38 @@
             <objects>
                 <viewController id="Vjg-e5-r3Z" customClass="ManualAlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="imv-QA-M8c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="algorithm 1" translatesAutoresizingMaskIntoConstraints="NO" id="R3K-lf-CpX">
-                                <rect key="frame" x="24" y="74" width="221" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="R3K-lf-CpX" secondAttribute="height" multiplier="221:61" id="Gp6-0c-gGc"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTF-pY-YhS">
-                                <rect key="frame" x="119" y="750" width="176" height="57"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
+                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="MATCHING">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="50" name="GemunuLibre-SemiBold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button">
+                                <rect key="frame" x="119.5" y="769" width="175" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Start game button"/>
+                                <state key="normal" backgroundImage="CreateGameButtonSmall"/>
+                                <connections>
+                                    <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="UNO-gg-m2R"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ULS-Ix-YMq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="NTF-pY-YhS" secondAttribute="bottom" constant="55" id="Tre-1X-xWR"/>
-                            <constraint firstItem="NTF-pY-YhS" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="sBj-PY-ZWf"/>
-                            <constraint firstItem="R3K-lf-CpX" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" multiplier="0.65" id="sSs-r5-j6L"/>
-                            <constraint firstItem="R3K-lf-CpX" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.23" id="zxr-9y-b5I"/>
+                            <constraint firstItem="quw-Hr-kV2" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="16F-GJ-EhV"/>
+                            <constraint firstItem="quw-Hr-kV2" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.3" id="K2q-UD-6vk"/>
+                            <constraint firstItem="wCP-FP-9sr" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="fbN-Cg-74W"/>
+                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="60" id="jQa-0I-HWX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
@@ -1030,7 +1050,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6Td-1F-5ho"/>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
@@ -1043,9 +1063,7 @@
         <image name="HostResumeGameButton" width="245" height="80"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
-        <image name="Start game button" width="176" height="57"/>
         <image name="Timer 1" width="128" height="61"/>
-        <image name="algorithm 1" width="221.5" height="61"/>
         <image name="announcement" width="46" height="35"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
         <image name="endGameBtn" width="207" height="50"/>
