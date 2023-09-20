@@ -11,7 +11,6 @@ target 'Game_Walker' do
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
   pod "GMStepper"
-  pod "PromiseKit", "~> 6.8"
   pod 'IQKeyboardManagerSwift'
 
 end

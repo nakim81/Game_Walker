@@ -111,26 +111,23 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {
-        showOverlay()
+        var componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame]
+        let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
+        showOverlay(componentPositions, explanationTexts)
     }
     
     @IBAction func settingBtnPressed(_ sender: UIButton) {
 
     }
     
-    private func showOverlay(){
+    private func showOverlay(_ componentList: [CGRect], _ explanationTexts: [String]){
         let overlayViewController = OverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
         var componentPositions: [CGPoint] = []
-        
-        let player = playerButton.frame
-        let referee = refereeButton.frame
-        let host = hostButton.frame
-        componentPositions.append(CGPoint(x: player.midX, y: player.midY))
-        componentPositions.append(CGPoint(x: referee.midX, y: referee.midY))
-        componentPositions.append(CGPoint(x: host.midX, y: host.midY))
+        for component in componentList {
+            componentPositions.append(CGPoint(x: component.midX, y: component.midY))
+        }
         
         overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: self.view.frame.maxY)
         present(overlayViewController, animated: true, completion: nil)

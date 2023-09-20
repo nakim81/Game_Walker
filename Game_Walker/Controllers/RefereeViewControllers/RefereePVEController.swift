@@ -96,13 +96,13 @@ class RefereePVEController: BaseViewController {
         label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 13)) ?? UIFont.systemFont(ofSize: fontSize(size: 13)),
+            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: fontSize(size: 13)),
             .foregroundColor: UIColor.black
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 20)) ?? UIFont.systemFont(ofSize: fontSize(size: 20)),
+            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
