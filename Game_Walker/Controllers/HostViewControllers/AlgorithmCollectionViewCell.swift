@@ -47,6 +47,14 @@ class AlgorithmCollectionViewCell: UICollectionViewCell {
         teamnumLabel.adjustsFontSizeToFitWidth = true
     }
     
+    func configureTestCell1() {
+        self.contentView.backgroundColor = UIColor.purple
+    }
+    func configureTestCell2() {
+        self.contentView.backgroundColor = UIColor.orange
+    }
+    
+    
     func configureAlgorithmNormalCell(cellteamnum : Int) {
         
         teamnumLabel.text = String(cellteamnum)
