@@ -96,8 +96,7 @@ class AlgorithmViewController: BaseViewController {
     }
     
     private func fetchDataAndInitialize() {
-//        S.delegate_stationList = self
-//        S.getStationList(gamecode)
+
         
         Task { @MainActor in
             do {
@@ -289,22 +288,10 @@ class AlgorithmViewController: BaseViewController {
             }
         }
         
-//        for rowIndex in stride(from: 1, through:grid.count - 1, by: 2) {
-//            for i in 0..<(pvpGameCount * 2) {
-//                if grid[rowIndex][i]  != -1 {
-//                    grid[rowIndex][i] = 0
-//                }
-//                if cellDataGrid[rowIndex][i].number != -1 {
-//                    cellDataGrid[rowIndex][i].number = 0
-//                }
-//            }
-//        }
-
 
         
         print("This is my grid: ", grid)
         print("This is my cellDataGrid: ", cellDataGrid)
-//      grid = [[1, 2, 4, 4, 5, 4, -1, -1], [0, 0, 4, 5, 6, 1, -1, -1]]
     }
     
     
@@ -484,6 +471,7 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func processPvpBlueCells() {
+        print("PROCESS PVP BLUE CELLS")
         var numbersSeenByNumber = [Int: Set<Int>]()
         var duplicatedPairs = Set<IntPair>()
         for pairIndex in 0...(pvpGameCount - 1) {
@@ -491,9 +479,8 @@ class AlgorithmViewController: BaseViewController {
             let endColumn = startColumn + 1
             
             for section in 0..<cellDataGrid.count {
-                for column in startColumn...endColumn {
-                    let cellData1 = cellDataGrid[section][column]
-                    let cellData2 = getCellCurrPlayingWith(cellData1)
+                    let cellData1 = cellDataGrid[section][startColumn]
+                    let cellData2 = cellDataGrid[section][endColumn]
                     let numberKey1 = cellData1.number
                     let numberKey2 = cellData2.number
                     
@@ -504,25 +491,39 @@ class AlgorithmViewController: BaseViewController {
                                     duplicatedPairs.insert(IntPair(first: numberKey1!, second: numberKey2!))
                                 } else {
                                     seenNumbers.insert(numberKey2!)
+                                    numbersSeenByNumber[numberKey1!] = seenNumbers
+                                    if var seenNumbersPair = numbersSeenByNumber[numberKey2!]{
+                                        if numberIsValid(numberKey1) {
+                                            if !seenNumbersPair.contains(numberKey1!) {
+                                                seenNumbersPair.insert(numberKey1!)
+                                                numbersSeenByNumber[numberKey2!] = seenNumbersPair
+                                            }
+                                        }
+                                    } else {
+                                        var newNumberSet = Set<Int>()
+                                        newNumberSet.insert(numberKey1!)
+                                        numbersSeenByNumber[numberKey2!] = newNumberSet
+                                    }
                                 }
                             }
                         } else {
                             if numberIsValid(numberKey2) {
-                                var newNumberSet = Set<Int>()
-                                newNumberSet.insert(numberKey2!)
-                                numbersSeenByNumber[numberKey1!] = newNumberSet
+                                var newNumberSet1 = Set<Int>()
+                                var newNumberSet2 = Set<Int>()
+                                newNumberSet1.insert(numberKey2!)
+                                numbersSeenByNumber[numberKey1!] = newNumberSet1
+                                newNumberSet2.insert(numberKey1!)
+                                numbersSeenByNumber[numberKey2!] = newNumberSet2
                             }
                         }
                     }
-                }
             }
         }
         makeAllDuplicatePairsBlue(duplicatedPairs)
     }
     
     func makeAllDuplicatePairsBlue(_ duplicatedPairs : Set<IntPair>) {
-        var indexPathsByPairs = [IntPair: Set<IndexPath>]()
-        print(duplicatedPairs, "DUPLICATEDPAIRS")
+//        print(duplicatedPairs, "DUPLICATEDPAIRS")
         
         var allCellsWithDuplicatedMatchesByPairs = [IntPair: Set<CellData>]()
         
@@ -569,11 +570,28 @@ class AlgorithmViewController: BaseViewController {
                     for currCellData in cellData.cellsWithSameBluePvpWarning {
                         changeCellGridData(cellDataInstance: currCellData, to: "red")
                     }
-                } else {
+                } else if cellData.hasPurpleWarning {
+                    for purpleCellData in cellData.cellsWithSamePurpleWarning {
+                        changeCellGridData(cellDataInstance: purpleCellData, to: "red")
+                    }
+                    for currCellData in cellData.cellsWithSameBluePvpWarning {
+                        changeCellGridData(cellDataInstance: currCellData, to: "red")
+                    }
+                } else if cellData.hasYellowWarning{
+                    for yellowCellData in cellData.cellsWithSameYellowWarning {
+                        changeCellGridData(cellDataInstance: yellowCellData, to: "red")
+                    }
+                    for currCellData in cellData.cellsWithSameBluePvpWarning {
+                        changeCellGridData(cellDataInstance: currCellData, to: "red")
+                    }
+                } else if cellData.hasRedWarning {
+                    for currCellData in cellData.cellsWithSameBluePvpWarning {
+                        changeCellGridData(cellDataInstance: currCellData, to: "red")
+                    }
+                }else {
                     changeCellGridData(cellDataInstance: cellData, to: "blue")
-                
+                    print("changing a pvp blue cell to blue. no other error encountered")
                 }
-                
             }
         }
     }
@@ -623,7 +641,6 @@ class AlgorithmViewController: BaseViewController {
                     for cellData in cellDataset {
                         changeCellGridData(cellDataInstance: cellData, to: "yellowPvp")
                         addCellSetsToCellGridData(cellDataInstance: cellData, to: "yellowPvp", set: cellDataset)
-                        print("Cell Data that has duplicates in pvp changed to yellow.")
                     }
                 }
             }
@@ -631,7 +648,6 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func processPurpleSameRoundCells() {
-        
         for row in cellDataGrid {
             var rowNumbers = [Int: Set<CellData>]()
             for cellData in row {
@@ -654,12 +670,7 @@ class AlgorithmViewController: BaseViewController {
                     for cellDataDuplicates in cellDataSet {
                         addCellSetsToCellGridData(cellDataInstance: cellDataDuplicates, to: "purple", set: cellDataSet)
                         
-                        if cellDataDuplicates.hasYellowWarning {
-//                            changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
-//                            for yellowCellData in cellDataDuplicates.cellsWithSameYellowWarning {
-//                                changeCellGridData(cellDataInstance: yellowCellData, to: "red")
-//                            }
-                        } else if cellDataDuplicates.hasRedWarning {
+                        if cellDataDuplicates.hasRedWarning {
                             changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
                         } else if cellDataDuplicates.hasPvpBlueWarning {
                             changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
@@ -688,6 +699,7 @@ class AlgorithmViewController: BaseViewController {
     }
     
     func processYellowSameStationCells() {
+        print("PROCESS YELLOW SAME STATION CELLS")
         for col in 0..<cellDataGrid[0].count {
             var columnNumbers = [Int: Set<CellData>]()
             for sect in 0..<cellDataGrid.count {
@@ -793,6 +805,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
             if let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgorithmCollectionViewCell {
                 selectedCellA.makeCellSelected()
             }
+
         } else if cellDataB == nil {
             // Second selection
 //            indexPathB = indexPath
@@ -840,18 +853,6 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
                     self.reloadAll()
                     self.collectionView.reloadData()
                 
-                    var printgrid = [[String]]()
-                    for row in self.cellDataGrid {
-                        var printrow = [String]()
-                        for cellData in row {
-                            let number = String(describing: cellData.number ?? -2)
-                            let warningcolor = cellData.warningColor ?? "-- Nil"
-                            let printstatement = number + " " + warningcolor
-                            printrow.append(printstatement)
-                        }
-                        printgrid.append(printrow)
-                    }
-                    print("PRINTING CELLDATA GRID: ", printgrid)
 
             })
 //            collectionView.reloadData()

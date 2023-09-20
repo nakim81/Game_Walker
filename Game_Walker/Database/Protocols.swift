@@ -55,7 +55,7 @@ protocol ModalViewControllerDelegate: AnyObject {
 }
 
 protocol AddStationDelegate: AnyObject {
-    func didUpdateStationData()
+    func didUpdateStationData(completion: @escaping () -> Void)
 }
 
 //MARK: - Errors

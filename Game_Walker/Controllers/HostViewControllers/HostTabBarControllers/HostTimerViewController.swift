@@ -1,9 +1,9 @@
-//
-//  HostTimerViewController.swift
-//  Game_Walker
-//
-//  Created by Noah Kim on 2/1/23.
-//
+////
+////  HostTimerViewController.swift
+////  Game_Walker
+////
+////  Created by Noah Kim on 2/1/23.
+
 
 import Foundation
 import UIKit
@@ -400,3 +400,4 @@ extension HostTimerViewController: HostUpdateListener {
         self.gameOver = host.gameover
     }
 }
+

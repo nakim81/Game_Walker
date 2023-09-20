@@ -250,7 +250,6 @@ class AddStationViewController: BaseViewController {
             }
         }
         
-        
         if (stationExists && !modified) {
             self.dismiss(animated: true, completion: nil)
         } else if (stationExists && modified) {
@@ -288,13 +287,9 @@ class AddStationViewController: BaseViewController {
                 }
             }
 
-
-
-
         } else if (!stationExists) {
             let selectedReferee = findRefereeWithUuid(refereeList: availableReferees, uuidToCheck: refereeUuid)
             Task { @MainActor in
-//               try await R.assignStation(gamecode, refereeUuid, gamename, true)
                 do {
                     try await R.assignStation(gamecode, refereeUuid, gamename, true)
                 } catch ServerError.serverError(let text){
@@ -307,8 +302,7 @@ class AddStationViewController: BaseViewController {
                 stationUuid = uuid.uuidString
                 
                 let stationToAdd = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : selectedReferee, description: rules)
-                
-//                try await S.addStation(UserData.readGamecode("gamecode")!, stationToAdd)
+
                 do {
                     try await S.saveStation(gamecode, stationToAdd)
                 } catch ServerError.serverError(let text){
@@ -319,8 +313,11 @@ class AddStationViewController: BaseViewController {
             }
         }
         
-        delegate?.didUpdateStationData()
-        self.dismiss(animated: true, completion: nil)
+        delegate?.didUpdateStationData {
+            print("delegate is being called")
+            self.dismiss(animated: true, completion: nil)
+        }
+
     }
     
     
