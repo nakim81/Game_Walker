@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -320,7 +320,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="139.5" y="375.5" width="127.5" height="23.5"/>
+                                        <rect key="frame" x="149" y="375.5" width="108" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -508,13 +508,13 @@
                                         <rect key="frame" x="87" y="-4" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="34.5" y="4.5" width="47" height="49"/>
+                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="100" y="4.5" width="47" height="49"/>
+                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -553,13 +553,13 @@
                                         <rect key="frame" x="87" y="-4.5" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="34.5" y="4" width="47" height="49"/>
+                                        <rect key="frame" x="36.5" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="100" y="4" width="47" height="49"/>
+                                        <rect key="frame" x="100" y="2" width="45" height="53.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -826,6 +826,18 @@
                                     <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="UNO-gg-m2R"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="stations capit" translatesAutoresizingMaskIntoConstraints="NO" id="HEJ-r5-Hr8">
+                                <rect key="frame" x="150" y="307" width="114" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HEJ-r5-Hr8" secondAttribute="height" multiplier="116:33" id="gWO-PA-gHZ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="roundscapit" translatesAutoresizingMaskIntoConstraints="NO" id="fnH-QW-CvZ">
+                                <rect key="frame" x="31" y="393" width="20" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fnH-QW-CvZ" secondAttribute="height" multiplier="33:104" id="5h5-ll-38x"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ULS-Ix-YMq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -837,6 +849,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
+                    <connections>
+                        <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
+                        <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLy-kz-LUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1067,19 +1083,17 @@
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
-
         <image name="Add Station Button Host" width="315" height="50"/>
         <image name="BoxOne" width="245" height="80"/>
         <image name="CreateGameButtonSmall" width="175" height="57"/>
-        <image name="Game Start Button" width="176" height="57"/>
+        <image name="EndGameButton" width="126" height="41"/>
+        <image name="GameStartButton" width="126" height="41"/>
         <image name="HostCreateGameButtonLarge" width="245" height="80"/>
         <image name="HostNextButton" width="175" height="57"/>
         <image name="HostResumeButton" width="175" height="57"/>
         <image name="HostResumeGameButton" width="245" height="80"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
-        <image name="Timer 1" width="128" height="61"/>
-
         <image name="announcement" width="46" height="35"/>
         <image name="chosse referee 1" width="147.5" height="25"/>
         <image name="endGameBtn" width="207" height="50"/>
@@ -1095,12 +1109,14 @@
         <image name="ranking 1" width="187" height="61"/>
         <image name="rounds" width="29" height="85"/>
         <image name="rounds 1" width="101" height="35"/>
+        <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules 2" width="59" height="25.5"/>
         <image name="rules textboxwhite 1" width="280" height="89.5"/>
         <image name="save 1" width="176" height="57"/>
         <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="53.5" height="40"/>
         <image name="stations" width="94" height="30"/>
+        <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
         <image name="timer 1-1" width="128" height="61"/>
         <image name="timer icon 1" width="85" height="112"/>

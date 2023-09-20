@@ -12,6 +12,9 @@ class ManualAlgorithmViewController: BaseViewController {
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!
     
+    @IBOutlet weak var stationsLabelImageView: UIImageView!
+    @IBOutlet weak var roundsLabelImageView: UIImageView!
+    
     private var gamecode = UserData.readGamecode("gamecode")!
     
     private var smallerGrid = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
@@ -22,27 +25,26 @@ class ManualAlgorithmViewController: BaseViewController {
     private var collectionViewCellSize : CGSize?
     private var collectionViewCellWidth : CGFloat?
     private var collectionViewCellSpacing: CGFloat = 6.0
-    
-//    let customLayout = CustomCollectionViewLayout()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
+
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         calculateSizesAndContentSize()
-        
-
+        setUpLabels()
     }
+    
+    
+    
     private func calculateSizesAndContentSize() {
-
-        
-//        let numberOfRows =
-        var numberOfItemsInARow = 8 // Adjust as needed
+        var numberOfItemsInARow = 8 
         let cellSpacing = collectionViewCellSpacing
-        print("collectionView.numberOfItems(inSection: 0): ", collectionView.numberOfItems(inSection: 0))
+
         if collectionView.numberOfItems(inSection: 0) > 8 {
             numberOfItemsInARow = collectionView.numberOfItems(inSection: 0)
         }
@@ -58,16 +60,6 @@ class ManualAlgorithmViewController: BaseViewController {
             flowLayout.minimumInteritemSpacing = collectionViewCellSpacing
             flowLayout.minimumLineSpacing = collectionViewCellSpacing
         }
-        
-//        customLayout.invalidateLayout()
-        
-        print("scrollView.contentSize: " , scrollView.contentSize)
-        print("collectionView.contentSize: " , collectionView.contentSize)
-        print("collectionView.frame.size: ", collectionView.frame.size)
-        print("scrollView.frame.size: ", scrollView.frame.size)
-        print("self.view.frame.size: ", self.view.frame.size)
-        print("scrollView.frame.height", scrollView.frame.height)
-        print("scrollView.frame.width", scrollView.frame.width)
 
     }
     
@@ -75,16 +67,13 @@ class ManualAlgorithmViewController: BaseViewController {
 
         let totalSpacing = collectionViewCellSpacing * 9
         let availableWidth = floor(collectionViewWidth - totalSpacing)
+        let toTheRight = collectionViewWidth * 0.05
         collectionViewCellWidth = availableWidth / 8
         collectionViewCellSize = CGSize(width: collectionViewCellWidth!, height: collectionViewCellWidth!)
-
-        
-//        collectionViewCellWidth = (collectionViewWidth - (collectionViewCellSpacing * 7)) / 8.0
 
         collectionViewCellSize = CGSize(width: collectionViewCellWidth!,
                                         height: collectionViewCellWidth!)
 
-            
         //create
         
         scrollView = UIScrollView()
@@ -109,25 +98,42 @@ class ManualAlgorithmViewController: BaseViewController {
         collectionView.delegate = self
 
         collectionView.register(AlgorithmCollectionViewCell.self, forCellWithReuseIdentifier: "AlgorithmCollectionViewCell")
-        
-        print("scrollView.contentSize.width: ", scrollView.contentSize.width)
 
-
+        let centerYMultiplier: CGFloat = 0.96
         NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: toTheRight) ,
+            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant:  -view.frame.size.height * (1 - centerYMultiplier)),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
             scrollView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75), // Make it square
             collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalTo: scrollView.heightAnchor) // Match the size of the scroll view
+            collectionView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        ])
+    }
+    
+    private func setUpLabels() {
+        stationsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
+        roundsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        let stationsLabelWidthMultiplier: CGFloat = 116.0 / 281.0
+        let roundsLabelHeightMultiplier: CGFloat = 104.0 / 291.0
+    
+        
+        NSLayoutConstraint.activate([
+            // Constraints for stationsLabelImageView
+            stationsLabelImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: stationsLabelWidthMultiplier),
+            stationsLabelImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            stationsLabelImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -5 - stationsLabelImageView.frame.height),
+
+            // Constraints for roundsLabelImageView
+            roundsLabelImageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: roundsLabelHeightMultiplier),
+            roundsLabelImageView.trailingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: -5), // 5 points to the left of collectionView
+            roundsLabelImageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
 
 
-        
-        
     }
        
 }
