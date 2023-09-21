@@ -28,11 +28,13 @@ struct P {
                 print("Player added")
             } else {
                 print("Gamecode does not exist")
-                throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode.\nPlease check again!")
             }
+        } catch GameWalkerError.invalidGamecode(let message) {
+            throw GameWalkerError.invalidGamecode(message)
         } catch {
             print("Error adding Player: \(error)")
-            throw ServerError.serverError("Something went wrong while adding Player")
+            throw GameWalkerError.serverError("Something went wrong while adding Player")
         }
     }
     
@@ -55,7 +57,7 @@ struct P {
             print("Player name modified")
         } catch {
             print("Error modifying Player name: \(error)")
-            throw ServerError.serverError("Something went wrong while modifying Player Name")
+            throw GameWalkerError.serverError("Something went wrong while modifying Player Name")
         }
     }
     

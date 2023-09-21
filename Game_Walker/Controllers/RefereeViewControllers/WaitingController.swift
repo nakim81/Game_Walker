@@ -57,8 +57,8 @@ class WaitingController: BaseViewController {
         var teamNumOrder : [Int] = []
         var teamOrder : [Team] = []
         Task {
-            stationList = try await S.getStationList2(gameCode)
-            teams = try await T.getTeamList2(gameCode)
+            stationList = try await S.getStationList(gameCode)
+            teams = try await T.getTeamList(gameCode)
         }
         for station in self.stationList {
             if station.pvp == true {

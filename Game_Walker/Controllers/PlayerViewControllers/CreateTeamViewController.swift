@@ -128,7 +128,7 @@ class CreateTeamViewController: BaseViewController {
         }
         Task { @MainActor in
             do {
-                self.host = try await H.getHost2(gameCode)
+                self.host = try await H.getHost(gameCode)
             } catch(let e) {
                 print(e)
                 alert(title: "Connection Error", message: e.localizedDescription)
@@ -153,7 +153,7 @@ class CreateTeamViewController: BaseViewController {
                     do {
                         try await T.addTeam(gameCode, newTeam)
                         performSegue(withIdentifier: "goToTPF4", sender: self)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
@@ -179,7 +179,7 @@ extension CreateTeamViewController {
         var stationList: [Station] = []
         Task { @MainActor in
             do {
-                stationList = try await S.getStationList2(gameCode)
+                stationList = try await S.getStationList(gameCode)
             } catch(let e) {
                 print(e)
                 alert(title: "Connection Error", message: e.localizedDescription)

@@ -95,7 +95,7 @@ class EndGameViewController: UIViewController {
         Task {@MainActor in
             do {
                 try await H.endGame(self.gameCode)
-            } catch ServerError.serverError(let text){
+            } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return

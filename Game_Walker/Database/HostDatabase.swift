@@ -15,7 +15,6 @@ import SwiftUI
 struct H {
     
     static let db = Firestore.firestore()
-    static var delegate_getHost: GetHost?
     static var delegates : [HostUpdateListener] = []
     
     //MARK: - Game Control Functions
@@ -26,7 +25,7 @@ struct H {
             print("Created Game")
         } catch {
             print("Error creating Game: \(error)")
-            throw ServerError.serverError("Something went wrong while creating Host")
+            throw GameWalkerError.serverError("Something went wrong while creating Host")
         }
     }
     
@@ -42,7 +41,7 @@ struct H {
             print("Host setted Settings")
         } catch {
             print("Error setting settings Host: \(error)")
-            throw ServerError.serverError("Something went wrong while setting Settings")
+            throw GameWalkerError.serverError("Something went wrong while setting Settings")
         }
     }
     
@@ -57,7 +56,7 @@ struct H {
             print("Started Game")
         } catch {
             print("Error starting Game: \(error)")
-            throw ServerError.serverError("Something went wrong while starting Game")
+            throw GameWalkerError.serverError("Something went wrong while starting Game")
         }
     }
     
@@ -82,11 +81,11 @@ struct H {
                 print("Paused/Resumed Game")
             } else {
                 print("Host does not exist")
-                throw ServerError.serverError("Something went wrong while pauseing/resuming Game")
+                throw GameWalkerError.serverError("Something went wrong while pauseing/resuming Game")
             }
         } catch {
             print("Error pausing/resuming Game: \(error)")
-            throw ServerError.serverError("Something went wrong while pauseing/resuming Game")
+            throw GameWalkerError.serverError("Something went wrong while pauseing/resuming Game")
         }
     }
     
@@ -99,7 +98,7 @@ struct H {
             print("End Game")
         } catch {
             print("Error ending Game: \(error)")
-            throw ServerError.serverError("Something went wrong while ending Host")
+            throw GameWalkerError.serverError("Something went wrong while ending Host")
         }
     }
     
@@ -112,7 +111,7 @@ struct H {
             print("Updated Current Round")
         } catch {
             print("Error updating Current Round: \(error)")
-            throw ServerError.serverError("Something went wrong while updating Current Round")
+            throw GameWalkerError.serverError("Something went wrong while updating Current Round")
         }
     }
     
@@ -126,7 +125,7 @@ struct H {
             print("Hid/Showed Score")
         } catch {
             print("Error hiding/showing score: \(error)")
-            throw ServerError.serverError("Something went wrong while hiding/showing Score")
+            throw GameWalkerError.serverError("Something went wrong while hiding/showing Score")
         }
     }
     
@@ -144,11 +143,11 @@ struct H {
                 print("Added Announcement")
             } else {
                 print("Host does not exist")
-                throw ServerError.serverError("Something went wrong while adding Announcement")
+                throw GameWalkerError.serverError("Something went wrong while adding Announcement")
             }
         } catch {
             print("Error adding Announcement: \(error)")
-            throw ServerError.serverError("Something went wrong while adding Announcement")
+            throw GameWalkerError.serverError("Something went wrong while adding Announcement")
         }
     }
     
@@ -165,15 +164,15 @@ struct H {
                     print("Modified Announcement")
                 } else {
                     print("Invalid index of announcement")
-                    throw ServerError.serverError("Wrong index while modifying Announcement")
+                    throw GameWalkerError.serverError("Wrong index while modifying Announcement")
                 }
             } else {
                 print("Host does not exist")
-                throw ServerError.serverError("Something went wrong while modifying Announcement")
+                throw GameWalkerError.serverError("Something went wrong while modifying Announcement")
             }
         } catch {
             print("Error modfiying Announcement: \(error)")
-            throw ServerError.serverError("Something went wrong while modifying Announcement")
+            throw GameWalkerError.serverError("Something went wrong while modifying Announcement")
         }
     }
     
@@ -190,15 +189,15 @@ struct H {
                     print("Removed Announcement")
                 } else {
                     print("Invalid announcement index")
-                    throw ServerError.serverError("Wrong index while removing Announcement")
+                    throw GameWalkerError.serverError("Wrong index while removing Announcement")
                 }
             } else {
                 print("Host does not exist")
-                throw ServerError.serverError("Something went wrong while removing Announcement")
+                throw GameWalkerError.serverError("Something went wrong while removing Announcement")
             }
         } catch {
             print("Error removing Announcement: \(error)")
-            throw ServerError.serverError("Something went wrong while removing Announcement")
+            throw GameWalkerError.serverError("Something went wrong while removing Announcement")
         }
     }
     
@@ -215,21 +214,7 @@ struct H {
         }
     }
     
-    static func getHost(_ gamecode: String){
-        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                let host = convertDataToHost(data)
-                delegate_getHost?.getHost(host)
-            } else {
-                print("Error getting Host")
-                
-            }
-        }
-    }
-    
-    static func getHost2(_ gamecode: String) async throws -> Host? {
+    static func getHost(_ gamecode: String) async throws -> Host? {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         let document = try await docRef.getDocument()
         if document.exists {
@@ -238,7 +223,7 @@ struct H {
             return host
         } else {
             print("Error getting Host")
-            throw ServerError.serverError("Something went wrong while rgetting Host")
+            throw GameWalkerError.serverError("Something went wrong while rgetting Host")
         }
     }
 

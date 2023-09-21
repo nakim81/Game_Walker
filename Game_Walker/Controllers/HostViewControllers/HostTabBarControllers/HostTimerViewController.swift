@@ -51,7 +51,7 @@ class HostTimerViewController: UIViewController {
         super.viewDidLoad()
         Task {
             callProtocols()
-            host = try await H.getHost2(gameCode) ?? Host()
+            host = try await H.getHost(gameCode) ?? Host()
             setSettings()
             configureTimerLabel()
         }
@@ -75,7 +75,7 @@ class HostTimerViewController: UIViewController {
                 Task { @MainActor in
                     do {
                         try await H.startGame(gameCode)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
@@ -84,7 +84,7 @@ class HostTimerViewController: UIViewController {
                     isPaused = !isPaused
                     do {
                         try await H.pause_resume_game(gameCode)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
@@ -102,7 +102,7 @@ class HostTimerViewController: UIViewController {
                 Task { @MainActor in
                     do {
                         try await H.pause_resume_game(gameCode)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
@@ -279,7 +279,7 @@ class HostTimerViewController: UIViewController {
                         Task {
                             do {
                                 try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
-                            } catch ServerError.serverError(let text){
+                            } catch GameWalkerError.serverError(let text){
                                 print(text)
                                 strongSelf.serverAlert(text)
                                 return
@@ -344,7 +344,7 @@ class HostTimerViewController: UIViewController {
         Task {
             do {
                 try await H.updateCurrentRound(gameCode, self.round)
-            } catch ServerError.serverError(let text){
+            } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return

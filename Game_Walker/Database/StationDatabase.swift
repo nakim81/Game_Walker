@@ -15,8 +15,6 @@ import SwiftUI
 struct S {
     
     static let db = Firestore.firestore()
-    static var delegate_stationList: StationList?
-    static var delegate_getStation: GetStation?
     
     //MARK: - Station Control Functions
     
@@ -29,10 +27,11 @@ struct S {
                 print("Station added")
             } else {
                 print("Gamecode does not exist")
+                throw GameWalkerError.serverError("Something went wrong while adding Station")
             }
         } catch {
             print("Error adding Station: \(error)")
-            throw ServerError.serverError("Something went wrong while saving Station")
+            throw GameWalkerError.serverError("Something went wrong while adding Station")
         }
     }
     
@@ -60,7 +59,7 @@ struct S {
             }
         } catch {
             print("Error assigning Referee: \(error)")
-            throw ServerError.serverError("Something went wrong while assigning Station a referee")
+            throw GameWalkerError.serverError("Something went wrong while assigning Station a referee")
         }
     }
     
@@ -78,26 +77,13 @@ struct S {
             }
         } catch {
             print("Error updating team order: \(error)")
-            throw ServerError.serverError("Something went wrong while updating Team Order of Station")
+            throw GameWalkerError.serverError("Something went wrong while updating Team Order of Station")
         }
     }
     
     //MARK: - Database Functions
     
-    static func getStation(_ gamecode: String, _ uuid : String) {
-        let docRef = db.collection("\(gamecode) : Stations").document(uuid)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                let station = convertDataToStation(data)
-                delegate_getStation?.getStation(station)
-            } else {
-                print("Error getting Station")
-            }
-        }
-    }
-    
-    static func getStation2(_ gamecode: String, _ uuid: String) async throws -> Station? {
+    static func getStation(_ gamecode: String, _ uuid: String) async throws -> Station? {
         let docRef = db.collection("\(gamecode) : Stations").document(uuid)
         let document = try await docRef.getDocument()
         if document.exists {
@@ -106,36 +92,11 @@ struct S {
             return station
         } else {
             print("Error getting Station")
-            throw ServerError.serverError("Something went wrong while getting Station")
+            throw GameWalkerError.serverError("Something went wrong while getting Station")
         }
     }
     
-    static func getStationList(_ gamecode: String) {
-        //sorted by station number and station is numbered priority to pvp
-        db.collection("\(gamecode) : Stations")
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting List of Station: \(err)")
-                } else {
-                    var stations : [Station] = []
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        let station = convertDataToStation(data)
-                        stations.append(station)
-                    }
-                    stations.sort {$0.pvp && !$1.pvp}
-                    if stations.first?.number == 0 {
-                        for i in 0...stations.count-1 {
-                            stations[i].number = i+1
-                        }
-                    }
-                    stations.sort {$0.number < $1.number}
-                    delegate_stationList?.listOfStations(stations)
-                }
-            }
-    }
-    
-    static func getStationList2(_ gamecode: String) async throws -> [Station] {
+    static func getStationList(_ gamecode: String) async throws -> [Station] {
         //sorted by station number and station is numbered priority to pvp
         do{
             let querySnapshot = try await db.collection("\(gamecode) : Stations").getDocuments()
@@ -158,7 +119,7 @@ struct S {
         }
         catch{
             print("Error getting StationList")
-            throw ServerError.serverError("Something went wrong while getting StationList")
+            throw GameWalkerError.serverError("Something went wrong while getting StationList")
         }
     }
     

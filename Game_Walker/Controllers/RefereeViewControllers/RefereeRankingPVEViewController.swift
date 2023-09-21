@@ -93,7 +93,7 @@ class RefereeRankingPVEViewController: UIViewController {
     }
     
     @objc func refreshFunction() {
-        T.getTeamList(gameCode)
+        //T.getTeamList(gameCode)
         refreshController.endRefreshing()
         leaderBoard.reloadData()
     }
