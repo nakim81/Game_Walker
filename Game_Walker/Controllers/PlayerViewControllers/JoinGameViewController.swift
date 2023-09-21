@@ -113,11 +113,16 @@ class JoinGameViewController: BaseViewController {
                         UserData.writeUsername(username, "username")
                         UserData.writePlayer(player, "player")
                         performSegue(withIdentifier: "goToPF2VC", sender: self)
-                    } catch GamecodeError.invalidGamecode(let text) {
-                        print(text)
-                        alert(title: "Invalid Gamecode", message: text)
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
+
                 }
             } else {
                 // Invalid input
@@ -130,9 +135,9 @@ class JoinGameViewController: BaseViewController {
                 if (UserData.readTeam("team") != nil) {
                     do {
                         try await T.leaveTeam(savedGameCode, savedUserName, player)
-                    } catch ServerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
                 }
@@ -143,9 +148,13 @@ class JoinGameViewController: BaseViewController {
                     UserData.writeGamecode(gamecode, "gamecode")
                     UserData.writePlayer(player, "player")
                     self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-                } catch GamecodeError.invalidGamecode(let text){
-                    print(text)
-                    alert(title: "Invalid Gamecode", message: text)
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
                     return
                 }
             }
@@ -156,9 +165,13 @@ class JoinGameViewController: BaseViewController {
                     player = Player(gamecode: gamecode, name: username)
                     UserData.writePlayer(player, "player")
                     UserData.writeUsername(username, "username")
-                } catch GamecodeError.invalidGamecode(let text){
-                    print(text)
-                    alert(title: "Invalid Gamecode", message: text)
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
                     return
                 }
                 if (UserData.readTeam("team") != nil) {
@@ -172,9 +185,9 @@ class JoinGameViewController: BaseViewController {
                 if UserData.readTeam("team") != nil {
                     do {
                         try await T.leaveTeam(savedGameCode, savedUserName, player)
-                    } catch ServerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
                 }
@@ -186,9 +199,13 @@ class JoinGameViewController: BaseViewController {
                     UserData.writeUsername(username, "username")
                     UserData.writePlayer(player, "player")
                     self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-                } catch GamecodeError.invalidGamecode(let text) {
-                    print(text)
-                    alert(title: "Invalid Gamecode", message: text)
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
                     return
                 }
             }

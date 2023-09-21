@@ -23,7 +23,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         Task {
             if storedGameCode != "" {
-                stations = try await S.getStationList2(storedGameCode)
+                stations = try await S.getStationList(storedGameCode)
             }
             configureNavItem()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
@@ -64,8 +64,13 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     Task { @MainActor in
                         do {
                             try await R.addReferee(gameCode, newReferee, refereeUserID)
-                        } catch GamecodeError.invalidGamecode(let text) {
-                            alert(title: "Invalid GameCode", message: text)
+                        } catch GameWalkerError.invalidGamecode(let message) {
+                            print(message)
+                            gamecodeAlert(message)
+                            return
+                        } catch GameWalkerError.serverError(let message) {
+                            print(message)
+                            serverAlert(message)
                             return
                         }
                         UserData.writeGamecode(gameCode, "refereeGameCode")
@@ -103,8 +108,13 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 Task { @MainActor in
                     do {
                         try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GamecodeError.invalidGamecode(let text) {
-                        alert(title: "Invalid GameCode", message: text)
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
                     UserData.writeGamecode(gameCode, "refereeGameCode")
@@ -120,8 +130,13 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 Task { @MainActor in
                     do {
                         try await R.modifyName(storedGameCode, refereeUserID, name)
-                    } catch GamecodeError.invalidGamecode(let text) {
-                        alert(title: "Invalid GameCode", message: text)
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
                 }
@@ -150,8 +165,13 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 Task { @MainActor in
                     do {
                         try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GamecodeError.invalidGamecode(let text) {
-                        alert(title: "Invalid GameCode", message: text)
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
                         return
                     }
                     UserData.writeGamecode(gameCode, "refereeGameCode")

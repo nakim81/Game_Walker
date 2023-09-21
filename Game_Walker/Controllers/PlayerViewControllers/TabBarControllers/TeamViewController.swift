@@ -123,7 +123,7 @@ class TeamViewController: UIViewController {
         settingRefreshControl()
         Task { @MainActor in
             do {
-                self.team = try await T.getTeam2(gameCode, teamName)
+                self.team = try await T.getTeam(gameCode, teamName)
                 table.reloadData()
             } catch {
                 alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
@@ -152,7 +152,7 @@ class TeamViewController: UIViewController {
             Task { @MainActor in
                 do {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
-                } catch ServerError.serverError(let text){
+                } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return
@@ -180,7 +180,7 @@ class TeamViewController: UIViewController {
     @objc func refreshFunction() {
         Task { @MainActor in
             do {
-                self.team = try await T.getTeam2(gameCode, teamName)
+                self.team = try await T.getTeam(gameCode, teamName)
                 refreshController.endRefreshing()
                 table.reloadData()
             } catch {

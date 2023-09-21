@@ -52,7 +52,7 @@ class JoinTeamViewController: BaseViewController {
         super.viewDidLoad()
         Task { @MainActor in
             do {
-                self.teamList = try await T.getTeamList2(gameCode)
+                self.teamList = try await T.getTeamList(gameCode)
                 self.teamList.sort{$0.number < $1.number}
                 collectionView.reloadData()
             } catch {
@@ -98,7 +98,7 @@ class JoinTeamViewController: BaseViewController {
     @objc func refreshFunction() {
         Task { @MainActor in
             do {
-                self.teamList = try await T.getTeamList2(gameCode)
+                self.teamList = try await T.getTeamList(gameCode)
                 self.teamList.sort{$0.number < $1.number}
                 refreshController.endRefreshing()
                 collectionView.reloadData()
@@ -123,7 +123,7 @@ class JoinTeamViewController: BaseViewController {
                 do {
                     try await T.joinTeam(strongSelf.gameCode, selectedTeam.name, strongSelf.currentPlayer)
                     strongSelf.performSegue(withIdentifier: "goToPF44", sender: strongSelf)
-                } catch ServerError.serverError(let text){
+                } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return

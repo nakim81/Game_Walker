@@ -100,7 +100,7 @@ class AlgorithmViewController: BaseViewController {
         
         Task { @MainActor in
             do {
-                stationList = try await S.getStationList2(gamecode)
+                stationList = try await S.getStationList(gamecode)
                 self.num_stations = stationList!.count
                 self.collectionView?.reloadData()
                 var pvpCount = 0
@@ -125,7 +125,7 @@ class AlgorithmViewController: BaseViewController {
 //        H.getHost(gamecode)
         Task { @MainActor in
             do {
-                let host = try await H.getHost2(gamecode)
+                let host = try await H.getHost(gamecode)
                 self.num_teams = host!.teams
                 self.num_rounds = host!.rounds
                 self.collectionView?.reloadData()
@@ -986,7 +986,7 @@ extension AlgorithmViewController: UICollectionViewDelegate, UICollectionViewDat
 }
 
 
-extension AlgorithmViewController: StationList {
+extension AlgorithmViewController {
     func listOfStations(_ stations: [Station]) {
         self.stationList = stations
         self.num_stations = stations.count

@@ -69,7 +69,7 @@ class StationsTableViewController: BaseViewController {
     private func getStationList() {
         Task { @MainActor in
             do {
-                currentStations = try await S.getStationList2(gamecode!)
+                currentStations = try await S.getStationList(gamecode!)
                 DispatchQueue.main.async {
                     self.stationTable.reloadData()
                     self.refreshController.endRefreshing()
@@ -92,7 +92,7 @@ class StationsTableViewController: BaseViewController {
     @objc func refreshFunction() {
         Task { @MainActor in
             do {
-                self.currentStations = try await S.getStationList2(gamecode!)
+                self.currentStations = try await S.getStationList(gamecode!)
                 refreshController.endRefreshing()
                 stationTable.reloadData()
             } catch (let e){
@@ -137,7 +137,7 @@ extension StationsTableViewController: UITableViewDelegate {
         Task{
             do{
                 try await R.assignStation(gamecode!, refereeToRemove!.uuid, "", false)
-            } catch ServerError.serverError(let text){
+            } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return
@@ -202,7 +202,7 @@ extension StationsTableViewController: AddStationDelegate {
     func didUpdateStationData(completion: @escaping () -> Void) {
         Task { @MainActor in
             do {
-                self.currentStations = try await S.getStationList2(gamecode!)
+                self.currentStations = try await S.getStationList(gamecode!)
                 DispatchQueue.main.async {
                     print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
                     self.dismiss(animated: true)
