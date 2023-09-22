@@ -42,10 +42,10 @@ class AlgCollectionViewCell: UICollectionViewCell {
     }
     
     func configureTestCell1() {
-        self.contentView.backgroundColor = UIColor.purple
+//        self.contentView.backgroundColor = UIColor.purple
     }
     func configureTestCell2() {
-        self.contentView.backgroundColor = UIColor.orange
+//        self.contentView.backgroundColor = UIColor.orange
     }
     
     
