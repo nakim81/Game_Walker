@@ -47,6 +47,14 @@ class ManualAlgorithmViewController: BaseViewController {
     var cellDataA : CellData?
     var cellDataB : CellData?
     
+    private var duplicatedOpponentsButton: UIButton!
+    private var duplicatedStationsButton: UIButton!
+    private var sameRoundDuplicatedButton: UIButton!
+    
+    private var blueOn : Bool = true
+    private var yellowOn : Bool = true
+    private var purpleOn : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
@@ -57,18 +65,17 @@ class ManualAlgorithmViewController: BaseViewController {
         super.viewDidAppear(animated)
         calculateSizesAndContentSize()
         setUpLabels()
+        setUpButtons()
+        print("scrollView.contentSize.width : ", scrollView.contentSize.width)
+        print("collectionView.frame.width : ", collectionView.frame.width)
     }
     
-    //method to ensure data
-    private func dataDidLoad() {
 
-        createGrid()
-        
-        //reload!
-        DispatchQueue.main.async {
-//            print(" num_stations, pvpGameCount, pveGamecount: ", self.num_stations , self.pvpGameCount , self.pveGameCount )
-//            print("grid: ", self.cellDataGrid.count)
-            self.collectionView?.reloadData()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    
+        if collectionViewCellWidth! > 0  {
+            createBorderLines()
         }
     }
     
@@ -177,8 +184,8 @@ class ManualAlgorithmViewController: BaseViewController {
             for column in 0..<(pvpGameCount * 2) {
                 let cellData = cellDataGrid[rowIndex][column]
                 if cellData.number != -1 {
-//                       changeCellGridData(cellDataInstance: cellData, to: "empty")
-                    print("have to change cell to empty")
+                       changeCellGridData(cellDataInstance: cellData, to: "empty")
+//                    print("have to change cell to empty")
                 }
             }
         }
@@ -191,6 +198,23 @@ class ManualAlgorithmViewController: BaseViewController {
             }
             print("celldatagrid at row ", count, " is ", rownums)
         }
+    }
+    
+
+    @objc func duplicatedOpponentsButtonPressed() {
+        duplicatedOpponentsButton.isSelected = !duplicatedOpponentsButton.isSelected
+        blueOn = duplicatedOpponentsButton.isSelected
+        print("blueon value: ", blueOn)
+    }
+
+    @objc func duplicatedStationsButtonPressed() {
+        duplicatedStationsButton.isSelected = !duplicatedStationsButton.isSelected
+        yellowOn = duplicatedStationsButton.isSelected
+    }
+
+    @objc func sameRoundDuplicatedButtonPressed() {
+        sameRoundDuplicatedButton.isSelected = !sameRoundDuplicatedButton.isSelected
+        purpleOn = sameRoundDuplicatedButton.isSelected
     }
         
     //helper functions
@@ -245,9 +269,10 @@ class ManualAlgorithmViewController: BaseViewController {
             numberOfItemsInARow = collectionView.numberOfItems(inSection: 0)
         }
         let contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + cellSpacing
-        
+        print(" contentWidth: ",  contentWidth, " , collectionView.contentSize.height: ", collectionView.contentSize.height)
         scrollView.contentSize = CGSize(width: contentWidth, height: collectionView.contentSize.height)
         collectionView.contentSize = scrollView.contentSize
+
         let collectionViewWidthConstraint = collectionView.widthAnchor.constraint(equalToConstant:  scrollView.contentSize.width)
         collectionViewWidthConstraint.isActive = true
         
@@ -256,6 +281,9 @@ class ManualAlgorithmViewController: BaseViewController {
             flowLayout.minimumInteritemSpacing = collectionViewCellSpacing
             flowLayout.minimumLineSpacing = collectionViewCellSpacing
         }
+        
+        print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
+
     }
     
     private  func getCellCurrPlayingWith(_ cellData: CellData) -> CellData {
@@ -265,6 +293,7 @@ class ManualAlgorithmViewController: BaseViewController {
             return cellDataGrid[cellData.cellIndex!.first][cellData.cellIndex!.second - 1]
         }
     }
+    
     
     func reloadAll() {
         collectionView.isUserInteractionEnabled = false
@@ -292,7 +321,6 @@ class ManualAlgorithmViewController: BaseViewController {
                     cellDataGrid[section][column].resetCellToDefault()
                     if let cell = collectionView.cellForItem(at: IndexPath(item: column, section: section)) as? AlgCollectionViewCell {
                         cell.makeCellOriginal()
-                        cell.backgroundColor = UIColor.systemPink
                     }
                 }
             }
@@ -572,7 +600,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     
     
-    //setting collectionview and scrollview apart from data
+    //setting collectionview and scrollview and labels and buttons and lines apart from data
     
     private func setUpCollectionViewScrollView() {
 
@@ -602,7 +630,7 @@ class ManualAlgorithmViewController: BaseViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(collectionView)
 
-//        scrollView.backgroundColor = UIColor.yellow
+        scrollView.backgroundColor = UIColor.yellow
 //        collectionView.backgroundColor = UIColor.tintColor
 
 
@@ -622,6 +650,7 @@ class ManualAlgorithmViewController: BaseViewController {
             collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             collectionView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
+        
     }
     
     private func setUpLabels() {
@@ -647,6 +676,124 @@ class ManualAlgorithmViewController: BaseViewController {
 
     }
        
+    private func setUpButtons() {
+        duplicatedOpponentsButton = createButton(withTitle: "Duplicated Opponents")
+        duplicatedStationsButton = createButton(withTitle: "Duplicated Stations")
+        sameRoundDuplicatedButton = createButton(withTitle: "Same Round Duplicated Appearance")
+
+        view.addSubview(duplicatedOpponentsButton)
+        view.addSubview(duplicatedStationsButton)
+        view.addSubview(sameRoundDuplicatedButton)
+        
+        duplicatedOpponentsButton.addTarget(self, action: #selector(duplicatedOpponentsButtonPressed), for: .touchUpInside)
+        duplicatedStationsButton.addTarget(self, action: #selector(duplicatedStationsButtonPressed), for: .touchUpInside)
+        sameRoundDuplicatedButton.addTarget(self, action: #selector(sameRoundDuplicatedButtonPressed), for: .touchUpInside)
+        
+
+        setButtonConstraints()
+
+    }
+    
+    private func createButton(withTitle title: String) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .selected)
+//        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: 20)
+        
+        if title == "Duplicated Opponents" {
+            button.setTitleColor(UIColor(red: 0.91, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
+            button.setTitleColor(UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00), for: .selected)
+        } else if title == "Duplicated Stations" {
+            button.setTitleColor(UIColor(red: 0.98, green: 0.94, blue: 0.85, alpha: 1.00), for: .normal)
+            button.setTitleColor(UIColor(red: 0.95, green: 0.75, blue: 0.22, alpha: 1.00), for: .selected)
+        } else if title == "Same Round Duplicated Appearance"{
+            button.setTitleColor(UIColor(red: 0.96, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
+            button.setTitleColor(UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00), for: .selected)
+        }
+        button.isSelected = true
+
+        return button
+    }
+    
+    private func setButtonConstraints() {
+        duplicatedOpponentsButton.translatesAutoresizingMaskIntoConstraints = false
+        duplicatedStationsButton.translatesAutoresizingMaskIntoConstraints = false
+        sameRoundDuplicatedButton.translatesAutoresizingMaskIntoConstraints = false
+        duplicatedOpponentsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
+
+        let verticalSpacing: CGFloat = 7.0
+
+
+
+        // Constraint to keep buttons from interfering with createGameButton
+
+
+        NSLayoutConstraint.activate([
+            duplicatedOpponentsButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10.0),
+            duplicatedOpponentsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            duplicatedStationsButton.topAnchor.constraint(equalTo:  duplicatedOpponentsButton.bottomAnchor, constant: verticalSpacing),
+            duplicatedStationsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            sameRoundDuplicatedButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            sameRoundDuplicatedButton.topAnchor.constraint(equalTo: duplicatedStationsButton.bottomAnchor, constant: verticalSpacing),
+            duplicatedOpponentsButton.widthAnchor.constraint(equalToConstant: scrollView.frame.width * 0.53)
+            
+        ])
+        let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
+        sameRoundDuplicatedButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
+        duplicatedOpponentsButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
+
+    }
+    
+    private func createBorderLines() {
+    
+        var positions: [(Int, Int)] = []
+    
+        for i in 0..<pvpGameCount {
+            let one = i * 2 + 1
+            let two = i * 2 + 2
+            positions.append((one, two))
+        }
+    
+        for position in positions {
+            let first = position.0
+            let second = position.1
+    
+            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 6, width: 2, height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
+                collectionView.addSubview(borderView)
+        }
+    }
+    
+    private func getLinePosition(firstColumn: Int, secondColumn: Int ) -> CGFloat? {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let indexPath1 = IndexPath(item: firstColumn, section: 0)
+            let indexPath2 = IndexPath(item: secondColumn, section: 0)
+    
+            if let attributes1 = layout.layoutAttributesForItem(at: indexPath1),
+                let attributes2 = layout.layoutAttributesForItem(at: indexPath2) {
+                let midpointX = (attributes1.frame.midX + attributes2.frame.midX) / 2.0
+                return midpointX
+            }
+        }
+        return nil
+    }
+    
+    private func getLineLength(smallerThanEight: Bool) -> CGFloat? {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let topCellIndexPath = IndexPath(item: 0, section: 0)
+            var bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
+            if smallerThanEight {
+                bottomCellIndexPath  = IndexPath(item: 0, section: 8 - 1 - verticalEmptyCells)
+            }
+            if let topAttributes = layout.layoutAttributesForItem(at: topCellIndexPath),
+                let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
+                let length = bottomAttributes.frame.maxY - topAttributes.frame.minY - 3
+                return length
+            }
+        }
+        return nil
+    }
 }
 
 
@@ -674,8 +821,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell at IndexPath: \(indexPath)")
         if cellDataA == nil {
-            // First selection
-    //           indexPathA = indexPath
             cellDataA = cellDataGrid[indexPath.section][indexPath.item]
             changeCellGridData(cellDataInstance: cellDataA!, to: "selected")
             let indexPathA = IndexPath(item: indexPath.item, section: indexPath.section )
@@ -735,22 +880,23 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlgCollectionViewCell.identifier, for: indexPath) as? AlgCollectionViewCell else {
                 return UICollectionViewCell()
             }
-    
+
             let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
             doubleTapGestureRecognizer.numberOfTapsRequired = 2
             cell.addGestureRecognizer(doubleTapGestureRecognizer)
-    
-    
+
+
             let cellData = cellDataGrid[indexPath.section][indexPath.item]
             let teamNumberLabel = cellData.number
-    
+
             if teamNumberLabel == -1 {
                 cell.makeCellInvisible()
             } else if teamNumberLabel == 0 {
                 cell.makeCellEmpty()
             }  else {
                 cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
-    
+//                cell.configureTestCell1()
+
                 if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
                     cell.makeBlueWarning()
                 } else if (cellData.hasPvpYellowWarning || cellData.hasYellowWarning) && !cellData.hasRedWarning {
@@ -765,7 +911,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
         }
     
         func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-    //        let cellNumber = grid[indexPath.section][indexPath.item]
             let cellNumber = cellDataGrid[indexPath.section][indexPath.item].number
     
             if shouldDisableInteraction(for: cellNumber!) {
