@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Dosis-Regular.ttf">
+            <string>Dosis-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,8 +26,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="2fa-Rq-hu6">
-                        <rect key="frame" x="16.5" y="15" width="17" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="16.5" y="14.5" width="17" height="21.5"/>
+                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,8 +44,8 @@
                 <constraint firstAttribute="bottom" secondItem="Y0Y-52-SN2" secondAttribute="bottom" id="nrA-uZ-t0t"/>
             </constraints>
             <connections>
-                <outlet property="algorithmCellBox" destination="Y0Y-52-SN2" id="pD2-HX-kJV"/>
-                <outlet property="teamnumLabel" destination="2fa-Rq-hu6" id="EAT-5i-Wb7"/>
+                <outlet property="algorithmCellBox" destination="Y0Y-52-SN2" id="onz-6Z-D4s"/>
+                <outlet property="teamnumLabel" destination="2fa-Rq-hu6" id="n0d-Hm-Fcg"/>
             </connections>
             <point key="canvasLocation" x="-30.434782608695656" y="79.6875"/>
         </collectionViewCell>
