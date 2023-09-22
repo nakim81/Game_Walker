@@ -26,6 +26,10 @@
 		61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTableViewCell.swift */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
+		A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */; };
+		A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */; };
+		A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */; };
+		A12634412ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */; };
 		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD82AAA4CF500B7BD8A /* IntPair.swift */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
@@ -144,6 +148,10 @@
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgCollectionViewCell.swift; sourceTree = "<group>"; };
+		A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgCollectionViewCell.xib; sourceTree = "<group>"; };
+		A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
+		A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManualAlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1521DD82AAA4CF500B7BD8A /* IntPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntPair.swift; path = Model/IntPair.swift; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
@@ -325,6 +333,10 @@
 				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
 				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
 				A1521DD62AA9B81C00B7BD8A /* CellData.swift */,
+				A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */,
+				A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */,
+				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
+				A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -599,6 +611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
+				A12634412ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib in Resources */,
 				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
 				FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */,
@@ -606,6 +619,7 @@
 				FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */,
 				FCB13E1A2A97A04B00F4AE99 /* congrats_ending.wav in Resources */,
 				A1A4CD362A371C0500704BF8 /* Dosis-Bold.ttf in Resources */,
+				A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */,
 				A1A4CD372A371C0500704BF8 /* Dosis-ExtraBold.ttf in Resources */,
 				A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */,
 				FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */,
@@ -710,6 +724,7 @@
 				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
 				61E5094F2988D8BB00F37E79 /* RefereePVPController.swift in Sources */,
 				61E5094D2988D8A400F37E79 /* RefereeTabBarPVPController.swift in Sources */,
+				A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				A1A4CD3F2A43C58600704BF8 /* VerticalBorderView.swift in Sources */,
 				FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */,
@@ -733,6 +748,7 @@
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
+				A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */,
 				A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */,
 				DABE5EF72A42B8970072203F /* Host.swift in Sources */,
 				A1A4CD3B2A42B8A800704BF8 /* Host.swift in Sources */,
