@@ -26,10 +26,33 @@ class ManualAlgorithmViewController: BaseViewController {
     private var collectionViewCellWidth : CGFloat?
     private var collectionViewCellSpacing: CGFloat = 6.0
 
+    // variables for data
+    private var cellDataGrid : [[CellData]] = [[CellData]]()
+    
+    private var totalrow : Int =  0
+    private var totalcolumn : Int = 0
+    private var num_rounds : Int = 0
+    private var num_teams : Int = 0
+    private var num_stations : Int = 0
+    private var needHorizontalEmptyCells = false
+    private var needVerticalEmptyCells = false
+    private var horizontalEmptyCells = 0
+    private var verticalEmptyCells = 0
+    //options: "none", "teams", "stations"
+    private var excessOf = "none"
+    private var excessCells = 0
+    private var pvpGameCount : Int = 0
+    private var pveGameCount : Int = 0
+    private var omittedTeamCells = 0
+    
+    private var stationList: [Station]? = nil
+    private var host : Host?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
+        fetchDataAndInitialize()
+
 
     }
     
@@ -39,7 +62,158 @@ class ManualAlgorithmViewController: BaseViewController {
         setUpLabels()
     }
     
+    private func fetchDataAndInitialize() {
+        Task { [weak self] in
+             do {
+                 self?.stationList = try await S.getStationList2(self?.gamecode ?? "")
+                 self?.num_stations = self?.stationList?.count ?? 0
+
+                 // Count pvp and pve games
+                 var pvpCount = 0
+                 if let unwrappedStationList = self?.stationList {
+                     for station in unwrappedStationList {
+                         if station.pvp {
+                             pvpCount += 1
+                         }
+                     }
+                 }
+                 self?.pvpGameCount = pvpCount
+                 self?.pveGameCount = self?.num_stations ?? 0 - pvpCount
+                 } catch {
+                     print("Failed to fetch stationList")
+                 }
+            do {
+                 // Fetch host data
+                 if let host = try await H.getHost2(self?.gamecode ?? "") {
+                     self?.host = host
+                     self?.num_teams = host.teams
+                     self?.num_rounds = host.rounds
+                 } else {
+                     print("Failed to fetch host")
+                 }
+
+                 // Call createGrid() here, once data is fetched
+                 self?.createGrid()
+
+                 // Reload the collection view once data is ready
+                 DispatchQueue.main.async {
+                     print(" num_stations, pvpGameCount, pveGamecount: ", self?.num_stations ?? 0, self?.pvpGameCount ?? 0, self?.pveGameCount ?? 0)
+                     print("grid: ", self?.cellDataGrid.count ?? 0)
+                     self?.collectionView?.reloadData()
+                 }
+             } catch(let e) {
+                 print(e)
+                 return
+             }
+         }
+    }
+        
     
+    private func createGrid() {
+            num_stations = pvpGameCount * 2 + pveGameCount
+    
+            omittedTeamCells = hasOmittedTeamCells()
+    
+            if (num_stations < 8) {
+                needHorizontalEmptyCells = true
+                horizontalEmptyCells = 8 - num_stations
+            }
+    
+            if (num_rounds < 8) {
+                needVerticalEmptyCells = true
+                verticalEmptyCells = 8 - num_rounds
+            }
+            if (num_stations < num_teams) {
+                excessOf = "teams"
+                excessCells = num_teams - num_stations
+            }
+            if (num_teams < num_stations) {
+                excessOf = "stations"
+                excessCells = num_stations - num_teams
+            }
+    
+            totalcolumn = max(num_stations, num_teams)
+            totalrow = num_rounds
+    
+            for r in 0..<totalrow {
+                var currRow: [Int] = []
+    
+                // adding grid with celldata
+                var currCellDataRow: [CellData] = []
+    
+                for t in 0..<totalcolumn {
+                    var number = (t + (r + 1)) % totalcolumn
+                    if number == 0 {
+                        number = totalcolumn
+                    }
+    
+    
+                    var visible = true
+                    if excessOf == "stations" || excessOf == "teams" {
+                        if t >= totalcolumn - excessCells {
+                            if excessOf == "stations" {
+                                number = 0
+                            } else if excessOf == "teams" {
+                                number = -1
+                                visible = false
+                            }
+                        }
+                    }
+                    let celldata = CellData(number: number, visible: visible, index: IntPair(first: r, second: t))
+                    currRow.append(number)
+                    currCellDataRow.append(celldata)
+                }
+    
+                while currRow.count < 8 {
+                    currRow.append(-1)
+                    let celldata = CellData(number: -1, visible: false, index: IntPair(first:r, second:currRow.count))
+                    currCellDataRow.append(celldata)
+                }
+    
+                cellDataGrid.append(currCellDataRow)
+            }
+    
+    
+            for rowIndex in stride(from: 1, through: cellDataGrid.count - 1, by: 2) {
+                for column in 0..<(pvpGameCount * 2) {
+                    let cellData = cellDataGrid[rowIndex][column]
+                    if cellData.number != -1 {
+//                        changeCellGridData(cellDataInstance: cellData, to: "empty")
+                        print("have to change cell to empty")
+                    }
+                }
+            }
+            var count = 0
+            for row in cellDataGrid {
+                count += 1
+                var rownums = [Int]()
+                for celldata in row {
+                    rownums.append(celldata.number!)
+                }
+                print("celldatagrid at row ", count, " is ", rownums)
+            }
+
+    }
+        
+    //helper functions
+    
+    
+    private func hasOmittedTeamCells() -> Int {
+        let stationCells = pvpGameCount * 2 + pveGameCount
+        let teamCells = num_teams
+
+        if teamCells > stationCells {
+            print("Be cautious there are omitted Team Cells.")
+            return teamCells - stationCells
+        }
+        return 0
+    }
+    
+    private func changeCellGridData(cellDataInstance: CellData, to state: String) {
+        let section = cellDataInstance.cellIndex?.first
+        let column = cellDataInstance.cellIndex?.second
+        cellDataGrid[section!][column!].changeState(to: state)
+    }
     
     private func calculateSizesAndContentSize() {
         var numberOfItemsInARow = 8 
@@ -142,10 +316,14 @@ class ManualAlgorithmViewController: BaseViewController {
 
 extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return biggerGrid[0].count
+        if section < cellDataGrid.count {
+            return cellDataGrid[section].count
+        }
+        return 0
+
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int{
-        return biggerGrid.count
+        return cellDataGrid.count
     }
 
     
