@@ -38,6 +38,7 @@ class StationsTableViewController: BaseViewController {
     }
 
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddStationSegue" {
             if let addStationVC = segue.destination as? AddStationViewController {
@@ -126,7 +127,7 @@ extension StationsTableViewController: UITableViewDelegate {
     
     func deleteStation(at indexPath: IndexPath) async {
 
-        print("stationList before Removal: ", currentStations)
+//        print("stationList before Removal: ", currentStations)
 
         let stationIndex = indexPath.item
         let stationToRemove = currentStations[stationIndex]
