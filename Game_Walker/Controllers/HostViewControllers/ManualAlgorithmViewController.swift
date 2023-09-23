@@ -73,7 +73,7 @@ class ManualAlgorithmViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-    
+        
         if collectionViewCellWidth! > 0  {
             createBorderLines()
         }
@@ -107,6 +107,7 @@ class ManualAlgorithmViewController: BaseViewController {
 
                     self!.collectionView.dataSource = self
                     self!.collectionView.delegate = self
+                    self?.reloadAll()
                     self?.collectionView?.reloadData()
                 }
             } catch {
@@ -205,16 +206,22 @@ class ManualAlgorithmViewController: BaseViewController {
         duplicatedOpponentsButton.isSelected = !duplicatedOpponentsButton.isSelected
         blueOn = duplicatedOpponentsButton.isSelected
         print("blueon value: ", blueOn)
+        resetAll()
+        reloadAll()
     }
 
     @objc func duplicatedStationsButtonPressed() {
         duplicatedStationsButton.isSelected = !duplicatedStationsButton.isSelected
         yellowOn = duplicatedStationsButton.isSelected
+        resetAll()
+        reloadAll()
     }
 
     @objc func sameRoundDuplicatedButtonPressed() {
         sameRoundDuplicatedButton.isSelected = !sameRoundDuplicatedButton.isSelected
         purpleOn = sameRoundDuplicatedButton.isSelected
+        resetAll()
+        reloadAll()
     }
         
     //helper functions
@@ -298,11 +305,22 @@ class ManualAlgorithmViewController: BaseViewController {
     func reloadAll() {
         collectionView.isUserInteractionEnabled = false
         if pvpGameCount > 0 {
-            processPvpYellowCells()
-            processPvpBlueCells()
+            if yellowOn {
+                processPvpYellowCells()
+            }
+            if blueOn {
+                processPvpBlueCells()
+            }
         }
-        processPurpleSameRoundCells()
-        processYellowSameStationCells()
+
+        if purpleOn {
+            processPurpleSameRoundCells()
+        }
+        
+        if yellowOn {
+            processYellowSameStationCells()
+        }
+
         collectionView.reloadData()
         DispatchQueue.main.async {
             self.collectionView.isUserInteractionEnabled = true
@@ -543,7 +561,6 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     
     func processYellowSameStationCells() {
-        print("PROCESS YELLOW SAME STATION CELLS")
         for col in 0..<cellDataGrid[0].count {
             var columnNumbers = [Int: Set<CellData>]()
             for sect in 0..<cellDataGrid.count {
@@ -698,7 +715,7 @@ class ManualAlgorithmViewController: BaseViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .selected)
-//        button.setTitle(title, for: .normal)
+        button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: 20)
         
         if title == "Duplicated Opponents" {
