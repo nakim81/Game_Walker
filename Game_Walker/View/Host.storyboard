@@ -60,25 +60,15 @@
                                     <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEc-PE-ylw">
-                                <rect key="frame" x="169.5" y="739" width="75" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <segue destination="Vjg-e5-r3Z" kind="show" identifier="AlgorithmTestingSegue" id="N2c-KI-9wD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="4MZ-FB-Fhl"/>
-                            <constraint firstItem="ZEc-PE-ylw" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="7BE-11-XH1"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.6" id="PBF-TX-gfT"/>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.6" id="T1U-j8-fCt"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ZdS-b9-9tO"/>
                             <constraint firstItem="cf7-AC-7yj" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="1.3" id="r07-bE-grh"/>
-                            <constraint firstItem="ZEc-PE-ylw" firstAttribute="top" secondItem="cf7-AC-7yj" secondAttribute="bottom" constant="107" id="sEe-kP-ZUS"/>
                             <constraint firstItem="fjH-HA-b1K" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="vm6-B7-U1w"/>
                         </constraints>
                     </view>
@@ -597,7 +587,7 @@
                                 <state key="normal" backgroundImage="Next button 1-1"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
-                                    <segue destination="uLg-Pv-BMT" kind="show" id="NcL-hR-YeL"/>
+                                    <segue destination="Vjg-e5-r3Z" kind="show" identifier="ShowAlgorithmSegue" id="flX-6b-8Ik"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
@@ -704,7 +694,7 @@
             <objects>
                 <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
@@ -751,7 +741,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
-                                <rect key="frame" x="119.5" y="774" width="175" height="57"/>
+                                <rect key="frame" x="119.5" y="750" width="175" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="CreateGameButtonSmall"/>
                                 <connections>
@@ -759,7 +749,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3H-Ds-FRZ">
-                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
+                                <rect key="frame" x="107.5" y="109.5" width="199.5" height="54.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="MATCHING">
                                         <attributes>
@@ -1079,7 +1069,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6Td-1F-5ho"/>
+        <segue reference="OK4-sB-gpM"/>
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>

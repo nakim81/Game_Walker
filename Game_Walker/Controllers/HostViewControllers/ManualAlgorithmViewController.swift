@@ -58,14 +58,30 @@ class ManualAlgorithmViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
-        fetchDataAndInitialize()
+        if let stationList = stationList, !stationList.isEmpty, num_stations != 0, num_rounds != 0, num_teams != 0 {
+            createGrid()
+
+            DispatchQueue.main.async { [weak self] in
+
+                self!.collectionView.dataSource = self
+                self!.collectionView.delegate = self
+                self?.reloadAll()
+                self?.collectionView?.reloadData()
+            }
+        } else {
+            fetchDataAndInitialize()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        collectionView.isHidden = false
+        scrollView.isHidden = false
         calculateSizesAndContentSize()
         setUpLabels()
         setUpButtons()
+        stationsLabelImageView.isHidden = false
+        roundsLabelImageView.isHidden = false
         print("scrollView.contentSize.width : ", scrollView.contentSize.width)
         print("collectionView.frame.width : ", collectionView.frame.width)
     }
@@ -79,7 +95,37 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
     
-    private func fetchDataAndInitialize() {
+    func fetchDataSimple(gamecode: String) async {
+        do {
+            stationList = try await S.getStationList2(gamecode)
+            num_stations = stationList!.count
+            var pvpCount = 0
+            if let unwrappedStationList = self.stationList {
+                for station in unwrappedStationList {
+                    if station.pvp {
+                        pvpCount += 1
+                    }
+                }
+            }
+            pvpGameCount = pvpCount
+            pveGameCount = num_stations - pvpGameCount
+        } catch (let e) {
+            print(e)
+            return
+        }
+        
+        do {
+            self.host = try await H.getHost2(gamecode)
+            num_teams = host!.teams
+            num_rounds = host!.rounds
+        } catch(let e) {
+            print(e)
+            return
+        }
+
+    }
+    
+    func fetchDataAndInitialize() {
         Task { [weak self] in
             do {
                 self?.stationList = try await S.getStationList2(self?.gamecode ?? "")
@@ -116,8 +162,6 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
 
-        
-    
     private func createGrid() {
         print("somehow inside create grid")
         num_stations = pvpGameCount * 2 + pveGameCount
@@ -197,7 +241,7 @@ class ManualAlgorithmViewController: BaseViewController {
             for celldata in row {
                 rownums.append(celldata.number!)
             }
-            print("celldatagrid at row ", count, " is ", rownums)
+//            print("celldatagrid at row ", count, " is ", rownums)
         }
     }
     
@@ -275,7 +319,24 @@ class ManualAlgorithmViewController: BaseViewController {
         if collectionView.numberOfItems(inSection: 0) > 8 {
             numberOfItemsInARow = collectionView.numberOfItems(inSection: 0)
         }
-        let contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + cellSpacing
+        var extraspace = 0
+        if horizontalEmptyCells > 0 {
+            extraspace = Int((collectionViewCellSize!.width + cellSpacing)) * horizontalEmptyCells
+        }
+        print("horizontalEmpty cells: ", horizontalEmptyCells)
+        var contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + cellSpacing - CGFloat(extraspace)
+        let minimumContentWidth = 8 * (collectionViewCellSize!.width + cellSpacing) + cellSpacing
+        
+        if contentWidth < minimumContentWidth {
+            print("I AM in this MIN content size")
+            contentWidth = minimumContentWidth
+        } else if omittedTeamCells > 0 {
+            print("omittedd condition!!")
+            // have to think about this part because when i simply erase the space, i get a contentsize too small because invisible disabled cells still count in the width!
+//            contentWidth  = contentWidth - (CGFloat(omittedTeamCells) * (collectionViewCellSize!.width + cellSpacing) )
+        }
+       
+        
         print(" contentWidth: ",  contentWidth, " , collectionView.contentSize.height: ", collectionView.contentSize.height)
         scrollView.contentSize = CGSize(width: contentWidth, height: collectionView.contentSize.height)
         collectionView.contentSize = scrollView.contentSize
@@ -466,7 +527,7 @@ class ManualAlgorithmViewController: BaseViewController {
                     }
                 }else {
                     changeCellGridData(cellDataInstance: cellData, to: "blue")
-                    print("changing a pvp blue cell to blue. no other error encountered")
+//                    print("changing a pvp blue cell to blue. no other error encountered")
                 }
             }
         }
@@ -619,7 +680,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     //setting collectionview and scrollview and labels and buttons and lines apart from data
     
-    private func setUpCollectionViewScrollView() {
+    func setUpCollectionViewScrollView() {
 
         let totalSpacing = collectionViewCellSpacing * 9
         let availableWidth = floor(collectionViewWidth - totalSpacing)
@@ -643,11 +704,13 @@ class ManualAlgorithmViewController: BaseViewController {
         collectionView.delaysContentTouches = true
         collectionView.isScrollEnabled = true
 
-
+        collectionView.isHidden = true
+        scrollView.isHidden = true
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(collectionView)
 
-        scrollView.backgroundColor = UIColor.yellow
+//        scrollView.backgroundColor = UIColor.yellow
 //        collectionView.backgroundColor = UIColor.tintColor
 
 
@@ -668,12 +731,16 @@ class ManualAlgorithmViewController: BaseViewController {
             collectionView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
         
+        
     }
     
     private func setUpLabels() {
         stationsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
         roundsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
 
+        stationsLabelImageView.isHidden = true
+        roundsLabelImageView.isHidden = true
+        
         let stationsLabelWidthMultiplier: CGFloat = 116.0 / 281.0
         let roundsLabelHeightMultiplier: CGFloat = 104.0 / 291.0
     
@@ -777,24 +844,31 @@ class ManualAlgorithmViewController: BaseViewController {
             let first = position.0
             let second = position.1
     
-            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 6, width: 2, height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
-                collectionView.addSubview(borderView)
+            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 6, width: Int(2), height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
+
+            borderView.backgroundColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1.0)
+
+            collectionView.addSubview(borderView)
         }
     }
     
-    private func getLinePosition(firstColumn: Int, secondColumn: Int ) -> CGFloat? {
+    private func getLinePosition(firstColumn: Int, secondColumn: Int) -> CGFloat? {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let indexPath1 = IndexPath(item: firstColumn, section: 0)
-            let indexPath2 = IndexPath(item: secondColumn, section: 0)
-    
-            if let attributes1 = layout.layoutAttributesForItem(at: indexPath1),
-                let attributes2 = layout.layoutAttributesForItem(at: indexPath2) {
-                let midpointX = (attributes1.frame.midX + attributes2.frame.midX) / 2.0
-                return midpointX
-            }
+            let sectionWidth = collectionView.bounds.width
+            let numberOfColumns = CGFloat(collectionView.numberOfItems(inSection: 0))
+            
+            // Calculate the width of each column
+            let columnWidth = sectionWidth / numberOfColumns
+            
+            // Calculate the midpoint between the specified columns
+            let midpointX = columnWidth * CGFloat(firstColumn + secondColumn + 1) / 2.0
+            
+            return midpointX
         }
         return nil
     }
+
+
     
     private func getLineLength(smallerThanEight: Bool) -> CGFloat? {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -1011,3 +1085,4 @@ extension ManualAlgorithmViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
+

@@ -28,6 +28,8 @@ class SettingTimeHostViewController: BaseViewController {
     var rounds : Int = 10
     
     private var gamecode = UserData.readGamecode("gamecode")!
+    var manualAlgorithmViewController: ManualAlgorithmViewController?
+    
     
     
     
@@ -131,6 +133,14 @@ class SettingTimeHostViewController: BaseViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAlgorithmSegue" {
+            if let destinationVC = segue.destination as? ManualAlgorithmViewController {
+                self.manualAlgorithmViewController = destinationVC
+            }
+        }
+    }
+
 
     @objc func dismissPicker() {
         if pickertype == 0 {
@@ -263,6 +273,11 @@ class SettingTimeHostViewController: BaseViewController {
         
         H.listenHost(gamecode, onListenerUpdate: listen(_:))
         T.listenTeams(gamecode, onListenerUpdate: listen(_:))
+        
+        Task {
+            await self.manualAlgorithmViewController?.fetchDataSimple(gamecode: gamecode)
+        }
+
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {
