@@ -25,7 +25,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         label.clipsToBounds = true
         label.font = UIFont(name: "Dosis-Regular", size: 10)
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
@@ -67,10 +67,10 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 40),
-            imageView.heightAnchor.constraint(equalToConstant: 40)
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
         ])
         
         self.imageName = imageName
@@ -88,20 +88,20 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height * 0.1),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.frame.height * 0.04),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
             
             teamNumLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             teamNumLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),
             teamNumLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             teamNumLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-            teamNumLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.13),
+            teamNumLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.15),
             
             teamNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            teamNameLabel.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: 0),
+            teamNameLabel.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: 2),
             teamNameLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 2),
             teamNameLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: -2),
-            teamNameLabel.heightAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.214)
+            teamNameLabel.heightAnchor.constraint(equalTo: teamNumLabel.heightAnchor, multiplier: 2.5)
         ])
         
         imageView.image = UIImage(named: imageName)
@@ -110,8 +110,8 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
     }
     
     func showBorder() {
-        containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        containerView.layer.borderWidth = 3
         containerView.layer.cornerRadius = containerView.frame.width / 2
     }
     
