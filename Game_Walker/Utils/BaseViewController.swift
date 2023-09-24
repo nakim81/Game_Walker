@@ -15,11 +15,16 @@ class BaseViewController: UIViewController {
     }
     
     func configureNavBar() {
-        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 10))
-        backButton.setImage(UIImage(named: "BackIcon"), for: .normal)
-        backButton.addTarget(self, action: #selector(onBackPressed), for: .touchUpInside)
-        let barBackButton = UIBarButtonItem(customView: backButton)
-        self.navigationItem.leftBarButtonItem = barBackButton
+        let backButtonImage = UIImage(named: "BackIcon")
+
+        // Create a custom bar button item with the image
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(onBackPressed))
+
+        // Customize the appearance of the back button (optional)
+        backButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
+
+        // Assign the custom back button to the navigationItem
+        navigationItem.leftBarButtonItem = backButton
     }
     
     @objc func onBackPressed() {

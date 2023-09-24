@@ -262,8 +262,8 @@ extension CreateTeamViewController: UICollectionViewDelegate {
             cell.isSelected = false
         } else {
             selectedIndex = indexPath.row
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            cell.layer.borderWidth = 3
             cell.layer.cornerRadius = cell.frame.size.width / 2
             cell.isSelected = true
         }
@@ -290,8 +290,8 @@ extension CreateTeamViewController: UICollectionViewDataSource {
         if cell.isSelected == false {
             cell.layer.borderWidth = 0.0
         } else {
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            cell.layer.borderWidth = 3
             cell.layer.cornerRadius = cell.frame.size.width / 2
         }
         return cell
@@ -302,7 +302,7 @@ extension CreateTeamViewController: UICollectionViewDataSource {
 extension CreateTeamViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
+        return CGSize(width: 65, height: 65)
     }
 }
 
