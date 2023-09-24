@@ -26,34 +26,54 @@ class RefereeGameInfoViewcontroller: UIViewController {
         return view
     }()
     
-    private lazy var  gameInfoLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Station Info 2")
-        return imageView
+    private lazy var  gameInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Info"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 40)
+        return label
     }()
     
-    private lazy var gameNameLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "station name 1")
-        return imageView
+    private lazy var gameNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Name"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gameLocationLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Station location 1")
-        return imageView
+    private lazy var gameLocationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Location"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gamePointsLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "station points 3")
-        return imageView
+    private lazy var gamePointsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station Points"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
-    private lazy var gameRuleLabel: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "rules 2")
-        return imageView
+    private lazy var gameRuleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Referee"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
+        return label
     }()
     
     private lazy var gameNameLabel1: UILabel = {
@@ -67,7 +87,6 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
         return label
     }()
     
@@ -82,7 +101,6 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
         return label
     }()
     
@@ -97,7 +115,6 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
-
         return label
     }()
     

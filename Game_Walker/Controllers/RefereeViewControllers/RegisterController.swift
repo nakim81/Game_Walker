@@ -22,21 +22,22 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         Task {
-            if storedGameCode != "" {
-                stations = try await S.getStationList(storedGameCode)
-            }
             configureNavItem()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
             gamecodeTextField.delegate = self
             gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
             usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
+            if storedGameCode != "" {
+                stations = try await S.getStationList(storedGameCode)
+            }
         }
         super.viewDidLoad()
     }
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
+        newBackButton.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     

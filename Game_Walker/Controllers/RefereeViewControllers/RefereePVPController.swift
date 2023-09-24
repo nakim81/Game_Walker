@@ -64,10 +64,10 @@ class RefereePVPController: BaseViewController {
     
     override func viewDidLoad() {
         Task {
-            callProtocols()
             stations = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
             host = try await H.getHost(gameCode) ?? Host()
+            callProtocols()
             getTeamOrder()
             updateScore()
             addSubviews()
@@ -275,7 +275,7 @@ class RefereePVPController: BaseViewController {
         label.backgroundColor = .white
         label.textColor = .black
         label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 25))
-        label.text = "Team \(self.teamOrder[2 * self.round - 2].number)"
+        label.text = "Team \(self.teamOrder[2 * self.round - 1].number)"
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
@@ -285,7 +285,7 @@ class RefereePVPController: BaseViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
-        label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 2].name)"
+        label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 1].name)"
         label.textColor = .black
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -499,7 +499,16 @@ class RefereePVPController: BaseViewController {
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        
+        // Testing
+        Task {
+            do {
+                try await H.updateCurrentRound(gameCode, 2)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
     }
     
     func fontSize(size: CGFloat) -> CGFloat {
@@ -552,14 +561,14 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
     }
     
     func updateHost(_ host: Host) {
-        roundLabel.text = "Round " + "\(host.currentRound)"
-        leftTeamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
-        leftIconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-        leftTeamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
-        rightTeamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
-        rightIconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-        rightTeamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
         if self.round != host.currentRound {
+            roundLabel.text = "Round " + "\(host.currentRound)"
+            leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
+            leftIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 2].iconName)
+            leftTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 2].name)"
+            rightTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 1].number)"
+            rightIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 1].iconName)
+            rightTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 1].name)"
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }

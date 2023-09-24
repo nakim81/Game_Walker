@@ -32,10 +32,10 @@ class RefereePVEController: BaseViewController {
     
     override func viewDidLoad() {
         Task {
-            callProtocols()
             stations = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
             host = try await H.getHost(gameCode) ?? Host()
+            callProtocols()
             getTeamOrder()
             updateScore()
             addSubviews()
@@ -73,7 +73,16 @@ class RefereePVEController: BaseViewController {
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        
+        // Testing
+        Task {
+            do {
+                try await H.updateCurrentRound(gameCode, 2)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
     }
     
     @IBAction func leaveButtonPressed(_ sender: Any) {
@@ -360,11 +369,11 @@ extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
     }
     
     func updateHost(_ host: Host) {
-        roundLabel.text = "Round " + "\(host.currentRound)"
-        teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
-        iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-        teamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
         if self.round != host.currentRound {
+            roundLabel.text = "Round " + "\(host.currentRound)"
+            teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
+            iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
+            teamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
             winButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }

@@ -199,7 +199,7 @@ class TimerViewController: UIViewController {
         let overlayViewController = OverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["press the circle to see how it changes", "check to see the members in your team", "check to see the ranking", "check to see the timer"]
+        let explanationTexts = ["Check to see what happens when you click this circle", "Team Members", "Ranking", "Timer"]
         var componentPositions: [CGPoint] = []
         let component1Frame = timerCircle.frame
         componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.minY))
@@ -297,7 +297,6 @@ class TimerViewController: UIViewController {
             totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
             totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
         ])
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
         timerCircle.isUserInteractionEnabled = true
@@ -402,12 +401,7 @@ class TimerViewController: UIViewController {
             tapped = false
         }
     }
-    
-    func timeString(time:TimeInterval) -> String {
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format:"%02i : %02i", minutes, seconds)
-    }
+
 }
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {

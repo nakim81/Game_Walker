@@ -57,13 +57,13 @@ class RefereeTimerController: BaseViewController {
         label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 13)) ?? UIFont.systemFont(ofSize: fontSize(size: 13)),
+            .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 20)) ?? UIFont.systemFont(ofSize: fontSize(size: 20)),
+            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
             .foregroundColor: UIColor.black
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
@@ -253,6 +253,42 @@ class RefereeTimerController: BaseViewController {
         }
     }
     
+    //MARK: - Overlay
+    private func showOverlay() {
+        let overlayViewController = OverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Check to see what happens when you click this circle", "Team Members", "Ranking", "Timer"]
+        var componentPositions: [CGPoint] = []
+        let component1Frame = timerCircle.frame
+        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.midY))
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        print(componentPositions)
+        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 4, tabBarTop: tabBarTop)
+        
+        present(overlayViewController, animated: true, completion: nil)
+    }
+    
     //MARK: - Timer
     func calculateTime() {
         if isPaused {
@@ -332,6 +368,12 @@ class RefereeTimerController: BaseViewController {
                         strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
                     }
                 }
+                strongSelf.totalTime += 1
+                let totalMinute = strongSelf.totalTime/60
+                let totalSecond = strongSelf.totalTime % 60
+                let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                strongSelf.totalTimeLabel.attributedText = attributedString
             }
         }
     }
