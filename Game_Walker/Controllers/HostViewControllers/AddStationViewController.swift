@@ -207,19 +207,19 @@ class AddStationViewController: BaseViewController {
     @IBAction func pvpChosen(_ sender: UIButton) {
         pvpnotchosen = false
         
-        if pveButton.currentBackgroundImage == UIImage(named:"pve selected 1") {
-            pveButton.setBackgroundImage(UIImage(named:"pve 1"), for:.normal)
+        if pveButton.currentBackgroundImage == UIImage(named:"PVE selected") {
+            pveButton.setBackgroundImage(UIImage(named:"PVEButton"), for:.normal)
         }
-        pvpButton.setBackgroundImage(UIImage(named:"pvp selected 1"), for: .normal)
+        pvpButton.setBackgroundImage(UIImage(named:"PVP selected"), for: .normal)
         isPvp = true
     }
     
     @IBAction func pveChosen(_ sender: UIButton) {
         pvpnotchosen = false
-        if pvpButton.currentBackgroundImage == UIImage(named:"pvp selected 1") {
-            pvpButton.setBackgroundImage(UIImage(named:"pvp 1"), for:.normal)
+        if pvpButton.currentBackgroundImage == UIImage(named:"PVP selected") {
+            pvpButton.setBackgroundImage(UIImage(named:"PVPButton"), for:.normal)
         }
-        pveButton.setBackgroundImage(UIImage(named:"pve selected 1"), for: .normal)
+        pveButton.setBackgroundImage(UIImage(named:"PVE selected"), for: .normal)
         isPvp = false
     }
     

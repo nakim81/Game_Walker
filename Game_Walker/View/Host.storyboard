@@ -372,12 +372,12 @@
                                         <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
-                                        <rect key="frame" x="105.5" y="609" width="195" height="58"/>
+                                        <rect key="frame" x="130" y="609" width="146" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="175:52" id="VeK-ka-nJC"/>
+                                            <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="126:41" id="VeK-ka-nJC"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="save 1"/>
+                                        <state key="normal" backgroundImage="HostSaveButton"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
                                         </connections>
@@ -398,7 +398,7 @@
                                     <constraint firstItem="iML-mv-p7Y" firstAttribute="width" secondItem="yze-MK-05s" secondAttribute="width" multiplier="0.5" id="Ey4-TW-FDf"/>
                                     <constraint firstItem="jZT-6z-gXz" firstAttribute="top" secondItem="bIc-0l-Lvr" secondAttribute="bottom" constant="12" id="JHk-Vm-0qT"/>
                                     <constraint firstItem="Dr0-Yh-9XK" firstAttribute="top" secondItem="iML-mv-p7Y" secondAttribute="bottom" multiplier="0.1" constant="-1" id="KFt-RE-eKY"/>
-                                    <constraint firstItem="mew-pS-Laf" firstAttribute="width" secondItem="Dr0-Yh-9XK" secondAttribute="width" multiplier="0.534759" id="M6H-Ca-fhz"/>
+                                    <constraint firstItem="mew-pS-Laf" firstAttribute="width" secondItem="Dr0-Yh-9XK" secondAttribute="width" multiplier="130/325" id="M6H-Ca-fhz"/>
                                     <constraint firstItem="HQY-JV-gHm" firstAttribute="top" secondItem="l4e-L9-4OF" secondAttribute="bottom" constant="5" id="MHS-Ys-lVV"/>
                                     <constraint firstItem="Dr0-Yh-9XK" firstAttribute="height" secondItem="l6w-xV-CKG" secondAttribute="height" multiplier="0.98" id="N6h-8F-Atb"/>
                                     <constraint firstItem="BkX-2h-b6N" firstAttribute="centerX" secondItem="l6w-xV-CKG" secondAttribute="centerX" id="NgW-ck-NUO"/>
@@ -1070,7 +1070,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OK4-sB-gpM"/>
+        <segue reference="6Td-1F-5ho"/>
         <segue reference="Yeq-Vg-rew"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1084,6 +1084,7 @@
         <image name="HostNextButton" width="175" height="57"/>
         <image name="HostResumeButton" width="175" height="57"/>
         <image name="HostResumeGameButton" width="245" height="80"/>
+        <image name="HostSaveButton" width="126" height="41"/>
         <image name="Next button 1-1" width="176" height="57"/>
         <image name="Number of Teams 1" width="162.5" height="25"/>
         <image name="PVEButton" width="111" height="33"/>
@@ -1099,7 +1100,6 @@
         <image name="rounds 1" width="101" height="35"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
-        <image name="save 1" width="176" height="57"/>
         <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="53.5" height="40"/>
         <image name="stations" width="94" height="30"/>
