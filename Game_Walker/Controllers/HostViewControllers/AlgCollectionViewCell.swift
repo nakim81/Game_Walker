@@ -38,7 +38,18 @@ class AlgCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     
+      
+        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            numberLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            numberLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            numberLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.90)
+        ])
         numberLabel.adjustsFontSizeToFitWidth = true
+        numberLabel.textAlignment = .center
+        numberLabel.minimumScaleFactor = 0.5
+        numberLabel.numberOfLines = 1
+        numberLabel.baselineAdjustment = .alignCenters
     }
     
     func configureTestCell1() {

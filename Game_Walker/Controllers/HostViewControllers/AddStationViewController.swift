@@ -225,29 +225,26 @@ class AddStationViewController: BaseViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if !stationExists {
-            if (gamenameTextfield.text!.isEmpty) {
-                alert(title:"No Game Name",message:"Please enter the game name.")
-            } else {
-                gamename = gamenameTextfield.text!
+            if gamenameTextfield.text!.isEmpty {
+                alert(title: "No Game Name", message: "Please enter the game name.")
+                return
             }
-            if (gamelocationTextfield.text!.isEmpty) {
-//                alert(title:"No Game Location",message:"Please enter the game location.")
-            } else {
-                gamelocation = gamelocationTextfield.text!
+            
+            if gamepointsTextfield.text!.isEmpty {
+                alert(title: "No Game Points", message: "Please set the game points.")
+                return
             }
-            if (gamepointsTextfield.text!.isEmpty) {
-                alert(title:"No Game Points",message:"Please set the game points.")
-            } else {
-                gamepoints = Int(gamepointsTextfield.text!)!
+            
+            if pvpnotchosen {
+                alert(title: "Game Type Not Specified", message: "Please select either PVP or PVE")
+                return
             }
-            if (rulesTextfield.text!.isEmpty) {
-//                alert(title:"No Game Rules",message:"Please enter the game rules.")
-            } else {
-                rules = rulesTextfield.text!
+
+            if refereeUuid.isEmpty {
+                alert(title: "No Referee Selected", message: "Please select a referee.")
+                return
             }
-            if (pvpnotchosen) {
-                alert(title:"Game Type Not Specified", message: "Please select either PVP or PVE")
-            }
+            
         }
         
         if (stationExists && !modified) {
