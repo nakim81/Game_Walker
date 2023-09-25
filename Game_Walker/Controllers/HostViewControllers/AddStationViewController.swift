@@ -231,7 +231,7 @@ class AddStationViewController: BaseViewController {
                 gamename = gamenameTextfield.text!
             }
             if (gamelocationTextfield.text!.isEmpty) {
-                alert(title:"No Game Location",message:"Please enter the game location.")
+//                alert(title:"No Game Location",message:"Please enter the game location.")
             } else {
                 gamelocation = gamelocationTextfield.text!
             }
@@ -241,7 +241,7 @@ class AddStationViewController: BaseViewController {
                 gamepoints = Int(gamepointsTextfield.text!)!
             }
             if (rulesTextfield.text!.isEmpty) {
-                alert(title:"No Game Rules",message:"Please enter the game rules.")
+//                alert(title:"No Game Rules",message:"Please enter the game rules.")
             } else {
                 rules = rulesTextfield.text!
             }
@@ -391,6 +391,7 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
         let curr_cellname = availableReferees[indexPath.row].name
         cell.configureRefereeCell(refereeName: curr_cellname)
+        cell.refereenameLabel?.font = UIFont(name: "Dosis-Regular", size: 20.0)
         return cell
     }
 
