@@ -21,7 +21,7 @@ class ManualAlgorithmViewController: BaseViewController {
     private var collectionViewCellSize : CGSize?
     private var collectionViewCellWidth : CGFloat?
     private var collectionViewCellSpacing: CGFloat = 6.0
-
+    
     // variables for data
     private var cellDataGrid : [[CellData]] = [[CellData]]()
     
@@ -60,15 +60,16 @@ class ManualAlgorithmViewController: BaseViewController {
         setUpCollectionViewScrollView()
         if let stationList = stationList, !stationList.isEmpty, num_stations != 0, num_rounds != 0, num_teams != 0 {
             createGrid()
-
+            
             DispatchQueue.main.async { [weak self] in
-
+                
                 self!.collectionView.dataSource = self
                 self!.collectionView.delegate = self
                 self?.reloadAll()
                 self?.collectionView?.reloadData()
             }
         } else {
+            print("ELSEEE!!!!!!!!!!!")
             fetchDataAndInitialize()
         }
     }
@@ -86,7 +87,7 @@ class ManualAlgorithmViewController: BaseViewController {
         print("collectionView.frame.width : ", collectionView.frame.width)
     }
     
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -95,6 +96,7 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
     
+
     func fetchDataSimple(gamecode: String) async {
         do {
             stationList = try await S.getStationList2(gamecode)
@@ -122,7 +124,7 @@ class ManualAlgorithmViewController: BaseViewController {
             print(e)
             return
         }
-
+        
     }
     
     func fetchDataAndInitialize() {
@@ -138,19 +140,19 @@ class ManualAlgorithmViewController: BaseViewController {
                         }
                     }
                 }
-
+                
                 self?.pvpGameCount = pvpCount
                 self?.pveGameCount = self?.num_stations ?? 0 - pvpCount
                 
                 self?.host = try await H.getHost2(self?.gamecode ?? "")
                 self?.num_teams = self?.host?.teams ?? 0
                 self?.num_rounds = self?.host?.rounds ?? 0
-
+                
                 self?.createGrid()
-
+                
                 // Reload the collection view once data is ready (on the main thread)
                 DispatchQueue.main.async { [weak self] in
-
+                    
                     self!.collectionView.dataSource = self
                     self!.collectionView.delegate = self
                     self?.reloadAll()
@@ -161,16 +163,16 @@ class ManualAlgorithmViewController: BaseViewController {
             }
         }
     }
-
+    
     private func createGrid() {
         print("somehow inside create grid")
         num_stations = pvpGameCount * 2 + pveGameCount
-            omittedTeamCells = hasOmittedTeamCells()
-                if (num_stations < 8) {
+        omittedTeamCells = hasOmittedTeamCells()
+        if (num_stations < 8) {
             needHorizontalEmptyCells = true
             horizontalEmptyCells = 8 - num_stations
         }
-    
+        
         if (num_rounds < 8) {
             needVerticalEmptyCells = true
             verticalEmptyCells = 8 - num_rounds
@@ -183,38 +185,38 @@ class ManualAlgorithmViewController: BaseViewController {
             excessOf = "stations"
             excessCells = num_stations - num_teams
         }
-    
+        
         totalcolumn = max(num_stations, num_teams)
         totalrow = num_rounds
-    
+        
         for r in 0..<totalrow {
             var currRow: [Int] = []
-    
+            
             // adding grid with celldata
             var currCellDataRow: [CellData] = []
-    
+            
             for t in 0..<totalcolumn {
                 var number = (t + (r + 1)) % totalcolumn
                 if number == 0 {
                     number = totalcolumn
                 }
-    
-    
-            var visible = true
-            if excessOf == "stations" || excessOf == "teams" {
-            if t >= totalcolumn - excessCells {
-                if excessOf == "stations" {
-                        number = 0
-                    } else if excessOf == "teams" {
-                        number = -1
-                        visible = false
+                
+                
+                var visible = true
+                if excessOf == "stations" || excessOf == "teams" {
+                    if t >= totalcolumn - excessCells {
+                        if excessOf == "stations" {
+                            number = 0
+                        } else if excessOf == "teams" {
+                            number = -1
+                            visible = false
+                        }
                     }
                 }
+                let celldata = CellData(number: number, visible: visible, index: IntPair(first: r, second: t))
+                currRow.append(number)
+                currCellDataRow.append(celldata)
             }
-            let celldata = CellData(number: number, visible: visible, index: IntPair(first: r, second: t))
-            currRow.append(number)
-            currCellDataRow.append(celldata)
-        }
             
             while currRow.count < 8 {
                 currRow.append(-1)
@@ -223,14 +225,14 @@ class ManualAlgorithmViewController: BaseViewController {
             }
             cellDataGrid.append(currCellDataRow)
         }
-    
-    
+        
+        
         for rowIndex in stride(from: 1, through: cellDataGrid.count - 1, by: 2) {
             for column in 0..<(pvpGameCount * 2) {
                 let cellData = cellDataGrid[rowIndex][column]
                 if cellData.number != -1 {
-                       changeCellGridData(cellDataInstance: cellData, to: "empty")
-//                    print("have to change cell to empty")
+                    changeCellGridData(cellDataInstance: cellData, to: "empty")
+                    //                    print("have to change cell to empty")
                 }
             }
         }
@@ -241,11 +243,11 @@ class ManualAlgorithmViewController: BaseViewController {
             for celldata in row {
                 rownums.append(celldata.number!)
             }
-//            print("celldatagrid at row ", count, " is ", rownums)
+            //            print("celldatagrid at row ", count, " is ", rownums)
         }
     }
     
-
+    
     @objc func duplicatedOpponentsButtonPressed() {
         duplicatedOpponentsButton.isSelected = !duplicatedOpponentsButton.isSelected
         blueOn = duplicatedOpponentsButton.isSelected
@@ -253,21 +255,21 @@ class ManualAlgorithmViewController: BaseViewController {
         resetAll()
         reloadAll()
     }
-
+    
     @objc func duplicatedStationsButtonPressed() {
         duplicatedStationsButton.isSelected = !duplicatedStationsButton.isSelected
         yellowOn = duplicatedStationsButton.isSelected
         resetAll()
         reloadAll()
     }
-
+    
     @objc func sameRoundDuplicatedButtonPressed() {
         sameRoundDuplicatedButton.isSelected = !sameRoundDuplicatedButton.isSelected
         purpleOn = sameRoundDuplicatedButton.isSelected
         resetAll()
         reloadAll()
     }
-        
+    
     //helper functions
     
     
@@ -282,7 +284,7 @@ class ManualAlgorithmViewController: BaseViewController {
     private func hasOmittedTeamCells() -> Int {
         let stationCells = pvpGameCount * 2 + pveGameCount
         let teamCells = num_teams
-
+        
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
             return teamCells - stationCells
@@ -315,7 +317,7 @@ class ManualAlgorithmViewController: BaseViewController {
     private func calculateSizesAndContentSize() {
         var numberOfItemsInARow = 8
         let cellSpacing = collectionViewCellSpacing
-
+        
         if collectionView.numberOfItems(inSection: 0) > 8 {
             numberOfItemsInARow = collectionView.numberOfItems(inSection: 0)
         }
@@ -333,14 +335,14 @@ class ManualAlgorithmViewController: BaseViewController {
         } else if omittedTeamCells > 0 {
             print("omittedd condition!!")
             // have to think about this part because when i simply erase the space, i get a contentsize too small because invisible disabled cells still count in the width!
-//            contentWidth  = contentWidth - (CGFloat(omittedTeamCells) * (collectionViewCellSize!.width + cellSpacing) )
+            //            contentWidth  = contentWidth - (CGFloat(omittedTeamCells) * (collectionViewCellSize!.width + cellSpacing) )
         }
-       
+        
         
         print(" contentWidth: ",  contentWidth, " , collectionView.contentSize.height: ", collectionView.contentSize.height)
         scrollView.contentSize = CGSize(width: contentWidth, height: collectionView.contentSize.height)
         collectionView.contentSize = scrollView.contentSize
-
+        
         let collectionViewWidthConstraint = collectionView.widthAnchor.constraint(equalToConstant:  scrollView.contentSize.width)
         collectionViewWidthConstraint.isActive = true
         
@@ -351,7 +353,7 @@ class ManualAlgorithmViewController: BaseViewController {
         }
         
         print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
-
+        
     }
     
     private  func getCellCurrPlayingWith(_ cellData: CellData) -> CellData {
@@ -373,7 +375,7 @@ class ManualAlgorithmViewController: BaseViewController {
                 processPvpBlueCells()
             }
         }
-
+        
         if purpleOn {
             processPurpleSameRoundCells()
         }
@@ -381,7 +383,7 @@ class ManualAlgorithmViewController: BaseViewController {
         if yellowOn {
             processYellowSameStationCells()
         }
-
+        
         collectionView.reloadData()
         DispatchQueue.main.async {
             self.collectionView.isUserInteractionEnabled = true
@@ -409,7 +411,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     
     
-//    processing functions
+    //    processing functions
     
     private func processPvpBlueCells() {
         var numbersSeenByNumber = [Int: Set<Int>]()
@@ -417,45 +419,45 @@ class ManualAlgorithmViewController: BaseViewController {
         for pairIndex in 0...(pvpGameCount - 1) {
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
-                for section in 0..<cellDataGrid.count {
-                    let cellData1 = cellDataGrid[section][startColumn]
-                    let cellData2 = cellDataGrid[section][endColumn]
-                    let numberKey1 = cellData1.number
-                    let numberKey2 = cellData2.number
-    
-                    if numberIsValid(numberKey1) {
-                        if var seenNumbers = numbersSeenByNumber[numberKey1!] {
-                            if numberIsValid(numberKey2) {
-                                if seenNumbers.contains(numberKey2!) {
-                                    duplicatedPairs.insert(IntPair(first: numberKey1!, second: numberKey2!))
-                                } else {
-                                    seenNumbers.insert(numberKey2!)
-                                    numbersSeenByNumber[numberKey1!] = seenNumbers
-                                    if var seenNumbersPair = numbersSeenByNumber[numberKey2!]{
-                                        if numberIsValid(numberKey1) {
-                                            if !seenNumbersPair.contains(numberKey1!) {
-                                                seenNumbersPair.insert(numberKey1!)
-                                                numbersSeenByNumber[numberKey2!] = seenNumbersPair
-                                            }
+            for section in 0..<cellDataGrid.count {
+                let cellData1 = cellDataGrid[section][startColumn]
+                let cellData2 = cellDataGrid[section][endColumn]
+                let numberKey1 = cellData1.number
+                let numberKey2 = cellData2.number
+                
+                if numberIsValid(numberKey1) {
+                    if var seenNumbers = numbersSeenByNumber[numberKey1!] {
+                        if numberIsValid(numberKey2) {
+                            if seenNumbers.contains(numberKey2!) {
+                                duplicatedPairs.insert(IntPair(first: numberKey1!, second: numberKey2!))
+                            } else {
+                                seenNumbers.insert(numberKey2!)
+                                numbersSeenByNumber[numberKey1!] = seenNumbers
+                                if var seenNumbersPair = numbersSeenByNumber[numberKey2!]{
+                                    if numberIsValid(numberKey1) {
+                                        if !seenNumbersPair.contains(numberKey1!) {
+                                            seenNumbersPair.insert(numberKey1!)
+                                            numbersSeenByNumber[numberKey2!] = seenNumbersPair
                                         }
-                                    } else {
-                                        var newNumberSet = Set<Int>()
-                                        newNumberSet.insert(numberKey1!)
-                                        numbersSeenByNumber[numberKey2!] = newNumberSet
                                     }
+                                } else {
+                                    var newNumberSet = Set<Int>()
+                                    newNumberSet.insert(numberKey1!)
+                                    numbersSeenByNumber[numberKey2!] = newNumberSet
                                 }
                             }
-                        } else {
-                            if numberIsValid(numberKey2) {
-                                var newNumberSet1 = Set<Int>()
-                                var newNumberSet2 = Set<Int>()
-                                newNumberSet1.insert(numberKey2!)
-                                numbersSeenByNumber[numberKey1!] = newNumberSet1
-                                newNumberSet2.insert(numberKey1!)
-                                numbersSeenByNumber[numberKey2!] = newNumberSet2
-                            }
+                        }
+                    } else {
+                        if numberIsValid(numberKey2) {
+                            var newNumberSet1 = Set<Int>()
+                            var newNumberSet2 = Set<Int>()
+                            newNumberSet1.insert(numberKey2!)
+                            numbersSeenByNumber[numberKey1!] = newNumberSet1
+                            newNumberSet2.insert(numberKey1!)
+                            numbersSeenByNumber[numberKey2!] = newNumberSet2
                         }
                     }
+                }
             }
         }
         makeAllDuplicatePairsBlue(duplicatedPairs)
@@ -463,22 +465,22 @@ class ManualAlgorithmViewController: BaseViewController {
     
     private func makeAllDuplicatePairsBlue(_ duplicatedPairs : Set<IntPair>) {
         var allCellsWithDuplicatedMatchesByPairs = [IntPair: Set<CellData>]()
-    
+        
         for pairIndex in 0...(pvpGameCount-1) {
             let evenColumn = pairIndex * 2
             for section in 0..<cellDataGrid.count {
-    
+                
                 let cellData1 = cellDataGrid[section][evenColumn]
                 let cellData2 = getCellCurrPlayingWith(cellData1)
                 let number1 = cellData1.number
                 let number2 = cellData2.number
-    
+                
                 // indexPathsByPairs with have the same IntPair value for either switched or not switched pairs.
                 // example: IntPair(1,2) and IntPair(2,1) will have the Key of IntPair(1,2)
                 let currPair = IntPair(first: number1!, second: number2!)
                 let currPairSwitched = currPair.switchPair(currPair)
                 let currPairKey = currPair.cleanOrderPair(currPair)
-
+                
                 if duplicatedPairs.contains(currPair) || duplicatedPairs.contains(currPairSwitched) {
                     if var cellDataSet = allCellsWithDuplicatedMatchesByPairs[currPairKey] {
                         cellDataSet.insert(cellData1)
@@ -493,11 +495,11 @@ class ManualAlgorithmViewController: BaseViewController {
                 }
             }
         }
-    
+        
         for (_, cellDataSet) in allCellsWithDuplicatedMatchesByPairs {
             for cellData in cellDataSet {
                 addCellSetsToCellGridData(cellDataInstance: cellData, to: "blue", set: cellDataSet)
-    
+                
                 //Case where cells that need blue warnings already has yellow pvp warnings
                 if cellData.hasPvpYellowWarning {
                     changeCellGridData(cellDataInstance: cellData, to: "red")
@@ -527,7 +529,7 @@ class ManualAlgorithmViewController: BaseViewController {
                     }
                 }else {
                     changeCellGridData(cellDataInstance: cellData, to: "blue")
-//                    print("changing a pvp blue cell to blue. no other error encountered")
+                    //                    print("changing a pvp blue cell to blue. no other error encountered")
                 }
             }
         }
@@ -537,14 +539,14 @@ class ManualAlgorithmViewController: BaseViewController {
         for pairIndex in 0..<pvpGameCount {
             let startColumn = pairIndex * 2
             let endColumn = startColumn + 1
-
+            
             var matchedCellsByNumber = [Int: Set<CellData>]()
-    
+            
             for section in 0..<cellDataGrid.count {
                 for column in startColumn...endColumn {
                     let cellData = cellDataGrid[section][column]
                     let numberKey = cellData.number
-    
+                    
                     if numberIsValid(numberKey) {
                         //Checking if IntPairsByNumbers already has the numberkey
                         if var cellDataSet = matchedCellsByNumber[numberKey!] {
@@ -576,7 +578,7 @@ class ManualAlgorithmViewController: BaseViewController {
             var rowNumbers = [Int: Set<CellData>]()
             for cellData in row {
                 let number = cellData.number
-
+                
                 if numberIsValid(number) {
                     if var cellDataSet = rowNumbers[number!] {
                         cellDataSet.insert(cellData)
@@ -588,12 +590,12 @@ class ManualAlgorithmViewController: BaseViewController {
                     }
                 }
             }
-                //Now mark each cell with more than two counts in sets in each row
+            //Now mark each cell with more than two counts in sets in each row
             for (_, cellDataSet) in rowNumbers {
                 if cellDataSet.count >= 2 {
                     for cellDataDuplicates in cellDataSet {
                         addCellSetsToCellGridData(cellDataInstance: cellDataDuplicates, to: "purple", set: cellDataSet)
-    
+                        
                         if cellDataDuplicates.hasRedWarning {
                             changeCellGridData(cellDataInstance: cellDataDuplicates, to: "red")
                         } else if cellDataDuplicates.hasPvpBlueWarning {
@@ -619,7 +621,7 @@ class ManualAlgorithmViewController: BaseViewController {
                 }
             }
         }
-        }
+    }
     
     func processYellowSameStationCells() {
         for col in 0..<cellDataGrid[0].count {
@@ -627,7 +629,7 @@ class ManualAlgorithmViewController: BaseViewController {
             for sect in 0..<cellDataGrid.count {
                 let cellData = cellDataGrid[sect][col]
                 let number = cellData.number
-    
+                
                 if numberIsValid(number) {
                     if var cellDataSet = columnNumbers[number!] {
                         cellDataSet.insert(cellData)
@@ -653,7 +655,7 @@ class ManualAlgorithmViewController: BaseViewController {
                             }
                         } else if cellDataWithWarning.hasRedWarning {
                             changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
-
+                            
                         } else if cellDataWithWarning.hasPvpBlueWarning {
                             changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
                             for pvpBlueCellData in cellDataWithWarning.cellsWithSameBluePvpWarning {
@@ -663,10 +665,10 @@ class ManualAlgorithmViewController: BaseViewController {
                                 changeCellGridData(cellDataInstance: currCellData, to: "red")
                             }
                         } else if cellDataWithWarning.hasPvpYellowWarning {
-    //                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
-    //                            for pvpYellowCellData in cellDataWithWarning.cellsWithSameYellowPvpWarning {
-    //                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
-    //                            }
+                            //                            changeCellGridData(cellDataInstance: cellDataWithWarning, to: "red")
+                            //                            for pvpYellowCellData in cellDataWithWarning.cellsWithSameYellowPvpWarning {
+                            //                                changeCellGridData(cellDataInstance: pvpYellowCellData, to: "red")
+                            //                            }
                         } else {
                             changeCellGridData(cellDataInstance: cellDataWithWarning, to: "yellow")
                         }
@@ -681,43 +683,43 @@ class ManualAlgorithmViewController: BaseViewController {
     //setting collectionview and scrollview and labels and buttons and lines apart from data
     
     func setUpCollectionViewScrollView() {
-
+        
         let totalSpacing = collectionViewCellSpacing * 9
         let availableWidth = floor(collectionViewWidth - totalSpacing)
         let toTheRight = collectionViewWidth * 0.05
         collectionViewCellWidth = availableWidth / 8
         collectionViewCellSize = CGSize(width: collectionViewCellWidth!, height: collectionViewCellWidth!)
-
+        
         collectionViewCellSize = CGSize(width: collectionViewCellWidth!,
                                         height: collectionViewCellWidth!)
-
+        
         //create
         
         scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
-
-
-
+        
+        
+        
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout:  UICollectionViewFlowLayout())
         collectionView.delaysContentTouches = true
         collectionView.isScrollEnabled = true
-
+        
         collectionView.isHidden = true
         scrollView.isHidden = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(collectionView)
-
-//        scrollView.backgroundColor = UIColor.yellow
+        
+        //        scrollView.backgroundColor = UIColor.yellow
 //        collectionView.backgroundColor = UIColor.tintColor
-
-
-//        collectionView.register(AlgCollectionViewCell.self, forCellWithReuseIdentifier: AlgCollectionViewCell.identifier)
+        
+        
+        //        collectionView.register(AlgCollectionViewCell.self, forCellWithReuseIdentifier: AlgCollectionViewCell.identifier)
         collectionView.register(UINib(nibName: "AlgCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgCollectionViewCell")
-
-
+        
+        
         let centerYMultiplier: CGFloat = 0.96
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: toTheRight) ,
@@ -737,34 +739,34 @@ class ManualAlgorithmViewController: BaseViewController {
     private func setUpLabels() {
         stationsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
         roundsLabelImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         stationsLabelImageView.isHidden = true
         roundsLabelImageView.isHidden = true
         
         let stationsLabelWidthMultiplier: CGFloat = 116.0 / 281.0
         let roundsLabelHeightMultiplier: CGFloat = 104.0 / 291.0
-    
+        
         
         NSLayoutConstraint.activate([
             // Constraints for stationsLabelImageView
             stationsLabelImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: stationsLabelWidthMultiplier),
             stationsLabelImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stationsLabelImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -5 - stationsLabelImageView.frame.height),
-
+            
             // Constraints for roundsLabelImageView
             roundsLabelImageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: roundsLabelHeightMultiplier),
             roundsLabelImageView.trailingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: -5), // 5 points to the left of collectionView
             roundsLabelImageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
-
-
+        
+        
     }
-       
+    
     private func setUpButtons() {
         duplicatedOpponentsButton = createButton(withTitle: "Duplicated Opponents")
         duplicatedStationsButton = createButton(withTitle: "Duplicated Stations")
         sameRoundDuplicatedButton = createButton(withTitle: "Same Round Duplicated Appearance")
-
+        
         view.addSubview(duplicatedOpponentsButton)
         view.addSubview(duplicatedStationsButton)
         view.addSubview(sameRoundDuplicatedButton)
@@ -773,9 +775,9 @@ class ManualAlgorithmViewController: BaseViewController {
         duplicatedStationsButton.addTarget(self, action: #selector(duplicatedStationsButtonPressed), for: .touchUpInside)
         sameRoundDuplicatedButton.addTarget(self, action: #selector(sameRoundDuplicatedButtonPressed), for: .touchUpInside)
         
-
+        
         setButtonConstraints()
-
+        
     }
     
     private func createButton(withTitle title: String) -> UIButton {
@@ -796,7 +798,7 @@ class ManualAlgorithmViewController: BaseViewController {
             button.setTitleColor(UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00), for: .selected)
         }
         button.isSelected = true
-
+        
         return button
     }
     
@@ -805,15 +807,15 @@ class ManualAlgorithmViewController: BaseViewController {
         duplicatedStationsButton.translatesAutoresizingMaskIntoConstraints = false
         sameRoundDuplicatedButton.translatesAutoresizingMaskIntoConstraints = false
         duplicatedOpponentsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
-
+        
+        
         let verticalSpacing: CGFloat = 7.0
-
-
-
+        
+        
+        
         // Constraint to keep buttons from interfering with createGameButton
-
-
+        
+        
         NSLayoutConstraint.activate([
             duplicatedOpponentsButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10.0),
             duplicatedOpponentsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -827,65 +829,34 @@ class ManualAlgorithmViewController: BaseViewController {
         let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
         sameRoundDuplicatedButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
         duplicatedOpponentsButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
-
+        
     }
+    
     
     private func createBorderLines() {
-    
-        var positions: [(Int, Int)] = []
-    
         for i in 0..<pvpGameCount {
-            let one = i * 2 + 1
-            let two = i * 2 + 2
-            positions.append((one, two))
-        }
-    
-        for position in positions {
-            let first = position.0
-            let second = position.1
-    
-            let borderView = VerticalBorderView(frame: CGRect(x: Int(getLinePosition(firstColumn: first, secondColumn: second) ?? 0), y: 6, width: Int(2), height: Int(getLineLength(smallerThanEight: needVerticalEmptyCells)!)))
-
-            borderView.backgroundColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1.0)
-
-            collectionView.addSubview(borderView)
-        }
-    }
-    
-    private func getLinePosition(firstColumn: Int, secondColumn: Int) -> CGFloat? {
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let sectionWidth = collectionView.bounds.width
-            let numberOfColumns = CGFloat(collectionView.numberOfItems(inSection: 0))
+            let firstColumn = i * 2 + 1
+            let secondColumn = firstColumn + 1
             
-            // Calculate the width of each column
-            let columnWidth = sectionWidth / numberOfColumns
+            let indexPathFirst = IndexPath(item: firstColumn, section: 0)
+            let indexPathSecond = IndexPath(item: secondColumn, section: 0)
             
-            // Calculate the midpoint between the specified columns
-            let midpointX = columnWidth * CGFloat(firstColumn + secondColumn + 1) / 2.0
-            
-            return midpointX
-        }
-        return nil
-    }
-
-
-    
-    private func getLineLength(smallerThanEight: Bool) -> CGFloat? {
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let topCellIndexPath = IndexPath(item: 0, section: 0)
-            var bottomCellIndexPath = IndexPath(item: 0, section: collectionView.numberOfSections - 1)
-            if smallerThanEight {
-                bottomCellIndexPath  = IndexPath(item: 0, section: 8 - 1 - verticalEmptyCells)
-            }
-            if let topAttributes = layout.layoutAttributesForItem(at: topCellIndexPath),
-                let bottomAttributes = layout.layoutAttributesForItem(at: bottomCellIndexPath) {
-                let length = bottomAttributes.frame.maxY - topAttributes.frame.minY - 3
-                return length
+            if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout,
+               let attributesFirst = layout.layoutAttributesForItem(at: indexPathFirst),
+               let attributesSecond = layout.layoutAttributesForItem(at: indexPathSecond) {
+                
+                let midpointX = (attributesFirst.frame.midX + attributesSecond.frame.midX) / 2.0
+                
+                let borderView = VerticalBorderView(frame: CGRect(x: midpointX - 1, y: 0, width: 2, height: collectionView.contentSize.height))
+                borderView.backgroundColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1.00)
+                
+                collectionView.addSubview(borderView)
             }
         }
-        return nil
+        
     }
 }
+
 
 
 
@@ -987,6 +958,7 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             }  else {
                 cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
 //                cell.configureTestCell1()
+//                cell.backgroundColor = UIColor.green
 
                 if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
                     cell.makeBlueWarning()
@@ -1057,32 +1029,17 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             }
         }
     
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  "AlgCollectionViewCell", for: indexPath) as? AlgCollectionViewCell else {
-//            return UICollectionViewCell()
-//        }
-//
-//        if indexPath.section % 2 == 0 {
-//            cell.configureTestCell1()
-//        } else {
-//            cell.configureTestCell2()
-//        }
-//
-//        return cell
-//    }
-    
-    
 }
+
 
 extension ManualAlgorithmViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == collectionView.numberOfSections - 1 {
             return UIEdgeInsets(top: 0, left:collectionViewCellSpacing, bottom: 0, right: collectionViewCellSpacing)
         } else if section == 0{
-            return UIEdgeInsets(top: collectionViewCellSpacing, left:collectionViewCellSpacing, bottom: collectionViewCellSpacing, right: collectionViewCellSpacing)
+            return UIEdgeInsets(top: 0, left:collectionViewCellSpacing, bottom: collectionViewCellSpacing, right: collectionViewCellSpacing)
         }else {
             return UIEdgeInsets(top: 0, left:collectionViewCellSpacing, bottom: collectionViewCellSpacing, right: collectionViewCellSpacing)
         }
     }
 }
-
