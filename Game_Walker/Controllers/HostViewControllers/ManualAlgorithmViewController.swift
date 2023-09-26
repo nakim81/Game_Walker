@@ -451,6 +451,26 @@ class ManualAlgorithmViewController: BaseViewController {
             }
         }
     }
+    
+    
+    private func createIntegerGrid() -> [[Int]]{
+        var integerGrid: [[Int]] = []
+
+        for row in cellDataGrid {
+            var rowOfIntegers: [Int] = []
+            
+            for cellData in row {
+                if let number = cellData.number {
+                    rowOfIntegers.append(number)
+                } else {
+                    print("error: number is not valid when saving as integer grid.")
+                }
+            }
+            
+            integerGrid.append(rowOfIntegers)
+        }
+        return integerGrid
+    }
     //helperfunctions end
     
     
@@ -1090,6 +1110,13 @@ extension ManualAlgorithmViewController: UICollectionViewDelegateFlowLayout {
 
 extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
     func modalViewControllerDidRequestPush() {
+        Task { @MainActor in
+            do {
+                let grid =  createIntegerGrid
+    //           try await H.setAlgorithm(gamecode, grid)
+            }
+
+        }
         pushTabBarController()
     }
 
