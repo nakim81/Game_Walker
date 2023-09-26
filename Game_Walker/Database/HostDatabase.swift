@@ -46,12 +46,19 @@ struct H {
     }
     
     static func setAlgorithm(_ gamecode: String, _ algorithm: [[Int]]) async throws {
-        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
-            try await server.updateData([
-                "algorithm": algorithm
-            ])
-            print("Host setted Algorithm")
+            let document = try await docRef.getDocument()
+            if document.exists {
+                guard let data = document.data() else { return }
+                var host = convertDataToHost(data)
+                host.algorithm = algorithm
+                updateHost(gamecode, host)
+                print("Setted Algorithm")
+            } else {
+                print("Host does not exist")
+                throw GameWalkerError.serverError("Something went wrong while setting Algorithm")
+            }
         } catch {
             print("Error setting Algorithm Host: \(error)")
             throw GameWalkerError.serverError("Something went wrong while setting Algorithm")
