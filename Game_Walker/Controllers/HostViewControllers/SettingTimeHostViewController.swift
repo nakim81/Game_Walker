@@ -17,6 +17,8 @@ class SettingTimeHostViewController: BaseViewController {
     @IBOutlet weak var roundsTextField: UITextField!
     @IBOutlet weak var teamcountTextField: UITextField!
     
+    private var stationList: [Station] = []
+    
 //    var host: Host?
 //    var team: Team?
     var gameminutes: Int = 0
@@ -28,6 +30,14 @@ class SettingTimeHostViewController: BaseViewController {
     var rounds : Int = 10
     
     private var gamecode = UserData.readGamecode("gamecode")!
+    
+    var manualAlgorithmViewController: ManualAlgorithmViewController?
+    var pvpGameCount : Int = 0
+    var pveGameCount : Int = 0
+    var num_rounds : Int = 0
+    var num_teams : Int = 0
+    var num_stations : Int = 0
+    
     
     
     
@@ -52,6 +62,22 @@ class SettingTimeHostViewController: BaseViewController {
         
         super.viewDidLoad()
         
+        Task {
+            do {
+                stationList = try await fetchStationsForAlgorithm()
+//                var pvpCount = 0
+//                    for station in stationList {
+//                        if station.pvp {
+//                            pvpCount += 1
+//                        }
+//                    }
+//                num_stations = stationList.count
+//                pvpGameCount = pvpCount
+//                pveGameCount = num_stations - pvpGameCount
+            } catch {
+                print( "Couldn't get data for stations")
+            }
+        }
         roundsTextField.keyboardType = .numberPad
         roundsTextField.textAlignment = .center
         roundsTextField.delegate = self
@@ -131,6 +157,19 @@ class SettingTimeHostViewController: BaseViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAlgorithmSegue" {
+            if let destinationVC = segue.destination as? ManualAlgorithmViewController {
+                destinationVC.stationList = self.stationList
+                destinationVC.pvpGameCount = self.pvpGameCount
+                destinationVC.pveGameCount = self.pveGameCount
+                destinationVC.num_rounds = self.num_rounds
+                destinationVC.num_teams = self.num_teams
+                destinationVC.num_stations = self.num_stations
+            }
+        }
+    }
+
 
     @objc func dismissPicker() {
         if pickertype == 0 {
@@ -252,10 +291,6 @@ class SettingTimeHostViewController: BaseViewController {
                               Int(teamcount) ?? 0)
             }
 
-//            print("ROUNDS AND TEAMCOUNT: ",rounds, teamcount)
-//            performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
-//            performSegue(withIdentifier: "TempSegue", sender: self)
-//            performSegue(withIdentifier: "ManualAlgSegue", sender: self)
             
         } else {
             alert(title: "Woops", message: "Please enter all information to set timer")
@@ -263,6 +298,11 @@ class SettingTimeHostViewController: BaseViewController {
         
         H.listenHost(gamecode, onListenerUpdate: listen(_:))
         T.listenTeams(gamecode, onListenerUpdate: listen(_:))
+        
+        Task {
+            await self.manualAlgorithmViewController?.fetchDataSimple(gamecode: gamecode)
+        }
+
     }
     
     func timeConvert(min : Int, sec : Int) -> Int {
@@ -321,12 +361,28 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
         }
 
     }
+    
+    func fetchStationsForAlgorithm() async throws -> [Station] {
+        var tempStationList: [Station] = []
+        do {
+            tempStationList = try await S.getStationList2(gamecode)
+            num_stations = tempStationList.count
+            var pvpCount = 0
+                for station in tempStationList {
+                    if station.pvp {
+                        pvpCount += 1
+                    }
+                }
+            pvpGameCount = pvpCount
+            pveGameCount = num_stations - pvpGameCount
+        } catch (let e) {
+            print(e)
+        }
+        return tempStationList
+    }
+    
 }
-//extension SettingTimeHostViewController: GetHost {
-//    func getHost(_ host: Host) {
-//        self.host = host
-//    }
-//}
+
 
 extension SettingTimeHostViewController: HostUpdateListener, TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
