@@ -775,6 +775,11 @@ class ManualAlgorithmViewController: BaseViewController {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(collectionView)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+
         
         //        scrollView.backgroundColor = UIColor.yellow
 //        collectionView.backgroundColor = UIColor.tintColor
