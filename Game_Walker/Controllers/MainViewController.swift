@@ -64,7 +64,7 @@ class MainViewController: BaseViewController {
 //        }
 //        var teams : Team?
 //        Task {
-//            teams = try await T.getTeam2("333333", "Team 1")
+//            teams = try await T.getTeam("333333", "Team 1")
 //            print(teams)
 //        }
         

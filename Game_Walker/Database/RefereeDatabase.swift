@@ -15,8 +15,6 @@ import SwiftUI
 struct R {
     
     static let db = Firestore.firestore()
-    static var delegate_refereeList: RefereeList?
-    static var delegate_getReferee: GetReferee?
     static var delegates : [RefereeUpdateListener] = []
     
     //MARK: - Referee Control Functions
@@ -30,11 +28,13 @@ struct R {
                 print("Referee added")
             } else {
                 print("Gamecode does not exist")
-                throw GamecodeError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
+        } catch GameWalkerError.invalidGamecode(let message) {
+            throw GameWalkerError.invalidGamecode(message)
         } catch {
-            print("Gamecode does not exist")
-            throw ServerError.serverError("Something went wrong while adding Referee")
+            print("Error adding Referee: \(error)")
+            throw GameWalkerError.serverError("Something went wrong while adding Referee")
         }
     }
     
@@ -57,7 +57,7 @@ struct R {
             print("Referee name modified")
         } catch {
             print("Gamecode does not exist")
-            throw ServerError.serverError("Something went wrong while modifying Referee name")
+            throw GameWalkerError.serverError("Something went wrong while modifying Referee name")
         }
     }
     
@@ -72,7 +72,7 @@ struct R {
             print("Referee assigned station")
         } catch {
             print("Error assigning Referee a station: \(error)")
-            throw ServerError.serverError("Something went wrong while assigning Referee a station")
+            throw GameWalkerError.serverError("Something went wrong while assigning Referee a station")
         }
     }
     
@@ -89,20 +89,7 @@ struct R {
         }
     }
     
-    static func getReferee(_ gamecode: String, _ uuid : String) {
-        let docRef = db.collection("\(gamecode) : Referees").document(uuid)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                let referee = convertDataToReferee(data)
-                delegate_getReferee?.getReferee(referee)
-            } else {
-                print("Error in getting Referee")
-            }
-        }
-    }
-    
-    static func getReferee2(_ gamecode: String, _ uuid: String) async throws -> Referee? {
+    static func getReferee(_ gamecode: String, _ uuid: String) async throws -> Referee? {
         let docRef = db.collection("\(gamecode) : Referees").document(uuid)
         let document = try await docRef.getDocument()
         if document.exists {
@@ -111,28 +98,11 @@ struct R {
             return referee
         } else {
             print("Error in getting Referee")
-            throw ServerError.serverError("Something went wrong while getting Referee")
+            throw GameWalkerError.serverError("Something went wrong while getting Referee")
         }
     }
     
-    static func getRefereeList(_ gamecode: String) {
-        db.collection("\(gamecode) : Referees").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting List of Referee: \(err)")
-            } else {
-                var referees : [Referee] = []
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    let referee = convertDataToReferee(data)
-                    referees.append(referee)
-                }
-                referees.sort{$0.name < $1.name}
-                delegate_refereeList?.listOfReferees(referees)
-            }
-        }
-    }
-    
-    static func getRefereeList2(_ gamecode: String) async throws -> [Referee] {
+    static func getRefereeList(_ gamecode: String) async throws -> [Referee] {
         do{
             let querySnapshot = try await db.collection("\(gamecode) : Referees").getDocuments()
             var referees: [Referee] = []
@@ -146,10 +116,9 @@ struct R {
         }
         catch{
             print("Error in getting RefereeList")
-            throw ServerError.serverError("Something went wrong while getting RefereeList")
+            throw GameWalkerError.serverError("Something went wrong while getting RefereeList")
         }
     }
-
     
     static func convertDataToReferee(_ data : [String : Any]) -> Referee {
         do {

@@ -33,9 +33,9 @@ class RefereePVEController: BaseViewController {
     override func viewDidLoad() {
         Task {
             callProtocols()
-            stations = try await S.getStationList2(gameCode)
-            teams = try await T.getTeamList2(gameCode)
-            host = try await H.getHost2(gameCode) ?? Host()
+            stations = try await S.getStationList(gameCode)
+            teams = try await T.getTeamList(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
             getTeamOrder()
             updateScore()
             addSubviews()
@@ -200,7 +200,7 @@ class RefereePVEController: BaseViewController {
         Task {
             do {
                 try await T.givePoints(gameCode, self.team.name, self.points)
-            } catch ServerError.serverError(let text){
+            } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return

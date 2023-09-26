@@ -41,8 +41,8 @@ class RefereeTimerController: BaseViewController {
     override func viewDidLoad() {
         Task {
             callProtocols()
-            stations = try await S.getStationList2(gameCode)
-            host = try await H.getHost2(gameCode) ?? Host()
+            stations = try await S.getStationList(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
             setSettings()
             configureTimerLabel()
             calculateTime()
@@ -350,8 +350,8 @@ extension RefereeTimerController: HostUpdateListener {
     func callProtocols() {
         H.delegates.append(self)
         Task {
-            stations = try await S.getStationList2(gameCode)
-            host = try await H.getHost2(gameCode) ?? Host()
+            stations = try await S.getStationList(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
         }
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
     }
