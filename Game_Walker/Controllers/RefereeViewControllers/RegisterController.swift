@@ -36,7 +36,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     

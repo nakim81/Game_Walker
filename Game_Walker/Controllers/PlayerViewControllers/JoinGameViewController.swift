@@ -57,7 +57,7 @@ class JoinGameViewController: BaseViewController {
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "back button 1"), style: .plain, target: self, action: #selector(back))
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(back))
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
