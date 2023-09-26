@@ -47,7 +47,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
         ])
         numberLabel.adjustsFontSizeToFitWidth = true
         numberLabel.textAlignment = .center
-        numberLabel.minimumScaleFactor = 0.5
+        numberLabel.minimumScaleFactor = 0.2
         numberLabel.numberOfLines = 1
         numberLabel.baselineAdjustment = .alignCenters
     }
@@ -61,7 +61,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     
     
     func configureAlgorithmNormalCell(cellteamnum : Int) {
-        
+
         numberLabel.text = String(cellteamnum)
         number = cellteamnum
         cellImageView.image = originalCellBoxImage
