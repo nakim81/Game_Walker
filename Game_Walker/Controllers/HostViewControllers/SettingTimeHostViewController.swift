@@ -291,10 +291,6 @@ class SettingTimeHostViewController: BaseViewController {
                               Int(teamcount) ?? 0)
             }
 
-//            print("ROUNDS AND TEAMCOUNT: ",rounds, teamcount)
-//            performSegue(withIdentifier: "SetAlgorithmSegue", sender: self)
-//            performSegue(withIdentifier: "TempSegue", sender: self)
-//            performSegue(withIdentifier: "ManualAlgSegue", sender: self)
             
         } else {
             alert(title: "Woops", message: "Please enter all information to set timer")
