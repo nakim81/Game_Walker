@@ -57,6 +57,12 @@ class ManualAlgorithmViewController: BaseViewController {
     private var yellowOn : Bool = true
     private var purpleOn : Bool = true
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
@@ -79,21 +85,6 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = true
         stationsLabelImageView.isHidden = true
         roundsLabelImageView.isHidden = true
-//        if let stationList = stationList, !stationList.isEmpty, num_stations != 0, num_rounds != 0, num_teams != 0 {
-//            print("NOT ELSEEEEEEEE")
-//            createGrid()
-//
-//            DispatchQueue.main.async { [weak self] in
-//
-//                self!.collectionView.dataSource = self
-//                self!.collectionView.delegate = self
-//                self?.reloadAll()
-//                self?.collectionView?.reloadData()
-//            }
-//        } else {
-//            print("ELSEEE!!!!!!!!!!!")
-//            fetchDataAndInitialize()
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,8 +96,7 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
-//        print("scrollView.contentSize.width : ", scrollView.contentSize.width)
-//        print("collectionView.frame.width : ", collectionView.frame.width)
+
     }
     
     
@@ -273,18 +263,16 @@ class ManualAlgorithmViewController: BaseViewController {
         for rowIndex in 0..<cellDataGrid.count {
             var filteredRow: [CellData] = []
             
+            //getting rid of unnecessary data that is disabled not visible, and greater than 8.
             for columnIndex in 0..<cellDataGrid[rowIndex].count {
                 let cellData = cellDataGrid[rowIndex][columnIndex]
                 
                 if cellData.cellIndex!.second > 8 && cellData.number == -1 {
-                    // Skip this element, effectively removing it
                     continue
                 }
                 
-                // if not removed, adding to filtered row
                 filteredRow.append(cellData)
             }
-            // Replace the original row with the filtered row
             cellDataGrid[rowIndex] = filteredRow
         }
         
@@ -299,6 +287,13 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
     
+    
+    
+    @IBAction func createButtonPressed(_ sender: UIButton) {
+        let startGameViewController = StartGameViewController(announcement: "Once the game is created, you won't be able to change the game settings", source: "", gamecode: gamecode)
+        startGameViewController.delegate = self
+        present(startGameViewController, animated: true)
+    }
     
     @objc func duplicatedOpponentsButtonPressed() {
         duplicatedOpponentsButton.isSelected = !duplicatedOpponentsButton.isSelected
@@ -1089,6 +1084,20 @@ extension ManualAlgorithmViewController: UICollectionViewDelegateFlowLayout {
             return UIEdgeInsets(top: 0, left:collectionViewCellSpacing, bottom: collectionViewCellSpacing, right: collectionViewCellSpacing)
         }else {
             return UIEdgeInsets(top: 0, left:collectionViewCellSpacing, bottom: collectionViewCellSpacing, right: collectionViewCellSpacing)
+        }
+    }
+}
+
+extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
+    func modalViewControllerDidRequestPush() {
+        pushTabBarController()
+    }
+
+    private func pushTabBarController() {
+        let storyboard = UIStoryboard(name: "Host", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "HostTabBarController") as? UITabBarController {
+            tabBarController.selectedIndex = 0
+            navigationController?.pushViewController(tabBarController, animated: true)
         }
     }
 }
