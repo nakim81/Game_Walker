@@ -823,6 +823,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="CreateGameButtonSmall"/>
                                 <connections>
+                                    <action selector="createButtonPressed:" destination="Vjg-e5-r3Z" eventType="touchUpInside" id="pPw-TG-BfL"/>
                                     <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="UNO-gg-m2R"/>
                                 </connections>
                             </button>
