@@ -16,7 +16,7 @@ struct Host: Codable {
     var teams: Int = 0
     var currentRound: Int = 1
     //algorithm
-    var algorithm: [[Int]] = []
+    var algorithm: [Int] = []
     
     //MARK: - Game Control
     var showScoreboard: Bool = true

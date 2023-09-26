@@ -137,8 +137,9 @@ class CreateTeamViewController: BaseViewController {
         }
         //H.getHost(gameCode)
         if Int(teamNumber) ?? 0 > 0 {
-            let algorithm = self.host?.algorithm
-            if !(algorithm?.isEmpty ?? true) {
+            guard let temp = self.host?.algorithm else { return }
+            let algorithm = convert1DArrayTo2D(temp)
+            if !(algorithm.isEmpty ?? true) {
                 teamNameTextField.resignFirstResponder()
                 guard let selectedIconName = selectedIconName else {
                     alert(title: "No Icon Selected", message: "Please select a team icon")
