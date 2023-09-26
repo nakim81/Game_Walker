@@ -27,9 +27,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     private var totalrow : Int =  0
     private var totalcolumn : Int = 0
-    private var num_rounds : Int = 0
-    private var num_teams : Int = 0
-    private var num_stations : Int = 0
+
     private var needHorizontalEmptyCells = false
     private var needVerticalEmptyCells = false
     private var horizontalEmptyCells = 0
@@ -37,12 +35,16 @@ class ManualAlgorithmViewController: BaseViewController {
     //options: "none", "teams", "stations"
     private var excessOf = "none"
     private var excessCells = 0
-    private var pvpGameCount : Int = 0
-    private var pveGameCount : Int = 0
     private var omittedTeamCells = 0
     
-    private var stationList: [Station]? = nil
-    private var host : Host?
+    var stationList: [Station]? = nil
+    var host : Host?
+    
+    var pvpGameCount : Int = 0
+    var pveGameCount : Int = 0
+    var num_rounds : Int = 0
+    var num_teams : Int = 0
+    var num_stations : Int = 0
     
     var cellDataA : CellData?
     var cellDataB : CellData?
@@ -58,29 +60,49 @@ class ManualAlgorithmViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewScrollView()
-        if let stationList = stationList, !stationList.isEmpty, num_stations != 0, num_rounds != 0, num_teams != 0 {
-            createGrid()
-            
-            DispatchQueue.main.async { [weak self] in
+        Task {
+            do{
+                host = try await fetchHostForAlgorithm()
+                createGrid()
                 
-                self!.collectionView.dataSource = self
-                self!.collectionView.delegate = self
-                self?.reloadAll()
-                self?.collectionView?.reloadData()
+                DispatchQueue.main.async {
+                    self.collectionView.dataSource = self
+                    self.collectionView.delegate = self
+                    self.reloadAll()
+                    self.collectionView?.reloadData()
+                }
+            } catch {
+                print("Couldnt catch host and make grid")
             }
-        } else {
-            print("ELSEEE!!!!!!!!!!!")
-            fetchDataAndInitialize()
         }
+        collectionView.isHidden = true
+        scrollView.isHidden = true
+        stationsLabelImageView.isHidden = true
+        roundsLabelImageView.isHidden = true
+//        if let stationList = stationList, !stationList.isEmpty, num_stations != 0, num_rounds != 0, num_teams != 0 {
+//            print("NOT ELSEEEEEEEE")
+//            createGrid()
+//
+//            DispatchQueue.main.async { [weak self] in
+//
+//                self!.collectionView.dataSource = self
+//                self!.collectionView.delegate = self
+//                self?.reloadAll()
+//                self?.collectionView?.reloadData()
+//            }
+//        } else {
+//            print("ELSEEE!!!!!!!!!!!")
+//            fetchDataAndInitialize()
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.isHidden = false
-        scrollView.isHidden = false
         calculateSizesAndContentSize()
         setUpLabels()
         setUpButtons()
+        collectionView.isHidden = false
+        scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
         print("scrollView.contentSize.width : ", scrollView.contentSize.width)
@@ -97,6 +119,17 @@ class ManualAlgorithmViewController: BaseViewController {
     }
     
 
+    func fetchHostForAlgorithm() async throws -> Host {
+        do {
+            self.host = try await H.getHost2(gamecode)
+            num_teams = host!.teams
+            num_rounds = host!.rounds
+        } catch(let e) {
+            print(e)
+        }
+        return host ?? Host()
+    }
+    
     func fetchDataSimple(gamecode: String) async {
         do {
             stationList = try await S.getStationList2(gamecode)
@@ -251,7 +284,7 @@ class ManualAlgorithmViewController: BaseViewController {
     @objc func duplicatedOpponentsButtonPressed() {
         duplicatedOpponentsButton.isSelected = !duplicatedOpponentsButton.isSelected
         blueOn = duplicatedOpponentsButton.isSelected
-        print("blueon value: ", blueOn)
+//        print("blueon value: ", blueOn)
         resetAll()
         reloadAll()
     }
@@ -325,12 +358,10 @@ class ManualAlgorithmViewController: BaseViewController {
         if horizontalEmptyCells > 0 {
             extraspace = Int((collectionViewCellSize!.width + cellSpacing)) * horizontalEmptyCells
         }
-        print("horizontalEmpty cells: ", horizontalEmptyCells)
         var contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + cellSpacing - CGFloat(extraspace)
         let minimumContentWidth = 8 * (collectionViewCellSize!.width + cellSpacing) + cellSpacing
         
         if contentWidth < minimumContentWidth {
-            print("I AM in this MIN content size")
             contentWidth = minimumContentWidth
         } else if omittedTeamCells > 0 {
             print("omittedd condition!!")
@@ -338,8 +369,6 @@ class ManualAlgorithmViewController: BaseViewController {
             //            contentWidth  = contentWidth - (CGFloat(omittedTeamCells) * (collectionViewCellSize!.width + cellSpacing) )
         }
         
-        
-        print(" contentWidth: ",  contentWidth, " , collectionView.contentSize.height: ", collectionView.contentSize.height)
         scrollView.contentSize = CGSize(width: contentWidth, height: collectionView.contentSize.height)
         collectionView.contentSize = scrollView.contentSize
         
@@ -352,7 +381,7 @@ class ManualAlgorithmViewController: BaseViewController {
             flowLayout.minimumLineSpacing = collectionViewCellSpacing
         }
         
-        print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
+//        print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
         
     }
     
