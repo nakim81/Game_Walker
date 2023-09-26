@@ -111,7 +111,7 @@ class ManualAlgorithmViewController: BaseViewController {
 
     func fetchHostForAlgorithm() async throws -> Host {
         do {
-            self.host = try await H.getHost2(gamecode)
+            self.host = try await H.getHost(gamecode)
             num_teams = host!.teams
             num_rounds = host!.rounds
         } catch(let e) {
@@ -122,7 +122,7 @@ class ManualAlgorithmViewController: BaseViewController {
     
     func fetchDataSimple(gamecode: String) async {
         do {
-            stationList = try await S.getStationList2(gamecode)
+            stationList = try await S.getStationList(gamecode)
             num_stations = stationList!.count
             var pvpCount = 0
             if let unwrappedStationList = self.stationList {
@@ -140,7 +140,7 @@ class ManualAlgorithmViewController: BaseViewController {
         }
         
         do {
-            self.host = try await H.getHost2(gamecode)
+            self.host = try await H.getHost(gamecode)
             num_teams = host!.teams
             num_rounds = host!.rounds
         } catch(let e) {
@@ -153,7 +153,7 @@ class ManualAlgorithmViewController: BaseViewController {
     func fetchDataAndInitialize() {
         Task { [weak self] in
             do {
-                self?.stationList = try await S.getStationList2(self?.gamecode ?? "")
+                self?.stationList = try await S.getStationList(self?.gamecode ?? "")
                 self?.num_stations = self?.stationList?.count ?? 0
                 var pvpCount = 0
                 if let unwrappedStationList = self?.stationList {
@@ -167,7 +167,7 @@ class ManualAlgorithmViewController: BaseViewController {
                 self?.pvpGameCount = pvpCount
                 self?.pveGameCount = self?.num_stations ?? 0 - pvpCount
                 
-                self?.host = try await H.getHost2(self?.gamecode ?? "")
+                self?.host = try await H.getHost(self?.gamecode ?? "")
                 self?.num_teams = self?.host?.teams ?? 0
                 self?.num_rounds = self?.host?.rounds ?? 0
                 
@@ -775,6 +775,11 @@ class ManualAlgorithmViewController: BaseViewController {
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(collectionView)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+
         
         //        scrollView.backgroundColor = UIColor.yellow
 //        collectionView.backgroundColor = UIColor.tintColor
@@ -783,6 +788,11 @@ class ManualAlgorithmViewController: BaseViewController {
         //        collectionView.register(AlgCollectionViewCell.self, forCellWithReuseIdentifier: AlgCollectionViewCell.identifier)
         collectionView.register(UINib(nibName: "AlgCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgCollectionViewCell")
         
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+
         
         let centerYMultiplier: CGFloat = 0.96
         NSLayoutConstraint.activate([
@@ -1112,8 +1122,8 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
     func modalViewControllerDidRequestPush() {
         Task { @MainActor in
             do {
-                let grid =  createIntegerGrid
-    //           try await H.setAlgorithm(gamecode, grid)
+                let grid =  createIntegerGrid()
+                try await H.setAlgorithm(gamecode, grid)
             }
 
         }
