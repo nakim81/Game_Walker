@@ -180,3 +180,39 @@ extension UITextField {
     }
     
 }
+
+//MARK: - Array Convert
+extension UIViewController {
+    func convert2DArrayTo1D(_ inputArray: [[Int]]) -> [Int] {
+        let rows = inputArray.count
+        let columns = inputArray.isEmpty ? 0 : inputArray[0].count
+        var resultArray: [Int] = [rows, columns]
+        for subArray in inputArray {
+            resultArray += subArray
+        }
+        return resultArray
+    }
+    
+    func convert1DArrayTo2D(_ inputArray: [Int]) -> [[Int]] {
+        guard inputArray.count >= 2 else {
+            fatalError("Input array is too short to determine dimensions.")
+        }
+        let rows = inputArray[0]
+        let columns = inputArray[1]
+        guard inputArray.count == 2 + (rows * columns) else {
+            fatalError("Input array size does not match the specified dimensions.")
+        }
+        var resultArray: [[Int]] = []
+        var currentIndex = 2 // Skip the first two elements
+        
+        for _ in 0..<rows {
+            var subArray: [Int] = []
+            for _ in 0..<columns {
+                subArray.append(inputArray[currentIndex])
+                currentIndex += 1
+            }
+            resultArray.append(subArray)
+        }
+        return resultArray
+    }
+}

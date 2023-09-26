@@ -45,7 +45,7 @@ struct H {
         }
     }
     
-    static func setAlgorithm(_ gamecode: String, _ algorithm: [[Int]]) async throws {
+    static func setAlgorithm(_ gamecode: String, _ algorithm: [Int]) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
