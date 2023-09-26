@@ -147,6 +147,11 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
+    func gamecodeAlert(_ message: String) {
+        let alert = UIAlertController(title: "Gamecode Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
     func serverAlert(_ message: String) {
         let alert = UIAlertController(title: "Server Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))

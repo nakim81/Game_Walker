@@ -84,7 +84,7 @@ class HostGivePointsController : UIViewController {
             do{
                 try await T.givePoints(gameCode, team.name, Int(stepper.value))
             }
-            catch ServerError.serverError(let text){
+            catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return

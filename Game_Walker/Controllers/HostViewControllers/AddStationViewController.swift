@@ -72,7 +72,7 @@ class AddStationViewController: BaseViewController {
 //        R.getRefereeList(gamecode)
         Task { @MainActor in
             do {
-                allReferees = try await R.getRefereeList2(gamecode)
+                allReferees = try await R.getRefereeList(gamecode)
                 for referee in allReferees {
                     if (!referee.assigned) {
                         availableReferees.append(referee)
@@ -258,14 +258,14 @@ class AddStationViewController: BaseViewController {
                 if (refereeModified) {
                     do{
                         try await R.assignStation(gamecode, refereeBefore!.uuid, "", false)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
                     }
                     do{
                         try await R.assignStation(gamecode, newReferee!.uuid, gamename, true)
-                    } catch ServerError.serverError(let text){
+                    } catch GameWalkerError.serverError(let text){
                         print(text)
                         serverAlert(text)
                         return
@@ -277,7 +277,7 @@ class AddStationViewController: BaseViewController {
                 let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
                 do {
                     try await S.saveStation(gamecode, modifiedStation)
-                } catch ServerError.serverError(let text){
+                } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return
@@ -289,7 +289,7 @@ class AddStationViewController: BaseViewController {
             Task { @MainActor in
                 do {
                     try await R.assignStation(gamecode, refereeUuid, gamename, true)
-                } catch ServerError.serverError(let text){
+                } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return
@@ -302,7 +302,7 @@ class AddStationViewController: BaseViewController {
 
                 do {
                     try await S.saveStation(gamecode, stationToAdd)
-                } catch ServerError.serverError(let text){
+                } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return

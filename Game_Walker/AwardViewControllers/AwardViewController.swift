@@ -317,7 +317,7 @@ class AwardViewController: UIViewController {
     private func getTeamList(_ gamecode: String) {
         Task { @MainActor in
             do {
-                self.teamList = try await T.getTeamList2(gamecode)
+                self.teamList = try await T.getTeamList(gamecode)
                 let order: (Team, Team) -> Bool = {(lhs, rhs) in
                     return lhs.points > rhs.points
                 }
@@ -328,9 +328,13 @@ class AwardViewController: UIViewController {
                 configureTopThree()
                 newTeamList = getNewTeamList(teamList)
                 configureLeaderboard()
-            } catch GamecodeError.invalidGamecode(let text) {
-                print(text)
-                alert(title: "Invalid Gamecode", message: text)
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
                 return
             }
         }

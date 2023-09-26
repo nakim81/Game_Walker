@@ -32,7 +32,7 @@ class HostRankingViewcontroller: UIViewController {
     }
     
     @objc func refresh() {
-        H.getHost(gameCode)
+        //H.getHost(gameCode)
         Task {
             try await Task.sleep(nanoseconds: 180_000_000)
             HostMessageViewController.messages = self.messages
@@ -43,7 +43,7 @@ class HostRankingViewcontroller: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        H.getHost(gameCode)
+        //H.getHost(gameCode)
         showHostMessagePopUp(messages: messages)
     }
     
@@ -64,10 +64,10 @@ class HostRankingViewcontroller: UIViewController {
     
     private func setDelegates() {
         T.delegates.append(self)
-        H.delegate_getHost = self
+        //H.delegate_getHost = self
         switchBtn.delegate = self
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.getHost(gameCode)
+        //H.getHost(gameCode)
         self.showScore = switchBtn.isOn
     }
     
@@ -115,7 +115,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     }
 }
 // MARK: - TeamProtocol
-extension HostRankingViewcontroller: TeamUpdateListener, GetHost {
+extension HostRankingViewcontroller: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
@@ -132,7 +132,7 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
       Task { @MainActor in
           do {
               try await H.hide_show_score(gameCode, self.showScore)
-          } catch ServerError.serverError(let text){
+          } catch GameWalkerError.serverError(let text){
               print(text)
               serverAlert(text)
               return

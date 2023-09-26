@@ -110,7 +110,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 try await H.addAnnouncement(gameCode, announcementTextView.text)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
                 self.dismiss(animated: true, completion: nil)
-            }  catch ServerError.serverError(let text){
+            }  catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return
@@ -125,7 +125,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 try await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
                 self.dismiss(animated: true, completion: nil)
-            } catch ServerError.serverError(let text){
+            } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return

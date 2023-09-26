@@ -152,9 +152,9 @@ class TimerViewController: UIViewController {
         Task {
             callProtocols()
             configureGamecodeLabel()
-            host = try await H.getHost2(gameCode) ?? Host()
-            team = try await T.getTeam2(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
-            stations = try await S.getStationList2(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
+            team = try await T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
+            stations = try await S.getStationList(gameCode)
             setSettings()
             configureTimerLabel()
         }

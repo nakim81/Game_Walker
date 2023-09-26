@@ -15,8 +15,6 @@ import SwiftUI
 struct T {
     
     static let db = Firestore.firestore()
-    static var delegate_teamList: TeamList?
-    static var delegate_getTeam: GetTeam?
     static var delegates : [TeamUpdateListener] = []
     
     //MARK: - Team Control Functions
@@ -30,10 +28,11 @@ struct T {
                 print("Team added")
             } else {
                 print("Gamecode does not exist")
+                throw GameWalkerError.serverError("Something went wrong while adding Team")
             }
         } catch {
             print("Error adding Team: \(error)")
-            throw ServerError.serverError("Something went wrong while adding Team")
+            throw GameWalkerError.serverError("Something went wrong while adding Team")
         }
     }
     
@@ -60,11 +59,11 @@ struct T {
                 print("Team joined")
             } else {
                 print("Team does not exist")
-                throw ServerError.serverError("Something went wrong while joining Team")
+                throw GameWalkerError.serverError("Something went wrong while joining Team")
             }
         } catch {
             print("Error joining Team: \(error)")
-            throw ServerError.serverError("Something went wrong while joining Team")
+            throw GameWalkerError.serverError("Something went wrong while joining Team")
         }
     }
     
@@ -82,11 +81,11 @@ struct T {
                 print("Left Team")
             } else {
                 print("Team does not exist")
-                throw ServerError.serverError("Something went wrong while leaving Team")
+                throw GameWalkerError.serverError("Something went wrong while leaving Team")
             }
         } catch {
             print("Error leaving team: \(error)")
-            throw ServerError.serverError("Something went wrong while leaving Team")
+            throw GameWalkerError.serverError("Something went wrong while leaving Team")
         }
     }
     
@@ -101,15 +100,15 @@ struct T {
                 updateTeam(gamecode, team)
             } else {
                 print("Team does not exist")
-                throw ServerError.serverError("Something went wrong while giving points to a Team")
+                throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
             }
         } catch {
             print("Error giving points to Team: \(error)")
-            throw ServerError.serverError("Something went wrong while giving points to a Team")
+            throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
         }
     }
     
-    static func updateStationOrder(_ gamecode: String, _ team: Team, _ stationOrder: [Int]) async {
+    static func updateStationOrder(_ gamecode: String, _ team: Team, _ stationOrder: [Int]) async throws{
         let docRef = db.collection("\(gamecode) : Teams").document(team.name)
         do {
             try await docRef.updateData([
@@ -118,6 +117,7 @@ struct T {
             print("Updated Station Order")
         } catch {
             print("Error updating Station Order: \(error)")
+            throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
         }
     }
     
@@ -137,20 +137,7 @@ struct T {
         }
     }
     
-    static func getTeam(_ gamecode: String, _ teamName : String) {
-        let docRef = db.collection("\(gamecode) : Teams").document(teamName)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                let team = convertDataToTeam(data)
-                delegate_getTeam?.getTeam(team)
-            } else {
-                print("Error getting Team")
-            }
-        }
-    }
-    
-    static func getTeam2(_ gamecode: String, _ teamName: String) async throws -> Team? {
+    static func getTeam(_ gamecode: String, _ teamName: String) async throws -> Team? {
         let docRef = db.collection("\(gamecode) : Teams").document(teamName)
         let document = try await docRef.getDocument()
         if document.exists {
@@ -159,30 +146,11 @@ struct T {
             return team
         } else {
             print("Error getting Team")
-            throw ServerError.serverError("Something went wrong while getting Team")
+            throw GameWalkerError.serverError("Something went wrong while getting Team")
         }
     }
     
-    static func getTeamList(_ gamecode: String) {
-        //sort by points
-        db.collection("\(gamecode) : Teams")
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting List of Team: \(err)")
-                } else {
-                    var teams : [Team] = []
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        let team = convertDataToTeam(data)
-                        teams.append(team)
-                    }
-                    teams.sort{$0.points > $1.points}
-                    delegate_teamList?.listOfTeams(teams)
-                }
-            }
-    }
-    
-    static func getTeamList2(_ gamecode: String) async throws -> [Team] {
+    static func getTeamList(_ gamecode: String) async throws -> [Team] {
         do{
             let querySnapshot = try await db.collection("\(gamecode) : Teams").getDocuments()
             var teams: [Team] = []
@@ -197,7 +165,7 @@ struct T {
         }
         catch {
             print("Error getting TeamList")
-            throw ServerError.serverError("Something went wrong while getting TeamList")
+            throw GameWalkerError.serverError("Something went wrong while getting TeamList")
         }
     }
     
