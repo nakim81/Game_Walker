@@ -365,7 +365,7 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
     func fetchStationsForAlgorithm() async throws -> [Station] {
         var tempStationList: [Station] = []
         do {
-            tempStationList = try await S.getStationList2(gamecode)
+            tempStationList = try await S.getStationList(gamecode)
             num_stations = tempStationList.count
             var pvpCount = 0
                 for station in tempStationList {
