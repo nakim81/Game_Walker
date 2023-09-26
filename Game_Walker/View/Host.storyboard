@@ -514,9 +514,8 @@
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
-                                        <rect key="frame" x="76.5" y="-3.5" width="30" height="66"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
+                                        <rect key="frame" x="-11" y="-2" width="219" height="66"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
@@ -641,8 +640,11 @@
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="30" id="7bC-gq-GPw"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
+                            <constraint firstItem="XV6-dh-1tR" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="9Fv-oA-wFn"/>
                             <constraint firstItem="fc8-so-AwG" firstAttribute="height" secondItem="Vix-LA-Y4c" secondAttribute="height" multiplier="0.9" id="9NM-t9-J5E"/>
+                            <constraint firstItem="XV6-dh-1tR" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="9xw-Qf-m4S"/>
                             <constraint firstItem="Ug1-se-9Lv" firstAttribute="width" secondItem="aJl-r6-JBT" secondAttribute="width" multiplier="0.9" id="BCn-aX-fc7"/>
+                            <constraint firstItem="XV6-dh-1tR" firstAttribute="centerY" secondItem="LEY-kG-BRL" secondAttribute="centerY" id="BNh-FY-4zo"/>
                             <constraint firstItem="Vix-LA-Y4c" firstAttribute="top" secondItem="WYz-bV-YWp" secondAttribute="bottom" constant="3" id="CBv-IP-Hi3"/>
                             <constraint firstItem="QMr-hQ-NGt" firstAttribute="width" secondItem="aJl-r6-JBT" secondAttribute="width" multiplier="0.44" id="D9t-LS-E0U"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="FHZ-hR-aL5"/>
@@ -655,6 +657,7 @@
                             <constraint firstItem="sQu-MN-J2c" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="P46-6a-0hT"/>
                             <constraint firstItem="fc8-so-AwG" firstAttribute="centerY" secondItem="Vix-LA-Y4c" secondAttribute="centerY" id="PHZ-OR-Doa"/>
                             <constraint firstItem="Vix-LA-Y4c" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="PiO-fT-rkZ"/>
+                            <constraint firstItem="XV6-dh-1tR" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="Va1-nq-eHU"/>
                             <constraint firstItem="aJl-r6-JBT" firstAttribute="top" secondItem="QMr-hQ-NGt" secondAttribute="bottom" constant="3" id="Yqr-DJ-bqP"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" multiplier="0.9" id="aRC-bE-YYo"/>
                             <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="bOk-sd-KSc"/>

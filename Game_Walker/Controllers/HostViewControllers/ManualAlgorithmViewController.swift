@@ -105,8 +105,8 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
-        print("scrollView.contentSize.width : ", scrollView.contentSize.width)
-        print("collectionView.frame.width : ", collectionView.frame.width)
+//        print("scrollView.contentSize.width : ", scrollView.contentSize.width)
+//        print("collectionView.frame.width : ", collectionView.frame.width)
     }
     
     
@@ -265,10 +265,29 @@ class ManualAlgorithmViewController: BaseViewController {
                 let cellData = cellDataGrid[rowIndex][column]
                 if cellData.number != -1 {
                     changeCellGridData(cellDataInstance: cellData, to: "empty")
-                    //                    print("have to change cell to empty")
+                    //   print("have to change cell to empty")
                 }
             }
         }
+        
+        for rowIndex in 0..<cellDataGrid.count {
+            var filteredRow: [CellData] = []
+            
+            for columnIndex in 0..<cellDataGrid[rowIndex].count {
+                let cellData = cellDataGrid[rowIndex][columnIndex]
+                
+                if cellData.cellIndex!.second > 8 && cellData.number == -1 {
+                    // Skip this element, effectively removing it
+                    continue
+                }
+                
+                // if not removed, adding to filtered row
+                filteredRow.append(cellData)
+            }
+            // Replace the original row with the filtered row
+            cellDataGrid[rowIndex] = filteredRow
+        }
+        
         var count = 0
         for row in cellDataGrid {
             count += 1
@@ -276,7 +295,7 @@ class ManualAlgorithmViewController: BaseViewController {
             for celldata in row {
                 rownums.append(celldata.number!)
             }
-            //            print("celldatagrid at row ", count, " is ", rownums)
+                        print("celldatagrid at row ", count, " is ", rownums)
         }
     }
     
@@ -320,6 +339,7 @@ class ManualAlgorithmViewController: BaseViewController {
         
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
+            alert(title: "Excess Teams.", message: "Be careful! There are more teams than available stations.")
             return teamCells - stationCells
         }
         return 0
@@ -972,9 +992,11 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 return UICollectionViewCell()
             }
 
-            let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
-            doubleTapGestureRecognizer.numberOfTapsRequired = 2
-            cell.addGestureRecognizer(doubleTapGestureRecognizer)
+//            let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+//            doubleTapGestureRecognizer.numberOfTapsRequired = 2
+//            cell.addGestureRecognizer(doubleTapGestureRecognizer)
+            let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+            cell.addGestureRecognizer(longPressGestureRecognizer)
 
 
             let cellData = cellDataGrid[indexPath.section][indexPath.item]
@@ -986,8 +1008,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 cell.makeCellEmpty()
             }  else {
                 cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
-//                cell.configureTestCell1()
-//                cell.backgroundColor = UIColor.green
 
                 if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
                     cell.makeBlueWarning()
@@ -1017,10 +1037,10 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
         }
     
     
-        @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
+        @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
             guard let cell = sender.view as? AlgCollectionViewCell else { return }
     
-            if !cell.isSelected {
+            if sender.state == .began {
     
                     let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
                     alertController.addTextField { textField in
