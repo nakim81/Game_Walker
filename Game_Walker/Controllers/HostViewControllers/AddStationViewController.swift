@@ -78,50 +78,50 @@ class AddStationViewController: BaseViewController {
                         availableReferees.append(referee)
                     }
                 }
+                
+                if stationExists {
+                    stationUuid = station!.uuid
+                    
+                    gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamename = station!.name
+                    
+                    gamelocationTextfield.attributedPlaceholder = NSAttributedString(string: station!.place, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamelocation = station!.place
+                    
+                    gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    rulesTextfield.text = station?.description
+                    rules = station?.description ?? ""
+                    gamepoints = station!.points
+                    
+                    pvpnotchosen = false
+                    if (station?.pvp == true) {
+                        pvpButton.sendActions(for: .touchUpInside)
+                        isPvp = true
+                        modified = true
+                    } else {
+                        pveButton.sendActions(for: .touchUpInside)
+                        isPvp = false
+                        modified = true
+                    }
+                    //change to -> station?.referee!.uuid
+                    //and compare with uuids.
+                    // for every Referee.uuid == uuid
+                    
+                    refereename = (station?.referee!.name)!
+                    refereeUuid = (station?.referee!.uuid)!
+                    refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
+                    print("refereeList.count : ", allReferees.count)
+                    checkReferee()
+                    setPaddings()
+
+                }
             } catch(let e) {
                 print(e)
                 return
             }
         }
 
-
-        if stationExists {
-            stationUuid = station!.uuid
-            
-            gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-            gamename = station!.name
-            
-            gamelocationTextfield.attributedPlaceholder = NSAttributedString(string: station!.place, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-            gamelocation = station!.place
-            
-            gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-            rulesTextfield.text = station?.description
-            rules = station?.description ?? ""
-            gamepoints = station!.points
-            
-            pvpnotchosen = false
-            if (station?.pvp == true) {
-                pvpButton.sendActions(for: .touchUpInside)
-                isPvp = true
-                modified = true
-            } else {
-                pveButton.sendActions(for: .touchUpInside)
-                isPvp = false
-                modified = true
-            }
-            //change to -> station?.referee!.uuid
-            //and compare with uuids.
-            // for every Referee.uuid == uuid
-            
-            refereename = (station?.referee!.name)!
-            refereeUuid = (station?.referee!.uuid)!
-            refereeBefore = findRefereeWithUuid(refereeList: allReferees, uuidToCheck: refereeUuid)
-
-        }
-        
-
-        checkReferee()
-        setPaddings()
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
