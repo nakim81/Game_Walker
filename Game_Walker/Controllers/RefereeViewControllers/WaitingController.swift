@@ -40,6 +40,7 @@ class WaitingController: BaseViewController {
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(WaitingController.onBackPressed))
+        newBackButton.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
@@ -92,11 +93,14 @@ class WaitingController: BaseViewController {
         }
         self.updatedTeamOrder = teamOrder
         Task {
-            do{
+            do {
                 try await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
             }
-            
-            
+            catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
         }
     }
     

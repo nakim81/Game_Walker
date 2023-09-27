@@ -46,7 +46,6 @@ class RefereeTimerController: BaseViewController {
             setSettings()
             configureTimerLabel()
             calculateTime()
-            runTimer()
         }
         super.viewDidLoad()
     }
@@ -57,13 +56,13 @@ class RefereeTimerController: BaseViewController {
         label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 13)) ?? UIFont.systemFont(ofSize: fontSize(size: 13)),
+            .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 20)) ?? UIFont.systemFont(ofSize: fontSize(size: 20)),
+            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
             .foregroundColor: UIColor.black
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
@@ -253,7 +252,91 @@ class RefereeTimerController: BaseViewController {
         }
     }
     
+    //MARK: - Overlay
+    private func showOverlay() {
+        let overlayViewController = OverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Check to see what happens when you click this circle", "Team Members", "Ranking", "Timer"]
+        var componentPositions: [CGPoint] = []
+        let component1Frame = timerCircle.frame
+        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.midY))
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        print(componentPositions)
+        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 4, tabBarTop: tabBarTop)
+        
+        present(overlayViewController, animated: true, completion: nil)
+    }
+    
     //MARK: - Timer
+    func runTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if !strongSelf.isPaused {
+                if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
+                    strongSelf.audioPlayerManager.stop()
+                    timer.invalidate()
+                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                }
+                if strongSelf.remainingTime <= 3 {
+                    strongSelf.impactFeedbackGenerator.impactOccurred()
+                }
+                if timer.isValid {
+                    if strongSelf.time < 1 {
+                        if strongSelf.moving {
+                            strongSelf.time = strongSelf.seconds
+                            strongSelf.moving = false
+                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                        } else {
+                            strongSelf.time = strongSelf.moveSeconds
+                            strongSelf.moving = true
+                            strongSelf.timeTypeLabel.text = "Moving Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                            strongSelf.round += 1
+                            strongSelf.roundLabel.text = "Round \(strongSelf.round)"
+                        }
+                    }
+                    strongSelf.time -= 1
+                    strongSelf.remainingTime -= 1
+                    let minute = strongSelf.time/60
+                    let second = strongSelf.time % 60
+                    strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+                    strongSelf.totalTime += 1
+                    let totalMinute = strongSelf.totalTime/60
+                    let totalSecond = strongSelf.totalTime % 60
+                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    strongSelf.totalTimeLabel.attributedText = attributedString
+                }
+            }
+        }
+    }
+    
     func calculateTime() {
         if isPaused {
             t = pauseTime - startTime - pausedTime
@@ -266,8 +349,10 @@ class RefereeTimerController: BaseViewController {
                 t = 0
             }
         }
+        let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
+            self.timeTypeLabel.text = "Moving Time"
             self.time = (moveSeconds - remainder)
             self.moving = true
             let minute = (moveSeconds - remainder)/60
@@ -275,64 +360,33 @@ class RefereeTimerController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
+            self.timeTypeLabel.text = "Game Time"
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
             let second = (seconds - remainder) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
-        self.remainingTime = self.remainingTime - t
-        self.rounds = self.rounds - self.round + 1
-    }
-        
-    func runTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            if !strongSelf.isPaused {
-                if strongSelf.remainingTime <= 5 {
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
-                    strongSelf.impactFeedbackGenerator.impactOccurred()
-                }
-                if strongSelf.time < 1 {
-                    if strongSelf.moving {
-                        strongSelf.time = strongSelf.seconds
-                        strongSelf.timeTypeLabel.text = "Game Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-                            strongSelf.moving = false
-                    } else {
-                        strongSelf.rounds -= 1
-                        if strongSelf.rounds < 1 {
-                            strongSelf.audioPlayerManager.stop()
-                            timer.invalidate()
-                        }
-                        strongSelf.time = strongSelf.moveSeconds
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i",strongSelf.time/60, strongSelf.time % 60)
-                        strongSelf.moving = true
-                        // Testing Purpose
-                        strongSelf.round += 1
-                        strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
-                        //
-                    }
-                }
-                else {
-                    strongSelf.time -= 1
-                    strongSelf.remainingTime -= 1
-                    let minute = strongSelf.time/60
-                    let second = strongSelf.time % 60
-                    if strongSelf.moving {
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                    } else {
-                        strongSelf.timeTypeLabel.text = "Game Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                    }
-                }
-            }
+        self.totalTime = t
+        let totalMinute = t/60
+        let totalSecond = t % 60
+        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+        self.totalTimeLabel.attributedText = attributedString
+        self.round = quotient + 1
+        if (moveSeconds + seconds) * self.rounds <= t  {
+            self.timeTypeLabel.text = "Game Time"
+            self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
+            self.totalTime = (moveSeconds + seconds) * self.rounds
+            let totalMinute = totalTime/60
+            let totalSecond = totalTime % 60
+            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+            self.totalTimeLabel.attributedText = attributedString
+            self.roundLabel.text = "Round \(self.rounds)"
+        } else {
+            self.roundLabel.text = "Round \(quotient + 1)"
+            runTimer()
         }
     }
 }

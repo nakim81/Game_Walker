@@ -135,6 +135,20 @@ struct H {
         }
     }
     
+    // Needed for Resetting Time Case
+    static func updatePausedTime(_ gamecode: String, _ pausedTime: Int) async throws {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "pausedTime": pausedTime
+            ])
+            print("Updated Paused Time")
+        } catch {
+            print("Error updating Paused Time: \(error)")
+            throw GameWalkerError.serverError("Something went wrong while updating Paused Time")
+        }
+    }
+    
     //if show is true, everyone can see the score; if false, only the players cannot see their team score (refs and host can)
     static func hide_show_score(_ gamecode: String, _ show: Bool) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")

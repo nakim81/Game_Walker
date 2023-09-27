@@ -14,6 +14,7 @@ class HostTimerViewController: UIViewController {
     @IBOutlet weak var pauseOrPlayButton: UIButton!
     @IBOutlet weak var announcementBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
+    @IBOutlet weak var infoBtn: UIButton!
     
     @IBOutlet weak var endGameBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
@@ -50,6 +51,7 @@ class HostTimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
+            titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: 50)
             callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
@@ -58,86 +60,157 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
+        // Testing Case for Resetting Time DB
+        Task {
+            do {
+                try await H.startGame(gameCode)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+            do {
+                try await H.pause_resume_game(gameCode)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+            do {
+                try await H.updatePausedTime(gameCode, 0)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+            do {
+                try await H.updateCurrentRound(gameCode, 1)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+            pauseOrPlayButton.isHidden = false
+            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
+            calculateTime()
+        }
+        //
         showHostMessagePopUp(messages: messages)
     }
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
-        Task {
-//            await H.startGame(gameCode)
-//            await H.pause_resume_game(gameCode)
-            pauseOrPlayButton.setImage(UIImage(named: "Game Start Button"), for: .normal)
-        }
+    }
+    
+    @IBAction func infoBtnPressed(_ sender: UIButton) {
+        showOverlay()
+    }
+    
+    @IBAction func endBtnPressed(_ sender: Any) {
+        showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
-        if sender.image(for: .normal) != end {
-            if !gameStart {
-                Task { @MainActor in
-                    do {
-                        try await H.startGame(gameCode)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                    sender.setImage(pause, for: .normal)
-                    isPaused = !isPaused
-                    do {
-                        try await H.pause_resume_game(gameCode)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
+        if !gameStart {
+            Task { @MainActor in
+                do {
+                    try await H.startGame(gameCode)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
                 }
-            }
-            else {
-                if isPaused {
-                    sender.setImage(pause, for: .normal)
-                }
-                else {
-                    sender.setImage(play, for: .normal)
-                }
+                sender.setImage(pause, for: .normal)
                 isPaused = !isPaused
-                Task { @MainActor in
-                    do {
-                        try await H.pause_resume_game(gameCode)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
+                do {
+                    try await H.pause_resume_game(gameCode)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
                 }
             }
         }
         else {
-            showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
-        }
-    }
-    //MARK: - Music
-    var audioPlayer: AVAudioPlayer?
-
-    func playMusic() {
-        guard let soundURL = Bundle.main.url(forResource: "timer_end", withExtension: "wav") else {
-            print("Music file not found.")
-            return
-        }
-
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = 2
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch {
-            print("Failed to play music: \(error.localizedDescription)")
+            if isPaused {
+                sender.setImage(pause, for: .normal)
+            }
+            else {
+                sender.setImage(play, for: .normal)
+            }
+            isPaused = !isPaused
+            Task { @MainActor in
+                do {
+                    try await H.pause_resume_game(gameCode)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
+            }
         }
     }
     
-    func stopMusic() {
-        audioPlayer?.stop()
-        audioPlayer = nil
+    private func showOverlay() {
+        let overlayViewController = OverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Check to see what happens when you click this circle", "Ranking", "Timer"]
+        var componentPositions: [CGPoint] = []
+        let component1Frame = timerCircle.frame
+        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.midY))
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        print(componentPositions)
+        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: tabBarTop)
+        
+        present(overlayViewController, animated: true, completion: nil)
     }
+
     //MARK: - UI Timer Elements
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 2
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
+        return label
+    }()
+    
     private let timerCircle: UILabel = {
         var view = UILabel()
         view.clipsToBounds = true
@@ -209,14 +282,20 @@ class HostTimerViewController: UIViewController {
     }()
     
     func configureTimerLabel(){
+//        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
+//            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+//            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
+//            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
+            
             timerCircle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.27),
+            timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.05),
             timerCircle.widthAnchor.constraint(equalTo: timerCircle.heightAnchor),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
@@ -253,53 +332,54 @@ class HostTimerViewController: UIViewController {
                 return
             }
             if !strongSelf.isPaused {
-                if strongSelf.rounds! < 1 {
-                    strongSelf.audioPlayer?.stop()
-                    strongSelf.pauseOrPlayButton.setImage(strongSelf.end, for: .normal)
+                if strongSelf.totalTime == strongSelf.rounds!*(strongSelf.seconds + strongSelf.moveSeconds) {
+                    strongSelf.audioPlayerManager.stop()
+                    strongSelf.pauseOrPlayButton.isHidden = true
                     timer.invalidate()
                 }
                 if strongSelf.remainingTime <= 5 {
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                 }
                 if strongSelf.remainingTime <= 3 {
-                    //strongSelf.impactFeedbackGenerator.impactOccurred()
+                    strongSelf.impactFeedbackGenerator.impactOccurred()
                 }
-                if strongSelf.time! < 1 {
-                    if strongSelf.moving {
-                        strongSelf.time = strongSelf.seconds
-                        strongSelf.moving = false
-                        strongSelf.timeTypeLabel.text = "Game Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
-                    } else {
-                        strongSelf.time = strongSelf.moveSeconds
-                        strongSelf.moving = true
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
-                        strongSelf.round += 1
-                        Task {
-                            do {
-                                try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
-                            } catch GameWalkerError.serverError(let text){
-                                print(text)
-                                strongSelf.serverAlert(text)
-                                return
+                if timer.isValid {
+                    if strongSelf.time! < 1 {
+                        if strongSelf.moving {
+                            strongSelf.time = strongSelf.seconds
+                            strongSelf.moving = false
+                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
+                        } else {
+                            strongSelf.time = strongSelf.moveSeconds
+                            strongSelf.moving = true
+                            strongSelf.timeTypeLabel.text = "Moving Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
+                            strongSelf.round += 1
+                            Task {
+                                do {
+                                    try await H.updateCurrentRound(strongSelf.gameCode, strongSelf.round)
+                                } catch GameWalkerError.serverError(let text){
+                                    print(text)
+                                    strongSelf.serverAlert(text)
+                                    return
+                                }
                             }
+                            strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         }
-                        strongSelf.roundLabel.text = "Round \(strongSelf.round)"
-                        strongSelf.rounds! -= 1
                     }
+                    strongSelf.time! -= 1
+                    strongSelf.remainingTime -= 1
+                    let minute = strongSelf.time!/60
+                    let second = strongSelf.time! % 60
+                    strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+                    strongSelf.totalTime += 1
+                    let totalMinute = strongSelf.totalTime/60
+                    let totalSecond = strongSelf.totalTime % 60
+                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    strongSelf.totalTimeLabel.attributedText = attributedString
                 }
-                strongSelf.time! -= 1
-                strongSelf.remainingTime -= 1
-                let minute = strongSelf.time!/60
-                let second = strongSelf.time! % 60
-                strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                strongSelf.totalTime += 1
-                let totalMinute = strongSelf.totalTime/60
-                let totalSecond = strongSelf.totalTime % 60
-                let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-                strongSelf.totalTimeLabel.attributedText = attributedString
             }
         }
     }
@@ -350,7 +430,7 @@ class HostTimerViewController: UIViewController {
                 return
             }
         }
-        if self.rounds! <= self.round {
+        if (moveSeconds + seconds) * self.rounds! <= t  {
             self.timeTypeLabel.text = "Game Time"
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds!
@@ -361,7 +441,6 @@ class HostTimerViewController: UIViewController {
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds!)"
         } else {
-            self.rounds! = self.rounds! - self.round
             self.roundLabel.text = "Round \(quotient + 1)"
             runTimer()
         }
@@ -370,6 +449,7 @@ class HostTimerViewController: UIViewController {
 //MARK: - Protocol
 extension HostTimerViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        self.startTime = host.startTimestamp
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.messages = host.announcements
