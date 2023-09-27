@@ -46,7 +46,6 @@ class RefereeTimerController: BaseViewController {
             setSettings()
             configureTimerLabel()
             calculateTime()
-            runTimer()
         }
         super.viewDidLoad()
     }
@@ -290,6 +289,54 @@ class RefereeTimerController: BaseViewController {
     }
     
     //MARK: - Timer
+    func runTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            if !strongSelf.isPaused {
+                if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
+                    strongSelf.audioPlayerManager.stop()
+                    timer.invalidate()
+                }
+                if strongSelf.remainingTime <= 5 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                }
+                if strongSelf.remainingTime <= 3 {
+                    strongSelf.impactFeedbackGenerator.impactOccurred()
+                }
+                if timer.isValid {
+                    if strongSelf.time < 1 {
+                        if strongSelf.moving {
+                            strongSelf.time = strongSelf.seconds
+                            strongSelf.moving = false
+                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                        } else {
+                            strongSelf.time = strongSelf.moveSeconds
+                            strongSelf.moving = true
+                            strongSelf.timeTypeLabel.text = "Moving Time"
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                            strongSelf.round += 1
+                            strongSelf.roundLabel.text = "Round \(strongSelf.round)"
+                        }
+                    }
+                    strongSelf.time -= 1
+                    strongSelf.remainingTime -= 1
+                    let minute = strongSelf.time/60
+                    let second = strongSelf.time % 60
+                    strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
+                    strongSelf.totalTime += 1
+                    let totalMinute = strongSelf.totalTime/60
+                    let totalSecond = strongSelf.totalTime % 60
+                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    strongSelf.totalTimeLabel.attributedText = attributedString
+                }
+            }
+        }
+    }
+    
     func calculateTime() {
         if isPaused {
             t = pauseTime - startTime - pausedTime
@@ -302,8 +349,10 @@ class RefereeTimerController: BaseViewController {
                 t = 0
             }
         }
+        let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
+            self.timeTypeLabel.text = "Moving Time"
             self.time = (moveSeconds - remainder)
             self.moving = true
             let minute = (moveSeconds - remainder)/60
@@ -311,70 +360,33 @@ class RefereeTimerController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
+            self.timeTypeLabel.text = "Game Time"
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
             let second = (seconds - remainder) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
-        self.remainingTime = self.remainingTime - t
-        self.rounds = self.rounds - self.round + 1
-    }
-        
-    func runTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            if !strongSelf.isPaused {
-                if strongSelf.remainingTime <= 5 {
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
-                    strongSelf.impactFeedbackGenerator.impactOccurred()
-                }
-                if strongSelf.time < 1 {
-                    if strongSelf.moving {
-                        strongSelf.time = strongSelf.seconds
-                        strongSelf.timeTypeLabel.text = "Game Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-                            strongSelf.moving = false
-                    } else {
-                        strongSelf.rounds -= 1
-                        if strongSelf.rounds < 1 {
-                            strongSelf.audioPlayerManager.stop()
-                            timer.invalidate()
-                        }
-                        strongSelf.time = strongSelf.moveSeconds
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i",strongSelf.time/60, strongSelf.time % 60)
-                        strongSelf.moving = true
-                        // Testing Purpose
-                        strongSelf.round += 1
-                        strongSelf.roundLabel.text = "Round " + "\(strongSelf.round)"
-                        //
-                    }
-                }
-                else {
-                    strongSelf.time -= 1
-                    strongSelf.remainingTime -= 1
-                    let minute = strongSelf.time/60
-                    let second = strongSelf.time % 60
-                    if strongSelf.moving {
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                    } else {
-                        strongSelf.timeTypeLabel.text = "Game Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                    }
-                }
-                strongSelf.totalTime += 1
-                let totalMinute = strongSelf.totalTime/60
-                let totalSecond = strongSelf.totalTime % 60
-                let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
-                strongSelf.totalTimeLabel.attributedText = attributedString
-            }
+        self.totalTime = t
+        let totalMinute = t/60
+        let totalSecond = t % 60
+        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+        self.totalTimeLabel.attributedText = attributedString
+        self.round = quotient + 1
+        if (moveSeconds + seconds) * self.rounds <= t  {
+            self.timeTypeLabel.text = "Game Time"
+            self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
+            self.totalTime = (moveSeconds + seconds) * self.rounds
+            let totalMinute = totalTime/60
+            let totalSecond = totalTime % 60
+            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+            self.totalTimeLabel.attributedText = attributedString
+            self.roundLabel.text = "Round \(self.rounds)"
+        } else {
+            self.roundLabel.text = "Round \(quotient + 1)"
+            runTimer()
         }
     }
 }

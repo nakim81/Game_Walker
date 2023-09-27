@@ -282,7 +282,7 @@ class HostTimerViewController: UIViewController {
     }()
     
     func configureTimerLabel(){
-        //self.view.addSubview(gameCodeLabel)
+//        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
