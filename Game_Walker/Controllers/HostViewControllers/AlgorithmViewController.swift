@@ -1047,4 +1047,3 @@
 //        }
 //    }
 //}
->>>>>>> f32aeea (finally found data collectionview problem in manual view controller)
