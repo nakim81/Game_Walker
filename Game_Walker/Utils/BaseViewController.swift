@@ -15,7 +15,7 @@ class BaseViewController: UIViewController {
     }
     
     func configureNavBar() {
-        let backButtonImage = UIImage(named: "BackIcon")
+        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
 
         // Create a custom bar button item with the image
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(onBackPressed))

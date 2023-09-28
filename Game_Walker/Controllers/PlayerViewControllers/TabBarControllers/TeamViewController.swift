@@ -132,7 +132,7 @@ class TeamViewController: UIViewController {
     }
     
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
-        alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
+        self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
@@ -146,7 +146,7 @@ class TeamViewController: UIViewController {
         showAwardPopUp()
     }
     
-    func alert2(title: String, message: String, sender: UIButton) {
+    private func alert2(title: String, message: String, sender: UIButton) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             Task { @MainActor in
