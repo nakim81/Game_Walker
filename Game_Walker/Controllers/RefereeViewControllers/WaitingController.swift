@@ -189,8 +189,8 @@ extension WaitingController: RefereeUpdateListener, HostUpdateListener {
     }
     
     func updateHost(_ host: Host) {
-        self.algorithm = convert1DArrayTo2D(host.algorithm)
-        if self.algorithm != [] {
+        if host.algorithm != [] {
+            self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.setTeamOrder()
         }
     }
