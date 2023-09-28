@@ -164,7 +164,7 @@ class TeamViewController: UIViewController {
                 }
             }
             UserData.clearMyTeam("team")
-            self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
+            self.performSegue(withIdentifier: "returnToCorJ", sender: sender)
         })
         alert.addAction(action)
         alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))

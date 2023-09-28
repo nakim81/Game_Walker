@@ -106,8 +106,6 @@ class CreateTeamViewController: BaseViewController {
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
         ])
     }
     private func configureBtn(){

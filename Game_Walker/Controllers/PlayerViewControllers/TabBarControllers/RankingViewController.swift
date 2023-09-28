@@ -78,8 +78,6 @@ class RankingViewController: UIViewController {
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
         ])
     }
     
@@ -150,7 +148,9 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
 extension RankingViewController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
-        self.leaderBoard.reloadData()
+        if self.showScore {
+            self.leaderBoard.reloadData()
+        }
     }
 }
 // MARK: - HostProtocol

@@ -111,7 +111,7 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {
-        var componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame]
+        let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame]
         let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
         showOverlay(componentPositions, explanationTexts)
     }

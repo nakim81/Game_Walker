@@ -79,7 +79,7 @@ class CustomSwitchButton: UIButton {
             self.addSubview(barView)
 
             circleView = UIImageView(frame: CGRect(x: 0, y: circleViewTopBottomMargin, width: circleViewHeight, height: circleViewHeight))
-            circleView.center.x = frame.width - (circleView.frame.width / 2)
+            circleView.center.x = self.circleView.frame.width / 2
             circleView.image = self.onImage.circle
             circleView.layer.masksToBounds = true
             circleView.layer.cornerRadius = frame.height / 2
@@ -103,11 +103,11 @@ class CustomSwitchButton: UIButton {
             var circleViewColor: UIImage
 
             if self.isOn {
-                circleCenter = self.frame.width - (self.circleView.frame.width / 2)
+                circleCenter = self.circleView.frame.width / 2
                 barViewColor = self.onImage.bar
                 circleViewColor = self.onImage.circle
             } else {
-                circleCenter = self.circleView.frame.width / 2
+                circleCenter = self.frame.width - (self.circleView.frame.width / 2)
                 barViewColor = self.offImage.bar
                 circleViewColor = self.offImage.circle
             }
