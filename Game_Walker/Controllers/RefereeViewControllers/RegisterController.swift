@@ -21,6 +21,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
+        UserDefaults.standard.removeObject(forKey: "gamecode")
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "referee")
         Task {
             configureNavItem()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
@@ -76,7 +79,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                             return
                         }
                         UserData.writeGamecode(gameCode, "gamecode")
-                        UserData.writeUsername(newReferee.name, "refereename")
+                        UserData.writeUsername(newReferee.name, "username")
                         UserData.writeReferee(newReferee, "referee")
                         performSegue(withIdentifier: "goToWait", sender: self)
                     }
@@ -120,7 +123,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         return
                     }
                     UserData.writeGamecode(gameCode, "gamecode")
-                    UserData.writeUsername(newReferee.name, "refereename")
+                    UserData.writeUsername(newReferee.name, "username")
                     UserData.writeReferee(newReferee, "Referee")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
@@ -143,7 +146,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     }
                 }
                 UserData.writeGamecode(storedGameCode, "gamecode")
-                UserData.writeUsername(newReferee.name, "refereename")
+                UserData.writeUsername(newReferee.name, "username")
                 UserData.writeReferee(newReferee, "referee")
                 if oldReferee.assigned {
                     for station in stations {
@@ -177,7 +180,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         return
                     }
                     UserData.writeGamecode(gameCode, "gamecode")
-                    UserData.writeUsername(name, "refereename")
+                    UserData.writeUsername(name, "username")
                     UserData.writeReferee(newReferee, "referee")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }

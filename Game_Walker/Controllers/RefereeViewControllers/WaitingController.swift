@@ -14,7 +14,8 @@ class WaitingController: BaseViewController {
     private var referee = UserData.readReferee("referee")!
     private var timer: Timer?
     
-    private var isGetStationCalled = false
+    private var pvpAssigned = false
+    private var isTeamOrderCalled = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
@@ -48,7 +49,7 @@ class WaitingController: BaseViewController {
     @objc override func onBackPressed() {
         R.removeReferee(gameCode, referee.uuid)
         UserDefaults.standard.removeObject(forKey: "gamecode")
-        UserDefaults.standard.removeObject(forKey: "refereename")
+        UserDefaults.standard.removeObject(forKey: "username")
         performSegue(withIdentifier: "toRegister", sender: self)
     }
     
@@ -62,7 +63,7 @@ class WaitingController: BaseViewController {
             stationList = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
             for station in self.stationList {
-                if referee.stationName == station.name {
+                if referee.name == station.referee?.name {
                     self.station = station
                 }
                 if station.pvp == true {
@@ -103,6 +104,7 @@ class WaitingController: BaseViewController {
                 serverAlert(message)
                 return
             }
+            self.isTeamOrderCalled = true
         }
     }
     
@@ -133,8 +135,8 @@ class WaitingController: BaseViewController {
                 }
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-            if self.referee.assigned && !self.isGetStationCalled {
-                self.isGetStationCalled = true
+            if self.referee.assigned && self.isTeamOrderCalled {
+                self.pvpAssigned = true
                 if self.station.pvp {
                     self.performSegue(withIdentifier: "goToPVP", sender: self)
                 }
@@ -142,7 +144,7 @@ class WaitingController: BaseViewController {
                     self.performSegue(withIdentifier: "goToPVE", sender: self)
                 }
             }
-            if self.referee.assigned && self.isGetStationCalled {
+            if self.pvpAssigned {
                 self.timer?.invalidate()
             }
             self.view.layoutIfNeeded() 
