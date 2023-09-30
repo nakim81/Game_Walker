@@ -13,8 +13,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    private var storedGameCode = UserData.readGamecode("refereeGameCode") ?? ""
-    private var storedRefereeName = UserData.readUsername("refereeName") ?? ""
+    private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
+    private var storedRefereeName = UserData.readUsername("username") ?? ""
     private var refereeUserID = UserData.readUUID()!
     private var stations : [Station] = []
     private var pvp : Bool?
@@ -74,9 +74,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                             serverAlert(message)
                             return
                         }
-                        UserData.writeGamecode(gameCode, "refereeGameCode")
-                        UserData.writeUsername(newReferee.name, "refereeName")
-                        UserData.writeReferee(newReferee, "Referee")
+                        UserData.writeGamecode(gameCode, "gamecode")
+                        UserData.writeUsername(newReferee.name, "refereename")
+                        UserData.writeReferee(newReferee, "referee")
                         performSegue(withIdentifier: "goToWait", sender: self)
                     }
                 } else {
@@ -85,7 +85,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             }
             // Rejoining the game.
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let oldReferee = UserData.readReferee("Referee")!
+                let oldReferee = UserData.readReferee("referee")!
                 if oldReferee.assigned {
                     for station in stations {
                         if station.name == oldReferee.stationName {
@@ -104,7 +104,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             }
             // Leaving the game and entering a new game with the same name.
             else if (gameCode != storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let oldReferee = UserData.readReferee("Referee")!
+                let oldReferee = UserData.readReferee("referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
                 Task { @MainActor in
                     do {
@@ -118,15 +118,15 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         serverAlert(message)
                         return
                     }
-                    UserData.writeGamecode(gameCode, "refereeGameCode")
-                    UserData.writeUsername(newReferee.name, "refereeName")
+                    UserData.writeGamecode(gameCode, "gamecode")
+                    UserData.writeUsername(newReferee.name, "refereename")
                     UserData.writeReferee(newReferee, "Referee")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
             }
             // Joining the game again with a new name.
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name != storedRefereeName) {
-                let oldReferee = UserData.readReferee("Referee")!
+                let oldReferee = UserData.readReferee("referee")!
                 let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
                 Task { @MainActor in
                     do {
@@ -141,9 +141,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         return
                     }
                 }
-                UserData.writeGamecode(storedGameCode, "refereeGameCode")
-                UserData.writeUsername(newReferee.name, "refereeName")
-                UserData.writeReferee(newReferee, "Referee")
+                UserData.writeGamecode(storedGameCode, "gamecode")
+                UserData.writeUsername(newReferee.name, "refereename")
+                UserData.writeReferee(newReferee, "referee")
                 if oldReferee.assigned {
                     for station in stations {
                         if station.name == oldReferee.stationName {
@@ -175,9 +175,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         serverAlert(message)
                         return
                     }
-                    UserData.writeGamecode(gameCode, "refereeGameCode")
-                    UserData.writeUsername(name, "refereeName")
-                    UserData.writeReferee(newReferee, "Referee")
+                    UserData.writeGamecode(gameCode, "gamecode")
+                    UserData.writeUsername(name, "refereename")
+                    UserData.writeReferee(newReferee, "referee")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
             }

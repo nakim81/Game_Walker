@@ -15,8 +15,8 @@ class RefereePVPController: BaseViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
     
-    private var gameCode = UserData.readGamecode("refereeGameCode")!
-    private var referee = UserData.readReferee("Referee")!
+    private var gameCode = UserData.readGamecode("gamecode")!
+    private var referee = UserData.readReferee("referee")!
     private var host: Host = Host()
     private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
     private var stations : [Station] = [Station()]

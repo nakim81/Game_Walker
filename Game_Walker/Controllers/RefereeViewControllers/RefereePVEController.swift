@@ -15,8 +15,8 @@ class RefereePVEController: BaseViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
     
-    private var gameCode = UserData.readGamecode("refereeGameCode")!
-    private var referee = UserData.readReferee("Referee")!
+    private var gameCode = UserData.readGamecode("gamecode")!
+    private var referee = UserData.readReferee("referee")!
     private var host: Host = Host()
     private var team : Team = Team()
     private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy")]
@@ -94,7 +94,7 @@ class RefereePVEController: BaseViewController {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
             UserData.writeTeam(self.team, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
             self.present(popUpWindow, animated: true, completion: nil)
         }
     }

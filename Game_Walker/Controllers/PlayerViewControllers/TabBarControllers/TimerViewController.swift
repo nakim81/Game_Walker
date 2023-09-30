@@ -448,6 +448,9 @@ extension TimerViewController: HostUpdateListener {
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.messages = host.announcements
     }
     
     func listen(_ _ : [String : Any]){

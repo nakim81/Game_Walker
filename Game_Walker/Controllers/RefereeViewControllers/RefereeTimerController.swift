@@ -12,7 +12,7 @@ class RefereeTimerController: BaseViewController {
     
     // Variables
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private var referee: Referee = UserData.readReferee("Referee") ?? Referee()
+    private var referee: Referee = UserData.readReferee("referee") ?? Referee()
     private var stations: [Station] = [Station()]
     private var host: Host = Host()
     
@@ -396,6 +396,9 @@ extension RefereeTimerController: HostUpdateListener {
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.messages = host.announcements
     }
     
     func listen(_ _ : [String : Any]){
