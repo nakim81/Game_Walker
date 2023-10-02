@@ -165,7 +165,7 @@ struct H {
     
     //MARK: - Announcment Functions
     
-    static func addAnnouncement(_ gamecode: String, _ announcement: String) async throws {
+    static func addAnnouncement(_ gamecode: String, _ announcement: Announcement) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -185,7 +185,7 @@ struct H {
         }
     }
     
-    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async throws {
+    static func modifyAnnouncement(_ gamecode: String, _ announcement: Announcement, _ index: Int) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
