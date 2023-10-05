@@ -10,8 +10,8 @@ import UIKit
 
 class WaitingController: BaseViewController {
     
-    private var gameCode = UserData.readGamecode("refereeGameCode")! 
-    private var referee = UserData.readReferee("Referee")!
+    private var gameCode = UserData.readGamecode("gamecode")!
+    private var referee = UserData.readReferee("referee")!
     private var timer: Timer?
     
     private var isGetStationCalled = false
@@ -47,8 +47,8 @@ class WaitingController: BaseViewController {
     
     @objc override func onBackPressed() {
         R.removeReferee(gameCode, referee.uuid)
-        UserDefaults.standard.removeObject(forKey: "refereeGameCode")
-        UserDefaults.standard.removeObject(forKey: "refereeName")
+        UserDefaults.standard.removeObject(forKey: "gamecode")
+        UserDefaults.standard.removeObject(forKey: "refereename")
         performSegue(withIdentifier: "toRegister", sender: self)
     }
     
@@ -61,39 +61,40 @@ class WaitingController: BaseViewController {
         Task {
             stationList = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
-        }
-        for station in self.stationList {
-            if station.pvp == true {
-                pvp_count += 1
-            }
-        }
-        if self.station.pvp {
-            column_number_index = 2 * station.number - 2
-            let left = self.algorithm.map({ $0[column_number_index] })
-            let right = self.algorithm.map({ $0[column_number_index + 1] })
-            var right_index : Int = 0
-            for left_index in left {
-                teamNumOrder.append(left_index)
-                teamNumOrder.append(right[right_index])
-                right_index += 1
-            }
-        }
-        else {
-            column_number_index = 2 * pvp_count + station.number - pvp_count - 1
-            teamNumOrder = self.algorithm.map({ $0[column_number_index] })
-        }
-        for team_num in teamNumOrder {
-            if team_num == 0 {
-                teamOrder.append(Team())
-            }
-            for team in self.teams {
-                if team_num == team.number {
-                    teamOrder.append(team)
+            for station in self.stationList {
+                if referee.stationName == station.name {
+                    self.station = station
+                }
+                if station.pvp == true {
+                    pvp_count += 1
                 }
             }
-        }
-        self.updatedTeamOrder = teamOrder
-        Task {
+            if self.station.pvp {
+                column_number_index = 2 * station.number - 2
+                let left = self.algorithm.map({ $0[column_number_index] })
+                let right = self.algorithm.map({ $0[column_number_index + 1] })
+                var right_index : Int = 0
+                for left_index in left {
+                    teamNumOrder.append(left_index)
+                    teamNumOrder.append(right[right_index])
+                    right_index += 1
+                }
+            }
+            else {
+                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
+                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
+            }
+            for team_num in teamNumOrder {
+                if team_num == 0 {
+                    teamOrder.append(Team())
+                }
+                for team in self.teams {
+                    if team_num == team.number {
+                        teamOrder.append(team)
+                    }
+                }
+            }
+            self.updatedTeamOrder = teamOrder
             do {
                 try await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
             }
@@ -185,8 +186,8 @@ class WaitingController: BaseViewController {
 // MARK: - Protocols
 extension WaitingController: RefereeUpdateListener, HostUpdateListener {
     func updateReferee(_ referee: Referee) {
-        UserData.writeReferee(referee, "Referee")
-        self.referee = UserData.readReferee("Referee")!
+        UserData.writeReferee(referee, "referee")
+        self.referee = UserData.readReferee("referee")!
     }
     
     func updateHost(_ host: Host) {
