@@ -141,7 +141,7 @@ class TimerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
-        if TeamViewController.read {
+        if TeamViewController.unread {
             self.announcementButton.setImage(readAll, for: .normal)
         } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
@@ -162,14 +162,14 @@ class TimerViewController: UIViewController {
     }
     
     @objc func readAll(notification: Notification) {
-        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
-        if isRead {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        } else {
+        if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.announcementButton.setImage(self.readAll, for: .normal)
         }
     }
     
@@ -191,7 +191,7 @@ class TimerViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.messages)
+        showMessagePopUp(messages: TeamViewController.localMessages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -448,7 +448,6 @@ extension TimerViewController: HostUpdateListener {
         self.pausedTime = host.pausedTime
         self.startTime = host.startTimestamp
         self.isPaused = host.paused
-        self.messages = host.announcements
     }
     
     func listen(_ _ : [String : Any]){
@@ -469,6 +468,5 @@ extension TimerViewController: HostUpdateListener {
         self.rounds = host.rounds
         self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        self.messages = host.announcements
     }
 }

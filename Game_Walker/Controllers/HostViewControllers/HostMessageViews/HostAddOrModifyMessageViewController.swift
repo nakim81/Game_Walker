@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class HostAddOrModifyMessageViewController: UIViewController {
-    private var announcement: String?
+    private var announcement: Announcement?
     private let fontColor: UIColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
     private var source = ""
@@ -28,7 +28,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
     
     private lazy var announcementTextView: UITextView = {
         let textView = UITextView()
-        textView.text = announcement
+        textView.text = announcement?.content
         textView.backgroundColor = .clear
         textView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         textView.layer.borderWidth = 3
@@ -107,7 +107,9 @@ class HostAddOrModifyMessageViewController: UIViewController {
     @objc func sendMessage() {
         Task { @MainActor in
             do {
-                try await H.addAnnouncement(gameCode, announcementTextView.text)
+                let newAnnouncement = Announcement(uuid: UUID().uuidString, content: announcementTextView.text, timestamp: getCurrentDateTime(), readStatus: false)
+                HostRankingViewcontroller.messages.append(newAnnouncement)
+                try await H.addAnnouncement(gameCode, newAnnouncement)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
                 self.dismiss(animated: true, completion: nil)
             }  catch GameWalkerError.serverError(let text){
@@ -115,14 +117,16 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 serverAlert(text)
                 return
             }
-            
         }
     }
     
     @objc func modifyMessage() {
         Task { @MainActor in
             do {
-                try await H.modifyAnnouncement(gameCode, announcementTextView.text, self.ind ?? 0)
+                guard let announcement = self.announcement, let index = self.ind else { return }
+                let newAnnouncement = Announcement(uuid: announcement.uuid, content: announcementTextView.text, timestamp: getCurrentDateTime(), readStatus: false)
+                try await H.modifyAnnouncement(gameCode, newAnnouncement, index)
+                HostRankingViewcontroller.messages[index] = newAnnouncement
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
                 self.dismiss(animated: true, completion: nil)
             } catch GameWalkerError.serverError(let text){
@@ -140,7 +144,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         return view
     }()
     
-    convenience init(announcement: String, source: String) {
+    convenience init(announcement: Announcement, source: String) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.announcement = announcement
@@ -148,7 +152,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         self.modalPresentationStyle = .overFullScreen
     }
     
-    convenience init(announcement: String?, index: Int, source: String) {
+    convenience init(announcement: Announcement, index: Int, source: String) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.announcement = announcement

@@ -16,7 +16,7 @@ class HostRankingViewcontroller: UIViewController {
     @IBOutlet weak var switchBtn: CustomSwitchButton!
     @IBOutlet weak var endGameBtn: UIButton!
     
-    private var messages: [String]?
+    static var messages: [Announcement] = []
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 1
@@ -28,23 +28,14 @@ class HostRankingViewcontroller: UIViewController {
         super.viewDidLoad()
         setDelegates()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
-    }
-    
-    @objc func refresh() {
-        //H.getHost(gameCode)
-        Task {
-            try await Task.sleep(nanoseconds: 180_000_000)
-            HostMessageViewController.messages = self.messages
-        }
+        setMessages()
     }
     
     func listen(_ _ : [String : Any]){
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        //H.getHost(gameCode)
-        showHostMessagePopUp(messages: messages)
+        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -62,12 +53,22 @@ class HostRankingViewcontroller: UIViewController {
         present(endGamePopUp, animated: true)
     }
     
+    private func setMessages() {
+            Task {@MainActor in
+                do {
+                    HostRankingViewcontroller.messages = try await H.getHost(gameCode)!.announcements
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
+            }
+    }
+    
     private func setDelegates() {
         T.delegates.append(self)
-        //H.delegate_getHost = self
         switchBtn.delegate = self
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        //H.getHost(gameCode)
         self.showScore = switchBtn.isOn
     }
     
@@ -119,10 +120,6 @@ extension HostRankingViewcontroller: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
         leaderBoard.reloadData()
-    }
-    
-    func getHost(_ host: Host) {
-        self.messages = host.announcements
     }
 }
 // MARK: - SwitchBtn

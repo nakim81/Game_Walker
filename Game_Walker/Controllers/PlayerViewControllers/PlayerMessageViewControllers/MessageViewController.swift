@@ -11,7 +11,7 @@ import UIKit
 class MessageViewController: UIViewController {
     
     private let fontColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-    private var messages: [String] = []
+    private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     
     private let messageTableView: UITableView = {
@@ -67,7 +67,7 @@ class MessageViewController: UIViewController {
         }
     }
     
-    convenience init(messages: [String]) {
+    convenience init(messages: [Announcement]) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.messages = messages
@@ -99,6 +99,15 @@ class MessageViewController: UIViewController {
         configureTableView()
         setUpViews()
         makeConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+    }
+    
+    @objc func refresh() {
+        Task {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            self.messages = TeamViewController.localMessages
+            messageTableView.reloadData()
+        }
     }
     
     private func configureTableView() {
@@ -158,12 +167,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.row + 1
-        let announcement = messages[indexPath.row]
-        if (TeamViewController.readMsgList.contains(announcement)) {
-            cell.configureTableViewCell(name: "Announcement \(ind)", read: true)
-        } else {
-            cell.configureTableViewCell(name: "Announcement \(ind)", read: false)
-        }
+        let announcement = TeamViewController.localMessages[indexPath.row]
+        cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
         cell.selectionStyle = .none
         return cell
     }
@@ -177,11 +182,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let announcementText = messages[indexPath.row]
-        if !TeamViewController.readMsgList.contains(announcementText) {
-            TeamViewController.readMsgList.append(announcementText)
-        }
-        showAnnouncementPopUp(announcement: announcementText)
+        TeamViewController.localMessages[indexPath.row].readStatus = true
+        showAnnouncementPopUp(announcement: TeamViewController.localMessages[indexPath.row])
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }

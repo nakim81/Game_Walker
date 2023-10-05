@@ -82,14 +82,14 @@ class RankingViewController: UIViewController {
     }
     
     @objc func readAll(notification: Notification) {
-        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
-        if isRead {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        } else {
+        if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.announcementButton.setImage(self.readAll, for: .normal)
         }
     }
     
@@ -97,14 +97,14 @@ class RankingViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.messages)
+        showMessagePopUp(messages: TeamViewController.localMessages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
     private func configureAlertIcon() {
-        if TeamViewController.read {
+        if TeamViewController.unread {
             self.announcementButton.setImage(readAll, for: .normal)
         } else {
             self.announcementButton.setImage(unreadSome, for: .normal)

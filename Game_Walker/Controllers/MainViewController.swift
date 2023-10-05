@@ -26,6 +26,7 @@ class MainViewController: BaseViewController {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
+//        UserData.writeGamecode("111111", "gamecode")
 //        UserDefaults.standard.removeObject(forKey: "team")
 //        UserDefaults.standard.removeObject(forKey: "gamecode")
 //        UserDefaults.standard.removeObject(forKey: "username")
@@ -33,9 +34,9 @@ class MainViewController: BaseViewController {
 //            let gc = "\(i)\(i)\(i)\(i)\(i)\(i)"
 //            //let gc = "888888"
 //
-//            let host1 = Host(gamecode: gc)
+//            let host1 = Host(gamecode: "111111")
 //
-//            Task { @MainActor in
+//           Task { @MainActor in
 //                H.createGame(gc, host1)
 //                for i in 1...8 {
 //                    let team = Team(gamecode: gc, name: "Team \(i)", number: i)
@@ -47,7 +48,8 @@ class MainViewController: BaseViewController {
 //                    try await R.addReferee(gc, ref, uuid)
 //                    await S.saveStation(gc, station)
 //                    await S.assignReferee(gc, station, ref)
-//                    await H.addAnnouncement(gc, "Announcement \(i) \n This is announcement \(i)!")
+//                    let announcement = Announcement(uuid: UUID().uuidString, content: "Announcement\(i)", timestamp: getCurrentDateTime(), readStatus: false)
+//                    try await H.addAnnouncement("111111", announcement)
 //                }
 //                let uuid = UUID().uuidString
 //                let ref2 = Referee(uuid: uuid, gamecode: gc, name: "Referee unassigned", assigned: false)

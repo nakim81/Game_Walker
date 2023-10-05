@@ -398,7 +398,6 @@ extension RefereeTimerController: HostUpdateListener {
         self.pausedTime = host.pausedTime
         self.startTime = host.startTimestamp
         self.isPaused = host.paused
-        self.messages = host.announcements
     }
     
     func listen(_ _ : [String : Any]){
@@ -423,6 +422,5 @@ extension RefereeTimerController: HostUpdateListener {
         self.rounds = host.rounds
         self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        self.messages = host.announcements
     }
 }

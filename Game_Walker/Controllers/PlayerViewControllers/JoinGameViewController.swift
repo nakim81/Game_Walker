@@ -27,8 +27,6 @@ class JoinGameViewController: BaseViewController {
         setUpTextFields()
         configureNavItem()
         configureJoinBtn()
-        UserData.clearMyTeam("team")
-        print(UserData.readTeam("team"))
     }
     
     private func configureJoinBtn(){
