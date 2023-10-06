@@ -256,8 +256,13 @@ struct H {
             let host = convertDataToHost(data)
             return host
         } else {
-            print("Error getting Host")
-            throw GameWalkerError.serverError("Something went wrong while rgetting Host")
+            if let error = document.error {
+                print("Error getting Host: \(error.localizedDescription)")
+                throw GameWalkerError.serverError("Something went wrong while getting Host")
+            } else {
+                print("Error getting Host with Gamecode")
+                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+            }
         }
     }
 
