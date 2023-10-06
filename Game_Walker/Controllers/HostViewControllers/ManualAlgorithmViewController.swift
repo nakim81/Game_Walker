@@ -384,7 +384,7 @@ class ManualAlgorithmViewController: BaseViewController {
         
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
-            alert(title: "Excess Teams.", message: "Be careful! There are more teams than available stations.")
+            alert(title: "Excess Teams", message: "Be careful! There are more teams than available stations.")
             return teamCells - stationCells
         }
         return 0
@@ -1177,7 +1177,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let grid =  createIntegerGrid()
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
-                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp )
+                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: true )
                 H.updateHost(gamecode, hostupdate)
                 print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
             }

@@ -135,6 +135,7 @@
                         <outlet property="gameCodeInput" destination="8bU-vL-2hU" id="qDq-Cq-kuv"/>
                         <outlet property="joinButton" destination="U83-h1-qtH" id="QJZ-d3-vwc"/>
                         <segue destination="1L0-Oz-afr" kind="show" identifier="HostJoinSegue" id="D0i-05-1lI"/>
+                        <segue destination="L51-9x-cCC" kind="show" identifier="GameAlreadyStartedSegue" id="rYH-ek-yGN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmR-Da-uq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -967,17 +968,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ranking 1" translatesAutoresizingMaskIntoConstraints="NO" id="VCg-rd-HS9">
-                                <rect key="frame" x="26" y="80.5" width="192.5" height="65"/>
+                                <rect key="frame" x="26" y="85" width="192.5" height="69"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F4M-EA-8mT">
-                                <rect key="frame" x="29.5" y="160.5" width="355" height="586"/>
+                                <rect key="frame" x="29.5" y="169" width="355" height="620"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6M-cq-y2e">
-                                <rect key="frame" x="294" y="47" width="74.5" height="40"/>
+                                <rect key="frame" x="294" y="50" width="74.5" height="42"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41c-QL-V9u">
-                                        <rect key="frame" x="2" y="-198.5" width="33.5" height="437"/>
+                                        <rect key="frame" x="2" y="-210.5" width="33.5" height="463"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="announcement"/>
                                         <connections>
@@ -985,7 +986,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVw-hW-wn8">
-                                        <rect key="frame" x="39" y="-7.5" width="33.5" height="55"/>
+                                        <rect key="frame" x="39" y="-8.5" width="33.5" height="58.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -1006,7 +1007,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-CG-hVP" customClass="CustomSwitchButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="324.5" y="121.5" width="60" height="31"/>
+                                <rect key="frame" x="324.5" y="130" width="60" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="oU8-ce-AOK"/>
                                     <constraint firstAttribute="width" constant="60" id="sVW-0k-iJc"/>
@@ -1018,7 +1019,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Te-FI-vyR">
-                                <rect key="frame" x="89.5" y="776.5" width="235" height="50"/>
+                                <rect key="frame" x="89.5" y="819" width="235" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KUP-Yj-CNZ"/>
                                 </constraints>
@@ -1052,6 +1053,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="f0y-wr-zc8"/>
+                    <navigationItem key="navigationItem" id="dZc-Z2-Jln"/>
                     <connections>
                         <outlet property="announcementBtn" destination="41c-QL-V9u" id="azZ-af-6ec"/>
                         <outlet property="endGameBtn" destination="1Te-FI-vyR" id="eE4-zk-DmT"/>
@@ -1086,7 +1088,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="OK4-sB-gpM"/>
-        <segue reference="HVu-dF-Day"/>
+        <segue reference="rYH-ek-yGN"/>
+        <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
