@@ -19,6 +19,7 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var hostButton: UIButton!
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
+    @IBOutlet weak var testBtn: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
     
@@ -26,8 +27,6 @@ class MainViewController: BaseViewController {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.removeObject(forKey: "gamecode")
 //        UserData.writeGamecode("111111", "gamecode")
 //        UserDefaults.standard.removeObject(forKey: "team")
 //        UserDefaults.standard.removeObject(forKey: "gamecode")
@@ -96,6 +95,9 @@ class MainViewController: BaseViewController {
         hostButton.layer.cornerRadius = 10
         hostButton.layer.borderWidth = 3
         hostButton.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
+        testBtn.layer.cornerRadius = 10
+        testBtn.layer.borderWidth = 3
+        testBtn.layer.borderColor = UIColor.systemBlue.cgColor
         
     }
     
@@ -112,6 +114,20 @@ class MainViewController: BaseViewController {
     @IBAction func hostBtnPressed(_ sender: Any) {
         self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
         performSegue(withIdentifier: "goToHost", sender: self)
+    }
+    
+    @IBAction func testBtnPressed(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "gamecode")
+        UserDefaults.standard.removeObject(forKey: "username")
+        UserDefaults.standard.removeObject(forKey: "referee")
+        UserDefaults.standard.removeObject(forKey: "player")
+        UserDefaults.standard.removeObject(forKey: "team")
+        UserData.writeUUID(UUID().uuidString)
+        print(UserData.readUUID())
+        print(UserData.readPlayer("player"))
+        print(UserData.readReferee("referee"))
+        print(UserData.readGamecode("gamecode"))
+        print(UserData.readTeam("team"))
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {
