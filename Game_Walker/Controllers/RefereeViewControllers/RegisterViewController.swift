@@ -21,9 +21,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
-        UserDefaults.standard.removeObject(forKey: "gamecode")
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.removeObject(forKey: "referee")
+//        UserDefaults.standard.removeObject(forKey: "gamecode")
+//        UserDefaults.standard.removeObject(forKey: "username")
+//        UserDefaults.standard.removeObject(forKey: "referee")
         Task {
             configureNavItem()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
