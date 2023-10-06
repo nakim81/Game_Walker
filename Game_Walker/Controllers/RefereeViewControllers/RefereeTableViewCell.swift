@@ -115,13 +115,14 @@ class RefereeTableViewCell: UITableViewCell {
         teamIconImage.image = UIImage(named: imageName)
         teamNameLabel.text = teamName
         teamNumLabel.text = teamNum
-        scoreLabel.text = points
         if (showScore) {
-            scoreLabel.textColor = .black
+            scoreLabel.text = points
+            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1).isActive = true
+            scoreLabel.backgroundColor = .clear
         } else {
             scoreLabel.text = ""
             scoreLabel.backgroundColor = UIColor(patternImage: blindImage!)
-            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.5).isActive = true
+            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.2).isActive = true
         }
     }
 

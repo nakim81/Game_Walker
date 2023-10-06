@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class RefereeAnnouncementViewController: UIViewController {
-    private var announcement: String?
+    private var announcement: Announcement?
     private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
     
     private lazy var containerView: UIView = {
@@ -33,7 +33,7 @@ class RefereeAnnouncementViewController: UIViewController {
     
     private lazy var announcementTextLabel: UILabel = {
         let label = UILabel()
-        label.text = self.announcement
+        label.text = self.announcement?.content
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Regular", size: 15)
@@ -69,7 +69,7 @@ class RefereeAnnouncementViewController: UIViewController {
         }
     }
     
-    convenience init(announcement: String?) {
+    convenience init(announcement: Announcement?) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.announcement = announcement

@@ -18,7 +18,6 @@ class HostTimerViewController: UIViewController {
     
     @IBOutlet weak var endGameBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    private var messages: [String] = []
     
     private var host : Host = Host()
     private var startTime : Int = 0
@@ -61,6 +60,9 @@ class HostTimerViewController: UIViewController {
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
         // Testing Case for Resetting Time DB
+        if timer.isValid {
+            timer.invalidate()
+        }
         Task {
             do {
                 try await H.startGame(gameCode)
@@ -91,11 +93,10 @@ class HostTimerViewController: UIViewController {
                 return
             }
             pauseOrPlayButton.isHidden = false
-            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
             calculateTime()
+            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
         }
-        //
-        showHostMessagePopUp(messages: messages)
+        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
@@ -120,14 +121,6 @@ class HostTimerViewController: UIViewController {
                     return
                 }
                 sender.setImage(pause, for: .normal)
-                isPaused = !isPaused
-                do {
-                    try await H.pause_resume_game(gameCode)
-                } catch GameWalkerError.serverError(let text){
-                    print(text)
-                    serverAlert(text)
-                    return
-                }
             }
         }
         else {
@@ -415,6 +408,7 @@ class HostTimerViewController: UIViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
+        self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
         let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
@@ -440,8 +434,17 @@ class HostTimerViewController: UIViewController {
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds!)"
+            pauseOrPlayButton.isHidden = true
         } else {
             self.roundLabel.text = "Round \(quotient + 1)"
+            if gameStart {
+                if isPaused {
+                    pauseOrPlayButton.setImage(play, for: .normal)
+                }
+                else {
+                    pauseOrPlayButton.setImage(pause, for: .normal)
+                }
+            }
             runTimer()
         }
     }
@@ -452,7 +455,7 @@ extension HostTimerViewController: HostUpdateListener {
         self.startTime = host.startTimestamp
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
-        self.messages = host.announcements
+        self.isPaused = host.paused
         self.gameStart = host.gameStart
     }
     
@@ -472,10 +475,8 @@ extension HostTimerViewController: HostUpdateListener {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.rounds = host.rounds
-        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        self.messages = host.announcements
-        self.messages = host.announcements
         self.gameStart = host.gameStart
         self.gameOver = host.gameover
     }

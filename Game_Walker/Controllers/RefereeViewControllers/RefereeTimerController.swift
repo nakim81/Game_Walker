@@ -12,7 +12,7 @@ class RefereeTimerController: BaseViewController {
     
     // Variables
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private var referee: Referee = UserData.readReferee("Referee") ?? Referee()
+    private var referee: Referee = UserData.readReferee("referee") ?? Referee()
     private var stations: [Station] = [Station()]
     private var host: Host = Host()
     
@@ -247,7 +247,7 @@ class RefereeTimerController: BaseViewController {
     func findStation() {
         for station in stations {
             if station.name == referee.stationName {
-                showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.description, gamePoitns: String(station.points), gameRule: station.place)
+                showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
             }
         }
     }
@@ -396,6 +396,8 @@ extension RefereeTimerController: HostUpdateListener {
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
     }
     
     func listen(_ _ : [String : Any]){
@@ -420,6 +422,5 @@ extension RefereeTimerController: HostUpdateListener {
         self.rounds = host.rounds
         self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        self.messages = host.announcements
     }
 }

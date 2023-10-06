@@ -165,7 +165,7 @@ struct H {
     
     //MARK: - Announcment Functions
     
-    static func addAnnouncement(_ gamecode: String, _ announcement: String) async throws {
+    static func addAnnouncement(_ gamecode: String, _ announcement: Announcement) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -185,7 +185,7 @@ struct H {
         }
     }
     
-    static func modifyAnnouncement(_ gamecode: String, _ announcement: String, _ index: Int) async throws {
+    static func modifyAnnouncement(_ gamecode: String, _ announcement: Announcement, _ index: Int) async throws {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
             let document = try await docRef.getDocument()
@@ -256,8 +256,13 @@ struct H {
             let host = convertDataToHost(data)
             return host
         } else {
-            print("Error getting Host")
-            throw GameWalkerError.serverError("Something went wrong while rgetting Host")
+            if let error = document.error {
+                print("Error getting Host: \(error.localizedDescription)")
+                throw GameWalkerError.serverError("Something went wrong while getting Host")
+            } else {
+                print("Error getting Host with Gamecode")
+                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+            }
         }
     }
 

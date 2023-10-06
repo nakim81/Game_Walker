@@ -28,7 +28,7 @@ struct Host: Codable {
     var pauseTimestamp: Int = Int(Date().timeIntervalSince1970)
     var pausedTime: Int = 0
     //announcements
-    var announcements: [String] = []
+    var announcements: [Announcement] = []
     
     enum CodingKeys: String, CodingKey {
         case gamecode

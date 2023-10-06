@@ -21,7 +21,9 @@ class HostCreateOrJoinViewController: BaseViewController {
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(back))
+        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
+        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
+        newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     

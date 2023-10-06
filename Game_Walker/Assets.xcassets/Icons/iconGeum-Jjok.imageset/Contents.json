@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iconOrance.png",
+      "filename" : "iconGeum-Jjok.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iconOrance@2x.png",
+      "filename" : "iconGeum-Jjok@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iconOrance@3x.png",
+      "filename" : "iconGeum-Jjok@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

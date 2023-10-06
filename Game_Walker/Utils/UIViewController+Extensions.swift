@@ -34,8 +34,8 @@ extension UIViewController {
 }
 // MARK: - PlayerMessagePopUps
 extension UIViewController {
-    func showMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = MessageViewController(messages: messages ?? [])
+    func showMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = MessageViewController(messages: messages)
         showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
@@ -46,7 +46,7 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
     
-    func showAnnouncementPopUp(announcement: String = "", _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = AnnouncementViewController(announcement: announcement)
         showAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -60,8 +60,8 @@ extension UIViewController {
 }
 // MARK: - RefereeMessagePopUps
 extension UIViewController {
-    func showRefereeMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = RefereeMessageViewController(messages: messages ?? [])
+    func showRefereeMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = RefereeMessageViewController(messages: messages)
         showRefereeMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
@@ -72,7 +72,7 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
     
-    func showRefereeAnnouncementPopUp(announcement: String = "", _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showRefereeAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = RefereeAnnouncementViewController(announcement: announcement)
         showRefereeAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -101,8 +101,8 @@ extension UIViewController {
 }
 // MARK: - HostMessagePopUps
 extension UIViewController {
-    func showHostMessagePopUp(messages: [String]? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = HostMessageViewController(messages: messages ?? [])
+    func showHostMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = HostMessageViewController(messages: messages)
         showHostMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
@@ -180,7 +180,19 @@ extension UITextField {
     }
     
 }
-
+// MARK: - Date Formatter
+extension UIViewController {
+    func getCurrentDateTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current // Use the current time zone
+        
+        let currentDateTime = Date()
+        let dateString = dateFormatter.string(from: currentDateTime)
+        
+        return dateString
+    }
+}
 //MARK: - Array Convert
 extension UIViewController {
     func convert2DArrayTo1D(_ inputArray: [[Int]]) -> [Int] {
@@ -214,5 +226,21 @@ extension UIViewController {
             resultArray.append(subArray)
         }
         return resultArray
+    }
+}
+// MARK: - methods for announcements
+extension UIViewController {
+    func removeAnnouncementsNotInHost(from sourceArray: inout [Announcement], targetArray: [Announcement]) {
+        sourceArray = sourceArray.filter { sourceAnnouncement in
+            targetArray.contains { targetAnnouncement in
+                sourceAnnouncement.uuid == targetAnnouncement.uuid
+            }
+        }
+    }
+    
+    func checkUnreadAnnouncements(announcements: [Announcement]) -> Bool {
+        let unreadAnnouncements = announcements.filter { $0.readStatus == false }
+        
+        return !unreadAnnouncements.isEmpty
     }
 }

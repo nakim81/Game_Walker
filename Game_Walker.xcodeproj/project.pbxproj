@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6149DB5E2992036900DD4DC2 /* HostGivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */; };
 		6149DB6029921B5600DD4DC2 /* WarningScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */; };
-		6159252829694A0600BC6D7F /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252129694A0600BC6D7F /* RegisterController.swift */; };
+		6159252829694A0600BC6D7F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252129694A0600BC6D7F /* RegisterViewController.swift */; };
 		6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252429694A0600BC6D7F /* WaitingController.swift */; };
 		6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252529694A0600BC6D7F /* GivePointsController.swift */; };
 		616EB4742AA708C9001394E7 /* RefereeTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EB4732AA708C9001394E7 /* RefereeTimerController.swift */; };
@@ -88,6 +88,7 @@
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
+		DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDC4CE2ACAB80000533EE9 /* Announcement.swift */; };
 		F31DE2CE50766775F884F8D9 /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */; };
@@ -110,7 +111,7 @@
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
-		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
+		FC633970298112EE004B02C0 /* RefereeGameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */; };
 		FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0E2A97A04A00F4AE99 /* purple.wav */; };
 		FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0F2A97A04A00F4AE99 /* blue.wav */; };
 		FCB13E172A97A04B00F4AE99 /* green.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E102A97A04A00F4AE99 /* green.wav */; };
@@ -131,7 +132,7 @@
 /* Begin PBXFileReference section */
 		6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostGivePointsController.swift; sourceTree = "<group>"; };
 		6149DB5F29921B5600DD4DC2 /* WarningScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningScreenController.swift; sourceTree = "<group>"; };
-		6159252129694A0600BC6D7F /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		6159252129694A0600BC6D7F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		6159252429694A0600BC6D7F /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		6159252529694A0600BC6D7F /* GivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivePointsController.swift; sourceTree = "<group>"; };
 		616EB4732AA708C9001394E7 /* RefereeTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTimerController.swift; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
+		DACDC4CE2ACAB80000533EE9 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Announcement.swift; path = Model/Announcement.swift; sourceTree = "<group>"; };
 		DAF08F79937420BC34B3A078 /* Pods-Game_Walker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.debug.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.debug.xcconfig"; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
@@ -225,7 +227,7 @@
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
+		FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewController.swift; sourceTree = "<group>"; };
 		FCB13E0E2A97A04A00F4AE99 /* purple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purple.wav; path = "Supporting Files/purple.wav"; sourceTree = "<group>"; };
 		FCB13E0F2A97A04A00F4AE99 /* blue.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = blue.wav; path = "Supporting Files/blue.wav"; sourceTree = "<group>"; };
 		FCB13E102A97A04A00F4AE99 /* green.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = green.wav; path = "Supporting Files/green.wav"; sourceTree = "<group>"; };
@@ -282,7 +284,7 @@
 		6159251E29694A0600BC6D7F /* RefereeViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6159252129694A0600BC6D7F /* RegisterController.swift */,
+				6159252129694A0600BC6D7F /* RegisterViewController.swift */,
 				6159252429694A0600BC6D7F /* WaitingController.swift */,
 				61E509462988901800F37E79 /* RefereeTabBarPVEController.swift */,
 				61E5094C2988D8A400F37E79 /* RefereeTabBarPVPController.swift */,
@@ -293,7 +295,7 @@
 				61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */,
 				61E509522988D91400F37E79 /* RefereeTableViewCell.swift */,
 				6159252529694A0600BC6D7F /* GivePointsController.swift */,
-				FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */,
+				FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */,
 				61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */,
 				61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */,
 				61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */,
@@ -395,6 +397,7 @@
 				DAC31328285862EF00BECF89 /* Station.swift */,
 				DAC3132C2858632100BECF89 /* Team.swift */,
 				DA96396F28A33CDA00853F05 /* Host.swift */,
+				DACDC4CE2ACAB80000533EE9 /* Announcement.swift */,
 				FC1D68F0288B97C500C529DA /* UserData.swift */,
 				A1521DD82AAA4CF500B7BD8A /* IntPair.swift */,
 			);
@@ -712,7 +715,7 @@
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
-				FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */,
+				FC633970298112EE004B02C0 /* RefereeGameInfoViewController.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				616EB4742AA708C9001394E7 /* RefereeTimerController.swift in Sources */,
@@ -734,7 +737,7 @@
 				A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */,
 				6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */,
 				A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */,
-				6159252829694A0600BC6D7F /* RegisterController.swift in Sources */,
+				6159252829694A0600BC6D7F /* RegisterViewController.swift in Sources */,
 				FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
 				A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */,
@@ -758,6 +761,7 @@
 				6149DB6029921B5600DD4DC2 /* WarningScreenController.swift in Sources */,
 				FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */,
 				61E509472988901800F37E79 /* RefereeTabBarPVEController.swift in Sources */,
+				DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,
 				DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */,
@@ -912,8 +916,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -930,8 +933,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalkeridentify;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
@@ -949,8 +951,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -967,8 +968,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalkeridentify;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-identify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;

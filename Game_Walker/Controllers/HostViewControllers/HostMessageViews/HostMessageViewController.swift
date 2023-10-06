@@ -10,7 +10,7 @@ import UIKit
 
 class HostMessageViewController: UIViewController {
     private let fontColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-    static var messages: [String]?
+    private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     private let messageTableView: UITableView = {
         let tableview = UITableView()
@@ -49,7 +49,7 @@ class HostMessageViewController: UIViewController {
     }()
     
     @objc func showPopUp(sender: UIButton) {
-        showAddHostMessagePopUp(announcement: "", source: "btn")
+        showAddHostMessagePopUp(announcement: Announcement(), source: "btn")
     }
     
     private lazy var closeButton: UIButton = {
@@ -79,10 +79,10 @@ class HostMessageViewController: UIViewController {
         }
     }
     
-    convenience init(messages: [String]) {
+    convenience init(messages: [Announcement]) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
-        Self.messages = messages
+        self.messages = messages
         self.modalPresentationStyle = .overFullScreen
     }
     
@@ -117,6 +117,7 @@ class HostMessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
+            self.messages = HostRankingViewcontroller.messages
             messageTableView.reloadData()
         }
     }
@@ -197,24 +198,22 @@ extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let messages = HostMessageViewController.messages else { return 0}
         return messages.count
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let messages = HostMessageViewController.messages {
-            let announcementText = messages[indexPath.row]
-            showModifyHostMessagePopUp(announcement: announcementText, index: indexPath.row, source: "table")
-            messageTableView.deselectRow(at: indexPath, animated: true)
-        }
+        let announcement = messages[indexPath.row]
+        showModifyHostMessagePopUp(announcement: announcement, index: indexPath.row, source: "table")
+        messageTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
-            HostMessageViewController.messages?.remove(at: indexPath.row)
+            HostRankingViewcontroller.messages.remove(at: indexPath.row)
+            self?.messages.remove(at: indexPath.row)
             self?.messageTableView.deleteRows(at: [indexPath], with: .automatic)
             Task { @MainActor in
-                try await H.removeAnnouncement(self?.gameCode ?? "", indexPath.section)
+                try await H.removeAnnouncement(self?.gameCode ?? "", indexPath.row)
                 try await Task.sleep(nanoseconds: 200_000_000)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             }
@@ -233,7 +232,7 @@ extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource 
 }
 // MARK: - AnnouncementPopUp
 extension HostMessageViewController {
-    func showAddHostMessagePopUp(announcement: String, source: String) {
+    func showAddHostMessagePopUp(announcement: Announcement, source: String) {
         let popUpViewController = HostAddOrModifyMessageViewController(announcement: announcement, source: source)
         showAddHostMessagePopUp(popUpViewController: popUpViewController)
     }
@@ -242,7 +241,7 @@ extension HostMessageViewController {
         present(popUpViewController, animated: false, completion: nil)
     }
     
-    func showModifyHostMessagePopUp(announcement: String, index: Int, source: String) {
+    func showModifyHostMessagePopUp(announcement: Announcement, index: Int, source: String) {
         let popUpViewController = HostAddOrModifyMessageViewController(announcement: announcement, index: index, source: source)
         showAddHostMessagePopUp(popUpViewController: popUpViewController)
     }

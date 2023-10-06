@@ -166,7 +166,7 @@ class TeamTableViewCell: UITableViewCell {
         } else {
             scoreLabel.text = ""
             scoreLabel.backgroundColor = UIColor(patternImage: blindImage!)
-            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.5).isActive = true
+            scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.2).isActive = true
         }
     }
     
