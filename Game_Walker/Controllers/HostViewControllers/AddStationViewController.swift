@@ -245,6 +245,12 @@ class AddStationViewController: BaseViewController {
                 return
             }
             
+            gamename = gamenameTextfield.text!
+            gamepoints = Int(gamepointsTextfield.text!)!
+            gamelocation = gamelocationTextfield.text ?? ""
+            rules = rulesTextfield.text ?? ""
+            
+            
         }
         
         if (stationExists && !modified) {
