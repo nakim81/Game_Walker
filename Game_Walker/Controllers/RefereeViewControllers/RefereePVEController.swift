@@ -74,17 +74,143 @@ class RefereePVEController: BaseViewController {
     }
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        // Testing
-        Task {
-            do {
-                try await H.updateCurrentRound(gameCode, 2)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
+        let shadeView = UIView(frame: view.bounds)
+        shadeView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        view.addSubview(shadeView)
+        view.addSubview(buttonBorder)
+        view.addSubview(closeBtn)
+        view.addSubview(teamPointsLabel)
+        view.addSubview(winButton)
+        view.addSubview(loseButton)
+        view.addSubview(explanationLabel)
+        setupOverlayView()
+    }
+    
+    private lazy var closeBtn: UIImageView = {
+        var view = UIImageView()
+        view.image = UIImage(named: "icon _close_")
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay))
+        view.addGestureRecognizer(tapGesture)
+        return view
+    }()
+    
+    private lazy var buttonBorder: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Click to give points of the Team"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var teamPointsLabel: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Team's total points"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var explanationLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Click win to give points of standard station points"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        return label
+    }()
+    
+    private func setupOverlayView() {
+        closeBtn.translatesAutoresizingMaskIntoConstraints = false
+        buttonBorder.translatesAutoresizingMaskIntoConstraints = false
+        teamPointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        explanationLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeBtn.widthAnchor.constraint(equalToConstant: 44),
+            closeBtn.heightAnchor.constraint(equalToConstant: 44),
+            closeBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25),
+            closeBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
+            
+            buttonBorder.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            buttonBorder.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
+            buttonBorder.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+            buttonBorder.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+            
+            teamPointsLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.370),
+            teamPointsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            teamPointsLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            teamPointsLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            
+            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.50),
+            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            explanationLabel.topAnchor.constraint(equalTo: winButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.025)
+        ])
+    }
+    
+    @objc func dismissOverlay() {
+        //Get rid of all the added elements
+        let shadeView = UIView(frame: view.bounds)
+        shadeView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+        view.addSubview(shadeView)
+        buttonBorder.removeFromSuperview()
+        teamPointsLabel.removeFromSuperview()
+        winButton.removeFromSuperview()
+        loseButton.removeFromSuperview()
+        explanationLabel.removeFromSuperview()
+    }
+    
+    private func showOverlay() {
+        let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
+        var componentPositions: [CGPoint] = []
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
             }
         }
     }
+    //
     
     @IBAction func leaveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "toRegister", sender: self)
@@ -207,23 +333,27 @@ class RefereePVEController: BaseViewController {
     
     @objc func winButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
-        Task {
-            do {
-                try await T.givePoints(gameCode, self.team.name, self.points)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
+        if self.team.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            Task {
+                do {
+                    try await T.givePoints(gameCode, self.team.name, self.points)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
             }
+            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            winButton.image = UIImage(named: "Lose Gray Button")
+            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            loseButton.image = UIImage(named: "Lose Yellow Button")
         }
-        winButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        winButton.image = UIImage(named: "Lose Gray Button")
-        loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
-        }
-        loseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
     private lazy var loseButton: UIImageView = {
@@ -251,14 +381,18 @@ class RefereePVEController: BaseViewController {
     
     @objc func loseButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
-        winButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
+        if self.team.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            winButton.image = UIImage(named: "Win Blue Button")
+            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            loseButton.image = UIImage(named: "Lose Gray Button")
         }
-        winButton.image = UIImage(named: "Win Blue Button")
-        loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        loseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     func fontSize(size: CGFloat) -> CGFloat {
@@ -361,6 +495,16 @@ class RefereePVEController: BaseViewController {
 //MARK: - Protocols
 extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
     func updateTeams(_ teams: [Team]) {
+        for old_team in self.teamOrder {
+            for team in teams {
+                if old_team.number == team.number && old_team.points != team.points {
+                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
+                        self.teamOrder[index] = team
+                    }
+                    break;
+                }
+            }
+        }
         for team in teams {
             if self.team.name == team.name {
                 self.team = team
@@ -374,7 +518,8 @@ extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
             roundLabel.text = "Round " + "\(host.currentRound)"
             teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
             iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-            teamNameLabel.text = "Team name is" + "/n" + "\(self.teamOrder[host.currentRound - 1].name)"
+            teamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[host.currentRound - 1].name)"
+            scoreLabel.text = "\(self.teamOrder[host.currentRound - 1].points)"
             winButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
@@ -384,6 +529,7 @@ extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
             }
             loseButton.image = UIImage(named: "Lose Yellow Button")
             self.round = host.currentRound
+            self.team = self.teamOrder[host.currentRound - 1]
         }
     }
     

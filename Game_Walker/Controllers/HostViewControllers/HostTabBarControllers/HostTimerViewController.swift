@@ -93,8 +93,8 @@ class HostTimerViewController: UIViewController {
                 return
             }
             pauseOrPlayButton.isHidden = false
-            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
             calculateTime()
+            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
         }
         showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
@@ -121,14 +121,6 @@ class HostTimerViewController: UIViewController {
                     return
                 }
                 sender.setImage(pause, for: .normal)
-                isPaused = !isPaused
-                do {
-                    try await H.pause_resume_game(gameCode)
-                } catch GameWalkerError.serverError(let text){
-                    print(text)
-                    serverAlert(text)
-                    return
-                }
             }
         }
         else {
@@ -445,6 +437,14 @@ class HostTimerViewController: UIViewController {
             pauseOrPlayButton.isHidden = true
         } else {
             self.roundLabel.text = "Round \(quotient + 1)"
+            if gameStart {
+                if isPaused {
+                    pauseOrPlayButton.setImage(play, for: .normal)
+                }
+                else {
+                    pauseOrPlayButton.setImage(pause, for: .normal)
+                }
+            }
             runTimer()
         }
     }

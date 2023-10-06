@@ -14,8 +14,9 @@ class WaitingController: BaseViewController {
     private var referee = UserData.readReferee("referee")!
     private var timer: Timer?
     
+    private var teamCreated = false
     private var pvpAssigned = false
-    private var isTeamOrderCalled = false
+    //private var isTeamOrderCalled = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
@@ -59,11 +60,14 @@ class WaitingController: BaseViewController {
         var column_number_index : Int = 0
         var teamNumOrder : [Int] = []
         var teamOrder : [Team] = []
-        Task {
+        Task {@MainActor in
             stationList = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
             for station in self.stationList {
                 if referee.name == station.referee?.name {
+                    self.station = station
+                }
+                if referee.stationName == station.name {
                     self.station = station
                 }
                 if station.pvp == true {
@@ -97,14 +101,24 @@ class WaitingController: BaseViewController {
             }
             self.updatedTeamOrder = teamOrder
             do {
-                try await S.updateTeamOrder(gameCode, self.station.name, self.updatedTeamOrder)
+                try await S.updateTeamOrder(gameCode, self.station.uuid, self.updatedTeamOrder)
             }
             catch GameWalkerError.serverError(let message) {
                 print(message)
                 serverAlert(message)
                 return
             }
-            self.isTeamOrderCalled = true
+            //self.isTeamOrderCalled = true
+            self.pvpAssigned = true
+            if self.station.pvp {
+                self.performSegue(withIdentifier: "goToPVP", sender: self)
+            }
+            else {
+                self.performSegue(withIdentifier: "goToPVE", sender: self)
+            }
+            if self.pvpAssigned {
+                self.timer?.invalidate()
+            }
         }
     }
     
@@ -135,18 +149,13 @@ class WaitingController: BaseViewController {
                 }
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-            if self.referee.assigned && self.isTeamOrderCalled {
-                self.pvpAssigned = true
-                if self.station.pvp {
-                    self.performSegue(withIdentifier: "goToPVP", sender: self)
-                }
-                else {
-                    self.performSegue(withIdentifier: "goToPVE", sender: self)
-                }
+            // For now, it is more suitable to write here considering we already have algorithms in the most of our testing cases.
+            if self.referee.assigned {
+                //if self.algorithm != [] && self.teamCreated {
+                setTeamOrder()
+                //}
             }
-            if self.pvpAssigned {
-                self.timer?.invalidate()
-            }
+            //
             self.view.layoutIfNeeded() 
         }
     }
@@ -186,7 +195,13 @@ class WaitingController: BaseViewController {
 }
 
 // MARK: - Protocols
-extension WaitingController: RefereeUpdateListener, HostUpdateListener {
+extension WaitingController: TeamUpdateListener ,RefereeUpdateListener, HostUpdateListener {
+    func updateTeams(_ teams: [Team]) {
+//        if teams.count == self.number {
+            self.teamCreated = true
+//        }
+    }
+    
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "referee")
         self.referee = UserData.readReferee("referee")!
@@ -195,7 +210,8 @@ extension WaitingController: RefereeUpdateListener, HostUpdateListener {
     func updateHost(_ host: Host) {
         if host.algorithm != [] {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
-            self.setTeamOrder()
+            self.number = host.teams
+            //self.setTeamOrder()
         }
     }
     
@@ -203,6 +219,8 @@ extension WaitingController: RefereeUpdateListener, HostUpdateListener {
     }
     
     func callProtocols() {
+        T.delegates.append(self)
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         R.delegates.append(self)
         R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
         H.delegates.append(self)

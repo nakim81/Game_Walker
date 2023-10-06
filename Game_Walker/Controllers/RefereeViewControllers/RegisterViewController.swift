@@ -124,7 +124,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     }
                     UserData.writeGamecode(gameCode, "gamecode")
                     UserData.writeUsername(newReferee.name, "username")
-                    UserData.writeReferee(newReferee, "Referee")
+                    UserData.writeReferee(newReferee, "referee")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
             }
