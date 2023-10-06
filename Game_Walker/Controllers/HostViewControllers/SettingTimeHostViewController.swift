@@ -19,7 +19,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     private var stationList: [Station] = []
     
-//    var host: Host?
+    var host: Host?
 //    var team: Team?
     var gameminutes: Int = 0
     var gameseconds: Int = 0
@@ -188,11 +188,12 @@ class SettingTimeHostViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowAlgorithmSegue" {
             if let destinationVC = segue.destination as? ManualAlgorithmViewController {
+                destinationVC.host = self.host
                 destinationVC.stationList = self.stationList
                 destinationVC.pvpGameCount = self.pvpGameCount
                 destinationVC.pveGameCount = self.pveGameCount
-                destinationVC.num_rounds = self.num_rounds
-                destinationVC.num_teams = self.num_teams
+                destinationVC.num_rounds = self.rounds
+                destinationVC.num_teams = self.teamcount
                 destinationVC.num_stations = self.num_stations
             }
         }
@@ -321,12 +322,16 @@ class SettingTimeHostViewController: BaseViewController {
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
 //            H.setTimer(gamecode, 110, 120, 13, 14)
             Task { @MainActor in
+                self.rounds = Int(rounds)!
+                self.teamcount = Int(teamcount)!
                 try await H.setSettings(gamecode,
                               timeConvert(min:gameminutes , sec:gameseconds ),
                               timeConvert(min:moveminutes , sec:moveseconds ),
                               Int(rounds) ?? 0,
                               Int(teamcount) ?? 0)
+                print ("rounds and teamcount", rounds," , ", teamcount)
             }
+            
 
             
         } else {

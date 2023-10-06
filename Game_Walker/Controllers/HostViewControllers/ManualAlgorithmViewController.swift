@@ -150,7 +150,9 @@ class ManualAlgorithmViewController: BaseViewController {
         do {
             self.host = try await H.getHost(gamecode)
             num_teams = host!.teams
+//            num_teams = 6
             num_rounds = host!.rounds
+//            num_rounds = 6
         } catch(let e) {
             print(e)
         }
@@ -178,8 +180,10 @@ class ManualAlgorithmViewController: BaseViewController {
         
         do {
             self.host = try await H.getHost(gamecode)
-            num_teams = host!.teams
-            num_rounds = host!.rounds
+//            num_teams = host!.teams
+            num_teams = 6
+//            num_rounds = host!.rounds
+            num_rounds = 6
         } catch(let e) {
             print(e)
             return
@@ -327,6 +331,15 @@ class ManualAlgorithmViewController: BaseViewController {
     
     
     @IBAction func createButtonPressed(_ sender: UIButton) {
+//        var gamecode: String = ""
+//        var gameTime: Int = 0
+//        var movingTime: Int = 0
+//        var rounds: Int = 0
+//        var teams: Int = 0
+//        var currentRound: Int = 1
+//        //algorithm
+//        var algorithm: [Int] = []
+
         let startGameViewController = StartGameViewController(announcement: "Once the game is created, you won't be able to change the game settings", source: "", gamecode: gamecode)
         startGameViewController.delegate = self
         present(startGameViewController, animated: true)
@@ -1164,7 +1177,11 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let grid =  createIntegerGrid()
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
+                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp )
+                H.updateHost(gamecode, hostupdate)
+                print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
             }
+            
 
         }
         pushTabBarController()
