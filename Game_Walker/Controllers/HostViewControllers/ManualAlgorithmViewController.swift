@@ -373,8 +373,10 @@ class ManualAlgorithmViewController: BaseViewController {
         if horizontalEmptyCells > 0 {
             extraspace = Int((collectionViewCellSize!.width + cellSpacing)) * horizontalEmptyCells
         }
-        var contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + cellSpacing - CGFloat(extraspace)
+        var contentWidth = CGFloat(numberOfItemsInARow) * (collectionViewCellSize!.width + cellSpacing) + (cellSpacing * 2) - CGFloat(extraspace)
+
         let minimumContentWidth = 8 * (collectionViewCellSize!.width + cellSpacing) + cellSpacing
+        print("contentWidth : \(contentWidth) and minimum content width is : \(minimumContentWidth)")
         
         if contentWidth < minimumContentWidth {
             contentWidth = minimumContentWidth
