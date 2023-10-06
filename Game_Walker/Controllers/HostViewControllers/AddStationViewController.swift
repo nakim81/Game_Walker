@@ -64,6 +64,8 @@ class AddStationViewController: BaseViewController {
         gamepointsTextfield.delegate = self
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
+
+
         
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
@@ -316,10 +318,11 @@ class AddStationViewController: BaseViewController {
         
         delegate?.didUpdateStationData {
             print("delegate is being called")
+            NotificationCenter.default.post(name: .stationDataUpdated, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
-
     }
+    
     
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {

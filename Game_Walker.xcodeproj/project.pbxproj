@@ -50,6 +50,7 @@
 		A1A4CD3F2A43C58600704BF8 /* VerticalBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD3E2A43C58600704BF8 /* VerticalBorderView.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
 		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
+		A1E3BBFA2AD0B24900613BC9 /* StationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */; };
 		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
@@ -171,6 +172,7 @@
 		A1A4CD332A371C0500704BF8 /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Dosis-Medium.ttf"; path = "Supporting Files/Fonts/Dosis-Medium.ttf"; sourceTree = "<group>"; };
 		A1A4CD3E2A43C58600704BF8 /* VerticalBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalBorderView.swift; sourceTree = "<group>"; };
 		A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAlgorithmViewController.swift; sourceTree = "<group>"; };
+		A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNotificationController.swift; sourceTree = "<group>"; };
 		A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
 		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
 		A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmViewController.swift; sourceTree = "<group>"; tabWidth = 5; };
@@ -339,6 +341,7 @@
 				A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */,
 				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
 				A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */,
+				A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -730,6 +733,7 @@
 				A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				A1A4CD3F2A43C58600704BF8 /* VerticalBorderView.swift in Sources */,
+				A1E3BBFA2AD0B24900613BC9 /* StationNotificationController.swift in Sources */,
 				FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */,
 				61E50949298891B800F37E79 /* RefereePVEController.swift in Sources */,
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,
