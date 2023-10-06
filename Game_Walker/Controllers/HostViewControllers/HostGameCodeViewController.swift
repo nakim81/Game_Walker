@@ -47,11 +47,24 @@ class HostGameCodeViewController: BaseViewController {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
-                UserData.writeGamecode(gamecode!, "gamecode")
+                Task { @MainActor in
+                    do {
+                        let hostTemp = try await H.getHost(gamecode ?? "")
+                        UserData.writeGamecode(gamecode!, "gamecode")
+                        H.updateHost(_:_:)(gamecode!, hostTemp!)
+                        
+
+                        performSegue(withIdentifier: "goToPF2VC", sender: self)
+
+                    } catch (let e) {
+                        print(e)
+                        gamecodeAlert("Gamecode is not Valid")
+                        return
+                    }
+//                    performSegue(withIdentifier: "goToPF2VC", sender: self)
+                }
             }
 
-//            H.getHost(storedgamecode!)
-            self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
         }
     }
     

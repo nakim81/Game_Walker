@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Dosis-Bold.ttf">
-            <string>Dosis-Bold</string>
-        </array>
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
         </array>
@@ -119,12 +116,6 @@
                                 <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwR-LK-PpZ">
-                                <rect key="frame" x="95.5" y="448.5" width="223" height="16.5"/>
-                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="13"/>
-                                <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hB5-b1-9hu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -134,8 +125,6 @@
                             <constraint firstItem="U83-h1-qtH" firstAttribute="width" secondItem="hB5-b1-9hu" secondAttribute="width" multiplier="0.483092" id="JkU-5b-d8C"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="KYx-IJ-e3n"/>
                             <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="0.75" id="iJr-OO-NFh"/>
-                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="centerX" secondItem="8bU-vL-2hU" secondAttribute="centerX" id="j6z-ms-H6X"/>
-                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="top" secondItem="8bU-vL-2hU" secondAttribute="bottom" constant="5" id="lPt-VG-1sa"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="top" secondItem="CTP-o1-Ip2" secondAttribute="bottom" constant="10" id="oCA-dn-QzG"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="width" secondItem="CTP-o1-Ip2" secondAttribute="width" multiplier="1.5" id="pgt-qc-0n6"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="1.7" id="xpK-2x-qZS"/>
@@ -251,19 +240,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QME-XF-J55" userLabel="Points Label">
-                                        <rect key="frame" x="57.5" y="221" width="119" height="25"/>
+                                        <rect key="frame" x="57.5" y="221" width="118.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-L9-4OF" userLabel="Referee Label">
-                                        <rect key="frame" x="57.5" y="302" width="67" height="25"/>
+                                        <rect key="frame" x="57.5" y="302" width="66.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZT-6z-gXz" userLabel="Rules Label">
-                                        <rect key="frame" x="57.5" y="436.5" width="48" height="25"/>
+                                        <rect key="frame" x="57.5" y="436.5" width="47.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
