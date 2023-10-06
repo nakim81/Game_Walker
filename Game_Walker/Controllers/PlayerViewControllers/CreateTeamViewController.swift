@@ -37,32 +37,6 @@ class CreateTeamViewController: BaseViewController {
         }
     }
     
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        return label
-    }()
-    
     private var selectedIndex : Int?
     
     override func viewDidLoad() {
@@ -70,11 +44,7 @@ class CreateTeamViewController: BaseViewController {
         configureDelegates()
         configureTextField()
         configureCollectionView()
-        configureGamecodeLabel()
         configureBtn()
-//        self.stationList = [Station(name: "game1", number: 1, pvp: true), Station(name: "game2", number: 2, pvp: true), Station(name: "game3", number: 3, pvp: true)]
-//        print(self.stationList)
-//        print(self.algorithm, self.algorithm.count)
     }
     
     private func configureTextField(){
@@ -101,13 +71,6 @@ class CreateTeamViewController: BaseViewController {
         collectionView.clipsToBounds = true
     }
     
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-        ])
-    }
     private func configureBtn(){
         createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         createTeamButton.layer.cornerRadius = 8

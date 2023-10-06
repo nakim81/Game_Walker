@@ -61,6 +61,7 @@ class JoinGameViewController: BaseViewController {
         let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
+        self.navigationItem.titleView?.isHidden = true
     }
     
     @objc func back(sender: UIBarButtonItem) {
