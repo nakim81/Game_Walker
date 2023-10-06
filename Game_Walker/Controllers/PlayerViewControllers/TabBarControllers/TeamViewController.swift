@@ -148,19 +148,19 @@ class TeamViewController: UIViewController {
             Task { @MainActor in
                 do {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
+                    if let team = self.team {
+                        if (team.players.count == 1) {
+                            T.removeTeam(gameCode, team)
+                        }
+                    }
+                    UserData.clearMyTeam("team")
+                    self.performSegue(withIdentifier: "returnToCorJ", sender: sender)
                 } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return
                 }
             }
-            if let team = self.team {
-                if (team.players.count == 1) {
-                    T.removeTeam(gameCode, team)
-                }
-            }
-            UserData.clearMyTeam("team")
-            self.performSegue(withIdentifier: "returnToCorJ", sender: sender)
         })
         alert.addAction(action)
         alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))

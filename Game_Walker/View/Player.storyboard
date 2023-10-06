@@ -759,6 +759,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="lz2-86-c74"/>
         <segue reference="qEi-jd-It5"/>
         <segue reference="NyH-V6-DS8"/>
     </inferredMetricsTieBreakers>

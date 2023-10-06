@@ -18,12 +18,13 @@ class CreateTeamViewController: BaseViewController {
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var host: Host?
+    private var stationList: [Station] = []
     
     private let audioPlayerManager = AudioPlayerManager()
     
     private let iconImageNames : [String] = [
-        "iconBoy", "iconBear", "iconJam-min", "iconGeum-jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
-        "iconDust", "iconFire", "iconWater", "iconRed", "iconOrance", "iconYellow", "iconGreen", "iconBlue",
+        "iconBoy", "iconBear", "iconJam-min 1", "iconGeum-Jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
+        "iconDust", "iconFire", "iconWater", "iconRed", "iconOrange", "iconYellow", "iconGreen", "iconBlue",
         "iconNavyblue", "iconPurple", "iconPink",
     ]
     
@@ -90,6 +91,7 @@ class CreateTeamViewController: BaseViewController {
         Task { @MainActor in
             do {
                 self.host = try await H.getHost(gameCode)
+                self.stationList = try await S.getStationList(gameCode)
             } catch(let e) {
                 print(e)
                 alert(title: "Connection Error", message: e.localizedDescription)
@@ -100,14 +102,15 @@ class CreateTeamViewController: BaseViewController {
         if Int(teamNumber) ?? 0 > 0 {
             guard let temp = self.host?.algorithm else { return }
             let algorithm = convert1DArrayTo2D(temp)
-            if !(algorithm.isEmpty ?? true) {
+            print(algorithm)
+            if !(algorithm.isEmpty ) {
                 teamNameTextField.resignFirstResponder()
                 guard let selectedIconName = selectedIconName else {
                     alert(title: "No Icon Selected", message: "Please select a team icon")
                     return
                 }
                 ///find the order of stations for player's team
-                let stationOrder = self.getStationOrder(algorithm ?? [[]], Int(teamNumber) ?? 0)
+                let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
                 print("stationorder: \(stationOrder)")
                 let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                 UserData.writeTeam(newTeam, "team")
@@ -137,17 +140,7 @@ class CreateTeamViewController: BaseViewController {
 extension CreateTeamViewController {
     
     ///return the order of staions for the team
-    private func getStationOrder(_ algorithm: [[Int]], _ teamNumber: Int) -> [Int] {
-        var stationList: [Station] = []
-        Task { @MainActor in
-            do {
-                stationList = try await S.getStationList(gameCode)
-            } catch(let e) {
-                print(e)
-                alert(title: "Connection Error", message: e.localizedDescription)
-                return
-            }
-        }
+    private func getStationOrder(_ algorithm: [[Int]], _ teamNumber: Int, _ stationList: [Station]) -> [Int] {
         var index = 0 ///represents the column index in the row
         var order: [Int] = []
         ///each row of the algorithm = teams
@@ -162,7 +155,7 @@ extension CreateTeamViewController {
                     index += 1
                 }
                 ///if my team not found in the row
-                if index == teams.count {
+                if index >= teams.count {
                     order.append(-1)
                 }
             }
