@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Dosis-Bold.ttf">
-            <string>Dosis-Bold</string>
-        </array>
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
         </array>
@@ -41,50 +38,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf7-AC-7yj">
-                                <rect key="frame" x="83" y="551" width="248" height="81"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="CreateGameButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyS-bJ-dkx">
+                                <rect key="frame" x="72.5" y="274.5" width="269" height="88"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="cf7-AC-7yj" secondAttribute="height" multiplier="245:80" id="szy-uf-51D"/>
+                                    <constraint firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="height" multiplier="245:80" id="Wan-Qp-l4G"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="HostResumeGameButton"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="HostCreateGameButtonLarge"/>
                                 <connections>
-                                    <action selector="joinButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ssN-9B-Ii4"/>
+                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YQo-xJ-Qzb"/>
+                                    <segue destination="1L0-Oz-afr" kind="show" identifier="CreateGameToStationsSegue" id="HVu-dF-Day"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjH-HA-b1K" userLabel="CreateButton">
-                                <rect key="frame" x="83" y="278" width="248" height="81"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NZ-by-CrW">
+                                <rect key="frame" x="72.5" y="508.5" width="269" height="88"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="fjH-HA-b1K" secondAttribute="height" multiplier="245:80" id="MLO-JZ-zd0"/>
+                                    <constraint firstAttribute="width" secondItem="8NZ-by-CrW" secondAttribute="height" multiplier="245:80" id="c52-Ne-J07"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="HostCreateGameButtonLarge"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="HostResumeGameButton"/>
                                 <connections>
-                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="J51-hc-cOs"/>
+                                    <action selector="resumeButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SzG-ND-FUq"/>
+                                    <segue destination="4gK-PM-WO8" kind="show" identifier="ResumeGameToCodeSegue" id="efF-m6-uwV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fjH-HA-b1K" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="4MZ-FB-Fhl"/>
-                            <constraint firstItem="cf7-AC-7yj" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.6" id="PBF-TX-gfT"/>
-                            <constraint firstItem="fjH-HA-b1K" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.6" id="T1U-j8-fCt"/>
-                            <constraint firstItem="cf7-AC-7yj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ZdS-b9-9tO"/>
-                            <constraint firstItem="cf7-AC-7yj" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="1.3" id="r07-bE-grh"/>
-                            <constraint firstItem="fjH-HA-b1K" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="vm6-B7-U1w"/>
+                            <constraint firstItem="8NZ-by-CrW" firstAttribute="centerX" secondItem="tyS-bJ-dkx" secondAttribute="centerX" id="84H-LA-uHn"/>
+                            <constraint firstItem="tyS-bJ-dkx" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.65" id="Awl-hY-Dio"/>
+                            <constraint firstItem="8NZ-by-CrW" firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="width" id="D56-He-p9g"/>
+                            <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="X8G-4e-xhE"/>
+                            <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="iRk-Jk-CUw"/>
+                            <constraint firstItem="8NZ-by-CrW" firstAttribute="top" secondItem="tyS-bJ-dkx" secondAttribute="bottom" constant="146" id="zTU-cw-RCj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="joinButton" destination="cf7-AC-7yj" id="SOQ-le-voL"/>
-                        <segue destination="4gK-PM-WO8" kind="show" identifier="HostGamecodeSegue" id="AVX-s8-MVB"/>
-                        <segue destination="1L0-Oz-afr" kind="show" identifier="CreateGameSegue" id="Yeq-Vg-rew"/>
-                        <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="YyJ-Bo-JHZ"/>
+                        <outlet property="createButton" destination="tyS-bJ-dkx" id="Geg-Ux-L43"/>
+                        <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-275" y="49"/>
+            <point key="canvasLocation" x="-349" y="28"/>
         </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
@@ -110,7 +107,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="" backgroundImage="HostResumeButton"/>
                                 <connections>
-                                    <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="6jZ-bb-bpg"/>
+                                    <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="h9p-9d-cMp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-o1-Ip2">
@@ -119,12 +116,7 @@
                                 <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwR-LK-PpZ">
-                                <rect key="frame" x="82.5" y="476.5" width="249" height="15.5"/>
-                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="13"/>
-                                <color key="textColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hB5-b1-9hu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -134,8 +126,6 @@
                             <constraint firstItem="U83-h1-qtH" firstAttribute="width" secondItem="hB5-b1-9hu" secondAttribute="width" multiplier="0.483092" id="JkU-5b-d8C"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="KYx-IJ-e3n"/>
                             <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="0.75" id="iJr-OO-NFh"/>
-                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="centerX" secondItem="8bU-vL-2hU" secondAttribute="centerX" id="j6z-ms-H6X"/>
-                            <constraint firstItem="pwR-LK-PpZ" firstAttribute="top" secondItem="8bU-vL-2hU" secondAttribute="bottom" constant="5" id="lPt-VG-1sa"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="top" secondItem="CTP-o1-Ip2" secondAttribute="bottom" constant="10" id="oCA-dn-QzG"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="width" secondItem="CTP-o1-Ip2" secondAttribute="width" multiplier="1.5" id="pgt-qc-0n6"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="1.7" id="xpK-2x-qZS"/>
@@ -145,12 +135,12 @@
                     <connections>
                         <outlet property="gameCodeInput" destination="8bU-vL-2hU" id="qDq-Cq-kuv"/>
                         <outlet property="joinButton" destination="U83-h1-qtH" id="QJZ-d3-vwc"/>
-                        <segue destination="1L0-Oz-afr" kind="show" identifier="HostJoinSegue" id="ba3-G3-TlT"/>
+                        <segue destination="1L0-Oz-afr" kind="show" identifier="HostJoinSegue" id="D0i-05-1lI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmR-Da-uq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="392"/>
+            <point key="canvasLocation" x="441" y="457"/>
         </scene>
         <!--Stations Table View Controller-->
         <scene sceneID="SNx-G6-8FI">
@@ -251,19 +241,24 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QME-XF-J55" userLabel="Points Label">
-                                        <rect key="frame" x="57.5" y="223" width="144" height="27"/>
+                                        <rect key="frame" x="57.5" y="221" width="118.5" height="25"/>
+
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-L9-4OF" userLabel="Referee Label">
-                                        <rect key="frame" x="57.5" y="306" width="79.5" height="27"/>
+
+                                        <rect key="frame" x="57.5" y="302" width="66.5" height="25"/>
+
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZT-6z-gXz" userLabel="Rules Label">
-                                        <rect key="frame" x="57.5" y="442.5" width="57.5" height="27"/>
+
+                                        <rect key="frame" x="57.5" y="436.5" width="47.5" height="25"/>
+
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1097,7 +1092,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="OK4-sB-gpM"/>
-        <segue reference="ba3-G3-TlT"/>
+        <segue reference="HVu-dF-Day"/>
+
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>

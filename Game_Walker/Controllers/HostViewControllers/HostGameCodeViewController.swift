@@ -11,7 +11,7 @@ class HostGameCodeViewController: BaseViewController {
 
     @IBOutlet weak var gameCodeInput: UITextField!
     @IBOutlet weak var joinButton: UIButton!
-    
+    var dontTriggerSegue = true
     private var storedgamecode = UserData.readGamecode("gamecode")
     private var gamecode = UserData.readGamecode("gamecode")
     
@@ -47,11 +47,23 @@ class HostGameCodeViewController: BaseViewController {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
-                UserData.writeGamecode(gamecode!, "gamecode")
-            }
+                Task { @MainActor in
+                    do {
+                        let hostTemp = try await H.getHost(gamecode ?? "")
+                        UserData.writeGamecode(gamecode!, "gamecode")
+                        H.updateHost(_:_:)(gamecode!, hostTemp!)
+                        
+                        performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                    } catch (let e) {
+                        print(e)
+                        gamecodeAlert("Gamecode is not Valid")
+                        return
+                    }
 
-//            H.getHost(storedgamecode!)
-            self.performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                }
+            } else {
+                performSegue(withIdentifier: "HostJoinSegue", sender: self)
+            }
         }
     }
     
