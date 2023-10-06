@@ -11,7 +11,7 @@ class HostGameCodeViewController: BaseViewController {
 
     @IBOutlet weak var gameCodeInput: UITextField!
     @IBOutlet weak var joinButton: UIButton!
-    
+    var dontTriggerSegue = true
     private var storedgamecode = UserData.readGamecode("gamecode")
     private var gamecode = UserData.readGamecode("gamecode")
     
@@ -53,18 +53,17 @@ class HostGameCodeViewController: BaseViewController {
                         UserData.writeGamecode(gamecode!, "gamecode")
                         H.updateHost(_:_:)(gamecode!, hostTemp!)
                         
-
-                        performSegue(withIdentifier: "goToPF2VC", sender: self)
-
+                        performSegue(withIdentifier: "HostJoinSegue", sender: self)
                     } catch (let e) {
                         print(e)
                         gamecodeAlert("Gamecode is not Valid")
                         return
                     }
-//                    performSegue(withIdentifier: "goToPF2VC", sender: self)
-                }
-            }
 
+                }
+            } else {
+                performSegue(withIdentifier: "HostJoinSegue", sender: self)
+            }
         }
     }
     
