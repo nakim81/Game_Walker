@@ -11,7 +11,7 @@ import UIKit
 class RefereeMessageViewController: UIViewController {
     
     private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-    private var messages: [String] = []
+    private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     
     private let messageTableView: UITableView = {
@@ -67,7 +67,7 @@ class RefereeMessageViewController: UIViewController {
         }
     }
     
-    convenience init(messages: [String]) {
+    convenience init(messages: [Announcement]) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.messages = messages
@@ -99,6 +99,15 @@ class RefereeMessageViewController: UIViewController {
         configureTableView()
         setUpViews()
         makeConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+    }
+    
+    @objc func refresh() {
+        Task {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            self.messages = RefereeRankingPVEViewController.localMessages
+            messageTableView.reloadData()
+        }
     }
     
     private func configureTableView() {
@@ -159,11 +168,7 @@ extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSour
         let cell = messageTableView.dequeueReusableCell(withIdentifier: RefereeMessageTableViewCell.identifier, for: indexPath) as! RefereeMessageTableViewCell
         let ind = indexPath.row + 1
         let announcement = messages[indexPath.row]
-        if (RefereeRankingPVEViewController.readMsgList.contains(announcement)) {
-            cell.configureTableViewCell(name: "Announcement \(ind)", read: true)
-        } else {
-            cell.configureTableViewCell(name: "Announcement \(ind)", read: false)
-        }
+        cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
         cell.selectionStyle = .none
         return cell
     }
@@ -177,11 +182,8 @@ extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSour
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let announcementText = messages[indexPath.row]
-        if !RefereeRankingPVEViewController.readMsgList.contains(announcementText) {
-            RefereeRankingPVEViewController.readMsgList.append(announcementText)
-        }
-        showRefereeAnnouncementPopUp(announcement: announcementText)
+        RefereeRankingPVEViewController.localMessages[indexPath.row].readStatus = true
+        showRefereeAnnouncementPopUp(announcement: RefereeRankingPVEViewController.localMessages[indexPath.row])
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }

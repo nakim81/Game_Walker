@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,9 @@
         </array>
         <array key="GemunuLibre-Bold.ttf">
             <string>GemunuLibre-Bold</string>
+        </array>
+        <array key="GemunuLibre-SemiBold.ttf">
+            <string>GemunuLibre-SemiBold</string>
         </array>
     </customFonts>
     <scenes>
@@ -313,7 +316,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-2R-IAd">
                                 <rect key="frame" x="29.5" y="103" width="355" height="53.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -457,8 +460,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JQ-sB-IuT">
+                                <rect key="frame" x="35.5" y="103" width="343" height="53.5"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-6H-nNi">
-                                <rect key="frame" x="29.5" y="171.5" width="355" height="650.5"/>
+                                <rect key="frame" x="35.5" y="171.5" width="343" height="650.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avT-q1-ZT6">
@@ -471,19 +480,13 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JQ-sB-IuT">
-                                <rect key="frame" x="29.5" y="103" width="355" height="53.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GdT-CQ-CKW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="height" secondItem="GdT-CQ-CKW" secondAttribute="height" multiplier="0.0634371" id="3db-ix-Q72"/>
                             <constraint firstItem="avT-q1-ZT6" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.0845" id="5vt-uM-h0w"/>
-                            <constraint firstItem="KtD-6H-nNi" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.857" id="GAA-JA-jnf"/>
+                            <constraint firstItem="KtD-6H-nNi" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.829439" id="GAA-JA-jnf"/>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="trailing" secondItem="KtD-6H-nNi" secondAttribute="trailing" id="HSm-uv-FWG"/>
                             <constraint firstItem="8zk-M0-jsJ" firstAttribute="centerY" secondItem="GdT-CQ-CKW" secondAttribute="centerY" multiplier="0.2" id="KR7-hY-Wag"/>
                             <constraint firstItem="avT-q1-ZT6" firstAttribute="centerX" secondItem="GdT-CQ-CKW" secondAttribute="centerX" multiplier="1.65" id="SMT-0w-0DY"/>

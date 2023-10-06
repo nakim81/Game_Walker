@@ -57,8 +57,11 @@ class JoinGameViewController: BaseViewController {
     
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(back))
+        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
+        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
+        newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
+        self.navigationItem.titleView?.isHidden = true
     }
     
     @objc func back(sender: UIBarButtonItem) {
@@ -132,9 +135,9 @@ class JoinGameViewController: BaseViewController {
             
         } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
             Task { @MainActor in
-                if (UserData.readTeam("team") != nil) {
+                if let team = UserData.readTeam("team") {
                     do {
-                        try await T.leaveTeam(savedGameCode, savedUserName, player)
+                        try await T.leaveTeam(savedGameCode, team.name, player)
                     } catch GameWalkerError.serverError(let message) {
                         print(message)
                         serverAlert(message)
@@ -182,9 +185,9 @@ class JoinGameViewController: BaseViewController {
             }
         } else if gamecode != savedGameCode && username != savedUserName {
             Task {@MainActor in
-                if UserData.readTeam("team") != nil {
+                if let team = UserData.readTeam("team") {
                     do {
-                        try await T.leaveTeam(savedGameCode, savedUserName, player)
+                        try await T.leaveTeam(savedGameCode, team.name, player)
                     } catch GameWalkerError.serverError(let message) {
                         print(message)
                         serverAlert(message)

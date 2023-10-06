@@ -18,7 +18,6 @@ class HostTimerViewController: UIViewController {
     
     @IBOutlet weak var endGameBtn: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    private var messages: [String] = []
     
     private var host : Host = Host()
     private var startTime : Int = 0
@@ -97,8 +96,7 @@ class HostTimerViewController: UIViewController {
             pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
             calculateTime()
         }
-        //
-        showHostMessagePopUp(messages: messages)
+        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
 
     @IBAction func settingBtnPressed(_ sender: UIButton) {
@@ -458,7 +456,6 @@ extension HostTimerViewController: HostUpdateListener {
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
         self.isPaused = host.paused
-        self.messages = host.announcements
         self.gameStart = host.gameStart
     }
     
@@ -480,8 +477,6 @@ extension HostTimerViewController: HostUpdateListener {
         self.rounds = host.rounds
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        self.messages = host.announcements
-        self.messages = host.announcements
         self.gameStart = host.gameStart
         self.gameOver = host.gameover
     }

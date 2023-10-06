@@ -39,22 +39,23 @@ class RefereePVPController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
-        if RefereeRankingPVEViewController.read {
-            self.annnouncementButton.setImage(readAll, for: .normal)
-        } else {
+        if RefereeRankingPVEViewController.unread {
             self.annnouncementButton.setImage(unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.annnouncementButton.setImage(readAll, for: .normal)
         }
     }
     
     @objc func readAll(notification: Notification) {
-        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
-        if isRead {
-            self.annnouncementButton.setImage(self.readAll, for: .normal)
-        } else {
+        if unread {
             self.annnouncementButton.setImage(self.unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.annnouncementButton.setImage(self.readAll, for: .normal)
         }
     }
     
@@ -495,7 +496,7 @@ class RefereePVPController: BaseViewController {
     }
     
     @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.messages)
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {

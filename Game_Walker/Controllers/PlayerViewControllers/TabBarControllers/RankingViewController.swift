@@ -78,20 +78,18 @@ class RankingViewController: UIViewController {
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
         ])
     }
     
     @objc func readAll(notification: Notification) {
-        guard let isRead = notification.userInfo?["isRead"] as? Bool else {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
-        if isRead {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        } else {
+        if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.announcementButton.setImage(self.readAll, for: .normal)
         }
     }
     
@@ -99,14 +97,14 @@ class RankingViewController: UIViewController {
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.messages)
+        showMessagePopUp(messages: TeamViewController.localMessages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
     }
     
     private func configureAlertIcon() {
-        if TeamViewController.read {
+        if TeamViewController.unread {
             self.announcementButton.setImage(readAll, for: .normal)
         } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
@@ -139,7 +137,6 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return teamList.count
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,7 +147,9 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
 extension RankingViewController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
-        self.leaderBoard.reloadData()
+        if self.showScore {
+            self.leaderBoard.reloadData()
+        }
     }
 }
 // MARK: - HostProtocol

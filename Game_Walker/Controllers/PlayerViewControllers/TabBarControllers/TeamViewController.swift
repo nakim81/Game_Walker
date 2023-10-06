@@ -18,8 +18,7 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var teamNumLbl: UILabel!
     @IBOutlet weak var teamNameLbl: UILabel!
     
-    static var readMsgList: [String] = []
-    static var messages: [String] = []
+    static var localMessages: [Announcement] = []
     private let readAll = UIImage(named: "announcement")
     private let unreadSome = UIImage(named: "unreadMessage")
     
@@ -30,7 +29,7 @@ class TeamViewController: UIViewController {
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
     private var timer = Timer()
-    static var read: Bool = true
+    static var unread: Bool = false
     private var diff: Int?
     
     private let audioPlayerManager = AudioPlayerManager()
@@ -70,24 +69,21 @@ class TeamViewController: UIViewController {
         configureLabel()
         
         // timer checks if all the announcements are read or not
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.diff = TeamViewController.messages.count - TeamViewController.readMsgList.count
-            if strongSelf.diff! < 1 {
-                if TeamViewController.read == false {
-                    TeamViewController.read = true
-                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead": TeamViewController.read])
-                    strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
-                }
+            // true if some announcements are unread, false if all read
+            let unread = strongSelf.checkUnreadAnnouncements(announcements: TeamViewController.localMessages)
+            TeamViewController.unread = unread
+            if unread{
+                NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                strongSelf.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
-                if TeamViewController.read == true {
-                    TeamViewController.read = false
-                    NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["isRead": TeamViewController.read])
-                    strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-                    strongSelf.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                }
+                NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
             }
         }
     }
@@ -132,11 +128,11 @@ class TeamViewController: UIViewController {
     }
     
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
-        alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
+        self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.messages)
+        showMessagePopUp(messages: TeamViewController.localMessages)
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
@@ -146,7 +142,7 @@ class TeamViewController: UIViewController {
         showAwardPopUp()
     }
     
-    func alert2(title: String, message: String, sender: UIButton) {
+    private func alert2(title: String, message: String, sender: UIButton) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             Task { @MainActor in
@@ -164,7 +160,7 @@ class TeamViewController: UIViewController {
                 }
             }
             UserData.clearMyTeam("team")
-            self.performSegue(withIdentifier: "returntoCorJ", sender: sender)
+            self.performSegue(withIdentifier: "returnToCorJ", sender: sender)
         })
         alert.addAction(action)
         alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
@@ -220,26 +216,29 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - TeamProtocol
 extension TeamViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        let msgList = TeamViewController.messages
-        if (msgList.count >= host.announcements.count) {
-            var count = 0
-            for ind in msgList.indices {
-                if (ind - count >= host.announcements.count) {
-                    break;
-                }
-                let text = msgList[ind]
-                if ((text != host.announcements[ind - count]) && TeamViewController.readMsgList.contains(text)) {
-                    if let index = TeamViewController.readMsgList.firstIndex(of: text) {
-                        TeamViewController.readMsgList.remove(at: index)
-                    }
-                    if (msgList.count > host.announcements.count) {
-                        count += 1
-                    }
-                }
-            }
-            TeamViewController.messages = host.announcements
+        var hostAnnouncements = Array(host.announcements)
+        // if some announcements were deleted from the server
+        if TeamViewController.localMessages.count > hostAnnouncements.count {
+            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: hostAnnouncements)
+            NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":TeamViewController.unread])
         } else {
-            TeamViewController.messages = host.announcements
+            // compare server announcements and local announcements
+            for announcement in hostAnnouncements {
+                let ids: [String] = TeamViewController.localMessages.map({ $0.uuid })
+                // new announcements
+                if !ids.contains(announcement.uuid) {
+                    TeamViewController.localMessages.append(announcement)
+                } else {
+                    // modified announcements
+                    if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                        if TeamViewController.localMessages[localIndex].content != announcement.content {
+                            TeamViewController.localMessages[localIndex].content = announcement.content
+                            TeamViewController.localMessages[localIndex].readStatus = false
+                        }
+                    }
+                }
+                
+            }
         }
     }
 }
