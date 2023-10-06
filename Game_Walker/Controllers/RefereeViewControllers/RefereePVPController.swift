@@ -119,7 +119,7 @@ class RefereePVPController: BaseViewController {
             alert(title: "", message: "The Team doesn't exist")
         } else {
             UserData.writeTeam(self.teamA, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
             self.present(popUpWindow, animated: true, completion: nil)
         }
     }
@@ -181,23 +181,27 @@ class RefereePVPController: BaseViewController {
     
     @objc func leftWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
-        Task {
-            do {
-                try await T.givePoints(gameCode, self.teamA.name, self.points)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
+        if self.teamA.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            Task {
+                do {
+                    try await T.givePoints(gameCode, self.teamA.name, self.points)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
             }
+            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            leftWinButton.image = UIImage(named: "Lose Gray Button")
+            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            leftLoseButton.image = UIImage(named: "Lose Yellow Button")
         }
-        leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        leftWinButton.image = UIImage(named: "Lose Gray Button")
-        leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
-        }
-        leftLoseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
     private lazy var leftLoseButton: UIImageView = {
@@ -225,14 +229,35 @@ class RefereePVPController: BaseViewController {
     
     @objc func leftLoseButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
-        leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
+        if self.teamA.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            Task {
+                do {
+                    try await T.givePoints(gameCode, self.teamA.name, self.points)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
+            }
+            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            leftWinButton.image = UIImage(named: "Lose Gray Button")
+            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            leftWinButton.image = UIImage(named: "Win Blue Button")
+            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            leftLoseButton.image = UIImage(named: "Lose Gray Button")
         }
-        leftWinButton.image = UIImage(named: "Lose Yellow Button")
-        leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        leftLoseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     private lazy var leftScoreLabel: UILabel = {
@@ -257,7 +282,7 @@ class RefereePVPController: BaseViewController {
             alert(title: "", message: "The Team doesn't exist")
         } else {
             UserData.writeTeam(self.teamB, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("refereeGameCode")!)
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
             self.present(popUpWindow, animated: true, completion: nil)
         }
     }
@@ -319,23 +344,27 @@ class RefereePVPController: BaseViewController {
     
     @objc func rightWinButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
-        Task {
-            do {
-                try await T.givePoints(gameCode, self.teamB.name, self.points)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
+        if self.teamB.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            Task {
+                do {
+                    try await T.givePoints(gameCode, self.teamB.name, self.points)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
             }
+            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            rightWinButton.image = UIImage(named: "Lose Gray Button")
+            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            rightLoseButton.image = UIImage(named: "Lose Yellow Button")
         }
-        rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        rightWinButton.image = UIImage(named: "Lose Gray Button")
-        rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
-        }
-        rightLoseButton.image = UIImage(named: "Lose Yellow Button")
     }
     
     private lazy var rightLoseButton: UIImageView = {
@@ -356,21 +385,25 @@ class RefereePVPController: BaseViewController {
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(rightLoseButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        label.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
     @objc func rightLoseButtonTapped() {
         //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
-        rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = true
+        if self.teamB.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            rightWinButton.image = UIImage(named: "Win Blue Button")
+            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            rightLoseButton.image = UIImage(named: "Lose Gray Button")
         }
-        rightWinButton.image = UIImage(named: "Lose Yellow Button")
-        rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-            gestureRecognizer.isEnabled = false
-        }
-        rightLoseButton.image = UIImage(named: "Lose Gray Button")
     }
     
     private lazy var rightScoreLabel: UILabel = {
@@ -549,6 +582,16 @@ class RefereePVPController: BaseViewController {
 //MARK: - Protocols
 extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
     func updateTeams(_ teams: [Team]) {
+        for old_team in self.teamOrder {
+            for team in teams {
+                if old_team.number == team.number && old_team.points != team.points {
+                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
+                        self.teamOrder[index] = team
+                    }
+                    break;
+                }
+            }
+        }
         for team in teams {
             if self.teamA.name == team.name {
                 self.teamA = team
@@ -567,9 +610,11 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
             leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
             leftIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 2].iconName)
             leftTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 2].name)"
+            leftScoreLabel.text = "\(self.teamOrder[2 * host.currentRound - 2].points)"
             rightTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 1].number)"
             rightIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 1].iconName)
             rightTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 1].name)"
+            rightScoreLabel.text = "\(self.teamOrder[2 * host.currentRound - 1].points)"
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
@@ -587,6 +632,8 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
             }
             rightLoseButton.image = UIImage(named: "Lose Yellow Button")
             self.round = host.currentRound
+            self.teamA = self.teamOrder[2 * host.currentRound - 2]
+            self.teamB = self.teamOrder[2 * host.currentRound - 1]
         }
     }
     

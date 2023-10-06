@@ -247,7 +247,7 @@ class RefereeTimerController: BaseViewController {
     func findStation() {
         for station in stations {
             if station.name == referee.stationName {
-                showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.description, gamePoitns: String(station.points), gameRule: station.place)
+                showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
             }
         }
     }
