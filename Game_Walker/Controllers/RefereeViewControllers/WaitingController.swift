@@ -151,9 +151,9 @@ class WaitingController: BaseViewController {
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
             // For now, it is more suitable to write here considering we already have algorithms in the most of our testing cases.
             if self.referee.assigned {
-                //if self.algorithm != [] && self.teamCreated {
-                setTeamOrder()
-                //}
+                if self.algorithm != [] && self.teamCreated {
+                    setTeamOrder()
+                }
             }
             //
             self.view.layoutIfNeeded() 
@@ -197,9 +197,9 @@ class WaitingController: BaseViewController {
 // MARK: - Protocols
 extension WaitingController: TeamUpdateListener ,RefereeUpdateListener, HostUpdateListener {
     func updateTeams(_ teams: [Team]) {
-//        if teams.count == self.number {
+        if teams.count == self.number {
             self.teamCreated = true
-//        }
+        }
     }
     
     func updateReferee(_ referee: Referee) {
