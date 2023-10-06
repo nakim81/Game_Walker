@@ -250,21 +250,22 @@ struct H {
     
     static func getHost(_ gamecode: String) async throws -> Host? {
         let docRef = db.collection("Servers").document("Gamecode : \(gamecode)")
-        let document = try await docRef.getDocument()
-        if document.exists {
-            guard let data = document.data() else { return nil }
-            let host = convertDataToHost(data)
-            return host
-        } else {
-            if let error = document.error {
-                print("Error getting Host: \(error.localizedDescription)")
-                throw GameWalkerError.serverError("Something went wrong while getting Host")
+        do {
+            let document = try await docRef.getDocument()
+            if document.exists {
+                guard let data = document.data() else { return nil }
+                let host = convertDataToHost(data)
+                return host
             } else {
-                print("Error getting Host with Gamecode")
+                print("Error getting Host by Gamecode")
                 throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
             }
+        } catch {
+            print("Error getting Host")
+            throw GameWalkerError.serverError("Something went wrong while getting Host")
         }
     }
+
 
     static func updateHost(_ gamecode: String, _ host: Host) {
         do {
