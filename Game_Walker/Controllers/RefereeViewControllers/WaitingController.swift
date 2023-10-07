@@ -26,7 +26,7 @@ class WaitingController: BaseViewController {
     private var stationList : [Station] = []
     private var station : Station = Station()
     private var pvp : Bool = false
-    private var number : Int = 0
+    private var number : Int = -1
     private var teams : [Team] = []
     private var updatedTeamOrder : [Team] = []
     
