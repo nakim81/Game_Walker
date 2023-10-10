@@ -29,7 +29,7 @@ class RefereeRankingPVEViewController: UIViewController {
     
     static let notificationName = Notification.Name("readNotification")
     
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
     override func viewDidLoad() {

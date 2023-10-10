@@ -14,12 +14,11 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var leaveButton: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
-    @IBOutlet weak var testBtn: UIButton!
     @IBOutlet weak var teamNumLbl: UILabel!
     @IBOutlet weak var teamNameLbl: UILabel!
     
     static var localMessages: [Announcement] = []
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private var team: Team?
@@ -67,7 +66,7 @@ class TeamViewController: UIViewController {
         addHostListener()
         configureTableView()
         configureLabel()
-        
+        settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
         // timer checks if all the announcements are read or not
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
@@ -136,10 +135,6 @@ class TeamViewController: UIViewController {
     }
     
     @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    @IBAction func testBtnPressed(_ sender: Any) {
-        showAwardPopUp()
     }
     
     private func alert2(title: String, message: String, sender: UIButton) {

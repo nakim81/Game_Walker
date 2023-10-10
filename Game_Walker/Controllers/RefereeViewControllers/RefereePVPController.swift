@@ -31,7 +31,7 @@ class RefereePVPController: BaseViewController {
     private var rule : String = ""
     
     private let audioPlayerManager = AudioPlayerManager()
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
     

@@ -21,7 +21,7 @@ class RefereeRankingPVPViewController: UIViewController {
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private let audioPlayerManager = AudioPlayerManager()

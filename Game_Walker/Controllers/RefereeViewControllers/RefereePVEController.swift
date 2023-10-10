@@ -26,7 +26,7 @@ class RefereePVEController: BaseViewController {
     private var points : Int = 0
     
     private let audioPlayerManager = AudioPlayerManager()
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
     

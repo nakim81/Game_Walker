@@ -112,6 +112,8 @@
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */; };
+		FCAAB3072AD3D30F0035F36A /* MainOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */; };
+		FCB1274C2AD5223000E47FF0 /* RorTOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */; };
 		FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0E2A97A04A00F4AE99 /* purple.wav */; };
 		FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0F2A97A04A00F4AE99 /* blue.wav */; };
 		FCB13E172A97A04B00F4AE99 /* green.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E102A97A04A00F4AE99 /* green.wav */; };
@@ -228,6 +230,8 @@
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewController.swift; sourceTree = "<group>"; };
+		FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOverlayViewController.swift; sourceTree = "<group>"; };
+		FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RorTOverlayViewController.swift; sourceTree = "<group>"; };
 		FCB13E0E2A97A04A00F4AE99 /* purple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purple.wav; path = "Supporting Files/purple.wav"; sourceTree = "<group>"; };
 		FCB13E0F2A97A04A00F4AE99 /* blue.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = blue.wav; path = "Supporting Files/blue.wav"; sourceTree = "<group>"; };
 		FCB13E102A97A04A00F4AE99 /* green.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = green.wav; path = "Supporting Files/green.wav"; sourceTree = "<group>"; };
@@ -536,6 +540,8 @@
 				FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */,
 				FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */,
 				FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */,
+				FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */,
+				FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -705,6 +711,7 @@
 				A1A4CD2A2A371B3B00704BF8 /* TeamDatabase.swift in Sources */,
 				A1A4CD282A371B2400704BF8 /* Protocols.swift in Sources */,
 				A1A4CD242A371AEF00704BF8 /* RefereeDatabase.swift in Sources */,
+				FCB1274C2AD5223000E47FF0 /* RorTOverlayViewController.swift in Sources */,
 				A1A4CD222A371AC700704BF8 /* PlayerDatabase.swift in Sources */,
 				A1A4CD202A371AA100704BF8 /* HostDatabase.swift in Sources */,
 				61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */,
@@ -780,6 +787,7 @@
 				A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */,
 				A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */,
 				A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */,
+				FCAAB3072AD3D30F0035F36A /* MainOverlayViewController.swift in Sources */,
 				FCF6FB48298A9FC700473FCE /* HostTabBarController.swift in Sources */,
 				FC1D68F1288B97C500C529DA /* UserData.swift in Sources */,
 				DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */,

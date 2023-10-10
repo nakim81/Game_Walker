@@ -14,6 +14,7 @@ import AVFoundation
 
 class MainViewController: BaseViewController {
    
+    @IBOutlet weak var gameWalkerImage: UIImageView!
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var hostButton: UIButton!
@@ -98,7 +99,7 @@ class MainViewController: BaseViewController {
         testBtn.layer.cornerRadius = 10
         testBtn.layer.borderWidth = 3
         testBtn.layer.borderColor = UIColor.systemBlue.cgColor
-        
+        settingBtn.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
     }
     
     @IBAction func playerBtnPressed(_ sender: Any) {
@@ -123,6 +124,7 @@ class MainViewController: BaseViewController {
         UserDefaults.standard.removeObject(forKey: "player")
         UserDefaults.standard.removeObject(forKey: "team")
         UserData.writeUUID(UUID().uuidString)
+        self.alert(title: "", message: "UUID: \(UserData.readUUID()), \(UserData.readPlayer("player")), \(UserData.readReferee("referee")), \(UserData.readReferee("referee")), \(UserData.readGamecode("gamecode")), \(UserData.readTeam("team"))")
         print(UserData.readUUID())
         print(UserData.readPlayer("player"))
         print(UserData.readReferee("referee"))
@@ -131,25 +133,22 @@ class MainViewController: BaseViewController {
     }
     
     @IBAction func infoBtnPressed(_ sender: UIButton) {
-        let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame]
+        let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame, gameWalkerImage.frame]
+        let layerList: [CALayer] = [playerButton.layer, refereeButton.layer, hostButton.layer]
         let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
-        showOverlay(componentPositions, explanationTexts)
+        showOverlay(componentPositions, layerList, explanationTexts)
     }
     
     @IBAction func settingBtnPressed(_ sender: UIButton) {
 
     }
     
-    private func showOverlay(_ componentList: [CGRect], _ explanationTexts: [String]){
-        let overlayViewController = OverlayViewController()
+    private func showOverlay(_ componentList: [CGRect], _ layerList: [CALayer], _ explanationTexts: [String]){
+        let overlayViewController = MainOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        var componentPositions: [CGPoint] = []
-        for component in componentList {
-            componentPositions.append(CGPoint(x: component.midX, y: component.midY))
-        }
+        overlayViewController.configureGuide(componentList, layerList, explanationTexts)
         
-        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: self.view.frame.maxY)
         present(overlayViewController, animated: true, completion: nil)
     }
 }

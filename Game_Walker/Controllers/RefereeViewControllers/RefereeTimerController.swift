@@ -17,7 +17,7 @@ class RefereeTimerController: BaseViewController {
     private var host: Host = Host()
     
     private var messages: [String] = []
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
