@@ -112,6 +112,7 @@ class ManualAlgorithmViewController: BaseViewController {
         stationsLabelImageView.isHidden = true
         roundsLabelImageView.isHidden = true
         configureGamecodeLabel()
+        addTapGesture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,8 +141,6 @@ class ManualAlgorithmViewController: BaseViewController {
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
         ])
     }
     
@@ -1176,5 +1175,284 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
             tabBarController.selectedIndex = 0
             navigationController?.pushViewController(tabBarController, animated: true)
         }
+    }
+}
+// MARK: - showStationListView PopUp
+extension ManualAlgorithmViewController {
+    private func showStationListPopUp(stations: [Station]) {
+        let popUpViewController = StationListViewController(stations: stations)
+        present(popUpViewController, animated: false, completion: nil)
+    }
+    
+    private func addTapGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stationLabelTapped(_:)))
+        stationsLabelImageView.isUserInteractionEnabled = true
+        stationsLabelImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func stationLabelTapped(_ sender: UITapGestureRecognizer) {
+        Task { @MainActor in
+            do {
+                let stationList = try await S.getStationList(gamecode)
+                print(stationList)
+                showStationListPopUp(stations: stationList)
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
+                return
+            }
+        }
+    }
+}
+// MARK: - stationListViewController
+class StationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    private var stationList: [Station] = []
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        view.layer.cornerRadius = 20
+        
+        ///for animation effect
+        view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        
+        return view
+    }()
+    
+    private lazy var  stationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Station List"
+        label.font = UIFont(name: "GemunuLibre-SemiBold", size: 40)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let stationTableView: UITableView = {
+        let tableview = UITableView()
+        return tableview
+    }()
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        
+        // enable
+        button.setTitle("Close", for: .normal)
+        button.setTitleColor(UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)), for: .normal)
+        button.setBackgroundImage(UIColor.white.image(), for: .normal)
+        
+        // disable
+        button.setTitleColor(.gray, for: .disabled)
+        button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
+        
+        // layer
+        button.layer.cornerRadius = 6
+        button.layer.masksToBounds = true
+        
+        button.addTarget(self, action: #selector(close), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc private func close() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    convenience init(stations: [Station]) {
+        self.init()
+        /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
+        self.stationList = stations
+        self.modalPresentationStyle = .overFullScreen
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        //curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+            self?.containerView.transform = .identity
+            self?.containerView.isHidden = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        //curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
+            self?.containerView.transform = .identity
+            self?.containerView.isHidden = true
+        }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTableView()
+        setUpViews()
+        makeConstraints()
+        print(self.stationList)
+    }
+    
+    private func configureTableView() {
+        stationTableView.delegate = self
+        stationTableView.dataSource = self
+        stationTableView.register(StationTableViewCell.self, forCellReuseIdentifier: StationTableViewCell.identifier)
+        stationTableView.backgroundColor = .clear
+        stationTableView.allowsSelection = false
+        stationTableView.separatorStyle = .none
+        stationTableView.allowsSelection = true
+        stationTableView.allowsMultipleSelection = false
+        stationTableView.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+    }
+    
+    private func setUpViews() {
+        self.view.addSubview(containerView)
+        containerView.addSubview(stationLabel)
+        containerView.addSubview(stationTableView)
+        containerView.addSubview(closeButton)
+        self.view.backgroundColor = .black.withAlphaComponent(0.2)
+    }
+    
+    private func makeConstraints() {
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        stationLabel.translatesAutoresizingMaskIntoConstraints = false
+        stationTableView.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 210),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -210),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            stationLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            stationLabel.widthAnchor.constraint(equalToConstant: 250),
+            stationLabel.heightAnchor.constraint(equalToConstant: 45),
+            stationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            stationTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
+            stationTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
+            stationTableView.topAnchor.constraint(equalTo: stationLabel.bottomAnchor, constant: 5),
+            stationTableView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -15),
+            stationTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
+            closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),
+            closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.12424),
+            closeButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+        ])
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = stationTableView.dequeueReusableCell(withIdentifier: StationTableViewCell.identifier, for: indexPath) as! StationTableViewCell
+        let ind = String(indexPath.item + 1)
+        cell.configureTableViewCell(index: "\(ind).", name: "\(self.stationList[indexPath.row].name)")
+        cell.selectionStyle = .none
+        return cell
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stationList.count
+     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+}
+// MARK: - stationTableViewCell
+class StationTableViewCell: UITableViewCell {
+    static let identifier = "StationTableViewCell"
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var indexLbl: UILabel = {
+       let label = UILabel()
+        label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        label.font = UIFont(name: "Dosis-Bold", size: 20)
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.clipsToBounds = true
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var stationLabel: UILabel = {
+        let label = UILabel()
+         label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+         label.font = UIFont(name: "Dosis-Bold", size: 20)
+         label.textAlignment = .left
+         label.numberOfLines = 1
+         label.clipsToBounds = true
+         label.textColor = .white
+         label.translatesAutoresizingMaskIntoConstraints = false
+         return label
+     }()
+    
+    private lazy var borderView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 3
+        return view
+    }()
+    
+    func configureTableViewCell(index: String, name: String) {
+        contentView.addSubview(containerView)
+        containerView.addSubview(indexLbl)
+        containerView.addSubview(stationLabel)
+        containerView.addSubview(borderView)
+        
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            indexLbl.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            indexLbl.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1),
+            indexLbl.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1),
+            indexLbl.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            
+            stationLabel.leadingAnchor.constraint(equalTo: indexLbl.trailingAnchor),
+            stationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            stationLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            stationLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            borderView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            borderView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            borderView.heightAnchor.constraint(equalToConstant: 2.0),
+            borderView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+        indexLbl.text = index
+        stationLabel.text = name
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
