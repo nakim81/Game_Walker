@@ -63,6 +63,7 @@
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
+		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -183,6 +184,7 @@
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
+		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
 		A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -317,6 +319,7 @@
 		A1EBA693296F21DF00228501 /* HostViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFDC762AD6FFF4000DF76E /* HostGuides */,
 				A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */,
 				A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */,
 				A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */,
@@ -345,6 +348,14 @@
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
+			sourceTree = "<group>";
+		};
+		A1FFDC762AD6FFF4000DF76E /* HostGuides */ = {
+			isa = PBXGroup;
+			children = (
+				A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */,
+			);
+			path = HostGuides;
 			sourceTree = "<group>";
 		};
 		DA28D783284FF9CE00EA1B94 = {
@@ -774,6 +785,7 @@
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
 				FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */,
+				A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */,
 				A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */,
 				A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
