@@ -317,13 +317,19 @@ class SettingTimeHostViewController: BaseViewController {
     
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
+        //FIX:- have to get rid of automatic segue
         teamcountTextField.resignFirstResponder()
         roundsTextField.resignFirstResponder()
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
 //            H.setTimer(gamecode, 110, 120, 13, 14)
             Task { @MainActor in
-                self.rounds = Int(rounds)!
-                self.teamcount = Int(teamcount)!
+                guard let roundInt = Int(rounds),
+                      let teamcountInt = Int(teamcount) else {
+                    self.alert(title: "Enter a number", message: "Please enter a number for rounds and teams")
+                    return
+                }
+                self.rounds = roundInt
+                self.teamcount = teamcountInt
                 try await H.setSettings(gamecode,
                               timeConvert(min:gameminutes , sec:gameseconds ),
                               timeConvert(min:moveminutes , sec:moveseconds ),

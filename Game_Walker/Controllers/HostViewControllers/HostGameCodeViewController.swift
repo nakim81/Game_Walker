@@ -43,6 +43,7 @@ class HostGameCodeViewController: BaseViewController {
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         setGameCode()
+        //FIX:- need to fix this logic
         if storedgamecode!.isEmpty {
             alert(title: "No Input",message:"You never created a game!")
         } else {

@@ -28,7 +28,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cj6-jD-uHD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1359" y="142"/>
+            <point key="canvasLocation" x="-1093" y="-28"/>
         </scene>
         <!--Host Create Or Join View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -77,11 +77,12 @@
                     <connections>
                         <outlet property="createButton" destination="tyS-bJ-dkx" id="Geg-Ux-L43"/>
                         <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
+                        <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="Ksp-7h-L4K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-349" y="28"/>
+            <point key="canvasLocation" x="-428" y="117"/>
         </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
@@ -695,104 +696,6 @@
             </objects>
             <point key="canvasLocation" x="2420" y="-517"/>
         </scene>
-        <!--Algorithm View Controller-->
-        <scene sceneID="scy-qe-gvo">
-            <objects>
-                <viewController id="uLg-Pv-BMT" userLabel="Algorithm View Controller" customClass="AlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VXH-El-S6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stations" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Mo-QnG">
-                                <rect key="frame" x="61.5" y="239" width="291" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="JZL-sj-7Eq"/>
-                                    <constraint firstAttribute="width" constant="291" id="LG1-Mc-v5Y"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rounds" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-Bf-esF">
-                                <rect key="frame" x="26" y="275" width="35" height="291"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="GoU-YR-dhr"/>
-                                    <constraint firstAttribute="height" constant="291" id="Lce-s0-Yq3"/>
-                                </constraints>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="cy9-VK-BJG">
-                                <rect key="frame" x="61" y="275" width="291" height="291"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m6H-bD-wNG" userLabel="Algorithm Collection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="727.5" height="291"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQp-Bt-URz">
-                                            <size key="itemSize" width="32" height="32"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells/>
-                                    </collectionView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="trailing" secondItem="TtO-gM-xsu" secondAttribute="trailing" id="7fl-5V-8aa"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="leading" secondItem="TtO-gM-xsu" secondAttribute="leading" id="8is-VS-tAW"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="bottom" secondItem="TtO-gM-xsu" secondAttribute="bottom" id="A86-6j-DfE"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="top" secondItem="TtO-gM-xsu" secondAttribute="top" id="hhm-Si-eU8"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="height" secondItem="7cj-Cz-6Bz" secondAttribute="height" id="iDo-OK-6oD"/>
-                                    <constraint firstItem="m6H-bD-wNG" firstAttribute="width" secondItem="7cj-Cz-6Bz" secondAttribute="width" multiplier="2.5" id="mwi-iK-xxR"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="TtO-gM-xsu"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="7cj-Cz-6Bz"/>
-                                <connections>
-                                    <outlet property="delegate" destination="VXH-El-S6Q" id="Bsf-cy-ehd"/>
-                                </connections>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6s2-dh-Y7m" userLabel="Start Game Button">
-                                <rect key="frame" x="119.5" y="750" width="175" height="57"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="CreateGameButtonSmall"/>
-                                <connections>
-                                    <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="ZQP-FP-JUJ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3H-Ds-FRZ">
-                                <rect key="frame" x="82.5" y="106.5" width="249" height="60"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="MATCHING">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" metaFont="system" size="50"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="h99-ko-w7n"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6s2-dh-Y7m" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="0Ah-Nx-XM3"/>
-                            <constraint firstItem="d3H-Ds-FRZ" firstAttribute="centerY" secondItem="h99-ko-w7n" secondAttribute="centerY" multiplier="0.3" id="8rM-h2-V4l"/>
-                            <constraint firstItem="h99-ko-w7n" firstAttribute="bottom" secondItem="6s2-dh-Y7m" secondAttribute="bottom" constant="55" id="EyG-tp-nYx"/>
-                            <constraint firstItem="cy9-VK-BJG" firstAttribute="top" secondItem="1oU-Mo-QnG" secondAttribute="bottom" constant="1" id="X80-mf-y31"/>
-                            <constraint firstItem="d3H-Ds-FRZ" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="fOB-TK-RSn"/>
-                            <constraint firstItem="ggU-Bf-esF" firstAttribute="centerY" secondItem="cy9-VK-BJG" secondAttribute="centerY" id="kOC-cw-fwt"/>
-                            <constraint firstItem="ggU-Bf-esF" firstAttribute="leading" secondItem="cy9-VK-BJG" secondAttribute="leading" constant="-35" id="rg4-Tk-C1g"/>
-                            <constraint firstItem="1oU-Mo-QnG" firstAttribute="centerX" secondItem="h99-ko-w7n" secondAttribute="centerX" id="v5D-pb-FkG"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="R6e-0w-gK0"/>
-                    <connections>
-                        <outlet property="collectionView" destination="m6H-bD-wNG" id="Mcl-iI-C22"/>
-                        <outlet property="scrollView" destination="cy9-VK-BJG" id="wzm-cO-UsD"/>
-                        <outlet property="startGameButton" destination="6s2-dh-Y7m" id="U3L-wq-9Vw"/>
-                        <segue destination="iWj-Yx-nuv" kind="show" identifier="ManageGameSegue" id="6Td-1F-5ho"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1QZ-hO-XSj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3318.840579710145" y="-788.16964285714278"/>
-        </scene>
         <!--Manual Algorithm View Controller-->
         <scene sceneID="Mj9-kg-wPY">
             <objects>
@@ -820,7 +723,6 @@
                                 <state key="normal" backgroundImage="CreateGameButtonSmall"/>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Vjg-e5-r3Z" eventType="touchUpInside" id="pPw-TG-BfL"/>
-                                    <action selector="startGameButtonPressed:" destination="uLg-Pv-BMT" eventType="touchUpInside" id="UNO-gg-m2R"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="stations capit" translatesAutoresizingMaskIntoConstraints="NO" id="HEJ-r5-Hr8">
@@ -847,13 +749,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
+                        <outlet property="navbar" destination="fel-ra-70E" id="6eS-HH-wgL"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLy-kz-LUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3319" y="-1469"/>
+            <point key="canvasLocation" x="3371" y="-883"/>
         </scene>
         <!--Host Timer View Controller-->
         <scene sceneID="wco-y0-K7R">
@@ -1093,7 +996,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6Td-1F-5ho"/>
         <segue reference="rYH-ek-yGN"/>
         <segue reference="HVu-dF-Day"/>
     </inferredMetricsTieBreakers>
@@ -1122,13 +1024,11 @@
         <image name="endGameBtn" width="207" height="50"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="ranking 1" width="187" height="61"/>
-        <image name="rounds" width="29" height="85"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
         <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="53.5" height="40"/>
         <image name="settings box" width="200" height="60"/>
-        <image name="stations" width="94" height="30"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
         <image name="timer icon 1" width="85" height="112"/>

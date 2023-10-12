@@ -12,6 +12,8 @@ class ManualAlgorithmViewController: BaseViewController {
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!
     
+    @IBOutlet weak var navbar: UINavigationItem!
+    
     @IBOutlet weak var stationsLabelImageView: UIImageView!
     @IBOutlet weak var roundsLabelImageView: UIImageView!
     
@@ -123,6 +125,7 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
+        setNavBarButtons()
 
     }
     
@@ -980,6 +983,30 @@ class ManualAlgorithmViewController: BaseViewController {
             }
         }
         
+    }
+    
+    private func setNavBarButtons() {
+        let helpImage = UIImage(named: "help-button")
+        let helpButton = UIBarButtonItem(image: helpImage, style: .plain, target: self, action: #selector(button1Tapped))
+        let settingsImage = UIImage(named: "settings-icon")
+        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(button2Tapped))
+
+        helpButton.tintColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
+        settingsButton.tintColor = UIColor(red: 0.27, green: 0.66, blue: 0.91, alpha: 1.00)
+        
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpace.width = 5
+        let rightBarButtonItems: [UIBarButtonItem] = [helpButton, fixedSpace, settingsButton]
+
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+    
+    @objc func button1Tapped() {
+
+    }
+
+    @objc func button2Tapped() {
+
     }
 }
 

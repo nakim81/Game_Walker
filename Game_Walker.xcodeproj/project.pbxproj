@@ -55,7 +55,6 @@
 		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
-		A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */; };
 		A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */; };
 		A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */; };
 		A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */; };
@@ -64,6 +63,11 @@
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
+		A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */; };
+		A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */; };
+		A1FFDC7E2AD7B92A000DF76E /* SameRoundGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */; };
+		A1FFDC802AD7B949000DF76E /* DuplicatedOppGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */; };
+		A1FFDC822AD7B959000DF76E /* MultiErrorGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -176,7 +180,6 @@
 		A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNotificationController.swift; sourceTree = "<group>"; };
 		A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostGameCodeViewController.swift; sourceTree = "<group>"; };
 		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
-		A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmViewController.swift; sourceTree = "<group>"; tabWidth = 5; };
 		A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
 		A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
@@ -185,6 +188,11 @@
 		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAlgGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedStationGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameRoundGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedOppGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiErrorGuideView.swift; sourceTree = "<group>"; };
 		A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -325,7 +333,6 @@
 				A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */,
 				A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */,
 				A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */,
-				A1EBA698296F21DF00228501 /* AlgorithmViewController.swift */,
 				A1A4CD3E2A43C58600704BF8 /* VerticalBorderView.swift */,
 				A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */,
 				A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */,
@@ -354,6 +361,11 @@
 			isa = PBXGroup;
 			children = (
 				A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */,
+				A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */,
+				A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */,
+				A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */,
+				A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */,
+				A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */,
 			);
 			path = HostGuides;
 			sourceTree = "<group>";
@@ -726,6 +738,7 @@
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
 				FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */,
 				FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */,
+				A1FFDC7E2AD7B92A000DF76E /* SameRoundGuideView.swift in Sources */,
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
@@ -748,11 +761,13 @@
 				FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */,
 				61E50949298891B800F37E79 /* RefereePVEController.swift in Sources */,
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,
+				A1FFDC802AD7B949000DF76E /* DuplicatedOppGuideView.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */,
 				6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */,
 				A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */,
 				6159252829694A0600BC6D7F /* RegisterViewController.swift in Sources */,
+				A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */,
 				FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
 				A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */,
@@ -784,12 +799,13 @@
 				FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
+				A1FFDC822AD7B959000DF76E /* MultiErrorGuideView.swift in Sources */,
 				FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */,
 				A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */,
 				A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */,
 				A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
-				A1EBA6A6296F21DF00228501 /* AlgorithmViewController.swift in Sources */,
+				A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				6149DB5E2992036900DD4DC2 /* HostGivePointsController.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
