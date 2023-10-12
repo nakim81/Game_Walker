@@ -749,7 +749,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
-                        <outlet property="navbar" destination="fel-ra-70E" id="6eS-HH-wgL"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>

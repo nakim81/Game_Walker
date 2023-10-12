@@ -12,7 +12,8 @@ class ManualAlgorithmViewController: BaseViewController {
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!
     
-    @IBOutlet weak var navbar: UINavigationItem!
+    private var rectWidth = 0.98 * UIScreen.main.bounds.width
+    private var modalRect : CGRect = CGRect()
     
     @IBOutlet weak var stationsLabelImageView: UIImageView!
     @IBOutlet weak var roundsLabelImageView: UIImageView!
@@ -451,8 +452,6 @@ class ManualAlgorithmViewController: BaseViewController {
             flowLayout.minimumLineSpacing = collectionViewCellSpacing
         }
         
-//        print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
-        
     }
     
     private  func getCellCurrPlayingWith(_ cellData: CellData) -> CellData {
@@ -797,8 +796,7 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
     
-    
-    
+
     //setting collectionview and scrollview and labels and buttons and lines apart from data
     
     func setUpCollectionViewScrollView() {
@@ -987,27 +985,56 @@ class ManualAlgorithmViewController: BaseViewController {
     
     private func setNavBarButtons() {
         let helpImage = UIImage(named: "help-button")
-        let helpButton = UIBarButtonItem(image: helpImage, style: .plain, target: self, action: #selector(button1Tapped))
+        let helpButton = UIBarButtonItem(image: helpImage, style: .plain, target: self, action: #selector(helpButtonTapped))
         let settingsImage = UIImage(named: "settings-icon")
-        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(button2Tapped))
+        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
 
         helpButton.tintColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
         settingsButton.tintColor = UIColor(red: 0.27, green: 0.66, blue: 0.91, alpha: 1.00)
         
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpace.width = 5
-        let rightBarButtonItems: [UIBarButtonItem] = [helpButton, fixedSpace, settingsButton]
+        let rightBarButtonItems: [UIBarButtonItem] = [settingsButton, fixedSpace, helpButton]
 
         self.navigationItem.rightBarButtonItems = rightBarButtonItems
     }
     
-    @objc func button1Tapped() {
+    @objc func helpButtonTapped() {
+        let screenWidth = UIScreen.main.bounds.width
+        let rectX = (screenWidth - rectWidth) / 2
+        let rectY = (UIScreen.main.bounds.height - rectWidth) / 2
+        modalRect = CGRect(x: rectX, y: rectY, width: rectWidth, height: rectWidth)
 
+        let firstModalView = FirstAlgGuideView(frame: modalRect)
+        view.addSubview(firstModalView)
+
+        firstModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+        firstModalView.onCloseButtonTapped = { [weak firstModalView] in
+            firstModalView?.removeFromSuperview()
+        }
     }
 
-    @objc func button2Tapped() {
+    @objc func settingsButtonTapped() {
 
     }
+    
+    //MARK: - Modal related functions for Guide
+
+    
+    func transitionToSecondModalView() {
+        // remove first modal presented
+        if let firstModalView = view.subviews.first(where: { $0 is FirstAlgGuideView }) {
+            firstModalView.removeFromSuperview()
+        }
+
+        let secondModalView = DuplicatedStationGuideView()
+        secondModalView.frame = view.bounds // Set the frame or constraints as needed
+        view.addSubview(secondModalView)
+    }
+    
+    
 }
 
 
