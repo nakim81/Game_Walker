@@ -130,7 +130,7 @@ class DuplicatedStationGuideView : UIView {
         containerView.addSubview(flaniImageView)
         NSLayoutConstraint.activate([
             flaniImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            flaniImageView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 40),
+            flaniImageView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 55),
             flaniImageView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5),
             flaniImageView.heightAnchor.constraint(equalTo: flaniImageView.widthAnchor, multiplier: 0.80972),
             

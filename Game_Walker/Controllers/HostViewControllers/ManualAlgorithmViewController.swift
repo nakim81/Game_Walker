@@ -1066,6 +1066,23 @@ class ManualAlgorithmViewController: BaseViewController {
         if let fourthModalView = view.subviews.first(where: { $0 is DuplicatedOppGuideView }) {
             fourthModalView.removeFromSuperview()
         }
+        
+        let thirdModalView = SameRoundGuideView(frame: modalRect)
+        view.addSubview(thirdModalView)
+        
+        thirdModalView.onCloseButtonTapped = { [weak thirdModalView] in
+            thirdModalView?.removeFromSuperview()
+        }
+        thirdModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToFourthModalView()
+        }
+        thirdModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+    }
+    
+    func transitionToFourthModalView() {
+        
     }
     
     
