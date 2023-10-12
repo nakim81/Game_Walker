@@ -65,8 +65,8 @@
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
 		A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */; };
 		A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */; };
-		A1FFDC7E2AD7B92A000DF76E /* SameRoundGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */; };
-		A1FFDC802AD7B949000DF76E /* DuplicatedOppGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */; };
+		A1FFDC7E2AD7B92A000DF76E /* DuplicatedOppGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7D2AD7B92A000DF76E /* DuplicatedOppGuideView.swift */; };
+		A1FFDC802AD7B949000DF76E /* SameRoundGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7F2AD7B949000DF76E /* SameRoundGuideView.swift */; };
 		A1FFDC822AD7B959000DF76E /* MultiErrorGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */; };
 		A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */; };
 		A1FFDC8E2AD7F410000DF76E /* sameround-duplicated-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */; };
@@ -193,8 +193,8 @@
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAlgGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedStationGuideView.swift; sourceTree = "<group>"; };
-		A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameRoundGuideView.swift; sourceTree = "<group>"; };
-		A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedOppGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC7D2AD7B92A000DF76E /* DuplicatedOppGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedOppGuideView.swift; sourceTree = "<group>"; };
+		A1FFDC7F2AD7B949000DF76E /* SameRoundGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameRoundGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiErrorGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "duplicated-stations-sample.gif"; path = "Supporting Files/duplicated-stations-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "sameround-duplicated-sample.gif"; path = "Supporting Files/sameround-duplicated-sample.gif"; sourceTree = "<group>"; };
@@ -369,8 +369,8 @@
 				A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */,
 				A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */,
 				A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */,
-				A1FFDC7D2AD7B92A000DF76E /* SameRoundGuideView.swift */,
-				A1FFDC7F2AD7B949000DF76E /* DuplicatedOppGuideView.swift */,
+				A1FFDC7D2AD7B92A000DF76E /* DuplicatedOppGuideView.swift */,
+				A1FFDC7F2AD7B949000DF76E /* SameRoundGuideView.swift */,
 				A1FFDC812AD7B958000DF76E /* MultiErrorGuideView.swift */,
 			);
 			path = HostGuides;
@@ -750,7 +750,7 @@
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
 				FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */,
 				FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */,
-				A1FFDC7E2AD7B92A000DF76E /* SameRoundGuideView.swift in Sources */,
+				A1FFDC7E2AD7B92A000DF76E /* DuplicatedOppGuideView.swift in Sources */,
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
@@ -773,7 +773,7 @@
 				FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */,
 				61E50949298891B800F37E79 /* RefereePVEController.swift in Sources */,
 				FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */,
-				A1FFDC802AD7B949000DF76E /* DuplicatedOppGuideView.swift in Sources */,
+				A1FFDC802AD7B949000DF76E /* SameRoundGuideView.swift in Sources */,
 				DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */,
 				A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */,
 				6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */,
