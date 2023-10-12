@@ -71,6 +71,7 @@
 		A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */; };
 		A1FFDC8E2AD7F410000DF76E /* sameround-duplicated-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */; };
 		A1FFDC902AD7F6E5000DF76E /* duplicated-opponents-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */; };
+		A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC912AD80833000DF76E /* multi-error-sample.gif */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -199,6 +200,7 @@
 		A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "duplicated-stations-sample.gif"; path = "Supporting Files/duplicated-stations-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "sameround-duplicated-sample.gif"; path = "Supporting Files/sameround-duplicated-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "duplicated-opponents-sample.gif"; path = "Supporting Files/duplicated-opponents-sample.gif"; sourceTree = "<group>"; };
+		A1FFDC912AD80833000DF76E /* multi-error-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "multi-error-sample.gif"; path = "Supporting Files/multi-error-sample.gif"; sourceTree = "<group>"; };
 		A8F36A671B20B09C1215D13F /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C968EB5EAC8E22DCD57223AC /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -545,6 +547,7 @@
 				A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */,
 				A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */,
 				A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */,
+				A1FFDC912AD80833000DF76E /* multi-error-sample.gif */,
 				FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */,
 				FCB13E112A97A04A00F4AE99 /* bgm.wav */,
 				FCB13E0F2A97A04A00F4AE99 /* blue.wav */,
@@ -651,6 +654,7 @@
 				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
 				A12634412ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib in Resources */,
 				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
+				A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
 				FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */,
 				A1A4CD352A371C0500704BF8 /* Dosis-SemiBold.ttf in Resources */,
