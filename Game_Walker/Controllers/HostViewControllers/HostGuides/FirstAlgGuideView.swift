@@ -92,7 +92,6 @@ class FirstAlgGuideView : UIView {
         \u{2022} Manually change team by long-click.
         \u{2022} Beware, mixing teams can cause errors.
         """
-        print(instructionText)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
 
@@ -117,8 +116,6 @@ class FirstAlgGuideView : UIView {
     
     override func layoutSubviews() {
         setupGuideText()
-        print("text borderview size : ", textBorderView.frame.size)
-        print("instructionlabel width : " , instructionLabel.frame.size)
     }
     //MARK: - Button related functions
     @objc private func closeButtonTapped() {

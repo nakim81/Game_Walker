@@ -12,6 +12,7 @@ target 'Game_Walker' do
   pod 'FirebaseFirestoreSwift'
   pod "GMStepper"
   pod 'IQKeyboardManagerSwift'
+  pod 'FLAnimatedImage'
 
 end
 post_install do |installer|

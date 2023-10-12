@@ -1022,16 +1022,50 @@ class ManualAlgorithmViewController: BaseViewController {
     
     //MARK: - Modal related functions for Guide
 
+    func transitionToFirstModalView() {
+        if let secondModalView = view.subviews.first(where: { $0 is DuplicatedStationGuideView }) {
+            secondModalView.removeFromSuperview()
+        }
+        let firstModalView = FirstAlgGuideView(frame: modalRect)
+        view.addSubview(firstModalView)
+
+        firstModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+        firstModalView.onCloseButtonTapped = { [weak firstModalView] in
+            firstModalView?.removeFromSuperview()
+        }
+    }
     
     func transitionToSecondModalView() {
-        // remove first modal presented
         if let firstModalView = view.subviews.first(where: { $0 is FirstAlgGuideView }) {
             firstModalView.removeFromSuperview()
         }
+        if let thirdModalView = view.subviews.first(where: { $0 is SameRoundGuideView }) {
+            thirdModalView.removeFromSuperview()
+        }
 
-        let secondModalView = DuplicatedStationGuideView()
-        secondModalView.frame = view.bounds // Set the frame or constraints as needed
+        let secondModalView = DuplicatedStationGuideView(frame: modalRect)
         view.addSubview(secondModalView)
+        
+        secondModalView.onCloseButtonTapped = { [weak secondModalView] in
+            secondModalView?.removeFromSuperview()
+        }
+        secondModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToThirdModalView()
+        }
+        secondModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToFirstModalView()
+        }
+    }
+    
+    func transitionToThirdModalView() {
+        if let secondModalView = view.subviews.first(where: { $0 is DuplicatedStationGuideView }) {
+            secondModalView.removeFromSuperview()
+        }
+        if let fourthModalView = view.subviews.first(where: { $0 is DuplicatedOppGuideView }) {
+            fourthModalView.removeFromSuperview()
+        }
     }
     
     
