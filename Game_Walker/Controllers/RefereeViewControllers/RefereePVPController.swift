@@ -39,6 +39,7 @@ class RefereePVPController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVPViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: RefereeRankingPVPViewController.notificationName2, object: nil)
         if RefereeRankingPVPViewController.unread {
             self.annnouncementButton.setImage(unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
@@ -53,10 +54,13 @@ class RefereePVPController: BaseViewController {
         }
         if unread {
             self.annnouncementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.annnouncementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @IBAction func leaveButtonPressed(_ sender: Any) {

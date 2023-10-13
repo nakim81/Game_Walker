@@ -29,6 +29,7 @@ class RefereeRankingPVEViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     
     static let notificationName = Notification.Name("readNotification")
+    static let notificationName2 = Notification.Name("announceNoti")
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -196,18 +197,20 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         var hostAnnouncements = Array(host.announcements)
         if RefereeRankingPVEViewController.localMessages.count > hostAnnouncements.count {
             removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":RefereeRankingPVEViewController.unread])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil, userInfo: nil)
         } else {
             for announcement in hostAnnouncements {
                 if !RefereeRankingPVEViewController.localMessages.contains(announcement) {
                     RefereeRankingPVEViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
                 } else {
                     if let localIndex = RefereeRankingPVEViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
                         if RefereeRankingPVEViewController.localMessages[localIndex].content != announcement.content {
                             RefereeRankingPVEViewController.localMessages[localIndex].content = announcement.content
                             RefereeRankingPVEViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
                         }
                     }
                 }

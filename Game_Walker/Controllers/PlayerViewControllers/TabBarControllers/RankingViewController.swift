@@ -56,13 +56,20 @@ class RankingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
+        if TeamViewController.unread {
+            self.announcementButton.setImage(self.unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.announcementButton.setImage(self.readAll, for: .normal)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureListeners()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
         configureAlertIcon()
         configureGamecodeLabel()
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
@@ -89,10 +96,13 @@ class RankingViewController: UIViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     func listen(_ _ : [String : Any]){

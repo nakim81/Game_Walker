@@ -140,11 +140,13 @@ class TimerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
         if TeamViewController.unread {
-            self.announcementButton.setImage(readAll, for: .normal)
-        } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
+            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+        } else {
+            self.announcementButton.setImage(readAll, for: .normal)
         }
     }
     
@@ -168,10 +170,13 @@ class TimerViewController: UIViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {

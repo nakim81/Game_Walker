@@ -73,19 +73,22 @@ class RefereeTimerController: BaseViewController {
         super.viewWillAppear(animated)
         guard let pvp = self.pvp else { return }
         
-        var notificationName: NSNotification.Name?
-        var unread: Bool?
+        var notificationName: NSNotification.Name
+        var notificationName2: NSNotification.Name
+        var unread: Bool
         
         if pvp {
             notificationName = RefereeRankingPVPViewController.notificationName
+            notificationName2 = RefereeRankingPVPViewController.notificationName2
             unread = RefereeRankingPVPViewController.unread
         } else {
             notificationName = RefereeRankingPVEViewController.notificationName
+            notificationName2 = RefereeRankingPVEViewController.notificationName2
             unread = RefereeRankingPVEViewController.unread
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: notificationName, object: nil)
-        guard let unread = unread else { return }
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: notificationName2, object: nil)
         if unread {
             self.announcementButton.setImage(unreadSome, for: .normal)
             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
@@ -100,10 +103,13 @@ class RefereeTimerController: BaseViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     //MARK: - UI Elements
