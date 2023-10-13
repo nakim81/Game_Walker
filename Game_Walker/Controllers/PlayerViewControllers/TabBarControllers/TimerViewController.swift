@@ -202,12 +202,23 @@ class TimerViewController: UIViewController {
         showOverlay()
     }
     
+    private func configureAnnouncementbuttonImage(){
+        announcementButton.setImage(readAll, for: .normal)
+    }
+    
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
+        ])
+    }
+// MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info", "Click to see what happens"]
-        let colorList = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
@@ -234,24 +245,10 @@ class TimerViewController: UIViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, colorList, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-
-    
-    private func configureAnnouncementbuttonImage(){
-        announcementButton.setImage(readAll, for: .normal)
-    }
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-        ])
-    }
-    
 // MARK: - Timer
     func findStation() {
         if round == rounds {

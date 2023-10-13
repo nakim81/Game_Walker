@@ -78,7 +78,6 @@ class TeamViewController: UIViewController {
             if unread{
                 NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-                strongSelf.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
                 NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
@@ -223,12 +222,14 @@ extension TeamViewController: HostUpdateListener {
                 // new announcements
                 if !ids.contains(announcement.uuid) {
                     TeamViewController.localMessages.append(announcement)
+                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                 } else {
                     // modified announcements
                     if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
                         if TeamViewController.localMessages[localIndex].content != announcement.content {
                             TeamViewController.localMessages[localIndex].content = announcement.content
                             TeamViewController.localMessages[localIndex].readStatus = false
+                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                         }
                     }
                 }

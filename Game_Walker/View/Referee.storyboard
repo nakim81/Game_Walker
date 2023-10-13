@@ -299,15 +299,15 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWW-zm-gsw">
-                                <rect key="frame" x="324" y="64.5" width="35" height="38"/>
+                                <rect key="frame" x="314" y="64.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                 <connections>
                                     <action selector="announcementButtonPressed:" destination="05k-AC-OW6" eventType="touchUpInside" id="zXa-vw-IjB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz6-Ao-RVq">
-                                <rect key="frame" x="365.5" y="67" width="35" height="33.5"/>
+                                <rect key="frame" x="349" y="67" width="35.5" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                 <connections>
@@ -320,14 +320,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2C-Xc-gyu">
+                                <rect key="frame" x="279" y="64.5" width="35" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                <connections>
+                                    <action selector="infoButtonPressed:" destination="05k-AC-OW6" eventType="touchUpInside" id="4Mh-R6-i9p"/>
+                                    <action selector="infoButtonPressed:" destination="5aH-sB-meb" eventType="touchUpInside" id="bj1-kP-QjQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Plc-xj-FuK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="trailing" secondItem="kYT-Cv-Qli" secondAttribute="trailing" id="6JI-Wb-dGQ"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="width" secondItem="Plc-xj-FuK" secondAttribute="width" multiplier="0.857" id="6O3-qF-S8O"/>
+                            <constraint firstItem="mz6-Ao-RVq" firstAttribute="trailing" secondItem="kYT-Cv-Qli" secondAttribute="trailing" id="Caw-mK-ZUG"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="centerX" secondItem="Plc-xj-FuK" secondAttribute="centerX" id="FzB-qA-npl"/>
-                            <constraint firstItem="ZWW-zm-gsw" firstAttribute="centerX" secondItem="Plc-xj-FuK" secondAttribute="centerX" multiplier="1.65" id="Kgo-X7-iDH"/>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="height" secondItem="Plc-xj-FuK" secondAttribute="height" multiplier="0.0634371" id="KmU-VK-R8B"/>
                             <constraint firstItem="ZWW-zm-gsw" firstAttribute="height" secondItem="Plc-xj-FuK" secondAttribute="height" multiplier="0.0455" id="OHm-FO-eZ1"/>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.31" id="SU4-PW-t3Q"/>
@@ -335,16 +344,21 @@
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="top" secondItem="K4T-2R-IAd" secondAttribute="bottom" constant="15" id="Vp4-J2-Nt0"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="bottom" secondItem="Plc-xj-FuK" secondAttribute="bottom" constant="15" id="W2v-Rk-Kxc"/>
                             <constraint firstItem="ZWW-zm-gsw" firstAttribute="width" secondItem="Plc-xj-FuK" secondAttribute="width" multiplier="0.0845" id="Z0g-gK-CNB"/>
+                            <constraint firstItem="ZWW-zm-gsw" firstAttribute="leading" secondItem="v2C-Xc-gyu" secondAttribute="trailing" id="ad8-4Q-GK9"/>
                             <constraint firstItem="ZWW-zm-gsw" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.2" id="cxc-vx-7hq"/>
+                            <constraint firstItem="v2C-Xc-gyu" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.2" id="gJL-Uk-ZUC"/>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="leading" secondItem="kYT-Cv-Qli" secondAttribute="leading" id="iM7-S8-aVy"/>
+                            <constraint firstItem="mz6-Ao-RVq" firstAttribute="leading" secondItem="ZWW-zm-gsw" secondAttribute="trailing" id="o5X-rS-fs5"/>
                             <constraint firstItem="mz6-Ao-RVq" firstAttribute="height" secondItem="Plc-xj-FuK" secondAttribute="height" multiplier="0.04" id="puE-ie-h7L"/>
-                            <constraint firstItem="mz6-Ao-RVq" firstAttribute="centerX" secondItem="Plc-xj-FuK" secondAttribute="centerX" multiplier="1.85" id="q8g-or-4IW"/>
                             <constraint firstItem="mz6-Ao-RVq" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.2" id="vcs-xq-ueA"/>
+                            <constraint firstItem="v2C-Xc-gyu" firstAttribute="width" secondItem="Plc-xj-FuK" secondAttribute="width" multiplier="0.0845411" id="yGa-cZ-WIq"/>
+                            <constraint firstItem="v2C-Xc-gyu" firstAttribute="height" secondItem="Plc-xj-FuK" secondAttribute="height" multiplier="0.0454002" id="zgV-3y-Vd9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="0dx-x9-DIU"/>
                     <connections>
                         <outlet property="announcementButton" destination="ZWW-zm-gsw" id="von-3l-HWS"/>
+                        <outlet property="infoButton" destination="v2C-Xc-gyu" id="AkO-U0-u1J"/>
                         <outlet property="leaderBoard" destination="kYT-Cv-Qli" id="szM-If-V8N"/>
                         <outlet property="settingButton" destination="mz6-Ao-RVq" id="oPM-o8-z8z"/>
                     </connections>
@@ -384,7 +398,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYT-Ko-9eQ">
                                 <rect key="frame" x="324" y="39.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                 <connections>
                                     <action selector="annoucmentButtonPressed:" destination="Hmo-3x-snH" eventType="touchUpInside" id="95m-J3-gv0"/>
                                 </connections>
@@ -471,64 +485,79 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avT-q1-ZT6">
-                                <rect key="frame" x="324" y="64.5" width="35" height="38"/>
+                                <rect key="frame" x="308.5" y="64.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zk-M0-jsJ">
-                                <rect key="frame" x="365.5" y="67" width="35" height="33.5"/>
+                                <rect key="frame" x="343.5" y="67" width="35" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUx-iy-M1O">
+                                <rect key="frame" x="273.5" y="64.5" width="35" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                <connections>
+                                    <action selector="infoButtonPressed:" destination="5aH-sB-meb" eventType="touchUpInside" id="1st-dv-sqW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GdT-CQ-CKW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="VUx-iy-M1O" firstAttribute="height" secondItem="GdT-CQ-CKW" secondAttribute="height" multiplier="0.0455" id="1WI-br-EHd"/>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="height" secondItem="GdT-CQ-CKW" secondAttribute="height" multiplier="0.0634371" id="3db-ix-Q72"/>
                             <constraint firstItem="avT-q1-ZT6" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.0845" id="5vt-uM-h0w"/>
+                            <constraint firstItem="8zk-M0-jsJ" firstAttribute="trailing" secondItem="KtD-6H-nNi" secondAttribute="trailing" id="FgZ-jP-YOK"/>
                             <constraint firstItem="KtD-6H-nNi" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.829439" id="GAA-JA-jnf"/>
+                            <constraint firstItem="8zk-M0-jsJ" firstAttribute="leading" secondItem="avT-q1-ZT6" secondAttribute="trailing" id="GfH-Bu-U4t"/>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="trailing" secondItem="KtD-6H-nNi" secondAttribute="trailing" id="HSm-uv-FWG"/>
                             <constraint firstItem="8zk-M0-jsJ" firstAttribute="centerY" secondItem="GdT-CQ-CKW" secondAttribute="centerY" multiplier="0.2" id="KR7-hY-Wag"/>
-                            <constraint firstItem="avT-q1-ZT6" firstAttribute="centerX" secondItem="GdT-CQ-CKW" secondAttribute="centerX" multiplier="1.65" id="SMT-0w-0DY"/>
                             <constraint firstItem="avT-q1-ZT6" firstAttribute="centerY" secondItem="GdT-CQ-CKW" secondAttribute="centerY" multiplier="0.2" id="TJI-zy-wUk"/>
                             <constraint firstItem="KtD-6H-nNi" firstAttribute="top" secondItem="8JQ-sB-IuT" secondAttribute="bottom" constant="15" id="W7o-x4-4AP"/>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="centerY" secondItem="GdT-CQ-CKW" secondAttribute="centerY" multiplier="0.31" id="ZoT-Ok-94d"/>
-                            <constraint firstItem="8zk-M0-jsJ" firstAttribute="centerX" secondItem="GdT-CQ-CKW" secondAttribute="centerX" multiplier="1.85" id="dpO-KC-eYg"/>
+                            <constraint firstItem="avT-q1-ZT6" firstAttribute="leading" secondItem="VUx-iy-M1O" secondAttribute="trailing" id="eqm-nZ-zpv"/>
                             <constraint firstItem="GdT-CQ-CKW" firstAttribute="bottom" secondItem="KtD-6H-nNi" secondAttribute="bottom" constant="15" id="fkR-4A-fXs"/>
                             <constraint firstItem="8zk-M0-jsJ" firstAttribute="height" secondItem="GdT-CQ-CKW" secondAttribute="height" multiplier="0.04" id="iCa-6V-5OK"/>
                             <constraint firstItem="avT-q1-ZT6" firstAttribute="height" secondItem="GdT-CQ-CKW" secondAttribute="height" multiplier="0.0455" id="ir4-gf-0tX"/>
+                            <constraint firstItem="VUx-iy-M1O" firstAttribute="centerY" secondItem="GdT-CQ-CKW" secondAttribute="centerY" multiplier="0.2" id="k0k-5O-PCS"/>
                             <constraint firstItem="KtD-6H-nNi" firstAttribute="centerX" secondItem="GdT-CQ-CKW" secondAttribute="centerX" id="umD-iB-94L"/>
                             <constraint firstItem="8zk-M0-jsJ" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.085" id="vhO-jb-pbj"/>
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="leading" secondItem="KtD-6H-nNi" secondAttribute="leading" id="vuw-VG-zde"/>
+                            <constraint firstItem="VUx-iy-M1O" firstAttribute="width" secondItem="GdT-CQ-CKW" secondAttribute="width" multiplier="0.0845" id="x12-F8-WUx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="mAv-Ll-x8y"/>
                     <connections>
                         <outlet property="announcementButton" destination="avT-q1-ZT6" id="t83-Py-3cm"/>
+                        <outlet property="infoButton" destination="VUx-iy-M1O" id="2vT-Go-jjV"/>
                         <outlet property="leaderBoard" destination="KtD-6H-nNi" id="SJT-HM-cqC"/>
                         <outlet property="settingButton" destination="8zk-M0-jsJ" id="b1y-84-BKs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysl-vZ-JBz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="1519"/>
+            <point key="canvasLocation" x="2737.68115942029" y="1518.75"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="S3m-98-REn"/>
         <segue reference="nu7-bb-fST"/>
-        <segue reference="bfG-fW-iGy"/>
-        <segue reference="prp-YP-ubG"/>
+        <segue reference="GxM-Ra-Tyo"/>
+        <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Code" width="168" height="27.5"/>
         <image name="LEAVE" width="60" height="16.5"/>
         <image name="Username" width="152" height="26.5"/>
         <image name="announcement" width="46" height="35"/>
+        <image name="infoIcon" width="25" height="25"/>
         <image name="join button 2" width="176" height="57"/>
+        <image name="messageIcon" width="25" height="25"/>
         <image name="next button 1" width="175.5" height="57"/>
         <image name="score 2" width="84" height="112"/>
-        <image name="settingIcon" width="53.5" height="40"/>
+        <image name="settingIcon" width="25" height="25"/>
         <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
         <image name="timer icon 1" width="85" height="112"/>

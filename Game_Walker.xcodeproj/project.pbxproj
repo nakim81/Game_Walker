@@ -13,7 +13,7 @@
 		6159252B29694A0700BC6D7F /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252429694A0600BC6D7F /* WaitingController.swift */; };
 		6159252C29694A0700BC6D7F /* GivePointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6159252529694A0600BC6D7F /* GivePointsController.swift */; };
 		616EB4742AA708C9001394E7 /* RefereeTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EB4732AA708C9001394E7 /* RefereeTimerController.swift */; };
-		61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */; };
+		61C33E29299B135100A512E5 /* RefereeRankingPVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */; };
 		61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */; };
 		61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */; };
 		61C33E2F299B25BC00A512E5 /* RefereeAnnouncementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */; };
@@ -138,7 +138,7 @@
 		6159252429694A0600BC6D7F /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		6159252529694A0600BC6D7F /* GivePointsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivePointsController.swift; sourceTree = "<group>"; };
 		616EB4732AA708C9001394E7 /* RefereeTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTimerController.swift; sourceTree = "<group>"; };
-		61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingViewPVPController.swift; sourceTree = "<group>"; };
+		61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingPVPViewController.swift; sourceTree = "<group>"; };
 		61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageViewController.swift; sourceTree = "<group>"; };
 		61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageTableViewCell.swift; sourceTree = "<group>"; };
 		61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeAnnouncementController.swift; sourceTree = "<group>"; };
@@ -296,7 +296,7 @@
 				61E50948298891B800F37E79 /* RefereePVEController.swift */,
 				616EB4732AA708C9001394E7 /* RefereeTimerController.swift */,
 				61E5094A2988C8E300F37E79 /* RefereeRankingPVEViewController.swift */,
-				61C33E28299B135100A512E5 /* RefereeRankingViewPVPController.swift */,
+				61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */,
 				61E509522988D91400F37E79 /* RefereeTableViewCell.swift */,
 				6159252529694A0600BC6D7F /* GivePointsController.swift */,
 				FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */,
@@ -730,7 +730,7 @@
 				FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */,
 				FCB13E1F2A97A1FD00F4AE99 /* AudioPlayerManager.swift in Sources */,
 				61E5094B2988C8E300F37E79 /* RefereeRankingPVEViewController.swift in Sources */,
-				61C33E29299B135100A512E5 /* RefereeRankingViewPVPController.swift in Sources */,
+				61C33E29299B135100A512E5 /* RefereeRankingPVPViewController.swift in Sources */,
 				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
 				61E5094F2988D8BB00F37E79 /* RefereePVPController.swift in Sources */,
 				61E5094D2988D8A400F37E79 /* RefereeTabBarPVPController.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 
 class RorTOverlayViewController: UIViewController {
     
+    let colorList = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
+    
     private let overlayView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.9)
@@ -50,7 +52,7 @@ class RorTOverlayViewController: UIViewController {
         ])
     }
     
-    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ colorList: [CGColor], _ textList: [String], _ tabBarTop: CGFloat, _ type: String){
+    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ type: String){
         let count = frameList.count - 1
         for i in 0..<count {
             let explanationLbl = UILabel()
@@ -114,7 +116,7 @@ class RorTOverlayViewController: UIViewController {
             ])
         } else {
             label.layer.cornerRadius = frameList[count].size.width / 2
-            label.layer.borderColor = colorList.last
+            label.layer.borderColor = color
             label.layer.borderWidth = 15
             
             NSLayoutConstraint.activate([

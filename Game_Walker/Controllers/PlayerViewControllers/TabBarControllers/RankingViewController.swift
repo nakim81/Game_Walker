@@ -133,7 +133,6 @@ extension RankingViewController {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info", "Points can be hidden by the Host"]
-        let colorList = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: Int(self.leaderBoard.frame.maxX - 85), y: Int(self.leaderBoard.frame.minY + 42.5), width: 85, height: 17)
@@ -159,7 +158,7 @@ extension RankingViewController {
         }
         componentFrames.append(component1Frame)
         print(componentPositions)
-        overlayViewController.configureGuide(componentFrames, componentPositions, colorList, explanationTexts, tabBarTop, "Ranking")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop, "Ranking")
         
         present(overlayViewController, animated: true, completion: nil)
     }
