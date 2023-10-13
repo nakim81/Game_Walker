@@ -457,10 +457,67 @@
                     <view key="view" contentMode="scaleToFill" id="qzm-HO-mAJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv5-BY-hiI">
+                                <rect key="frame" x="266" y="47" width="112.5" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81R-01-Yxy">
+                                        <rect key="frame" x="4" y="0.0" width="37" height="40"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                        <connections>
+                                            <action selector="infoButtonPressed:" destination="NZX-3l-nEo" eventType="touchUpInside" id="j2g-gQ-DVZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzJ-GZ-4F1">
+                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="40"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
+                                        <connections>
+                                            <action selector="announcementButtonPressed:" destination="NZX-3l-nEo" eventType="touchUpInside" id="VKr-dR-9dp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9H-VF-cKs">
+                                        <rect key="frame" x="71.5" y="0.0" width="37" height="40"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
+                                        <connections>
+                                            <action selector="settingButtonPressed:" destination="NZX-3l-nEo" eventType="touchUpInside" id="ziq-yK-HeK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="gzJ-GZ-4F1" firstAttribute="centerY" secondItem="qv5-BY-hiI" secondAttribute="centerY" id="0nH-2P-xY4"/>
+                                    <constraint firstItem="W9H-VF-cKs" firstAttribute="centerY" secondItem="qv5-BY-hiI" secondAttribute="centerY" id="EUd-yn-a6J"/>
+                                    <constraint firstItem="W9H-VF-cKs" firstAttribute="height" secondItem="qv5-BY-hiI" secondAttribute="height" id="G6L-aI-BIh"/>
+                                    <constraint firstItem="81R-01-Yxy" firstAttribute="height" secondItem="qv5-BY-hiI" secondAttribute="height" id="HnZ-dL-ByH"/>
+                                    <constraint firstItem="81R-01-Yxy" firstAttribute="centerX" secondItem="qv5-BY-hiI" secondAttribute="centerX" multiplier="0.4" id="IKf-hh-g3l"/>
+                                    <constraint firstItem="gzJ-GZ-4F1" firstAttribute="height" secondItem="qv5-BY-hiI" secondAttribute="height" id="LgE-qT-jUE"/>
+                                    <constraint firstItem="81R-01-Yxy" firstAttribute="width" secondItem="qv5-BY-hiI" secondAttribute="width" multiplier="0.33" id="MPa-RH-41m"/>
+                                    <constraint firstItem="W9H-VF-cKs" firstAttribute="width" secondItem="qv5-BY-hiI" secondAttribute="width" multiplier="0.33" id="Rih-ur-2TM"/>
+                                    <constraint firstItem="W9H-VF-cKs" firstAttribute="centerX" secondItem="qv5-BY-hiI" secondAttribute="centerX" multiplier="1.6" id="UtT-FR-4hq"/>
+                                    <constraint firstItem="gzJ-GZ-4F1" firstAttribute="width" secondItem="qv5-BY-hiI" secondAttribute="width" multiplier="0.33" id="VEo-hQ-Yfj"/>
+                                    <constraint firstItem="gzJ-GZ-4F1" firstAttribute="centerX" secondItem="qv5-BY-hiI" secondAttribute="centerX" id="df5-Mk-7VH"/>
+                                    <constraint firstItem="81R-01-Yxy" firstAttribute="centerY" secondItem="qv5-BY-hiI" secondAttribute="centerY" id="qUt-QU-9AB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="yDZ-oz-LGx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qv5-BY-hiI" firstAttribute="centerY" secondItem="yDZ-oz-LGx" secondAttribute="centerY" multiplier="0.16" id="BKR-mp-oxa"/>
+                            <constraint firstItem="qv5-BY-hiI" firstAttribute="centerX" secondItem="yDZ-oz-LGx" secondAttribute="centerX" multiplier="1.5565" id="MF6-U0-oap"/>
+                            <constraint firstItem="qv5-BY-hiI" firstAttribute="width" secondItem="yDZ-oz-LGx" secondAttribute="width" multiplier="0.272" id="m1S-M9-OQO"/>
+                            <constraint firstItem="qv5-BY-hiI" firstAttribute="height" secondItem="yDZ-oz-LGx" secondAttribute="height" multiplier="0.0475" id="oXk-6t-a9X"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="BbY-Ko-IuE"/>
+                    <connections>
+                        <outlet property="announcementButton" destination="gzJ-GZ-4F1" id="Wpa-xD-D8Q"/>
+                        <outlet property="infoButton" destination="81R-01-Yxy" id="2ig-zC-hAt"/>
+                        <outlet property="settingButton" destination="W9H-VF-cKs" id="LoP-y4-bw6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eds-Os-F8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

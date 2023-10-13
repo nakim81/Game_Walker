@@ -10,7 +10,7 @@ import UIKit
 
 class RorTOverlayViewController: UIViewController {
     
-    let colorList = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
+    var colorList = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor]
     
     private let overlayView: UIView = {
         let view = UIView()
@@ -52,7 +52,8 @@ class RorTOverlayViewController: UIViewController {
         ])
     }
     
-    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ type: String){
+    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ tabType: String){
+        colorList.append(color)
         let count = frameList.count - 1
         for i in 0..<count {
             let explanationLbl = UILabel()
@@ -98,7 +99,7 @@ class RorTOverlayViewController: UIViewController {
         label.font = UIFont(name: "Dosis-Bold", size: 15)
         overlayView.addSubview(label)
         
-        if type == "Ranking" {
+        if tabType == "Ranking" {
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.image = UIImage(named: "blindScore")

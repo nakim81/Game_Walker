@@ -158,7 +158,7 @@ extension RankingViewController {
         }
         componentFrames.append(component1Frame)
         print(componentPositions)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop, "Ranking")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking")
         
         present(overlayViewController, animated: true, completion: nil)
     }
