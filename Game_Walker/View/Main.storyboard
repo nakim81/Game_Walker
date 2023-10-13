@@ -65,7 +65,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUQ-mT-iSw">
                                         <rect key="frame" x="2" y="0.0" width="33.5" height="36.5"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="Group 344"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
                                         <connections>
                                             <action selector="infoBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q9r-v6-iiD"/>
                                         </connections>
@@ -142,6 +142,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9Nj-Y1-Ljk"/>
                     <connections>
+                        <outlet property="gameWalkerImage" destination="h4J-RS-OY5" id="C3l-qq-5KU"/>
                         <outlet property="hostButton" destination="fHc-CG-zIU" id="sBJ-NS-ad9"/>
                         <outlet property="infoBtn" destination="FUQ-mT-iSw" id="u4I-1t-Bnk"/>
                         <outlet property="playerButton" destination="15D-kC-3Ti" id="BXB-Kn-tkm"/>
@@ -226,9 +227,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Group 344" width="28.5" height="30"/>
         <image name="Typography 1" width="278" height="181"/>
-        <image name="settingIcon" width="53.5" height="40"/>
+        <image name="infoIcon" width="25" height="25"/>
+        <image name="settingIcon" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

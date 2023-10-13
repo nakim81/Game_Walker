@@ -20,7 +20,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     private var messages: [String] = []
     
-    private let readAll = UIImage(named: "announcement")
+    private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private var host : Host = Host()
@@ -159,6 +159,7 @@ class TimerViewController: UIViewController {
             setSettings()
             configureTimerLabel()
         }
+        settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
     }
     
     @objc func readAll(notification: Notification) {
@@ -201,14 +202,26 @@ class TimerViewController: UIViewController {
         showOverlay()
     }
     
+    private func configureAnnouncementbuttonImage(){
+        announcementButton.setImage(readAll, for: .normal)
+    }
+    
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
+        ])
+    }
+// MARK: - overlay Guide view
     private func showOverlay() {
-        let overlayViewController = OverlayViewController()
+        let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Check to see what happens when you click this circle", "Team Members", "Ranking", "Timer"]
+        let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info", "Click to see what happens"]
         var componentPositions: [CGPoint] = []
-        let component1Frame = timerCircle.frame
-        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.minY))
+        var componentFrames: [CGRect] = []
+        let timerFrame = timerCircle.frame
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
             // Loop through each view controller in the tab bar controller
@@ -222,33 +235,20 @@ class TimerViewController: UIViewController {
                         // Calculate topAnchor position based on tab bar's frame
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
-                        if (tabBarTop == 0) {
-                            tabBarTop = topAnchorPosition
-                        }
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
                         componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
                     }
                 }
             }
         }
         print(componentPositions)
-        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 4, tabBarTop: tabBarTop)
+        componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
+        componentFrames.append(timerFrame)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-
-    
-    private func configureAnnouncementbuttonImage(){
-        announcementButton.setImage(readAll, for: .normal)
-    }
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-        ])
-    }
-    
 // MARK: - Timer
     func findStation() {
         if round == rounds {

@@ -12,6 +12,7 @@ class HostMessageViewController: UIViewController {
     private let fontColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
     private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
+    
     private let messageTableView: UITableView = {
         let tableview = UITableView()
         return tableview

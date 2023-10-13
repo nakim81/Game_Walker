@@ -46,6 +46,18 @@ class CreateTeamViewController: BaseViewController {
         configureTextField()
         configureCollectionView()
         configureBtn()
+        configureNavItem()
+    }
+    
+    func configureNavItem() {
+        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
+        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
+        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightButton
+    }
+    
+    @objc func setting(sender: UIBarButtonItem) {
+        
     }
     
     private func configureTextField(){

@@ -1,14 +1,14 @@
 //
-//  RefereeRankingPVEViewController.swift
+//  RefereeRankingViewPVPController.swift
 //  Game_Walker
 //
-//  Created by 김현식 on 1/30/23.
+//  Created by 김현식 on 2/13/23.
 //
 
 import Foundation
 import UIKit
 
-class RefereeRankingPVEViewController: UIViewController {
+class RefereeRankingPVPViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var announcementButton: UIButton!
@@ -18,41 +18,58 @@ class RefereeRankingPVEViewController: UIViewController {
     private var teamList: [Team] = []
     
     static var localMessages: [Announcement] = []
+    static var unread: Bool = false
+    static let notificationName = Notification.Name("readNotification")
+    
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     
     private var timer = Timer()
-    static var unread: Bool = false
-    private var diff: Int?
-    
-    private let audioPlayerManager = AudioPlayerManager()
-    
-    static let notificationName = Notification.Name("readNotification")
-    
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
+    
+    private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        configureGamecodeLabel()
         configureListeners()
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
             }
-            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeRankingPVEViewController.localMessages)
-            RefereeRankingPVEViewController.unread = unread
+            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeRankingPVPViewController.localMessages)
+            RefereeRankingPVPViewController.unread = unread
             if unread{
-                NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: RefereeRankingPVPViewController.notificationName, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
-                NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: RefereeRankingPVPViewController.notificationName, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
             }
         }
+    }
+    
+    @IBAction func announcementButtonPressed(_ sender: UIButton) {
+        showRefereeMessagePopUp(messages: RefereeRankingPVPViewController.localMessages)
+    }
+    
+    @IBAction func settingButtonPressed(_ sender: UIButton) {
+    }
+    
+    @IBAction func infoButtonPressed(_ sender: UIButton) {
+        self.showOverlay()
+    }
+    
+    private func configureTableView() {
+        leaderBoard.delegate = self
+        leaderBoard.dataSource = self
+        leaderBoard.register(RefereeTableViewCell.self, forCellReuseIdentifier: RefereeTableViewCell.identifier)
+        leaderBoard.backgroundColor = .white
+        leaderBoard.allowsSelection = false
+        leaderBoard.separatorStyle = .none
     }
     
     private func configureListeners(){
@@ -88,29 +105,6 @@ class RefereeRankingPVEViewController: UIViewController {
         return label
     }()
     
-    func listen(_ _ : [String : Any]){
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
-        self.showOverlay()
-    }
-    
-    private func configureTableView() {
-        leaderBoard.delegate = self
-        leaderBoard.dataSource = self
-        leaderBoard.register(RefereeTableViewCell.self, forCellReuseIdentifier: RefereeTableViewCell.identifier)
-        leaderBoard.backgroundColor = .white
-        leaderBoard.allowsSelection = false
-        leaderBoard.separatorStyle = .none
-    }
-    
     private func configureGamecodeLabel() {
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
@@ -118,9 +112,12 @@ class RefereeRankingPVEViewController: UIViewController {
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!)
         ])
     }
+    
+    func listen(_ _ : [String : Any]){
+    }
 }
 // MARK: - TableView
-extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataSource {
+extension RefereeRankingPVPViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: RefereeTableViewCell.identifier, for: indexPath) as! RefereeTableViewCell
         let team = teamList[indexPath.row]
@@ -143,7 +140,7 @@ extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataS
     }
 }
 // MARK: - overlay guide
-extension RefereeRankingPVEViewController {
+extension RefereeRankingPVPViewController {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -180,33 +177,33 @@ extension RefereeRankingPVEViewController {
     }
 }
 // MARK: - TeamProtocol
-extension RefereeRankingPVEViewController: TeamUpdateListener {
+extension RefereeRankingPVPViewController: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
-        if self.showScore {
+        if self.showScore{
             leaderBoard.reloadData()
         }
     }
 }
-// MARK: - HostProtocol
-extension RefereeRankingPVEViewController: HostUpdateListener {
+// MARK: - HostProtocl
+extension RefereeRankingPVPViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.showScore = host.showScoreboard
         leaderBoard.reloadData()
         var hostAnnouncements = Array(host.announcements)
-        if RefereeRankingPVEViewController.localMessages.count > hostAnnouncements.count {
-            removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":RefereeRankingPVEViewController.unread])
+        if RefereeRankingPVPViewController.localMessages.count > hostAnnouncements.count {
+            removeAnnouncementsNotInHost(from: &RefereeRankingPVPViewController.localMessages, targetArray: hostAnnouncements)
+            NotificationCenter.default.post(name: RefereeRankingPVPViewController.notificationName, object: nil, userInfo: ["unread":RefereeRankingPVPViewController.unread])
         } else {
             for announcement in hostAnnouncements {
-                if !RefereeRankingPVEViewController.localMessages.contains(announcement) {
-                    RefereeRankingPVEViewController.localMessages.append(announcement)
+                if !RefereeRankingPVPViewController.localMessages.contains(announcement) {
+                    RefereeRankingPVPViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                 } else {
-                    if let localIndex = RefereeRankingPVEViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                        if RefereeRankingPVEViewController.localMessages[localIndex].content != announcement.content {
-                            RefereeRankingPVEViewController.localMessages[localIndex].content = announcement.content
-                            RefereeRankingPVEViewController.localMessages[localIndex].readStatus = false
+                    if let localIndex = RefereeRankingPVPViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                        if RefereeRankingPVPViewController.localMessages[localIndex].content != announcement.content {
+                            RefereeRankingPVPViewController.localMessages[localIndex].content = announcement.content
+                            RefereeRankingPVPViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                         }
                     }
@@ -215,3 +212,4 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         }
     }
 }
+

@@ -61,10 +61,19 @@ class JoinGameViewController: BaseViewController {
         let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
+        
+        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
+        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
+        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightButton
     }
     
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "ToMainVC", sender: self)
+    }
+    
+    @objc func setting(sender: UIBarButtonItem) {
+        
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {

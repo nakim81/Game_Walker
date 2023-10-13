@@ -23,7 +23,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RefereeBoxThree" translatesAutoresizingMaskIntoConstraints="NO" id="Geo-u7-Uzx">
-                        <rect key="frame" x="-4" y="-0.5" width="323" height="51"/>
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Geo-u7-Uzx" secondAttribute="height" multiplier="315:50" id="Xkj-Oi-gKx"/>
                         </constraints>
@@ -36,12 +36,12 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="12m-cW-6Ca"/>
                     <constraint firstItem="cJ6-a7-auZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="4t4-F5-r6D"/>
-                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Njd-CG-8Ae"/>
-                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="QZP-lw-htA"/>
-                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="height" secondItem="cJ6-a7-auZ" secondAttribute="height" multiplier="1.6" id="XOI-7J-XXc"/>
+                    <constraint firstAttribute="trailing" secondItem="Geo-u7-Uzx" secondAttribute="trailing" id="KHu-eq-3YA"/>
                     <constraint firstItem="cJ6-a7-auZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bPD-8l-vXR"/>
+                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="egU-qu-Kjq"/>
+                    <constraint firstItem="Geo-u7-Uzx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iqq-Ld-8g9"/>
+                    <constraint firstAttribute="bottom" secondItem="Geo-u7-Uzx" secondAttribute="bottom" id="yda-Ha-YGS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
