@@ -43,26 +43,41 @@ class HostGameCodeViewController: BaseViewController {
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         setGameCode()
+        //FIX:- need to fix this logic
         if storedgamecode!.isEmpty {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
                     do {
-                        let hostTemp = try await H.getHost(gamecode ?? "")
+                        guard let hostTemp = try await H.getHost(gamecode ?? "") else {
+                            gamecodeAlert("Gamecode is not Valid")
+                            return
+                        }
                         UserData.writeGamecode(gamecode!, "gamecode")
-                        H.updateHost(_:_:)(gamecode!, hostTemp!)
-                        
-                        performSegue(withIdentifier: "HostJoinSegue", sender: self)
-                    } catch (let e) {
-                        print(e)
-                        gamecodeAlert("Gamecode is not Valid")
-                        return
-                    }
+                        H.updateHost(_:_:)(gamecode!, hostTemp)
+                        if hostTemp.gameStart {
+                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                        } else {
+                            performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                        }
 
+                    }
                 }
             } else {
-                performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                Task { @MainActor in
+                    do {
+                        guard let hostTemp = try await H.getHost(gamecode ?? "") else {
+                            gamecodeAlert("Gamecode is not Valid")
+                            return
+                        }
+                        if hostTemp.gameStart {
+                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                        } else {
+                            performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                        }
+                    }
+                }
             }
         }
     }

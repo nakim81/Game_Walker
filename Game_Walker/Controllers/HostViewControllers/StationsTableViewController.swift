@@ -50,6 +50,7 @@ class StationsTableViewController: BaseViewController {
         super.viewDidLoad()
         
         addLetterSpacing(to: stationsLabel, spacing: 3)
+        NotificationCenter.default.addObserver(self, selector: #selector(stationDataUpdated(_:)), name: .stationDataUpdated, object: nil)
         stationTable.delegate = self
         stationTable.dataSource = self
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
@@ -90,6 +91,10 @@ class StationsTableViewController: BaseViewController {
         }
     }
     
+    @objc func stationDataUpdated(_ notification: Notification) {
+        getStationList()
+    }
+    
     @IBAction func addButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "AddStationSegue", sender: self)
     }
@@ -105,7 +110,7 @@ class StationsTableViewController: BaseViewController {
             ])
         }
     }
-    private func getStationList() {
+    private func getStationList(){
         Task { @MainActor in
             do {
                 currentStations = try await S.getStationList(gamecode!)
@@ -118,7 +123,6 @@ class StationsTableViewController: BaseViewController {
                 return
             }
         }
-
     }
     
     private func settingRefreshControl() {
@@ -244,6 +248,8 @@ extension StationsTableViewController: AddStationDelegate {
                 self.currentStations = try await S.getStationList(gamecode!)
                 DispatchQueue.main.async {
                     print("SUCCESSFULLY CAME IN TO RELOAD STATION TABLE")
+                    self.stationTable.reloadData()
+                    self.refreshController.endRefreshing()
                     self.dismiss(animated: true)
                     completion() // Call the completion handler after data update
                 }

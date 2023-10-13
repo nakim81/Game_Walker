@@ -11,6 +11,11 @@ import SwiftUI
 class AddStationViewController: BaseViewController {
 
     @IBOutlet var fullview: UIView!
+    @IBOutlet weak var guideContainerView: UIView!
+    @IBOutlet weak var pvpPveContainerView: UIView!
+    
+    @IBOutlet weak var popupImageView: UIImageView!
+    @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var gamenameTextfield: UITextField!
     @IBOutlet weak var gamelocationTextfield: UITextField!
     @IBOutlet weak var gamepointsTextfield: UITextField!
@@ -64,6 +69,8 @@ class AddStationViewController: BaseViewController {
         gamepointsTextfield.delegate = self
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
+
+
         
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
@@ -316,10 +323,11 @@ class AddStationViewController: BaseViewController {
         
         delegate?.didUpdateStationData {
             print("delegate is being called")
+            NotificationCenter.default.post(name: .stationDataUpdated, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
-
     }
+    
     
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
@@ -333,6 +341,36 @@ class AddStationViewController: BaseViewController {
             isdropped = false
         }
     }
+    
+    @IBAction func getGuideButtonPressed(_ sender: UIButton) {
+        let overlay = OverlayGuideView(frame : popupImageView.frame)
+        overlay.giveCornerRadius(of: CGFloat(20))
+        popupView.addSubview(overlay)
+        let refereeOverlay = OverlayComponentView(frame : refereeButton.frame)
+        refereeOverlay.addLabel(with: "No Referees yet? Share the game code.", width: refereeButton.frame.width)
+        popupView.addSubview(refereeOverlay)
+        
+
+        let pvpButtonFrameInPopupView = pvpPveContainerView.convert(pvpButton.frame, to: popupView)
+        let pveButtonFrameInPopupView = pvpPveContainerView.convert(pveButton.frame, to: popupView)
+        
+        let pvpOverlay = OverlayComponentView(frame: pvpButtonFrameInPopupView)
+        let pveOverlay = OverlayComponentView(frame: pveButtonFrameInPopupView)
+
+        pvpOverlay.addLabel(with: "PVP for competition", width: pvpButton.frame.width)
+        pveOverlay.addLabel(with: "PVE for goals.", width : pveButton.frame.width)
+        
+        popupView.addSubview(pvpOverlay)
+        popupView.addSubview(pveOverlay)
+        
+        overlay.onCloseButtonTapped = { [weak overlay] in
+            overlay?.removeFromSuperview()
+            refereeOverlay.removeFromSuperview()
+            pvpOverlay.removeFromSuperview()
+            pveOverlay.removeFromSuperview()
+        }
+    }
+    
     
     
 }

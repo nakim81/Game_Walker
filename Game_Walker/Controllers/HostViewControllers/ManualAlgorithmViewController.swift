@@ -12,6 +12,9 @@ class ManualAlgorithmViewController: BaseViewController {
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!
     
+    private var rectWidth = 0.98 * UIScreen.main.bounds.width
+    private var modalRect : CGRect = CGRect()
+    
     @IBOutlet weak var stationsLabelImageView: UIImageView!
     @IBOutlet weak var roundsLabelImageView: UIImageView!
     
@@ -123,6 +126,7 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
+        setNavBarButtons()
 
     }
     
@@ -384,7 +388,7 @@ class ManualAlgorithmViewController: BaseViewController {
         
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
-            alert(title: "Excess Teams.", message: "Be careful! There are more teams than available stations.")
+            alert(title: "Excess Teams", message: "Be careful! There are more teams than available stations.")
             return teamCells - stationCells
         }
         return 0
@@ -447,8 +451,6 @@ class ManualAlgorithmViewController: BaseViewController {
             flowLayout.minimumInteritemSpacing = collectionViewCellSpacing
             flowLayout.minimumLineSpacing = collectionViewCellSpacing
         }
-        
-//        print("collectionView.contentSize : ", collectionView.contentSize.width, "but scrollview.contentsize.width: ", scrollView.contentSize.width, print("collectionView.frameSize : ", collectionView.frame.width))
         
     }
     
@@ -794,8 +796,7 @@ class ManualAlgorithmViewController: BaseViewController {
         }
     }
     
-    
-    
+
     //setting collectionview and scrollview and labels and buttons and lines apart from data
     
     func setUpCollectionViewScrollView() {
@@ -981,6 +982,144 @@ class ManualAlgorithmViewController: BaseViewController {
         }
         
     }
+    
+    private func setNavBarButtons() {
+        let helpImage = UIImage(named: "help-button")
+        let helpButton = UIBarButtonItem(image: helpImage, style: .plain, target: self, action: #selector(helpButtonTapped))
+        let settingsImage = UIImage(named: "settings-icon")
+        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
+
+        helpButton.tintColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
+        settingsButton.tintColor = UIColor(red: 0.27, green: 0.66, blue: 0.91, alpha: 1.00)
+        
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpace.width = 5
+        let rightBarButtonItems: [UIBarButtonItem] = [settingsButton, fixedSpace, helpButton]
+
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems
+    }
+    
+    @objc func helpButtonTapped() {
+        let screenWidth = UIScreen.main.bounds.width
+        let rectX = (screenWidth - rectWidth) / 2
+        let rectY = (UIScreen.main.bounds.height - rectWidth) / 2
+        modalRect = CGRect(x: rectX, y: rectY, width: rectWidth, height: rectWidth)
+
+        let firstModalView = FirstAlgGuideView(frame: modalRect)
+        view.addSubview(firstModalView)
+
+        firstModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+        firstModalView.onCloseButtonTapped = { [weak firstModalView] in
+            firstModalView?.removeFromSuperview()
+        }
+    }
+
+    @objc func settingsButtonTapped() {
+
+    }
+    
+    //MARK: - Modal related functions for Guide
+
+    private func transitionToFirstModalView() {
+        if let secondModalView = view.subviews.first(where: { $0 is DuplicatedStationGuideView }) {
+            secondModalView.removeFromSuperview()
+        }
+        let firstModalView = FirstAlgGuideView(frame: modalRect)
+        view.addSubview(firstModalView)
+
+        firstModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+        firstModalView.onCloseButtonTapped = { [weak firstModalView] in
+            firstModalView?.removeFromSuperview()
+        }
+    }
+    
+    private func transitionToSecondModalView() {
+        if let firstModalView = view.subviews.first(where: { $0 is FirstAlgGuideView }) {
+            firstModalView.removeFromSuperview()
+        }
+        if let thirdModalView = view.subviews.first(where: { $0 is SameRoundGuideView }) {
+            thirdModalView.removeFromSuperview()
+        }
+
+        let secondModalView = DuplicatedStationGuideView(frame: modalRect)
+        view.addSubview(secondModalView)
+        
+        secondModalView.onCloseButtonTapped = { [weak secondModalView] in
+            secondModalView?.removeFromSuperview()
+        }
+        secondModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToThirdModalView()
+        }
+        secondModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToFirstModalView()
+        }
+    }
+    
+    private func transitionToThirdModalView() {
+        if let secondModalView = view.subviews.first(where: { $0 is DuplicatedStationGuideView }) {
+            secondModalView.removeFromSuperview()
+        }
+        if let fourthModalView = view.subviews.first(where: { $0 is DuplicatedOppGuideView }) {
+            fourthModalView.removeFromSuperview()
+        }
+        
+        let thirdModalView = SameRoundGuideView(frame: modalRect)
+        view.addSubview(thirdModalView)
+        
+        thirdModalView.onCloseButtonTapped = { [weak thirdModalView] in
+            thirdModalView?.removeFromSuperview()
+        }
+        thirdModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToFourthModalView()
+        }
+        thirdModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToSecondModalView()
+        }
+    }
+    
+    private func transitionToFourthModalView() {
+        if let thirdModalView = view.subviews.first(where: { $0 is SameRoundGuideView }) {
+            thirdModalView.removeFromSuperview()
+        }
+        if let fifthModalView = view.subviews.first(where: { $0 is MultiErrorGuideView }) {
+            fifthModalView.removeFromSuperview()
+        }
+        
+        let fourthModalView = DuplicatedOppGuideView(frame: modalRect)
+        view.addSubview(fourthModalView)
+        
+        fourthModalView.onCloseButtonTapped = { [weak fourthModalView] in
+            fourthModalView?.removeFromSuperview()
+        }
+        fourthModalView.onNextButtonTapped = { [weak self] in
+            self?.transitionToFifthModalView()
+        }
+        fourthModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToThirdModalView()
+        }
+    }
+    
+    private func transitionToFifthModalView() {
+        if let fourthModalView = view.subviews.first(where: { $0 is DuplicatedOppGuideView }) {
+            fourthModalView.removeFromSuperview()
+        }
+        let fifthModalView = MultiErrorGuideView(frame: modalRect)
+        view.addSubview(fifthModalView)
+        
+        fifthModalView.onCloseButtonTapped = { [weak fifthModalView] in
+            fifthModalView?.removeFromSuperview()
+        }
+        fifthModalView.onPreviousButtonTapped = { [weak self] in
+            self?.transitionToFourthModalView()
+        }
+
+    }
+    
+    
 }
 
 
@@ -1177,7 +1316,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let grid =  createIntegerGrid()
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
-                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp )
+                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: true )
                 H.updateHost(gamecode, hostupdate)
                 print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
             }

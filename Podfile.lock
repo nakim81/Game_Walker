@@ -692,6 +692,7 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
   - FirebaseSharedSwift (10.14.0)
+  - FLAnimatedImage (1.0.17)
   - GMStepper (2.2)
   - GoogleAppMeasurement (10.14.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.14.0)
@@ -809,6 +810,7 @@ DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
   - FirebaseFirestoreSwift
+  - FLAnimatedImage
   - GMStepper
   - IQKeyboardManagerSwift
 
@@ -826,6 +828,7 @@ SPEC REPOS:
     - FirebaseFirestoreSwift
     - FirebaseInstallations
     - FirebaseSharedSwift
+    - FLAnimatedImage
     - GMStepper
     - GoogleAppMeasurement
     - GoogleUtilities
@@ -851,6 +854,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreSwift: 4bfcdffcc8c5a91962bed488187a8bc69910438e
   FirebaseInstallations: f672b1eda64e6381c21d424a2f680a943fd83f3b
   FirebaseSharedSwift: 0eec812f08b6ec9e03196fc27635739781513028
+  FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
   GMStepper: 89fb106944dfcc3aa3add7164e3ebd463ea2104b
   GoogleAppMeasurement: 7fee012a868315d418f365fbc8d394d8e020e749
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
@@ -863,6 +867,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: d6574c39dfa4fc900d8d67fc5eeedb7e3e5de546
+PODFILE CHECKSUM: c9ab11d5d35b40c09995ea105b0153ef3755e6f9
 
 COCOAPODS: 1.12.1
