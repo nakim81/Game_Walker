@@ -12,6 +12,7 @@ class RefereePVEGuideViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOverlayView()
+        showOverlay()
     }
     
     private lazy var shadeView: UIView = {
@@ -79,6 +80,44 @@ class RefereePVEGuideViewController : UIViewController {
         return label
     }()
     
+    private lazy var winButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Win Blue Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "WIN"
+        label.textColor = .white
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var loseButton: UIImageView = {
+        var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        view.image = UIImage(named: "Lose Yellow Button")
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 57, height: 13))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "LOSE"
+        label.textColor = .white
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont(name: "Dosis-Bold", size: 13)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
     private func setupOverlayView() {
         closeBtn.translatesAutoresizingMaskIntoConstraints = false
         buttonBorder.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +142,17 @@ class RefereePVEGuideViewController : UIViewController {
 //            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
 //            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
 //            explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            explanationLabel.topAnchor.constraint(equalTo: winButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01)
+//            explanationLabel.topAnchor.constraint(equalTo: winButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01),
+            
+//            winButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+//            winButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+//            winButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.315),
+//            winButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5),
+//            
+//            loseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+//            loseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+//            loseButton.leadingAnchor.constraint(equalTo: winButton.trailingAnchor, constant: 5),
+//            loseButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5)
         ])
     }
     

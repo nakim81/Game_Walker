@@ -15,6 +15,7 @@
 		616EB4742AA708C9001394E7 /* RefereeTimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616EB4732AA708C9001394E7 /* RefereeTimerController.swift */; };
 		6174CED22ADA8412007CA70B /* RefereePVEGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174CED12ADA8412007CA70B /* RefereePVEGuideViewController.swift */; };
 		6174CED42ADA8427007CA70B /* RefereePVPGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174CED32ADA8427007CA70B /* RefereePVPGuideViewController.swift */; };
+		6174CED62ADAA277007CA70B /* HostRankingGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6174CED52ADAA277007CA70B /* HostRankingGuideViewController.swift */; };
 		61C33E29299B135100A512E5 /* RefereeRankingPVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */; };
 		61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */; };
 		61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */; };
@@ -152,6 +153,7 @@
 		616EB4732AA708C9001394E7 /* RefereeTimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTimerController.swift; sourceTree = "<group>"; };
 		6174CED12ADA8412007CA70B /* RefereePVEGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereePVEGuideViewController.swift; sourceTree = "<group>"; };
 		6174CED32ADA8427007CA70B /* RefereePVPGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereePVPGuideViewController.swift; sourceTree = "<group>"; };
+		6174CED52ADAA277007CA70B /* HostRankingGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRankingGuideViewController.swift; sourceTree = "<group>"; };
 		61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeRankingPVPViewController.swift; sourceTree = "<group>"; };
 		61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageViewController.swift; sourceTree = "<group>"; };
 		61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				FCFA80F5298AC74C00F868B3 /* HostRankingTableViewCell.swift */,
 				FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */,
 				FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */,
+				6174CED52ADAA277007CA70B /* HostRankingGuideViewController.swift */,
 				6149DB5D2992036900DD4DC2 /* HostGivePointsController.swift */,
 				FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */,
 			);
@@ -820,6 +823,7 @@
 				DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */,
 				6149DB6029921B5600DD4DC2 /* WarningScreenController.swift in Sources */,
 				FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */,
+				6174CED62ADAA277007CA70B /* HostRankingGuideViewController.swift in Sources */,
 				61E509472988901800F37E79 /* RefereeTabBarPVEController.swift in Sources */,
 				DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,

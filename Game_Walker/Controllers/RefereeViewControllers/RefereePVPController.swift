@@ -22,8 +22,8 @@ class RefereePVPController: BaseViewController {
     private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
     private var stations : [Station] = [Station()]
     private var teamOrder : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
-//    private var maxPointsA : Bool = false
-//    private var maxPointsB : Bool = false
+    private var maxPointsA : Bool = false
+    private var maxPointsB : Bool = false
     private var maxA : String = ""
     private var maxB : String = ""
     private var teamA : Team = Team(name: "Simon Dominic", iconName: "iconDaisy")
