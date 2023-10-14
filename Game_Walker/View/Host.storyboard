@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" minimumFontSize="17" background="BoxOne" translatesAutoresizingMaskIntoConstraints="NO" id="8bU-vL-2hU">
-                                <rect key="frame" x="85.5" y="364" width="243" height="79.5"/>
+                                <rect key="frame" x="45" y="366" width="324" height="105.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8bU-vL-2hU" secondAttribute="height" multiplier="245:80" id="hBc-CJ-HEn"/>
                                 </constraints>
@@ -112,7 +112,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-o1-Ip2">
-                                <rect key="frame" x="126" y="310.5" width="162" height="43.5"/>
+                                <rect key="frame" x="99" y="309" width="216" height="47"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                 <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
-                                <rect key="frame" x="116" y="105.5" width="182.5" height="54.5"/>
+                                <rect key="frame" x="91" y="103.5" width="232.5" height="58.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="STATIONS">
                                         <attributes>
@@ -173,11 +173,11 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
-                                <rect key="frame" x="31" y="175" width="352" height="487.5"/>
+                                <rect key="frame" x="31" y="177" width="352" height="487.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-lG-6rY" userLabel="Add Button">
-                                <rect key="frame" x="49.5" y="677.5" width="315" height="50"/>
+                                <rect key="frame" x="49.5" y="679.5" width="315" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0cn-lG-6rY" secondAttribute="height" multiplier="315:50" id="Dbi-1s-kEz"/>
                                 </constraints>
@@ -230,31 +230,31 @@
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iML-mv-p7Y" userLabel="Station Label">
-                                        <rect key="frame" x="57.5" y="58.5" width="158.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="56.5" width="158.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kB-BH-qBQ" userLabel="Location Label">
-                                        <rect key="frame" x="57.5" y="139.5" width="135.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="139.5" width="168.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QME-XF-J55" userLabel="Points Label">
-                                        <rect key="frame" x="57.5" y="221" width="118.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="223" width="144" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-L9-4OF" userLabel="Referee Label">
-                                        <rect key="frame" x="57.5" y="302" width="66.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="306" width="79.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZT-6z-gXz" userLabel="Rules Label">
-                                        <rect key="frame" x="57.5" y="436.5" width="47.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="442.5" width="57.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -273,27 +273,27 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0RL-II-XhM" userLabel="text Game Location">
-                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-P8-uwc" userLabel="Game Location Text">
-                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fW0-Ap-xmH" userLabel="text Game Points">
-                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-DB-iAK" userLabel="Game Points Text">
-                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQY-JV-gHm" userLabel="Referee Button">
-                                        <rect key="frame" x="44" y="332" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="338" width="318" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="BoxFour"/>
@@ -302,13 +302,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="149" y="342" width="108" height="19.5"/>
+                                        <rect key="frame" x="139.5" y="348" width="127.5" height="19.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIc-0l-Lvr" userLabel="Pvp Pve View">
-                                        <rect key="frame" x="44" y="385.5" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="391.5" width="318" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sd-pw-gIC" userLabel="PVP">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="39"/>
@@ -356,7 +356,7 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xx1-Tw-m3A" userLabel="Rules text view">
-                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xx1-Tw-m3A" secondAttribute="height" multiplier="267:103" id="ls9-as-iQd"/>
@@ -366,10 +366,10 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rules Box" translatesAutoresizingMaskIntoConstraints="NO" id="BkX-2h-b6N">
-                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
-                                        <rect key="frame" x="130" y="609" width="146" height="48"/>
+                                        <rect key="frame" x="130" y="617" width="146" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="126:41" id="VeK-ka-nJC"/>
                                         </constraints>
@@ -482,31 +482,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GameTime Label" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
-                                <rect key="frame" x="137" y="168" width="140" height="36"/>
+                                <rect key="frame" x="137" y="170" width="140" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="128:33" id="In3-dF-mbz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
-                                <rect key="frame" x="97.5" y="207" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="209" width="219" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="200:60" id="89c-SK-TFL"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                <rect key="frame" x="108.5" y="209" width="197" height="62.5"/>
+                                <rect key="frame" x="108.5" y="211" width="197" height="62.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
                                         <rect key="frame" x="94" y="-2" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="42.5" y="4.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="40.5" y="6.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="108" y="4.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="108" y="6.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -531,28 +531,28 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transitino Time Label" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="110.5" y="303" width="193" height="35.5"/>
+                                <rect key="frame" x="110.5" y="305" width="193" height="35.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="179:33" id="wkB-x3-fMl"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
-                                <rect key="frame" x="97.5" y="341.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                <rect key="frame" x="97.5" y="341.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
                                         <rect key="frame" x="105" y="0.0" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="52" y="6.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="50" y="8.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="121" y="6.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="121" y="8.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -576,13 +576,13 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rounds Label" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="158.5" y="437.5" width="97" height="36"/>
+                                <rect key="frame" x="158.5" y="439.5" width="97" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="88:33" id="gC4-9S-8sz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
-                                <rect key="frame" x="97.5" y="476.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="478.5" width="219" height="66"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
                                 <rect key="frame" x="119" y="774" width="176" height="57"/>
@@ -594,28 +594,28 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                <rect key="frame" x="108.5" y="480" width="197" height="59"/>
+                                <rect key="frame" x="108.5" y="482" width="197" height="59"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Num Teams label" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-bV-YWp" userLabel="Team Count label">
-                                <rect key="frame" x="95.5" y="572.5" width="223" height="36"/>
+                                <rect key="frame" x="95.5" y="574.5" width="223" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WYz-bV-YWp" secondAttribute="height" multiplier="203:33" id="sJQ-7T-Ic5"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Vix-LA-Y4c" userLabel="Team Count box">
-                                <rect key="frame" x="97.5" y="611.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="613.5" width="219" height="66"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                <rect key="frame" x="108.5" y="615" width="197" height="59"/>
+                                <rect key="frame" x="108.5" y="617" width="197" height="59"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw">
-                                <rect key="frame" x="115" y="83.5" width="184.5" height="54.5"/>
+                                <rect key="frame" x="87" y="81.5" width="240" height="58.5"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -705,7 +705,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
-                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
+                                <rect key="frame" x="77.5" y="103.5" width="259.5" height="58.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="MATCHING">
                                         <attributes>
@@ -779,7 +779,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPV-fJ-K8i">
                                         <rect key="frame" x="0.0" y="-7.5" width="54" height="55"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="Group 344"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
                                         <connections>
                                             <action selector="infoBtnPressed:" destination="XpD-HK-1hf" eventType="touchUpInside" id="NDA-UM-PFC"/>
                                         </connections>
@@ -787,7 +787,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgH-dT-cdH">
                                         <rect key="frame" x="33" y="-7.5" width="54.5" height="55"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                         <connections>
                                             <action selector="announcementBtnPressed:" destination="XpD-HK-1hf" eventType="touchUpInside" id="NN4-aG-YEK"/>
                                         </connections>
@@ -883,18 +883,26 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6M-cq-y2e">
-                                <rect key="frame" x="294" y="50" width="74.5" height="42"/>
+                                <rect key="frame" x="275" y="50" width="112.5" height="42"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41c-QL-V9u">
-                                        <rect key="frame" x="2" y="-210.5" width="33.5" height="463"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8N-JF-hV0">
+                                        <rect key="frame" x="4" y="1.5" width="37" height="39"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                        <connections>
+                                            <action selector="infoButtonPressed:" destination="L51-9x-cCC" eventType="touchUpInside" id="Ebw-wu-jwR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41c-QL-V9u">
+                                        <rect key="frame" x="37.5" y="-210.5" width="37.5" height="463"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                         <connections>
                                             <action selector="announcementButtonPressed:" destination="L51-9x-cCC" eventType="touchUpInside" id="vFg-bJ-OlR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVw-hW-wn8">
-                                        <rect key="frame" x="39" y="-8.5" width="33.5" height="58.5"/>
+                                        <rect key="frame" x="71.5" y="-8.5" width="37" height="58.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -904,14 +912,18 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="41c-QL-V9u" firstAttribute="width" secondItem="A6M-cq-y2e" secondAttribute="width" multiplier="0.45" id="G05-4e-hod"/>
+                                    <constraint firstItem="g8N-JF-hV0" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" multiplier="0.4" id="A6D-cc-kwf"/>
+                                    <constraint firstItem="g8N-JF-hV0" firstAttribute="centerY" secondItem="A6M-cq-y2e" secondAttribute="centerY" id="EgB-uc-XtE"/>
+                                    <constraint firstItem="41c-QL-V9u" firstAttribute="width" secondItem="A6M-cq-y2e" secondAttribute="width" multiplier="0.33" id="G05-4e-hod"/>
+                                    <constraint firstItem="g8N-JF-hV0" firstAttribute="width" secondItem="A6M-cq-y2e" secondAttribute="width" multiplier="0.33" id="V1R-Jv-LMk"/>
                                     <constraint firstItem="EVw-hW-wn8" firstAttribute="height" secondItem="A6M-cq-y2e" secondAttribute="height" multiplier="1.38462" id="Wut-RD-gqJ"/>
                                     <constraint firstItem="41c-QL-V9u" firstAttribute="height" secondItem="A6M-cq-y2e" secondAttribute="height" multiplier="11" id="Yec-iT-8rm"/>
+                                    <constraint firstItem="g8N-JF-hV0" firstAttribute="height" secondItem="A6M-cq-y2e" secondAttribute="height" multiplier="0.928571" id="gg0-5Z-g30"/>
                                     <constraint firstItem="EVw-hW-wn8" firstAttribute="centerY" secondItem="A6M-cq-y2e" secondAttribute="centerY" id="hNE-aB-z7X"/>
-                                    <constraint firstItem="EVw-hW-wn8" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" multiplier="1.5" id="hrd-5u-us6"/>
-                                    <constraint firstItem="EVw-hW-wn8" firstAttribute="width" secondItem="A6M-cq-y2e" secondAttribute="width" multiplier="0.45" id="mno-DZ-Xio"/>
+                                    <constraint firstItem="EVw-hW-wn8" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" multiplier="1.6" id="hrd-5u-us6"/>
+                                    <constraint firstItem="EVw-hW-wn8" firstAttribute="width" secondItem="A6M-cq-y2e" secondAttribute="width" multiplier="0.33" id="mno-DZ-Xio"/>
                                     <constraint firstItem="41c-QL-V9u" firstAttribute="centerY" secondItem="A6M-cq-y2e" secondAttribute="centerY" id="un1-x1-dCE"/>
-                                    <constraint firstItem="41c-QL-V9u" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" multiplier="0.5" id="yEr-mF-JoK"/>
+                                    <constraint firstItem="41c-QL-V9u" firstAttribute="centerX" secondItem="A6M-cq-y2e" secondAttribute="centerX" id="yEr-mF-JoK"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-CG-hVP" customClass="CustomSwitchButton" customModule="Game_Walker" customModuleProvider="target">
@@ -957,7 +969,7 @@
                             <constraint firstItem="1Te-FI-vyR" firstAttribute="top" secondItem="F4M-EA-8mT" secondAttribute="bottom" constant="30" id="kpS-eK-E3n"/>
                             <constraint firstItem="1Te-FI-vyR" firstAttribute="width" secondItem="F4M-EA-8mT" secondAttribute="width" multiplier="0.661" id="ksY-BS-ox3"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.7" id="lX4-Y3-EX8"/>
-                            <constraint firstItem="A6M-cq-y2e" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.18" id="v5A-mX-2Rl"/>
+                            <constraint firstItem="A6M-cq-y2e" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.272" id="v5A-mX-2Rl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="f0y-wr-zc8"/>
@@ -965,6 +977,7 @@
                     <connections>
                         <outlet property="announcementBtn" destination="41c-QL-V9u" id="azZ-af-6ec"/>
                         <outlet property="endGameBtn" destination="1Te-FI-vyR" id="eE4-zk-DmT"/>
+                        <outlet property="infoBtn" destination="g8N-JF-hV0" id="Bjf-Fk-Ecf"/>
                         <outlet property="leaderBoard" destination="F4M-EA-8mT" id="Lg0-8l-mCC"/>
                         <outlet property="settingBtn" destination="EVw-hW-wn8" id="Amk-AC-nuv"/>
                         <outlet property="switchBtn" destination="Z5O-CG-hVP" id="Bsk-vu-AMi"/>
@@ -1006,7 +1019,6 @@
         <image name="EndGameButton" width="126" height="41"/>
         <image name="GameStartButton" width="126" height="41"/>
         <image name="GameTime Label" width="125.5" height="21"/>
-        <image name="Group 344" width="28.5" height="30"/>
         <image name="HostCreateGameButtonLarge" width="245" height="80"/>
         <image name="HostNextButton" width="175" height="57"/>
         <image name="HostResumeButton" width="175" height="57"/>
@@ -1019,14 +1031,15 @@
         <image name="Rounds Label" width="85" height="21"/>
         <image name="Transitino Time Label" width="177.5" height="21"/>
         <image name="WhiteGuideIcon" width="30" height="30"/>
-        <image name="announcement" width="46" height="35"/>
         <image name="endGameBtn" width="207" height="50"/>
+        <image name="infoIcon" width="25" height="25"/>
+        <image name="messageIcon" width="25" height="25"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="ranking 1" width="187" height="61"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
         <image name="score 2" width="84" height="112"/>
-        <image name="settingIcon" width="53.5" height="40"/>
+        <image name="settingIcon" width="25" height="25"/>
         <image name="settings box" width="200" height="60"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>

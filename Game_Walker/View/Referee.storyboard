@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -214,9 +214,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KB4-TO-xR6">
-                                <rect key="frame" x="324" y="39.5" width="35" height="38"/>
+                                <rect key="frame" x="334.5" y="39.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="announcement"/>
+                                <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                 <connections>
                                     <action selector="messageButtonPressed:" destination="Zoa-T9-beL" eventType="touchUpInside" id="muh-vw-qZF"/>
                                 </connections>
@@ -237,19 +237,31 @@
                                     <action selector="leaveButtonPressed:" destination="Zoa-T9-beL" eventType="touchUpInside" id="XWM-8z-KrS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lf-t3-CWV">
+                                <rect key="frame" x="296.5" y="39" width="49" height="39"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                <connections>
+                                    <action selector="infoBtnPressed:" destination="Zoa-T9-beL" eventType="touchUpInside" id="L1G-FK-4W2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q1A-ob-tej"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6lf-t3-CWV" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.14" id="05o-0p-6CV"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="width" secondItem="iJp-w0-aMs" secondAttribute="width" multiplier="0.085" id="57l-oU-S0y"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="width" secondItem="q1A-ob-tej" secondAttribute="width" multiplier="0.0845" id="8l7-8y-cvN"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="0.284" id="B4p-kJ-Cgb"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="height" secondItem="iJp-w0-aMs" secondAttribute="height" multiplier="0.04" id="OIw-wO-fVq"/>
-                            <constraint firstItem="KB4-TO-xR6" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.65" id="OJD-zx-dIO"/>
+                            <constraint firstItem="KB4-TO-xR6" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.7" id="OJD-zx-dIO"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.0455" id="Py7-Bw-gbV"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="width" secondItem="q1A-ob-tej" secondAttribute="width" multiplier="0.202899" id="R2S-dH-hWm"/>
+                            <constraint firstItem="6lf-t3-CWV" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.55" id="Rbp-IO-TaO"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="centerX" secondItem="q1A-ob-tej" secondAttribute="centerX" multiplier="1.85" id="Wam-Ll-PGY"/>
+                            <constraint firstItem="6lf-t3-CWV" firstAttribute="width" secondItem="q1A-ob-tej" secondAttribute="width" multiplier="0.118357" id="ces-ur-i5j"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.145" id="igs-5Y-G7S"/>
+                            <constraint firstItem="6lf-t3-CWV" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.046595" id="kRb-xS-JcW"/>
                             <constraint firstItem="KB4-TO-xR6" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.14" id="mRQ-NW-a8w"/>
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.0537634" id="wku-p3-QWl"/>
                             <constraint firstItem="eE9-Oa-bu2" firstAttribute="centerY" secondItem="q1A-ob-tej" secondAttribute="centerY" multiplier="0.14" id="xxk-h0-DFZ"/>
@@ -258,6 +270,7 @@
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="0At-mo-4sZ"/>
                     <navigationItem key="navigationItem" id="6ve-Tb-mVa"/>
                     <connections>
+                        <outlet property="infoButton" destination="6lf-t3-CWV" id="azP-ap-qB6"/>
                         <outlet property="leaveButton" destination="8CS-DM-8s8" id="tp0-99-A3b"/>
                         <outlet property="messageButton" destination="KB4-TO-xR6" id="rXI-80-h4q"/>
                         <outlet property="settingsButton" destination="eE9-Oa-bu2" id="K18-zm-7E7"/>
@@ -396,7 +409,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYT-Ko-9eQ">
-                                <rect key="frame" x="324" y="39.5" width="35" height="38"/>
+                                <rect key="frame" x="334.5" y="39.5" width="35" height="38"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                 <connections>
@@ -419,16 +432,28 @@
                                     <action selector="leaveButtonPressed:" destination="Hmo-3x-snH" eventType="touchUpInside" id="Qrz-n8-cxz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDU-8w-LVs">
+                                <rect key="frame" x="296.5" y="39" width="49" height="39"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
+                                <connections>
+                                    <action selector="infoButtonPressed:" destination="Hmo-3x-snH" eventType="touchUpInside" id="dwf-mG-1TL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GFd-Dx-WLW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bDU-8w-LVs" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="0.14" id="3m4-kV-ZzC"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.85" id="6eE-hC-h96"/>
-                            <constraint firstItem="qYT-Ko-9eQ" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.65" id="D19-Bc-aMe"/>
+                            <constraint firstItem="qYT-Ko-9eQ" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.7" id="D19-Bc-aMe"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.04" id="EzC-dP-8oq"/>
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="width" secondItem="GFd-Dx-WLW" secondAttribute="width" multiplier="0.202" id="FSz-oO-lML"/>
+                            <constraint firstItem="bDU-8w-LVs" firstAttribute="height" secondItem="GFd-Dx-WLW" secondAttribute="height" multiplier="0.046595" id="FZJ-Pq-4oi"/>
                             <constraint firstItem="qYT-Ko-9eQ" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="0.14" id="Jl9-SQ-Nkh"/>
+                            <constraint firstItem="bDU-8w-LVs" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.55" id="LmG-Zx-u2i"/>
                             <constraint firstItem="ECZ-cN-lrq" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="0.14" id="OwR-ik-qdC"/>
+                            <constraint firstItem="bDU-8w-LVs" firstAttribute="width" secondItem="GFd-Dx-WLW" secondAttribute="width" multiplier="0.118357" id="Xe0-9g-E4u"/>
                             <constraint firstItem="qYT-Ko-9eQ" firstAttribute="width" secondItem="GFd-Dx-WLW" secondAttribute="width" multiplier="0.0845" id="aow-rV-Ekg"/>
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="0.284" id="dmp-Rh-s14"/>
                             <constraint firstItem="36t-aj-G8Y" firstAttribute="centerY" secondItem="GFd-Dx-WLW" secondAttribute="centerY" multiplier="0.145" id="e8k-BV-CyN"/>
@@ -440,6 +465,7 @@
                     <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="N01-yb-VHc"/>
                     <connections>
                         <outlet property="annnouncementButton" destination="qYT-Ko-9eQ" id="28G-oK-H4g"/>
+                        <outlet property="infoButton" destination="bDU-8w-LVs" id="VyT-qr-9Ll"/>
                         <outlet property="leaveButton" destination="36t-aj-G8Y" id="Mwe-rV-Pm4"/>
                         <outlet property="settingsButton" destination="ECZ-cN-lrq" id="Qh3-dE-dTB"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVP" id="GxM-Ra-Tyo"/>
@@ -542,16 +568,15 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S3m-98-REn"/>
-        <segue reference="nu7-bb-fST"/>
-        <segue reference="GxM-Ra-Tyo"/>
-        <segue reference="ef2-ZC-eYE"/>
+        <segue reference="SEr-t1-evM"/>
+        <segue reference="qww-74-glH"/>
+        <segue reference="bfG-fW-iGy"/>
+        <segue reference="KeI-Qk-QLQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Code" width="168" height="27.5"/>
         <image name="LEAVE" width="60" height="16.5"/>
         <image name="Username" width="152" height="26.5"/>
-        <image name="announcement" width="46" height="35"/>
         <image name="infoIcon" width="25" height="25"/>
         <image name="join button 2" width="176" height="57"/>
         <image name="messageIcon" width="25" height="25"/>

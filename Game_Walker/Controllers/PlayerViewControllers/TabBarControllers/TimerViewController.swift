@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class TimerViewController: UIViewController {
+class TimerViewController: BaseViewController {
     
     @IBOutlet weak var gameInfoButton: UIButton!
     @IBOutlet weak var nextGameButton: UIButton!
@@ -159,6 +159,7 @@ class TimerViewController: UIViewController {
             setSettings()
             configureTimerLabel()
         }
+        titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
     }
     
@@ -290,7 +291,7 @@ class TimerViewController: UIViewController {
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
             timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.18),
+            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.25),
             timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             

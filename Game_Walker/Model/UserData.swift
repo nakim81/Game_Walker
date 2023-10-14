@@ -33,6 +33,14 @@ class UserData {
         return UserDefaults.standard.string(forKey: key)
     }
     
+    static func writeMax(_ max: String, _ key: String){
+        UserDefaults.standard.set(max, forKey: key)
+    }
+    
+    static func readMax(_ key: String) -> String? {
+        return UserDefaults.standard.string(forKey: key)
+    }
+    
     static func writePlayer(_ player: Player, _ key: String){
         do{
             let encoder = JSONEncoder()
