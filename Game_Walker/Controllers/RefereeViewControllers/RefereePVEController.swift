@@ -99,7 +99,6 @@ class RefereePVEController: BaseViewController {
     }
     
     //MARK: - Buttons Pressed
-        
     @objc func buttonTapped() {
         if self.team.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
@@ -224,7 +223,7 @@ class RefereePVEController: BaseViewController {
     }
     
     @objc func dismissOverlay() {
-        shadeView.removeFromSuperview()
+        //shadeView.removeFromSuperview()
         buttonBorder.removeFromSuperview()
         teamPointsLabel.removeFromSuperview()
         closeBtn.removeFromSuperview()

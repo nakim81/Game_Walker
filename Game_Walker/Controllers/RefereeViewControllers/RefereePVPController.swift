@@ -45,6 +45,28 @@ class RefereePVPController: BaseViewController {
             stations = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
             host = try await H.getHost(gameCode) ?? Host()
+//            maxA = UserData.readMax("maxA") ?? ""
+//            maxB = UserData.readMax("maxB") ?? ""
+//            if maxA == "true" {
+//                leftWinButton.image = UIImage(named: "Lose Gray Button")
+//                leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+//            } else if maxA == "false" {
+//                leftWinButton.image = UIImage(named: "Win Blue Button")
+//                leftLoseButton.image = UIImage(named: "Lose Gray Button")
+//            } else {
+//                leftWinButton.image = UIImage(named: "Win Blue Button")
+//                leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+//            }
+//            if maxB == "true" {
+//                rightWinButton.image = UIImage(named: "Lose Gray Button")
+//                rightLoseButton.image = UIImage(named: "Lose Yellow Button")
+//            } else if maxB == "false" {
+//                rightWinButton.image = UIImage(named: "Win Blue Button")
+//                rightLoseButton.image = UIImage(named: "Lose Gray Button")
+//            } else {
+//                rightWinButton.image = UIImage(named: "Win Blue Button")
+//                rightLoseButton.image = UIImage(named: "Lose Yellow Button")
+//            }
             callProtocols()
             getTeamOrder()
             updateScore()
@@ -208,6 +230,19 @@ class RefereePVPController: BaseViewController {
                 }
                 maxPointsA = true
             }
+//            if maxA != "true" {
+//                Task {
+//                    do {
+//                        try await T.givePoints(gameCode, self.teamA.name, self.points)
+//                    } catch GameWalkerError.serverError(let text){
+//                        print(text)
+//                        serverAlert(text)
+//                        return
+//                    }
+//                }
+//                UserData.writeMax("true", "maxA")
+//                maxA = UserData.readMax("maxA")!
+//            }
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
@@ -259,6 +294,19 @@ class RefereePVPController: BaseViewController {
                 }
                 maxPointsA = false
             }
+//            if maxA == "true" {
+//                Task {
+//                    do {
+//                        try await T.givePoints(gameCode, self.teamA.name, -self.points)
+//                    } catch GameWalkerError.serverError(let text){
+//                        print(text)
+//                        serverAlert(text)
+//                        return
+//                    }
+//                }
+//                UserData.writeMax("false", "maxA")
+//                maxA = UserData.readMax("maxA")!
+//            }
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
@@ -377,6 +425,19 @@ class RefereePVPController: BaseViewController {
                 }
                 maxPointsB = true
             }
+//            if maxB != "true" {
+//                Task {
+//                    do {
+//                        try await T.givePoints(gameCode, self.teamB.name, self.points)
+//                    } catch GameWalkerError.serverError(let text){
+//                        print(text)
+//                        serverAlert(text)
+//                        return
+//                    }
+//                }
+//                UserData.writeMax("true", "maxB")
+//                maxB = UserData.readMax("maxB")!
+//            }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
@@ -428,6 +489,19 @@ class RefereePVPController: BaseViewController {
                 }
                 maxPointsB = false
             }
+//            if maxB == "true" {
+//                Task {
+//                    do {
+//                        try await T.givePoints(gameCode, self.teamB.name, -self.points)
+//                    } catch GameWalkerError.serverError(let text){
+//                        print(text)
+//                        serverAlert(text)
+//                        return
+//                    }
+//                }
+//                UserData.writeMax("false", "maxB")
+//                maxB = UserData.readMax("maxB")!
+//            }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
@@ -904,6 +978,10 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
             self.round = host.currentRound
             self.teamA = self.teamOrder[2 * host.currentRound - 2]
             self.teamB = self.teamOrder[2 * host.currentRound - 1]
+//            UserData.writeMax("", "maxA")
+//            maxA = UserData.readMax("maxA")!
+//            UserData.writeMax("", "maxB")
+//            maxB = UserData.readMax("maxB")!
         }
     }
     

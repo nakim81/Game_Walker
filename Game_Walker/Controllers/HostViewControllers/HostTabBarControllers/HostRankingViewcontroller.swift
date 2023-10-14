@@ -85,186 +85,186 @@ class HostRankingViewcontroller: UIViewController {
     
     // MARK: - Overlay
     @IBAction func infoButtonPressed(_ sender: Any) {
-        view.addSubview(shadeView)
-        view.addSubview(arrowView)
-        view.addSubview(closeBtn)
-        view.addSubview(switchBtn)
-        switchBtn.isUserInteractionEnabled = false
-        view.addSubview(explanationLabel)
+//        view.addSubview(shadeView)
+//        view.addSubview(arrowView)
+//        view.addSubview(closeBtn)
+//        view.addSubview(switchBtn)
+//        switchBtn.isUserInteractionEnabled = false
+//        view.addSubview(explanationLabel)
         showOverlay()
-        setupOverlayView()
+//        setupOverlayView()
     }
     
-    private lazy var shadeView: UIView = {
-            var view = UIView(frame: view.bounds)
-            view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-            return view
-        }()
-        
-        private lazy var arrowView: UIImageView = {
-            var view = UIImageView()
-            view.image = UIImage(named: "Arrow")
-            return view
-        }()
-        
-        private lazy var closeBtn: UIImageView = {
-            var view = UIImageView()
-            view.image = UIImage(named: "icon _close_")
-            view.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay))
-            view.addGestureRecognizer(tapGesture)
-            return view
-        }()
-        
-        private lazy var explanationLabel: UILabel = {
-            var label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "Click to hide points from others"
-            label.textColor = .white
-            label.textAlignment = .center
-            label.font = UIFont(name: "Dosis-Bold", size: 13)
-            return label
-        }()
-        
-        private func setupOverlayView() {
-            closeBtn.translatesAutoresizingMaskIntoConstraints = false
-            arrowView.translatesAutoresizingMaskIntoConstraints = false
-            explanationLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                closeBtn.widthAnchor.constraint(equalToConstant: 44),
-                closeBtn.heightAnchor.constraint(equalToConstant: 44),
-                closeBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25),
-                closeBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
-                
-                explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
-                explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
-                explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                explanationLabel.topAnchor.constraint(equalTo: switchBtn.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
-                
-                arrowView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.35),
-                arrowView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
-                arrowView.bottomAnchor.constraint(equalTo: explanationLabel.topAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
-                arrowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            ])
-        }
-        
-        @objc func dismissOverlay() {
-            shadeView.removeFromSuperview()
-            closeBtn.removeFromSuperview()
-            explanationLabel.removeFromSuperview()
-            switchBtn.isUserInteractionEnabled = true
-            for border in circularBorders {
-                border.removeFromSuperview()
-            }
-            for label in explanationLbls {
-                label.removeFromSuperview()
-            }
-            explanationLbls.removeAll()
-            circularBorders.removeAll()
-        }
-        
-        var circularBorders: [UIView] = []
-        var explanationLbls: [UILabel] = []
-        
-        private func showOverlay() {
-            var index : Int = 0
-            var tabBarTop: CGFloat = 0
-            var componentPositions: [CGPoint] = []
-            let explanationTexts = ["Ranking Status", "Timer & Start/End Game"]
-            let colors = [UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
-            if let tabBarController = self.tabBarController {
-                for viewController in tabBarController.viewControllers ?? [] {
-                    if let tabItem = viewController.tabBarItem {
-                        if let tabItemView = tabItem.value(forKey: "view") as? UIView {
-                            // Adding Circle Borders on Tab Bar Frame
-                            let tabItemFrame = tabItemView.frame
-                            let tabBarFrame = tabBarController.tabBar.frame
-                            let centerXPosition = tabItemFrame.midX
-                            let centerYPosition = tabBarFrame.midY
-                            let circularBorder = UIView()
-                            circularBorder.frame = CGRect(x: centerXPosition / 2, y: centerYPosition / 2, width: tabItemFrame.width * 0.33, height: tabItemFrame.width * 0.33)
-                            circularBorder.layer.cornerRadius = tabItemFrame.width * 0.35 / 2
-                            circularBorder.layer.borderWidth = 4.0
-                            circularBorder.layer.borderColor = colors[index]
-                            circularBorder.translatesAutoresizingMaskIntoConstraints = false
-                            self.view.addSubview(circularBorder)
-                            circularBorders.append(circularBorder)
-                            // Adding Texts on Tab Bar Frame
-                            let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
-                            if (tabBarTop == 0) {
-                                tabBarTop = topAnchorPosition
-                            }
-                            componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
-                            NSLayoutConstraint.activate([
-                                circularBorder.centerXAnchor.constraint(equalTo: tabItemView.centerXAnchor),
-                                circularBorder.centerYAnchor.constraint(equalTo: tabItemView.centerYAnchor),
-                                circularBorder.widthAnchor.constraint(equalTo: tabItemView.widthAnchor, multiplier: 0.33),
-                                circularBorder.heightAnchor.constraint(equalTo: tabItemView.widthAnchor, multiplier: 0.33)
-                            ])
-                            
-                            let explanationLbl = UILabel()
-                            explanationLbl.translatesAutoresizingMaskIntoConstraints = false
-                            explanationLbl.text = explanationTexts[index]
-                            explanationLbl.numberOfLines = 0
-                            explanationLbl.textAlignment = .center
-                            explanationLbl.textColor = .white
-                            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
-                            explanationLbls.append(explanationLbl)
-                            self.view.addSubview(explanationLbl)
-                            var maxWidth: CGFloat = 0
-                            if (componentPositions[index].y >= tabBarTop) {
-                                maxWidth = 75
-                            } else {
-                                maxWidth = 200
-                            }
-                            explanationLbl.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).isActive = true
-                            NSLayoutConstraint.activate([
-                                explanationLbl.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: componentPositions[index].x),
-                                explanationLbl.bottomAnchor.constraint(equalTo: self.view.topAnchor, constant: componentPositions[index].y - 15)
-                            ])
-                            index += 1
-                        }
-                    }
-                }
-            }
-        }
-    
-    
-//    private func showOverlay() {
-//        let overlayViewController = HostRankingGuideViewController()
-//        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+//    private lazy var shadeView: UIView = {
+//        var view = UIView(frame: view.bounds)
+//        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+//        return view
+//    }()
 //
-//        let explanationTexts = ["Ranking Status", "Timer & Station Info"]
-//        var componentPositions: [CGPoint] = []
-//        var componentFrames: [CGRect] = []
-//        let component1Frame = CGRect(x: Int(self.leaderBoard.frame.maxX - 85), y: Int(self.leaderBoard.frame.minY + 42.5), width: 85, height: 17)
+//    private lazy var arrowView: UIImageView = {
+//        var view = UIImageView()
+//        view.image = UIImage(named: "Arrow")
+//        return view
+//    }()
+//
+//    private lazy var closeBtn: UIImageView = {
+//        var view = UIImageView()
+//        view.image = UIImage(named: "icon _close_")
+//        view.isUserInteractionEnabled = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay))
+//        view.addGestureRecognizer(tapGesture)
+//        return view
+//    }()
+//
+//    private lazy var explanationLabel: UILabel = {
+//        var label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "Click to hide points from others"
+//        label.textColor = .white
+//        label.textAlignment = .center
+//        label.font = UIFont(name: "Dosis-Bold", size: 13)
+//        return label
+//    }()
+//
+//    private func setupOverlayView() {
+//        closeBtn.translatesAutoresizingMaskIntoConstraints = false
+//        arrowView.translatesAutoresizingMaskIntoConstraints = false
+//        explanationLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            closeBtn.widthAnchor.constraint(equalToConstant: 44),
+//            closeBtn.heightAnchor.constraint(equalToConstant: 44),
+//            closeBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25),
+//            closeBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
+//
+//            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
+//            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier:0.0604),
+//            explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            explanationLabel.topAnchor.constraint(equalTo: switchBtn.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
+//
+//            arrowView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.35),
+//            arrowView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
+//            arrowView.bottomAnchor.constraint(equalTo: explanationLabel.topAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
+//            arrowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+//        ])
+//    }
+//
+//    @objc func dismissOverlay() {
+//        shadeView.removeFromSuperview()
+//        closeBtn.removeFromSuperview()
+//        explanationLabel.removeFromSuperview()
+//        switchBtn.isUserInteractionEnabled = true
+//        for border in circularBorders {
+//            border.removeFromSuperview()
+//        }
+//        for label in explanationLbls {
+//            label.removeFromSuperview()
+//        }
+//        explanationLbls.removeAll()
+//        circularBorders.removeAll()
+//    }
+//
+//    var circularBorders: [UIView] = []
+//    var explanationLbls: [UILabel] = []
+//
+//    private func showOverlay() {
+//        var index : Int = 0
 //        var tabBarTop: CGFloat = 0
+//        var componentPositions: [CGPoint] = []
+//        let explanationTexts = ["Ranking Status", "Timer & Start/End Game"]
+//        let colors = [UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red:0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
 //        if let tabBarController = self.tabBarController {
-//            // Loop through each view controller in the tab bar controller
 //            for viewController in tabBarController.viewControllers ?? [] {
 //                if let tabItem = viewController.tabBarItem {
-//                    // Access the tab bar item of the current view controller
 //                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+//                        // Adding Circle Borders on Tab Bar Frame
 //                        let tabItemFrame = tabItemView.frame
-//                        // Calculate centerX position
-//                        let centerXPosition = tabItemFrame.midX
-//                        // Calculate topAnchor position based on tab bar's frame
 //                        let tabBarFrame = tabBarController.tabBar.frame
+//                        let centerXPosition = tabItemFrame.midX
+//                        let centerYPosition = tabBarFrame.midY
+//                        let circularBorder = UIView()
+//                        circularBorder.frame = CGRect(x: centerXPosition / 2, y: centerYPosition / 2,width: tabItemFrame.width * 0.33, height: tabItemFrame.width * 0.33)
+//                        circularBorder.layer.cornerRadius = tabItemFrame.width * 0.35 / 2
+//                        circularBorder.layer.borderWidth = 4.0
+//                        circularBorder.layer.borderColor = colors[index]
+//                        circularBorder.translatesAutoresizingMaskIntoConstraints = false
+//                        self.view.addSubview(circularBorder)
+//                        circularBorders.append(circularBorder)
+//                        // Adding Texts on Tab Bar Frame
 //                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
-//                        tabBarTop = tabBarFrame.minY
-//                        componentFrames.append(tabItemFrame)
+//                        if (tabBarTop == 0) {
+//                            tabBarTop = topAnchorPosition
+//                        }
 //                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+//                        NSLayoutConstraint.activate([
+//                            circularBorder.centerXAnchor.constraint(equalTo: tabItemView.centerXAnchor),
+//                            circularBorder.centerYAnchor.constraint(equalTo: tabItemView.centerYAnchor),
+//                            circularBorder.widthAnchor.constraint(equalTo: tabItemView.widthAnchor,multiplier: 0.33),
+//                                circularBorder.heightAnchor.constraint(equalTo: tabItemView.widthAnchor, multiplier: 0.33)
+//                        ])
+//
+//                        let explanationLbl = UILabel()
+//                        explanationLbl.translatesAutoresizingMaskIntoConstraints = false
+//                        explanationLbl.text = explanationTexts[index]
+//                        explanationLbl.numberOfLines = 0
+//                        explanationLbl.textAlignment = .center
+//                        explanationLbl.textColor = .white
+//                        explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
+//                        explanationLbls.append(explanationLbl)
+//                        self.view.addSubview(explanationLbl)
+//                        var maxWidth: CGFloat = 0
+//                        if (componentPositions[index].y >= tabBarTop) {
+//                            maxWidth = 75
+//                        } else {
+//                            maxWidth = 200
+//                        }
+//                        explanationLbl.widthAnchor.constraint(lessThanOrEqualToConstant:maxWidth).isActive = true
+//                        NSLayoutConstraint.activate([
+//                            explanationLbl.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: componentPositions[index].x),
+//                                explanationLbl.bottomAnchor.constraint(equalTo: self.view.topAnchor, constant: componentPositions[index].y - 15)
+//                        ])
+//                        index += 1
 //                    }
 //                }
 //            }
 //        }
-//        componentFrames.append(component1Frame)
-//        print(componentPositions)
-//        overlayViewController.setupOverlayView(_button: switchBtn)
-//        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop)
-//
-//        present(overlayViewController, animated: true, completion: nil)
 //    }
+    
+    
+    private func showOverlay() {
+        let overlayViewController = HostRankingGuideViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+
+        let explanationTexts = ["Ranking Status", "Timer & Station Info"]
+        var componentPositions: [CGPoint] = []
+        var componentFrames: [CGRect] = []
+        let component1Frame = CGRect(x: Int(self.switchBtn.frame.maxX - 60), y: Int(self.switchBtn.frame.minY + 17.5), width: 60, height: 31)
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        componentFrames.append(component1Frame)
+        print(componentPositions)
+        //overlayViewController.setupOverlayView(_button: switchBtn)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop)
+
+        present(overlayViewController, animated: true, completion: nil)
+    }
 }
 // MARK: - tableView
 extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource {

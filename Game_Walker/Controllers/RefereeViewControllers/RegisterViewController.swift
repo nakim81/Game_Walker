@@ -80,6 +80,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         UserData.writeGamecode(gameCode, "gamecode")
                         UserData.writeUsername(newReferee.name, "username")
                         UserData.writeReferee(newReferee, "referee")
+                        UserDefaults.standard.removeObject(forKey: "max")
+                        UserDefaults.standard.removeObject(forKey: "maxA")
+                        UserDefaults.standard.removeObject(forKey: "maxB")
                         performSegue(withIdentifier: "goToWait", sender: self)
                     }
                 } else {
@@ -124,6 +127,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     UserData.writeGamecode(gameCode, "gamecode")
                     UserData.writeUsername(newReferee.name, "username")
                     UserData.writeReferee(newReferee, "referee")
+                    UserDefaults.standard.removeObject(forKey: "max")
+                    UserDefaults.standard.removeObject(forKey: "maxA")
+                    UserDefaults.standard.removeObject(forKey: "maxB")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
             }
@@ -181,6 +187,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     UserData.writeGamecode(gameCode, "gamecode")
                     UserData.writeUsername(name, "username")
                     UserData.writeReferee(newReferee, "referee")
+                    UserDefaults.standard.removeObject(forKey: "max")
+                    UserDefaults.standard.removeObject(forKey: "maxA")
+                    UserDefaults.standard.removeObject(forKey: "maxB")
                     performSegue(withIdentifier: "goToWait", sender: self)
                 }
             }

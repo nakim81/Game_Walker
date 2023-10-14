@@ -54,15 +54,18 @@ class HostRankingGuideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupOverlayView()
     }
     
-    func setupOverlayView(_button: CustomSwitchButton!) {
+    func setupOverlayView() {
         view.addSubview(overlayView)
         overlayView.addSubview(closeBtn)
+        overlayView.addSubview(switchBtn)
         overlayView.addSubview(arrowView)
         overlayView.addSubview(explanationLabel)
         closeBtn.translatesAutoresizingMaskIntoConstraints = false
         arrowView.translatesAutoresizingMaskIntoConstraints = false
+        switchBtn.translatesAutoresizingMaskIntoConstraints = false
         explanationLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             overlayView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -74,21 +77,6 @@ class HostRankingGuideViewController: UIViewController {
             closeBtn.heightAnchor.constraint(equalToConstant: 44),
             closeBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25),
             closeBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
-            
-            switchBtn.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 60),
-            switchBtn.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant: 31),
-            switchBtn.leadingAnchor.constraint(equalTo: _button.leadingAnchor),
-            switchBtn.bottomAnchor.constraint(equalTo: _button.bottomAnchor),
-            
-            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
-            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
-            explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            explanationLabel.topAnchor.constraint(equalTo: switchBtn.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
-            
-            arrowView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.35),
-            arrowView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
-            arrowView.bottomAnchor.constraint(equalTo: explanationLabel.topAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
-            arrowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
     }
 
@@ -127,26 +115,23 @@ class HostRankingGuideViewController: UIViewController {
                 circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.25),
                 circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor)
             ])
-        }
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = textList[count]
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont(name: "Dosis-Bold", size: 15)
-        overlayView.addSubview(label)
-        
-        label.layer.cornerRadius = frameList[count].size.width / 2
-        label.layer.borderColor = color
-        label.layer.borderWidth = 15
             
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant:positionList[count].x),
-            label.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[count].y),
-            label.widthAnchor.constraint(equalToConstant: frameList[count].width),
-            label.heightAnchor.constraint(equalToConstant: frameList[count].height)
-        ])
+            NSLayoutConstraint.activate([
+                switchBtn.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count].minX),
+                switchBtn.centerYAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count].minY),
+                switchBtn.widthAnchor.constraint(equalToConstant: frameList[count].width),
+                switchBtn.heightAnchor.constraint(equalToConstant: frameList[count].height),
+                
+                explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
+                explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+                explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                explanationLabel.topAnchor.constraint(equalTo: switchBtn.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
+                
+                arrowView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.35),
+                arrowView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
+                arrowView.bottomAnchor.constraint(equalTo: explanationLabel.topAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
+                arrowView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            ])
+        }
     }
 }
