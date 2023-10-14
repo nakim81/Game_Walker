@@ -14,6 +14,7 @@ class RefereePVPController: BaseViewController {
     @IBOutlet weak var annnouncementButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
     
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
@@ -21,6 +22,10 @@ class RefereePVPController: BaseViewController {
     private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
     private var stations : [Station] = [Station()]
     private var teamOrder : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
+//    private var maxPointsA : Bool = false
+//    private var maxPointsB : Bool = false
+    private var maxA : String = ""
+    private var maxB : String = ""
     private var teamA : Team = Team(name: "Simon Dominic", iconName: "iconDaisy")
     private var teamB : Team = Team(name: "Simon Dominic", iconName: "iconDaisy")
     private var round: Int = 1
@@ -34,6 +39,20 @@ class RefereePVPController: BaseViewController {
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
+    
+    override func viewDidLoad() {
+        Task {
+            stations = try await S.getStationList(gameCode)
+            teams = try await T.getTeamList(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
+            callProtocols()
+            getTeamOrder()
+            updateScore()
+            addSubviews()
+            addConstraints()
+        }
+        super.viewDidLoad()
+    }
     
     //MARK: - Messages
     override func viewWillAppear(_ animated: Bool) {
@@ -59,22 +78,15 @@ class RefereePVPController: BaseViewController {
         }
     }
     
+    @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+    }
+    
     @IBAction func leaveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "toRegister", sender: self)
     }
     
-    override func viewDidLoad() {
-        Task {
-            stations = try await S.getStationList(gameCode)
-            teams = try await T.getTeamList(gameCode)
-            host = try await H.getHost(gameCode) ?? Host()
-            callProtocols()
-            getTeamOrder()
-            updateScore()
-            addSubviews()
-            addConstraints()
-        }
-        super.viewDidLoad()
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
     }
 
     //MARK: - UI elements
@@ -96,7 +108,7 @@ class RefereePVPController: BaseViewController {
         attributedText.append(numberAttributedString)
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
@@ -106,7 +118,7 @@ class RefereePVPController: BaseViewController {
     private lazy var roundLabel: UILabel = {
         var view = UILabel()
         view.backgroundColor = .white
-        view.textColor = .black
+        view.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50)) ?? UIFont(name: "Dosis-SemiBold", size: fontSize(size: 50))
         view.textAlignment = .center
         view.text = "Round " + "\(round)"
@@ -136,7 +148,7 @@ class RefereePVPController: BaseViewController {
     private lazy var leftTeamNumLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.textColor = .black
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 25))
         label.text = "Team \(self.teamOrder[2 * self.round - 2].number)"
         label.numberOfLines = 1
@@ -149,7 +161,7 @@ class RefereePVPController: BaseViewController {
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 2].name)"
-        label.textColor = .black
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.adjustsFontForContentSizeCategory = true
@@ -184,14 +196,17 @@ class RefereePVPController: BaseViewController {
         if self.teamA.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
-            Task {
-                do {
-                    try await T.givePoints(gameCode, self.teamA.name, self.points)
-                } catch GameWalkerError.serverError(let text){
-                    print(text)
-                    serverAlert(text)
-                    return
+            if !maxPointsA {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamA.name, self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                 }
+                maxPointsA = true
             }
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
@@ -232,14 +247,17 @@ class RefereePVPController: BaseViewController {
         if self.teamA.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
-            Task {
-                do {
-                    try await T.givePoints(gameCode, self.teamA.name, self.points)
-                } catch GameWalkerError.serverError(let text){
-                    print(text)
-                    serverAlert(text)
-                    return
+            if maxPointsA {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamA.name, -self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                 }
+                maxPointsA = false
             }
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
@@ -265,14 +283,14 @@ class RefereePVPController: BaseViewController {
         let score = "\(self.teamOrder[2 * self.round - 2].points)"
         let scoreAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
         attributedText.append(scoreAttributedString)
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 109.01, height: 40.12))
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         label.textAlignment = .center
         return label
     }()
@@ -299,7 +317,7 @@ class RefereePVPController: BaseViewController {
     private lazy var rightTeamNumLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 115, height: 38))
         label.backgroundColor = .white
-        label.textColor = .black
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 25))
         label.text = "Team \(self.teamOrder[2 * self.round - 1].number)"
         label.numberOfLines = 1
@@ -312,7 +330,7 @@ class RefereePVPController: BaseViewController {
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 1].name)"
-        label.textColor = .black
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.adjustsFontForContentSizeCategory = true
@@ -347,14 +365,17 @@ class RefereePVPController: BaseViewController {
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
-            Task {
-                do {
-                    try await T.givePoints(gameCode, self.teamB.name, self.points)
-                } catch GameWalkerError.serverError(let text){
-                    print(text)
-                    serverAlert(text)
-                    return
+            if !maxPointsB {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamB.name, self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
                 }
+                maxPointsB = true
             }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
@@ -395,6 +416,18 @@ class RefereePVPController: BaseViewController {
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
+            if maxPointsB {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamB.name, -self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                maxPointsB = false
+            }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
@@ -411,14 +444,14 @@ class RefereePVPController: BaseViewController {
         let score = "\(self.teamOrder[self.round].points)"
         let scoreAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
         attributedText.append(scoreAttributedString)
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 109.01, height: 40.12))
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         label.textAlignment = .center
         return label
     }()
@@ -457,7 +490,7 @@ class RefereePVPController: BaseViewController {
         rightScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
             gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
             gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
@@ -527,28 +560,265 @@ class RefereePVPController: BaseViewController {
             rightLoseButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001)
         ])
     }
-    
-    @IBAction func annoucmentButtonPressed(_ sender: UIButton) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVPViewController.localMessages)
-    }
-    
-    @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        // Testing
-        Task {
-            do {
-                try await H.updateCurrentRound(gameCode, 2)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
-            }
-        }
-    }
-    
+
     func fontSize(size: CGFloat) -> CGFloat {
         let size_formatter = size/390
         let result = UIScreen.main.bounds.size.width * size_formatter
         return result
+    }
+    
+    //MARK: - Overlay
+    @IBAction func infoButtonPressed(_ sender: Any) {
+        view.addSubview(shadeView)
+        view.addSubview(leftButtonBorder)
+        view.addSubview(rightButtonBorder)
+        view.addSubview(closeBtn)
+        view.addSubview(buttonLabel)
+        view.addSubview(leftTeamPointsLabel)
+        view.addSubview(rightTeamPointsLabel)
+        view.addSubview(leftWinButton)
+        leftWinButton.image = UIImage(named: "Win Blue Button")
+        view.addSubview(leftLoseButton)
+        leftWinButton.isUserInteractionEnabled = false
+        leftLoseButton.image = UIImage(named: "Lose Yellow Button")
+        view.addSubview(rightWinButton)
+        leftLoseButton.isUserInteractionEnabled = false
+        rightWinButton.image = UIImage(named: "Win Blue Button")
+        view.addSubview(rightLoseButton)
+        rightWinButton.isUserInteractionEnabled = false
+        rightLoseButton.image = UIImage(named: "Lose Yellow Button")
+        view.addSubview(explanationLabel)
+        rightLoseButton.isUserInteractionEnabled = false
+        showOverlay()
+        setupOverlayView()
+    }
+    
+    private lazy var shadeView: UIView = {
+        var view = UIView(frame: view.bounds)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        return view
+    }()
+    
+    private lazy var closeBtn: UIImageView = {
+        var view = UIImageView()
+        view.image = UIImage(named: "icon _close_")
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay))
+        view.addGestureRecognizer(tapGesture)
+        return view
+    }()
+    
+    private lazy var buttonLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Click to give points of the Team"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        return label
+    }()
+    
+    private lazy var leftButtonBorder: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        return view
+    }()
+    
+    private lazy var rightButtonBorder: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        return view
+    }()
+    
+    private lazy var leftTeamPointsLabel: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Team's total points"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var rightTeamPointsLabel: UIView = {
+        var view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderWidth = 5.0
+        view.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+        view.layer.cornerRadius = 5.0
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Team's total points"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var explanationLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Click win to give points of standard station points"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        return label
+    }()
+    
+    @objc func dismissOverlay() {
+        shadeView.removeFromSuperview()
+        buttonLabel.removeFromSuperview()
+        closeBtn.removeFromSuperview()
+        leftButtonBorder.removeFromSuperview()
+        rightButtonBorder.removeFromSuperview()
+        leftTeamPointsLabel.removeFromSuperview()
+        rightTeamPointsLabel.removeFromSuperview()
+        explanationLabel.removeFromSuperview()
+        for border in circularBorders {
+            border.removeFromSuperview()
+        }
+        for label in explanationLbls {
+            label.removeFromSuperview()
+        }
+        explanationLbls.removeAll()
+        circularBorders.removeAll()
+        leftWinButton.isUserInteractionEnabled = true
+        leftLoseButton.isUserInteractionEnabled = true
+        rightWinButton.isUserInteractionEnabled = true
+        rightLoseButton.isUserInteractionEnabled = true
+    }
+    
+    private func setupOverlayView() {
+        closeBtn.translatesAutoresizingMaskIntoConstraints = false
+        buttonLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftButtonBorder.translatesAutoresizingMaskIntoConstraints = false
+        rightButtonBorder.translatesAutoresizingMaskIntoConstraints = false
+        leftTeamPointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightTeamPointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        explanationLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeBtn.widthAnchor.constraint(equalToConstant: 44),
+            closeBtn.heightAnchor.constraint(equalToConstant: 44),
+            closeBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25),
+            closeBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
+            
+            buttonLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            buttonLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01),
+            buttonLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
+            buttonLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.02),
+
+            leftButtonBorder.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            leftButtonBorder.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            leftButtonBorder.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.0853),
+            leftButtonBorder.topAnchor.constraint(equalTo: leftTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
+            
+            rightButtonBorder.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            rightButtonBorder.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            rightButtonBorder.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.0853),
+            rightButtonBorder.topAnchor.constraint(equalTo: leftTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
+
+            leftTeamPointsLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            leftTeamPointsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            leftTeamPointsLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.09),
+            leftTeamPointsLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            
+            rightTeamPointsLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
+            rightTeamPointsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            rightTeamPointsLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.09),
+            rightTeamPointsLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+
+            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80),
+            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            explanationLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            explanationLabel.topAnchor.constraint(equalTo: leftWinButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01)
+        ])
+    }
+    
+    var circularBorders: [UIView] = []
+    var explanationLbls: [UILabel] = []
+    
+    private func showOverlay() {
+        var index : Int = 0
+        var tabBarTop: CGFloat = 0
+        var componentPositions: [CGPoint] = []
+        let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
+        let colors = [UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor, UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor]
+        if let tabBarController = self.tabBarController {
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        // Adding Circle Borders on Tab Bar Frame
+                        let tabItemFrame = tabItemView.frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let centerXPosition = tabItemFrame.midX
+                        let centerYPosition = tabBarFrame.midY
+                        let circularBorder = UIView()
+                        circularBorder.frame = CGRect(x: centerXPosition / 2, y: centerYPosition / 2, width: tabItemFrame.width * 0.45, height: tabItemFrame.width * 0.45)
+                        circularBorder.layer.cornerRadius = tabItemFrame.width * 0.45 / 2
+                        circularBorder.layer.borderWidth = 4.0
+                        circularBorder.layer.borderColor = colors[index]
+                        circularBorder.translatesAutoresizingMaskIntoConstraints = false
+                        self.view.addSubview(circularBorder)
+                        circularBorders.append(circularBorder)
+                        // Adding Texts on Tab Bar Frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        if (tabBarTop  == 0) {
+                            tabBarTop = topAnchorPosition
+                        }
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                        NSLayoutConstraint.activate([
+                            circularBorder.centerXAnchor.constraint(equalTo: tabItemView.centerXAnchor),
+                            circularBorder.centerYAnchor.constraint(equalTo: tabItemView.centerYAnchor),
+                            circularBorder.widthAnchor.constraint(equalTo: tabItemView.widthAnchor, multiplier: 0.45),
+                            circularBorder.heightAnchor.constraint(equalTo: tabItemView.widthAnchor, multiplier: 0.45)
+                        ])
+                        
+                        let explanationLbl = UILabel()
+                        explanationLbl.translatesAutoresizingMaskIntoConstraints = false
+                        explanationLbl.text = explanationTexts[index]
+                        explanationLbl.numberOfLines = 0
+                        explanationLbl.textAlignment = .center
+                        explanationLbl.textColor = .white
+                        explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
+                        self.view.addSubview(explanationLbl)
+                        explanationLbls.append(explanationLbl)
+                        var maxWidth: CGFloat = 0
+                        if (componentPositions[index].y >= tabBarTop) {
+                            maxWidth = 75
+                        } else {
+                            maxWidth = 200
+                        }
+                        explanationLbl.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth).isActive = true
+                        NSLayoutConstraint.activate([
+                            explanationLbl.centerXAnchor.constraint(equalTo: self.view.leadingAnchor, constant: componentPositions[index].x),
+                            explanationLbl.bottomAnchor.constraint(equalTo: self.view.topAnchor, constant: componentPositions[index].y - 15)
+                        ])
+                        index += 1
+                    }
+                }
+            }
+        }
     }
 
     //MARK: - Score Update

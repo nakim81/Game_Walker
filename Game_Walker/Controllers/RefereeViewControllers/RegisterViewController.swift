@@ -18,14 +18,13 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var refereeUserID = UserData.readUUID()!
     private var stations : [Station] = []
     private var pvp : Bool?
+    private var gameStart : Bool?
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
-//        UserDefaults.standard.removeObject(forKey: "gamecode")
-//        UserDefaults.standard.removeObject(forKey: "username")
-//        UserDefaults.standard.removeObject(forKey: "referee")
         Task {
             configureNavItem()
+            callProtocols()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
             gamecodeTextField.delegate = self
             gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
@@ -90,7 +89,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             // Rejoining the game.
             else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                 let oldReferee = UserData.readReferee("referee")!
-                if oldReferee.assigned {
+                if oldReferee.assigned && gameStart! {
                     for station in stations {
                         if station.name == oldReferee.stationName {
                             self.pvp = station.pvp
@@ -148,7 +147,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 UserData.writeGamecode(storedGameCode, "gamecode")
                 UserData.writeUsername(newReferee.name, "username")
                 UserData.writeReferee(newReferee, "referee")
-                if oldReferee.assigned {
+                if oldReferee.assigned && gameStart! {
                     for station in stations {
                         if station.name == oldReferee.stationName {
                             self.pvp = station.pvp
@@ -186,6 +185,21 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
+    }
+}
+
+// MARK: - Protocols
+extension RegisterController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.gameStart = host.gameStart
+    }
+    
+    func listen(_ _ : [String : Any]){
+    }
+    
+    func callProtocols() {
+        H.delegates.append(self)
+        H.listenHost(storedGameCode, onListenerUpdate: listen(_:))
     }
 }
 
