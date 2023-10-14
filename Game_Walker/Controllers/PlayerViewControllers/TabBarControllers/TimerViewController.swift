@@ -144,7 +144,6 @@ class TimerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
         if TeamViewController.unread {
             self.announcementButton.setImage(unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(readAll, for: .normal)
         }
@@ -162,6 +161,7 @@ class TimerViewController: UIViewController {
             configureTimerLabel()
         }
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        configureGamecodeLabel()
     }
     
     @objc func readAll(notification: Notification) {
@@ -250,7 +250,7 @@ class TimerViewController: UIViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }

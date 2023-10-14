@@ -91,7 +91,6 @@ class RefereeTimerController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: notificationName2, object: nil)
         if unread {
             self.announcementButton.setImage(unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(readAll, for: .normal)
         }
@@ -308,7 +307,7 @@ class RefereeTimerController: BaseViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "referee")
         
         present(overlayViewController, animated: true, completion: nil)
     }

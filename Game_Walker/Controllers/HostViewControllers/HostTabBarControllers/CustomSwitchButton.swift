@@ -65,6 +65,9 @@ class CustomSwitchButton: UIButton {
             super.init(coder: coder)
 
             self.buttonInit(frame: frame)
+            let width = frame.width * 0.9438202247
+            let height = frame.height
+            print(frame)
         }
 
         private func buttonInit(frame: CGRect) {
@@ -72,17 +75,17 @@ class CustomSwitchButton: UIButton {
             let circleViewHeight = frame.height - (circleViewTopBottomMargin * 2)
 
             barView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+            print(barView.frame.width)
             barView.image = self.onImage.bar
-            barView.layer.masksToBounds = true
-            barView.layer.cornerRadius = frame.height / 2
+            barView.contentMode = .scaleToFill
 
             self.addSubview(barView)
 
             circleView = UIImageView(frame: CGRect(x: 0, y: circleViewTopBottomMargin, width: circleViewHeight, height: circleViewHeight))
+            print(circleView.frame.height)
             circleView.center.x = self.circleView.frame.width / 2
             circleView.image = self.onImage.circle
-            circleView.layer.masksToBounds = true
-            circleView.layer.cornerRadius = frame.height / 2
+            circleView.contentMode = .scaleAspectFit
 
             self.addSubview(circleView)
         }

@@ -142,15 +142,15 @@ class HostTimerViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - overlay Guide view
     private func showOverlay() {
-        let overlayViewController = OverlayViewController()
+        let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Check to see what happens when you click this circle", "Ranking", "Timer"]
+        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to see what happens"]
         var componentPositions: [CGPoint] = []
-        let component1Frame = timerCircle.frame
-        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.midY))
+        var componentFrames: [CGRect] = []
+        let timerFrame = timerCircle.frame
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
             // Loop through each view controller in the tab bar controller
@@ -164,20 +164,20 @@ class HostTimerViewController: UIViewController {
                         // Calculate topAnchor position based on tab bar's frame
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
-                        if (tabBarTop == 0) {
-                            tabBarTop = topAnchorPosition
-                        }
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
                         componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
                     }
                 }
             }
         }
         print(componentPositions)
-        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: tabBarTop)
+        componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
+        componentFrames.append(timerFrame)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-
     //MARK: - UI Timer Elements
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()

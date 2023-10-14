@@ -52,9 +52,9 @@ class RorTOverlayViewController: UIViewController {
         ])
     }
     
-    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ tabType: String){
+    func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ tabType: String, _ userType: String){
         colorList.append(color)
-        let count = frameList.count - 1
+        let count = textList.count - 1
         for i in 0..<count {
             let explanationLbl = UILabel()
             explanationLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -100,21 +100,49 @@ class RorTOverlayViewController: UIViewController {
         overlayView.addSubview(label)
         
         if tabType == "Ranking" {
+            
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.image = UIImage(named: "blindScore")
             overlayView.addSubview(imageView)
             
-            NSLayoutConstraint.activate([
-                imageView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count].minX),
-                imageView.centerYAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count].minY),
-                imageView.widthAnchor.constraint(equalToConstant: frameList[count].width),
-                imageView.heightAnchor.constraint(equalToConstant: frameList[count].height),
+            if userType == "host" {
+                imageView.image = UIImage(named: "arrow")
                 
-                label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-                label.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -15),
-                label.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.4)
-            ])
+                let buttonView = UIImageView()
+                buttonView.translatesAutoresizingMaskIntoConstraints = false
+                overlayView.addSubview(buttonView)
+                buttonView.image = UIImage(named: "switchBtn")
+                
+                NSLayoutConstraint.activate([
+                    buttonView.widthAnchor.constraint(equalToConstant: frameList.last!.width * 1.0628279295),
+                    buttonView.heightAnchor.constraint(equalToConstant: frameList.last!.height * 1.1666666667),
+                    buttonView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList.last!.x),
+                    buttonView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList.last!.y),
+                    
+                    imageView.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.36),
+                    imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.4888888889),
+                    imageView.trailingAnchor.constraint(equalTo: buttonView.leadingAnchor),
+                    imageView.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
+                    
+                    label.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+                    label.widthAnchor.constraint(equalToConstant: frameList[count].width),
+                    label.heightAnchor.constraint(equalTo: label.widthAnchor, multiplier: 0.07),
+                    label.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
+                ])
+            } else {
+                imageView.image = UIImage(named: "blindScore")
+                
+                NSLayoutConstraint.activate([
+                    imageView.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count].minX),
+                    imageView.centerYAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count].minY),
+                    imageView.widthAnchor.constraint(equalToConstant: frameList[count].width),
+                    imageView.heightAnchor.constraint(equalToConstant: frameList[count].height),
+                    
+                    label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+                    label.bottomAnchor.constraint(equalTo: imageView.topAnchor, constant: -15),
+                    label.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.4)
+                ])
+            }
         } else {
             label.layer.cornerRadius = frameList[count].size.width / 2
             label.layer.borderColor = color

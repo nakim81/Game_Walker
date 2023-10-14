@@ -51,7 +51,6 @@ class RefereePVEController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: RefereeRankingPVEViewController.notificationName2, object: nil)
         if RefereeRankingPVEViewController.unread {
             self.messageButton.setImage(unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.messageButton.setImage(readAll, for: .normal)
         }
