@@ -47,8 +47,9 @@ class RefereeTimerController: BaseViewController {
         super.viewDidLoad()
         Task {
             callProtocols()
-            configureTimerLabel()
-            calculateTime()
+            //setSetting()
+            //configureTimerLabel()
+            //calculateTime()
         }
     }
     
@@ -296,12 +297,6 @@ class RefereeTimerController: BaseViewController {
         ])
     }
     
-    func fontSize(size: CGFloat) -> CGFloat {
-        let size_formatter = size/390
-        let result = UIScreen.main.bounds.size.width * size_formatter
-        return result
-    }
-    
     //MARK: - Overlay
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -472,6 +467,9 @@ extension RefereeTimerController: HostUpdateListener {
             self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
             self.round = host.currentRound
             
+            calculateTime()
+            configureTimerLabel()
+            
             for station in stations {
                 if station.name == referee.stationName {
                     self.station = station
@@ -479,5 +477,17 @@ extension RefereeTimerController: HostUpdateListener {
                 }
             }
         }
+    }
+    
+    func setSetting(){
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
     }
 }

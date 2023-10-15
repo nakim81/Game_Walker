@@ -288,6 +288,8 @@ class AddStationViewController: BaseViewController {
                 let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
                 do {
                     try await S.saveStation(gamecode, modifiedStation)
+                    NotificationCenter.default.post(name: Notification.Name("stationUpdate"), object: nil)
+                    self.dismiss(animated: true, completion: nil)
                 } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
@@ -313,18 +315,14 @@ class AddStationViewController: BaseViewController {
 
                 do {
                     try await S.saveStation(gamecode, stationToAdd)
+                    NotificationCenter.default.post(name: Notification.Name("stationUpdate"), object: nil)
+                    self.dismiss(animated: true, completion: nil)
                 } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
                     return
                 }
             }
-        }
-        
-        delegate?.didUpdateStationData {
-            print("delegate is being called")
-            NotificationCenter.default.post(name: .stationDataUpdated, object: nil)
-            self.dismiss(animated: true, completion: nil)
         }
     }
     

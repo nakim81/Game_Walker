@@ -151,7 +151,7 @@ class TimerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Task {
+        Task { @MainActor in
             callProtocols()
             configureGamecodeLabel()
             host = try await H.getHost(gameCode) ?? Host()
@@ -219,7 +219,7 @@ class TimerViewController: BaseViewController {
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
         ])
     }
-// MARK: - overlay Guide view
+    // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -255,7 +255,7 @@ class TimerViewController: BaseViewController {
         
         present(overlayViewController, animated: true, completion: nil)
     }
-// MARK: - Timer
+    // MARK: - Timer
     func findStation() {
         if round == rounds {
             for station in self.stations {
@@ -367,7 +367,7 @@ class TimerViewController: BaseViewController {
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
                     let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             }
@@ -444,7 +444,7 @@ class TimerViewController: BaseViewController {
             tapped = false
         }
     }
-
+    
 }
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {

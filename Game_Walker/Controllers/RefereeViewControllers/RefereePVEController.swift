@@ -531,12 +531,6 @@ class RefereePVEController: BaseViewController {
         }
     }
     
-    func fontSize(size: CGFloat) -> CGFloat {
-        let size_formatter = size/390
-        let result = UIScreen.main.bounds.size.width * size_formatter
-        return result
-    }
-    
     func addSubviews() {
         self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)

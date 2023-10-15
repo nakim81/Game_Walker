@@ -108,7 +108,9 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func endBtnPressed(_ sender: Any) {
-        showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        endGamePopUp.delegate = self
+        present(endGamePopUp, animated: true)
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
@@ -175,7 +177,7 @@ class HostTimerViewController: UIViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "host")
         
         present(overlayViewController, animated: true, completion: nil)
     }
@@ -476,4 +478,9 @@ extension HostTimerViewController: HostUpdateListener {
         self.gameOver = host.gameover
     }
 }
-
+// MARK: - ModalViewControllerDelegate
+extension HostTimerViewController: ModalViewControllerDelegate {
+    func modalViewControllerDidRequestPush() {
+        self.showAwardPopUp()
+    }
+}
