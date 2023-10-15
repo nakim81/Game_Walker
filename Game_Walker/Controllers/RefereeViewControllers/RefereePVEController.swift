@@ -62,9 +62,9 @@ class RefereePVEController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: RefereeRankingPVEViewController.notificationName2, object: nil)
         if RefereeRankingPVEViewController.unread {
             self.messageButton.setImage(unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.messageButton.setImage(readAll, for: .normal)
         }
@@ -76,12 +76,16 @@ class RefereePVEController: BaseViewController {
         }
         if unread {
             self.messageButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.messageButton.setImage(self.readAll, for: .normal)
         }
     }
     
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+    }
+    
+//MARK: - Buttons Pressed
     @IBAction func messageButtonPressed(_ sender: Any) {
         showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
     }

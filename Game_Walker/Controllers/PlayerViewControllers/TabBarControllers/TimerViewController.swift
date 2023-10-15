@@ -140,11 +140,12 @@ class TimerViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
         if TeamViewController.unread {
-            self.announcementButton.setImage(readAll, for: .normal)
-        } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
+        } else {
+            self.announcementButton.setImage(readAll, for: .normal)
         }
     }
     
@@ -161,6 +162,7 @@ class TimerViewController: BaseViewController {
         }
         titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        configureGamecodeLabel()
     }
     
     @objc func readAll(notification: Notification) {
@@ -169,10 +171,13 @@ class TimerViewController: BaseViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
@@ -246,7 +251,7 @@ class TimerViewController: BaseViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }

@@ -56,13 +56,19 @@ class RankingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
+        if TeamViewController.unread {
+            self.announcementButton.setImage(self.unreadSome, for: .normal)
+        } else {
+            self.announcementButton.setImage(self.readAll, for: .normal)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureListeners()
         configureTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
         configureAlertIcon()
         configureGamecodeLabel()
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
@@ -89,10 +95,13 @@ class RankingViewController: UIViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     func listen(_ _ : [String : Any]){
@@ -158,7 +167,7 @@ extension RankingViewController {
         }
         componentFrames.append(component1Frame)
         print(componentPositions)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop, "Ranking")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }

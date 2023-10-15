@@ -14,7 +14,6 @@ class HostRankingViewcontroller: UIViewController {
     @IBOutlet weak var announcementBtn: UIButton!
     @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var switchBtn: CustomSwitchButton!
-    @IBOutlet weak var endGameBtn: UIButton!
     @IBOutlet weak var infoBtn: UIButton!
     
     static var messages: [Announcement] = []
@@ -30,6 +29,7 @@ class HostRankingViewcontroller: UIViewController {
         setDelegates()
         configureTableView()
         setMessages()
+        print(switchBtn.frame)
     }
     
     func listen(_ _ : [String : Any]){
@@ -46,12 +46,8 @@ class HostRankingViewcontroller: UIViewController {
         //Update showScoreBoard of host on the server
     }
     
-    @IBAction func endGameBtnPressed(_ sender: UIButton) {
-        //present end game warning popup
-//        showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
-        let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
-        endGamePopUp.delegate = self
-        present(endGamePopUp, animated: true)
+    @IBAction func infoBtnPressed(_ sender: UIButton) {
+        self.showOverlay()
     }
     
     private func setMessages() {
@@ -299,6 +295,47 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         leaderBoard.deselectRow(at: indexPath, animated: true)
     }
 }
+// MARK: - overlay guide
+extension HostRankingViewcontroller {
+    private func showOverlay() {
+        let overlayViewController = RorTOverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to hide points from otherst"]
+        var componentPositions: [CGPoint] = []
+        var componentFrames: [CGRect] = []
+        let component1Frame = CGRect(x: self.leaderBoard.frame.maxX - 85.0, y: self.leaderBoard.frame.minY, width: self.leaderBoard.frame.width, height: 17)
+        let component2Frame = CGRect(x: self.switchBtn.frame.minX, y: self.switchBtn.frame.minY, width: self.switchBtn.frame.width, height: self.switchBtn.frame.height)
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        componentFrames.append(component1Frame)
+        componentFrames.append(component2Frame)
+        componentPositions.append(CGPoint(x: leaderBoard.frame.maxX, y: leaderBoard.frame.minY))
+        componentPositions.append(CGPoint(x: switchBtn.frame.minX, y: switchBtn.frame.minY))
+        print(componentPositions)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking", "host")
+        
+        present(overlayViewController, animated: true, completion: nil)
+    }
+}
 // MARK: - TeamProtocol
 extension HostRankingViewcontroller: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
@@ -313,13 +350,13 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
       Task { @MainActor in
           do {
               try await H.hide_show_score(gameCode, self.showScore)
+              leaderBoard.reloadData()
           } catch GameWalkerError.serverError(let text){
               print(text)
               serverAlert(text)
               return
           }
       }
-      leaderBoard.reloadData()
   }
 }
 // MARK: - ModalViewControllerDelegate

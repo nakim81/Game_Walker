@@ -143,7 +143,7 @@ class HostTimerViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -175,11 +175,10 @@ class HostTimerViewController: UIViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-
     //MARK: - UI Timer Elements
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
