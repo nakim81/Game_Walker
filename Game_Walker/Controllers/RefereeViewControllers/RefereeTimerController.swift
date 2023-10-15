@@ -297,12 +297,6 @@ class RefereeTimerController: BaseViewController {
         ])
     }
     
-    func fontSize(size: CGFloat) -> CGFloat {
-        let size_formatter = size/390
-        let result = UIScreen.main.bounds.size.width * size_formatter
-        return result
-    }
-    
     //MARK: - Overlay
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
