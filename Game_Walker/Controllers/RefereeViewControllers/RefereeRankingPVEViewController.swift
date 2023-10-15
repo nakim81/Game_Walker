@@ -29,6 +29,7 @@ class RefereeRankingPVEViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     
     static let notificationName = Notification.Name("readNotification")
+    static let notificationName2 = Notification.Name("announceNoti")
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -68,19 +69,19 @@ class RefereeRankingPVEViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
         attributedText.append(numberAttributedString)
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = false
         label.textAlignment = .center
@@ -174,7 +175,7 @@ extension RefereeRankingPVEViewController {
         }
         componentFrames.append(component1Frame)
         print(componentPositions)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor.black.cgColor, explanationTexts, tabBarTop, "Ranking")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking", "referee")
         
         present(overlayViewController, animated: true, completion: nil)
     }
@@ -196,18 +197,20 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         var hostAnnouncements = Array(host.announcements)
         if RefereeRankingPVEViewController.localMessages.count > hostAnnouncements.count {
             removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":RefereeRankingPVEViewController.unread])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil, userInfo: nil)
         } else {
             for announcement in hostAnnouncements {
                 if !RefereeRankingPVEViewController.localMessages.contains(announcement) {
                     RefereeRankingPVEViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
                 } else {
                     if let localIndex = RefereeRankingPVEViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
                         if RefereeRankingPVEViewController.localMessages[localIndex].content != announcement.content {
                             RefereeRankingPVEViewController.localMessages[localIndex].content = announcement.content
                             RefereeRankingPVEViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
                         }
                     }
                 }
@@ -215,3 +218,4 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         }
     }
 }
+

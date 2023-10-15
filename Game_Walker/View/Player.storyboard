@@ -435,7 +435,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdP-DM-uNL">
-                                <rect key="frame" x="30.666666666666671" y="53" width="60" height="32.666666666666657"/>
+                                <rect key="frame" x="30.666666666666671" y="46" width="60" height="46.666666666666657"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Leave">
@@ -478,20 +478,20 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTv-HE-hya">
-                                <rect key="frame" x="30.666666666666657" y="105.66666666666667" width="366.66666666666674" height="44.000000000000014"/>
+                                <rect key="frame" x="30.666666666666657" y="112.66666666666669" width="366.66666666666674" height="44"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-sP-dTp">
-                                <rect key="frame" x="30.666666666666657" y="152.66666666666666" width="366.66666666666674" height="33"/>
+                                <rect key="frame" x="30.666666666666657" y="159.66666666666666" width="366.66666666666674" height="33"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="30.666666666666657" y="190.66666666666669" width="366.66666666666674" height="661.33333333333326"/>
+                                <rect key="frame" x="30.666666666666657" y="197.66666666666669" width="366.66666666666674" height="654.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -512,7 +512,7 @@
                             <constraint firstItem="oTv-HE-hya" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0507497" id="S7n-Af-YV6"/>
                             <constraint firstItem="Pfz-mn-NZG" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0475" id="WwQ-YD-q2P"/>
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="ZwR-9C-rKf"/>
-                            <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0378049" id="ak0-Nc-oww"/>
+                            <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0537" id="ak0-Nc-oww"/>
                             <constraint firstItem="oTv-HE-hya" firstAttribute="top" secondItem="qdP-DM-uNL" secondAttribute="bottom" constant="20" id="eT1-QV-Zap"/>
                             <constraint firstItem="vx8-sP-dTp" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" id="efi-Pw-jEf"/>
                             <constraint firstItem="oTv-HE-hya" firstAttribute="leading" secondItem="qdP-DM-uNL" secondAttribute="leading" id="hT4-FL-g5k"/>
@@ -755,7 +755,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="29y-2J-Hks"/>
-        <segue reference="NyH-V6-DS8"/>
+        <segue reference="UvD-Ge-RWl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="current station info 2" width="169.66667175292969" height="55"/>

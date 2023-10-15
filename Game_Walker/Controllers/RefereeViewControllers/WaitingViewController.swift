@@ -16,7 +16,6 @@ class WaitingController: BaseViewController {
     
     private var teamCreated = false
     private var pvpAssigned = false
-    //private var isTeamOrderCalled = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
@@ -108,16 +107,12 @@ class WaitingController: BaseViewController {
                 serverAlert(message)
                 return
             }
-            //self.isTeamOrderCalled = true
             self.pvpAssigned = true
             if self.station.pvp {
                 self.performSegue(withIdentifier: "goToPVP", sender: self)
             }
             else {
                 self.performSegue(withIdentifier: "goToPVE", sender: self)
-            }
-            if self.pvpAssigned {
-                self.timer?.invalidate()
             }
         }
     }
@@ -150,10 +145,13 @@ class WaitingController: BaseViewController {
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
             // For now, it is more suitable to write here considering we already have algorithms in the most of our testing cases.
-            if self.referee.assigned {
+            if self.referee.assigned && !self.pvpAssigned {
                 if self.algorithm != [] && self.teamCreated {
                     setTeamOrder()
                 }
+            }
+            if self.pvpAssigned {
+                self.timer?.invalidate()
             }
             //
             self.view.layoutIfNeeded() 
@@ -211,7 +209,6 @@ extension WaitingController: TeamUpdateListener ,RefereeUpdateListener, HostUpda
         if host.algorithm != [] {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
-            //self.setTeamOrder()
         }
     }
     

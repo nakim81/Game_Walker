@@ -33,7 +33,8 @@ class TeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     
-    static let notificationName = Notification.Name("readNotification")
+    static let notificationName1 = Notification.Name("readNotification")
+    static let notificationName2 = Notification.Name("announceNoti")
     
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -76,11 +77,11 @@ class TeamViewController: UIViewController {
             let unread = strongSelf.checkUnreadAnnouncements(announcements: TeamViewController.localMessages)
             TeamViewController.unread = unread
             if unread{
-                NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: TeamViewController.notificationName1, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
             } else {
-                NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: TeamViewController.notificationName1, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
             }
         }
@@ -214,7 +215,7 @@ extension TeamViewController: HostUpdateListener {
         // if some announcements were deleted from the server
         if TeamViewController.localMessages.count > hostAnnouncements.count {
             removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: TeamViewController.notificationName, object: nil, userInfo: ["unread":TeamViewController.unread])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil, userInfo: nil)
         } else {
             // compare server announcements and local announcements
             for announcement in hostAnnouncements {
@@ -223,6 +224,7 @@ extension TeamViewController: HostUpdateListener {
                 if !ids.contains(announcement.uuid) {
                     TeamViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: TeamViewController.notificationName2, object: nil, userInfo: nil)
                 } else {
                     // modified announcements
                     if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
@@ -230,6 +232,7 @@ extension TeamViewController: HostUpdateListener {
                             TeamViewController.localMessages[localIndex].content = announcement.content
                             TeamViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: TeamViewController.notificationName2, object: nil, userInfo: nil)
                         }
                     }
                 }

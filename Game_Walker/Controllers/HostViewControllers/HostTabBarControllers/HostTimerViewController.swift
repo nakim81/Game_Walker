@@ -51,6 +51,7 @@ class HostTimerViewController: UIViewController {
         super.viewDidLoad()
         Task {
             titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: 50)
+            titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
             callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
@@ -107,7 +108,9 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func endBtnPressed(_ sender: Any) {
-        showEndGamePopUp(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        endGamePopUp.delegate = self
+        present(endGamePopUp, animated: true)
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
@@ -142,15 +145,15 @@ class HostTimerViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - overlay Guide view
     private func showOverlay() {
-        let overlayViewController = OverlayViewController()
+        let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Check to see what happens when you click this circle", "Ranking", "Timer"]
+        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to see what happens"]
         var componentPositions: [CGPoint] = []
-        let component1Frame = timerCircle.frame
-        componentPositions.append(CGPoint(x: component1Frame.midX, y: component1Frame.midY))
+        var componentFrames: [CGRect] = []
+        let timerFrame = timerCircle.frame
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
             // Loop through each view controller in the tab bar controller
@@ -164,20 +167,20 @@ class HostTimerViewController: UIViewController {
                         // Calculate topAnchor position based on tab bar's frame
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
-                        if (tabBarTop == 0) {
-                            tabBarTop = topAnchorPosition
-                        }
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
                         componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
                     }
                 }
             }
         }
         print(componentPositions)
-        overlayViewController.showExplanationLabels(explanationTexts: explanationTexts, componentPositions: componentPositions, numberOfLabels: 3, tabBarTop: tabBarTop)
+        componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
+        componentFrames.append(timerFrame)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "host")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-
     //MARK: - UI Timer Elements
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -185,19 +188,19 @@ class HostTimerViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
         attributedText.append(numberAttributedString)
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
@@ -275,18 +278,12 @@ class HostTimerViewController: UIViewController {
     }()
     
     func configureTimerLabel(){
-//        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
-//            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
-//            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-//            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
-            
             timerCircle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.05),
             timerCircle.widthAnchor.constraint(equalTo: timerCircle.heightAnchor),
@@ -444,7 +441,7 @@ class HostTimerViewController: UIViewController {
                 else {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
-            }
+            } 
             runTimer()
         }
     }
@@ -481,4 +478,9 @@ extension HostTimerViewController: HostUpdateListener {
         self.gameOver = host.gameover
     }
 }
-
+// MARK: - ModalViewControllerDelegate
+extension HostTimerViewController: ModalViewControllerDelegate {
+    func modalViewControllerDidRequestPush() {
+        self.showAwardPopUp()
+    }
+}

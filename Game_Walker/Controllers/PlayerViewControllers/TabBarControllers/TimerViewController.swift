@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class TimerViewController: UIViewController {
+class TimerViewController: BaseViewController {
     
     @IBOutlet weak var gameInfoButton: UIButton!
     @IBOutlet weak var nextGameButton: UIButton!
@@ -140,17 +140,18 @@ class TimerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
         if TeamViewController.unread {
-            self.announcementButton.setImage(readAll, for: .normal)
-        } else {
             self.announcementButton.setImage(unreadSome, for: .normal)
+        } else {
+            self.announcementButton.setImage(readAll, for: .normal)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Task {
+        Task { @MainActor in
             callProtocols()
             configureGamecodeLabel()
             host = try await H.getHost(gameCode) ?? Host()
@@ -159,7 +160,9 @@ class TimerViewController: UIViewController {
             setSettings()
             configureTimerLabel()
         }
+        titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        configureGamecodeLabel()
     }
     
     @objc func readAll(notification: Notification) {
@@ -168,10 +171,13 @@ class TimerViewController: UIViewController {
         }
         if unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
-            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
         } else {
             self.announcementButton.setImage(self.readAll, for: .normal)
         }
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
@@ -213,7 +219,7 @@ class TimerViewController: UIViewController {
             gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
         ])
     }
-// MARK: - overlay Guide view
+    // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -245,11 +251,11 @@ class TimerViewController: UIViewController {
         print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
-        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer")
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)
     }
-// MARK: - Timer
+    // MARK: - Timer
     func findStation() {
         if round == rounds {
             for station in self.stations {
@@ -290,7 +296,7 @@ class TimerViewController: UIViewController {
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
             timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.18),
+            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.25),
             timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
@@ -361,7 +367,7 @@ class TimerViewController: UIViewController {
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
                     let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             }
@@ -438,7 +444,7 @@ class TimerViewController: UIViewController {
             tapped = false
         }
     }
-
+    
 }
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {

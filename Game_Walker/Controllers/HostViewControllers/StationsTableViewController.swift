@@ -25,7 +25,7 @@ class StationsTableViewController: BaseViewController {
         super.viewDidLoad()
         
         addLetterSpacing(to: stationsLabel, spacing: 3)
-        NotificationCenter.default.addObserver(self, selector: #selector(stationDataUpdated(_:)), name: .stationDataUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name("stationUpdate"), object: nil)
         stationTable.delegate = self
         stationTable.dataSource = self
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
@@ -35,8 +35,17 @@ class StationsTableViewController: BaseViewController {
         
         stationTable.refreshControl = refreshController
         settingRefreshControl()
-        
-        
+
+        configureGamecodeLabel()
+    }
+    
+    @objc func refresh() {
+        Task {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            guard let gamecode = self.gamecode else { return }
+            self.currentStations = try await S.getStationList(gamecode)
+            stationTable.reloadData()
+        }
     }
 
 
@@ -55,6 +64,7 @@ class StationsTableViewController: BaseViewController {
         }
     }
     
+
     @objc func stationDataUpdated(_ notification: Notification) {
         getStationList()
     }
@@ -63,6 +73,7 @@ class StationsTableViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: .stationDataUpdated, object: nil)
     }
     
+
     @IBAction func addButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "AddStationSegue", sender: self)
     }
