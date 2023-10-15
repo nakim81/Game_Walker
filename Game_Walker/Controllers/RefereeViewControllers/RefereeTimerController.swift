@@ -47,8 +47,9 @@ class RefereeTimerController: BaseViewController {
         super.viewDidLoad()
         Task {
             callProtocols()
-            configureTimerLabel()
-            calculateTime()
+            //setSetting()
+            //configureTimerLabel()
+            //calculateTime()
         }
     }
     
@@ -472,6 +473,9 @@ extension RefereeTimerController: HostUpdateListener {
             self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
             self.round = host.currentRound
             
+            calculateTime()
+            configureTimerLabel()
+            
             for station in stations {
                 if station.name == referee.stationName {
                     self.station = station
@@ -479,5 +483,17 @@ extension RefereeTimerController: HostUpdateListener {
                 }
             }
         }
+    }
+    
+    func setSetting(){
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
     }
 }
