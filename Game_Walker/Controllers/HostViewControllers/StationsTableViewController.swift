@@ -36,7 +36,6 @@ class StationsTableViewController: BaseViewController {
         stationTable.refreshControl = refreshController
         settingRefreshControl()
 
-        configureGamecodeLabel()
     }
     
     @objc func refresh() {
