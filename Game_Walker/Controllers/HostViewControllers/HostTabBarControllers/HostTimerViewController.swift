@@ -51,6 +51,7 @@ class HostTimerViewController: UIViewController {
         super.viewDidLoad()
         Task {
             titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: 50)
+            titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
             callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
@@ -185,19 +186,19 @@ class HostTimerViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
         attributedText.append(numberAttributedString)
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
@@ -275,18 +276,12 @@ class HostTimerViewController: UIViewController {
     }()
     
     func configureTimerLabel(){
-//        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(timerCircle)
         self.view.addSubview(timerLabel)
         self.view.addSubview(timeTypeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
-//            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
-//            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-//            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
-            
             timerCircle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.05),
             timerCircle.widthAnchor.constraint(equalTo: timerCircle.heightAnchor),
@@ -444,7 +439,7 @@ class HostTimerViewController: UIViewController {
                 else {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
-            }
+            } 
             runTimer()
         }
     }

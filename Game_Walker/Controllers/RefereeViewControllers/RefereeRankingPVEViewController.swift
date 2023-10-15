@@ -69,19 +69,19 @@ class RefereeRankingPVEViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
         attributedText.append(numberAttributedString)
         label.backgroundColor = .white
         label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = false
         label.textAlignment = .center
@@ -218,3 +218,4 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         }
     }
 }
+
