@@ -37,37 +37,7 @@ class SettingTimeHostViewController: BaseViewController {
     var num_rounds : Int = 0
     var num_teams : Int = 0
     var num_stations : Int = 0
-    
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gamecode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
 
-    
-    
-    
     //UIPickerView inside of UIView container
     var gametimePickerView: UIView!
     var gametimePicker: UIPickerView!
@@ -83,7 +53,9 @@ class SettingTimeHostViewController: BaseViewController {
 
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     override func viewDidLoad() {
 
         
@@ -92,15 +64,7 @@ class SettingTimeHostViewController: BaseViewController {
         Task {
             do {
                 stationList = try await fetchStationsForAlgorithm()
-//                var pvpCount = 0
-//                    for station in stationList {
-//                        if station.pvp {
-//                            pvpCount += 1
-//                        }
-//                    }
-//                num_stations = stationList.count
-//                pvpGameCount = pvpCount
-//                pveGameCount = num_stations - pvpGameCount
+
             } catch {
                 print( "Couldn't get data for stations")
             }
@@ -179,10 +143,14 @@ class SettingTimeHostViewController: BaseViewController {
         gametimePicker.dataSource = self
         movetimePicker.dataSource = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
-        view.addGestureRecognizer(tapGesture)
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
+        //TODO: - make keyboard dismissed
         
-        configureGamecodeLabel()
+        tapGesture1.require(toFail: tapGesture2)
+        view.addGestureRecognizer(tapGesture1)
+        view.addGestureRecognizer(tapGesture2)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -199,17 +167,9 @@ class SettingTimeHostViewController: BaseViewController {
         }
     }
     
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
-        ])
-    }
 
     @objc func dismissPicker() {
+        print("dismissPicker - BEGIN")
         if pickertype == 0 {
             if gametimePickerView.frame.origin.y == view.bounds.height - gametimePickerView.bounds.size.height {
                 // Dismiss the picker view
@@ -225,6 +185,7 @@ class SettingTimeHostViewController: BaseViewController {
                 })
             }
         }
+        print("dismissPicker - END")
     }
     @IBAction func gametimePressed(_ sender: UIButton) {
         pickertype = 0
@@ -274,6 +235,12 @@ class SettingTimeHostViewController: BaseViewController {
         } else if  sender.tag == 3 {
             teamcountTextField.becomeFirstResponder()
         }
+    }
+    
+    @objc func dismissKeyboard() {
+        print("dismissKeyboard - BEGIN")
+        view.endEditing(true)
+        print("dismissKeyboard - End")
     }
     
     func changeTimeToString(timeInteger : Int) -> String{
