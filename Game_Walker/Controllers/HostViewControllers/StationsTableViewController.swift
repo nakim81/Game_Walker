@@ -20,31 +20,6 @@ class StationsTableViewController: BaseViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stationTable: UITableView!
     
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gamecode!, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,25 +31,14 @@ class StationsTableViewController: BaseViewController {
         stationTable.register(UINib(nibName: "HostStationsTableViewCell", bundle: nil), forCellReuseIdentifier: "HostStationsTableViewCell")
         stationTable.separatorStyle = UITableViewCell.SeparatorStyle.none
         getStationList()
-        
         adjustAddButtonWidth()
         
         stationTable.refreshControl = refreshController
         settingRefreshControl()
-        configureGamecodeLabel()
         
         
     }
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
-        ])
-    }
+
 
     
     
@@ -93,6 +57,10 @@ class StationsTableViewController: BaseViewController {
     
     @objc func stationDataUpdated(_ notification: Notification) {
         getStationList()
+    }
+    deinit {
+        // removing the observer when the viewcontroller is deallocated
+        NotificationCenter.default.removeObserver(self, name: .stationDataUpdated, object: nil)
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
@@ -115,6 +83,7 @@ class StationsTableViewController: BaseViewController {
             do {
                 currentStations = try await S.getStationList(gamecode!)
                 DispatchQueue.main.async {
+                    print("data reloaded for stations: ", self.currentStations)
                     self.stationTable.reloadData()
                     self.refreshController.endRefreshing()
                 }

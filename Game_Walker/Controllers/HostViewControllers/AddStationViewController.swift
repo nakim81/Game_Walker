@@ -286,6 +286,7 @@ class AddStationViewController: BaseViewController {
                 
                 
                 let modifiedStation = Station(uuid: stationUuid, name:gamename, pvp: isPvp, points: gamepoints, place: gamelocation, referee : tempReferee, description: rules)
+                
                 do {
                     try await S.saveStation(gamecode, modifiedStation)
                 } catch GameWalkerError.serverError(let text){
@@ -313,6 +314,10 @@ class AddStationViewController: BaseViewController {
 
                 do {
                     try await S.saveStation(gamecode, stationToAdd)
+                    delegate?.didUpdateStationData {
+                        print("delegate is being called")
+                        NotificationCenter.default.post(name: .stationDataUpdated, object: nil)
+                    }
                 } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
@@ -320,19 +325,13 @@ class AddStationViewController: BaseViewController {
                 }
             }
         }
-        
-        delegate?.didUpdateStationData {
-            print("delegate is being called")
-            NotificationCenter.default.post(name: .stationDataUpdated, object: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     
     @IBAction func refereeButtonPressed(_ sender: UIButton) {
-//        dropRefereeList(dropped: isdropped)
-//        self.refereeTableView.reloadData()
+
         if (!isdropped) {
             addRefereeTable()
             isdropped = true
