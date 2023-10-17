@@ -175,6 +175,7 @@ extension RefereeRankingPVEViewController {
             }
         }
         componentFrames.append(component1Frame)
+        print(componentFrames)
         print(componentPositions)
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking", "referee")
         
