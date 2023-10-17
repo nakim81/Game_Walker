@@ -244,11 +244,22 @@ extension UIViewController {
         return !unreadAnnouncements.isEmpty
     }
 }
-// MARK: - Font Size
+// MARK: - etc
 extension UIViewController {
     func fontSize(size: CGFloat) -> CGFloat {
         let size_formatter = size/390
         let result = UIScreen.main.bounds.size.width * size_formatter
         return result
+    }
+    
+    /// find the number of pvp games
+    func findNumberOfPVP(_ stationList: [Station]) -> Int {
+        var pvp = 0
+        for station in stationList {
+            if station.pvp {
+                pvp += 1
+            }
+        }
+        return pvp
     }
 }

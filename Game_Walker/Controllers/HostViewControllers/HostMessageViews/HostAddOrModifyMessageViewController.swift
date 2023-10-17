@@ -33,8 +33,8 @@ class HostAddOrModifyMessageViewController: UIViewController {
         textView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         textView.layer.borderWidth = 3
         textView.layer.cornerRadius = 10
-        textView.textAlignment = .center
-        textView.font = UIFont(name: "Dosis-Regular", size: 15)
+        textView.textAlignment = .left
+        textView.font = UIFont(name: "Dosis-Regular", size: 18)
         textView.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
         return textView
@@ -223,10 +223,10 @@ class HostAddOrModifyMessageViewController: UIViewController {
             announcementTextView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -25),
             announcementTextView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
 
-            buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
-            buttonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            buttonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
             NSLayoutConstraint(item: buttonStackView, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -10),
-            buttonStackView.heightAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.2),
+            buttonStackView.heightAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.15),
             buttonStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }

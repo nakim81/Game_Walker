@@ -20,6 +20,7 @@ class RefereeTimerController: BaseViewController {
     private var station: Station?
     private var host: Host = Host()
     private var pvp: Bool?
+    private var awardViewControllerPresented = false
     
     private var messages: [String] = []
     private let readAll = UIImage(named: "messageIcon")
@@ -52,7 +53,6 @@ class RefereeTimerController: BaseViewController {
             //calculateTime()
         }
     }
-    
 
     @IBAction func infoButtonPressed(_ sender: UIButton) {
         self.showOverlay()
@@ -439,6 +439,11 @@ class RefereeTimerController: BaseViewController {
 //MARK: - Protocol
 extension RefereeTimerController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            self.awardViewControllerPresented = true
+            return
+        }
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime

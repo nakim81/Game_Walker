@@ -10,7 +10,10 @@ import UIKit
 
 class JoinGameViewController: BaseViewController {
     
+    @IBOutlet weak var gamecodeLbl: UILabel!
     @IBOutlet weak var gamecodeTextField: UITextField!
+    @IBOutlet weak var infoLbl: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -24,7 +27,7 @@ class JoinGameViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
-        setUpTextFields()
+        setUp()
         configureNavItem()
         configureJoinBtn()
     }
@@ -39,7 +42,7 @@ class JoinGameViewController: BaseViewController {
         T.delegates.append(self)
     }
     
-    private func setUpTextFields() {
+    private func setUp() {
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
         gamecodeTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +56,8 @@ class JoinGameViewController: BaseViewController {
         usernameTextField.layer.borderWidth = 3
         usernameTextField.layer.borderColor = UIColor.black.cgColor
         usernameTextField.layer.cornerRadius = 10
+        gamecodeLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
     }
     
     private func configureNavItem() {

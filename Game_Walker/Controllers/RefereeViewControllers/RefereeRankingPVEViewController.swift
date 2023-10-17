@@ -27,6 +27,7 @@ class RefereeRankingPVEViewController: UIViewController {
     private var diff: Int?
     
     private let audioPlayerManager = AudioPlayerManager()
+    private var awardViewControllerPresented = false
     
     static let notificationName = Notification.Name("readNotification")
     static let notificationName2 = Notification.Name("announceNoti")
@@ -192,6 +193,11 @@ extension RefereeRankingPVEViewController: TeamUpdateListener {
 // MARK: - HostProtocol
 extension RefereeRankingPVEViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            self.awardViewControllerPresented = true
+            return
+        }
         self.showScore = host.showScoreboard
         leaderBoard.reloadData()
         var hostAnnouncements = Array(host.announcements)

@@ -12,6 +12,7 @@ class JoinTeamViewController: BaseViewController {
     
     @IBOutlet weak var joinTeamButton: UIButton!
     
+    @IBOutlet weak var chooseLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var selectedIndex: Int?
@@ -36,6 +37,7 @@ class JoinTeamViewController: BaseViewController {
         configureCollectionView()
         configureBtn()
         configureNavItem()
+        chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
     }
     
     func configureNavItem() {

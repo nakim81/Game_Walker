@@ -40,6 +40,8 @@ class RefereePVPController: BaseViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
     
+    private var awardViewControllerPresented = false
+    
     override func viewDidLoad() {
         Task {
             stations = try await S.getStationList(gameCode)
@@ -953,6 +955,11 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
     }
     
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            self.awardViewControllerPresented = true
+            return
+        }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
             leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
