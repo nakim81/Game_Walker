@@ -10,6 +10,7 @@ import Foundation
 struct Host: Codable {
     //MARK: - Game Info
     var gamecode: String = ""
+    var standard: Bool = true
     var gameTime: Int = 0
     var movingTime: Int = 0
     var rounds: Int = 0
@@ -32,6 +33,7 @@ struct Host: Codable {
     
     enum CodingKeys: String, CodingKey {
         case gamecode
+        case standard
         case gameTime
         case movingTime
         case rounds
