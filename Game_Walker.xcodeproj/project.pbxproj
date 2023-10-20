@@ -31,8 +31,6 @@
 		A10D18A32AE256B0005DFCF5 /* ChooseStyleModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */; };
 		A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */; };
 		A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */; };
-		A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */; };
-		A12634412ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */; };
 		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD82AAA4CF500B7BD8A /* IntPair.swift */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
@@ -169,8 +167,6 @@
 		A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseStyleModalViewController.swift; sourceTree = "<group>"; };
 		A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgCollectionViewCell.xib; sourceTree = "<group>"; };
-		A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
-		A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManualAlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1521DD82AAA4CF500B7BD8A /* IntPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntPair.swift; path = Model/IntPair.swift; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
@@ -367,8 +363,6 @@
 				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
 				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
 				A1521DD62AA9B81C00B7BD8A /* CellData.swift */,
-				A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */,
-				A126343F2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib */,
 				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
 				A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */,
 				A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */,
@@ -667,7 +661,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
-				A12634412ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.xib in Resources */,
 				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
 				A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
@@ -786,7 +779,6 @@
 				FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */,
 				61E5094F2988D8BB00F37E79 /* RefereePVPViewController.swift in Sources */,
 				61E5094D2988D8A400F37E79 /* RefereeTabBarPVPController.swift in Sources */,
-				A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */,
 				DAC31329285862EF00BECF89 /* Station.swift in Sources */,
 				A1A4CD3F2A43C58600704BF8 /* VerticalBorderView.swift in Sources */,
 				A1E3BBFA2AD0B24900613BC9 /* StationNotificationController.swift in Sources */,
@@ -984,7 +976,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1001,7 +993,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-p";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
@@ -1019,7 +1011,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1036,7 +1028,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-identify1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-p";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;

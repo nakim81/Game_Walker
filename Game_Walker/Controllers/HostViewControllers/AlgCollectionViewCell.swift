@@ -77,15 +77,18 @@ class AlgCollectionViewCell: UICollectionViewCell {
         numberLabel.textColor = UIColor.red
         warningColor = "red"
         hasWarning = true
+        isUserInteractionEnabled = true
     }
     
     func makeCellSelected() {
         cellImageView.image = selectedCellBoxImage
+        isUserInteractionEnabled = true
         numberLabel.textColor = UIColor(red: 138/255, green: 138/255, blue: 138/255, alpha: 1.0)
 
     }
     
     func makeCellImageOriginal() {
+        isUserInteractionEnabled = true
         cellImageView.image = originalCellBoxImage
     }
     
@@ -114,6 +117,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     
     func makeCellEmpty() {
         numberLabel.text = ""
+        isUserInteractionEnabled = true
         warningColor = ""
         hasWarning = false
         cellImageView.image = originalCellBoxImage
@@ -122,6 +126,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     }
     
     func makeRedWarning() {
+        isUserInteractionEnabled = true
         //same team in same column
         cellImageView.image = redWarningBoxImage
         numberLabel.textColor = UIColor.white
@@ -130,6 +135,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     }
     
     func makeBlueWarning() {
+        isUserInteractionEnabled = true
         //same team in same row
         cellImageView.image = blueWarningBoxImage
         numberLabel.textColor = UIColor.white
@@ -139,6 +145,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     }
     
     func makeYellowWarning() {
+        isUserInteractionEnabled = true
         cellImageView.image = yellowWarningBoxImage
         numberLabel.textColor = UIColor.white
         hasWarning = false
@@ -146,6 +153,7 @@ class AlgCollectionViewCell: UICollectionViewCell {
     }
     
     func makePurpleWarning() {
+        isUserInteractionEnabled = true
         cellImageView.image = purpleWarningBoxImage
         numberLabel.textColor = UIColor.white
         hasWarning = true
