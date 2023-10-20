@@ -12,6 +12,7 @@ struct Host: Codable {
     var gamecode: String = ""
     var standardStyle: Bool = true
     var confirmStations: Bool = false
+    var confirmCreated: Bool = false
     var gameTime: Int = 0
     var movingTime: Int = 0
     var rounds: Int = 0
@@ -36,6 +37,7 @@ struct Host: Codable {
         case gamecode
         case standardStyle
         case confirmStations
+        case confirmCreated
         case gameTime
         case movingTime
         case rounds

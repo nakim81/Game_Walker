@@ -41,7 +41,7 @@ struct H {
             throw GameWalkerError.serverError("Something went wrong while completing Stations")
         }
     }
-    
+        
     static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
@@ -66,6 +66,7 @@ struct H {
                 guard let data = document.data() else { return }
                 var host = convertDataToHost(data)
                 host.algorithm = algorithm
+                host.confirmCreated = true
                 updateHost(gamecode, host)
                 print("Setted Algorithm")
             } else {
