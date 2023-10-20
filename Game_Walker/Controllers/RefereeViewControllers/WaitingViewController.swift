@@ -15,18 +15,12 @@ class WaitingController: BaseViewController {
     private var timer: Timer?
     
     private var teamCreated = false
-    private var pvpAssigned = false
+    private var isSeguePerformed = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
     private var waitingImageViewWidthConstraint: NSLayoutConstraint?
-    
-    private var algorithm : [[Int]] = []
-    private var stationList : [Station] = []
     private var station : Station = Station()
-    private var pvp : Bool = false
-    private var teams : [Team] = []
-    private var updatedTeamOrder : [Team] = []
     
     override func viewDidLoad() {
         configureNavItem()
@@ -52,7 +46,7 @@ class WaitingController: BaseViewController {
         performSegue(withIdentifier: "toRegister", sender: self)
     }
     
-//MARK: - Animating Screen
+    //MARK: - Animating Screen
     func animateWaitingScreen() {
         if timer != nil {
             return
@@ -79,20 +73,11 @@ class WaitingController: BaseViewController {
                 }
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-            if self.referee.assigned && self.timer?.isValid != true {
-                if self.station.pvp {
-                    self.performSegue(withIdentifier: "goToPVP", sender: self)
-                }
-                else {
-                    self.performSegue(withIdentifier: "goToPVE", sender: self)
-                }
-            }
-            self.timer?.invalidate()
-            self.view.layoutIfNeeded() 
+            self.view.layoutIfNeeded()
         }
     }
     
-//MARK: - UI elements
+    //MARK: - UI elements
     private lazy var gameIconView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 311, height: 146.46))
         imageView.image = UIImage(named: "game 1")
@@ -124,13 +109,37 @@ class WaitingController: BaseViewController {
         self.view.addSubview(gameIconView)
         self.view.addSubview(waitingImageView)
     }
+    
+    //MARK: - Find Station Assgined to Referee
+    func findStation() {
+        Task { @MainActor in
+            let stations = try await S.getStationList(gameCode)
+            for station in stations {
+                if referee.stationName == station.name {
+                    self.station = station
+                    print(self.station)
+                }
+            }
+            if self.station.pvp {
+                performSegue(withIdentifier: "goToPVP", sender: self)
+                isSeguePerformed = true
+            }
+            else {
+                performSegue(withIdentifier: "goToPVE", sender: self)
+                isSeguePerformed = true
+            }
+        }
+    }
 }
-
 // MARK: - Protocols
 extension WaitingController: RefereeUpdateListener {
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "referee")
         self.referee = UserData.readReferee("referee")!
+        if self.referee.assigned && !isSeguePerformed {
+            self.timer?.invalidate()
+            findStation()
+        }
     }
     
     func listen(_ _ : [String : Any]){

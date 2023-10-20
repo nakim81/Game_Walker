@@ -203,10 +203,10 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 extension RegisterController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.gameStart = host.gameStart
-        //self.style = host.style
-        if gameStart! && !isSeguePerformed {
-            performSegue(withIdentifier: "goToWait", sender: self)
-            isSeguePerformed = true
+        self.standardStyle = host.standardStyle
+        if self.standardStyle! {
+            nextButton.isEnabled = false
+            alert(title: "Referee Disabled", message: "You are in different style.")
         }
     }
     

@@ -298,7 +298,7 @@ class TimerViewController: BaseViewController {
         self.view.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
             timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.bounds.height * 0.25),
+            timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.028),
             timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
