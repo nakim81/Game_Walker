@@ -70,8 +70,8 @@ class RefereePVPController: BaseViewController {
                 rightLoseButton.image = UIImage(named: "Lose Yellow Button")
             }
             callProtocols()
-            getTeamOrder()
-            updateScore()
+//            getTeamOrder()
+//            updateScore()
             addSubviews()
             addConstraints()
         }
@@ -549,6 +549,50 @@ class RefereePVPController: BaseViewController {
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
+    }()
+    
+    private lazy var leftBorderView: UIView = {
+        var view = UIView()
+        view.frame = CGRect()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 5
+        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        var label = UILabel()
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "TO BE\n" + "DETERMINED"
+        label.numberOfLines = 2
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 30))
+        label.lineBreakMode = .byWordWrapping
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 55).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
+    private lazy var rightBorderView: UIView = {
+        var view = UIView()
+        view.frame = CGRect()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 5
+        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        var label = UILabel()
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "TO BE\n" + "DETERMINED"
+        label.numberOfLines = 2
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 30))
+        label.lineBreakMode = .byWordWrapping
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 55).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
     }()
     
     func addSubviews() {
