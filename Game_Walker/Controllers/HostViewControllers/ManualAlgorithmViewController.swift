@@ -1170,9 +1170,7 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 return UICollectionViewCell()
             }
 
-//            let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
-//            doubleTapGestureRecognizer.numberOfTapsRequired = 2
-//            cell.addGestureRecognizer(doubleTapGestureRecognizer)
+
             let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
             cell.addGestureRecognizer(longPressGestureRecognizer)
 
@@ -1283,7 +1281,6 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 H.updateHost(gamecode, hostupdate)
                 print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
             }
-            
 
         }
         pushTabBarController()
@@ -1293,6 +1290,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
         let storyboard = UIStoryboard(name: "Host", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "HostTabBarController") as? UITabBarController {
             tabBarController.selectedIndex = 0
+            UserData.confirmHost(true)
             navigationController?.pushViewController(tabBarController, animated: true)
         }
     }
