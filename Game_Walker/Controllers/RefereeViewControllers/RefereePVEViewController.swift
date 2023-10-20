@@ -49,7 +49,7 @@ class RefereePVEController: BaseViewController {
                 winButton.image = UIImage(named: "Win Blue Button")
                 loseButton.image = UIImage(named: "Lose Yellow Button")
             }
-            callProtocols()
+//            callProtocols()
             getTeamOrder()
             updateScore()
             addSubviews()
@@ -514,76 +514,72 @@ class RefereePVEController: BaseViewController {
     }
 }
 
-//MARK: - Protocols
-extension RefereePVEController: TeamUpdateListener, HostUpdateListener, RefereeUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        for old_team in self.teamOrder {
-            for team in teams {
-                if old_team.number == team.number && old_team.points != team.points {
-                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
-                        self.teamOrder[index] = team
-                    }
-                    break;
-                }
-            }
-        }
-        for team in teams {
-            if self.team.name == team.name {
-                self.team = team
-            }
-        }
-        scoreLabel.text = "\(self.team.points)"
-    }
-    
-    func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
-            self.awardViewControllerPresented = true
-            return
-        if host.gameStart {
-            borderView.removeFromSuperview()
-            self.view.addSubview(teamNumLabel)
-            self.view.addSubview(iconButton)
-            self.view.addSubview(teamNameLabel)
-        }
-        if self.round != host.currentRound {
-            roundLabel.text = "Round " + "\(host.currentRound)"
-            teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
-            iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-            teamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[host.currentRound - 1].name)"
-            scoreLabel.text = "\(self.teamOrder[host.currentRound - 1].points)"
-            winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            winButton.image = UIImage(named: "Win Blue Button")
-            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            loseButton.image = UIImage(named: "Lose Yellow Button")
-            self.round = host.currentRound
-            self.team = self.teamOrder[host.currentRound - 1]
-            UserData.writeMax("", "max")
-            max = UserData.readMax("max")!
-        }
-    }
-    
-    func updateReferee(_ referee : Referee) {
-//        if referee.pvp != self.referee.pvp {
+////MARK: - Protocols
+//extension RefereePVEController: TeamUpdateListener, HostUpdateListener, RefereeUpdateListener {
+//    func updateReferee(_ referee: Referee) {
+//        <#code#>
+//    }
 //
+//    func updateTeams(_ teams: [Team]) {
+//        for old_team in self.teamOrder {
+//            for team in teams {
+//                if old_team.number == team.number && old_team.points != team.points {
+//                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
+//                        self.teamOrder[index] = team
+//                    }
+//                    break;
+//                }
+//            }
 //        }
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        T.delegates.append(self)
-        H.delegates.append(self)
-        R.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
-    }
-}
-
-
+//        for team in teams {
+//            if self.team.name == team.name {
+//                self.team = team
+//            }
+//        }
+//        scoreLabel.text = "\(self.team.points)"
+//    }
+//
+//    func updateHost(_ host: Host) {
+//        if host.gameover && !awardViewControllerPresented {
+//            showAwardPopUp()
+//            self.awardViewControllerPresented = true
+//            return
+//        if host.gameStart {
+//            borderView.removeFromSuperview()
+//            self.view.addSubview(teamNumLabel)
+//            self.view.addSubview(iconButton)
+//            self.view.addSubview(teamNameLabel)
+//        }
+//        if self.round != host.currentRound {
+//            roundLabel.text = "Round " + "\(host.currentRound)"
+//            teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
+//            iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
+//            teamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[host.currentRound - 1].name)"
+//            scoreLabel.text = "\(self.teamOrder[host.currentRound - 1].points)"
+//            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+//                gestureRecognizer.isEnabled = true
+//            }
+//            winButton.image = UIImage(named: "Win Blue Button")
+//            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+//                gestureRecognizer.isEnabled = true
+//            }
+//            loseButton.image = UIImage(named: "Lose Yellow Button")
+//            self.round = host.currentRound
+//            self.team = self.teamOrder[host.currentRound - 1]
+//            UserData.writeMax("", "max")
+//            max = UserData.readMax("max")!
+//        }
+//    }
+//
+//    func listen(_ _ : [String : Any]){
+//    }
+//
+//    func callProtocols() {
+//        T.delegates.append(self)
+//        H.delegates.append(self)
+//        R.delegates.append(self)
+//        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+//        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+//        R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
+//    }
+//}
