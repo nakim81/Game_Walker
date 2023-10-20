@@ -35,8 +35,8 @@ class RefereeAnnouncementViewController: UIViewController {
         let label = UILabel()
         label.text = self.announcement?.content
         label.backgroundColor = .clear
-        label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
+        label.textAlignment = .left
+        label.font = UIFont(name: "Dosis-Regular", size: 18)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -130,10 +130,10 @@ class RefereeAnnouncementViewController: UIViewController {
             announcementScrollView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -20),
             announcementScrollView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            announcementTextLabel.topAnchor.constraint(equalTo: announcementScrollView.topAnchor),
-            announcementTextLabel.bottomAnchor.constraint(equalTo: announcementScrollView.bottomAnchor),
-            announcementTextLabel.centerXAnchor.constraint(equalTo: announcementScrollView.centerXAnchor),
-            announcementTextLabel.widthAnchor.constraint(equalTo: announcementScrollView.widthAnchor),
+            announcementTextLabel.topAnchor.constraint(equalTo: announcementScrollView.topAnchor, constant: 10),
+            announcementTextLabel.bottomAnchor.constraint(equalTo: announcementScrollView.bottomAnchor, constant: 10),
+            announcementTextLabel.centerXAnchor.constraint(equalTo: announcementScrollView.centerXAnchor, constant: 10),
+            announcementTextLabel.widthAnchor.constraint(equalTo: announcementScrollView.widthAnchor, constant: 10),
 
             closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),

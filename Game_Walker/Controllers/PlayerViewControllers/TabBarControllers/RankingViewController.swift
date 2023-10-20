@@ -14,6 +14,7 @@ class RankingViewController: UIViewController {
     @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var rankingLbl: UILabel!
     
     private var showScore: Bool = true
     private var teamList: [Team] = []
@@ -27,6 +28,7 @@ class RankingViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private let audioPlayerManager = AudioPlayerManager()
+    private var awardViewControllerPresented = false
     
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -82,6 +84,7 @@ class RankingViewController: UIViewController {
     }
     
     private func configureGamecodeLabel() {
+        rankingLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -207,6 +210,11 @@ extension RankingViewController: TeamUpdateListener {
 // MARK: - HostProtocol
 extension RankingViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            awardViewControllerPresented = true
+            return
+        }
         self.showScore = host.showScoreboard
         self.leaderBoard.reloadData()
     }
