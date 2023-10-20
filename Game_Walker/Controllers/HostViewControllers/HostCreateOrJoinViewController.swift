@@ -15,8 +15,18 @@ class HostCreateOrJoinViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        T.delegates.append(self)
         configureNavItem()
+        NotificationCenter.default.addObserver(self, selector: #selector(performStandardModeSegue), name: Notification.Name("StandardMode"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(performPointsOnlySegue), name: Notification.Name("PointsOnly"), object: nil)
+        
+    }
+    
+    @objc private func performStandardModeSegue() {
+        performSegue(withIdentifier: "CreateStandardGameSegue", sender: self)
+    }
+    
+    @objc private func performPointsOnlySegue() {
+        performSegue(withIdentifier: "CreatePointsOnlySegue", sender: self)
     }
     
     private func configureNavItem() {
@@ -38,10 +48,7 @@ class HostCreateOrJoinViewController: BaseViewController {
     @objc func settingsButtonTapped() {
         
     }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
+        
     @IBAction func resumeButtonPressed(_ sender: UIButton) {
         
             if UserData.readGamecode("gamecode") != nil {
@@ -51,30 +58,13 @@ class HostCreateOrJoinViewController: BaseViewController {
                 alert(title: "", message: "No game exists")
         }
     }
+
     
     @IBAction func createButtonPressed(_ sender: UIButton) {
-        
-            let gc = String(Int.random(in: 100000 ... 999999))
-            let host = Host(gamecode: gc)
-            Task { @MainActor in
-                do {
-                try await H.createGame(gc, host)
-                } catch (let e) {
-                    print("error : ", e)
-                }
-            }
-            UserData.writeGamecode(gc, "gamecode")
-            T.listenTeams(gc, onListenerUpdate: listen(_:))
-//            print("host create game segue")
-//            performSegue(withIdentifier: "CreateGameToStationsSegue", sender: self)
+
     }
     
     
     
 }
-// MARK: - TeamListner
-extension HostCreateOrJoinViewController: TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        
-    }
-}
+

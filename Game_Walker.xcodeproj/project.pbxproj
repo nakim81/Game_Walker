@@ -28,6 +28,7 @@
 		61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTableViewCell.swift */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
 		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
+		A10D18A32AE256B0005DFCF5 /* ChooseStyleModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */; };
 		A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */; };
 		A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */; };
 		A12634402ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */; };
@@ -165,6 +166,7 @@
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
 		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseStyleModalViewController.swift; sourceTree = "<group>"; };
 		A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgCollectionViewCell.xib; sourceTree = "<group>"; };
 		A126343E2ABD707C00C2AB87 /* ManualAlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
 				A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */,
 				A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */,
+				A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */,
 			);
 			name = HostViewControllers;
 			path = Controllers/HostViewControllers;
@@ -800,6 +803,7 @@
 				FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */,
 				6174CED42ADA8427007CA70B /* RefereePVPGuideViewController.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
+				A10D18A32AE256B0005DFCF5 /* ChooseStyleModalViewController.swift in Sources */,
 				A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */,
 				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,

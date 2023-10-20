@@ -9,6 +9,14 @@ import Foundation
 
 class UserData {
     
+    static func confirmHost(_ confirmed: Bool) {
+        UserDefaults.standard.set(false, forKey: "hostconfirm")
+    }
+    
+    static func isHostConfirmed() -> Bool? {
+        return UserDefaults.standard.bool(forKey: "hostconfirm")
+    }
+    
     static func writeUUID(_ uuid: String){
         UserDefaults.standard.set(uuid, forKey: "uuid")
     }

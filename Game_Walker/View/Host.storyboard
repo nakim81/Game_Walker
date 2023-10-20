@@ -15,6 +15,9 @@
         <array key="GemunuLibre-Bold.ttf">
             <string>GemunuLibre-Bold</string>
         </array>
+        <array key="GemunuLibre-ExtraLight.ttf">
+            <string>GemunuLibre-ExtraLight</string>
+        </array>
         <array key="GemunuLibre-SemiBold.ttf">
             <string>GemunuLibre-SemiBold</string>
         </array>
@@ -46,8 +49,8 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="HostCreateGameButtonLarge"/>
                                 <connections>
-                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YQo-xJ-Qzb"/>
-                                    <segue destination="1L0-Oz-afr" kind="show" identifier="CreateGameToStationsSegue" id="HVu-dF-Day"/>
+                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cg6-Ei-Hb0"/>
+                                    <segue destination="dTc-Om-aUZ" kind="presentation" id="c5a-T7-MqK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NZ-by-CrW">
@@ -78,11 +81,13 @@
                         <outlet property="createButton" destination="tyS-bJ-dkx" id="Geg-Ux-L43"/>
                         <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
                         <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="Ksp-7h-L4K"/>
+                        <segue destination="1L0-Oz-afr" kind="show" identifier="CreateStandardGameSegue" id="tce-ii-ly8"/>
+                        <segue destination="iWj-Yx-nuv" kind="show" identifier="CreatePointsOnlySegue" id="7rv-rP-bSv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-428" y="117"/>
+            <point key="canvasLocation" x="-430" y="199"/>
         </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
@@ -142,6 +147,144 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmR-Da-uq7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="441" y="457"/>
+        </scene>
+        <!--Choose Style Modal View Controller-->
+        <scene sceneID="QmI-zi-hPN">
+            <objects>
+                <viewController storyboardIdentifier="&quot;ChooseStyleModalViewController&quot;" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dTc-Om-aUZ" customClass="ChooseStyleModalViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T1a-KZ-vJn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1JR-rt-2yt">
+                                <rect key="frame" x="25" y="258" width="364" height="370"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3wM-l0-M92">
+                                        <rect key="frame" x="28" y="25" width="308" height="320"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the style that fits your event!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtQ-t2-3Ba">
+                                                <rect key="frame" x="16" y="0.0" width="276.5" height="65.5"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                <color key="textColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-UZ-7lT">
+                                                <rect key="frame" x="0.0" y="89" width="308" height="66"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pi3-zN-szb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-ys-a2b">
+                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40"/>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
+                                                                <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
+                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
+                                                                <string key="text">This mode includes all of our features
+(Points, Stations, Matching, Timer, etc)</string>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
+                                                                <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstItem="pi3-zN-szb" firstAttribute="top" secondItem="GH2-UZ-7lT" secondAttribute="top" id="6Jg-G2-Dlf"/>
+                                                    <constraint firstAttribute="width" secondItem="GH2-UZ-7lT" secondAttribute="height" multiplier="268:57.4" id="6a9-it-yZ4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pi3-zN-szb" secondAttribute="trailing" id="Ewj-CN-yMj"/>
+                                                    <constraint firstItem="pi3-zN-szb" firstAttribute="leading" secondItem="GH2-UZ-7lT" secondAttribute="leading" id="tov-b4-z23"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pi3-zN-szb" secondAttribute="bottom" id="uXv-QH-9wH"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMs-Uc-B0K">
+                                                <rect key="frame" x="0.0" y="178" width="308" height="66"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-qL-haN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdt-89-RkS">
+                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40"/>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
+                                                                <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This mode includes points and rankings only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFs-Tm-uFC">
+                                                                <rect key="frame" x="72.5" y="26" width="163" height="40"/>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
+                                                                <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstItem="pgh-qL-haN" firstAttribute="top" secondItem="FMs-Uc-B0K" secondAttribute="top" id="DoY-IF-g9q"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pgh-qL-haN" secondAttribute="bottom" id="O8N-wu-7sq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pgh-qL-haN" secondAttribute="trailing" id="YFD-tF-iZ1"/>
+                                                    <constraint firstItem="pgh-qL-haN" firstAttribute="leading" secondItem="FMs-Uc-B0K" secondAttribute="leading" id="gYO-3c-vkR"/>
+                                                    <constraint firstAttribute="width" secondItem="FMs-Uc-B0K" secondAttribute="height" multiplier="268: 57.4" id="lol-FF-yWr"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9k-iE-1W1">
+                                                <rect key="frame" x="92.5" y="280" width="123" height="40"/>
+                                                <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Q9k-iE-1W1" secondAttribute="height" multiplier="126:41" id="l01-vA-60R"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="CLOSE">
+                                                    <color key="titleColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="closeButtonTapped:" destination="dTc-Om-aUZ" eventType="touchUpInside" id="sfr-t8-yLf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="GH2-UZ-7lT" firstAttribute="leading" secondItem="3wM-l0-M92" secondAttribute="leading" id="9Xu-Il-WaG"/>
+                                            <constraint firstAttribute="trailing" secondItem="FMs-Uc-B0K" secondAttribute="trailing" id="YWo-rS-eSt"/>
+                                            <constraint firstItem="Q9k-iE-1W1" firstAttribute="width" secondItem="3wM-l0-M92" secondAttribute="width" multiplier="0.4" id="ftv-iU-lQA"/>
+                                            <constraint firstAttribute="trailing" secondItem="GH2-UZ-7lT" secondAttribute="trailing" id="vQu-uG-EQq"/>
+                                            <constraint firstItem="FMs-Uc-B0K" firstAttribute="leading" secondItem="3wM-l0-M92" secondAttribute="leading" id="xll-8q-0sP"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GH2-UZ-7lT" secondAttribute="trailing" constant="28" id="1b7-li-nbA"/>
+                                    <constraint firstItem="3wM-l0-M92" firstAttribute="leading" secondItem="1JR-rt-2yt" secondAttribute="leading" constant="28" id="QAZ-cE-kWz"/>
+                                    <constraint firstItem="3wM-l0-M92" firstAttribute="top" secondItem="1JR-rt-2yt" secondAttribute="top" constant="25" id="W4j-gD-Js5"/>
+                                    <constraint firstAttribute="trailing" secondItem="3wM-l0-M92" secondAttribute="trailing" constant="28" id="fCc-c1-NJs"/>
+                                    <constraint firstAttribute="width" secondItem="1JR-rt-2yt" secondAttribute="height" multiplier="325:330" id="kbG-Ut-jh5"/>
+                                    <constraint firstAttribute="bottom" secondItem="3wM-l0-M92" secondAttribute="bottom" constant="25" id="o7n-HJ-OUH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pdG-fq-O0b"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1JR-rt-2yt" firstAttribute="centerY" secondItem="pdG-fq-O0b" secondAttribute="centerY" id="Mzs-4i-Vyn"/>
+                            <constraint firstItem="1JR-rt-2yt" firstAttribute="centerX" secondItem="pdG-fq-O0b" secondAttribute="centerX" id="YUT-Vd-qdy"/>
+                            <constraint firstItem="1JR-rt-2yt" firstAttribute="width" secondItem="T1a-KZ-vJn" secondAttribute="width" multiplier="0.88" id="vm1-ga-Se3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Q9k-iE-1W1" id="5S2-gj-8MP"/>
+                        <outlet property="modalContainerView" destination="1JR-rt-2yt" id="NeI-Lm-hpt"/>
+                        <outlet property="pointsOnlyView" destination="FMs-Uc-B0K" id="uF3-G7-OBf"/>
+                        <outlet property="standardModeView" destination="GH2-UZ-7lT" id="be3-nd-ag0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mce-cD-J32" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-430.43478260869568" y="-577.23214285714278"/>
         </scene>
         <!--Stations Table View Controller-->
         <scene sceneID="SNx-G6-8FI">
@@ -996,7 +1139,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nWr-2f-mnX"/>
+        <segue reference="7rv-rP-bSv"/>
         <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>

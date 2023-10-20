@@ -18,6 +18,8 @@ class OverlayGuideView:UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "icon _close_"), for: .normal)
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        let tappedAroundGesture = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+        overlay.addGestureRecognizer(tappedAroundGesture)
         return button
     }()
     

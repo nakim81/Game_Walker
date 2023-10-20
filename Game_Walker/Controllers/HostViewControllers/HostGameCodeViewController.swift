@@ -44,38 +44,63 @@ class HostGameCodeViewController: BaseViewController {
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         setGameCode()
         //FIX:- need to fix this logic
-        if storedgamecode!.isEmpty {
+        guard let userGamecodeInput = gameCodeInput.text else {
+            return
+        }
+        if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
             alert(title: "No Input",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
                     do {
-                        guard let hostTemp = try await H.getHost(gamecode ?? "") else {
-                            gamecodeAlert("Gamecode is not Valid")
-                            return
-                        }
-                        UserData.writeGamecode(gamecode!, "gamecode")
-                        H.updateHost(_:_:)(gamecode!, hostTemp)
-                        if hostTemp.gameStart {
-                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                        } else {
+                        let hostTemp = try await H.getHost(userGamecodeInput)
+                        if !(hostTemp?.confirmCreated ?? true) {
+                            UserData.writeGamecode(userGamecodeInput, "gamecode")
+                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                            
+                        } else {
+                            if UserData.isHostConfirmed() ?? false {
+                                UserData.writeGamecode(userGamecodeInput, "gamecode")
+                                H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                                performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            } else{
+                                alert(title: "", message: "Invalid Host!")
+                            }
                         }
-
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
+                        return
                     }
                 }
             } else {
                 Task { @MainActor in
                     do {
-                        guard let hostTemp = try await H.getHost(gamecode ?? "") else {
-                            gamecodeAlert("Gamecode is not Valid")
-                            return
-                        }
-                        if hostTemp.gameStart {
-                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                        } else {
+                        let hostTemp = try await H.getHost(gamecode!)
+                        
+                        if !(hostTemp?.confirmCreated ?? true) {
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                        } else {
+                            if UserData.isHostConfirmed() ?? false {
+                                performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            } else{
+                                alert(title: "", message: "Invalid Host!")
+                            }
                         }
+
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
+                        return
                     }
                 }
             }
