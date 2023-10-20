@@ -71,7 +71,7 @@ class HostGameCodeViewController: BaseViewController {
                             gamecodeAlert("Gamecode is not Valid")
                             return
                         }
-                        if hostTemp.gameStart {
+                        if !hostTemp.algorithm.isEmpty {
                             performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                         } else {
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
