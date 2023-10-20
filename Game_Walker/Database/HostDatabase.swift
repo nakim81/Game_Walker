@@ -29,6 +29,19 @@ struct H {
         }
     }
     
+    static func completeStations(_ gamecode: String, _ finished: Bool) async throws {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "confirmStations": finished
+            ])
+            print("Stations complete!")
+        } catch {
+            print("Error completing stations: \(error)")
+            throw GameWalkerError.serverError("Something went wrong while completing Stations")
+        }
+    }
+    
     static func setSettings(_ gamecode: String, _ gameTime: Int, _ movingTime: Int, _ rounds: Int, _ teams: Int) async throws {
         let server = db.collection("Servers").document("Gamecode : \(gamecode)")
         do {
