@@ -120,7 +120,7 @@ extension HostRankingViewcontroller {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to hide points from otherst"]
+        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to hide points from others"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: self.leaderBoard.frame.maxX - 85.0, y: self.leaderBoard.frame.minY, width: self.leaderBoard.frame.width, height: 17)
