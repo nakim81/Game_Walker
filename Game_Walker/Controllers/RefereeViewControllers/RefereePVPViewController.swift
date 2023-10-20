@@ -78,6 +78,69 @@ class RefereePVPController: BaseViewController {
         super.viewDidLoad()
     }
     
+//    func setTeamOrder() {
+//        var pvp_count : Int = 0
+//        var column_number_index : Int = 0
+//        var teamNumOrder : [Int] = []
+//        var teamOrder : [Team] = []
+//        Task {@MainActor in
+//            stationList = try await S.getStationList(gameCode)
+//            teams = try await T.getTeamList(gameCode)
+//            for station in self.stationList {
+//                if referee.name == station.referee?.name {
+//                    self.station = station
+//                }
+//                if referee.stationName == station.name {
+//                    self.station = station
+//                }
+//                if station.pvp == true {
+//                    pvp_count += 1
+//                }
+//            }
+//            if self.station.pvp {
+//                column_number_index = 2 * station.number - 2
+//                let left = self.algorithm.map({ $0[column_number_index] })
+//                let right = self.algorithm.map({ $0[column_number_index + 1] })
+//                var right_index : Int = 0
+//                for left_index in left {
+//                    teamNumOrder.append(left_index)
+//                    teamNumOrder.append(right[right_index])
+//                    right_index += 1
+//                }
+//            }
+//            else {
+//                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
+//                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
+//            }
+//            for team_num in teamNumOrder {
+//                if team_num == 0 {
+//                    teamOrder.append(Team())
+//                }
+//                for team in self.teams {
+//                    if team_num == team.number {
+//                        teamOrder.append(team)
+//                    }
+//                }
+//            }
+//            self.updatedTeamOrder = teamOrder
+//            do {
+//                try await S.updateTeamOrder(gameCode, self.station.uuid, self.updatedTeamOrder)
+//            }
+//            catch GameWalkerError.serverError(let message) {
+//                print(message)
+//                serverAlert(message)
+//                return
+//            }
+//            self.pvpAssigned = true
+//            if self.station.pvp {
+//                self.performSegue(withIdentifier: "goToPVP", sender: self)
+//            }
+//            else {
+//                self.performSegue(withIdentifier: "goToPVE", sender: self)
+//            }
+//        }
+//    }
+    
     //MARK: - Messages
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -395,7 +458,7 @@ class RefereePVPController: BaseViewController {
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
-            if !maxPointsB {
+            if maxB != "true" {
                 Task {
                     do {
                         try await T.givePoints(gameCode, self.teamB.name, self.points)
@@ -405,21 +468,9 @@ class RefereePVPController: BaseViewController {
                         return
                     }
                 }
-                maxPointsB = true
+                UserData.writeMax("true", "maxB")
+                maxB = UserData.readMax("maxB")!
             }
-//            if maxB != "true" {
-//                Task {
-//                    do {
-//                        try await T.givePoints(gameCode, self.teamB.name, self.points)
-//                    } catch GameWalkerError.serverError(let text){
-//                        print(text)
-//                        serverAlert(text)
-//                        return
-//                    }
-//                }
-//                UserData.writeMax("true", "maxB")
-//                maxB = UserData.readMax("maxB")!
-//            }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
@@ -459,7 +510,7 @@ class RefereePVPController: BaseViewController {
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
-            if maxPointsB {
+            if maxB == "true" {
                 Task {
                     do {
                         try await T.givePoints(gameCode, self.teamB.name, -self.points)
@@ -469,21 +520,9 @@ class RefereePVPController: BaseViewController {
                         return
                     }
                 }
-                maxPointsB = false
+                UserData.writeMax("false", "maxB")
+                maxB = UserData.readMax("maxB")!
             }
-//            if maxB == "true" {
-//                Task {
-//                    do {
-//                        try await T.givePoints(gameCode, self.teamB.name, -self.points)
-//                    } catch GameWalkerError.serverError(let text){
-//                        print(text)
-//                        serverAlert(text)
-//                        return
-//                    }
-//                }
-//                UserData.writeMax("false", "maxB")
-//                maxB = UserData.readMax("maxB")!
-//            }
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
@@ -628,14 +667,6 @@ class RefereePVPController: BaseViewController {
         let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
-        let component1Frame = CGRect(x: self.leftIconButton.frame.minX , y: self.leftIconButton.frame.minY, width: self.leftIconButton.frame.width, height: self.leftIconButton.frame.height)
-        let component2Frame = CGRect(x: self.leftWinButton.frame.minX , y: self.leftWinButton.frame.minY, width: self.leftWinButton.frame.width, height: self.leftWinButton.frame.height)
-        let component3Frame = CGRect(x: self.leftLoseButton.frame.minX, y: self.leftLoseButton.frame.minY, width: self.leftLoseButton.frame.width, height: self.leftLoseButton.frame.height)
-        let component4Frame = CGRect(x: self.leftScoreLabel.frame.minX , y: self.leftScoreLabel.frame.minY, width: self.leftScoreLabel.frame.width, height: self.leftScoreLabel.frame.height)
-        let component5Frame = CGRect(x: self.rightIconButton.frame.minX , y: self.rightIconButton.frame.minY, width: self.rightIconButton.frame.width, height: self.rightIconButton.frame.height)
-        let component6Frame = CGRect(x: self.rightWinButton.frame.minX, y: self.rightWinButton.frame.minY, width: self.rightWinButton.frame.width, height: self.rightWinButton.frame.height)
-        let component7Frame = CGRect(x: self.rightLoseButton.frame.minX, y: self.rightLoseButton.frame.minY, width: self.rightLoseButton.frame.width, height: self.rightLoseButton.frame.height)
-        let component8Frame = CGRect(x: self.rightScoreLabel.frame.minX, y: self.rightScoreLabel.frame.minY, width: self.rightScoreLabel.frame.width, height: self.rightScoreLabel.frame.height)
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
             // Loop through each view controller in the tab bar controller
@@ -656,22 +687,13 @@ class RefereePVPController: BaseViewController {
                 }
             }
         }
-        componentFrames.append(component1Frame)
-        componentFrames.append(component2Frame)
-        componentFrames.append(component3Frame)
-        componentFrames.append(component4Frame)
-        componentFrames.append(component5Frame)
-        componentFrames.append(component6Frame)
-        componentFrames.append(component7Frame)
-        componentFrames.append(component8Frame)
-        componentPositions.append(CGPoint(x: leftIconButton.frame.minX, y: leftIconButton.frame.minY))
-        componentPositions.append(CGPoint(x: leftWinButton.frame.minX, y: leftWinButton.frame.minY))
-        componentPositions.append(CGPoint(x: leftLoseButton.frame.minX, y: leftLoseButton.frame.minY))
-        componentPositions.append(CGPoint(x: leftScoreLabel.frame.minX, y: leftScoreLabel.frame.minY))
-        componentPositions.append(CGPoint(x: rightIconButton.frame.minX, y: rightIconButton.frame.minY))
-        componentPositions.append(CGPoint(x: rightWinButton.frame.minX, y: rightWinButton.frame.minY))
-        componentPositions.append(CGPoint(x: rightLoseButton.frame.minX, y: rightLoseButton.frame.minY))
-        componentPositions.append(CGPoint(x: rightScoreLabel.frame.minX, y: rightScoreLabel.frame.minY))
+        let components = [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel]
+        for component in components {
+            let frame = CGRect(x: component.frame.minX, y: component.frame.minY, width: component.frame.width, height: component.frame.height)
+            let position = CGPoint(x: component.frame.minX, y: component.frame.minY)
+            componentFrames.append(frame)
+            componentPositions.append(position)
+        }
         overlayViewController.configureGuide(componentFrames, componentPositions, explanationTexts, tabBarTop)
         present(overlayViewController, animated: true, completion: nil)
     }
@@ -735,6 +757,12 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
             self.awardViewControllerPresented = true
             return
         }
+//        if host.gameStart {
+//            borderView.removeFromSuperview()
+//            self.view.addSubview(teamNumLabel)
+//            self.view.addSubview(iconButton)
+//            self.view.addSubview(teamNameLabel)
+//        }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
             leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"

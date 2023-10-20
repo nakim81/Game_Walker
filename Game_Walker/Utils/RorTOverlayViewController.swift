@@ -94,7 +94,7 @@ class RorTOverlayViewController: UIViewController {
             overlayView.addSubview(imageView)
             
             if userType == "host" {
-                imageView.image = UIImage(named: "arrow")
+                imageView.image = UIImage(named: "Arrow")
                 
                 let buttonView = UIImageView()
                 buttonView.translatesAutoresizingMaskIntoConstraints = false

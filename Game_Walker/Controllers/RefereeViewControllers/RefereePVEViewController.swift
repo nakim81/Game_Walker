@@ -57,6 +57,69 @@ class RefereePVEController: BaseViewController {
         }
         super.viewDidLoad()
     }
+    
+//    func setTeamOrder() {
+//        var pvp_count : Int = 0
+//        var column_number_index : Int = 0
+//        var teamNumOrder : [Int] = []
+//        var teamOrder : [Team] = []
+//        Task {@MainActor in
+//            stationList = try await S.getStationList(gameCode)
+//            teams = try await T.getTeamList(gameCode)
+//            for station in self.stationList {
+//                if referee.name == station.referee?.name {
+//                    self.station = station
+//                }
+//                if referee.stationName == station.name {
+//                    self.station = station
+//                }
+//                if station.pvp == true {
+//                    pvp_count += 1
+//                }
+//            }
+//            if self.station.pvp {
+//                column_number_index = 2 * station.number - 2
+//                let left = self.algorithm.map({ $0[column_number_index] })
+//                let right = self.algorithm.map({ $0[column_number_index + 1] })
+//                var right_index : Int = 0
+//                for left_index in left {
+//                    teamNumOrder.append(left_index)
+//                    teamNumOrder.append(right[right_index])
+//                    right_index += 1
+//                }
+//            }
+//            else {
+//                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
+//                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
+//            }
+//            for team_num in teamNumOrder {
+//                if team_num == 0 {
+//                    teamOrder.append(Team())
+//                }
+//                for team in self.teams {
+//                    if team_num == team.number {
+//                        teamOrder.append(team)
+//                    }
+//                }
+//            }
+//            self.updatedTeamOrder = teamOrder
+//            do {
+//                try await S.updateTeamOrder(gameCode, self.station.uuid, self.updatedTeamOrder)
+//            }
+//            catch GameWalkerError.serverError(let message) {
+//                print(message)
+//                serverAlert(message)
+//                return
+//            }
+//            self.pvpAssigned = true
+//            if self.station.pvp {
+//                self.performSegue(withIdentifier: "goToPVP", sender: self)
+//            }
+//            else {
+//                self.performSegue(withIdentifier: "goToPVE", sender: self)
+//            }
+//        }
+//    }
 
 //MARK: - Messages
     override func viewWillAppear(_ animated: Bool) {
@@ -124,10 +187,6 @@ class RefereePVEController: BaseViewController {
         let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
-        let component1Frame = CGRect(x: self.iconButton.frame.minX , y: self.iconButton.frame.minY, width: self.iconButton.frame.width, height: self.iconButton.frame.height)
-        let component2Frame = CGRect(x: self.scoreLabel.frame.minX , y: self.scoreLabel.frame.minY, width: self.scoreLabel.frame.width, height: self.scoreLabel.frame.height)
-        let component3Frame = CGRect(x: self.winButton.frame.minX , y: self.winButton.frame.minY, width: self.winButton.frame.width, height: self.winButton.frame.height)
-        let component4Frame = CGRect(x: self.loseButton.frame.minX, y: self.loseButton.frame.minY, width: self.loseButton.frame.width, height: self.loseButton.frame.height)
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
             // Loop through each view controller in the tab bar controller
@@ -148,16 +207,14 @@ class RefereePVEController: BaseViewController {
                 }
             }
         }
-        print(componentFrames)
-        print(componentPositions)
-        componentFrames.append(component1Frame)
-        componentFrames.append(component2Frame)
-        componentFrames.append(component3Frame)
-        componentFrames.append(component4Frame)
-        componentPositions.append(CGPoint(x: iconButton.frame.minX, y: iconButton.frame.minY))
-        componentPositions.append(CGPoint(x: scoreLabel.frame.minX, y: scoreLabel.frame.minY))
-        componentPositions.append(CGPoint(x: winButton.frame.minX, y: winButton.frame.minY))
-        componentPositions.append(CGPoint(x: loseButton.frame.minX, y: loseButton.frame.minY))
+        let components = [iconButton, scoreLabel, winButton, loseButton]
+        for component in components {
+            let frame = CGRect(x: component.frame.minX, y: component.frame.minY, width: component.frame.width, height: component.frame.height)
+            let position = CGPoint(x: component.frame.minX, y: component.frame.minY)
+            
+            componentFrames.append(frame)
+            componentPositions.append(position)
+        }
         overlayViewController.configureGuide(componentFrames, componentPositions, explanationTexts, tabBarTop)
         present(overlayViewController, animated: true, completion: nil)
     }
@@ -269,7 +326,6 @@ class RefereePVEController: BaseViewController {
     }()
     
     @objc func winButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         if self.team.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -321,7 +377,6 @@ class RefereePVEController: BaseViewController {
     }()
     
     @objc func loseButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
         if self.team.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -349,12 +404,31 @@ class RefereePVEController: BaseViewController {
         }
     }
     
+    private lazy var borderView: UIView = {
+        var view = UIView()
+        view.frame = CGRect()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 5
+        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        var label = UILabel()
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "TO BE DETERMINED"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 30))
+        label.lineBreakMode = .byWordWrapping
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 55).isActive = true
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        return view
+    }()
+    
     func addSubviews() {
         self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
-        self.view.addSubview(teamNumLabel)
-        self.view.addSubview(iconButton)
-        self.view.addSubview(teamNameLabel)
+        self.view.addSubview(borderView)
         self.view.addSubview(scoreLabel)
         self.view.addSubview(winButton)
         self.view.addSubview(loseButton)
@@ -441,7 +515,7 @@ class RefereePVEController: BaseViewController {
 }
 
 //MARK: - Protocols
-extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
+extension RefereePVEController: TeamUpdateListener, HostUpdateListener, RefereeUpdateListener {
     func updateTeams(_ teams: [Team]) {
         for old_team in self.teamOrder {
             for team in teams {
@@ -466,6 +540,11 @@ extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
             showAwardPopUp()
             self.awardViewControllerPresented = true
             return
+        if host.gameStart {
+            borderView.removeFromSuperview()
+            self.view.addSubview(teamNumLabel)
+            self.view.addSubview(iconButton)
+            self.view.addSubview(teamNameLabel)
         }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
@@ -488,15 +567,22 @@ extension RefereePVEController: TeamUpdateListener, HostUpdateListener {
         }
     }
     
+    func updateReferee(_ referee : Referee) {
+//        if referee.pvp != self.referee.pvp {
+//
+//        }
+    }
+    
     func listen(_ _ : [String : Any]){
-        
     }
     
     func callProtocols() {
         T.delegates.append(self)
         H.delegates.append(self)
+        R.delegates.append(self)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
     }
 }
 

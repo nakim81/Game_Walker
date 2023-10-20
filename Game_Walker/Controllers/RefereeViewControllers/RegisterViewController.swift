@@ -17,8 +17,10 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var storedRefereeName = UserData.readUsername("username") ?? ""
     private var refereeUserID = UserData.readUUID()!
     private var stations : [Station] = []
+    private var isSeguePerformed = false
     private var pvp : Bool?
     private var gameStart : Bool?
+    private var standardStyle : Bool?
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
@@ -201,6 +203,11 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 extension RegisterController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.gameStart = host.gameStart
+        //self.style = host.style
+        if gameStart! && !isSeguePerformed {
+            performSegue(withIdentifier: "goToWait", sender: self)
+            isSeguePerformed = true
+        }
     }
     
     func listen(_ _ : [String : Any]){

@@ -25,7 +25,6 @@ class WaitingController: BaseViewController {
     private var stationList : [Station] = []
     private var station : Station = Station()
     private var pvp : Bool = false
-    private var number : Int = -1
     private var teams : [Team] = []
     private var updatedTeamOrder : [Team] = []
     
@@ -51,70 +50,6 @@ class WaitingController: BaseViewController {
         UserDefaults.standard.removeObject(forKey: "gamecode")
         UserDefaults.standard.removeObject(forKey: "username")
         performSegue(withIdentifier: "toRegister", sender: self)
-    }
-    
-// MARK: - SetTeamOrder
-    func setTeamOrder() {
-        var pvp_count : Int = 0
-        var column_number_index : Int = 0
-        var teamNumOrder : [Int] = []
-        var teamOrder : [Team] = []
-        Task {@MainActor in
-            stationList = try await S.getStationList(gameCode)
-            teams = try await T.getTeamList(gameCode)
-            for station in self.stationList {
-                if referee.name == station.referee?.name {
-                    self.station = station
-                }
-                if referee.stationName == station.name {
-                    self.station = station
-                }
-                if station.pvp == true {
-                    pvp_count += 1
-                }
-            }
-            if self.station.pvp {
-                column_number_index = 2 * station.number - 2
-                let left = self.algorithm.map({ $0[column_number_index] })
-                let right = self.algorithm.map({ $0[column_number_index + 1] })
-                var right_index : Int = 0
-                for left_index in left {
-                    teamNumOrder.append(left_index)
-                    teamNumOrder.append(right[right_index])
-                    right_index += 1
-                }
-            }
-            else {
-                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
-                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
-            }
-            for team_num in teamNumOrder {
-                if team_num == 0 {
-                    teamOrder.append(Team())
-                }
-                for team in self.teams {
-                    if team_num == team.number {
-                        teamOrder.append(team)
-                    }
-                }
-            }
-            self.updatedTeamOrder = teamOrder
-            do {
-                try await S.updateTeamOrder(gameCode, self.station.uuid, self.updatedTeamOrder)
-            }
-            catch GameWalkerError.serverError(let message) {
-                print(message)
-                serverAlert(message)
-                return
-            }
-            self.pvpAssigned = true
-            if self.station.pvp {
-                self.performSegue(withIdentifier: "goToPVP", sender: self)
-            }
-            else {
-                self.performSegue(withIdentifier: "goToPVE", sender: self)
-            }
-        }
     }
     
 //MARK: - Animating Screen
@@ -144,16 +79,15 @@ class WaitingController: BaseViewController {
                 }
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
-            // For now, it is more suitable to write here considering we already have algorithms in the most of our testing cases.
-            if self.referee.assigned && !self.pvpAssigned {
-                if self.algorithm != [] && self.teamCreated {
-                    setTeamOrder()
+            if self.referee.assigned && self.timer?.isValid != true {
+                if self.station.pvp {
+                    self.performSegue(withIdentifier: "goToPVP", sender: self)
+                }
+                else {
+                    self.performSegue(withIdentifier: "goToPVE", sender: self)
                 }
             }
-            if self.pvpAssigned {
-                self.timer?.invalidate()
-            }
-            //
+            self.timer?.invalidate()
             self.view.layoutIfNeeded() 
         }
     }
@@ -193,35 +127,18 @@ class WaitingController: BaseViewController {
 }
 
 // MARK: - Protocols
-extension WaitingController: TeamUpdateListener ,RefereeUpdateListener, HostUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        if teams.count == self.number {
-            self.teamCreated = true
-        }
-    }
-    
+extension WaitingController: RefereeUpdateListener {
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "referee")
         self.referee = UserData.readReferee("referee")!
-    }
-    
-    func updateHost(_ host: Host) {
-        if host.algorithm != [] {
-            self.algorithm = convert1DArrayTo2D(host.algorithm)
-            self.number = host.teams
-        }
     }
     
     func listen(_ _ : [String : Any]){
     }
     
     func callProtocols() {
-        T.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         R.delegates.append(self)
         R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
-        H.delegates.append(self)
-        H.listenHost(self.gameCode, onListenerUpdate: listen(_:))
     }
 }
 

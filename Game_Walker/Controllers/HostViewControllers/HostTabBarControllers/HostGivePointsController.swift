@@ -27,8 +27,8 @@ class HostGivePointsController : UIViewController {
     }
     
     override func viewDidLoad() {
-        addConstraints()
         addSubViews()
+        addConstraints()
         super.viewDidLoad()
     }
     
