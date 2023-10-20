@@ -31,6 +31,7 @@ class RefereeRankingPVPViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private let audioPlayerManager = AudioPlayerManager()
+    private var awardViewControllerPresented = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,6 +190,11 @@ extension RefereeRankingPVPViewController: TeamUpdateListener {
 // MARK: - HostProtocl
 extension RefereeRankingPVPViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            self.awardViewControllerPresented = true
+            return
+        }
         self.showScore = host.showScoreboard
         leaderBoard.reloadData()
         var hostAnnouncements = Array(host.announcements)

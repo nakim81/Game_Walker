@@ -17,15 +17,7 @@ class MainOverlayViewController: UIViewController {
         return view
     }()
     
-    private var closeBtn: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "icon _close_"), for: .normal)
-        button.addTarget(self, action: #selector(dismissOverlay), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc private func dismissOverlay() {
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -36,17 +28,13 @@ class MainOverlayViewController: UIViewController {
     
     private func setupOverlayView() {
         view.addSubview(overlayView)
-        overlayView.addSubview(closeBtn)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        overlayView.addGestureRecognizer(tapGestureRecognizer)
         NSLayoutConstraint.activate([
             overlayView.topAnchor.constraint(equalTo: view.topAnchor),
             overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            closeBtn.widthAnchor.constraint(equalToConstant: 44),
-            closeBtn.heightAnchor.constraint(equalToConstant: 44),
-            closeBtn.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: 30),
-            closeBtn.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -35)
+            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     

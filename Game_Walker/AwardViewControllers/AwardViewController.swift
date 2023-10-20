@@ -10,11 +10,7 @@ import UIKit
 
 class AwardViewController: UIViewController {
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
-    private var teamList: [Team] = []
     private var newTeamList: [Team] = []
-    private var firstPlace: Team?
-    private var secondPlace: Team?
-    private var thirdPlace: Team?
     
     private let leaderBoard = UITableView(frame: .zero)
     private let cellSpacingHeight: CGFloat = 3
@@ -317,17 +313,30 @@ class AwardViewController: UIViewController {
     private func getTeamList(_ gamecode: String) {
         Task { @MainActor in
             do {
-                self.teamList = try await T.getTeamList(gamecode)
+                var teamList = try await T.getTeamList(gamecode)
                 let order: (Team, Team) -> Bool = {(lhs, rhs) in
                     return lhs.points > rhs.points
                 }
-                self.teamList.sort(by: order)
-                self.firstPlace = teamList.first
-                self.secondPlace = teamList[1]
-                self.thirdPlace = teamList[2]
-                configureTopThree()
-                newTeamList = getNewTeamList(teamList)
-                configureLeaderboard()
+                
+                teamList.sort(by: order)
+                
+                if teamList.count > 3 {
+                    configureTopThree(teamList.first, teamList[1], teamList[2])
+                } else if teamList.count > 2 {
+                    configureTopThree(teamList.first, teamList[1], teamList[2])
+                } else if teamList.count > 1 {
+                    configureTopThree(teamList.first, teamList[1], nil)
+                } else {
+                    configureTopThree(teamList.first, nil, nil)
+                }
+                
+                if teamList.count > 3 {
+                    newTeamList = getNewTeamList(teamList)
+                }
+                
+                if newTeamList.count >= 1 {
+                    configureLeaderboard()
+                }
             } catch GameWalkerError.invalidGamecode(let message) {
                 print(message)
                 gamecodeAlert(message)
@@ -393,22 +402,27 @@ class AwardViewController: UIViewController {
         leaderBoard.separatorStyle = .none
     }
     
-    private func configureTopThree() {
-        guard let firstPlace = firstPlace, let secondPlace = secondPlace, let thirdPlace = thirdPlace else { return }
-        firstPlaceImage.image = UIImage(named: firstPlace.iconName)
-        firstPlaceTeamNum.text = "Team \(firstPlace.number)"
-        firstPlaceTeamName.text = firstPlace.name
-        firstPlacePoints.text = String(firstPlace.points)
+    private func configureTopThree( _ first: Team?, _ second: Team?, _ third: Team?) {
+        if let firstPlace = first {
+            firstPlaceImage.image = UIImage(named: firstPlace.iconName)
+            firstPlaceTeamNum.text = "Team \(firstPlace.number)"
+            firstPlaceTeamName.text = firstPlace.name
+            firstPlacePoints.text = String(firstPlace.points)
+        }
         
-        secondPlaceImage.image = UIImage(named: secondPlace.iconName)
-        secondPlaceTeamNum.text = "Team \(secondPlace.number)"
-        secondPlaceTeamName.text = secondPlace.name
-        secondPlacePoints.text = String(secondPlace.points)
+        if let secondPlace = second {
+            secondPlaceImage.image = UIImage(named: secondPlace.iconName)
+            secondPlaceTeamNum.text = "Team \(secondPlace.number)"
+            secondPlaceTeamName.text = secondPlace.name
+            secondPlacePoints.text = String(secondPlace.points)
+        }
         
-        thirdPlaceImage.image = UIImage(named: thirdPlace.iconName)
-        thirdPlaceTeamNum.text = "Team \(thirdPlace.number)"
-        thirdPlaceTeamName.text = thirdPlace.name
-        thirdPlacePoints.text = String(thirdPlace.points)
+        if let thirdPlace = third {
+            thirdPlaceImage.image = UIImage(named: thirdPlace.iconName)
+            thirdPlaceTeamNum.text = "Team \(thirdPlace.number)"
+            thirdPlaceTeamName.text = thirdPlace.name
+            thirdPlacePoints.text = String(thirdPlace.points)
+        }
     }
     
     private func getNewTeamList(_ teamList: [Team]) -> [Team] {

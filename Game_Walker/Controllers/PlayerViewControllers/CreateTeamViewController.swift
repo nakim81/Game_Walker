@@ -10,8 +10,11 @@ import UIKit
 
 class CreateTeamViewController: BaseViewController {
     
+    @IBOutlet weak var teamNameLbl: UILabel!
     @IBOutlet weak var teamNameTextField: UITextField!
+    @IBOutlet weak var teamNumberLbl: UILabel!
     @IBOutlet weak var teamNumberTextField: UITextField!
+    @IBOutlet weak var chooseLbl: UILabel!
     @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -43,7 +46,7 @@ class CreateTeamViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegates()
-        configureTextField()
+        viewSetUp()
         configureCollectionView()
         configureBtn()
         configureNavItem()
@@ -60,13 +63,17 @@ class CreateTeamViewController: BaseViewController {
         
     }
     
-    private func configureTextField(){
+    private func viewSetUp(){
         teamNameTextField.layer.cornerRadius = 10
         teamNameTextField.layer.borderWidth = 3
         teamNameTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
         teamNumberTextField.layer.cornerRadius = 10
         teamNumberTextField.layer.borderWidth = 3
         teamNumberTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
+        teamNumberTextField.keyboardType = .asciiCapableNumberPad
+        teamNameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
+        teamNumberLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
+        chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
     }
     
     private func configureDelegates() {
@@ -175,7 +182,7 @@ extension CreateTeamViewController {
             index = 0
         }
         print("column order: \(order)")
-        let pvp = self.findNumberOfPVP(stationList) ///number of pvp games
+        let pvp = findNumberOfPVP(stationList) ///number of pvp games
         var actualOrder: [Int] = [] //array of station.numbers
         
         /// if no pvp game, then order = actualOrder
@@ -207,16 +214,7 @@ extension CreateTeamViewController {
         return actualOrder
     }
     
-    /// find the number of pvp games
-    private func findNumberOfPVP(_ stationList: [Station]) -> Int {
-        var pvp = 0
-        for station in stationList {
-            if station.pvp {
-                pvp += 1
-            }
-        }
-        return pvp
-    }
+    
 }
 // MARK: - UICollectionViewDelegate
 extension CreateTeamViewController: UICollectionViewDelegate {

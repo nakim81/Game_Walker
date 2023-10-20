@@ -23,11 +23,19 @@ class HostRankingViewcontroller: UIViewController {
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
+    private var round: Int = 0
+    private var algorithm: [[Int]] = [[]]
+    private var stationList: [Station] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAlgorithmAndStation()
         setDelegates()
-        configureTableView()
         setMessages()
         print(switchBtn.frame)
     }
@@ -62,10 +70,32 @@ class HostRankingViewcontroller: UIViewController {
         }
     }
     
+    private func getAlgorithmAndStation() {
+        Task {@MainActor in
+            do {
+                self.stationList = try await S.getStationList(gameCode)
+                let host = try await H.getHost(gameCode)
+                guard let h = host else {return}
+                let temp = h.algorithm
+                self.algorithm = convert1DArrayTo2D(temp)
+                self.round = h.currentRound - 1
+                print(self.algorithm)
+                print(self.round)
+                configureTableView()
+            } catch GameWalkerError.serverError(let text) {
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
+    }
+    
     private func setDelegates() {
         T.delegates.append(self)
         switchBtn.delegate = self
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        H.delegates.append(self)
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         self.showScore = switchBtn.isOn
     }
     
@@ -90,7 +120,7 @@ extension HostRankingViewcontroller {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to hide points from otherst"]
+        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to hide points from others"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: self.leaderBoard.frame.maxX - 85.0, y: self.leaderBoard.frame.minY, width: self.leaderBoard.frame.width, height: 17)
@@ -129,10 +159,10 @@ extension HostRankingViewcontroller {
 extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
-        let teamNum = String(teamList[indexPath.row].number)
+        let teamNum = teamList[indexPath.row].number
         let team = teamList[indexPath.row]
-        //comeback later: stationName
-        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: "team.currentStation", points: team.points, showScore: self.showScore)
+        let stationName = self.findStation(self.round, teamNum)
+        cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: stationName, points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
         return cell
     }
@@ -157,12 +187,46 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         self.present(svc, animated: true)
         leaderBoard.deselectRow(at: indexPath, animated: true)
     }
+    
+    private func findStation( _ round: Int, _ teamNum: Int) -> String {
+        guard round >= 0, round < self.algorithm.count else {
+            return "Invalid round"
+        }
+        
+        let currentRound = self.algorithm[round]
+        print(teamNum)
+        print(currentRound)
+        if let teamIndex = currentRound.firstIndex(of: teamNum) {
+            print(teamIndex)
+            let numberOfPVP = findNumberOfPVP(self.stationList)
+            
+            if numberOfPVP == 0 {
+                return stationList[teamIndex].name
+            } else {
+                let limit = numberOfPVP * 2
+                if teamIndex < limit {
+                    return stationList[teamIndex / 2].name
+                } else {
+                    return stationList[teamIndex - numberOfPVP].name
+                }
+            }
+        } else {
+            return "currently not playing"
+        }
+    }
 }
 
 // MARK: - TeamProtocol
 extension HostRankingViewcontroller: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
+        leaderBoard.reloadData()
+    }
+}
+// MARK: - HostProtocol
+extension HostRankingViewcontroller: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        self.round = host.currentRound - 1
         leaderBoard.reloadData()
     }
 }

@@ -95,13 +95,13 @@ class EndGameViewController: UIViewController {
         Task {@MainActor in
             do {
                 try await H.endGame(self.gameCode)
+                dismiss(animated: true, completion: nil)
+                delegate?.modalViewControllerDidRequestPush()
             } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
                 return
             }
-            dismiss(animated: true, completion: nil)
-            delegate?.modalViewControllerDidRequestPush()
         }
         
     }

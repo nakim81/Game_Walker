@@ -12,6 +12,7 @@ class TeamViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var announcementButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var teamNumLbl: UILabel!
@@ -35,6 +36,8 @@ class TeamViewController: UIViewController {
     
     static let notificationName1 = Notification.Name("readNotification")
     static let notificationName2 = Notification.Name("announceNoti")
+    
+    private var awardViewControllerPresented = false
     
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -96,7 +99,9 @@ class TeamViewController: UIViewController {
         let team = UserData.readTeam("team") ?? Team()
         
         teamNumLbl.text = "TEAM \(String(describing: team.number))"
+        teamNumLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 40))
         teamNameLbl.text = team.name
+        teamNameLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 30))
         
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
@@ -128,6 +133,10 @@ class TeamViewController: UIViewController {
     
     @IBAction func leaveButtonPressed(_ sender: UIButton) {
         self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
+    }
+    
+    @IBAction func infoButtonPressed(_ sender: UIButton) {
+        showOverlay()
     }
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
@@ -207,11 +216,50 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
             return 65
         }
 }
-
+// MARK: - overlay guide
+extension TeamViewController {
+    private func showOverlay() {
+        let overlayViewController = RorTOverlayViewController()
+        overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
+        
+        let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info"]
+        var componentPositions: [CGPoint] = []
+        var componentFrames: [CGRect] = []
+        var tabBarTop: CGFloat = 0
+        if let tabBarController = self.tabBarController {
+            // Loop through each view controller in the tab bar controller
+            for viewController in tabBarController.viewControllers ?? [] {
+                if let tabItem = viewController.tabBarItem {
+                    // Access the tab bar item of the current view controller
+                    if let tabItemView = tabItem.value(forKey: "view") as? UIView {
+                        let tabItemFrame = tabItemView.frame
+                        // Calculate centerX position
+                        let centerXPosition = tabItemFrame.midX
+                        // Calculate topAnchor position based on tab bar's frame
+                        let tabBarFrame = tabBarController.tabBar.frame
+                        let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
+                        tabBarTop = tabBarFrame.minY
+                        componentFrames.append(tabItemFrame)
+                        componentPositions.append(CGPoint(x: centerXPosition, y: topAnchorPosition))
+                    }
+                }
+            }
+        }
+        print(componentPositions)
+        overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Team", "player")
+        
+        present(overlayViewController, animated: true, completion: nil)
+    }
+}
 // MARK: - TeamProtocol
 extension TeamViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        var hostAnnouncements = Array(host.announcements)
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            awardViewControllerPresented = true
+            return
+        }
+        let hostAnnouncements = Array(host.announcements)
         // if some announcements were deleted from the server
         if TeamViewController.localMessages.count > hostAnnouncements.count {
             removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: hostAnnouncements)

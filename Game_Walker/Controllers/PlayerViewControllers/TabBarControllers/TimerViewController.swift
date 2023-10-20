@@ -59,6 +59,7 @@ class TimerViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    private var awardViewControllerPresented = false
     
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -161,6 +162,7 @@ class TimerViewController: BaseViewController {
             configureTimerLabel()
         }
         titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
+        titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
         settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
         configureGamecodeLabel()
     }
@@ -449,6 +451,11 @@ class TimerViewController: BaseViewController {
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if host.gameover && !awardViewControllerPresented {
+            showAwardPopUp()
+            self.awardViewControllerPresented = true
+            return
+        }
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
