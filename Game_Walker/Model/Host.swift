@@ -11,6 +11,7 @@ struct Host: Codable {
     //MARK: - Game Info
     var gamecode: String = ""
     var standardStyle: Bool = true
+    var confirmStations: False = false
     var gameTime: Int = 0
     var movingTime: Int = 0
     var rounds: Int = 0
@@ -34,6 +35,7 @@ struct Host: Codable {
     enum CodingKeys: String, CodingKey {
         case gamecode
         case standardStyle
+        case confirmStations
         case gameTime
         case movingTime
         case rounds
