@@ -56,6 +56,7 @@ class HostTimerViewController: UIViewController {
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
             configureTimerLabel()
+            configureGamecodeLabel()
         }
     }
     
@@ -204,8 +205,17 @@ class HostTimerViewController: UIViewController {
         label.numberOfLines = 2
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementBtn.centerYAnchor),
+        ])
+    }
     
     private let timerCircle: UILabel = {
         var view = UILabel()

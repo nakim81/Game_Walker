@@ -17,6 +17,7 @@ class JoinTeamViewController: BaseViewController {
     
     private var selectedIndex: Int?
     private var teamList: [Team] = []
+    private var host: Host?
     private var currentPlayer: Player = UserData.readPlayer("player") ?? Player()
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
@@ -29,6 +30,7 @@ class JoinTeamViewController: BaseViewController {
             do {
                 self.teamList = try await T.getTeamList(gameCode)
                 self.teamList.sort{$0.number < $1.number}
+                self.host = try await H.getHost(gameCode)
                 collectionView.reloadData()
             } catch {
                 alert(title: "Connection Error", message: "Swipe down the screen again to reload team list!")
@@ -38,6 +40,16 @@ class JoinTeamViewController: BaseViewController {
         configureBtn()
         configureNavItem()
         chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tabBarController = segue.destination as? PlayerTabBarController {
+            // Determine the value of "standardStyle" (true or false)
+            guard let isStandardStyle = self.host?.standardStyle else {return}
+
+            // Pass the "standardStyle" value to the tab bar controller
+            tabBarController.standardStyle = isStandardStyle
+        }
     }
     
     func configureNavItem() {
@@ -93,6 +105,8 @@ class JoinTeamViewController: BaseViewController {
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")
+            guard let standardStyle = self.host?.standardStyle else {return}
+            UserData.setStandardStyle(standardStyle, "standardstyle")
             Task { [weak self] in
                 guard let strongSelf = self else {
                     return

@@ -539,7 +539,7 @@
                             <constraint firstItem="qdP-DM-uNL" firstAttribute="leading" secondItem="ojk-Pl-An6" secondAttribute="leading" constant="30.670000000000002" id="vyK-9y-ysw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="hC8-lC-I9C"/>
+                    <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="hC8-lC-I9C"/>
                     <navigationItem key="navigationItem" id="6mo-hl-SSu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -640,7 +640,7 @@
                             <constraint firstItem="QhR-xt-DuL" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0634371" id="rdF-FN-C6E"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="648-ad-0wH"/>
+                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="648-ad-0wH"/>
                     <navigationItem key="navigationItem" id="aTS-cS-zr8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -757,7 +757,7 @@
                             <constraint firstItem="TfO-f6-xHl" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0475" id="ya6-B1-0PM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="dUb-JY-qbb"/>
+                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="dUb-JY-qbb"/>
                     <navigationItem key="navigationItem" id="qeT-WX-hQA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -779,14 +779,14 @@
         <segue reference="UvD-Ge-RWl"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="MemberButton" width="76" height="76"/>
+        <image name="RankingButton" width="76" height="76"/>
+        <image name="TimerButton1" width="76" height="76"/>
         <image name="current station info 2" width="169.66667175292969" height="55"/>
         <image name="infoIcon" width="25" height="25"/>
         <image name="messageIcon" width="25" height="25"/>
         <image name="next station info 1" width="169.66667175292969" height="55"/>
-        <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="25" height="25"/>
-        <image name="team member icon 1" width="84" height="112"/>
-        <image name="timer icon 1" width="85" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

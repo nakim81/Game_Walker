@@ -59,7 +59,6 @@ class TimerViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    private var awardViewControllerPresented = false
     
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -143,6 +142,7 @@ class TimerViewController: BaseViewController {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
         if TeamViewController.unread {
             self.announcementButton.setImage(unreadSome, for: .normal)
         } else {
@@ -182,6 +182,10 @@ class TimerViewController: BaseViewController {
         self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
+    @objc func gameOver() {
+        showAwardPopUp()
+    }
+    
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         findStation()
@@ -218,7 +222,7 @@ class TimerViewController: BaseViewController {
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
         ])
     }
     // MARK: - overlay Guide view
@@ -451,11 +455,6 @@ class TimerViewController: BaseViewController {
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
-            self.awardViewControllerPresented = true
-            return
-        }
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime

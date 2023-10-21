@@ -60,11 +60,6 @@ class CreateOrJoinTeamViewController: BaseViewController {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
     }
-    @IBAction func testBtnPressed(_ sender: Any) {
-        let startGameViewController = StartGameViewController(announcement: "Once the game is created, you won't be able to change the game settings", source: "", gamecode: gameCode)
-        startGameViewController.delegate = self
-        present(startGameViewController, animated: true)
-    }
 }
 // MARK: - ModalViewProtocol
 extension CreateOrJoinTeamViewController: ModalViewControllerDelegate {

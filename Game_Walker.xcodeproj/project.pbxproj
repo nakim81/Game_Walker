@@ -267,6 +267,7 @@
 		FCB13E142A97A04B00F4AE99 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = message.wav; path = "Supporting Files/message.wav"; sourceTree = "<group>"; };
 		FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
 		FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
+		FCCE41792AE2DE6300A099C8 /* koverwatch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = koverwatch.ttf; path = ../../../../Downloads/koverwatch.ttf; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Bold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Bold.ttf"; sourceTree = "<group>"; };
@@ -509,6 +510,7 @@
 				A1A4CD332A371C0500704BF8 /* Dosis-Medium.ttf */,
 				A1A4CD312A371C0400704BF8 /* Dosis-Regular.ttf */,
 				A1A4CD2E2A371C0400704BF8 /* Dosis-SemiBold.ttf */,
+				FCCE41792AE2DE6300A099C8 /* koverwatch.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -984,7 +986,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1001,7 +1003,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
@@ -1019,7 +1021,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1036,7 +1038,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-identify1";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-identify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;

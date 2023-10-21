@@ -9,6 +9,14 @@ import Foundation
 
 class UserData {
     
+    static func setStandardStyle(_ standardStyle: Bool, _ key: String) {
+        UserDefaults.standard.set(standardStyle, forKey: "key")
+    }
+    
+    static func isStandardStyle() -> Bool {
+        return UserDefaults.standard.bool(forKey: "standardstyle")
+    }
+    
     static func confirmHost(_ confirmed: Bool) {
         UserDefaults.standard.set(false, forKey: "hostconfirm")
     }

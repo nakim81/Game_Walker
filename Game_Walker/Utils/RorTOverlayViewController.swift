@@ -42,7 +42,12 @@ class RorTOverlayViewController: UIViewController {
     
     func configureGuide(_ frameList: [CGRect], _ positionList: [CGPoint], _ color: CGColor, _ textList: [String], _ tabBarTop: CGFloat, _ tabType: String, _ userType: String){
         colorList.append(color)
-        let count = textList.count - 1
+        var count: Int
+        if tabType == "Team" {
+            count = textList.count
+        } else {
+            count = textList.count - 1
+        }
         for i in 0..<count {
             let explanationLbl = UILabel()
             explanationLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -62,18 +67,18 @@ class RorTOverlayViewController: UIViewController {
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.clipsToBounds = true
-            circleView.layer.cornerRadius = frameList[i].height*1.2 / 2
+            circleView.layer.cornerRadius = frameList[i].height*1.55 / 2
             circleView.layer.borderColor = colorList[i]
             circleView.layer.borderWidth = 3
             overlayView.addSubview(circleView)
             
             NSLayoutConstraint.activate([
                 explanationLbl.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 10),
+                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 17),
                 
-                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.992),
+                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.981),
                 circleView.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.25),
+                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.6),
                 circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor)
             ])
         }
@@ -131,7 +136,7 @@ class RorTOverlayViewController: UIViewController {
                     label.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.4)
                 ])
             }
-        } else {
+        } else if tabType == "Timer" {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = textList[count]

@@ -65,6 +65,7 @@ class ChooseStyleModalViewController: BaseViewController {
             }
         }
         UserData.writeGamecode(gc, "gamecode")
+        UserData.setStandardStyle(true, "standardstyle")
         print("created game. mode is: ", host.standardStyle)
         T.listenTeams(gc, onListenerUpdate: listen(_:))
         
@@ -85,6 +86,7 @@ class ChooseStyleModalViewController: BaseViewController {
             }
         }
         UserData.writeGamecode(gc, "gamecode")
+        UserData.setStandardStyle(false, "standardstyle")
         print("created game. mode is: ", host.standardStyle)
         T.listenTeams(gc, onListenerUpdate: listen(_:))
      

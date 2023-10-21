@@ -163,25 +163,25 @@
                                         <rect key="frame" x="28" y="25" width="308" height="320"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the style that fits your event!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtQ-t2-3Ba">
-                                                <rect key="frame" x="16" y="0.0" width="276.5" height="65.5"/>
+                                                <rect key="frame" x="7.5" y="0.0" width="293.5" height="70"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-UZ-7lT">
-                                                <rect key="frame" x="0.0" y="89" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="90.5" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pi3-zN-szb">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-ys-a2b">
-                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40"/>
+                                                                <rect key="frame" x="84.5" y="0.0" width="139" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
-                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
+                                                                <rect key="frame" x="59.5" y="25.5" width="189.5" height="40.5"/>
                                                                 <string key="text">This mode includes all of our features
 (Points, Stations, Matching, Timer, etc)</string>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
@@ -201,19 +201,19 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMs-Uc-B0K">
-                                                <rect key="frame" x="0.0" y="178" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="178.5" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-qL-haN">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdt-89-RkS">
-                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40"/>
+                                                                <rect key="frame" x="102.5" y="0.0" width="103" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This mode includes points and rankings only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFs-Tm-uFC">
-                                                                <rect key="frame" x="72.5" y="26" width="163" height="40"/>
+                                                                <rect key="frame" x="44.5" y="25.5" width="219" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
@@ -996,7 +996,7 @@
                             <constraint firstItem="4vl-0Q-0Cj" firstAttribute="centerY" secondItem="s6r-8J-ljp" secondAttribute="centerY" multiplier="1.6" id="xic-vc-20M"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="zS1-ab-lZI"/>
+                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="zS1-ab-lZI"/>
                     <connections>
                         <outlet property="announcementBtn" destination="xgH-dT-cdH" id="G7F-Lk-uSZ"/>
                         <outlet property="endGameBtn" destination="4vl-0Q-0Cj" id="gFJ-vj-Em6"/>
@@ -1104,12 +1104,13 @@
                             <constraint firstItem="A6M-cq-y2e" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.272" id="v5A-mX-2Rl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="f0y-wr-zc8"/>
+                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="f0y-wr-zc8"/>
                     <navigationItem key="navigationItem" id="dZc-Z2-Jln"/>
                     <connections>
                         <outlet property="announcementBtn" destination="41c-QL-V9u" id="azZ-af-6ec"/>
                         <outlet property="infoBtn" destination="Ra5-Ug-yoa" id="Me4-Sb-yID"/>
                         <outlet property="leaderBoard" destination="F4M-EA-8mT" id="Lg0-8l-mCC"/>
+                        <outlet property="rankingLbl" destination="NEr-D6-pdY" id="uHF-nu-8Uf"/>
                         <outlet property="settingBtn" destination="EVw-hW-wn8" id="Amk-AC-nuv"/>
                         <outlet property="switchBtn" destination="Z5O-CG-hVP" id="Bsk-vu-AMi"/>
                     </connections>
@@ -1159,7 +1160,9 @@
         <image name="Num Teams label" width="201" height="21"/>
         <image name="PVEButton" width="111" height="33"/>
         <image name="PVPButton" width="111" height="33"/>
+        <image name="RankingButton" width="76" height="76"/>
         <image name="Rounds Label" width="85" height="21"/>
+        <image name="TimerButton1" width="76" height="76"/>
         <image name="Transitino Time Label" width="177.5" height="21"/>
         <image name="WhiteGuideIcon" width="30" height="30"/>
         <image name="infoIcon" width="25" height="25"/>
@@ -1167,12 +1170,10 @@
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
-        <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="25" height="25"/>
         <image name="settings box" width="200" height="60"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
-        <image name="timer icon 1" width="85" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
