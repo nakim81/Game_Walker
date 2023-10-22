@@ -25,19 +25,24 @@ class StartGameViewController: UIViewController {
         return view
     }()
     
-    private lazy var  warningLbl: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "warning 1")
-        return imageView
+    private lazy var  warningLbl: UILabel = {
+        let view = UILabel()
+        view.text = "HEADS UP!"
+        view.backgroundColor = .clear
+        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        view.textColor = .white
+        view.textAlignment = .center
+        view.numberOfLines = 1
+        return view
     }()
     
     private lazy var warningTextLbl: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 25)
-        label.numberOfLines = 0
-        label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        label.textColor = .white
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 25))
+        label.numberOfLines = 3
 
         return label
     }()
@@ -45,7 +50,7 @@ class StartGameViewController: UIViewController {
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle("Dismiss", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -56,7 +61,7 @@ class StartGameViewController: UIViewController {
         button.setBackgroundImage(UIColor.white.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 3.0
         button.layer.masksToBounds = true
@@ -67,7 +72,7 @@ class StartGameViewController: UIViewController {
     private lazy var confirmButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "Dosis-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle("Confirm", for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -78,7 +83,7 @@ class StartGameViewController: UIViewController {
         button.setBackgroundImage(UIColor.white.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 6
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 3.0
         button.layer.masksToBounds = true
@@ -97,7 +102,7 @@ class StartGameViewController: UIViewController {
     
     private lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
-        view.spacing = 14.0
+        view.spacing = 17.0
         view.distribution = .fillEqually
         view.addArrangedSubview(dismissButton)
         view.addArrangedSubview(confirmButton)
@@ -153,30 +158,25 @@ class StartGameViewController: UIViewController {
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 230),
-            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -270),
+            containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4064039409),
+            containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8666666667),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            warningLbl.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
-            warningLbl.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -15),
+            warningLbl.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            warningLbl.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             warningLbl.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
-            warningLbl.heightAnchor.constraint(equalTo: warningLbl.widthAnchor, multiplier: 0.178),
-            warningLbl.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            warningLbl.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.1303030303),
             
-            warningTextLbl.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
-            warningTextLbl.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            warningTextLbl.topAnchor.constraint(equalTo: warningLbl.bottomAnchor),
-            warningTextLbl.heightAnchor.constraint(equalTo: warningTextLbl.widthAnchor, multiplier: 0.53),
+            warningTextLbl.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor),
             warningTextLbl.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            warningTextLbl.topAnchor.constraint(equalTo: warningLbl.bottomAnchor),
+            warningTextLbl.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -15),
 
-            buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
-            buttonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
-            NSLayoutConstraint(item: buttonStackView, attribute: .bottom, relatedBy: .equal, toItem: self.containerView, attribute: .bottom, multiplier: 1, constant: -10),
-            buttonStackView.heightAnchor.constraint(equalTo: buttonStackView.widthAnchor, multiplier: 0.2),
-            buttonStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            buttonStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
+            buttonStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            buttonStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.13)
         ])
     }
 }
