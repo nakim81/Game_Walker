@@ -134,7 +134,7 @@ class CreateTeamViewController: BaseViewController {
                 let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                 UserData.writeTeam(newTeam, "team")
                 guard let standardStyle = self.host?.standardStyle else {return}
-                UserData.setStandardStyle(standardStyle, "standardstyle")
+                UserData.setStandardStyle(standardStyle)
                 Task { @MainActor in
                     do {
                         try await T.addTeam(gameCode, newTeam)

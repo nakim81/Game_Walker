@@ -27,6 +27,7 @@ class TeamViewController: UIViewController {
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
+    private var gameOverTriggered = false
     
     private var timer = Timer()
     static var unread: Bool = false
@@ -62,6 +63,11 @@ class TeamViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        /// add method for removing HostListener
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,8 +261,11 @@ extension TeamViewController {
 // MARK: - TeamProtocol
 extension TeamViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        if host.gameover{
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "gameover"), object: nil, userInfo: nil)
+        if host.gameover {
+            if !gameOverTriggered {
+                gameOverTriggered = true
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "gameover"), object: nil, userInfo: nil)
+            }
         }
         let hostAnnouncements = Array(host.announcements)
         // if some announcements were deleted from the server

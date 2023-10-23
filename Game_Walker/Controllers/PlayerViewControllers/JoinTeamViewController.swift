@@ -106,7 +106,9 @@ class JoinTeamViewController: BaseViewController {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")
             guard let standardStyle = self.host?.standardStyle else {return}
-            UserData.setStandardStyle(standardStyle, "standardstyle")
+            UserData.setStandardStyle(standardStyle)
+            print("host's standardstyle: \(standardStyle)")
+            print(UserData.isStandardStyle())
             Task { [weak self] in
                 guard let strongSelf = self else {
                     return
