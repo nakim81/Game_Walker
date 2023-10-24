@@ -15,6 +15,7 @@ import SwiftUI
 struct H {
     
     static let db = Firestore.firestore()
+    static var listener: ListenerRegistration?
     static var delegates : [HostUpdateListener] = []
     
     //MARK: - Game Control Functions
@@ -252,7 +253,7 @@ struct H {
     //MARK: - Database Functions
     
     static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
-        db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
+        listener = db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else { print("Error listening Host"); return }
             guard let data = document.data() else { print("Error listening Host"); return }
             let host = convertDataToHost(data)
@@ -260,6 +261,10 @@ struct H {
                 delegate.updateHost(host)
             }
         }
+    }
+    
+    static func detatchHost() async {
+        listener?.remove()
     }
     
     static func getHost(_ gamecode: String) async throws -> Host? {
