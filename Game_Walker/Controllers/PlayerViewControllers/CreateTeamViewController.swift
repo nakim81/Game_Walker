@@ -133,6 +133,8 @@ class CreateTeamViewController: BaseViewController {
                 print("stationorder: \(stationOrder)")
                 let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                 UserData.writeTeam(newTeam, "team")
+                guard let standardStyle = self.host?.standardStyle else {return}
+                UserData.setStandardStyle(standardStyle)
                 Task { @MainActor in
                     do {
                         try await T.addTeam(gameCode, newTeam)
@@ -150,6 +152,16 @@ class CreateTeamViewController: BaseViewController {
         } else {
             alert(title: "Team Number Error", message: "Team number should be greater than 0!")
             return
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tabBarController = segue.destination as? PlayerTabBarController {
+            // Determine the value of "standardStyle" (true or false)
+            guard let isStandardStyle = self.host?.standardStyle else {return}
+
+            // Pass the "standardStyle" value to the tab bar controller
+            tabBarController.standardStyle = isStandardStyle
         }
     }
     

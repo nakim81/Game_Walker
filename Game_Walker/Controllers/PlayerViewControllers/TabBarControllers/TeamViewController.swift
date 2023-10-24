@@ -27,6 +27,7 @@ class TeamViewController: UIViewController {
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
+    private var gameOverTriggered = false
     
     private var timer = Timer()
     static var unread: Bool = false
@@ -36,8 +37,6 @@ class TeamViewController: UIViewController {
     
     static let notificationName1 = Notification.Name("readNotification")
     static let notificationName2 = Notification.Name("announceNoti")
-    
-    private var awardViewControllerPresented = false
     
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -65,6 +64,11 @@ class TeamViewController: UIViewController {
         return label
     }()
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        /// add method for removing HostListener
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addHostListener()
@@ -88,6 +92,11 @@ class TeamViewController: UIViewController {
                 strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
+    }
+    
+    @objc func gameOver() {
+        showAwardPopUp()
     }
     
     private func addHostListener(){
@@ -106,9 +115,7 @@ class TeamViewController: UIViewController {
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3)
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
         ])
     }
     
@@ -254,10 +261,11 @@ extension TeamViewController {
 // MARK: - TeamProtocol
 extension TeamViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
-            awardViewControllerPresented = true
-            return
+        if host.gameover {
+            if !gameOverTriggered {
+                gameOverTriggered = true
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "gameover"), object: nil, userInfo: nil)
+            }
         }
         let hostAnnouncements = Array(host.announcements)
         // if some announcements were deleted from the server

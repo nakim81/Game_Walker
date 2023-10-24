@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "timer icon 1.png",
+      "filename" : "RankingButton.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "timer icon 1@2x.png",
+      "filename" : "RankingButton@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "timer icon 1@3x.png",
+      "filename" : "RankingButton@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

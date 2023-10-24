@@ -23,6 +23,7 @@ class JoinGameViewController: BaseViewController {
     private var storedUsername = UserData.readUsername("username") ?? ""
     private var storedPlayer = UserData.readPlayer("player") ?? nil
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
+    private let standardStyle = UserData.isStandardStyle() ?? true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -228,6 +229,15 @@ class JoinGameViewController: BaseViewController {
         } else {
             alert(title: "", message: "Invalid Input!")
             return
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tabBarController = segue.destination as? PlayerTabBarController {
+            // Determine the value of "standardStyle" (true or false)
+
+            // Pass the "standardStyle" value to the tab bar controller
+            tabBarController.standardStyle = self.standardStyle
         }
     }
     
