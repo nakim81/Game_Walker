@@ -51,14 +51,13 @@ class SettingTimeHostViewController: BaseViewController {
     var moveToolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
     var roundToolBar = UIToolbar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 35))
 
-    
+    var navBarHidden = false
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
     override func viewDidLoad() {
-
-        
         super.viewDidLoad()
         
         Task {
@@ -151,8 +150,19 @@ class SettingTimeHostViewController: BaseViewController {
         view.addGestureRecognizer(tapGesture1)
         view.addGestureRecognizer(tapGesture2)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    @objc func keyboardWillShow(_ notification: Notification) {
+        navBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        navBarHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowAlgorithmSegue" {
             if let destinationVC = segue.destination as? ManualAlgorithmViewController {

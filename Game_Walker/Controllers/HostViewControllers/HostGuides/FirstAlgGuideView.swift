@@ -69,7 +69,7 @@ class FirstAlgGuideView : UIView {
         textBorderView.layer.borderColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00).cgColor
         containerView.addSubview(textBorderView)
         NSLayoutConstraint.activate([
-            textBorderView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.88),
+            textBorderView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.80),
             textBorderView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.7),
             textBorderView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             textBorderView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
@@ -78,8 +78,8 @@ class FirstAlgGuideView : UIView {
         containerView.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nextButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -13),
-            nextButton.topAnchor.constraint(equalTo: textBorderView.bottomAnchor, constant: 13)
+            nextButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -7),
+            nextButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
         
         
