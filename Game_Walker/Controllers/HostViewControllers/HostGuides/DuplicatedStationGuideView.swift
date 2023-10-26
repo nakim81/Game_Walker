@@ -134,11 +134,11 @@ class DuplicatedStationGuideView : UIView {
             flaniImageView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5),
             flaniImageView.heightAnchor.constraint(equalTo: flaniImageView.widthAnchor, multiplier: 0.80972),
             
-            previousButton.centerYAnchor.constraint(equalTo: flaniImageView.centerYAnchor, constant: 12),
-            previousButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
+            previousButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            previousButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 7),
             
-            nextButton.centerYAnchor.constraint(equalTo: flaniImageView.centerYAnchor, constant: 12),
-            nextButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12)
+            nextButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+            nextButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -7)
         ])
         
     }

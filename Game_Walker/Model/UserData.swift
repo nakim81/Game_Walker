@@ -18,7 +18,7 @@ class UserData {
     }
     
     static func confirmHost(_ confirmed: Bool) {
-        UserDefaults.standard.set(false, forKey: "hostconfirm")
+        UserDefaults.standard.set(confirmed, forKey: "hostconfirm")
     }
     
     static func isHostConfirmed() -> Bool? {

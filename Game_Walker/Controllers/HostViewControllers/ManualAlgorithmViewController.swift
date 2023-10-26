@@ -453,7 +453,7 @@ class ManualAlgorithmViewController: BaseViewController {
     func resetAll() {
         if let indexPaths = collectionView.indexPathsForSelectedItems, !indexPaths.isEmpty {
             for indexPath in indexPaths {
-                self.collectionView.deselectItem(at: indexPath, animated: true)
+                self.collectionView.deselectItem(at: indexPath,  animated: true)
             }
         }
         for section in 0..<cellDataGrid.count {
@@ -462,6 +462,7 @@ class ManualAlgorithmViewController: BaseViewController {
                     cellDataGrid[section][column].resetCellToDefault()
                     if let cell = collectionView.cellForItem(at: IndexPath(item: column, section: section)) as? AlgCollectionViewCell {
                         cell.makeCellOriginal()
+                        print("IS IT enabled? :" , cell.isUserInteractionEnabled, " for item at : column->", column," and section-> ", section)
                     }
                 }
             }
@@ -1109,6 +1110,10 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected cell at IndexPath: \(indexPath)")
+        
+        if let testcell = collectionView.cellForItem(at:IndexPath(item: 0, section: 1 )) as? AlgCollectionViewCell {
+            print( "???? ???? ",testcell.isUserInteractionEnabled)
+        }
         if cellDataA == nil {
             cellDataA = cellDataGrid[indexPath.section][indexPath.item]
             changeCellGridData(cellDataInstance: cellDataA!, to: "selected")
@@ -1144,8 +1149,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                     self.changeCellGridData(cellDataInstance: self.cellDataA!, to: "deselected")
                     self.changeCellGridData(cellDataInstance: self.cellDataB!, to: "deselected")
     
-                    print("CELL SWAPPED: CELL NUMBER IN INDEX: ", self.cellDataGrid[0][3].cellIndex!, " with number: ", self.cellDataGrid[0][3].number!)
-                    print("CELL SWAPPED: CELL NUMBER IN INDEX: ", self.cellDataGrid[1][3].cellIndex!, " with number: ", self.cellDataGrid[1][3].number!)
 
                     let selectedCellA = collectionView.cellForItem(at: indexPathA) as? AlgCollectionViewCell
                     let selectedCellB = collectionView.cellForItem(at: indexPathB) as? AlgCollectionViewCell
