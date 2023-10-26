@@ -15,17 +15,47 @@ class HostRankingViewcontroller: UIViewController {
     @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var switchBtn: CustomSwitchButton!
     @IBOutlet weak var infoBtn: UIButton!
+    @IBOutlet weak var rankingLbl: UILabel!
     
     static var messages: [Announcement] = []
     private var teamList: [Team] = []
     private var selectedIndex: Int?
     private let cellSpacingHeight: CGFloat = 1
+    
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
+    private let standardStyle = UserData.isStandardStyle() ?? true
+    
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     private var round: Int = 0
     private var algorithm: [[Int]] = [[]]
     private var stationList: [Station] = []
+    
+    private lazy var gameCodeLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+        let attributedText = NSMutableAttributedString()
+        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+            .foregroundColor: UIColor.black
+        ]
+        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
+        attributedText.append(gameCodeAttributedString)
+        let numberAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
+            .foregroundColor: UIColor.black
+        ]
+        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+        attributedText.append(numberAttributedString)
+        label.backgroundColor = .white
+        label.attributedText = attributedText
+        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+        label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = false
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -34,10 +64,18 @@ class HostRankingViewcontroller: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAlgorithmAndStation()
+        if standardStyle {
+            getAlgorithmAndStation()
+        } else {
+            configureTableView()
+        }
         setDelegates()
         setMessages()
-        print(switchBtn.frame)
+        configureGamecodeLabel()
+        Task { @MainActor in
+            let host = try await H.getHost(gameCode)
+            switchBtn.isOn = host?.showScoreboard ?? true
+        }
     }
     
     func listen(_ _ : [String : Any]){
@@ -114,6 +152,18 @@ class HostRankingViewcontroller: UIViewController {
     }
     
 }
+// MARK: - Gamecode Label
+extension HostRankingViewcontroller {
+    
+    private func configureGamecodeLabel() {
+        rankingLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementBtn.centerYAnchor),
+        ])
+    }
+}
 // MARK: - HostRankingGuidView
 extension HostRankingViewcontroller {
     private func showOverlay() {
@@ -161,7 +211,12 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: HostRankingTableViewCell.identifier, for: indexPath) as! HostRankingTableViewCell
         let teamNum = teamList[indexPath.row].number
         let team = teamList[indexPath.row]
-        let stationName = self.findStation(self.round, teamNum)
+        var stationName: String
+        if self.standardStyle {
+            stationName = self.findStation(self.round, teamNum)
+        } else {
+            stationName = ""
+        }
         cell.configureRankTableViewCell(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, stationName: stationName, points: team.points, showScore: self.showScore)
         cell.selectionStyle = .none
         return cell

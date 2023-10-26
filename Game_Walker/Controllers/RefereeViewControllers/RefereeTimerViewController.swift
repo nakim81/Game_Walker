@@ -48,6 +48,7 @@ class RefereeTimerController: BaseViewController {
         super.viewDidLoad()
         Task {
             callProtocols()
+            configureGamecodeLabel()
             //setSetting()
             //configureTimerLabel()
             //calculateTime()
@@ -123,6 +124,14 @@ class RefereeTimerController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
+    
+    private func configureGamecodeLabel() {
+        view.addSubview(gameCodeLabel)
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
+        ])
+    }
     
     @objc func readAll(notification: Notification) {
         guard let unread = notification.userInfo?["unread"] as? Bool else {

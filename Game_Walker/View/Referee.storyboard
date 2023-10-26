@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -279,7 +279,7 @@
                             <constraint firstItem="8CS-DM-8s8" firstAttribute="height" secondItem="q1A-ob-tej" secondAttribute="height" multiplier="0.0537" id="wku-p3-QWl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="0At-mo-4sZ"/>
+                    <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="0At-mo-4sZ"/>
                     <navigationItem key="navigationItem" id="6ve-Tb-mVa"/>
                     <connections>
                         <outlet property="infoButton" destination="mc7-mG-0yL" id="KgV-qt-9ys"/>
@@ -356,7 +356,7 @@
                             <constraint firstItem="fRC-fS-cvN" firstAttribute="centerY" secondItem="212-75-2aX" secondAttribute="centerY" multiplier="0.16" id="zs5-Hz-2Ai"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="KwV-GR-Ld8"/>
+                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="KwV-GR-Ld8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="announcementButton" destination="EaJ-xg-1oZ" id="gR7-d1-ksb"/>
@@ -448,7 +448,7 @@
                             <constraint firstItem="q97-De-LZD" firstAttribute="width" secondItem="Plc-xj-FuK" secondAttribute="width" multiplier="0.272" id="ndW-lf-Pzy"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="0dx-x9-DIU"/>
+                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="0dx-x9-DIU"/>
                     <connections>
                         <outlet property="announcementButton" destination="xFF-qw-Xzm" id="AkS-X3-vSZ"/>
                         <outlet property="infoButton" destination="blo-RY-4W2" id="dNV-sX-87n"/>
@@ -557,7 +557,7 @@
                             <constraint firstItem="gbt-yo-h6K" firstAttribute="centerX" secondItem="GFd-Dx-WLW" secondAttribute="centerX" multiplier="1.5565" id="uiv-uJ-kVC"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="team member icon 1" selectedImage="team member icon 1" id="N01-yb-VHc"/>
+                    <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="N01-yb-VHc"/>
                     <connections>
                         <outlet property="annnouncementButton" destination="7zg-Mj-YQM" id="Kts-7P-gAJ"/>
                         <outlet property="infoButton" destination="b7I-nf-wXK" id="L4S-rd-xmR"/>
@@ -633,7 +633,7 @@
                             <constraint firstItem="qv5-BY-hiI" firstAttribute="height" secondItem="yDZ-oz-LGx" secondAttribute="height" multiplier="0.0475" id="oXk-6t-a9X"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="timer icon 1" selectedImage="timer icon 1" id="BbY-Ko-IuE"/>
+                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="BbY-Ko-IuE"/>
                     <connections>
                         <outlet property="announcementButton" destination="gzJ-GZ-4F1" id="Wpa-xD-D8Q"/>
                         <outlet property="infoButton" destination="81R-01-Yxy" id="2ig-zC-hAt"/>
@@ -724,7 +724,7 @@
                             <constraint firstItem="8JQ-sB-IuT" firstAttribute="leading" secondItem="KtD-6H-nNi" secondAttribute="leading" id="vuw-VG-zde"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="score 2" selectedImage="score 2" id="mAv-Ll-x8y"/>
+                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="mAv-Ll-x8y"/>
                     <connections>
                         <outlet property="announcementButton" destination="kNe-Tc-82s" id="0Rl-ul-9gn"/>
                         <outlet property="infoButton" destination="ALb-GH-t1Z" id="805-D7-g2W"/>
@@ -740,22 +740,22 @@
     <inferredMetricsTieBreakers>
         <segue reference="SEr-t1-evM"/>
         <segue reference="qww-74-glH"/>
-        <segue reference="bfG-fW-iGy"/>
-        <segue reference="KeI-Qk-QLQ"/>
+        <segue reference="GxM-Ra-Tyo"/>
+        <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Code" width="168" height="27.5"/>
         <image name="LEAVE" width="60" height="16.5"/>
+        <image name="MemberButton" width="76" height="76"/>
+        <image name="RankingButton" width="76" height="76"/>
+        <image name="TimerButton1" width="76" height="76"/>
         <image name="Username" width="152" height="26.5"/>
         <image name="infoIcon" width="25" height="25"/>
         <image name="join button 2" width="176" height="57"/>
         <image name="messageIcon" width="25" height="25"/>
         <image name="next button 1" width="175.5" height="57"/>
-        <image name="score 2" width="84" height="112"/>
         <image name="settingIcon" width="25" height="25"/>
-        <image name="team member icon 1" width="84" height="112"/>
         <image name="text box 1" width="244" height="79"/>
-        <image name="timer icon 1" width="85" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

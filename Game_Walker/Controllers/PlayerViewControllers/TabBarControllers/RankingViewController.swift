@@ -28,7 +28,6 @@ class RankingViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private let audioPlayerManager = AudioPlayerManager()
-    private var awardViewControllerPresented = false
     
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
@@ -60,6 +59,7 @@ class RankingViewController: UIViewController {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
         if TeamViewController.unread {
             self.announcementButton.setImage(self.unreadSome, for: .normal)
         } else {
@@ -88,7 +88,7 @@ class RankingViewController: UIViewController {
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!),
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
         ])
     }
     
@@ -105,6 +105,10 @@ class RankingViewController: UIViewController {
     
     @objc func sound() {
         self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+    }
+    
+    @objc func gameOver() {
+        showAwardPopUp()
     }
     
     func listen(_ _ : [String : Any]){
@@ -210,11 +214,6 @@ extension RankingViewController: TeamUpdateListener {
 // MARK: - HostProtocol
 extension RankingViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
-            awardViewControllerPresented = true
-            return
-        }
         self.showScore = host.showScoreboard
         self.leaderBoard.reloadData()
     }

@@ -117,7 +117,7 @@ class RefereeRankingPVEViewController: UIViewController {
         view.addSubview(gameCodeLabel)
         NSLayoutConstraint.activate([
             gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: (self.navigationController?.navigationBar.frame.minY)!)
+            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
         ])
     }
 }

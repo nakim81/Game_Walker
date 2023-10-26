@@ -124,6 +124,7 @@ class MainViewController: BaseViewController {
         UserDefaults.standard.removeObject(forKey: "referee")
         UserDefaults.standard.removeObject(forKey: "player")
         UserDefaults.standard.removeObject(forKey: "team")
+        UserDefaults.standard.removeObject(forKey: "standardstyle")
         UserData.writeUUID(UUID().uuidString)
         self.alert(title: "", message: "UUID: \(UserData.readUUID()), \(UserData.readPlayer("player")), \(UserData.readReferee("referee")), \(UserData.readReferee("referee")), \(UserData.readGamecode("gamecode")), \(UserData.readTeam("team"))")
         print(UserData.readUUID())
