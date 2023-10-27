@@ -164,8 +164,6 @@ class CreateTeamViewController: BaseViewController {
             tabBarController.standardStyle = isStandardStyle
         }
     }
-    
-    private func listen(_ _ : [String : Any]){}
 }
 // MARK: - Methods for checking if the game started
 extension CreateTeamViewController {

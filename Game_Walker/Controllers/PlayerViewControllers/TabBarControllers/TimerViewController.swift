@@ -183,7 +183,12 @@ class TimerViewController: BaseViewController {
     }
     
     @objc func gameOver() {
-        showAwardPopUp()
+        Task {@MainActor in
+            await H.detatchHost()
+            print(H.listener)
+            NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "gameover"), object: nil)
+            showAwardPopUp()
+        }
     }
     
     @IBAction func gameInfoButtonPressed(_ sender: UIButton) {

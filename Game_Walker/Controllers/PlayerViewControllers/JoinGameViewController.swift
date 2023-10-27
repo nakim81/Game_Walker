@@ -23,11 +23,10 @@ class JoinGameViewController: BaseViewController {
     private var storedUsername = UserData.readUsername("username") ?? ""
     private var storedPlayer = UserData.readPlayer("player") ?? nil
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
-    private let standardStyle = UserData.isStandardStyle() ?? true
+    private let standardStyle = UserData.isStandardStyle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegates()
         setUp()
         configureNavItem()
         configureJoinBtn()
@@ -36,11 +35,6 @@ class JoinGameViewController: BaseViewController {
     private func configureJoinBtn(){
         nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         nextButton.layer.cornerRadius = 8
-    }
-    
-    private func setDelegates() {
-        H.delegates.append(self)
-        T.delegates.append(self)
     }
     
     private func setUp() {
@@ -240,9 +234,6 @@ class JoinGameViewController: BaseViewController {
             tabBarController.standardStyle = self.standardStyle
         }
     }
-    
-    func listen(_ _ : [String : Any]){
-    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -254,16 +245,5 @@ extension JoinGameViewController: UITextFieldDelegate {
             nextButtonPressed(nextButton)
         }
         return true
-    }
-}
-
-// MARK: - listener
-extension JoinGameViewController: HostUpdateListener, TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        
-    }
-    
-    func updateHost(_ host: Host) {
-        
     }
 }
