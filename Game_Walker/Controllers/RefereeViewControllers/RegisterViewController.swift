@@ -205,8 +205,10 @@ extension RegisterController: HostUpdateListener {
         self.gameStart = host.gameStart
         self.standardStyle = host.standardStyle
         if self.standardStyle! {
-            nextButton.isEnabled = false
-            alert(title: "Referee Disabled", message: "You are in different style.")
+           nextButton.isEnabled = true
+        } else {
+           nextButton.isEnabled = false
+           alert(title: "Referee Disabled", message: "You are in different style.")
         }
     }
     

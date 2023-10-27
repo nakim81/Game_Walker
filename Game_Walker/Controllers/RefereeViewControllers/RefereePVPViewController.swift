@@ -19,16 +19,22 @@ class RefereePVPController: BaseViewController {
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
     private var host: Host = Host()
-    private var teams : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
+    private var teams : [Team] = [Team(), Team()]
+    private var station : Station = Station()
     private var stations : [Station] = [Station()]
-    private var teamOrder : [Team] = [Team(name: "Simon Dominic", iconName: "iconDaisy"), Team(name: "Simon Dominic", iconName: "iconDaisy")]
+    private var teamOrder : [Team] = [Team(), Team()]
     private var maxPointsA : Bool = false
     private var maxPointsB : Bool = false
     private var maxA : String = ""
     private var maxB : String = ""
-    private var teamA : Team = Team(name: "Simon Dominic", iconName: "iconDaisy")
-    private var teamB : Team = Team(name: "Simon Dominic", iconName: "iconDaisy")
-    private var round: Int = 1
+    private var teamA : Team = Team()
+    private var teamB : Team = Team()
+    private var algorithm : [[Int]] = []
+    private var teamOrderSet : Bool = false
+    private var isSeguePerformed : Bool = false
+    private var number : Int = -1
+    private var count : Int = -2
+    private var round : Int = 1
     
     private var points : Int = 0
     private var name : String = ""
@@ -70,76 +76,86 @@ class RefereePVPController: BaseViewController {
                 rightLoseButton.image = UIImage(named: "Lose Yellow Button")
             }
             callProtocols()
-//            getTeamOrder()
-//            updateScore()
-            addSubviews()
-            addConstraints()
+            // Host needs to fix the code, so that confirmCreated will be updated when algorithm made.
+            if host.confirmCreated && count == number {
+                getTeamOrder()
+                updateScore()
+                addSubviews()
+                addConstraints()
+                modifyViews()
+                newConstraints()
+            } else {
+                addSubviews()
+                addConstraints()
+            }
         }
         super.viewDidLoad()
     }
     
-//    func setTeamOrder() {
-//        var pvp_count : Int = 0
-//        var column_number_index : Int = 0
-//        var teamNumOrder : [Int] = []
-//        var teamOrder : [Team] = []
-//        Task {@MainActor in
-//            stationList = try await S.getStationList(gameCode)
-//            teams = try await T.getTeamList(gameCode)
-//            for station in self.stationList {
-//                if referee.name == station.referee?.name {
-//                    self.station = station
-//                }
-//                if referee.stationName == station.name {
-//                    self.station = station
-//                }
-//                if station.pvp == true {
-//                    pvp_count += 1
-//                }
-//            }
-//            if self.station.pvp {
-//                column_number_index = 2 * station.number - 2
-//                let left = self.algorithm.map({ $0[column_number_index] })
-//                let right = self.algorithm.map({ $0[column_number_index + 1] })
-//                var right_index : Int = 0
-//                for left_index in left {
-//                    teamNumOrder.append(left_index)
-//                    teamNumOrder.append(right[right_index])
-//                    right_index += 1
-//                }
-//            }
-//            else {
-//                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
-//                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
-//            }
-//            for team_num in teamNumOrder {
-//                if team_num == 0 {
-//                    teamOrder.append(Team())
-//                }
-//                for team in self.teams {
-//                    if team_num == team.number {
-//                        teamOrder.append(team)
-//                    }
-//                }
-//            }
-//            self.updatedTeamOrder = teamOrder
-//            do {
-//                try await S.updateTeamOrder(gameCode, self.station.uuid, self.updatedTeamOrder)
-//            }
-//            catch GameWalkerError.serverError(let message) {
-//                print(message)
-//                serverAlert(message)
-//                return
-//            }
-//            self.pvpAssigned = true
-//            if self.station.pvp {
-//                self.performSegue(withIdentifier: "goToPVP", sender: self)
-//            }
-//            else {
-//                self.performSegue(withIdentifier: "goToPVE", sender: self)
-//            }
-//        }
-//    }
+    func setTeamOrder() {
+        var pvp_count : Int = 0
+        var column_number_index : Int = 0
+        var teamNumOrder : [Int] = []
+        var teamOrder : [Team] = []
+        Task { @MainActor in
+            let stationList = try await S.getStationList(gameCode)
+            let teams = try await T.getTeamList(gameCode)
+            for station in stationList {
+                if referee.name == station.referee?.name {
+                    self.station = station
+                }
+                if referee.stationName == station.name {
+                    self.station = station
+                }
+                if station.pvp == true {
+                    pvp_count += 1
+                }
+            }
+            if self.station.pvp {
+                column_number_index = 2 * station.number - 2
+                let left = self.algorithm.map({ $0[column_number_index] })
+                let right = self.algorithm.map({ $0[column_number_index + 1] })
+                var right_index : Int = 0
+                for left_index in left {
+                    teamNumOrder.append(left_index)
+                    teamNumOrder.append(right[right_index])
+                    right_index += 1
+                }
+            }
+            else {
+                column_number_index = 2 * pvp_count + station.number - pvp_count - 1
+                teamNumOrder = self.algorithm.map({ $0[column_number_index] })
+            }
+            for team_num in teamNumOrder {
+                if team_num == 0 {
+                    teamOrder.append(Team())
+                }
+                for team in self.teams {
+                    if team_num == team.number {
+                        teamOrder.append(team)
+                    }
+                }
+            }
+            self.teamOrder = teamOrder
+            do {
+                try await S.updateTeamOrder(gameCode, self.station.uuid, self.teamOrder)
+            }
+            catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+            // How in the world do we fix this...make them all async?
+            try await Task.sleep(nanoseconds: 30000000)
+            getTeamOrder()
+            try await Task.sleep(nanoseconds: 30000000)
+            updateScore()
+            try await Task.sleep(nanoseconds: 30000000)
+            modifyViews()
+            try await Task.sleep(nanoseconds: 30000000)
+            newConstraints()
+        }
+    }
     
     //MARK: - Messages
     override func viewWillAppear(_ animated: Bool) {
@@ -283,7 +299,6 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func leftWinButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         if self.teamA.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -335,7 +350,6 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func leftLoseButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
         if self.teamA.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -454,7 +468,6 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func rightWinButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point up", withExtension: "wav")
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -506,7 +519,6 @@ class RefereePVPController: BaseViewController {
     }()
     
     @objc func rightLoseButtonTapped() {
-        //self.audioPlayerManager.playAudioFile(named: "point down", withExtension: "wav")
         if self.teamB.number == 0 {
             alert(title: "The Team doesn't exist", message: "This is an invalid team.")
         } else {
@@ -555,7 +567,7 @@ class RefereePVPController: BaseViewController {
         var view = UIView()
         view.frame = CGRect()
         view.layer.cornerRadius = 10
-        view.layer.borderWidth = 5
+        view.layer.borderWidth = 3
         view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
         var label = UILabel()
         view.addSubview(label)
@@ -564,10 +576,10 @@ class RefereePVPController: BaseViewController {
         label.numberOfLines = 2
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 30))
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 22))
         label.lineBreakMode = .byWordWrapping
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 55).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.11).isActive = true
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         return view
@@ -577,7 +589,7 @@ class RefereePVPController: BaseViewController {
         var view = UIView()
         view.frame = CGRect()
         view.layer.cornerRadius = 10
-        view.layer.borderWidth = 5
+        view.layer.borderWidth = 3
         view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
         var label = UILabel()
         view.addSubview(label)
@@ -586,27 +598,34 @@ class RefereePVPController: BaseViewController {
         label.numberOfLines = 2
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 30))
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 22))
         label.lineBreakMode = .byWordWrapping
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 55).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.11).isActive = true
         label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         return view
     }()
     
-    func addSubviews() {
-        self.view.addSubview(gameCodeLabel)
-        self.view.addSubview(roundLabel)
+    func modifyViews() {
+        leftBorderView.removeFromSuperview()
+        rightBorderView.removeFromSuperview()
         self.view.addSubview(leftTeamNumLabel)
         self.view.addSubview(leftIconButton)
         self.view.addSubview(leftTeamNameLabel)
-        self.view.addSubview(leftWinButton)
-        self.view.addSubview(leftLoseButton)
-        self.view.addSubview(leftScoreLabel)
         self.view.addSubview(rightTeamNumLabel)
         self.view.addSubview(rightIconButton)
         self.view.addSubview(rightTeamNameLabel)
+    }
+    
+    func addSubviews() {
+        self.view.addSubview(gameCodeLabel)
+        self.view.addSubview(roundLabel)
+        self.view.addSubview(leftBorderView)
+        self.view.addSubview(leftWinButton)
+        self.view.addSubview(leftLoseButton)
+        self.view.addSubview(leftScoreLabel)
+        self.view.addSubview(rightBorderView)
         self.view.addSubview(rightWinButton)
         self.view.addSubview(rightLoseButton)
         self.view.addSubview(rightScoreLabel)
@@ -615,15 +634,11 @@ class RefereePVPController: BaseViewController {
     func addConstraints() {
         gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
-        leftIconButton.translatesAutoresizingMaskIntoConstraints = false
-        leftTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftBorderView.translatesAutoresizingMaskIntoConstraints = false
         leftWinButton.translatesAutoresizingMaskIntoConstraints = false
         leftLoseButton.translatesAutoresizingMaskIntoConstraints = false
         leftScoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightIconButton.translatesAutoresizingMaskIntoConstraints = false
-        rightTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightBorderView.translatesAutoresizingMaskIntoConstraints = false
         rightWinButton.translatesAutoresizingMaskIntoConstraints = false
         rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
         rightScoreLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -634,10 +649,66 @@ class RefereePVPController: BaseViewController {
             gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
             roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.002),
+            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
             roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
             roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
             
+            leftBorderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.10),
+            leftBorderView.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
+            leftBorderView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.39),
+            leftBorderView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.33),
+            
+            leftScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
+            leftScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
+            leftScoreLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.12),
+            leftScoreLabel.topAnchor.constraint(equalTo: leftBorderView.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
+            
+            leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            leftWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.09),
+            leftWinButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            leftLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            leftLoseButton.leadingAnchor.constraint(equalTo: leftWinButton.trailingAnchor, constant: UIScreen.main.bounds.size.width * 0.001),
+            leftLoseButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            rightBorderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.10),
+            rightBorderView.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
+            rightBorderView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.39),
+            rightBorderView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.33),
+            
+            rightScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
+            rightScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
+            rightScoreLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.12),
+            rightScoreLabel.topAnchor.constraint(equalTo: rightBorderView.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
+            
+            rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            rightWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            rightWinButton.trailingAnchor.constraint(equalTo: rightLoseButton.leadingAnchor, constant: -UIScreen.main.bounds.size.width * 0.001),
+            rightWinButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            rightLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            rightLoseButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.09),
+            rightLoseButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001)
+        ])
+    }
+    
+    func newConstraints() {
+        self.view.addSubview(leftTeamNumLabel)
+        self.view.addSubview(leftIconButton)
+        self.view.addSubview(leftTeamNameLabel)
+        self.view.addSubview(rightTeamNumLabel)
+        self.view.addSubview(rightIconButton)
+        self.view.addSubview(rightTeamNameLabel)
+        leftTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftIconButton.translatesAutoresizingMaskIntoConstraints = false
+        leftTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightIconButton.translatesAutoresizingMaskIntoConstraints = false
+        rightTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             leftTeamNumLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.125),
             leftTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
             leftTeamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
@@ -652,21 +723,6 @@ class RefereePVPController: BaseViewController {
             leftTeamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.06),
             leftTeamNameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.07),
             leftTeamNameLabel.topAnchor.constraint(equalTo: leftIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
-            
-            leftScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
-            leftScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
-            leftScoreLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.12),
-            leftScoreLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
-            
-            leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
-            leftWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.09),
-            leftWinButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
-            
-            leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
-            leftLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            leftLoseButton.leadingAnchor.constraint(equalTo: leftWinButton.trailingAnchor, constant: UIScreen.main.bounds.size.width * 0.001),
-            leftLoseButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
             
             rightTeamNumLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.125),
             rightTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
@@ -683,20 +739,8 @@ class RefereePVPController: BaseViewController {
             rightTeamNameLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.07),
             rightTeamNameLabel.topAnchor.constraint(equalTo: rightIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
             
-            rightScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
-            rightScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
-            rightScoreLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.12),
-            rightScoreLabel.topAnchor.constraint(equalTo: rightTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
-            
-            rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
-            rightWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            rightWinButton.trailingAnchor.constraint(equalTo: rightLoseButton.leadingAnchor, constant: -UIScreen.main.bounds.size.width * 0.001),
-            rightWinButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
-            
-            rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
-            rightLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            rightLoseButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.09),
-            rightLoseButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001)
+            leftScoreLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.075),
+            rightScoreLabel.topAnchor.constraint(equalTo: rightTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.075),
         ])
     }
     
@@ -713,15 +757,11 @@ class RefereePVPController: BaseViewController {
         var componentFrames: [CGRect] = []
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
-            // Loop through each view controller in the tab bar controller
             for viewController in tabBarController.viewControllers ?? [] {
                 if let tabItem = viewController.tabBarItem {
-                    // Access the tab bar item of the current view controller
                     if let tabItemView = tabItem.value(forKey: "view") as? UIView {
                         let tabItemFrame = tabItemView.frame
-                        // Calculate centerX position
                         let centerXPosition = tabItemFrame.midX
-                        // Calculate topAnchor position based on tab bar's frame
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
                         tabBarTop = tabBarFrame.minY
@@ -768,30 +808,30 @@ class RefereePVPController: BaseViewController {
             }
         }
     }
+    
+    //MARK: - find Station
+    func findStation() {
+        Task { @MainActor in
+            let stations = try await S.getStationList(gameCode)
+            for station in stations {
+                if referee.stationName == station.name {
+                    self.station = station
+                }
+            }
+            if !self.station.pvp {
+//                performSegue(withIdentifier: "goToPVE", sender: self)
+                
+            }
+        }
+    }
 }
 
 //MARK: - Protocols
-extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        for old_team in self.teamOrder {
-            for team in teams {
-                if old_team.number == team.number && old_team.points != team.points {
-                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
-                        self.teamOrder[index] = team
-                    }
-                    break;
-                }
-            }
-        }
-        for team in teams {
-            if self.teamA.name == team.name {
-                self.teamA = team
-                leftScoreLabel.text = "\(self.teamA.points)"
-            }
-            if self.teamB.name == team.name {
-                self.teamB = team
-                rightScoreLabel.text = "\(self.teamB.points)"
-            }
+extension RefereePVPController: RefereeUpdateListener, HostUpdateListener, TeamUpdateListener {
+    func updateReferee(_ referee: Referee) {
+        if !referee.assigned && !isSeguePerformed {
+            performSegue(withIdentifier: "toWait", sender: self)
+            isSeguePerformed = true
         }
     }
     
@@ -801,12 +841,38 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
             self.awardViewControllerPresented = true
             return
         }
-//        if host.gameStart {
-//            borderView.removeFromSuperview()
-//            self.view.addSubview(teamNumLabel)
-//            self.view.addSubview(iconButton)
-//            self.view.addSubview(teamNameLabel)
-//        }
+        if host.confirmStations {
+            findStation()
+            roundLabel.text = "Round " + "\(host.currentRound)"
+            if let tabBarController = self.tabBarController {
+                if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
+                    let tabBarItem = tabBarItems[2]
+                    tabBarItem.isEnabled = true
+                }
+            }
+        } else {
+            self.view.addSubview(leftBorderView)
+            self.view.addSubview(rightBorderView)
+            roundLabel.text = "Round 0"
+            leftTeamNumLabel.removeFromSuperview()
+            leftIconButton.removeFromSuperview()
+            leftTeamNameLabel.removeFromSuperview()
+            rightTeamNumLabel.removeFromSuperview()
+            rightIconButton.removeFromSuperview()
+            rightTeamNameLabel.removeFromSuperview()
+            addConstraints()
+            if let tabBarController = self.tabBarController {
+                if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
+                    let tabBarItem = tabBarItems[2]
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
+        // switch to ConfirmCreated when host implements.
+        if host.algorithm != [] {
+            self.algorithm = convert1DArrayTo2D(host.algorithm)
+            self.number = host.teams
+        }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
             leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
@@ -843,11 +909,41 @@ extension RefereePVPController: TeamUpdateListener, HostUpdateListener {
         }
     }
     
+    func updateTeams(_ teams: [Team]) {
+        count = teams.count
+        if teams.count == self.number && !teamOrderSet {
+            setTeamOrder()
+            teamOrderSet = true
+        }
+        for old_team in self.teamOrder {
+            for team in teams {
+                if old_team.number == team.number && old_team.points != team.points {
+                    if let index = self.teamOrder.firstIndex(where: { $0.number == old_team.number }) {
+                        self.teamOrder[index] = team
+                    }
+                    break;
+                }
+            }
+        }
+        for team in teams {
+            if self.teamA.name == team.name {
+                self.teamA = team
+                leftScoreLabel.text = "\(self.teamA.points)"
+            }
+            if self.teamB.name == team.name {
+                self.teamB = team
+                rightScoreLabel.text = "\(self.teamB.points)"
+            }
+        }
+    }
+    
     func callProtocols() {
-        T.delegates.append(self)
+        R.delegates.append(self)
         H.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+        T.delegates.append(self)
+        R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
     }
     
     func listen(_ _ : [String : Any]){

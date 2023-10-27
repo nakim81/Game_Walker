@@ -14,15 +14,16 @@ class WaitingController: BaseViewController {
     private var referee = UserData.readReferee("referee")!
     private var timer: Timer?
     
+    private var stations : [Station]?
     private var teamCreated = false
     private var isSeguePerformed = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
     private var waitingImageViewWidthConstraint: NSLayoutConstraint?
-    private var station : Station = Station()
     
     override func viewDidLoad() {
+        print("X")
         configureNavItem()
         callProtocols()
         addSubviews()
@@ -73,6 +74,10 @@ class WaitingController: BaseViewController {
                 }
             }
             self.waitingImageView.image = UIImage(named: self.waitingImagesArray[self.currentIndex])
+            if self.referee.assigned {
+                self.timer?.invalidate()
+                findStation()
+            }
             self.view.layoutIfNeeded()
         }
     }
@@ -113,20 +118,18 @@ class WaitingController: BaseViewController {
     //MARK: - Find Station Assgined to Referee
     func findStation() {
         Task { @MainActor in
-            let stations = try await S.getStationList(gameCode)
-            for station in stations {
-                if referee.stationName == station.name {
-                    self.station = station
-                    print(self.station)
+            stations = try await S.getStationList(gameCode)
+            for station in stations! {
+                if referee.name == station.referee!.name && !isSeguePerformed {
+                    if station.pvp {
+                        performSegue(withIdentifier: "goToPVP", sender: self)
+                        isSeguePerformed = true
+                    }
+                    else {
+                        performSegue(withIdentifier: "goToPVE", sender: self)
+                        isSeguePerformed = true
+                    }
                 }
-            }
-            if self.station.pvp {
-                performSegue(withIdentifier: "goToPVP", sender: self)
-                isSeguePerformed = true
-            }
-            else {
-                performSegue(withIdentifier: "goToPVE", sender: self)
-                isSeguePerformed = true
             }
         }
     }
@@ -136,10 +139,6 @@ extension WaitingController: RefereeUpdateListener {
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "referee")
         self.referee = UserData.readReferee("referee")!
-        if self.referee.assigned && !isSeguePerformed {
-            self.timer?.invalidate()
-            findStation()
-        }
     }
     
     func listen(_ _ : [String : Any]){

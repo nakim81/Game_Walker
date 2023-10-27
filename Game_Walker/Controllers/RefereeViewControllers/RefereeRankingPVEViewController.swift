@@ -22,6 +22,7 @@ class RefereeRankingPVEViewController: UIViewController {
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     
+    private var isSeguePerformed = false
     private var timer = Timer()
     static var unread: Bool = false
     private var diff: Int?
@@ -60,8 +61,10 @@ class RefereeRankingPVEViewController: UIViewController {
     private func configureListeners(){
         T.delegates.append(self)
         H.delegates.append(self)
+        R.delegates.append(self)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        R.listenReferee(gameCode, UserData.readReferee("referee")!.uuid, onListenerUpdate: listen(_:))
     }
     
     private lazy var gameCodeLabel: UILabel = {
@@ -222,6 +225,17 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
                     }
                 }
             }
+        }
+    }
+}
+// MARK: - RefereeProtocol
+extension RefereeRankingPVEViewController: RefereeUpdateListener {
+    func updateReferee(_ referee: Referee) {
+        if !referee.assigned && !isSeguePerformed {
+            print("A")
+            //A (segue) is triggered only once, but somehow destination controller is loaded twice...seems like something has to do with navigation stack and tab bar.
+            performSegue(withIdentifier: "toWait2", sender: self)
+            isSeguePerformed = true
         }
     }
 }

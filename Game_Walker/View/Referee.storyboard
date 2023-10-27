@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -288,6 +288,7 @@
                         <outlet property="settingsButton" destination="VCC-9k-IBy" id="cWd-VS-Aut"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVE" id="bfG-fW-iGy"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="KeI-Qk-QLQ"/>
+                        <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="aOb-L3-ExC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42f-rM-rtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -454,6 +455,7 @@
                         <outlet property="infoButton" destination="blo-RY-4W2" id="dNV-sX-87n"/>
                         <outlet property="leaderBoard" destination="kYT-Cv-Qli" id="szM-If-V8N"/>
                         <outlet property="settingButton" destination="yrV-eE-wZ3" id="GCI-BQ-hIk"/>
+                        <segue destination="d9X-u1-YmW" kind="show" identifier="toWait2" id="s6S-2S-uEn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFU-wt-84y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -565,6 +567,7 @@
                         <outlet property="settingsButton" destination="Ury-Rb-uWQ" id="6Ha-vB-2QQ"/>
                         <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVP" id="GxM-Ra-Tyo"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="ef2-ZC-eYE"/>
+                        <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="hGd-Bz-Fky"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUJ-SR-8WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -739,9 +742,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SEr-t1-evM"/>
-        <segue reference="qww-74-glH"/>
-        <segue reference="GxM-Ra-Tyo"/>
-        <segue reference="ef2-ZC-eYE"/>
+        <segue reference="nu7-bb-fST"/>
+        <segue reference="bfG-fW-iGy"/>
+        <segue reference="s6S-2S-uEn"/>
+        <segue reference="KeI-Qk-QLQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Code" width="168" height="27.5"/>

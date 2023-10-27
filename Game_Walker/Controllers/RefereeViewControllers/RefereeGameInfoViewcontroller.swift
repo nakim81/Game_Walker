@@ -126,7 +126,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 15))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label
@@ -261,6 +261,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
             
             gameLocationLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gameLocationLabel1.topAnchor.constraint(equalTo: gameLocationLabel.bottomAnchor),
+            gameLocationLabel1.topAnchor.constraint(equalTo: gameLocationLabel.bottomAnchor, constant: 5.0),
             gameLocationLabel1.heightAnchor.constraint(equalTo: gameNameLabel1.widthAnchor, multiplier: 0.12),
             gameLocationLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
@@ -271,6 +272,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
             
             gamePointsLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
             gamePointsLabel1.topAnchor.constraint(equalTo: gamePointsLabel.bottomAnchor),
+            gamePointsLabel1.topAnchor.constraint(equalTo: gamePointsLabel.bottomAnchor, constant: 5.0),
             gamePointsLabel1.heightAnchor.constraint(equalTo: gamePointsLabel1.widthAnchor, multiplier: 0.12),
             gamePointsLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
