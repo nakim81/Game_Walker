@@ -353,7 +353,7 @@ class TimerViewController: BaseViewController {
                         if strongSelf.moving {
                             strongSelf.time = strongSelf.seconds
                             strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timeTypeLabel.text = "Station Time"
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
                         } else {
                             strongSelf.time = strongSelf.moveSeconds
@@ -372,7 +372,7 @@ class TimerViewController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
@@ -403,7 +403,7 @@ class TimerViewController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
@@ -413,17 +413,17 @@ class TimerViewController: BaseViewController {
         self.totalTime = t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds)"

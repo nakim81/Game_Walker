@@ -61,43 +61,6 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func announcementBtnPressed(_ sender: UIButton) {
-        // Testing Case for Resetting Time DB
-        if timer.isValid {
-            timer.invalidate()
-        }
-        Task {
-            do {
-                try await H.startGame(gameCode)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
-            }
-            do {
-                try await H.pause_resume_game(gameCode)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
-            }
-            do {
-                try await H.updatePausedTime(gameCode, 0)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
-            }
-            do {
-                try await H.updateCurrentRound(gameCode, 1)
-            } catch GameWalkerError.serverError(let text){
-                print(text)
-                serverAlert(text)
-                return
-            }
-            pauseOrPlayButton.isHidden = false
-            calculateTime()
-            pauseOrPlayButton.setImage(UIImage(named: "GameStartButton"), for: .normal)
-        }
         showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
 
@@ -348,7 +311,7 @@ class HostTimerViewController: UIViewController {
                         if strongSelf.moving {
                             strongSelf.time = strongSelf.seconds
                             strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timeTypeLabel.text = "Station Time"
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         } else {
                             strongSelf.time = strongSelf.moveSeconds
@@ -376,7 +339,7 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
                         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
@@ -407,7 +370,7 @@ class HostTimerViewController: UIViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
@@ -418,7 +381,7 @@ class HostTimerViewController: UIViewController {
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
@@ -432,12 +395,12 @@ class HostTimerViewController: UIViewController {
             }
         }
         if (moveSeconds + seconds) * self.rounds! <= t  {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds!
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds!)"

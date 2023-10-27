@@ -102,7 +102,8 @@ class RefereeTimerController: BaseViewController {
     //MARK: - UI Elements
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+        //label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+        label.translatesAutoresizingMaskIntoConstraints = false
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
@@ -159,7 +160,6 @@ class RefereeTimerController: BaseViewController {
         label.numberOfLines = 1
         return label
     }()
-    
     
     private lazy var timerCircle: UILabel = {
         var view = UILabel()
@@ -232,7 +232,7 @@ class RefereeTimerController: BaseViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-        label.text = "TOTAL TIME" + "\n" + "00:00"
+        label.text = "GAME TIME" + "\n" + "00:00"
         label.textColor = UIColor(red: 28.0 / 255.0, green: 134.0 / 255.0, blue: 11.0 / 255.0, alpha: 1.0)
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 30))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -268,9 +268,8 @@ class RefereeTimerController: BaseViewController {
         timerCircle.translatesAutoresizingMaskIntoConstraints = false
         currentStationInfoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: (self.navigationController?.navigationBar.frame.maxY)! + UIScreen.main.bounds.size.height * 0.005),
+            titleLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant:  UIScreen.main.bounds.size.height * 0.01),
             titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.55),
             titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
@@ -365,7 +364,7 @@ class RefereeTimerController: BaseViewController {
                         if strongSelf.moving {
                             strongSelf.time = strongSelf.seconds
                             strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = "Game Time"
+                            strongSelf.timeTypeLabel.text = "Station Time"
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
                         } else {
                             strongSelf.time = strongSelf.moveSeconds
@@ -384,7 +383,7 @@ class RefereeTimerController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "Total time\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
                         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
@@ -415,7 +414,7 @@ class RefereeTimerController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.time = (seconds - remainder)
             self.moving = false
             let minute = (seconds - remainder)/60
@@ -425,17 +424,17 @@ class RefereeTimerController: BaseViewController {
         self.totalTime = t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
-            self.timeTypeLabel.text = "Game Time"
+            self.timeTypeLabel.text = "Station Time"
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "Total time\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
+            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds)"
