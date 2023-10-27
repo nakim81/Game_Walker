@@ -122,7 +122,7 @@
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
-		FC633970298112EE004B02C0 /* RefereeGameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */; };
+		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
 		FCAAB3072AD3D30F0035F36A /* MainOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */; };
 		FCB1274C2AD5223000E47FF0 /* RorTOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */; };
 		FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0E2A97A04A00F4AE99 /* purple.wav */; };
@@ -251,7 +251,7 @@
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewController.swift; sourceTree = "<group>"; };
+		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
 		FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOverlayViewController.swift; sourceTree = "<group>"; };
 		FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RorTOverlayViewController.swift; sourceTree = "<group>"; };
 		FCB13E0E2A97A04A00F4AE99 /* purple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purple.wav; path = "Supporting Files/purple.wav"; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 				61C33E28299B135100A512E5 /* RefereeRankingPVPViewController.swift */,
 				61E509522988D91400F37E79 /* RefereeTableViewCell.swift */,
 				6159252529694A0600BC6D7F /* GivePointsViewController.swift */,
-				FC63396F298112EE004B02C0 /* RefereeGameInfoViewController.swift */,
+				FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */,
 				61C33E2A299B259000A512E5 /* RefereeMessageViewController.swift */,
 				61C33E2C299B25A800A512E5 /* RefereeMessageTableViewCell.swift */,
 				61C33E2E299B25BC00A512E5 /* RefereeAnnouncementController.swift */,
@@ -769,7 +769,7 @@
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
-				FC633970298112EE004B02C0 /* RefereeGameInfoViewController.swift in Sources */,
+				FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */,
 				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				616EB4742AA708C9001394E7 /* RefereeTimerViewController.swift in Sources */,
@@ -978,7 +978,6 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-
 				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
@@ -996,9 +995,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone2";
-
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-Phone1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1017,9 +1013,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-
 				DEVELOPMENT_TEAM = UG3NAUMUS7;
-
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1036,9 +1030,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joyful.GameWalker-identify";
-
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
