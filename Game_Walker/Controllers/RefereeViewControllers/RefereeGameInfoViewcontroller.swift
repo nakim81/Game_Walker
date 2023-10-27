@@ -32,7 +32,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 40))
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 40)
         return label
     }()
     
@@ -42,7 +42,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
         return label
     }()
     
@@ -52,7 +52,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
         return label
     }()
     
@@ -62,7 +62,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
         return label
     }()
     
@@ -72,7 +72,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = UIFont(name: "GemunuLibre-Semibold", size: 23)
         return label
     }()
     
@@ -84,7 +84,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -98,7 +98,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -112,7 +112,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: 17)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -126,7 +126,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label
@@ -141,7 +141,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = UIFont(name: "Dosis-Regular", size: 17)
 
         // enable
         button.setTitle(title, for: .normal)
@@ -153,7 +153,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
 
         // layer
-        button.layer.cornerRadius = 6
+        button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
 
         button.addAction(for: .touchUpInside) { _ in
@@ -161,10 +161,11 @@ class RefereeGameInfoViewcontroller: UIViewController {
         }
         buttonView.addSubview(button)
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor),
-            button.topAnchor.constraint(equalTo: buttonView.topAnchor),
-            button.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor)
+            button.leadingAnchor.constraint(equalTo: buttonView.leadingAnchor, constant: 73),
+            button.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -73),
+            button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.3),
+            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor)
         ])
     }
     
@@ -234,60 +235,74 @@ class RefereeGameInfoViewcontroller: UIViewController {
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8666666667),
-            containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6650246305),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 135),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -135),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            gameInfoLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57),
-            gameInfoLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            gameInfoLabel.heightAnchor.constraint(equalTo: gameInfoLabel.widthAnchor, multiplier: 0.232),
+            gameInfoLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 66.0),
+            gameInfoLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -66.0),
+            gameInfoLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10.0),
+            gameInfoLabel.bottomAnchor.constraint(equalTo: gameNameLabel.topAnchor, constant: 10.0),
+            gameInfoLabel.heightAnchor.constraint(equalTo: gameInfoLabel.widthAnchor, multiplier: 0.25),
             gameInfoLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameNameLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.38),
-            gameNameLabel.topAnchor.constraint(equalTo: gameInfoLabel.bottomAnchor, constant: 15.0),
-            gameNameLabel.heightAnchor.constraint(equalTo: gameNameLabel.widthAnchor, multiplier: 0.2049180328),
-            gameNameLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gameNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -190.2),
+            gameNameLabel.topAnchor.constraint(equalTo: gameInfoLabel.bottomAnchor, constant: 10.0),
+            gameNameLabel.heightAnchor.constraint(equalTo: gameNameLabel.widthAnchor, multiplier: 0.21),
+            gameNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameNameLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
-            gameNameLabel1.topAnchor.constraint(equalTo: gameNameLabel.bottomAnchor),
+            gameNameLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22),
+            gameNameLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22),
+            gameNameLabel1.topAnchor.constraint(equalTo: gameNameLabel.bottomAnchor, constant: 5.0),
             gameNameLabel1.heightAnchor.constraint(equalTo: gameNameLabel1.widthAnchor, multiplier: 0.12),
             gameNameLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameLocationLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.4492307692),
-            gameLocationLabel.topAnchor.constraint(equalTo: gameNameLabel1.bottomAnchor, constant: 12.0),
-            gameLocationLabel.heightAnchor.constraint(equalTo: gameLocationLabel.widthAnchor, multiplier: 0.1712328767),
-            gameLocationLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameLocationLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gameLocationLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -165.2),
+            gameLocationLabel.topAnchor.constraint(equalTo: gameNameLabel1.bottomAnchor, constant: 10.0),
+            gameLocationLabel.heightAnchor.constraint(equalTo: gameLocationLabel.widthAnchor, multiplier: 0.16),
+            gameLocationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameLocationLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
-            gameLocationLabel1.topAnchor.constraint(equalTo: gameLocationLabel.bottomAnchor),
+            gameLocationLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gameLocationLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22.0),
+            gameLocationLabel1.topAnchor.constraint(equalTo: gameLocationLabel.bottomAnchor, constant: 5.0),
             gameLocationLabel1.heightAnchor.constraint(equalTo: gameNameLabel1.widthAnchor, multiplier: 0.12),
-            gameLocationLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameLocationLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gamePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3938461538),
-            gamePointsLabel.topAnchor.constraint(equalTo: gameLocationLabel1.bottomAnchor, constant: 12.0),
-            gamePointsLabel.heightAnchor.constraint(equalTo: gamePointsLabel.widthAnchor, multiplier: 0.1953125),
-            gamePointsLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gamePointsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gamePointsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -181.0),
+            gamePointsLabel.topAnchor.constraint(equalTo: gameLocationLabel1.bottomAnchor, constant: 10.0),
+            gamePointsLabel.heightAnchor.constraint(equalTo: gamePointsLabel.widthAnchor, multiplier: 0.19),
+            gamePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gamePointsLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
-            gamePointsLabel1.topAnchor.constraint(equalTo: gamePointsLabel.bottomAnchor),
+            gamePointsLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gamePointsLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:  -22.0),
+            gamePointsLabel1.topAnchor.constraint(equalTo: gamePointsLabel.bottomAnchor, constant: 5.0),
             gamePointsLabel1.heightAnchor.constraint(equalTo: gamePointsLabel1.widthAnchor, multiplier: 0.12),
-            gamePointsLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gamePointsLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameRuleLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.1538461538),
-            gameRuleLabel.topAnchor.constraint(equalTo: gamePointsLabel1.bottomAnchor, constant: 12.0),
-            gameRuleLabel.heightAnchor.constraint(equalTo: gameRuleLabel.widthAnchor, multiplier: 0.5),
-            gameRuleLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameRuleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22),
+            gameRuleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -245),
+            gameRuleLabel.topAnchor.constraint(equalTo: gamePointsLabel1.bottomAnchor, constant: 10.0),
+            gameRuleLabel.heightAnchor.constraint(equalTo: gameRuleLabel.widthAnchor, multiplier: 0.4),
+            gameRuleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            gameRuleLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
-            gameRuleLabel1.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor),
+            gameRuleLabel1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 22.0),
+            gameRuleLabel1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -22.0),
+            gameRuleLabel1.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor, constant: 5.0),
             gameRuleLabel1.heightAnchor.constraint(equalTo: gameRuleLabel1.widthAnchor, multiplier: 0.25),
-            gameRuleLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameRuleLabel1.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             
-            buttonView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3876923077),
-            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.3253968254),
-            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
+            buttonView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 1.0),
+            buttonView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -1.0),
+            buttonView.topAnchor.constraint(equalTo: gameRuleLabel1.bottomAnchor, constant: 10.0),
+            buttonView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -5.0),
+            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.27),
+            buttonView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
     }
 }
