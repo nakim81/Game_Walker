@@ -64,11 +64,6 @@ class TeamViewController: UIViewController {
         return label
     }()
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        /// add method for removing HostListener
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addHostListener()
@@ -93,10 +88,17 @@ class TeamViewController: UIViewController {
             }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
+        gameOverTriggered = false
+        print(gameOverTriggered)
     }
     
     @objc func gameOver() {
-        showAwardPopUp()
+        Task {@MainActor in
+            await H.detatchHost()
+            print(H.listener)
+            NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "gameover"), object: nil)
+            showAwardPopUp()
+        }
     }
     
     private func addHostListener(){
