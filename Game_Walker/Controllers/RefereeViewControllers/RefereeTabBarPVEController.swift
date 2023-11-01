@@ -23,4 +23,3 @@ class RefereeTabBarPVEController: UITabBarController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
-
