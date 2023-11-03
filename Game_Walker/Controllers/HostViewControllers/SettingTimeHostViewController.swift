@@ -57,6 +57,22 @@ class SettingTimeHostViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let destinationVC = navigationController?.viewControllers.last as? StationsTableViewController {
+            Task { @MainActor in
+                do {
+                    try await H.completeStations(gamecode, false)
+                } catch GameWalkerError.serverError(let text){
+                    print(text)
+                    serverAlert(text)
+                    return
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
