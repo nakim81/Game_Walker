@@ -393,9 +393,9 @@ class TimerViewController: BaseViewController {
             if pausedTime != 0 {
                 t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
             }
-            else {
-                t = 0
-            }
+//            else {
+//                t = 0
+//            }
         }
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
