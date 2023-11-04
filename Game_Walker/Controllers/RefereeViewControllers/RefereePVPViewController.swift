@@ -19,7 +19,7 @@ class RefereePVPController: BaseViewController {
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
     private var host: Host = Host()
-    private var teams : [Team] = [Team(), Team()]
+    private var teams : [Team] = []
     private var station : Station = Station()
     private var stations : [Station] = [Station()]
     private var teamOrder : [Team] = [Team(), Team()]
@@ -31,6 +31,7 @@ class RefereePVPController: BaseViewController {
     private var teamB : Team = Team()
     private var algorithm : [[Int]] = []
     private var teamOrderSet : Bool = false
+    private var pvpSwitched : Bool = false
     private var isSeguePerformed : Bool = false
     private var number : Int = -1
     private var count : Int = -2
@@ -49,6 +50,7 @@ class RefereePVPController: BaseViewController {
     private var awardViewControllerPresented = false
     
     override func viewDidLoad() {
+        self.hidesBottomBarWhenPushed = false
         Task {
             stations = try await S.getStationList(gameCode)
             teams = try await T.getTeamList(gameCode)
@@ -77,11 +79,13 @@ class RefereePVPController: BaseViewController {
             }
             callProtocols()
             if host.algorithm != [] && host.teams == teams.count {
+                print("A")
                 getTeamOrder()
                 updateScore()
                 combineViews()
                 combineConstraints()
             } else {
+                print("B")
                 addSubviews()
                 addConstraints()
             }
@@ -100,6 +104,7 @@ class RefereePVPController: BaseViewController {
             for station in stationList {
                 if referee.name == station.referee?.name {
                     self.station = station
+                    self.points = station.points
                 }
                 if station.pvp == true {
                     pvp_count += 1
@@ -142,6 +147,11 @@ class RefereePVPController: BaseViewController {
             updateScore()
             modifyViews()
             newConstraints()
+//            if leftBorderView.superview != nil {
+//                print("here")
+//                modifyViews()
+//                newConstraints()
+//            }
         }
     }
     
@@ -216,7 +226,7 @@ class RefereePVPController: BaseViewController {
         view.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50)) ?? UIFont(name: "Dosis-SemiBold", size: fontSize(size: 50))
         view.textAlignment = .center
-        view.text = "Round " + "\(round)"
+        view.text = "Round 0"
         view.adjustsFontForContentSizeCategory = true
         return view
     }()
@@ -665,17 +675,17 @@ class RefereePVPController: BaseViewController {
             
             leftScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
             leftScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
-            leftScoreLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.12),
+            leftScoreLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.156),
             leftScoreLabel.topAnchor.constraint(equalTo: leftBorderView.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
             
-            leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
             leftWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.09),
+            leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.13),
             leftWinButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
             
-            leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
             leftLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            leftLoseButton.leadingAnchor.constraint(equalTo: leftWinButton.trailingAnchor, constant: UIScreen.main.bounds.size.width * 0.001),
+            leftLoseButton.leadingAnchor.constraint(equalTo: leftWinButton.trailingAnchor, constant: UIScreen.main.bounds.size.width * 0.026),
             leftLoseButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
             
             rightBorderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.10),
@@ -685,17 +695,17 @@ class RefereePVPController: BaseViewController {
             
             rightScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
             rightScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
-            rightScoreLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.12),
+            rightScoreLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.156),
             rightScoreLabel.topAnchor.constraint(equalTo: rightBorderView.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
             
-            rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
             rightWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            rightWinButton.trailingAnchor.constraint(equalTo: rightLoseButton.leadingAnchor, constant: -UIScreen.main.bounds.size.width * 0.001),
+            rightWinButton.trailingAnchor.constraint(equalTo: rightLoseButton.leadingAnchor, constant: -UIScreen.main.bounds.size.width * 0.026),
             rightWinButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
             
-            rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
             rightLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
-            rightLoseButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.09),
+            rightLoseButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.13),
             rightLoseButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001)
         ])
     }
@@ -708,34 +718,34 @@ class RefereePVPController: BaseViewController {
         rightIconButton.translatesAutoresizingMaskIntoConstraints = false
         rightTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            leftTeamNumLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.125),
+            leftTeamNumLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.153),
             leftTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
             leftTeamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
             leftTeamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
             
             leftIconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
             leftIconButton.heightAnchor.constraint(equalTo: leftIconButton.widthAnchor, multiplier: 1),
-            leftIconButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.0853),
+            leftIconButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.125),
             leftIconButton.topAnchor.constraint(equalTo: leftTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
             
-            leftTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4),
+            leftTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.37),
             leftTeamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.06),
-            leftTeamNameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.07),
+            leftTeamNameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.116),
             leftTeamNameLabel.topAnchor.constraint(equalTo: leftIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
             
-            rightTeamNumLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.125),
+            rightTeamNumLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.153),
             rightTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
             rightTeamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
             rightTeamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
             
             rightIconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
             rightIconButton.heightAnchor.constraint(equalTo: rightIconButton.widthAnchor, multiplier: 1),
-            rightIconButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.0853),
+            rightIconButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.125),
             rightIconButton.topAnchor.constraint(equalTo: rightTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
             
-            rightTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4),
+            rightTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.37),
             rightTeamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.06),
-            rightTeamNameLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.07),
+            rightTeamNameLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.116),
             rightTeamNameLabel.topAnchor.constraint(equalTo: rightIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
             
             leftScoreLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.075),
@@ -744,51 +754,96 @@ class RefereePVPController: BaseViewController {
     }
     
     func combineConstraints() {
+        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        roundLabel.translatesAutoresizingMaskIntoConstraints = false
         leftTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
         leftIconButton.translatesAutoresizingMaskIntoConstraints = false
         leftTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftScoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        leftWinButton.translatesAutoresizingMaskIntoConstraints = false
+        leftLoseButton.translatesAutoresizingMaskIntoConstraints = false
         rightTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
         rightIconButton.translatesAutoresizingMaskIntoConstraints = false
         rightTeamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightScoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightWinButton.translatesAutoresizingMaskIntoConstraints = false
+        rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            leftTeamNumLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.125),
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
+            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
+            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
+            
+            roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
+            roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
+            
+            leftTeamNumLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.152),
             leftTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
             leftTeamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
             leftTeamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
             
             leftIconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
             leftIconButton.heightAnchor.constraint(equalTo: leftIconButton.widthAnchor, multiplier: 1),
-            leftIconButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.0853),
+            leftIconButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.125),
             leftIconButton.topAnchor.constraint(equalTo: leftTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
             
-            leftTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4),
+            leftTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.37),
             leftTeamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.06),
-            leftTeamNameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.07),
+            leftTeamNameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.116),
             leftTeamNameLabel.topAnchor.constraint(equalTo: leftIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
             
-            rightTeamNumLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.125),
+            leftScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
+            leftScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
+            leftScoreLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.156),
+            leftScoreLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
+            
+            leftWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
+            leftWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            leftWinButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.13),
+            leftWinButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            leftLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
+            leftLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            leftLoseButton.leadingAnchor.constraint(equalTo: leftWinButton.trailingAnchor, constant: UIScreen.main.bounds.size.width * 0.026),
+            leftLoseButton.topAnchor.constraint(equalTo: leftScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            rightTeamNumLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.152),
             rightTeamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.04),
             rightTeamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
             rightTeamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
             
             rightIconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.36),
             rightIconButton.heightAnchor.constraint(equalTo: rightIconButton.widthAnchor, multiplier: 1),
-            rightIconButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.0853),
+            rightIconButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.125),
             rightIconButton.topAnchor.constraint(equalTo: rightTeamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.02),
             
-            rightTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4),
+            rightTeamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.37),
             rightTeamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.06),
-            rightTeamNameLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.07),
+            rightTeamNameLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.116),
             rightTeamNameLabel.topAnchor.constraint(equalTo: rightIconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
             
-            leftScoreLabel.topAnchor.constraint(equalTo: leftTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.075),
-            rightScoreLabel.topAnchor.constraint(equalTo: rightTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.075),
+            rightScoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.291),
+            rightScoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0493),
+            rightScoreLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.156),
+            rightScoreLabel.topAnchor.constraint(equalTo: rightTeamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.06),
+            
+            rightWinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
+            rightWinButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            rightWinButton.trailingAnchor.constraint(equalTo: rightLoseButton.leadingAnchor, constant: -UIScreen.main.bounds.size.width * 0.026),
+            rightWinButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001),
+            
+            rightLoseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.156),
+            rightLoseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            rightLoseButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -UIScreen.main.bounds.size.width * 0.13),
+            rightLoseButton.topAnchor.constraint(equalTo: rightScoreLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.0001)
         ])
     }
     
     //MARK: - Overlay
     @IBAction func infoButtonPressed(_ sender: Any) {
-        if self.algorithm == [] {
+        if !teamOrderSet {
             alert(title: "The board is not ready yet", message: "Please try again when it is ready")
         } else {
             showOverlay()
@@ -840,6 +895,7 @@ class RefereePVPController: BaseViewController {
                 }
             }
         }
+        roundLabel.text = "Round " + "\(self.round)"
         self.teamA = self.teamOrder[2 * self.round - 2]
         leftTeamNumLabel.text = "Team \(self.teamA.number)"
         leftIconButton.image = UIImage(named: self.teamA.iconName)
@@ -872,8 +928,9 @@ class RefereePVPController: BaseViewController {
                     self.station = station
                 }
             }
-            if !self.station.pvp {
-//                performSegue(withIdentifier: "goToPVE", sender: self)
+            if !self.station.pvp && !pvpSwitched {
+                performSegue(withIdentifier: "goToPVE", sender: self)
+                pvpSwitched = true
                 
             }
         }
@@ -908,23 +965,25 @@ extension RefereePVPController: RefereeUpdateListener, HostUpdateListener, TeamU
             rightIconButton.removeFromSuperview()
             rightTeamNameLabel.removeFromSuperview()
             addConstraints()
+        }
+        if host.gameTime + host.movingTime == 0 {
             if let tabBarController = self.tabBarController {
                 if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
                     let tabBarItem = tabBarItems[2]
                     tabBarItem.isEnabled = false
                 }
             }
-        }
-        if host.algorithm != [] {
-            self.algorithm = convert1DArrayTo2D(host.algorithm)
-            self.number = host.teams
-            roundLabel.text = "Round " + "\(host.currentRound)"
+        } else {
             if let tabBarController = self.tabBarController {
                 if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
                     let tabBarItem = tabBarItems[2]
                     tabBarItem.isEnabled = true
                 }
             }
+        }
+        if host.algorithm != [] {
+            self.algorithm = convert1DArrayTo2D(host.algorithm)
+            self.number = host.teams
         }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"

@@ -25,6 +25,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         Task {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
             configureNavItem()
             callProtocols()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
