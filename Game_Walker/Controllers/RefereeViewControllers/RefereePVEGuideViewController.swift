@@ -128,7 +128,7 @@ class RefereePVEGuideViewController : UIViewController {
             
             explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
             explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.025),
-            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.2),
+            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.3),
             explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
         ])
     }
@@ -156,18 +156,18 @@ class RefereePVEGuideViewController : UIViewController {
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.clipsToBounds = true
-            circleView.layer.cornerRadius = frameList[i].height*1.2 / 2
+            circleView.layer.cornerRadius = frameList[i].height*1.55 / 2
             circleView.layer.borderColor = colorList[i]
             circleView.layer.borderWidth = 3
             overlayView.addSubview(circleView)
             
             NSLayoutConstraint.activate([
                 explanationLbl.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 10),
+                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 17),
                 
-                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.992),
+                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.981),
                 circleView.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.25),
+                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.6),
                 circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor)
             ])
         }

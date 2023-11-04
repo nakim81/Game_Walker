@@ -23,7 +23,7 @@ class WaitingController: BaseViewController {
     private var waitingImageViewWidthConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
-        print("X")
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         configureNavItem()
         callProtocols()
         addSubviews()

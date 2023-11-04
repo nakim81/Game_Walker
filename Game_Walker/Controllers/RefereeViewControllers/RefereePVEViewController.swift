@@ -19,6 +19,7 @@ class RefereePVEController: BaseViewController {
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
     private var isSeguePerformed : Bool = false
+    private var pvpSwitched : Bool = false
     private var host: Host = Host()
     private var team : Team = Team()
     private var teams : [Team] = []
@@ -56,14 +57,11 @@ class RefereePVEController: BaseViewController {
                 loseButton.image = UIImage(named: "Lose Yellow Button")
             }
             callProtocols()
-            // Host needs to fix the code, so that confirmCreated will be updated when algorithm made.
-            if host.confirmCreated && count == number {
+            if host.algorithm != [] && host.teams == teams.count {
                 getTeamOrder()
                 updateScore()
-                addSubviews()
-                addConstraints()
-                modifyViews()
-                newConstraints()
+                combineSubviews()
+                combineConstraints()
             } else {
                 addSubviews()
                 addConstraints()
@@ -83,6 +81,7 @@ class RefereePVEController: BaseViewController {
             for station in stationList {
                 if referee.name == station.referee?.name {
                     self.station = station
+                    self.points = station.points
                 }
                 if station.pvp == true {
                     pvp_count += 1
@@ -122,14 +121,8 @@ class RefereePVEController: BaseViewController {
                 serverAlert(message)
                 return
             }
-            // How in the world do we fix this...make them all async?
-            try await Task.sleep(nanoseconds: 30000000)
-            getTeamOrder()
-            try await Task.sleep(nanoseconds: 30000000)
             updateScore()
-            try await Task.sleep(nanoseconds: 30000000)
             modifyViews()
-            try await Task.sleep(nanoseconds: 30000000)
             newConstraints()
         }
     }
@@ -171,7 +164,6 @@ class RefereePVEController: BaseViewController {
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        // Testing code for resetting max variable
         
     }
     
@@ -188,7 +180,11 @@ class RefereePVEController: BaseViewController {
     
 //MARK: - Overlay
     @IBAction func infoBtnPressed(_ sender: Any) {
-        showOverlay()
+        if !teamOrderSet {
+            alert(title: "The board is not ready yet", message: "Please try again when it is ready")
+        } else {
+            showOverlay()
+        }
     }
     
     private func showOverlay() {
@@ -448,6 +444,17 @@ class RefereePVEController: BaseViewController {
         self.view.addSubview(loseButton)
     }
     
+    func combineSubviews() {
+        self.view.addSubview(gameCodeLabel)
+        self.view.addSubview(roundLabel)
+        self.view.addSubview(teamNumLabel)
+        self.view.addSubview(iconButton)
+        self.view.addSubview(teamNameLabel)
+        self.view.addSubview(scoreLabel)
+        self.view.addSubview(winButton)
+        self.view.addSubview(loseButton)
+    }
+    
     func addConstraints() {
         gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -507,8 +514,60 @@ class RefereePVEController: BaseViewController {
             teamNameLabel.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
             teamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.492),
             teamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
-            
+        
             scoreLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+        ])
+    }
+    
+    func combineConstraints() {
+        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        roundLabel.translatesAutoresizingMaskIntoConstraints = false
+        teamNumLabel.translatesAutoresizingMaskIntoConstraints = false
+        iconButton.translatesAutoresizingMaskIntoConstraints = false
+        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        winButton.translatesAutoresizingMaskIntoConstraints = false
+        loseButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
+            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
+            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
+            
+            roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
+            roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
+            
+            teamNumLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            teamNumLabel.topAnchor.constraint(equalTo: roundLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.01),
+            teamNumLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.295),
+            teamNumLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.045),
+
+            iconButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            iconButton.topAnchor.constraint(equalTo: teamNumLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.03),
+            iconButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+            iconButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.467),
+
+            teamNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            teamNameLabel.topAnchor.constraint(equalTo: iconButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.005),
+            teamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.492),
+            teamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.12),
+            
+            scoreLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.370),
+            scoreLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0604),
+            scoreLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            scoreLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            
+            winButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            winButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            winButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: UIScreen.main.bounds.size.width * 0.315),
+            winButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5),
+            
+            loseButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.176),
+            loseButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.032),
+            loseButton.leadingAnchor.constraint(equalTo: winButton.trailingAnchor, constant: 5),
+            loseButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 5)
         ])
     }
     
@@ -524,7 +583,11 @@ class RefereePVEController: BaseViewController {
                 }
             }
         }
+        roundLabel.text = "Round " + "\(self.round)"
         self.team = self.teamOrder[self.round - 1]
+        teamNumLabel.text = "Team \(self.team.number)"
+        iconButton.image = UIImage(named: self.team.iconName)
+        teamNameLabel.text = "Team name is" + "\n" + "\(self.team.name)"
         scoreLabel.text = "\(self.team.points)"
     }
     
@@ -538,6 +601,7 @@ class RefereePVEController: BaseViewController {
             }
         }
     }
+    
     //MARK: - find Station
     func findStation() {
         Task { @MainActor in
@@ -547,8 +611,9 @@ class RefereePVEController: BaseViewController {
                     self.station = station
                 }
             }
-            if self.station.pvp {
-//                performSegue(withIdentifier: "goToPVP", sender: self)
+            if self.station.pvp && !pvpSwitched {
+                performSegue(withIdentifier: "goToPVP", sender: self)
+                pvpSwitched = true
             }
         }
     }
@@ -571,13 +636,6 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
         }
         if host.confirmStations {
             findStation()
-            roundLabel.text = "Round " + "\(host.currentRound)"
-            if let tabBarController = self.tabBarController {
-                if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
-                    let tabBarItem = tabBarItems[2]
-                    tabBarItem.isEnabled = true
-                }
-            }
         } else {
             self.view.addSubview(borderView)
             roundLabel.text = "Round 0"
@@ -585,17 +643,26 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
             iconButton.removeFromSuperview()
             teamNameLabel.removeFromSuperview()
             addConstraints()
+        }
+        if host.gameTime + host.movingTime == 0 {
             if let tabBarController = self.tabBarController {
                 if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
                     let tabBarItem = tabBarItems[2]
                     tabBarItem.isEnabled = false
                 }
             }
+        } else {
+            if let tabBarController = self.tabBarController {
+                if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
+                    let tabBarItem = tabBarItems[2]
+                    tabBarItem.isEnabled = true
+                }
+            }
         }
-        // switch to ConfirmCreated when host implements.
         if host.algorithm != [] {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
+            
         }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
@@ -620,7 +687,6 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
     
     func updateTeams(_ teams: [Team]) {
         count = teams.count
-        //setTeamOrder should be called only, only once.
         if teams.count == self.number && !teamOrderSet {
             teamOrderSet = true
             setTeamOrder()
