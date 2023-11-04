@@ -1280,7 +1280,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
 //                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: true )
-                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: false )
+                let hostupdate = Host(gamecode: host!.gamecode, confirmStations: true, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: false )
                 H.updateHost(gamecode, hostupdate)
                 print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
             }

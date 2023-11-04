@@ -19,6 +19,7 @@ class RefereePVEController: BaseViewController {
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
     private var isSeguePerformed : Bool = false
+    private var pvpSwitched : Bool = false
     private var host: Host = Host()
     private var team : Team = Team()
     private var teams : [Team] = []
@@ -57,13 +58,11 @@ class RefereePVEController: BaseViewController {
             }
             callProtocols()
             if host.algorithm != [] && host.teams == teams.count {
-                print("A")
                 getTeamOrder()
                 updateScore()
                 combineSubviews()
                 combineConstraints()
             } else {
-                print("B")
                 addSubviews()
                 addConstraints()
             }
@@ -181,7 +180,7 @@ class RefereePVEController: BaseViewController {
     
 //MARK: - Overlay
     @IBAction func infoBtnPressed(_ sender: Any) {
-        if self.algorithm == [] {
+        if !teamOrderSet {
             alert(title: "The board is not ready yet", message: "Please try again when it is ready")
         } else {
             showOverlay()
@@ -584,6 +583,7 @@ class RefereePVEController: BaseViewController {
                 }
             }
         }
+        roundLabel.text = "Round " + "\(self.round)"
         self.team = self.teamOrder[self.round - 1]
         teamNumLabel.text = "Team \(self.team.number)"
         iconButton.image = UIImage(named: self.team.iconName)
@@ -611,8 +611,9 @@ class RefereePVEController: BaseViewController {
                     self.station = station
                 }
             }
-            if self.station.pvp {
-//                performSegue(withIdentifier: "goToPVP", sender: self)
+            if self.station.pvp && !pvpSwitched {
+                performSegue(withIdentifier: "goToPVP", sender: self)
+                pvpSwitched = true
             }
         }
     }
@@ -642,23 +643,26 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
             iconButton.removeFromSuperview()
             teamNameLabel.removeFromSuperview()
             addConstraints()
+        }
+        if host.gameTime + host.movingTime == 0 {
             if let tabBarController = self.tabBarController {
                 if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
                     let tabBarItem = tabBarItems[2]
                     tabBarItem.isEnabled = false
                 }
             }
-        }
-        if host.algorithm != [] {
-            self.algorithm = convert1DArrayTo2D(host.algorithm)
-            self.number = host.teams
-//            roundLabel.text = "Round " + "\(host.currentRound)"
+        } else {
             if let tabBarController = self.tabBarController {
                 if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(2) {
                     let tabBarItem = tabBarItems[2]
                     tabBarItem.isEnabled = true
                 }
             }
+        }
+        if host.algorithm != [] {
+            self.algorithm = convert1DArrayTo2D(host.algorithm)
+            self.number = host.teams
+            
         }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"

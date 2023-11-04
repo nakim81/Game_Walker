@@ -195,7 +195,7 @@ class RefereePVPGuideViewController : UIViewController {
             
             buttonLabel.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.8),
             buttonLabel.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.045),
-            buttonLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: self.view.bounds.height * 0.265),
+            buttonLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: self.view.bounds.height * 0.230),
             buttonLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             
             explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
