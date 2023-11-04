@@ -199,7 +199,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CS-DM-8s8">
-                                <rect key="frame" x="30.5" y="47" width="84" height="47.5"/>
+                                <rect key="frame" x="30.5" y="44.5" width="84" height="45"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="LEAVE"/>
                                 <connections>
@@ -207,10 +207,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20d-g9-9OT">
-                                <rect key="frame" x="266" y="50" width="112.5" height="42"/>
+                                <rect key="frame" x="266" y="47" width="112.5" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mc7-mG-0yL">
-                                        <rect key="frame" x="4" y="0.0" width="37" height="42"/>
+                                        <rect key="frame" x="4" y="0.0" width="37" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
                                         <connections>
@@ -218,7 +218,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZF-x4-wLh">
-                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="42"/>
+                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                         <connections>
@@ -226,7 +226,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCC-9k-IBy">
-                                        <rect key="frame" x="71.5" y="0.0" width="37" height="42"/>
+                                        <rect key="frame" x="71.5" y="0.0" width="37" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -273,7 +273,7 @@
                         <outlet property="settingsButton" destination="VCC-9k-IBy" id="cWd-VS-Aut"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="KeI-Qk-QLQ"/>
                         <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="aOb-L3-ExC"/>
-                        <segue destination="Hmo-3x-snH" kind="show" identifier="goToPVP" id="RBA-f6-fe4"/>
+                        <segue destination="R55-PH-MbY" kind="show" identifier="goToPVP" id="fyi-xk-pLj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42f-rM-rtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -476,7 +476,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36t-aj-G8Y">
-                                <rect key="frame" x="30.5" y="47" width="84" height="47.5"/>
+                                <rect key="frame" x="30.5" y="44.5" width="84" height="45"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="LEAVE"/>
                                 <connections>
@@ -484,10 +484,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbt-yo-h6K">
-                                <rect key="frame" x="266" y="50" width="112.5" height="42"/>
+                                <rect key="frame" x="266" y="47" width="112.5" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7I-nf-wXK">
-                                        <rect key="frame" x="4" y="0.0" width="37" height="42"/>
+                                        <rect key="frame" x="4" y="0.0" width="37" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
                                         <connections>
@@ -496,7 +496,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zg-Mj-YQM">
-                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="42"/>
+                                        <rect key="frame" x="37.5" y="0.0" width="37.5" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
                                         <connections>
@@ -505,7 +505,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ury-Rb-uWQ">
-                                        <rect key="frame" x="71.5" y="0.0" width="37" height="42"/>
+                                        <rect key="frame" x="71.5" y="0.0" width="37" height="40"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
                                         <connections>
@@ -553,7 +553,7 @@
                         <outlet property="settingsButton" destination="Ury-Rb-uWQ" id="6Ha-vB-2QQ"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="ef2-ZC-eYE"/>
                         <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="hGd-Bz-Fky"/>
-                        <segue destination="Zoa-T9-beL" kind="show" identifier="goToPVE" id="FaV-qM-39m"/>
+                        <segue destination="4eu-zS-s9n" kind="show" identifier="goToPVE" id="BFP-JJ-wUU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUJ-SR-8WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -727,10 +727,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RBA-f6-fe4"/>
-        <segue reference="SEr-t1-evM"/>
-        <segue reference="FaV-qM-39m"/>
-        <segue reference="nu7-bb-fST"/>
+        <segue reference="fyi-xk-pLj"/>
+        <segue reference="BFP-JJ-wUU"/>
         <segue reference="hGd-Bz-Fky"/>
         <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
