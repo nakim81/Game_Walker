@@ -14,7 +14,7 @@ class UserData {
     }
     
     static func isStandardStyle() -> Bool {
-        return UserDefaults.standard.bool(forKey: "standardstylese")
+        return UserDefaults.standard.bool(forKey: "standardstyle")
     }
     
     static func confirmHost(_ confirmed: Bool) {
