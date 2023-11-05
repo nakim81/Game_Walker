@@ -55,7 +55,7 @@ class HostTimerViewController: UIViewController {
             callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
-            configureTimerLabel()
+            //configureTimerLabel()
             configureGamecodeLabel()
         }
     }
