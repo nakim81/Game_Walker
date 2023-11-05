@@ -54,6 +54,15 @@ class HostGameCodeViewController: BaseViewController {
                 Task { @MainActor in
                     do {
                         let hostTemp = try await H.getHost(userGamecodeInput)
+                        let isStandard = hostTemp?.standardStyle ?? true
+                        
+                        if !isStandard {
+                            UserData.writeGamecode(userGamecodeInput, "gamecode")
+                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            return
+                        }
+                        
                         if !(hostTemp?.confirmCreated ?? true) {
                             UserData.writeGamecode(userGamecodeInput, "gamecode")
                             H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
@@ -82,7 +91,14 @@ class HostGameCodeViewController: BaseViewController {
                 Task { @MainActor in
                     do {
                         let hostTemp = try await H.getHost(gamecode!)
+                        let isStandard = hostTemp?.standardStyle ?? true
                         
+                        if !isStandard {
+                            UserData.writeGamecode(userGamecodeInput, "gamecode")
+                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            return
+                        }
                         if !(hostTemp?.confirmCreated ?? true) {
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
                         } else {
