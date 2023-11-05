@@ -97,63 +97,80 @@ class CreateTeamViewController: BaseViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        
-        guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
-            alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
-            return
-        }
-        guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
-            alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
-            return
-        }
-        Task { @MainActor in
-            do {
-                self.host = try await H.getHost(gameCode)
-                self.stationList = try await S.getStationList(gameCode)
-            } catch(let e) {
-                print(e)
-                alert(title: "Connection Error", message: e.localizedDescription)
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+            
+            guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
+                alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
                 return
             }
-        }
-        //H.getHost(gameCode)
-        if Int(teamNumber) ?? 0 > 0 {
-            guard let temp = self.host?.algorithm else { return }
-            let algorithm = convert1DArrayTo2D(temp)
-            print(algorithm)
-            if !(algorithm.isEmpty ) {
-                teamNameTextField.resignFirstResponder()
-                guard let selectedIconName = selectedIconName else {
-                    alert(title: "No Icon Selected", message: "Please select a team icon")
-                    return
-                }
-                ///find the order of stations for player's team
-                let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
-                print("stationorder: \(stationOrder)")
-                let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
-                UserData.writeTeam(newTeam, "team")
-                guard let standardStyle = self.host?.standardStyle else {return}
-                UserData.setStandardStyle(standardStyle)
-                Task { @MainActor in
-                    do {
-                        try await T.addTeam(gameCode, newTeam)
-                        performSegue(withIdentifier: "goToTPF4", sender: self)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
+            guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
+                alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
+                return
+            }
+            Task { @MainActor in
+                do {
+                    self.host = try await H.getHost(gameCode)
+                    self.stationList = try await S.getStationList(gameCode)
+                    guard let standardStyle = self.host?.standardStyle else {return}
+                    guard let selectedIconName = selectedIconName else {
+                        alert(title: "No Icon Selected", message: "Please select a team icon")
                         return
                     }
+                    
+                    if Int(teamNumber) ?? 0 > 0 {
+                        if standardStyle {
+                            guard let temp = self.host?.algorithm else { return }
+                            let algorithm = convert1DArrayTo2D(temp)
+                            print(algorithm)
+                            if !(algorithm.isEmpty ) {
+                                teamNameTextField.resignFirstResponder()
+                                
+                                ///find the order of stations for player's team
+                                let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
+                                print("stationorder: \(stationOrder)")
+                                let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
+                                UserData.writeTeam(newTeam, "team")
+                                UserData.setStandardStyle(standardStyle)
+                                Task { @MainActor in
+                                    do {
+                                        try await T.addTeam(gameCode, newTeam)
+                                        performSegue(withIdentifier: "goToTPF4", sender: self)
+                                    } catch GameWalkerError.serverError(let text){
+                                        print(text)
+                                        serverAlert(text)
+                                        return
+                                    }
+                                }
+                            } else {
+                                alert(title: "", message: "The game has not started yet. Please try few minutes later!")
+                                return
+                            }
+                        } else {
+                            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: [], iconName: selectedIconName)
+                            UserData.writeTeam(newTeam, "team")
+                            UserData.setStandardStyle(standardStyle)
+                            Task { @MainActor in
+                                do {
+                                    try await T.addTeam(gameCode, newTeam)
+                                    performSegue(withIdentifier: "goToTPF4", sender: self)
+                                } catch GameWalkerError.serverError(let text){
+                                    print(text)
+                                    serverAlert(text)
+                                    return
+                                }
+                            }
+                        }
+                    } else {
+                        alert(title: "Team Number Error", message: "Team number should be greater than 0!")
+                        return
+                    }
+                } catch(let e) {
+                    print(e)
+                    alert(title: "Connection Error", message: e.localizedDescription)
+                    return
                 }
-            } else {
-                alert(title: "", message: "The game has not started yet. Please try few minutes later!")
-                return
             }
-        } else {
-            alert(title: "Team Number Error", message: "Team number should be greater than 0!")
-            return
         }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tabBarController = segue.destination as? PlayerTabBarController {
