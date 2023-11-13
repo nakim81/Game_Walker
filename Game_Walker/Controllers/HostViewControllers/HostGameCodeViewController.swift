@@ -27,6 +27,7 @@ class HostGameCodeViewController: BaseViewController {
 //        H.delegate_getHost = self
 
         gameCodeInput.placeholder = storedgamecode
+        configureSimpleNavBar()
     }
     
     func setGameCode() {

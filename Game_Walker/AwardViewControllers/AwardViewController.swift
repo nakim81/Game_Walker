@@ -277,11 +277,10 @@ class AwardViewController: UIViewController {
         return view
     }()
     
-    private lazy var homeBtn: UIButton = {
-        let button = UIButton(type: .system)
+    private let homeBtn: UIButton = {
+        let button = UIButton()
         button.setImage(UIImage(named: "homeBtn"), for: .normal)
         button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
-        button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -301,6 +300,10 @@ class AwardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -440,11 +443,8 @@ class AwardViewController: UIViewController {
     }
     
     @objc func callMainVC() {
-        audioPlayerManager.stop()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let storyboardViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            self.navigationController?.pushViewController(storyboardViewController, animated: true)
-        }
+//        audioPlayerManager.stop()
+        self.navigationController?.popToMainViewController(animated: true)
     }
     
     init() {
@@ -477,3 +477,13 @@ extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
 }
+extension UINavigationController {
+    func popToMainViewController(animated: Bool) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
+           let mainViewController = rootController.viewControllers.first(where: { $0 is MainViewController }) {
+            popToViewController(mainViewController, animated: animated)
+        }
+    }
+}
+

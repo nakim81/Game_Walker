@@ -47,24 +47,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JjS-oM-0t8">
-                                <rect key="frame" x="53.666666666666657" y="151.00000000000003" width="321" height="430.66666666666674"/>
+                                <rect key="frame" x="53.666666666666657" y="143.00000000000003" width="321" height="407.66666666666674"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lM5-Jl-jSM">
-                                        <rect key="frame" x="0.0" y="0.0" width="321" height="211.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="321" height="199.66666666666666"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-L2-JQI">
-                                                <rect key="frame" x="70.333333333333343" y="7.6666666666666572" width="180" height="48.333333333333336"/>
+                                                <rect key="frame" x="70.333333333333343" y="7" width="180" height="46"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="gamecode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0T-xa-Ha7">
-                                                <rect key="frame" x="34.333333333333343" y="56" width="252.00000000000003" height="89"/>
+                                                <rect key="frame" x="34.333333333333343" y="53" width="252.00000000000003" height="84"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM6-Pv-lZC">
-                                                <rect key="frame" x="34.333333333333343" y="153" width="252.00000000000003" height="17"/>
+                                                <rect key="frame" x="34.333333333333343" y="145" width="252.00000000000003" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="VRd-iw-1M3"/>
                                                 </constraints>
@@ -89,16 +89,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-Nf-STL">
-                                        <rect key="frame" x="0.0" y="219.33333333333331" width="321" height="211.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="207.66666666666669" width="321" height="200"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCH-oc-Jk3">
-                                                <rect key="frame" x="70.333333333333343" y="39" width="180" height="48.666666666666657"/>
+                                                <rect key="frame" x="70.333333333333343" y="37" width="180" height="46"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHB-dB-ukm">
-                                                <rect key="frame" x="34.333333333333343" y="87.666666666666686" width="252.00000000000003" height="88.666666666666686"/>
+                                                <rect key="frame" x="34.333333333333343" y="83" width="252.00000000000003" height="84"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -124,7 +124,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-xD-iG8">
-                                <rect key="frame" x="124" y="714.33333333333337" width="180" height="64.333333333333371"/>
+                                <rect key="frame" x="124" y="676.33333333333337" width="180" height="60.666666666666629"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="JOIN">
@@ -174,7 +174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktk-W4-AgV">
-                                <rect key="frame" x="88" y="230.66666666666666" width="252" height="88.333333333333343"/>
+                                <rect key="frame" x="88" y="232.99999999999997" width="252" height="83.666666666666657"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Create Team">
@@ -185,7 +185,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX2-Lc-Buy">
-                                <rect key="frame" x="88" y="455" width="252" height="88.333333333333371"/>
+                                <rect key="frame" x="88" y="430.66666666666669" width="252" height="83.666666666666686"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Join Team">
@@ -209,7 +209,9 @@
                             <constraint firstItem="JX2-Lc-Buy" firstAttribute="centerY" secondItem="jjs-iK-Gsc" secondAttribute="centerY" multiplier="1.09" id="lhp-qB-1SL"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="3os-qE-uhh"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="creatTeamButton" destination="ktk-W4-AgV" id="Goi-Co-Ghr"/>
                         <outlet property="joinTeamButton" destination="JX2-Lc-Buy" id="dql-d5-uTk"/>
@@ -231,35 +233,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-IQ-mef">
-                                <rect key="frame" x="141.33333333333331" y="123.66666666666667" width="145.33333333333331" height="45.666666666666671"/>
+                                <rect key="frame" x="141.33333333333331" y="116.99999999999999" width="145.33333333333331" height="43.333333333333329"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="my team name is..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eq1-L3-5lr">
-                                <rect key="frame" x="86.666666666666671" y="169.33333333333334" width="254.66666666666663" height="59.666666666666657"/>
+                                <rect key="frame" x="86.666666666666671" y="160.33333333333334" width="254.66666666666663" height="56.333333333333343"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-Ph-z0G">
-                                <rect key="frame" x="128.33333333333331" y="284" width="171.33333333333331" height="45.666666666666686"/>
+                                <rect key="frame" x="128.33333333333331" y="271.66666666666669" width="171.33333333333331" height="43.333333333333314"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="my team number is..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-VR-hmI">
-                                <rect key="frame" x="86.666666666666671" y="329.66666666666669" width="254.66666666666663" height="59.666666666666686"/>
+                                <rect key="frame" x="86.666666666666671" y="315" width="254.66666666666663" height="56.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team Icon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-AO-KSw">
-                                <rect key="frame" x="51.333333333333343" y="434.33333333333331" width="325.33333333333326" height="42"/>
+                                <rect key="frame" x="51.333333333333343" y="416.33333333333331" width="325.33333333333326" height="40"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
-                                <rect key="frame" x="124" y="714.33333333333337" width="180" height="64.333333333333371"/>
+                                <rect key="frame" x="124" y="676.33333333333337" width="180" height="60.666666666666629"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Create Team"/>
@@ -268,7 +270,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aTU-Td-471">
-                                <rect key="frame" x="51.333333333333343" y="496.33333333333326" width="325.33333333333326" height="188"/>
+                                <rect key="frame" x="51.333333333333343" y="476.33333333333326" width="325.33333333333326" height="170"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="7Kk-TS-KKy">
                                     <size key="itemSize" width="128" height="128"/>
@@ -346,13 +348,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpC-kJ-vii">
-                                <rect key="frame" x="52" y="123.66666666666667" width="324" height="45.666666666666671"/>
+                                <rect key="frame" x="52" y="116.99999999999999" width="324" height="43.333333333333329"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n1b-ak-Lxf">
-                                <rect key="frame" x="52" y="179.33333333333337" width="324" height="485"/>
+                                <rect key="frame" x="52" y="170.33333333333337" width="324" height="456"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="21Y-fg-sN0">
                                     <size key="itemSize" width="128" height="128"/>
@@ -372,7 +374,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Kg-HhG">
-                                <rect key="frame" x="124" y="714.33333333333337" width="180" height="64.333333333333371"/>
+                                <rect key="frame" x="124" y="676.33333333333337" width="180" height="60.666666666666629"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Join Team">
@@ -424,9 +426,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Zkt-o5-gfj" kind="relationship" relationship="viewControllers" id="SK3-kU-CHz"/>
-                        <segue destination="dWY-v4-76s" kind="relationship" relationship="viewControllers" id="jbX-Ju-2oG"/>
-                        <segue destination="ynI-iC-04s" kind="relationship" relationship="viewControllers" id="66t-13-a5H"/>
+                        <segue destination="GKs-N4-Ir3" kind="relationship" relationship="viewControllers" id="SK3-kU-CHz"/>
+                        <segue destination="IXb-Wv-YsN" kind="relationship" relationship="viewControllers" id="jbX-Ju-2oG"/>
+                        <segue destination="dlm-ML-1zU" kind="relationship" relationship="viewControllers" id="66t-13-a5H"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63w-Rt-jrl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -441,121 +443,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdP-DM-uNL">
-                                <rect key="frame" x="30.666666666666671" y="46" width="60" height="46.666666666666657"/>
-                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="25"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Leave">
-                                    <color key="titleColor" red="1" green="0.047058823529411764" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="leaveButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="boj-GC-Hvf"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfz-mn-NZG">
-                                <rect key="frame" x="280" y="48.666666666666657" width="116.33333333333331" height="41.333333333333343"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lid-SL-9zU">
-                                        <rect key="frame" x="39" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
-                                        <connections>
-                                            <action selector="announcementButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="TYh-bJ-LOP"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaC-ZZ-TQ6">
-                                        <rect key="frame" x="74" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
-                                        <connections>
-                                            <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="Z2H-Al-VJe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvF-xV-6b0">
-                                        <rect key="frame" x="4" y="0.0" width="38.333333333333336" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
-                                        <connections>
-                                            <action selector="infoButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="O2d-vS-fSw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="lid-SL-9zU" firstAttribute="height" secondItem="Pfz-mn-NZG" secondAttribute="height" id="BGG-CD-C21"/>
-                                    <constraint firstItem="uvF-xV-6b0" firstAttribute="height" secondItem="Pfz-mn-NZG" secondAttribute="height" id="CIZ-cB-AUH"/>
-                                    <constraint firstItem="lid-SL-9zU" firstAttribute="centerX" secondItem="Pfz-mn-NZG" secondAttribute="centerX" id="OJr-vT-yUk"/>
-                                    <constraint firstItem="uvF-xV-6b0" firstAttribute="centerX" secondItem="Pfz-mn-NZG" secondAttribute="centerX" multiplier="0.4" id="QOG-qg-Wfq"/>
-                                    <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="width" secondItem="Pfz-mn-NZG" secondAttribute="width" multiplier="0.33" id="TFA-77-jo6"/>
-                                    <constraint firstItem="uvF-xV-6b0" firstAttribute="width" secondItem="Pfz-mn-NZG" secondAttribute="width" multiplier="0.33" id="aaX-5E-7Zy"/>
-                                    <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="height" secondItem="Pfz-mn-NZG" secondAttribute="height" id="bqS-JK-sx1"/>
-                                    <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="centerX" secondItem="Pfz-mn-NZG" secondAttribute="centerX" multiplier="1.6" id="kad-7t-swb"/>
-                                    <constraint firstItem="lid-SL-9zU" firstAttribute="width" secondItem="Pfz-mn-NZG" secondAttribute="width" multiplier="0.33" id="t1t-GU-fXM"/>
-                                    <constraint firstItem="lid-SL-9zU" firstAttribute="centerY" secondItem="Pfz-mn-NZG" secondAttribute="centerY" id="vZJ-yH-42g"/>
-                                    <constraint firstItem="oaC-ZZ-TQ6" firstAttribute="centerY" secondItem="Pfz-mn-NZG" secondAttribute="centerY" id="y9N-ns-M14"/>
-                                    <constraint firstItem="uvF-xV-6b0" firstAttribute="centerY" secondItem="Pfz-mn-NZG" secondAttribute="centerY" id="yEQ-L8-bff"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTv-HE-hya">
-                                <rect key="frame" x="30.666666666666657" y="112.66666666666669" width="366.66666666666674" height="44"/>
+                                <rect key="frame" x="34.333333333333343" y="105" width="359.33333333333326" height="39"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-sP-dTp">
-                                <rect key="frame" x="30.666666666666657" y="159.66666666666666" width="366.66666666666674" height="39.666666666666657"/>
+                                <rect key="frame" x="34.333333333333343" y="147" width="359.33333333333326" height="35.333333333333343"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vrd-Ze-eKQ">
-                                <rect key="frame" x="30.666666666666657" y="204.33333333333331" width="366.66666666666674" height="647.66666666666674"/>
+                                <rect key="frame" x="34.333333333333343" y="187.33333333333331" width="359.33333333333326" height="625.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb8-ib-KpQ">
+                                <rect key="frame" x="1" y="-34" width="1" height="1"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <segue destination="qHC-gW-Vfc" kind="unwind" identifier="unwindToCorJ" unwindAction="unwindToCorJ:" id="Og5-B5-aAt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ojk-Pl-An6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ojk-Pl-An6" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" constant="30.670000000000002" id="2Tr-o4-xoD"/>
-                            <constraint firstItem="qdP-DM-uNL" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.140187" id="AFU-hd-rmF"/>
-                            <constraint firstItem="Pfz-mn-NZG" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" multiplier="1.58" id="AuQ-hu-Rl6"/>
-                            <constraint firstItem="Pfz-mn-NZG" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.272" id="DE9-8x-3VR"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.2815" id="0Kt-7a-HPL"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="width" secondItem="ojk-Pl-An6" secondAttribute="width" multiplier="0.84" id="1WF-Ov-djC"/>
                             <constraint firstItem="vx8-sP-dTp" firstAttribute="top" secondItem="oTv-HE-hya" secondAttribute="bottom" constant="3" id="F4n-UV-Y3Q"/>
-                            <constraint firstItem="Pfz-mn-NZG" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="FNZ-PN-dnp"/>
-                            <constraint firstItem="vx8-sP-dTp" firstAttribute="leading" secondItem="oTv-HE-hya" secondAttribute="leading" id="GWq-lq-1UW"/>
                             <constraint firstItem="vx8-sP-dTp" firstAttribute="height" secondItem="oTv-HE-hya" secondAttribute="height" multiplier="0.9" id="HaG-0L-npF"/>
                             <constraint firstItem="ojk-Pl-An6" firstAttribute="bottom" secondItem="vrd-Ze-eKQ" secondAttribute="bottom" constant="15" id="Hig-X9-H5T"/>
+                            <constraint firstItem="Tb8-ib-KpQ" firstAttribute="width" secondItem="32a-A9-NYs" secondAttribute="width" multiplier="0.00233645" id="Hxn-hG-Umv"/>
                             <constraint firstItem="vrd-Ze-eKQ" firstAttribute="top" secondItem="vx8-sP-dTp" secondAttribute="bottom" constant="5" id="JHR-d0-CAO"/>
                             <constraint firstItem="oTv-HE-hya" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" id="Mh6-bf-Sil"/>
+                            <constraint firstItem="oTv-HE-hya" firstAttribute="leading" secondItem="vrd-Ze-eKQ" secondAttribute="leading" id="NpF-Te-MUw"/>
                             <constraint firstItem="oTv-HE-hya" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0507497" id="S7n-Af-YV6"/>
-                            <constraint firstItem="Pfz-mn-NZG" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0475" id="WwQ-YD-q2P"/>
-                            <constraint firstItem="qdP-DM-uNL" firstAttribute="centerY" secondItem="ojk-Pl-An6" secondAttribute="centerY" multiplier="0.16" id="ZwR-9C-rKf"/>
-                            <constraint firstItem="qdP-DM-uNL" firstAttribute="height" secondItem="ojk-Pl-An6" secondAttribute="height" multiplier="0.0537" id="ak0-Nc-oww"/>
-                            <constraint firstItem="oTv-HE-hya" firstAttribute="top" secondItem="qdP-DM-uNL" secondAttribute="bottom" constant="20" id="eT1-QV-Zap"/>
+                            <constraint firstItem="Tb8-ib-KpQ" firstAttribute="leading" secondItem="ojk-Pl-An6" secondAttribute="leading" constant="1" id="WSL-6J-DYv"/>
+                            <constraint firstItem="ojk-Pl-An6" firstAttribute="top" secondItem="Tb8-ib-KpQ" secondAttribute="top" constant="90" id="ZRj-AM-WJ9"/>
                             <constraint firstItem="vx8-sP-dTp" firstAttribute="trailing" secondItem="vrd-Ze-eKQ" secondAttribute="trailing" id="efi-Pw-jEf"/>
-                            <constraint firstItem="oTv-HE-hya" firstAttribute="leading" secondItem="qdP-DM-uNL" secondAttribute="leading" id="hT4-FL-g5k"/>
-                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="leading" secondItem="qdP-DM-uNL" secondAttribute="leading" id="ice-tj-miD"/>
-                            <constraint firstItem="qdP-DM-uNL" firstAttribute="leading" secondItem="ojk-Pl-An6" secondAttribute="leading" constant="30.670000000000002" id="vyK-9y-ysw"/>
+                            <constraint firstItem="vx8-sP-dTp" firstAttribute="leading" secondItem="vrd-Ze-eKQ" secondAttribute="leading" id="hbx-Mu-xae"/>
+                            <constraint firstItem="vrd-Ze-eKQ" firstAttribute="centerX" secondItem="ojk-Pl-An6" secondAttribute="centerX" id="sxl-zb-M53"/>
+                            <constraint firstItem="Tb8-ib-KpQ" firstAttribute="height" secondItem="32a-A9-NYs" secondAttribute="height" multiplier="0.00107991" id="y48-t2-NcI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="hC8-lC-I9C"/>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="6mo-hl-SSu"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="announcementButton" destination="lid-SL-9zU" id="Az5-G6-dKN"/>
-                        <outlet property="infoButton" destination="uvF-xV-6b0" id="bmc-LO-7HY"/>
-                        <outlet property="leaveButton" destination="qdP-DM-uNL" id="DXO-uU-QqS"/>
-                        <outlet property="settingButton" destination="oaC-ZZ-TQ6" id="o6q-FR-xoW"/>
                         <outlet property="table" destination="vrd-Ze-eKQ" id="2dK-sj-K7o"/>
                         <outlet property="teamNameLbl" destination="vx8-sP-dTp" id="QPw-VN-rPL"/>
                         <outlet property="teamNumLbl" destination="oTv-HE-hya" id="yqQ-eg-DLp"/>
-                        <segue destination="MIX-tc-IL7" kind="show" identifier="returnToCorJ" id="UvD-Ge-RWl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyK-2z-iKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="qHC-gW-Vfc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1570.0934579439252" y="2723.9740820734341"/>
+            <point key="canvasLocation" x="-670.09345794392516" y="2723.9740820734341"/>
         </scene>
         <!--Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">
@@ -566,62 +514,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhR-xt-DuL">
-                                <rect key="frame" x="36.666666666666657" y="107" width="355" height="55"/>
+                                <rect key="frame" x="36.666666666666657" y="118.66666666666669" width="355" height="52"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-Tt-ih6">
-                                <rect key="frame" x="36.666666666666657" y="177" width="355" height="675"/>
+                                <rect key="frame" x="36.666666666666657" y="185.66666666666669" width="355" height="676.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZ6-J9-loV">
-                                <rect key="frame" x="280" y="48.666666666666657" width="116.33333333333331" height="41.333333333333343"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNq-e3-met">
-                                        <rect key="frame" x="4" y="0.0" width="38.333333333333336" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
-                                        <connections>
-                                            <action selector="infoBtnPressed:" destination="dWY-v4-76s" eventType="touchUpInside" id="clK-wk-vvC"/>
-                                            <action selector="infoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="89l-Qh-U8M"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGF-zr-E2m">
-                                        <rect key="frame" x="39" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
-                                        <connections>
-                                            <action selector="announcementButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="48P-2L-MYr"/>
-                                            <action selector="announcementButtonPressed:" destination="dWY-v4-76s" eventType="touchUpInside" id="Ops-7a-u28"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YlO-hs-2KM">
-                                        <rect key="frame" x="74" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
-                                        <connections>
-                                            <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="9hC-Lc-FlO"/>
-                                            <action selector="settingButtonPressed:" destination="dWY-v4-76s" eventType="touchUpInside" id="agV-Cy-Ede"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="vNq-e3-met" firstAttribute="centerX" secondItem="nZ6-J9-loV" secondAttribute="centerX" multiplier="0.4" id="5S7-cR-CHO"/>
-                                    <constraint firstItem="YlO-hs-2KM" firstAttribute="centerX" secondItem="nZ6-J9-loV" secondAttribute="centerX" multiplier="1.6" id="CiU-KW-J83"/>
-                                    <constraint firstItem="yGF-zr-E2m" firstAttribute="width" secondItem="nZ6-J9-loV" secondAttribute="width" multiplier="0.33" id="DXi-Fd-5fx"/>
-                                    <constraint firstItem="vNq-e3-met" firstAttribute="width" secondItem="nZ6-J9-loV" secondAttribute="width" multiplier="0.33" id="EWZ-Md-5G4"/>
-                                    <constraint firstItem="yGF-zr-E2m" firstAttribute="centerX" secondItem="nZ6-J9-loV" secondAttribute="centerX" id="PkW-xE-2fq"/>
-                                    <constraint firstItem="vNq-e3-met" firstAttribute="centerY" secondItem="nZ6-J9-loV" secondAttribute="centerY" id="Rin-WK-X57"/>
-                                    <constraint firstItem="vNq-e3-met" firstAttribute="height" secondItem="nZ6-J9-loV" secondAttribute="height" id="Sae-ye-YrZ"/>
-                                    <constraint firstItem="YlO-hs-2KM" firstAttribute="width" secondItem="nZ6-J9-loV" secondAttribute="width" multiplier="0.33" id="UBt-Y0-p7R"/>
-                                    <constraint firstItem="yGF-zr-E2m" firstAttribute="centerY" secondItem="nZ6-J9-loV" secondAttribute="centerY" id="fqf-Cu-4lg"/>
-                                    <constraint firstItem="YlO-hs-2KM" firstAttribute="centerY" secondItem="nZ6-J9-loV" secondAttribute="centerY" id="jFJ-P4-NSu"/>
-                                    <constraint firstItem="YlO-hs-2KM" firstAttribute="height" secondItem="nZ6-J9-loV" secondAttribute="height" id="le0-bt-ofo"/>
-                                    <constraint firstItem="yGF-zr-E2m" firstAttribute="height" secondItem="nZ6-J9-loV" secondAttribute="height" id="pDA-2g-ggi"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qT9-g7-uz0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -629,31 +530,23 @@
                             <constraint firstItem="qT9-g7-uz0" firstAttribute="bottom" secondItem="QR7-Tt-ih6" secondAttribute="bottom" constant="15" id="1fp-ow-dsQ"/>
                             <constraint firstItem="QhR-xt-DuL" firstAttribute="trailing" secondItem="QR7-Tt-ih6" secondAttribute="trailing" id="2dj-H3-lCF"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" id="8k9-Ut-RfQ"/>
-                            <constraint firstItem="nZ6-J9-loV" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.272" id="C9b-qO-3Uu"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="width" secondItem="qT9-g7-uz0" secondAttribute="width" multiplier="0.829439" id="F9a-eD-U9z"/>
-                            <constraint firstItem="nZ6-J9-loV" firstAttribute="centerX" secondItem="qT9-g7-uz0" secondAttribute="centerX" multiplier="1.58" id="Km0-LY-pru"/>
-                            <constraint firstItem="nZ6-J9-loV" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.16" id="LAm-vL-Vn4"/>
-                            <constraint firstItem="nZ6-J9-loV" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0475" id="XPu-hZ-Wm9"/>
                             <constraint firstItem="QR7-Tt-ih6" firstAttribute="top" secondItem="QhR-xt-DuL" secondAttribute="bottom" constant="15" id="b6K-Ab-7Pp"/>
                             <constraint firstItem="QhR-xt-DuL" firstAttribute="centerY" secondItem="qT9-g7-uz0" secondAttribute="centerY" multiplier="0.31" id="hUj-am-TbG"/>
                             <constraint firstItem="QhR-xt-DuL" firstAttribute="leading" secondItem="QR7-Tt-ih6" secondAttribute="leading" id="iPa-ly-kUu"/>
                             <constraint firstItem="QhR-xt-DuL" firstAttribute="height" secondItem="qT9-g7-uz0" secondAttribute="height" multiplier="0.0634371" id="rdF-FN-C6E"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="648-ad-0wH"/>
                     <navigationItem key="navigationItem" id="aTS-cS-zr8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="announcementButton" destination="yGF-zr-E2m" id="1Wk-Mm-EFf"/>
-                        <outlet property="infoBtn" destination="vNq-e3-met" id="dsn-bK-CqI"/>
                         <outlet property="leaderBoard" destination="QR7-Tt-ih6" id="9Kv-UU-h0e"/>
                         <outlet property="rankingLbl" destination="QhR-xt-DuL" id="tRy-C7-NKW"/>
-                        <outlet property="settingButton" destination="YlO-hs-2KM" id="JUv-tM-53h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81p-5w-qGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="557" y="2724"/>
+            <point key="canvasLocation" x="1410" y="2724"/>
         </scene>
         <!--Timer View Controller-->
         <scene sceneID="9Ql-4N-5bX">
@@ -664,7 +557,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xni-rl-bjf">
-                                <rect key="frame" x="126.66666666666669" y="510.00000000000006" width="175" height="63.666666666666686"/>
+                                <rect key="frame" x="126.66666666666669" y="553" width="175" height="60"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="current station info 2"/>
@@ -674,7 +567,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-gX-yty">
-                                <rect key="frame" x="126.66666666666669" y="618.66666666666663" width="175" height="63.333333333333371"/>
+                                <rect key="frame" x="126.66666666666669" y="669.66666666666663" width="175" height="60"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="next station info 1"/>
@@ -683,54 +576,8 @@
                                     <action selector="nextGameButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="UPF-XF-prI"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfO-f6-xHl">
-                                <rect key="frame" x="280" y="48.666666666666657" width="116.33333333333331" height="41.333333333333343"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7V0-LQ-ElI">
-                                        <rect key="frame" x="39" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="messageIcon"/>
-                                        <connections>
-                                            <action selector="announcementButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="X3x-tS-6RX"/>
-                                            <action selector="announcementButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="mwR-GM-gfi"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1g-cc-IIE">
-                                        <rect key="frame" x="74" y="0.0" width="38.333333333333343" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="settingIcon"/>
-                                        <connections>
-                                            <action selector="settingButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="4Zk-Dq-wc1"/>
-                                            <action selector="settingButtonPressed:" destination="Zkt-o5-gfj" eventType="touchUpInside" id="LGi-aj-dPY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWF-LA-OGg">
-                                        <rect key="frame" x="4" y="0.0" width="38.333333333333336" height="41.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="infoIcon"/>
-                                        <connections>
-                                            <action selector="infoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="jxJ-6Z-oEP"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="w1g-cc-IIE" firstAttribute="width" secondItem="TfO-f6-xHl" secondAttribute="width" multiplier="0.33" id="By5-pq-KIB"/>
-                                    <constraint firstItem="7V0-LQ-ElI" firstAttribute="height" secondItem="TfO-f6-xHl" secondAttribute="height" id="Ffb-c1-dVS"/>
-                                    <constraint firstItem="7V0-LQ-ElI" firstAttribute="centerY" secondItem="TfO-f6-xHl" secondAttribute="centerY" id="JbJ-ME-2db"/>
-                                    <constraint firstItem="w1g-cc-IIE" firstAttribute="centerX" secondItem="TfO-f6-xHl" secondAttribute="centerX" multiplier="1.6" id="Pt9-gX-B00"/>
-                                    <constraint firstItem="w1g-cc-IIE" firstAttribute="centerY" secondItem="TfO-f6-xHl" secondAttribute="centerY" id="WnJ-Io-ltF"/>
-                                    <constraint firstItem="gWF-LA-OGg" firstAttribute="height" secondItem="TfO-f6-xHl" secondAttribute="height" id="bpj-0h-RwB"/>
-                                    <constraint firstItem="gWF-LA-OGg" firstAttribute="width" secondItem="TfO-f6-xHl" secondAttribute="width" multiplier="0.33" id="e9J-gl-FLH"/>
-                                    <constraint firstItem="w1g-cc-IIE" firstAttribute="height" secondItem="TfO-f6-xHl" secondAttribute="height" id="eWZ-87-J9h"/>
-                                    <constraint firstItem="7V0-LQ-ElI" firstAttribute="centerX" secondItem="TfO-f6-xHl" secondAttribute="centerX" id="ff8-tA-bW3"/>
-                                    <constraint firstItem="7V0-LQ-ElI" firstAttribute="width" secondItem="TfO-f6-xHl" secondAttribute="width" multiplier="0.33" id="j1x-dr-tUt"/>
-                                    <constraint firstItem="gWF-LA-OGg" firstAttribute="centerX" secondItem="TfO-f6-xHl" secondAttribute="centerX" multiplier="0.4" id="vJ0-oO-UeI"/>
-                                    <constraint firstItem="gWF-LA-OGg" firstAttribute="centerY" secondItem="TfO-f6-xHl" secondAttribute="centerY" id="x9i-xQ-Znk"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-qO-Kvn">
-                                <rect key="frame" x="128.33333333333331" y="100.66666666666669" width="171.33333333333331" height="59"/>
+                                <rect key="frame" x="128.33333333333331" y="112" width="171.33333333333331" height="56"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -741,9 +588,7 @@
                         <constraints>
                             <constraint firstItem="Frx-gX-yty" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.5" id="0by-72-GS7"/>
                             <constraint firstItem="Frx-gX-yty" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.408879" id="1ar-UH-0eA"/>
-                            <constraint firstItem="TfO-f6-xHl" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.272" id="2Bi-7E-qEu"/>
                             <constraint firstItem="xni-rl-bjf" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.25" id="7wt-C8-Alz"/>
-                            <constraint firstItem="TfO-f6-xHl" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" multiplier="1.58" id="ApZ-ya-6jq"/>
                             <constraint firstItem="Frx-gX-yty" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="DK0-Vi-baP"/>
                             <constraint firstItem="xni-rl-bjf" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="G3r-jC-gSe"/>
                             <constraint firstItem="Frx-gX-yty" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="SB1-yP-bPD"/>
@@ -753,40 +598,88 @@
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="jTH-6N-oGT"/>
                             <constraint firstItem="xni-rl-bjf" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="urL-df-aQm"/>
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0680507" id="vJo-QC-qjc"/>
-                            <constraint firstItem="TfO-f6-xHl" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="0.16" id="w1M-f5-AB3"/>
-                            <constraint firstItem="TfO-f6-xHl" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0475" id="ya6-B1-0PM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="dUb-JY-qbb"/>
                     <navigationItem key="navigationItem" id="qeT-WX-hQA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="announcementButton" destination="7V0-LQ-ElI" id="ZNu-cW-7qw"/>
                         <outlet property="gameInfoButton" destination="xni-rl-bjf" id="qXc-RA-GNw"/>
-                        <outlet property="infoButton" destination="gWF-LA-OGg" id="kqj-vp-5nA"/>
                         <outlet property="nextGameButton" destination="Frx-gX-yty" id="aey-u2-y5H"/>
-                        <outlet property="settingButton" destination="w1g-cc-IIE" id="ikc-hV-O3S"/>
                         <outlet property="titleLabel" destination="rhR-qO-Kvn" id="luX-wA-huG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHy-RL-qYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2020" y="2724"/>
+            <point key="canvasLocation" x="3506" y="2724"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="knk-N2-109">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GKs-N4-Ir3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="hC8-lC-I9C"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tj1-Mf-wO5">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zkt-o5-gfj" kind="relationship" relationship="rootViewController" id="hgb-F3-uwf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9AX-Af-UTk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1570.0934579439252" y="2723.9740820734341"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wxA-0r-nUC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXb-Wv-YsN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="648-ad-0wH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PHi-sE-EwQ">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dWY-v4-76s" kind="relationship" relationship="rootViewController" id="0tX-0N-C0w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ex-b7-k9k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557" y="2724"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xLH-0l-UbX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dlm-ML-1zU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="dUb-JY-qbb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iC1-4p-fVs">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ynI-iC-04s" kind="relationship" relationship="rootViewController" id="WmA-M9-dZs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fXd-L9-rwu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2673" y="2724"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="M4x-Iq-v4s"/>
-        <segue reference="UvD-Ge-RWl"/>
+        <segue reference="NyH-V6-DS8"/>
+        <segue reference="qEi-jd-It5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MemberButton" width="76" height="76"/>
         <image name="RankingButton" width="76" height="76"/>
         <image name="TimerButton1" width="76" height="76"/>
         <image name="current station info 2" width="169.66667175292969" height="55"/>
-        <image name="infoIcon" width="25" height="25"/>
-        <image name="messageIcon" width="25" height="25"/>
         <image name="next station info 1" width="169.66667175292969" height="55"/>
-        <image name="settingIcon" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

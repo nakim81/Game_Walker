@@ -17,9 +17,15 @@ class CreateOrJoinTeamViewController: BaseViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSettingBtn()
+        configureBackButton()
+        configureTitleLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavItem()
         configureBtns()
     }
     
@@ -36,19 +42,10 @@ class CreateOrJoinTeamViewController: BaseViewController {
         let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
-        
-        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
-        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
-        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-        self.navigationItem.rightBarButtonItem = rightButton
     }
     
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToJoinGameVC", sender: self)
-    }
-    
-    @objc func setting(sender: UIBarButtonItem) {
-        
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
@@ -59,6 +56,10 @@ class CreateOrJoinTeamViewController: BaseViewController {
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
+    }
+    
+    @IBAction func unwindToCorJ(_ segue: UIStoryboardSegue) {
+        
     }
 }
 // MARK: - ModalViewProtocol

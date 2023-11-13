@@ -64,6 +64,8 @@ class AddStationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSimpleNavBar()
+        
         gamenameTextfield.delegate = self
         gamelocationTextfield.delegate = self
         gamepointsTextfield.delegate = self

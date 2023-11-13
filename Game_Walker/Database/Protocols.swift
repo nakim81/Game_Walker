@@ -14,11 +14,11 @@ protocol RefereeUpdateListener {
     func updateReferee(_ referee: Referee)
 }
 
-protocol TeamUpdateListener {
+protocol TeamUpdateListener: AnyObject {
     func updateTeams(_ teams: [Team])
 }
 
-protocol HostUpdateListener {
+protocol HostUpdateListener: AnyObject {
     func updateHost(_ host: Host)
 }
 
@@ -31,8 +31,15 @@ protocol AddStationDelegate: AnyObject {
 }
 
 //MARK: - Errors
-
 enum GameWalkerError: Error {
     case invalidGamecode(String)
     case serverError(String)
+}
+// MARK: - sturct for protocols
+struct WeakHostUpdateListener {
+    weak var value: HostUpdateListener?
+}
+
+struct WeakTeamUpdateListener {
+    weak var value: TeamUpdateListener?
 }

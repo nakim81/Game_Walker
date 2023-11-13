@@ -11,10 +11,7 @@ import UIKit
 class HostRankingViewcontroller: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
-    @IBOutlet weak var announcementBtn: UIButton!
-    @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var switchBtn: CustomSwitchButton!
-    @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var rankingLbl: UILabel!
     
     static var messages: [Announcement] = []
@@ -23,44 +20,13 @@ class HostRankingViewcontroller: UIViewController {
     private let cellSpacingHeight: CGFloat = 1
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
-    private let standardStyle = UserData.isStandardStyle() ?? true
+    private let standardStyle = UserData.isStandardStyle()
     
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
     private var round: Int = 0
     private var algorithm: [[Int]] = [[]]
     private var stationList: [Station] = []
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,31 +35,24 @@ class HostRankingViewcontroller: UIViewController {
         } else {
             configureTableView()
         }
-        setDelegates()
+        setDelegate()
         setMessages()
-        configureGamecodeLabel()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
+        addObservers()
         Task { @MainActor in
             let host = try await H.getHost(gameCode)
             switchBtn.isOn = host?.showScoreboard ?? true
         }
     }
     
-    func listen(_ _ : [String : Any]){
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLeaderboard), name: .roundUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTeams), name: .teamsUpdate, object: nil)
     }
     
     @IBAction func switchBtnPressed(_ sender: CustomSwitchButton) {
         //Update showScoreBoard of host on the server
-    }
-    
-    @IBAction func infoBtnPressed(_ sender: UIButton) {
-        self.showOverlay()
     }
     
     private func setMessages() {
@@ -128,12 +87,8 @@ class HostRankingViewcontroller: UIViewController {
         }
     }
     
-    private func setDelegates() {
-        T.delegates.append(self)
+    private func setDelegate() {
         switchBtn.delegate = self
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
         self.showScore = switchBtn.isOn
     }
     
@@ -145,23 +100,6 @@ class HostRankingViewcontroller: UIViewController {
         leaderBoard.allowsSelection = true
         leaderBoard.separatorStyle = .none
         leaderBoard.allowsMultipleSelection = false
-    }
-    
-    @IBAction func infoButtonPressed(_ sender: Any) {
-        showOverlay()
-    }
-    
-}
-// MARK: - Gamecode Label
-extension HostRankingViewcontroller {
-    
-    private func configureGamecodeLabel() {
-        rankingLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementBtn.centerYAnchor),
-        ])
     }
 }
 // MARK: - HostRankingGuidView
@@ -201,7 +139,7 @@ extension HostRankingViewcontroller {
         componentPositions.append(CGPoint(x: switchBtn.frame.minX, y: switchBtn.frame.minY))
         print(componentPositions)
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Ranking", "host")
-
+        
         present(overlayViewController, animated: true, completion: nil)
     }
 }
@@ -228,7 +166,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return teamList.count
-     }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
@@ -270,40 +208,41 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
         }
     }
 }
-
-// MARK: - TeamProtocol
-extension HostRankingViewcontroller: TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        self.teamList = teams
-        leaderBoard.reloadData()
-    }
-}
-// MARK: - HostProtocol
-extension HostRankingViewcontroller: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.round = host.currentRound - 1
-        leaderBoard.reloadData()
-    }
-}
 // MARK: - SwitchBtn
 extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
-  func isOnValueChange(isOn: Bool) {
-      self.showScore = isOn
-      Task { @MainActor in
-          do {
-              try await H.hide_show_score(gameCode, self.showScore)
-              leaderBoard.reloadData()
-          } catch GameWalkerError.serverError(let text){
-              print(text)
-              serverAlert(text)
-              return
-          }
-      }
-  }
+    func isOnValueChange(isOn: Bool) {
+        self.showScore = isOn
+        Task { @MainActor in
+            do {
+                try await H.hide_show_score(gameCode, self.showScore)
+                leaderBoard.reloadData()
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
+    }
 }
-// MARK: - ModalViewControllerDelegate
-extension HostRankingViewcontroller: ModalViewControllerDelegate {
-    func modalViewControllerDidRequestPush() {
-        self.showAwardPopUp()
+// MARK: - @objc
+extension HostRankingViewcontroller {
+    @objc func updateLeaderboard(notification: Notification) {
+        guard let round = notification.userInfo?["round"] as? Int else { return }
+        self.round = round
+        leaderBoard.reloadData()
+    }
+    
+    @objc override func announceAction() {
+        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
+    }
+    
+    @objc override func infoAction() {
+        showOverlay()
+    }
+    
+    @objc func updateTeams(notification: Notification) {
+        guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
+        self.teamList = teams
+        leaderBoard.reloadData()
     }
 }

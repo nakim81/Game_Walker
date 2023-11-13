@@ -30,9 +30,6 @@ class RefereeRankingPVEViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private var awardViewControllerPresented = false
     
-    static let notificationName = Notification.Name("readNotification")
-    static let notificationName2 = Notification.Name("announceNoti")
-    
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
@@ -48,11 +45,11 @@ class RefereeRankingPVEViewController: UIViewController {
             let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeRankingPVEViewController.localMessages)
             RefereeRankingPVEViewController.unread = unread
             if unread{
-                NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
             } else {
-                NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
                 strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
             }
         }
@@ -60,7 +57,7 @@ class RefereeRankingPVEViewController: UIViewController {
     
     private func configureListeners(){
         T.delegates.append(self)
-        H.delegates.append(self)
+        H.delegates.append(WeakHostUpdateListener(value: self))
         R.delegates.append(self)
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
@@ -207,20 +204,20 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
         var hostAnnouncements = Array(host.announcements)
         if RefereeRankingPVEViewController.localMessages.count > hostAnnouncements.count {
             removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
         } else {
             for announcement in hostAnnouncements {
                 if !RefereeRankingPVEViewController.localMessages.contains(announcement) {
                     RefereeRankingPVEViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
+                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                 } else {
                     if let localIndex = RefereeRankingPVEViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
                         if RefereeRankingPVEViewController.localMessages[localIndex].content != announcement.content {
                             RefereeRankingPVEViewController.localMessages[localIndex].content = announcement.content
                             RefereeRankingPVEViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: RefereeRankingPVEViewController.notificationName2, object: nil, userInfo: nil)
+                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                         }
                     }
                 }

@@ -11,10 +11,6 @@ import UIKit
 class TeamViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var leaveButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var teamNumLbl: UILabel!
     @IBOutlet weak var teamNameLbl: UILabel!
     
@@ -27,7 +23,6 @@ class TeamViewController: UIViewController {
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
-    private var gameOverTriggered = false
     
     private var timer = Timer()
     static var unread: Bool = false
@@ -35,41 +30,13 @@ class TeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     
-    static let notificationName1 = Notification.Name("readNotification")
-    static let notificationName2 = Notification.Name("announceNoti")
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHostListener()
+        configureNavigationBar()
+        configureLeaveBtn()
         configureTableView()
         configureLabel()
-        settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
+        tabBarController?.navigationController?.isNavigationBarHidden = true
         // timer checks if all the announcements are read or not
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
@@ -79,31 +46,47 @@ class TeamViewController: UIViewController {
             let unread = strongSelf.checkUnreadAnnouncements(announcements: TeamViewController.localMessages)
             TeamViewController.unread = unread
             if unread{
-                NotificationCenter.default.post(name: TeamViewController.notificationName1, object: nil, userInfo: ["unread":unread])
-                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+                if let items = strongSelf.navigationItem.rightBarButtonItems {
+                    for barButtonItem in items {
+                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                            // 이미지 변경
+                            btn.setImage(strongSelf.unreadSome, for: .normal)
+                            break
+                        }
+                    }
+                }
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
             } else {
-                NotificationCenter.default.post(name: TeamViewController.notificationName1, object: nil, userInfo: ["unread":unread])
-                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+                if let items = strongSelf.navigationItem.rightBarButtonItems {
+                    for barButtonItem in items {
+                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                            // 이미지 변경
+                            btn.setImage(strongSelf.readAll, for: .normal)
+                            break
+                        }
+                    }
+                }
             }
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
-        gameOverTriggered = false
-        print(gameOverTriggered)
-    }
-    
-    @objc func gameOver() {
-        Task {@MainActor in
-            await H.detatchHost()
-            print(H.listener)
-            NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "gameover"), object: nil)
-            showAwardPopUp()
+        NotificationCenter.default.addObserver(self, selector: #selector(announceUpdate), name: .hostUpdate, object: nil)
+        print("------------H.delegates------------")
+        H.delegates = H.delegates.filter { $0.value != nil }
+        for delegate in H.delegates {
+            print(delegate)
         }
+        print("------------H.delegates------------")
     }
     
-    private func addHostListener(){
-        H.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+    func configureLeaveBtn() {
+        let leaveImg = UIImage(named: "LEAVE 1")
+        let leaveBtn = UIButton()
+        leaveBtn.setImage(leaveImg, for: .normal)
+        leaveBtn.addTarget(self, action: #selector(customBackAction(_:)), for: .touchUpInside)
+        let leave = UIBarButtonItem(customView: leaveBtn)
+        
+        self.navigationItem.leftBarButtonItem = leave
     }
     
     private func configureLabel(){
@@ -113,12 +96,6 @@ class TeamViewController: UIViewController {
         teamNumLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 40))
         teamNameLbl.text = team.name
         teamNameLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 30))
-        
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
-        ])
     }
     
     private func configureTableView() {
@@ -140,22 +117,7 @@ class TeamViewController: UIViewController {
         }
     }
     
-    @IBAction func leaveButtonPressed(_ sender: UIButton) {
-        self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
-    }
-    
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
-        showOverlay()
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.localMessages)
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    private func alert2(title: String, message: String, sender: UIButton) {
+    private func alert2(title: String, message: String, sender: AnyObject) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
             Task { @MainActor in
@@ -167,7 +129,7 @@ class TeamViewController: UIViewController {
                         }
                     }
                     UserData.clearMyTeam("team")
-                    self.performSegue(withIdentifier: "returnToCorJ", sender: sender)
+                    self.performSegue(withIdentifier: "unwindToCorJ", sender: sender)
                 } catch GameWalkerError.serverError(let text){
                     print(text)
                     serverAlert(text)
@@ -184,21 +146,6 @@ class TeamViewController: UIViewController {
         refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
         refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
         refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
-    }
-    
-    @objc func refreshFunction() {
-        Task { @MainActor in
-            do {
-                self.team = try await T.getTeam(gameCode, teamName)
-                refreshController.endRefreshing()
-                table.reloadData()
-            } catch {
-                alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
-            }
-        }
-    }
-    
-    func listen(_ _ : [String : Any]){
     }
 }
 // MARK: - TableView
@@ -260,29 +207,36 @@ extension TeamViewController {
         present(overlayViewController, animated: true, completion: nil)
     }
 }
-// MARK: - TeamProtocol
-extension TeamViewController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        if host.gameover {
-            if !gameOverTriggered {
-                gameOverTriggered = true
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "gameover"), object: nil, userInfo: nil)
-            }
-        }
-        let hostAnnouncements = Array(host.announcements)
+// MARK: - @objc
+extension TeamViewController {
+    
+    @objc func customBackAction(_ sender: UIBarButtonItem) {
+        self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
+    }
+    
+    @objc override func infoAction() {
+        self.showOverlay()
+    }
+    
+    @objc override func announceAction() {
+        showMessagePopUp(messages: TeamViewController.localMessages)
+    }
+    
+    @objc func announceUpdate(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
         // if some announcements were deleted from the server
-        if TeamViewController.localMessages.count > hostAnnouncements.count {
-            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: hostAnnouncements)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil, userInfo: nil)
+        if TeamViewController.localMessages.count > host.announcements.count {
+            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: host.announcements)
+            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
         } else {
             // compare server announcements and local announcements
-            for announcement in hostAnnouncements {
+            for announcement in host.announcements {
                 let ids: [String] = TeamViewController.localMessages.map({ $0.uuid })
                 // new announcements
                 if !ids.contains(announcement.uuid) {
                     TeamViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: TeamViewController.notificationName2, object: nil, userInfo: nil)
+                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                 } else {
                     // modified announcements
                     if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
@@ -290,7 +244,7 @@ extension TeamViewController: HostUpdateListener {
                             TeamViewController.localMessages[localIndex].content = announcement.content
                             TeamViewController.localMessages[localIndex].readStatus = false
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: TeamViewController.notificationName2, object: nil, userInfo: nil)
+                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                         }
                     }
                 }
@@ -298,7 +252,18 @@ extension TeamViewController: HostUpdateListener {
             }
         }
     }
+    
+    @objc func refreshFunction() {
+        Task { @MainActor in
+            do {
+                self.team = try await T.getTeam(gameCode, teamName)
+                refreshController.endRefreshing()
+                table.reloadData()
+            } catch {
+                alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
+            }
+        }
+    }
 }
-
 
 

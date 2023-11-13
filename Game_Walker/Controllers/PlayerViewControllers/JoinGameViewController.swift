@@ -25,16 +25,16 @@ class JoinGameViewController: BaseViewController {
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     private let standardStyle = UserData.isStandardStyle()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSettingBtn()
+        configureBackButton()
+        configureTitleLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        configureNavItem()
-        configureJoinBtn()
-    }
-    
-    private func configureJoinBtn(){
-        nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
-        nextButton.layer.cornerRadius = 8
     }
     
     private func setUp() {
@@ -53,6 +53,9 @@ class JoinGameViewController: BaseViewController {
         usernameTextField.layer.cornerRadius = 10
         gamecodeLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        
+        nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        nextButton.layer.cornerRadius = 8
     }
     
     private func configureNavItem() {
@@ -61,11 +64,6 @@ class JoinGameViewController: BaseViewController {
         let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
-        
-        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
-        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
-        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-        self.navigationItem.rightBarButtonItem = rightButton
     }
     
     @objc func back(sender: UIBarButtonItem) {
@@ -190,6 +188,30 @@ class JoinGameViewController: BaseViewController {
                 } else {
                     self.performSegue(withIdentifier: "goToPF2VC", sender: self)
                 }
+            }
+        } else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty {
+            if let username = usernameTextField.text {
+                Task {@MainActor in
+                    let player = Player(gamecode: savedGameCode, name: username)
+                    UserData.writePlayer(player, "player")
+                    UserData.writeUsername(username, "username")
+                    UserData.writeGamecode(savedGameCode, "gamecode")
+                    do {
+                        try await P.addPlayer(savedGameCode, player, uuid)
+                        self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                    } catch GameWalkerError.invalidGamecode(let message) {
+                        print(message)
+                        gamecodeAlert(message)
+                        return
+                    } catch GameWalkerError.serverError(let message) {
+                        print(message)
+                        serverAlert(message)
+                        return
+                    }
+                }
+            } else {
+                alert(title: "", message: "Please enter username")
+                return
             }
         } else if gamecode != savedGameCode && username != savedUserName {
             Task {@MainActor in

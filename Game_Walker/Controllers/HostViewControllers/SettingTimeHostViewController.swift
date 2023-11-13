@@ -59,7 +59,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureSimpleNavBar()
         Task {
             do {
                 stationList = try await fetchStationsForAlgorithm()

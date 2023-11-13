@@ -216,7 +216,7 @@ extension RegisterController: HostUpdateListener {
     }
     
     func callProtocols() {
-        H.delegates.append(self)
+        H.delegates.append(WeakHostUpdateListener(value: self))
         H.listenHost(storedGameCode, onListenerUpdate: listen(_:))
     }
 }

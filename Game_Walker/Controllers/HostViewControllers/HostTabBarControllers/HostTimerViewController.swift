@@ -49,26 +49,23 @@ class HostTimerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
         Task {
             titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: 50)
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-            callProtocols()
-            host = try await H.getHost(gameCode) ?? Host()
-            setSettings()
-            configureTimerLabel()
-            configureGamecodeLabel()
+            do {
+                host = try await H.getHost(gameCode) ?? Host()
+                setSettings()
+                configureTimerLabel()
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(updateHostInfo), name: .hostUpdate, object: nil)
         }
-    }
-    
-    @IBAction func announcementBtnPressed(_ sender: UIButton) {
-        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
-    }
-
-    @IBAction func settingBtnPressed(_ sender: UIButton) {
-    }
-    
-    @IBAction func infoBtnPressed(_ sender: UIButton) {
-        showOverlay()
     }
     
     @IBAction func endBtnPressed(_ sender: Any) {
@@ -109,6 +106,20 @@ class HostTimerViewController: UIViewController {
             }
         }
     }
+    
+    func setSettings() {
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
+        self.gameStart = host.gameStart
+        self.gameOver = host.gameover
+    }
     // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -146,39 +157,6 @@ class HostTimerViewController: UIViewController {
         present(overlayViewController, animated: true, completion: nil)
     }
     //MARK: - UI Timer Elements
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        label.numberOfLines = 2
-        label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementBtn.centerYAnchor),
-        ])
-    }
     
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -340,7 +318,7 @@ class HostTimerViewController: UIViewController {
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
                     let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             }
@@ -388,6 +366,7 @@ class HostTimerViewController: UIViewController {
         Task {
             do {
                 try await H.updateCurrentRound(gameCode, self.round)
+                NotificationCenter.default.post(name: .roundUpdate, object: nil, userInfo: ["round":self.round])
             } catch GameWalkerError.serverError(let text){
                 print(text)
                 serverAlert(text)
@@ -414,46 +393,33 @@ class HostTimerViewController: UIViewController {
                 else {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
-            } 
+            }
             runTimer()
         }
-    }
-}
-//MARK: - Protocol
-extension HostTimerViewController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.startTime = host.startTimestamp
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.isPaused = host.paused
-        self.gameStart = host.gameStart
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        H.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-    }
-    
-    func setSettings() {
-        self.seconds = host.gameTime
-        self.moveSeconds = host.movingTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.rounds = host.rounds
-        self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime)
-        self.round = host.currentRound
-        self.gameStart = host.gameStart
-        self.gameOver = host.gameover
     }
 }
 // MARK: - ModalViewControllerDelegate
 extension HostTimerViewController: ModalViewControllerDelegate {
     func modalViewControllerDidRequestPush() {
         self.showAwardPopUp()
+    }
+}
+// MARK: - @objc
+extension HostTimerViewController {
+    @objc func updateHostInfo(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return}
+        self.startTime = host.startTimestamp
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.isPaused = host.paused
+        self.gameStart = host.gameStart
+    }
+    
+    @objc override func announceAction() {
+        showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
+    }
+    
+    @objc override func infoAction() {
+        showOverlay()
     }
 }

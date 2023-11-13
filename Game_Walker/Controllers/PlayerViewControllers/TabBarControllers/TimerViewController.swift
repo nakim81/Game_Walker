@@ -10,12 +10,9 @@ import UIKit
 import AVFoundation
 
 class TimerViewController: BaseViewController {
-    
+
     @IBOutlet weak var gameInfoButton: UIButton!
     @IBOutlet weak var nextGameButton: UIButton!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
     private var messages: [String] = []
@@ -59,7 +56,7 @@ class TimerViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    
+// MARK: - UI components
     private let timerCircle: UILabel = {
         var view = UILabel()
         view.clipsToBounds = true
@@ -137,24 +134,25 @@ class TimerViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+// MARK: - View Life Cycle methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
+        addObservers()
         if TeamViewController.unread {
-            self.announcementButton.setImage(unreadSome, for: .normal)
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.unreadSome
+            }
         } else {
-            self.announcementButton.setImage(readAll, for: .normal)
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.readAll
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         Task { @MainActor in
-            callProtocols()
-            configureGamecodeLabel()
             host = try await H.getHost(gameCode) ?? Host()
             team = try await T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
             stations = try await S.getStationList(gameCode)
@@ -163,38 +161,15 @@ class TimerViewController: BaseViewController {
         }
         titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
-        settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-        configureGamecodeLabel()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
-    @objc func readAll(notification: Notification) {
-        guard let unread = notification.userInfo?["unread"] as? Bool else {
-            return
-        }
-        if unread {
-            self.announcementButton.setImage(self.unreadSome, for: .normal)
-        } else {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        }
-    }
+// MARK: - others
     
-    @objc func sound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
-    @objc func gameOver() {
-        Task {@MainActor in
-            await H.detatchHost()
-            print(H.listener)
-            NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "gameover"), object: nil)
-            showAwardPopUp()
-        }
-    }
-    
-    @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        findStation()
-        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
     }
     
     @IBAction func nextGameButtonPressed(_ sender: UIButton) {
@@ -208,28 +183,18 @@ class TimerViewController: BaseViewController {
         }
     }
     
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.localMessages)
+    func setSettings() {
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
     }
     
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
-        showOverlay()
-    }
-    
-    private func configureAnnouncementbuttonImage(){
-        announcementButton.setImage(readAll, for: .normal)
-    }
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
-        ])
-    }
     // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -437,6 +402,38 @@ class TimerViewController: BaseViewController {
             runTimer()
         }
     }
+}
+// MARK: - @objc
+extension TimerViewController {
+    
+    @objc func hostUpdate(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
+        
+        self.round = host.currentRound
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        if unread {
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.unreadSome
+            }
+        } else {
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.readAll
+            }
+        }
+    }
+    
+    @objc func playSound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+    }
     
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
         if !tapped {
@@ -456,34 +453,42 @@ class TimerViewController: BaseViewController {
         }
     }
     
-}
-//MARK: - UIUpdate
-extension TimerViewController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.round = host.currentRound
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
+    @objc override func infoAction() {
+        self.showOverlay()
     }
     
-    func listen(_ _ : [String : Any]){
+    @objc override func announceAction() {
+        showMessagePopUp(messages: TeamViewController.localMessages)
     }
     
-    func callProtocols() {
-        H.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-    }
-    
-    func setSettings() {
-        self.seconds = host.gameTime
-        self.moveSeconds = host.movingTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.rounds = host.rounds
-        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-        self.round = host.currentRound
+    @objc func announceUpdate(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
+        // if some announcements were deleted from the server
+        if TeamViewController.localMessages.count > host.announcements.count {
+            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: host.announcements)
+            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
+        } else {
+            // compare server announcements and local announcements
+            for announcement in host.announcements {
+                let ids: [String] = TeamViewController.localMessages.map({ $0.uuid })
+                // new announcements
+                if !ids.contains(announcement.uuid) {
+                    TeamViewController.localMessages.append(announcement)
+                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                } else {
+                    // modified announcements
+                    if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                        if TeamViewController.localMessages[localIndex].content != announcement.content {
+                            TeamViewController.localMessages[localIndex].content = announcement.content
+                            TeamViewController.localMessages[localIndex].readStatus = false
+                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                        }
+                    }
+                }
+                
+            }
+        }
     }
 }
