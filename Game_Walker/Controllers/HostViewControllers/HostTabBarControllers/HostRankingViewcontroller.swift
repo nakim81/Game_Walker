@@ -281,6 +281,14 @@ extension HostRankingViewcontroller: TeamUpdateListener {
 // MARK: - HostProtocol
 extension HostRankingViewcontroller: HostUpdateListener {
     func updateHost(_ host: Host) {
+        if !host.standardStyle {
+            if let tabBarController = self.tabBarController {
+                if let tabBarItems = tabBarController.tabBar.items, tabBarItems.indices.contains(1) {
+                    let tabBarItem = tabBarItems[1]
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         self.round = host.currentRound - 1
         leaderBoard.reloadData()
     }

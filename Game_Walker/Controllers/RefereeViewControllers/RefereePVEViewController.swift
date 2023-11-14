@@ -190,7 +190,7 @@ class RefereePVEController: BaseViewController {
     private func showOverlay() {
         let overlayViewController = RefereePVEGuideViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen
-        let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
+        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         var tabBarTop: CGFloat = 0
@@ -284,7 +284,7 @@ class RefereePVEController: BaseViewController {
         let label = UILabel(frame: CGRect())
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 25))
-        label.text = "Team name is" + "\n" + "\(self.teamOrder[self.round - 1].name)"
+        label.text = "\(self.teamOrder[self.round - 1].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -587,7 +587,7 @@ class RefereePVEController: BaseViewController {
         self.team = self.teamOrder[self.round - 1]
         teamNumLabel.text = "Team \(self.team.number)"
         iconButton.image = UIImage(named: self.team.iconName)
-        teamNameLabel.text = "Team name is" + "\n" + "\(self.team.name)"
+        teamNameLabel.text = "\(self.team.name)"
         scoreLabel.text = "\(self.team.points)"
     }
     
@@ -662,13 +662,12 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
         if host.algorithm != [] {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
-            
         }
         if self.round != host.currentRound {
             roundLabel.text = "Round " + "\(host.currentRound)"
             teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
             iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
-            teamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[host.currentRound - 1].name)"
+            teamNameLabel.text = "\(self.teamOrder[host.currentRound - 1].name)"
             scoreLabel.text = "\(self.teamOrder[host.currentRound - 1].points)"
             winButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true

@@ -31,6 +31,7 @@ class HostTimerViewController: UIViewController {
     private var moveSeconds: Int = 0
     private var moving: Bool = true
     private var tapped: Bool = false
+    private var number: Int = -1
     private var round: Int = 1
     private var rounds: Int?
     private var isPaused = true
@@ -44,18 +45,19 @@ class HostTimerViewController: UIViewController {
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var gameStart : Bool = false
+    private var ready : Bool = false
     private var gameOver : Bool = false
     private var segueCalled : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
-            titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: 50)
+            titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
             callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             setSettings()
-            //configureTimerLabel()
+            configureTimerLabel()
             configureGamecodeLabel()
         }
     }
@@ -78,7 +80,7 @@ class HostTimerViewController: UIViewController {
     }
     
     @IBAction func pauseOrPlayButtonPressed(_ sender: UIButton) {
-        if !gameStart {
+        if !gameStart && ready {
             Task { @MainActor in
                 do {
                     try await H.startGame(gameCode)
@@ -90,7 +92,7 @@ class HostTimerViewController: UIViewController {
                 sender.setImage(pause, for: .normal)
             }
         }
-        else {
+        else if gameStart && ready {
             if isPaused {
                 sender.setImage(pause, for: .normal)
             }
@@ -107,6 +109,9 @@ class HostTimerViewController: UIViewController {
                     return
                 }
             }
+        }
+        else {
+            alert(title: "Teams are not ready yet.", message: "You don't have enough teams to start the game.")
         }
     }
     // MARK: - overlay Guide view
@@ -151,7 +156,7 @@ class HostTimerViewController: UIViewController {
         label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
@@ -183,12 +188,11 @@ class HostTimerViewController: UIViewController {
     private let timerCircle: UILabel = {
         var view = UILabel()
         view.clipsToBounds = true
-        view.frame = CGRect(x: 0, y: 0, width: 256, height: 256)
+        view.frame = CGRect()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.alpha = 0.6
-        view.layer.borderWidth = 15
-        view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        view.layer.borderWidth = 15 * UIScreen.main.bounds.size.width / 375
+        view.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.6).cgColor
         view.layer.cornerRadius = 0.68 * UIScreen.main.bounds.size.width / 2.0
         return view
     }()
@@ -202,7 +206,7 @@ class HostTimerViewController: UIViewController {
             totalTimeLabel.alpha = 1.0
             tapped = true
         } else {
-            timerCircle.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+            timerCircle.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor
             timerLabel.alpha = 1.0
             timeTypeLabel.alpha = 1.0
             roundLabel.alpha = 0.0
@@ -211,76 +215,98 @@ class HostTimerViewController: UIViewController {
         }
     }
     
-    private let timerLabel: UILabel = {
+    private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 55)
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 55))
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()
     
-    private let timeTypeLabel: UILabel = {
+    private lazy var timeTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Moving Time"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 35)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.textColor = .black
         label.numberOfLines = 1
         return label
     }()
     
-    private let roundLabel: UILabel = {
+    private lazy var roundLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = UIColor(red: 0.535, green: 0.006, blue: 0.721, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 35)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.numberOfLines = 1
         label.alpha = 0.0
         return label
     }()
     
-    private let totalTimeLabel: UILabel = {
+    private lazy var totalTimeLabel: UILabel = {
         let label = UILabel()
+        let attributedText = NSMutableAttributedString()
+        let totaltimeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
+            .foregroundColor: UIColor.black
+        ]
+        let totaltimeAttributedString = NSAttributedString(string: "GAME TIME\n", attributes: totaltimeAttributes)
+        attributedText.append(totaltimeAttributedString)
+        let timeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .foregroundColor: UIColor.black
+        ]
+        let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)
+        attributedText.append(timeAttributedString)
+        label.attributedText = attributedText
         label.textAlignment = .center
-        label.textColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
+        label.textColor = UIColor(red: 0.535, green: 0.006, blue: 0.721, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.alpha = 0.0
         return label
     }()
     
-    func configureTimerLabel(){
+    func configureTimerLabel() {
         self.view.addSubview(timerCircle)
-        self.view.addSubview(timerLabel)
-        self.view.addSubview(timeTypeLabel)
-        self.view.addSubview(roundLabel)
-        self.view.addSubview(totalTimeLabel)
+        timerCircle.addSubview(timerLabel)
+        timerCircle.addSubview(timeTypeLabel)
+        timerCircle.addSubview(roundLabel)
+        timerCircle.addSubview(totalTimeLabel)
         NSLayoutConstraint.activate([
-            timerCircle.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.05),
-            timerCircle.widthAnchor.constraint(equalTo: timerCircle.heightAnchor),
+            titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.076),
+            
+            timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
+            timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.028),
+            timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
+            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.09),
+            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.9),
+            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
+            
             timerLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timerLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.39),
+            timerLabel.topAnchor.constraint(equalTo: self.timeTypeLabel.layoutMarginsGuide.bottomAnchor, constant: 0),
             timerLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.70),
             timerLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.36),
             
-            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.29),
-            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.656),
-            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
-            
             roundLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.32),
+            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.084),
             roundLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.605),
             roundLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
             
             totalTimeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            totalTimeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.547),
-            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
-            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
+            totalTimeLabel.topAnchor.constraint(equalTo: self.roundLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.01),
+            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.53),
+            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.27),
+            
+            pauseOrPlayButton.topAnchor.constraint(equalTo: timerCircle.bottomAnchor, constant: UIScreen.main.bounds.height * 0.049),
+            endGameBtn.topAnchor.constraint(equalTo: pauseOrPlayButton.bottomAnchor, constant: UIScreen.main.bounds.height * 0.049)
         ])
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
@@ -299,6 +325,12 @@ class HostTimerViewController: UIViewController {
                     strongSelf.audioPlayerManager.stop()
                     strongSelf.pauseOrPlayButton.isHidden = true
                     timer.invalidate()
+                }
+                if strongSelf.remainingTime == 10 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                }
+                if strongSelf.remainingTime == 9 {
+                    strongSelf.audioPlayerManager.stop()
                 }
                 if strongSelf.remainingTime <= 5 {
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
@@ -339,8 +371,8 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             }
@@ -352,37 +384,32 @@ class HostTimerViewController: UIViewController {
             t = pauseTime - startTime - pausedTime
         }
         else {
-            if pausedTime != 0 {
-                t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
-            }
-            else {
-                t = 0
-            }
+            t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
         }
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
             self.timeTypeLabel.text = "Moving Time"
-            self.time = (moveSeconds - remainder)
+            self.time = (moveSeconds - remainder%moveSeconds)
             self.moving = true
-            let minute = (moveSeconds - remainder)/60
-            let second = (moveSeconds - remainder) % 60
+            let minute = (moveSeconds - remainder%moveSeconds)/60
+            let second = (moveSeconds - remainder%moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
             self.timeTypeLabel.text = "Station Time"
-            self.time = (seconds - remainder)
+            self.time = (seconds - remainder%moveSeconds)
             self.moving = false
-            let minute = (seconds - remainder)/60
-            let second = (seconds - remainder) % 60
+            let minute = (seconds - remainder%moveSeconds)/60
+            let second = (seconds - remainder%moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         Task {
@@ -400,8 +427,8 @@ class HostTimerViewController: UIViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds!
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds!)"
             pauseOrPlayButton.isHidden = true
@@ -420,7 +447,7 @@ class HostTimerViewController: UIViewController {
     }
 }
 //MARK: - Protocol
-extension HostTimerViewController: HostUpdateListener {
+extension HostTimerViewController: HostUpdateListener, TeamUpdateListener {
     func updateHost(_ host: Host) {
         self.startTime = host.startTimestamp
         self.pauseTime = host.pauseTimestamp
@@ -429,15 +456,24 @@ extension HostTimerViewController: HostUpdateListener {
         self.gameStart = host.gameStart
     }
     
+    func updateTeams(_ teams: [Team]) {
+        if teams.count == self.number {
+            ready = true
+        }
+    }
+    
     func listen(_ _ : [String : Any]){
     }
     
     func callProtocols() {
         H.delegates.append(self)
+        T.delegates.append(self)
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
     }
     
     func setSettings() {
+        self.number = host.teams
         self.seconds = host.gameTime
         self.moveSeconds = host.movingTime
         self.startTime = host.startTimestamp
