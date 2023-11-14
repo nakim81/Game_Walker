@@ -20,7 +20,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var isSeguePerformed = false
     private var pvp : Bool?
     private var gameStart : Bool?
-    private var standardStyle : Bool?
+    private var host : Host = Host()
     private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
@@ -63,138 +63,150 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
-        if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
-            //Joining the game for the first time
-            if storedGameCode.isEmpty && storedRefereeName.isEmpty {
-                if !gameCode.isEmpty && !name.isEmpty {
-                    let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                    Task { @MainActor in
-                        do {
-                            try await R.addReferee(gameCode, newReferee, refereeUserID)
-                        } catch GameWalkerError.invalidGamecode(let message) {
-                            print(message)
-                            gamecodeAlert(message)
-                            return
-                        } catch GameWalkerError.serverError(let message) {
-                            print(message)
-                            serverAlert(message)
-                            return
+        Task {
+            if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
+                host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
+            } else {
+                host = try await H.getHost(gamecodeTextField.text!) ?? Host()
+            }
+            if host.standardStyle == false {
+                alert(title: "Point Style", message: "Referee is unavailable in point style.")
+            } else {
+                if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
+                    //Joining the game for the first time
+                    if storedGameCode.isEmpty && storedRefereeName.isEmpty {
+                        if !gameCode.isEmpty && !name.isEmpty {
+                            let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                            Task { @MainActor in
+                                do {
+                                    try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                } catch GameWalkerError.invalidGamecode(let message) {
+                                    print(message)
+                                    gamecodeAlert(message)
+                                    return
+                                } catch GameWalkerError.serverError(let message) {
+                                    print(message)
+                                    serverAlert(message)
+                                    return
+                                }
+                                UserData.writeGamecode(gameCode, "gamecode")
+                                UserData.writeUsername(newReferee.name, "username")
+                                UserData.writeReferee(newReferee, "referee")
+                                UserDefaults.standard.removeObject(forKey: "max")
+                                UserDefaults.standard.removeObject(forKey: "maxA")
+                                UserDefaults.standard.removeObject(forKey: "maxB")
+                                performSegue(withIdentifier: "goToWait", sender: self)
+                            }
+                        } else {
+                            alert(title: "", message: "Please enter both game code and username.")
                         }
-                        UserData.writeGamecode(gameCode, "gamecode")
+                    }
+                    // Rejoining the game.
+                    else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
+                        let oldReferee = UserData.readReferee("referee")!
+                        if oldReferee.assigned && gameStart! {
+                            for station in stations {
+                                if station.name == oldReferee.stationName {
+                                    self.pvp = station.pvp
+                                    break;
+                                }
+                            }
+                            if self.pvp! {
+                                performSegue(withIdentifier: "toPVP", sender: self)
+                            } else {
+                                performSegue(withIdentifier: "toPVE", sender: self)
+                            }
+                        } else {
+                            performSegue(withIdentifier: "goToWait", sender: self)
+                        }
+                    }
+                    // Leaving the game and entering a new game with the same name.
+                    else if (gameCode != storedGameCode) && (name.isEmpty || name == storedRefereeName) {
+                        let oldReferee = UserData.readReferee("referee")!
+                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
+                        Task { @MainActor in
+                            do {
+                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+                            } catch GameWalkerError.invalidGamecode(let message) {
+                                print(message)
+                                gamecodeAlert(message)
+                                return
+                            } catch GameWalkerError.serverError(let message) {
+                                print(message)
+                                serverAlert(message)
+                                return
+                            }
+                            UserData.writeGamecode(gameCode, "gamecode")
+                            UserData.writeUsername(newReferee.name, "username")
+                            UserData.writeReferee(newReferee, "referee")
+                            UserDefaults.standard.removeObject(forKey: "max")
+                            UserDefaults.standard.removeObject(forKey: "maxA")
+                            UserDefaults.standard.removeObject(forKey: "maxB")
+                            performSegue(withIdentifier: "goToWait", sender: self)
+                        }
+                    }
+                    // Joining the game again with a new name.
+                    else if (gameCode.isEmpty || gameCode == storedGameCode) && (name != storedRefereeName) {
+                        let oldReferee = UserData.readReferee("referee")!
+                        let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
+                        Task { @MainActor in
+                            do {
+                                try await R.modifyName(storedGameCode, refereeUserID, name)
+                            } catch GameWalkerError.invalidGamecode(let message) {
+                                print(message)
+                                gamecodeAlert(message)
+                                return
+                            } catch GameWalkerError.serverError(let message) {
+                                print(message)
+                                serverAlert(message)
+                                return
+                            }
+                        }
+                        UserData.writeGamecode(storedGameCode, "gamecode")
                         UserData.writeUsername(newReferee.name, "username")
                         UserData.writeReferee(newReferee, "referee")
-                        UserDefaults.standard.removeObject(forKey: "max")
-                        UserDefaults.standard.removeObject(forKey: "maxA")
-                        UserDefaults.standard.removeObject(forKey: "maxB")
-                        performSegue(withIdentifier: "goToWait", sender: self)
-                    }
-                } else {
-                    alert(title: "", message: "Please enter both game code and username.")
-                }
-            }
-            // Rejoining the game.
-            else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let oldReferee = UserData.readReferee("referee")!
-                if oldReferee.assigned && gameStart! {
-                    for station in stations {
-                        if station.name == oldReferee.stationName {
-                            self.pvp = station.pvp
-                            break;
+                        if oldReferee.assigned && gameStart! {
+                            for station in stations {
+                                if station.name == oldReferee.stationName {
+                                    self.pvp = station.pvp
+                                    break;
+                                }
+                            }
+                            if self.pvp! {
+                                performSegue(withIdentifier: "toPVP", sender: self)
+                            } else {
+                                performSegue(withIdentifier: "toPVE", sender: self)
+                            }
+                        } else {
+                            performSegue(withIdentifier: "goToWait", sender: self)
                         }
                     }
-                    if self.pvp! {
-                        performSegue(withIdentifier: "toPVP", sender: self)
-                    } else {
-                        performSegue(withIdentifier: "toPVE", sender: self)
-                    }
-                } else {
-                    performSegue(withIdentifier: "goToWait", sender: self)
-                }
-            }
-            // Leaving the game and entering a new game with the same name.
-            else if (gameCode != storedGameCode) && (name.isEmpty || name == storedRefereeName) {
-                let oldReferee = UserData.readReferee("referee")!
-                let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
-                Task { @MainActor in
-                    do {
-                        try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                    UserData.writeGamecode(gameCode, "gamecode")
-                    UserData.writeUsername(newReferee.name, "username")
-                    UserData.writeReferee(newReferee, "referee")
-                    UserDefaults.standard.removeObject(forKey: "max")
-                    UserDefaults.standard.removeObject(forKey: "maxA")
-                    UserDefaults.standard.removeObject(forKey: "maxB")
-                    performSegue(withIdentifier: "goToWait", sender: self)
-                }
-            }
-            // Joining the game again with a new name.
-            else if (gameCode.isEmpty || gameCode == storedGameCode) && (name != storedRefereeName) {
-                let oldReferee = UserData.readReferee("referee")!
-                let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: oldReferee.stationName, assigned: oldReferee.assigned)
-                Task { @MainActor in
-                    do {
-                        try await R.modifyName(storedGameCode, refereeUserID, name)
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                }
-                UserData.writeGamecode(storedGameCode, "gamecode")
-                UserData.writeUsername(newReferee.name, "username")
-                UserData.writeReferee(newReferee, "referee")
-                if oldReferee.assigned && gameStart! {
-                    for station in stations {
-                        if station.name == oldReferee.stationName {
-                            self.pvp = station.pvp
-                            break;
+                    //Joining a completely new game with a different name on the same machine.
+                    else {
+                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                        Task { @MainActor in
+                            do {
+                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+                            } catch GameWalkerError.invalidGamecode(let message) {
+                                print(message)
+                                gamecodeAlert(message)
+                                return
+                            } catch GameWalkerError.serverError(let message) {
+                                print(message)
+                                serverAlert(message)
+                                return
+                            }
+                            UserData.writeGamecode(gameCode, "gamecode")
+                            UserData.writeUsername(name, "username")
+                            UserData.writeReferee(newReferee, "referee")
+                            UserDefaults.standard.removeObject(forKey: "max")
+                            UserDefaults.standard.removeObject(forKey: "maxA")
+                            UserDefaults.standard.removeObject(forKey: "maxB")
+                            performSegue(withIdentifier: "goToWait", sender: self)
                         }
                     }
-                    if self.pvp! {
-                        performSegue(withIdentifier: "toPVP", sender: self)
-                    } else {
-                        performSegue(withIdentifier: "toPVE", sender: self)
-                    }
-                } else {
-                    performSegue(withIdentifier: "goToWait", sender: self)
                 }
-            }
-            //Joining a completely new game with a different name on the same machine.
-            else {
-                let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                Task { @MainActor in
-                    do {
-                        try await R.addReferee(gameCode, newReferee, refereeUserID)
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                    UserData.writeGamecode(gameCode, "gamecode")
-                    UserData.writeUsername(name, "username")
-                    UserData.writeReferee(newReferee, "referee")
-                    UserDefaults.standard.removeObject(forKey: "max")
-                    UserDefaults.standard.removeObject(forKey: "maxA")
-                    UserDefaults.standard.removeObject(forKey: "maxB")
-                    performSegue(withIdentifier: "goToWait", sender: self)
-                }
+                
             }
         }
     }
@@ -204,13 +216,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 extension RegisterController: HostUpdateListener {
     func updateHost(_ host: Host) {
         self.gameStart = host.gameStart
-        self.standardStyle = host.standardStyle
-        if self.standardStyle! {
-           nextButton.isEnabled = true
-        } else {
-           nextButton.isEnabled = false
-           alert(title: "Referee Disabled", message: "You are in different style.")
-        }
     }
     
     func listen(_ _ : [String : Any]){

@@ -47,25 +47,14 @@ class RefereePVEGuideViewController : UIViewController {
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         return view
     }()
-    
-    private lazy var teamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+
+    private lazy var teamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        return label
     }()
     
     private lazy var winButton: UIImageView = {
@@ -188,7 +177,7 @@ class RefereePVEGuideViewController : UIViewController {
             buttonBorder.heightAnchor.constraint(equalToConstant: frameList[count].height),
 
             teamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 1].minX),
-            teamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 1].minY),
+            teamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 1].minY - frameList[count + 1].height/2),
             teamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 1].width),
             teamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 1].height),
 

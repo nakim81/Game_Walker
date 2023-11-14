@@ -63,44 +63,22 @@ class RefereePVPGuideViewController : UIViewController {
         return view
     }()
     
-    private lazy var leftTeamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+    private lazy var leftTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        return label
     }()
     
-    private lazy var rightTeamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+    private lazy var rightTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        return label
     }()
     
     private lazy var leftWinButton: UIImageView = {
@@ -275,7 +253,7 @@ class RefereePVPGuideViewController : UIViewController {
                 leftLoseButton.heightAnchor.constraint(equalToConstant: frameList[count + 2].height),
                 
                 leftTeamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 3].minX),
-                leftTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 3].minY),
+                leftTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 3].minY - frameList[count + 3].height),
                 leftTeamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 3].width),
                 leftTeamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 3].height),
                 
@@ -295,7 +273,7 @@ class RefereePVPGuideViewController : UIViewController {
                 rightLoseButton.heightAnchor.constraint(equalToConstant: frameList[count + 6].height),
                 
                 rightTeamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 7].minX),
-                rightTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 7].minY),
+                rightTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 7].minY - frameList[count + 7].height),
                 rightTeamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 7].width),
                 rightTeamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 7].height),
             ])

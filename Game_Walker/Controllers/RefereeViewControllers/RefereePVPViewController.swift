@@ -265,7 +265,7 @@ class RefereePVPController: BaseViewController {
         let label = UILabel()
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
-        label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 2].name)"
+        label.text = "\(self.teamOrder[2 * self.round - 2].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -434,7 +434,7 @@ class RefereePVPController: BaseViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
         label.backgroundColor = .white
         label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
-        label.text = "Team name is" + "\n" + "\(self.teamOrder[2 * self.round - 1].name)"
+        label.text = "\(self.teamOrder[2 * self.round - 1].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -853,7 +853,7 @@ class RefereePVPController: BaseViewController {
     private func showOverlay() {
         let overlayViewController = RefereePVPGuideViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen
-        let explanationTexts = ["Remote your Station", "Ranking Status", "Timer & Station Info"]
+        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         var tabBarTop: CGFloat = 0
@@ -899,12 +899,12 @@ class RefereePVPController: BaseViewController {
         self.teamA = self.teamOrder[2 * self.round - 2]
         leftTeamNumLabel.text = "Team \(self.teamA.number)"
         leftIconButton.image = UIImage(named: self.teamA.iconName)
-        leftTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamA.name)"
+        leftTeamNameLabel.text = "\(self.teamA.name)"
         leftScoreLabel.text = "\(self.teamA.points)"
         self.teamB = self.teamOrder[2 * self.round - 1]
         rightTeamNumLabel.text = "Team \(self.teamB.number)"
         rightIconButton.image = UIImage(named: self.teamB.iconName)
-        rightTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamB.name)"
+        rightTeamNameLabel.text = "\(self.teamB.name)"
         rightScoreLabel.text = "\(self.teamB.points)"
     }
     
@@ -989,11 +989,11 @@ extension RefereePVPController: RefereeUpdateListener, HostUpdateListener, TeamU
             roundLabel.text = "Round " + "\(host.currentRound)"
             leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
             leftIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 2].iconName)
-            leftTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 2].name)"
+            leftTeamNameLabel.text = "\(self.teamOrder[2 * host.currentRound - 2].name)"
             leftScoreLabel.text = "\(self.teamOrder[2 * host.currentRound - 2].points)"
             rightTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 1].number)"
             rightIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 1].iconName)
-            rightTeamNameLabel.text = "Team name is" + "\n" + "\(self.teamOrder[2 * host.currentRound - 1].name)"
+            rightTeamNameLabel.text = "\(self.teamOrder[2 * host.currentRound - 1].name)"
             rightScoreLabel.text = "\(self.teamOrder[2 * host.currentRound - 1].points)"
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true

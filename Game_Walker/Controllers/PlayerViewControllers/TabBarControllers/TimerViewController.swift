@@ -63,58 +63,113 @@ class TimerViewController: BaseViewController {
     private let timerCircle: UILabel = {
         var view = UILabel()
         view.clipsToBounds = true
-        view.frame = CGRect(x: 0, y: 0, width: 256, height: 256)
+        view.frame = CGRect()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.alpha = 0.6
-        view.layer.borderWidth = 15
-        view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        view.layer.borderWidth = 15 * UIScreen.main.bounds.size.width / 375
+        view.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.6).cgColor
         view.layer.cornerRadius = 0.68 * UIScreen.main.bounds.size.width / 2.0
         return view
     }()
     
-    private let timerLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 55)
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let timeTypeLabel: UILabel = {
+    private lazy var timeTypeLabel: UILabel = {
         let label = UILabel()
         label.text = "Moving Time"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 35)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.textColor = .black
         label.numberOfLines = 1
         return label
     }()
     
-    private let roundLabel: UILabel = {
+    private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 35)
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 55))
+        label.textColor = .black
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var roundLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Round 1"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(red: 0.006, green: 0.45, blue: 0.721, alpha: 1)
+        label.textAlignment = .center
+        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.numberOfLines = 1
         label.alpha = 0.0
         return label
     }()
     
-    private let totalTimeLabel: UILabel = {
+    private lazy var totalTimeLabel: UILabel = {
         let label = UILabel()
+        let attributedText = NSMutableAttributedString()
+        let totaltimeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
+            .foregroundColor: UIColor.black
+        ]
+        let totaltimeAttributedString = NSAttributedString(string: "GAME TIME\n", attributes: totaltimeAttributes)
+        attributedText.append(totaltimeAttributedString)
+        let timeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .foregroundColor: UIColor.black
+        ]
+        let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)
+        attributedText.append(timeAttributedString)
+        label.attributedText = attributedText
         label.textAlignment = .center
-        label.textColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        label.textColor = UIColor(red: 0.006, green: 0.45, blue: 0.721, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.alpha = 0.0
         return label
     }()
     
+    private lazy var currentStationInfoButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("Current Station Info", for: .normal)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
+        button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(currentStationInfoButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        findStation()
+        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
+    }
+    
+    private lazy var nextStationInfoButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("Next Station Info", for: .normal)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
+        button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(nextStationInfoButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func nextStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if round == rounds {
+            alert(title: "Warning", message: "You are in your last round!")
+        }
+        else {
+            findStation()
+            showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
+        }
+    }
+    
     private lazy var gameCodeLabel: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
@@ -153,8 +208,9 @@ class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task { @MainActor in
+            gameInfoButton.removeFromSuperview()
+            nextGameButton.removeFromSuperview()
             callProtocols()
-            configureGamecodeLabel()
             host = try await H.getHost(gameCode) ?? Host()
             team = try await T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
             stations = try await S.getStationList(gameCode)
@@ -185,7 +241,6 @@ class TimerViewController: BaseViewController {
     @objc func gameOver() {
         Task {@MainActor in
             await H.detatchHost()
-            print(H.listener)
             NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "gameover"), object: nil)
             showAwardPopUp()
         }
@@ -230,6 +285,7 @@ class TimerViewController: BaseViewController {
             gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
         ])
     }
+    
     // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -301,35 +357,51 @@ class TimerViewController: BaseViewController {
     
     func configureTimerLabel() {
         self.view.addSubview(timerCircle)
-        self.view.addSubview(timerLabel)
-        self.view.addSubview(timeTypeLabel)
-        self.view.addSubview(roundLabel)
-        self.view.addSubview(totalTimeLabel)
+        timerCircle.addSubview(timerLabel)
+        timerCircle.addSubview(timeTypeLabel)
+        timerCircle.addSubview(roundLabel)
+        timerCircle.addSubview(totalTimeLabel)
+        self.view.addSubview(currentStationInfoButton)
+        self.view.addSubview(nextStationInfoButton)
+        currentStationInfoButton.translatesAutoresizingMaskIntoConstraints = false
+        nextStationInfoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.076),
+            
             timerCircle.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor),
             timerCircle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: self.view.bounds.height * 0.028),
             timerCircle.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             timerCircle.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.68),
             
+            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
+            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.09),
+            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.9),
+            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
+            
             timerLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timerLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.39),
+            timerLabel.topAnchor.constraint(equalTo: self.timeTypeLabel.layoutMarginsGuide.bottomAnchor, constant: 0),
             timerLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.70),
             timerLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.36),
             
-            timeTypeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            timeTypeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.29),
-            timeTypeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.656),
-            timeTypeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
-            
             roundLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.32),
+            roundLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.084),
             roundLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.605),
             roundLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.17),
             
             totalTimeLabel.centerXAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.centerXAnchor),
-            totalTimeLabel.topAnchor.constraint(equalTo: self.timerCircle.layoutMarginsGuide.topAnchor, constant: self.timerCircle.bounds.height * 0.547),
-            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.38),
-            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.19)
+            totalTimeLabel.topAnchor.constraint(equalTo: self.roundLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.01),
+            totalTimeLabel.widthAnchor.constraint(equalTo: self.timerCircle.widthAnchor, multiplier: 0.53),
+            totalTimeLabel.heightAnchor.constraint(equalTo: self.timerCircle.heightAnchor, multiplier: 0.27),
+            
+            currentStationInfoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            currentStationInfoButton.topAnchor.constraint(equalTo: timerCircle.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            currentStationInfoButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.45),
+            currentStationInfoButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.068),
+            
+            nextStationInfoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            nextStationInfoButton.topAnchor.constraint(equalTo: currentStationInfoButton.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
+            nextStationInfoButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.45),
+            nextStationInfoButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.068)
         ])
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
         timerCircle.addGestureRecognizer(tapGesture)
@@ -346,6 +418,12 @@ class TimerViewController: BaseViewController {
                 if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
                     strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
+                }
+                if strongSelf.remainingTime == 10 {
+                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                }
+                if strongSelf.remainingTime == 9 {
+                    strongSelf.audioPlayerManager.stop()
                 }
                 if strongSelf.remainingTime <= 5 {
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
@@ -365,8 +443,6 @@ class TimerViewController: BaseViewController {
                             strongSelf.moving = true
                             strongSelf.timeTypeLabel.text = "Moving Time"
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-                            strongSelf.round += 1
-                            strongSelf.roundLabel.text = "Round \(strongSelf.round)"
                         }
                     }
                     strongSelf.time -= 1
@@ -377,8 +453,8 @@ class TimerViewController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             }
@@ -390,36 +466,32 @@ class TimerViewController: BaseViewController {
             t = pauseTime - startTime - pausedTime
         }
         else {
-            if pausedTime != 0 {
-                t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
-            }
-//            else {
-//                t = 0
-//            }
+            t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
         }
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
             self.timeTypeLabel.text = "Moving Time"
-            self.time = (moveSeconds - remainder)
+            self.time = (moveSeconds - remainder%moveSeconds)
             self.moving = true
-            let minute = (moveSeconds - remainder)/60
-            let second = (moveSeconds - remainder) % 60
+            let minute = (moveSeconds - remainder%moveSeconds)/60
+            let second = (moveSeconds - remainder%moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
             self.timeTypeLabel.text = "Station Time"
-            self.time = (seconds - remainder)
+            self.time = (seconds - remainder%moveSeconds)
             self.moving = false
-            let minute = (seconds - remainder)/60
-            let second = (seconds - remainder) % 60
+            let minute = (seconds - remainder%moveSeconds)/60
+            let second = (seconds - remainder%moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
+        self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
@@ -428,8 +500,8 @@ class TimerViewController: BaseViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 20) ?? UIFont(name: "Dosis-Regular", size: 20)!])
-            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15) ?? UIFont(name: "Dosis-Regular", size: 15)!]))
+            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds)"
         } else {
@@ -447,7 +519,7 @@ class TimerViewController: BaseViewController {
             totalTimeLabel.alpha = 1.0
             tapped = true
         } else {
-            timerCircle.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+            timerCircle.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.6).cgColor
             timerLabel.alpha = 1.0
             timeTypeLabel.alpha = 1.0
             roundLabel.alpha = 0.0
@@ -460,6 +532,7 @@ class TimerViewController: BaseViewController {
 //MARK: - UIUpdate
 extension TimerViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
+        roundLabel.text = "Round \(host.currentRound)"
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
