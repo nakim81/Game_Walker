@@ -260,6 +260,13 @@ extension HostRankingViewcontroller {
     @objc func updateTeams(notification: Notification) {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
         self.teamList = teams
+        self.teamList.sort { (team1, team2) in
+            if team1.points != team2.points {
+                return team1.points > team2.points
+            } else {
+                return team1.number < team2.number
+            }
+        }
         leaderBoard.reloadData()
     }
 }
