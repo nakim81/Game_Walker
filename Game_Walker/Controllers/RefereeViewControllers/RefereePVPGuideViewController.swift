@@ -63,44 +63,22 @@ class RefereePVPGuideViewController : UIViewController {
         return view
     }()
     
-    private lazy var leftTeamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+    private lazy var leftTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        return label
     }()
     
-    private lazy var rightTeamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+    private lazy var rightTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        return label
     }()
     
     private lazy var leftWinButton: UIImageView = {
@@ -195,12 +173,12 @@ class RefereePVPGuideViewController : UIViewController {
             
             buttonLabel.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.8),
             buttonLabel.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.045),
-            buttonLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: self.view.bounds.height * 0.225),
+            buttonLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: self.view.bounds.height * 0.230),
             buttonLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             
             explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
             explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.025),
-            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.2),
+            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.35),
             explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
         ])
     }
@@ -226,18 +204,18 @@ class RefereePVPGuideViewController : UIViewController {
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.clipsToBounds = true
-            circleView.layer.cornerRadius = frameList[i].height*1.2 / 2
+            circleView.layer.cornerRadius = frameList[i].height * 1.55 / 2
             circleView.layer.borderColor = colorList[i]
             circleView.layer.borderWidth = 3
             overlayView.addSubview(circleView)
             
             NSLayoutConstraint.activate([
                 explanationLbl.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 10),
+                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 17),
                 
-                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.992),
+                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.981),
                 circleView.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.25),
+                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.6),
                 circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor)
             ])
             
@@ -275,7 +253,7 @@ class RefereePVPGuideViewController : UIViewController {
                 leftLoseButton.heightAnchor.constraint(equalToConstant: frameList[count + 2].height),
                 
                 leftTeamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 3].minX),
-                leftTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 3].minY),
+                leftTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 3].minY - frameList[count + 3].height),
                 leftTeamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 3].width),
                 leftTeamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 3].height),
                 
@@ -295,7 +273,7 @@ class RefereePVPGuideViewController : UIViewController {
                 rightLoseButton.heightAnchor.constraint(equalToConstant: frameList[count + 6].height),
                 
                 rightTeamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 7].minX),
-                rightTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 7].minY),
+                rightTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 7].minY - frameList[count + 7].height),
                 rightTeamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 7].width),
                 rightTeamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 7].height),
             ])

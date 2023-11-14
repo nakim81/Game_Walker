@@ -160,7 +160,6 @@ class CreateTeamViewController: UIViewController {
                 return
             }
         }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tabBarController = segue.destination as? PlayerTabBarController {

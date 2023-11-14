@@ -124,6 +124,24 @@ class StationsTableViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func nextButtonPressed(_ sender: UIButton) {
+        if currentStations.count < 1 {
+            alert(title: "You need at least 1 Station", message: "Please add a station")
+            return
+        }
+        Task { @MainActor in
+            do {
+                try await H.completeStations(gamecode!, true)
+                performSegue(withIdentifier: "ToSettingsSegue", sender: self)
+            } catch GameWalkerError.serverError(let text){
+                print(text)
+                serverAlert(text)
+                return
+            }
+        }
+    }
+    
 
 }
 

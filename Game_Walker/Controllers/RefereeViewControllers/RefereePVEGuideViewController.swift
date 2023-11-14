@@ -47,25 +47,14 @@ class RefereePVEGuideViewController : UIViewController {
         label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         return view
     }()
-    
-    private lazy var teamPointsLabel: UIView = {
-        var view = UIView()
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 5.0
-        view.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
-        view.layer.cornerRadius = 5.0
+
+    private lazy var teamPointsLabel: UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Team's total points"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
-        view.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        return view
+        return label
     }()
     
     private lazy var winButton: UIImageView = {
@@ -128,7 +117,7 @@ class RefereePVEGuideViewController : UIViewController {
             
             explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
             explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.025),
-            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.2),
+            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.3),
             explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
         ])
     }
@@ -156,18 +145,18 @@ class RefereePVEGuideViewController : UIViewController {
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.clipsToBounds = true
-            circleView.layer.cornerRadius = frameList[i].height*1.2 / 2
+            circleView.layer.cornerRadius = frameList[i].height*1.55 / 2
             circleView.layer.borderColor = colorList[i]
             circleView.layer.borderWidth = 3
             overlayView.addSubview(circleView)
             
             NSLayoutConstraint.activate([
                 explanationLbl.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 10),
+                explanationLbl.bottomAnchor.constraint(equalTo: overlayView.topAnchor, constant: tabBarTop - 17),
                 
-                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.992),
+                circleView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[i].y*0.981),
                 circleView.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[i].x),
-                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.25),
+                circleView.widthAnchor.constraint(equalToConstant: frameList[i].height * 1.6),
                 circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor)
             ])
         }
@@ -188,7 +177,7 @@ class RefereePVEGuideViewController : UIViewController {
             buttonBorder.heightAnchor.constraint(equalToConstant: frameList[count].height),
 
             teamPointsLabel.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 1].minX),
-            teamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 1].minY),
+            teamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 1].minY - frameList[count + 1].height/2),
             teamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 1].width),
             teamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 1].height),
 

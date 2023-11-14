@@ -170,21 +170,6 @@
             </objects>
             <point key="canvasLocation" x="-378" y="131"/>
         </scene>
-        <!--Give Points Controller-->
-        <scene sceneID="fr4-mJ-QRE">
-            <objects>
-                <viewController id="oap-1p-LNQ" customClass="GivePointsController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wsF-wg-h8L">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="DDt-pE-hgc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="veh-Wh-Q4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5578" y="-1522"/>
-        </scene>
         <!--Referee Tab BarPVE Controller-->
         <scene sceneID="58K-jT-5gZ">
             <objects>
@@ -286,9 +271,9 @@
                         <outlet property="leaveButton" destination="8CS-DM-8s8" id="tp0-99-A3b"/>
                         <outlet property="messageButton" destination="2ZF-x4-wLh" id="rTW-Zy-wgU"/>
                         <outlet property="settingsButton" destination="VCC-9k-IBy" id="cWd-VS-Aut"/>
-                        <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVE" id="bfG-fW-iGy"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="KeI-Qk-QLQ"/>
                         <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="aOb-L3-ExC"/>
+                        <segue destination="R55-PH-MbY" kind="show" identifier="goToPVP" id="fyi-xk-pLj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42f-rM-rtM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -560,14 +545,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="N01-yb-VHc"/>
+                    <navigationItem key="navigationItem" id="yGm-4O-u5B"/>
                     <connections>
                         <outlet property="annnouncementButton" destination="7zg-Mj-YQM" id="Kts-7P-gAJ"/>
                         <outlet property="infoButton" destination="b7I-nf-wXK" id="L4S-rd-xmR"/>
                         <outlet property="leaveButton" destination="36t-aj-G8Y" id="Mwe-rV-Pm4"/>
                         <outlet property="settingsButton" destination="Ury-Rb-uWQ" id="6Ha-vB-2QQ"/>
-                        <segue destination="oap-1p-LNQ" kind="presentation" identifier="givePointsPVP" id="GxM-Ra-Tyo"/>
                         <segue destination="Y6W-OH-hqX" kind="show" identifier="toRegister" id="ef2-ZC-eYE"/>
                         <segue destination="d9X-u1-YmW" kind="show" identifier="toWait" id="hGd-Bz-Fky"/>
+                        <segue destination="4eu-zS-s9n" kind="show" identifier="goToPVE" id="BFP-JJ-wUU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUJ-SR-8WA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -741,11 +727,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SEr-t1-evM"/>
-        <segue reference="nu7-bb-fST"/>
-        <segue reference="bfG-fW-iGy"/>
-        <segue reference="s6S-2S-uEn"/>
-        <segue reference="KeI-Qk-QLQ"/>
+        <segue reference="fyi-xk-pLj"/>
+        <segue reference="BFP-JJ-wUU"/>
+        <segue reference="hGd-Bz-Fky"/>
+        <segue reference="ef2-ZC-eYE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Code" width="168" height="27.5"/>

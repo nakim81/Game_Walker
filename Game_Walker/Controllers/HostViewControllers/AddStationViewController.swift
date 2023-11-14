@@ -76,8 +76,8 @@ class AddStationViewController: UIViewController {
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
         refereeTableView.dataSource = self
-//        R.delegate_refereeList = self
-//        R.getRefereeList(gamecode)
+        rulesTextfield.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        
         Task { @MainActor in
             do {
                 allReferees = try await R.getRefereeList(gamecode)

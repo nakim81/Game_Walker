@@ -228,7 +228,7 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
 extension HostRankingViewcontroller {
     @objc func updateLeaderboard(notification: Notification) {
         guard let round = notification.userInfo?["round"] as? Int else { return }
-        self.round = round
+        self.round = round - 1
         leaderBoard.reloadData()
     }
     

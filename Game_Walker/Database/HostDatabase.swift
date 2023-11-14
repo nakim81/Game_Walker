@@ -36,7 +36,7 @@ struct H {
             try await server.updateData([
                 "confirmStations": finished
             ])
-            print("Stations complete!")
+            print("Stations complete! with: ", finished)
         } catch {
             print("Error completing stations: \(error)")
             throw GameWalkerError.serverError("Something went wrong while completing Stations")
