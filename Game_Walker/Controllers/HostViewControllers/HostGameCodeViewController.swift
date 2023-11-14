@@ -58,21 +58,18 @@ class HostGameCodeViewController: UIViewController {
                         let isStandard = hostTemp?.standardStyle ?? true
                         
                         if !isStandard {
-                            UserData.writeGamecode(userGamecodeInput, "gamecode")
-                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             return
                         }
                         
                         if !(hostTemp?.confirmCreated ?? true) {
-                            UserData.writeGamecode(userGamecodeInput, "gamecode")
-                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
                             
                         } else {
                             if UserData.isHostConfirmed() ?? false {
-                                UserData.writeGamecode(userGamecodeInput, "gamecode")
-                                H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                                UserData.writeGamecode(gamecode!, "gamecode")
                                 performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             } else{
                                 alert(title: "", message: "Invalid Host!")
@@ -95,18 +92,18 @@ class HostGameCodeViewController: UIViewController {
                         let isStandard = hostTemp?.standardStyle ?? true
                         
                         if !isStandard {
-                            UserData.writeGamecode(userGamecodeInput, "gamecode")
-                            H.updateHost(_:_:)(userGamecodeInput, hostTemp!)
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             return
                         }
                         if !(hostTemp?.confirmCreated ?? true) {
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
                         } else {
                             if UserData.isHostConfirmed() ?? false {
+                                UserData.writeGamecode(gamecode!, "gamecode")
                                 performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             } else{
-                                print("userdata host confirmed: ", UserData.isHostConfirmed())
                                 alert(title: "", message: "Invalid Host!")
                             }
                         }
