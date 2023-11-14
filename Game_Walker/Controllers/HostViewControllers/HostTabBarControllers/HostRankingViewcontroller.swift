@@ -275,6 +275,13 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
 extension HostRankingViewcontroller: TeamUpdateListener {
     func updateTeams(_ teams: [Team]) {
         self.teamList = teams
+        self.teamList.sort { (team1, team2) in
+            if team1.points != team2.points {
+                return team1.points > team2.points
+            } else {
+                return team1.number < team2.number
+            }
+        }
         leaderBoard.reloadData()
     }
 }

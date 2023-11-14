@@ -160,7 +160,13 @@ struct T {
                 let team = convertDataToTeam(data)
                 teams.append(team)
             }
-            teams.sort { $0.points > $1.points }
+            teams.sort { (team1, team2) in
+                if team1.points != team2.points {
+                    return team1.points > team2.points
+                } else {
+                    return team1.number < team2.number
+                }
+            }
             return teams
         }
         catch {
