@@ -11,9 +11,6 @@ import AVFoundation
 
 class TimerViewController: BaseViewController {
 
-    @IBOutlet weak var gameInfoButton: UIButton!
-    @IBOutlet weak var nextGameButton: UIButton!
-    
     @IBOutlet weak var titleLabel: UILabel!
     private var messages: [String] = []
     
@@ -208,9 +205,6 @@ class TimerViewController: BaseViewController {
         super.viewDidLoad()
         configureNavigationBar()
         Task { @MainActor in
-            gameInfoButton.removeFromSuperview()
-            nextGameButton.removeFromSuperview()
-            callProtocols()
             host = try await H.getHost(gameCode) ?? Host()
             team = try await T.getTeam(gameCode, UserData.readTeam("team")?.name ?? "") ?? Team()
             stations = try await S.getStationList(gameCode)
@@ -228,23 +222,6 @@ class TimerViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
-    }
-    
-    @IBAction func gameInfoButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        findStation()
-        showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
-    }
-    
-    @IBAction func nextGameButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        if round == rounds {
-            alert(title: "Warning", message: "You are in your last round!")
-        }
-        else {
-            findStation()
-            showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
-        }
     }
     
     func setSettings() {
@@ -536,6 +513,7 @@ extension TimerViewController {
     
     @objc override func infoAction() {
         self.showOverlay()
+    }
     
     @objc override func announceAction() {
         showMessagePopUp(messages: TeamViewController.localMessages)

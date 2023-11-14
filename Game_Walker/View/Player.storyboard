@@ -556,26 +556,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xni-rl-bjf">
-                                <rect key="frame" x="126.66666666666669" y="553" width="175" height="60"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="current station info 2"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="gameInfoButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="Ktk-4e-S5D"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frx-gX-yty">
-                                <rect key="frame" x="126.66666666666669" y="669.66666666666663" width="175" height="60"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="next station info 1"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="nextGameButtonPressed:" destination="ynI-iC-04s" eventType="touchUpInside" id="UPF-XF-prI"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-qO-Kvn">
                                 <rect key="frame" x="128.33333333333331" y="112" width="171.33333333333331" height="56"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
@@ -586,25 +566,15 @@
                         <viewLayoutGuide key="safeArea" id="BjG-Bb-y3L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Frx-gX-yty" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.5" id="0by-72-GS7"/>
-                            <constraint firstItem="Frx-gX-yty" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.408879" id="1ar-UH-0eA"/>
-                            <constraint firstItem="xni-rl-bjf" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="1.25" id="7wt-C8-Alz"/>
-                            <constraint firstItem="Frx-gX-yty" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="DK0-Vi-baP"/>
-                            <constraint firstItem="xni-rl-bjf" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="G3r-jC-gSe"/>
-                            <constraint firstItem="Frx-gX-yty" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="SB1-yP-bPD"/>
-                            <constraint firstItem="xni-rl-bjf" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.408879" id="UZK-Xp-ha5"/>
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="centerY" secondItem="BjG-Bb-y3L" secondAttribute="centerY" multiplier="0.3" id="Vg4-Ih-Rkw"/>
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="width" secondItem="BjG-Bb-y3L" secondAttribute="width" multiplier="0.4" id="czf-W2-XS3"/>
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="centerX" secondItem="BjG-Bb-y3L" secondAttribute="centerX" id="jTH-6N-oGT"/>
-                            <constraint firstItem="xni-rl-bjf" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0731707" id="urL-df-aQm"/>
                             <constraint firstItem="rhR-qO-Kvn" firstAttribute="height" secondItem="BjG-Bb-y3L" secondAttribute="height" multiplier="0.0680507" id="vJo-QC-qjc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qeT-WX-hQA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="gameInfoButton" destination="xni-rl-bjf" id="qXc-RA-GNw"/>
-                        <outlet property="nextGameButton" destination="Frx-gX-yty" id="aey-u2-y5H"/>
                         <outlet property="titleLabel" destination="rhR-qO-Kvn" id="luX-wA-huG"/>
                     </connections>
                 </viewController>
@@ -678,8 +648,6 @@
         <image name="MemberButton" width="76" height="76"/>
         <image name="RankingButton" width="76" height="76"/>
         <image name="TimerButton1" width="76" height="76"/>
-        <image name="current station info 2" width="169.66667175292969" height="55"/>
-        <image name="next station info 1" width="169.66667175292969" height="55"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -160,12 +160,13 @@ class CreateTeamViewController: UIViewController {
                 return
             }
         }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tabBarController = segue.destination as? PlayerTabBarController {
             // Determine the value of "standardStyle" (true or false)
             guard let isStandardStyle = self.host?.standardStyle else {return}
-
+            
             // Pass the "standardStyle" value to the tab bar controller
             tabBarController.standardStyle = isStandardStyle
         }
