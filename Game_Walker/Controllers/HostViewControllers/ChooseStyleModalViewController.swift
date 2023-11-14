@@ -21,7 +21,7 @@ class ChooseStyleModalViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        T.delegates.append(self)
+        T.delegates.append(WeakTeamUpdateListener(value: self))
         let standardModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(standardModeViewTapped))
         standardModeView.addGestureRecognizer(standardModeTapGesture)
 

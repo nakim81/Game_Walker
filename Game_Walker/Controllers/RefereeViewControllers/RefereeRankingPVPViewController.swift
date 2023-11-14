@@ -73,7 +73,7 @@ class RefereeRankingPVPViewController: UIViewController {
     }
     
     private func configureListeners(){
-        T.delegates.append(self)
+        T.delegates.append(WeakTeamUpdateListener(value: self))
         H.delegates.append(WeakHostUpdateListener(value: self))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))

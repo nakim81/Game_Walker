@@ -940,7 +940,7 @@ extension RefereePVPController: RefereeUpdateListener, HostUpdateListener, TeamU
     func callProtocols() {
         R.delegates.append(self)
         H.delegates.append(WeakHostUpdateListener(value: self))
-        T.delegates.append(self)
+        T.delegates.append(WeakTeamUpdateListener(value: self))
         R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
