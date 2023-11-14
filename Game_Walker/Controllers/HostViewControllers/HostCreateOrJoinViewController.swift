@@ -58,8 +58,6 @@ class HostCreateOrJoinViewController: UIViewController {
     @IBAction func createButtonPressed(_ sender: UIButton) {
 
     }
-    
-    
-    
+
 }
 

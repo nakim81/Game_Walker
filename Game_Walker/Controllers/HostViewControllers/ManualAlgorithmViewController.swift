@@ -1279,11 +1279,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let grid =  createIntegerGrid()
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
-//                let hostupdate = Host(gamecode: host!.gamecode, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: true )
-//                let hostupdate = Host(gamecode: host!.gamecode, confirmStations: true, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: false )
-                let hostupdate = Host(gamecode: host!.gamecode, confirmStations: true, gameTime: host!.gameTime, movingTime: host!.movingTime, rounds: self.num_rounds, teams: self.num_teams, algorithm: temp, gameStart: host!.gameStart, paused: host!.paused, startTimestamp: host!.startTimestamp, pauseTimestamp: host!.pauseTimestamp, pausedTime: host!.pausedTime)
-                H.updateHost(gamecode, hostupdate)
-                print("host state before creating game : ", "gamecode: ", host!.gamecode, "gameTime:", host!.gameTime, "movingTime:", host!.movingTime, "rounds:", self.num_rounds, "teams:", self.num_teams, "algorithm:", temp)
+
             }
 
         }
@@ -1295,6 +1291,7 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "HostTabBarController") as? UITabBarController {
             tabBarController.selectedIndex = 0
             UserData.confirmHost(true)
+            print("confirm host")
             navigationController?.pushViewController(tabBarController, animated: true)
         }
     }

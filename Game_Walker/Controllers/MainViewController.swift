@@ -26,7 +26,9 @@ class MainViewController: UIViewController {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
         }
-        UserData.confirmHost(false)
+        if UserData.isHostConfirmed() == nil || UserData.isHostConfirmed() == false {
+            UserData.confirmHost(false)
+        }
 //        UserData.writeGamecode("111111", "gamecode")
 //        UserDefaults.standard.removeObject(forKey: "team")
 //        UserDefaults.standard.removeObject(forKey: "gamecode")

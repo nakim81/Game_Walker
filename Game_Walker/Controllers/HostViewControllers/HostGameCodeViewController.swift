@@ -106,6 +106,7 @@ class HostGameCodeViewController: UIViewController {
                             if UserData.isHostConfirmed() ?? false {
                                 performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             } else{
+                                print("userdata host confirmed: ", UserData.isHostConfirmed())
                                 alert(title: "", message: "Invalid Host!")
                             }
                         }
