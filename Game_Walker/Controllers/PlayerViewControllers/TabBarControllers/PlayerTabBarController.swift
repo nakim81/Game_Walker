@@ -45,7 +45,8 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
             
             if !standardStyle {
                 // Customize the tabBarItem when standardStyle is false
-                timerViewController.tabBarItem.image = UIImage(named: "TimerButton")
+//                timerViewController.tabBarItem.image = UIImage(named: "TimerButton")
+                timerViewController.tabBarItem.isEnabled = false
             } else {
                 // Reset the tabBarItem to its original image and title when standardStyle is true
                 timerViewController.tabBarItem.image = UIImage(named: "TimerButton1")

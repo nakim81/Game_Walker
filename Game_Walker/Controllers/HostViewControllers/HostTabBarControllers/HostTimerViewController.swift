@@ -67,6 +67,7 @@ class HostTimerViewController: UIViewController {
             }
             
             NotificationCenter.default.addObserver(self, selector: #selector(updateHostInfo), name: .hostUpdate, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(updateTeamsInfo), name: .teamsUpdate, object: nil)
         }
     }
     
@@ -429,7 +430,7 @@ class HostTimerViewController: UIViewController {
 // MARK: - @objc
 extension HostTimerViewController {
     @objc func updateHostInfo(notification: Notification) {
-        guard let host = notification.userInfo?["host"] as? Host else { return}
+        guard let host = notification.userInfo?["host"] as? Host else { return }
         self.startTime = host.startTimestamp
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime
@@ -438,30 +439,22 @@ extension HostTimerViewController {
         self.number = host.teams
     }
     
-
+    
     @objc override func announceAction() {
         showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
     }
     
     @objc override func infoAction() {
         showOverlay()
+    }
     
-    // 탭바에서 
-    func updateTeams(_ teams: [Team]) {
+    @objc func updateTeamsInfo(notification: Notification) {
+        guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
         if teams.count == self.number {
             ready = true
         }
     }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        H.delegates.append(self)
-        T.delegates.append(self)
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-    }
+}
 // MARK: - ModalViewControllerDelegate
 extension HostTimerViewController: ModalViewControllerDelegate {
     func modalViewControllerDidRequestPush() {
