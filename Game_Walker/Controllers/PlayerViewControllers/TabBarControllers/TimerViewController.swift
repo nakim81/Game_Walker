@@ -192,11 +192,23 @@ class TimerViewController: BaseViewController {
         addObservers()
         if TeamViewController.unread {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.unreadSome
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
             }
         } else {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.readAll
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }
@@ -480,11 +492,23 @@ extension TimerViewController {
         }
         if unread {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.unreadSome
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
             }
         } else {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.readAll
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }
@@ -517,36 +541,5 @@ extension TimerViewController {
     
     @objc override func announceAction() {
         showMessagePopUp(messages: TeamViewController.localMessages)
-    }
-    
-    @objc func announceUpdate(notification: Notification) {
-        guard let host = notification.userInfo?["host"] as? Host else { return }
-        // if some announcements were deleted from the server
-        if TeamViewController.localMessages.count > host.announcements.count {
-            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: host.announcements)
-            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
-        } else {
-            // compare server announcements and local announcements
-            for announcement in host.announcements {
-                let ids: [String] = TeamViewController.localMessages.map({ $0.uuid })
-                // new announcements
-                if !ids.contains(announcement.uuid) {
-                    TeamViewController.localMessages.append(announcement)
-                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                } else {
-                    // modified announcements
-                    if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                        if TeamViewController.localMessages[localIndex].content != announcement.content {
-                            TeamViewController.localMessages[localIndex].content = announcement.content
-                            TeamViewController.localMessages[localIndex].readStatus = false
-                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                        }
-                    }
-                }
-                
-            }
-        }
     }
 }
