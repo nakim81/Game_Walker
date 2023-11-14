@@ -28,12 +28,28 @@ class HostRankingViewcontroller: UIViewController {
     private var algorithm: [[Int]] = [[]]
     private var stationList: [Station] = []
     
+    // MARK: - methods related to the view lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if standardStyle {
-            getAlgorithmAndStation()
-        } else {
-            configureTableView()
+        Task {@MainActor in
+            do {
+                teamList = try await T.getTeamList(gameCode)
+                if standardStyle {
+                    getAlgorithmAndStation()
+                } else {
+                    configureTableView()
+                }
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
         }
         setDelegate()
         setMessages()
@@ -46,6 +62,7 @@ class HostRankingViewcontroller: UIViewController {
         }
     }
     
+    // MARK: - others
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateLeaderboard), name: .roundUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTeams), name: .teamsUpdate, object: nil)

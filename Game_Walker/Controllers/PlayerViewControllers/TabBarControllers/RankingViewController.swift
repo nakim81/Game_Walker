@@ -26,42 +26,28 @@ class RankingViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
         if TeamViewController.unread {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.unreadSome
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
             }
         } else {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.readAll
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }
@@ -75,9 +61,18 @@ class RankingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
-        configureNavigationBar()
         tabBarController?.navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
+        Task{@MainActor in
+            do {
+                teamList = try await T.getTeamList(gameCode)
+                configureTableView()
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+        }
     }
     
     private func configureTableView() {
@@ -158,11 +153,23 @@ extension RankingViewController {
         }
         if unread {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.unreadSome
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
             }
         } else {
             if let items = self.navigationItem.rightBarButtonItems {
-                items[2].image = self.readAll
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }

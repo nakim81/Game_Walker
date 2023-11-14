@@ -49,9 +49,15 @@ class HostTimerViewController: UIViewController {
     private var gameOver : Bool = false
     private var segueCalled : Bool = false
     
+    // MARK: - methods related to the view lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.navigationController?.isNavigationBarHidden = true
         configureNavigationBar()
         Task {
             titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
@@ -71,6 +77,7 @@ class HostTimerViewController: UIViewController {
         }
     }
     
+    // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
         let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
         endGamePopUp.delegate = self
@@ -176,24 +183,6 @@ class HostTimerViewController: UIViewController {
         view.layer.cornerRadius = 0.68 * UIScreen.main.bounds.size.width / 2.0
         return view
     }()
-    
-    @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
-        if !tapped {
-            timerCircle.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
-            timerLabel.alpha = 0.0
-            timeTypeLabel.alpha = 0.0
-            roundLabel.alpha = 1.0
-            totalTimeLabel.alpha = 1.0
-            tapped = true
-        } else {
-            timerCircle.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor
-            timerLabel.alpha = 1.0
-            timeTypeLabel.alpha = 1.0
-            roundLabel.alpha = 0.0
-            totalTimeLabel.alpha = 0.0
-            tapped = false
-        }
-    }
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
@@ -452,6 +441,24 @@ extension HostTimerViewController {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
         if teams.count == self.number {
             ready = true
+        }
+    }
+    
+    @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
+        if !tapped {
+            timerCircle.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
+            timerLabel.alpha = 0.0
+            timeTypeLabel.alpha = 0.0
+            roundLabel.alpha = 1.0
+            totalTimeLabel.alpha = 1.0
+            tapped = true
+        } else {
+            timerCircle.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor
+            timerLabel.alpha = 1.0
+            timeTypeLabel.alpha = 1.0
+            roundLabel.alpha = 0.0
+            totalTimeLabel.alpha = 0.0
+            tapped = false
         }
     }
 }
