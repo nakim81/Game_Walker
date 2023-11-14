@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingTimeHostViewController: BaseViewController {
+class SettingTimeHostViewController: UIViewController {
 
     
     @IBOutlet weak var gameMinutesLabel: UILabel!

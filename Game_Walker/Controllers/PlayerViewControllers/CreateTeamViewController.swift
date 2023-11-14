@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CreateTeamViewController: BaseViewController {
+class CreateTeamViewController: UIViewController {
     
     @IBOutlet weak var teamNameLbl: UILabel!
     @IBOutlet weak var teamNameTextField: UITextField!

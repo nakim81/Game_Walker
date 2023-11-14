@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class AddStationViewController: BaseViewController {
+class AddStationViewController: UIViewController {
 
     @IBOutlet var fullview: UIView!
     @IBOutlet weak var guideContainerView: UIView!
@@ -64,7 +64,6 @@ class AddStationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSimpleNavBar()
         
         gamenameTextfield.delegate = self
         gamelocationTextfield.delegate = self

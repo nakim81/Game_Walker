@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ManualAlgorithmViewController: BaseViewController {
+class ManualAlgorithmViewController: UIViewController {
     
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!

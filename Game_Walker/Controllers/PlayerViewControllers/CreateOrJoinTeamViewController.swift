@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class CreateOrJoinTeamViewController: BaseViewController {
+class CreateOrJoinTeamViewController: UIViewController {
     
     @IBOutlet weak var creatTeamButton: UIButton!
     @IBOutlet weak var joinTeamButton: UIButton!

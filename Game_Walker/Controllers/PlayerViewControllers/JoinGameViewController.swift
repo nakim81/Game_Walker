@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class JoinGameViewController: BaseViewController {
+class JoinGameViewController: UIViewController {
     
     @IBOutlet weak var gamecodeLbl: UILabel!
     @IBOutlet weak var gamecodeTextField: UITextField!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StationsTableViewController: BaseViewController {
+class StationsTableViewController: UIViewController {
     
     private var currentStations: [Station] = []
 
@@ -23,6 +23,7 @@ class StationsTableViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSimpleNavBar()
         
         addLetterSpacing(to: stationsLabel, spacing: 3)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name("stationUpdate"), object: nil)
