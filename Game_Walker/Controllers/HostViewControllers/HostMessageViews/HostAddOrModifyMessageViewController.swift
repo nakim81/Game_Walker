@@ -110,7 +110,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 let newAnnouncement = Announcement(uuid: UUID().uuidString, content: announcementTextView.text, timestamp: getCurrentDateTime(), readStatus: false)
                 HostRankingViewcontroller.messages.append(newAnnouncement)
                 try await H.addAnnouncement(gameCode, newAnnouncement)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
                 self.dismiss(animated: true, completion: nil)
             }  catch GameWalkerError.serverError(let text){
                 print(text)
@@ -127,7 +127,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
                 let newAnnouncement = Announcement(uuid: announcement.uuid, content: announcementTextView.text, timestamp: getCurrentDateTime(), readStatus: false)
                 try await H.modifyAnnouncement(gameCode, newAnnouncement, index)
                 HostRankingViewcontroller.messages[index] = newAnnouncement
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
                 self.dismiss(animated: true, completion: nil)
             } catch GameWalkerError.serverError(let text){
                 print(text)

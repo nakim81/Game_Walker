@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HostCreateOrJoinViewController: BaseViewController {
+class HostCreateOrJoinViewController: UIViewController {
     @IBOutlet weak var resumeButton: UIButton!
     
     @IBOutlet weak var createButton: UIButton!
@@ -36,17 +36,12 @@ class HostCreateOrJoinViewController: BaseViewController {
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
         
-        let settingsButton = UIBarButtonItem(image: UIImage(named: "settings-icon"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-        navigationItem.rightBarButtonItem = settingsButton
+        configureSettingBtn()
 
     }
     
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "ToMainVC", sender: self)
-    }
-    
-    @objc func settingsButtonTapped() {
-        
     }
         
     @IBAction func resumeButtonPressed(_ sender: UIButton) {

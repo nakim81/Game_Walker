@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingTimeHostViewController: BaseViewController {
+class SettingTimeHostViewController: UIViewController {
 
     
     @IBOutlet weak var gameMinutesLabel: UILabel!
@@ -75,7 +75,7 @@ class SettingTimeHostViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureSimpleNavBar()
         Task {
             do {
                 stationList = try await fetchStationsForAlgorithm()

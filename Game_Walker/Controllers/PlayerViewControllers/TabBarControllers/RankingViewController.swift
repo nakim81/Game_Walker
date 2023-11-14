@@ -11,9 +11,6 @@ import UIKit
 class RankingViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
-    @IBOutlet weak var infoBtn: UIButton!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var rankingLbl: UILabel!
     
     private var showScore: Bool = true
@@ -57,80 +54,30 @@ class RankingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: TeamViewController.notificationName1, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: TeamViewController.notificationName2, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(gameOver), name: Notification.Name(rawValue: "gameover"), object: nil)
+        addObservers()
         if TeamViewController.unread {
-            self.announcementButton.setImage(self.unreadSome, for: .normal)
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.unreadSome
+            }
         } else {
-            self.announcementButton.setImage(self.readAll, for: .normal)
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.readAll
+            }
         }
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showOrHideScore), name: .hostUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLeaderboard), name: .teamsUpdate, object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureListeners()
         configureTableView()
-        configureAlertIcon()
-        configureGamecodeLabel()
-        settingButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-    }
-    
-    private func configureListeners(){
-        T.delegates.append(self)
-        H.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-    }
-    
-    private func configureGamecodeLabel() {
-        rankingLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
-        ])
-    }
-    
-    @objc func readAll(notification: Notification) {
-        guard let unread = notification.userInfo?["unread"] as? Bool else {
-            return
-        }
-        if unread {
-            self.announcementButton.setImage(self.unreadSome, for: .normal)
-        } else {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        }
-    }
-    
-    @objc func sound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
-    @objc func gameOver() {
-        showAwardPopUp()
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    @IBAction func infoBtnPressed(_ sender: UIButton) {
-        showOverlay()
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showMessagePopUp(messages: TeamViewController.localMessages)
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    private func configureAlertIcon() {
-        if TeamViewController.unread {
-            self.announcementButton.setImage(readAll, for: .normal)
-        } else {
-            self.announcementButton.setImage(unreadSome, for: .normal)
-        }
+        configureNavigationBar()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
     private func configureTableView() {
@@ -202,19 +149,51 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
         return 85
     }
 }
-// MARK: - TeamProtocol
-extension RankingViewController: TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
+// MARK: - @objc
+extension RankingViewController {
+    
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        if unread {
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.unreadSome
+            }
+        } else {
+            if let items = self.navigationItem.rightBarButtonItems {
+                items[2].image = self.readAll
+            }
+        }
+    }
+    
+    @objc override func announceAction() {
+        showMessagePopUp(messages: TeamViewController.localMessages)
+    }
+    
+    @objc override func infoAction() {
+        self.showOverlay()
+    }
+    
+    @objc override func settingApp() {
+        
+    }
+    
+    @objc func sound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+    }
+    
+    @objc func showOrHideScore(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else {return}
+        self.showScore = host.showScoreboard
+        self.leaderBoard.reloadData()
+    }
+    
+    @objc func updateLeaderboard(notification: Notification) {
+        guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
         self.teamList = teams
         if self.showScore {
             self.leaderBoard.reloadData()
         }
-    }
-}
-// MARK: - HostProtocol
-extension RankingViewController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.showScore = host.showScoreboard
-        self.leaderBoard.reloadData()
     }
 }

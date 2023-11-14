@@ -16,7 +16,7 @@ struct H {
     
     static let db = Firestore.firestore()
     static var listener: ListenerRegistration?
-    static var delegates : [HostUpdateListener] = []
+    static var delegates : [WeakHostUpdateListener] = []
     
     //MARK: - Game Control Functions
     
@@ -257,13 +257,14 @@ struct H {
             guard let document = documentSnapshot else { print("Error listening Host"); return }
             guard let data = document.data() else { print("Error listening Host"); return }
             let host = convertDataToHost(data)
+            H.delegates = H.delegates.filter { $0.value != nil }
             for delegate in delegates {
-                delegate.updateHost(host)
+                delegate.value?.updateHost(host)
             }
         }
     }
     
-    static func detatchHost() async {
+    static func detatchHost() {
         listener?.remove()
     }
     

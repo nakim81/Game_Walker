@@ -15,7 +15,7 @@ import SwiftUI
 struct T {
     
     static let db = Firestore.firestore()
-    static var delegates : [TeamUpdateListener] = []
+    static var delegates : [WeakTeamUpdateListener] = []
     
     //MARK: - Team Control Functions
     
@@ -132,7 +132,7 @@ struct T {
             }
             teams.sort{$0.points > $1.points}
             for delegate in delegates {
-                delegate.updateTeams(teams)
+                delegate.value?.updateTeams(teams)
             }
         }
     }

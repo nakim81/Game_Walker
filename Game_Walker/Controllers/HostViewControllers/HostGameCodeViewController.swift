@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HostGameCodeViewController: BaseViewController {
+class HostGameCodeViewController: UIViewController {
 
     @IBOutlet weak var gameCodeInput: UITextField!
     @IBOutlet weak var joinButton: UIButton!
@@ -27,6 +27,7 @@ class HostGameCodeViewController: BaseViewController {
 //        H.delegate_getHost = self
 
         gameCodeInput.placeholder = storedgamecode
+        configureSimpleNavBar()
     }
     
     func setGameCode() {

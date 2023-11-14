@@ -7,26 +7,37 @@
 
 import UIKit
 
-class PlayerTabBarController: UITabBarController {
+class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdateListener {
     
     var standardStyle: Bool = true // Default value is true
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.delegate = self
-        customizeTimerTabBarItem()
-    }
+    let gameCode = UserData.readGamecode("gamecode") ?? ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        H.delegates.append(WeakHostUpdateListener(value: self))
+        T.delegates.append(WeakTeamUpdateListener(value: self))
+        addHostListener()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
+        customizeTimerTabBarItem()
+        print("tabbar prints: \(H.delegates.count)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        H.delegates = H.delegates.filter { $0.value != nil }
+        T.delegates = T.delegates.filter { $0.value != nil}
+        removeListeners()
     }
+    
+    private func removeListeners() {
+        H.detatchHost()
+        //T.detatchHost()
+    }
+    
     
     private func customizeTimerTabBarItem() {
         if let viewControllers = viewControllers, viewControllers.count > 2 {
@@ -41,6 +52,27 @@ class PlayerTabBarController: UITabBarController {
             }
         }
     }
+    
+    private func addHostListener(){
+        H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+    }
+    
+    func updateHost(_ host: Host) {
+        let data: [String:Host] = ["host":host]
+        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
+        if host.gameover {
+            showAwardPopUp()
+        }
+    }
+    
+    func updateTeams(_ teams: [Team]) {
+        let data: [String:[Team]] = ["teams":teams]
+        NotificationCenter.default.post(name: .teamsUpdate, object: nil, userInfo: data)
+    }
+    
+    func listen(_ _ : [String : Any]){
+    }
 }
 // MARK: - standardStyle?
 extension PlayerTabBarController: UITabBarControllerDelegate {
@@ -53,7 +85,7 @@ extension PlayerTabBarController: UITabBarControllerDelegate {
                 }
             }
         }
-
+        
         return true
     }
 }

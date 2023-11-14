@@ -244,6 +244,130 @@ extension UIViewController {
         return !unreadAnnouncements.isEmpty
     }
 }
+// MARK: - Nav Bar
+extension UIViewController {
+    
+    func configureTitleLabel() {
+        let gameCode = UserData.readGamecode("gamecode") ?? ""
+        
+        let gameCodeLabel: UILabel = {
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
+            let attributedText = NSMutableAttributedString()
+            let gameCodeAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+                .foregroundColor: UIColor.black
+            ]
+            let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
+            attributedText.append(gameCodeAttributedString)
+            let numberAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
+                .foregroundColor: UIColor.black
+            ]
+            let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
+            attributedText.append(numberAttributedString)
+            label.backgroundColor = .white
+            label.attributedText = attributedText
+            label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
+            label.numberOfLines = 0
+            label.adjustsFontForContentSizeCategory = false
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        navigationItem.titleView = gameCodeLabel
+    }
+    
+    func configureSettingBtn() {
+        let settingImage = UIImage(named: "settingIcon")
+        let settingBtn = UIButton()
+        settingBtn.setImage(settingImage, for: .normal)
+        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
+        let setting = UIBarButtonItem(customView: settingBtn)
+        
+        self.navigationItem.rightBarButtonItems = [setting]
+    }
+    
+    func createSpacer() -> UIBarButtonItem {
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        spacer.width = 5
+        return spacer
+    }
+    
+    func configureRightBarButtonItems() {
+        let settingImage = UIImage(named: "settingIcon")
+        let settingBtn = UIButton()
+        settingBtn.setImage(settingImage, for: .normal)
+        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
+        let setting = UIBarButtonItem(customView: settingBtn)
+        
+        let spacer = createSpacer()
+        
+        let infoImage = UIImage(named: "infoIcon")
+        let infoBtn = UIButton()
+        infoBtn.setImage(infoImage, for: .normal)
+        infoBtn.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
+        let info = UIBarButtonItem(customView: infoBtn)
+
+        let announceImage = UIImage(named: "messageIcon")
+        let announceBtn = UIButton()
+        announceBtn.setImage(announceImage, for: .normal)
+        announceBtn.addTarget(self, action: #selector(announceAction), for: .touchUpInside)
+        announceBtn.tag = 120
+        let announce = UIBarButtonItem(customView: announceBtn)
+        
+        self.navigationItem.rightBarButtonItems = [setting, spacer, announce, spacer, info]
+    }
+    
+    func configureBackButton() {
+        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
+
+        // Create a custom bar button item with the image
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(onBackPressed))
+
+        // Customize the appearance of the back button (optional)
+        backButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
+
+        // Assign the custom back button to the navigationItem
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func configureNavigationBar() {
+        configureRightBarButtonItems()
+        configureTitleLabel()
+    }
+    
+    func configureSimpleNavBar() {
+        configureBackButton()
+        configureSettingBtn()
+        configureTitleLabel()
+    }
+    
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func infoAction() {
+    }
+    
+    @objc func settingApp() {
+        
+    }
+    
+    @objc func announceAction() {
+    }
+}
+// MARK: - Color
+extension UIColor {
+    convenience init?(hex: Int) {
+        let red = CGFloat((hex >> 16) & 0xFF) / 255.0
+        let green = CGFloat((hex >> 8) & 0xFF) / 255.0
+        let blue = CGFloat(hex & 0xFF) / 255.0
+
+        self.init(red: red, green: green, blue: blue, alpha: 1.0)
+    }
+}
 // MARK: - etc
 extension UIViewController {
     func fontSize(size: CGFloat) -> CGFloat {
@@ -261,5 +385,25 @@ extension UIViewController {
             }
         }
         return pvp
+    }
+    
+    func alert2(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default) {value in
+            self.performSegue(withIdentifier: "ManageGameSegue", sender: (Any).self)
+        })
+        present(alert, animated: true)
+    }
+    
+    func addLetterSpacing(to label: UILabel, spacing: CGFloat) {
+        
+        let labelText = NSMutableAttributedString(string: label.text ?? "")
+
+        labelText.addAttribute(NSAttributedString.Key.kern,
+                                    value: spacing,
+                                    range: NSRange(location: 0, length: labelText.length))
+
+        label.attributedText = labelText
     }
 }

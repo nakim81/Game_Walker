@@ -112,7 +112,7 @@ class HostMessageViewController: UIViewController {
         configureTableView()
         setUpViews()
         makeConstraints()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: .newDataNotif, object: nil)
     }
     
     @objc func refresh() {
@@ -216,7 +216,7 @@ extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource 
             Task { @MainActor in
                 try await H.removeAnnouncement(self?.gameCode ?? "", indexPath.row)
                 try await Task.sleep(nanoseconds: 200_000_000)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
             }
             success(true)
         }

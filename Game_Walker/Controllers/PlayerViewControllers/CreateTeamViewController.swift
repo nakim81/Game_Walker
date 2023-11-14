@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CreateTeamViewController: BaseViewController {
+class CreateTeamViewController: UIViewController {
     
     @IBOutlet weak var teamNameLbl: UILabel!
     @IBOutlet weak var teamNameTextField: UITextField!
@@ -43,27 +43,24 @@ class CreateTeamViewController: BaseViewController {
     
     private var selectedIndex : Int?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSettingBtn()
+        configureBackButton()
+        configureTitleLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDelegates()
         viewSetUp()
         configureCollectionView()
-        configureBtn()
-        configureNavItem()
-    }
-    
-    func configureNavItem() {
-        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
-        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
-        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-        self.navigationItem.rightBarButtonItem = rightButton
-    }
-    
-    @objc func setting(sender: UIBarButtonItem) {
-        
+        configureBackButton()
     }
     
     private func viewSetUp(){
+        teamNameTextField.delegate = self
+        teamNumberTextField.delegate = self
+        
         teamNameTextField.layer.cornerRadius = 10
         teamNameTextField.layer.borderWidth = 3
         teamNameTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
@@ -74,11 +71,9 @@ class CreateTeamViewController: BaseViewController {
         teamNameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
         teamNumberLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
         chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
-    }
-    
-    private func configureDelegates() {
-        teamNameTextField.delegate = self
-        teamNumberTextField.delegate = self
+        
+        createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        createTeamButton.layer.cornerRadius = 8
     }
     
     private func configureCollectionView() {
@@ -91,62 +86,39 @@ class CreateTeamViewController: BaseViewController {
         collectionView.clipsToBounds = true
     }
     
-    private func configureBtn(){
-        createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
-        createTeamButton.layer.cornerRadius = 8
-    }
-    
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-            
-            guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
-                alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
-                return
-            }
-            guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
-                alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
-                return
-            }
-            Task { @MainActor in
-                do {
-                    self.host = try await H.getHost(gameCode)
-                    self.stationList = try await S.getStationList(gameCode)
-                    guard let standardStyle = self.host?.standardStyle else {return}
-                    guard let selectedIconName = selectedIconName else {
-                        alert(title: "No Icon Selected", message: "Please select a team icon")
-                        return
-                    }
-                    
-                    if Int(teamNumber) ?? 0 > 0 {
-                        if standardStyle {
-                            guard let temp = self.host?.algorithm else { return }
-                            let algorithm = convert1DArrayTo2D(temp)
-                            print(algorithm)
-                            if !(algorithm.isEmpty ) {
-                                teamNameTextField.resignFirstResponder()
-                                
-                                ///find the order of stations for player's team
-                                let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
-                                print("stationorder: \(stationOrder)")
-                                let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
-                                UserData.writeTeam(newTeam, "team")
-                                UserData.setStandardStyle(standardStyle)
-                                Task { @MainActor in
-                                    do {
-                                        try await T.addTeam(gameCode, newTeam)
-                                        performSegue(withIdentifier: "goToTPF4", sender: self)
-                                    } catch GameWalkerError.serverError(let text){
-                                        print(text)
-                                        serverAlert(text)
-                                        return
-                                    }
-                                }
-                            } else {
-                                alert(title: "", message: "The game has not started yet. Please try few minutes later!")
-                                return
-                            }
-                        } else {
-                            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: [], iconName: selectedIconName)
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        
+        guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
+            alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
+            return
+        }
+        guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
+            alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
+            return
+        }
+        Task { @MainActor in
+            do {
+                self.host = try await H.getHost(gameCode)
+                self.stationList = try await S.getStationList(gameCode)
+                guard let standardStyle = self.host?.standardStyle else {return}
+                guard let selectedIconName = selectedIconName else {
+                    alert(title: "No Icon Selected", message: "Please select a team icon")
+                    return
+                }
+                
+                if Int(teamNumber) ?? 0 > 0 {
+                    if standardStyle {
+                        guard let temp = self.host?.algorithm else { return }
+                        let algorithm = convert1DArrayTo2D(temp)
+                        print(algorithm)
+                        if !(algorithm.isEmpty ) {
+                            teamNameTextField.resignFirstResponder()
+                            
+                            ///find the order of stations for player's team
+                            let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
+                            print("stationorder: \(stationOrder)")
+                            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                             UserData.writeTeam(newTeam, "team")
                             UserData.setStandardStyle(standardStyle)
                             Task { @MainActor in
@@ -159,16 +131,33 @@ class CreateTeamViewController: BaseViewController {
                                     return
                                 }
                             }
+                        } else {
+                            alert(title: "", message: "The game has not started yet. Please try few minutes later!")
+                            return
                         }
                     } else {
-                        alert(title: "Team Number Error", message: "Team number should be greater than 0!")
-                        return
+                        let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: [], iconName: selectedIconName)
+                        UserData.writeTeam(newTeam, "team")
+                        UserData.setStandardStyle(standardStyle)
+                        Task { @MainActor in
+                            do {
+                                try await T.addTeam(gameCode, newTeam)
+                                performSegue(withIdentifier: "goToTPF4", sender: self)
+                            } catch GameWalkerError.serverError(let text){
+                                print(text)
+                                serverAlert(text)
+                                return
+                            }
+                        }
                     }
-                } catch(let e) {
-                    print(e)
-                    alert(title: "Connection Error", message: e.localizedDescription)
+                } else {
+                    alert(title: "Team Number Error", message: "Team number should be greater than 0!")
                     return
                 }
+            } catch(let e) {
+                print(e)
+                alert(title: "Connection Error", message: e.localizedDescription)
+                return
             }
         }
     

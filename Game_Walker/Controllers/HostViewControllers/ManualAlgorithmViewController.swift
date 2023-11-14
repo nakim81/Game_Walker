@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ManualAlgorithmViewController: BaseViewController {
+class ManualAlgorithmViewController: UIViewController {
     
     private var scrollView: UIScrollView!
     private var collectionView: UICollectionView!
@@ -88,6 +88,7 @@ class ManualAlgorithmViewController: BaseViewController {
         scrollView.isHidden = true
         stationsLabelImageView.isHidden = true
         roundsLabelImageView.isHidden = true
+        configureSimpleNavBar()
         addTapGesture()
     }
     
@@ -955,8 +956,7 @@ class ManualAlgorithmViewController: BaseViewController {
         helpButton.tintColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
         settingsButton.tintColor = UIColor(red: 0.27, green: 0.66, blue: 0.91, alpha: 1.00)
         
-        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixedSpace.width = 5
+        let fixedSpace = createSpacer()
         let rightBarButtonItems: [UIBarButtonItem] = [settingsButton, fixedSpace, helpButton]
 
         self.navigationItem.rightBarButtonItems = rightBarButtonItems

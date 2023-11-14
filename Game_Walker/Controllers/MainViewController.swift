@@ -12,14 +12,12 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import AVFoundation
 
-class MainViewController: BaseViewController {
+class MainViewController: UIViewController {
    
     @IBOutlet weak var gameWalkerImage: UIImageView!
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var hostButton: UIButton!
-    @IBOutlet weak var infoBtn: UIButton!
-    @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var testBtn: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
@@ -72,19 +70,11 @@ class MainViewController: BaseViewController {
 //            teams = try await T.getTeam("333333", "Team 1")
 //            print(teams)
 //        }
-        
-        
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        configureNavBarItems()
         configureButtons()
         self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     private func configureButtons(){
@@ -100,7 +90,6 @@ class MainViewController: BaseViewController {
         testBtn.layer.cornerRadius = 10
         testBtn.layer.borderWidth = 3
         testBtn.layer.borderColor = UIColor.systemBlue.cgColor
-        settingBtn.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
     }
     
     @IBAction func playerBtnPressed(_ sender: Any) {
@@ -134,22 +123,34 @@ class MainViewController: BaseViewController {
         print(UserData.readTeam("team"))
     }
     
-    @IBAction func infoBtnPressed(_ sender: UIButton) {
+    private func configureNavBarItems() {
+        print("configuring nav bar items")
+        
+        let settingImage = UIImage(named: "settingIcon")
+        let settingBtn = UIButton()
+        settingBtn.setImage(settingImage, for: .normal)
+        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
+        let setting = UIBarButtonItem(customView: settingBtn)
+        
+        let spacer = createSpacer()
+        
+        let infoImage = UIImage(named: "infoIcon")
+        let infoBtn = UIButton()
+        infoBtn.setImage(infoImage, for: .normal)
+        infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
+        let info = UIBarButtonItem(customView: infoBtn)
+
+        self.navigationItem.rightBarButtonItems = [setting, spacer, info]
+    }
+    
+    @objc func guide() {
         let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame, gameWalkerImage.frame]
         let layerList: [CALayer] = [playerButton.layer, refereeButton.layer, hostButton.layer]
         let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
-        showOverlay(componentPositions, layerList, explanationTexts)
-    }
-    
-    @IBAction func settingBtnPressed(_ sender: UIButton) {
-
-    }
-    
-    private func showOverlay(_ componentList: [CGRect], _ layerList: [CALayer], _ explanationTexts: [String]){
+        
         let overlayViewController = MainOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
-        
-        overlayViewController.configureGuide(componentList, layerList, explanationTexts)
+        overlayViewController.configureGuide(componentPositions, layerList, explanationTexts)
         
         present(overlayViewController, animated: true, completion: nil)
     }

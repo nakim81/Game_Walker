@@ -73,22 +73,16 @@ class RefereeTimerController: BaseViewController {
         super.viewWillAppear(animated)
         guard let pvp = self.pvp else { return }
         
-        var notificationName: NSNotification.Name
-        var notificationName2: NSNotification.Name
         var unread: Bool
         
         if pvp {
-            notificationName = RefereeRankingPVPViewController.notificationName
-            notificationName2 = RefereeRankingPVPViewController.notificationName2
             unread = RefereeRankingPVPViewController.unread
         } else {
-            notificationName = RefereeRankingPVEViewController.notificationName
-            notificationName2 = RefereeRankingPVEViewController.notificationName2
             unread = RefereeRankingPVEViewController.unread
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: notificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: notificationName2, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
         if unread {
             self.announcementButton.setImage(unreadSome, for: .normal)
         } else {
@@ -470,7 +464,7 @@ extension RefereeTimerController: HostUpdateListener {
     }
     
     func callProtocols() {
-        H.delegates.append(self)
+        H.delegates.append(WeakHostUpdateListener(value: self))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         
         Task {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class JoinTeamViewController: BaseViewController {
+class JoinTeamViewController: UIViewController {
     
     @IBOutlet weak var joinTeamButton: UIButton!
     
@@ -24,6 +24,13 @@ class JoinTeamViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSettingBtn()
+        configureBackButton()
+        configureTitleLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Task { @MainActor in
@@ -38,7 +45,7 @@ class JoinTeamViewController: BaseViewController {
         }
         configureCollectionView()
         configureBtn()
-        configureNavItem()
+        configureBackButton()
         chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
     }
     
@@ -50,17 +57,6 @@ class JoinTeamViewController: BaseViewController {
             // Pass the "standardStyle" value to the tab bar controller
             tabBarController.standardStyle = isStandardStyle
         }
-    }
-    
-    func configureNavItem() {
-        let settingBtnImage = UIImage(named: "settingIcon")?.withRenderingMode(.alwaysTemplate)
-        let rightButton = UIBarButtonItem(image: settingBtnImage, style: .plain, target: self, action: #selector(setting))
-        rightButton.tintColor = UIColor(red: 0.267, green: 0.659, blue: 0.906, alpha: 1)
-        self.navigationItem.rightBarButtonItem = rightButton
-    }
-    
-    @objc func setting(sender: UIBarButtonItem) {
-        
     }
     
     private func configureBtn(){

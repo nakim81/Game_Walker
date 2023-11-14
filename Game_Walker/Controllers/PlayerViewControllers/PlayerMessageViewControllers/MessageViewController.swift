@@ -99,7 +99,7 @@ class MessageViewController: UIViewController {
         configureTableView()
         setUpViews()
         makeConstraints()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: .newDataNotif, object: nil)
     }
     
     @objc func refresh() {

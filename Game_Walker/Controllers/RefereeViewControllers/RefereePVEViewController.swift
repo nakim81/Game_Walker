@@ -130,8 +130,8 @@ class RefereePVEController: BaseViewController {
 //MARK: - Messages
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: RefereeRankingPVEViewController.notificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: RefereeRankingPVEViewController.notificationName2, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
         if RefereeRankingPVEViewController.unread {
             self.messageButton.setImage(unreadSome, for: .normal)
         } else {
@@ -713,8 +713,8 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
     
     func callProtocols() {
         R.delegates.append(self)
-        H.delegates.append(self)
-        T.delegates.append(self)
+        H.delegates.append(WeakHostUpdateListener(value: self))
+        T.delegates.append(WeakTeamUpdateListener(value: self))
         R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
