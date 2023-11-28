@@ -21,7 +21,7 @@ class HostTabBarController: UITabBarController, HostUpdateListener, TeamUpdateLi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

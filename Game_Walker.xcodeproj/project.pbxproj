@@ -123,6 +123,7 @@
 		FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5240A02AF12E6F00999282 /* NotificationNames.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
+		FC9AEC552B16221E00B445AD /* UINavigationViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */; };
 		FCAAB3072AD3D30F0035F36A /* MainOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */; };
 		FCB1274C2AD5223000E47FF0 /* RorTOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */; };
 		FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E0E2A97A04A00F4AE99 /* purple.wav */; };
@@ -252,6 +253,7 @@
 		FC5240A02AF12E6F00999282 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
+		FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationViewControllerExtensions.swift; sourceTree = "<group>"; };
 		FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOverlayViewController.swift; sourceTree = "<group>"; };
 		FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RorTOverlayViewController.swift; sourceTree = "<group>"; };
 		FCB13E0E2A97A04A00F4AE99 /* purple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purple.wav; path = "Supporting Files/purple.wav"; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				FCAAB3062AD3D30F0035F36A /* MainOverlayViewController.swift */,
 				FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */,
 				FC5240A02AF12E6F00999282 /* NotificationNames.swift */,
+				FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
 				A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */,
+				FC9AEC552B16221E00B445AD /* UINavigationViewControllerExtensions.swift in Sources */,
 				A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */,
 				DABE5EF72A42B8970072203F /* Host.swift in Sources */,
 				A1A4CD3B2A42B8A800704BF8 /* Host.swift in Sources */,

@@ -11,16 +11,10 @@ import AVFoundation
 
 class RefereePVEController: BaseViewController {
     
-    @IBOutlet weak var messageButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var leaveButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
-    
     private let audioPlayerManager = AudioPlayerManager()
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private var messages: [String] = []
-    private var awardViewControllerPresented = false
     
     private var teamOrderSet: Bool = false
     private var isSeguePerformed : Bool = false
@@ -48,6 +42,31 @@ class RefereePVEController: BaseViewController {
     private var stations : [Station] = [Station(), Station()]
     private var teams : [Team] = []
     private var host: Host = Host()
+    
+    //MARK: - View Life Cycle Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+        guard let items = self.navigationItem.rightBarButtonItems else {return}
+        var unread = RefereeRankingPVEViewController.unread
+        if unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
+                }
+            }
+        } else {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         Task { @MainActor in
@@ -100,7 +119,6 @@ class RefereePVEController: BaseViewController {
                     loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
                 }
             }
-            callProtocols()
             if host.algorithm != [] && host.teams == teams.count {
                 getTeamOrder()
                 updateScore()
@@ -122,6 +140,27 @@ class RefereePVEController: BaseViewController {
             }
         }
         super.viewDidLoad()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        configureNavigationBar()
+        configureLeaveBtn()
+    }
+// MARK: - ETC
+    
+    func configureLeaveBtn() {
+        let leaveImg = UIImage(named: "LEAVE 1")
+        let leaveBtn = UIButton()
+        leaveBtn.setImage(leaveImg, for: .normal)
+        leaveBtn.addTarget(self, action: #selector(leaveAction), for: .touchUpInside)
+        let leave = UIBarButtonItem(customView: leaveBtn)
+        
+        self.navigationItem.leftBarButtonItem = leave
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(teamsUpdate), name: .teamsUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
     }
 //MARK: - Team Order
     func setTeamOrder() {
@@ -185,60 +224,8 @@ class RefereePVEController: BaseViewController {
             }
         }
     }
-
-//MARK: - Messages
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
-        if RefereeRankingPVEViewController.unread {
-            self.messageButton.setImage(unreadSome, for: .normal)
-        } else {
-            self.messageButton.setImage(readAll, for: .normal)
-        }
-    }
-    
-    @objc func readAll(notification: Notification) {
-        guard let unread = notification.userInfo?["unread"] as? Bool else {
-            return
-        }
-        if unread {
-            self.messageButton.setImage(self.unreadSome, for: .normal)
-        } else {
-            self.messageButton.setImage(self.readAll, for: .normal)
-        }
-    }
-    
-    @objc func sound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
-//MARK: - Buttons Pressed
-    @IBAction func messageButtonPressed(_ sender: Any) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
-    }
-    
-    @IBAction func leaveButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "toRegister", sender: self)
-    }
-    
-    @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        
-    }
     
 //MARK: - Overlay
-    @IBAction func infoBtnPressed(_ sender: Any) {
-        if !teamOrderSet {
-            alert(title: "The board is not ready yet", message: "Please try again when it is ready")
-        } else {
-            if pvp {
-                showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])
-            } else {
-                showOverlay(pvp: pvp, components: [iconButton, scoreLabel, winButton, loseButton])
-            }
-        }
-    }
-    
     private func showOverlay(pvp: Bool, components: [UIView]) {
         let overlayViewController = RefereeGuideViewController(pvp: pvp)
         overlayViewController.modalPresentationStyle = .overFullScreen
@@ -278,29 +265,6 @@ class RefereePVEController: BaseViewController {
     
 
 //MARK: - UI elements - PVE
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel(frame: CGRect())
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 13))!,
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: fontSize(size: 20))!,
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        label.numberOfLines = 2
-        label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .center
-        return label
-    }()
     
     private lazy var roundLabel: UILabel = {
         var view = UILabel(frame: CGRect())
@@ -321,16 +285,6 @@ class RefereePVEController: BaseViewController {
         view.addGestureRecognizer(tapGesture)
         return view
     }()
-    
-    @objc func buttonTapped() {
-        if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            UserData.writeTeam(self.team, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
-            self.present(popUpWindow, animated: true, completion: nil)
-        }
-    }
     
     private lazy var teamNumLabel: UILabel = {
         let label = UILabel(frame: CGRect())
@@ -379,34 +333,6 @@ class RefereePVEController: BaseViewController {
         return button
     }()
     
-    @objc func winButtonTapped() {
-        if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if max != "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.team.name, self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("true", "max")
-                max = UserData.readMax("max")!
-            }
-            winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-        } 
-    }
-    
     private lazy var loseButton: UIButton = {
         var button = UIButton()
         button.setTitle("LOSE", for: .normal)
@@ -417,34 +343,6 @@ class RefereePVEController: BaseViewController {
         button.addTarget(self, action: #selector(loseButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    @objc func loseButtonTapped() {
-        if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if max == "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.team.name, -self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("false", "max")
-                max = UserData.readMax("max")!
-            }
-            winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
-            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-        }
-    }
     
     private lazy var borderView: UIView = {
         var view = UIView()
@@ -476,7 +374,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func addSubviewsPVE() {
-        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(borderView)
         self.view.addSubview(scoreLabel)
@@ -485,7 +382,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func combineSubviewsPVE() {
-        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(teamNumLabel)
         self.view.addSubview(iconButton)
@@ -496,20 +392,15 @@ class RefereePVEController: BaseViewController {
     }
     
     func addConstraintsPVE() {
-        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         borderView.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         winButton.translatesAutoresizingMaskIntoConstraints = false
         loseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
             roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.15),
             roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
             roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
             
@@ -560,7 +451,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func combineConstraintsPVE() {
-        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         teamNumLabel.translatesAutoresizingMaskIntoConstraints = false
         iconButton.translatesAutoresizingMaskIntoConstraints = false
@@ -569,13 +459,9 @@ class RefereePVEController: BaseViewController {
         winButton.translatesAutoresizingMaskIntoConstraints = false
         loseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
             roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.15),
             roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
             roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
             
@@ -611,15 +497,6 @@ class RefereePVEController: BaseViewController {
         ])
     }
     //MARK: - UI Elements - PVP
-    @objc func leftButtonTapped() {
-        if self.teamA.number == 0 {
-            alert(title: "", message: "The Team doesn't exist")
-        } else {
-            UserData.writeTeam(self.teamA, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
-            self.present(popUpWindow, animated: true, completion: nil)
-        }
-    }
     
     private lazy var leftIconButton: UIImageView = {
         var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
@@ -664,34 +541,6 @@ class RefereePVEController: BaseViewController {
         return button
     }()
     
-    @objc func leftWinButtonTapped() {
-        if self.teamA.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if maxA != "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.teamA.name, self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("true", "maxA")
-                maxA = UserData.readMax("maxA")!
-            }
-            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-        }
-    }
-    
     private lazy var leftLoseButton: UIButton = {
         var button = UIButton()
         button.setTitle("LOSE", for: .normal)
@@ -702,34 +551,6 @@ class RefereePVEController: BaseViewController {
         button.addTarget(self, action: #selector(leftLoseButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    @objc func leftLoseButtonTapped() {
-        if self.teamA.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if maxA == "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.teamA.name, -self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("false", "maxA")
-                maxA = UserData.readMax("maxA")!
-            }
-            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
-            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-        }
-    }
     
     private lazy var leftScoreLabel: UILabel = {
         let attributedText = NSMutableAttributedString()
@@ -747,16 +568,6 @@ class RefereePVEController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
-    
-    @objc func rightButtonTapped() {
-        if self.teamB.number == 0 {
-            alert(title: "", message: "The Team doesn't exist")
-        } else {
-            UserData.writeTeam(self.teamB, "Team")
-            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
-            self.present(popUpWindow, animated: true, completion: nil)
-        }
-    }
     
     private lazy var rightIconButton: UIImageView = {
         var view = UIImageView(frame: CGRect(x: 0, y: 0, width: 175, height: 175))
@@ -801,34 +612,6 @@ class RefereePVEController: BaseViewController {
         return button
     }()
     
-    @objc func rightWinButtonTapped() {
-        if self.teamB.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if maxB != "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.teamB.name, self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("true", "maxB")
-                maxB = UserData.readMax("maxB")!
-            }
-            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-        }
-    }
-    
     private lazy var rightLoseButton: UIButton = {
         var button = UIButton()
         button.setTitle("LOSE", for: .normal)
@@ -839,34 +622,6 @@ class RefereePVEController: BaseViewController {
         button.addTarget(self, action: #selector(rightLoseButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-    @objc func rightLoseButtonTapped() {
-        if self.teamB.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
-        } else {
-            if maxB == "true" {
-                Task {
-                    do {
-                        try await T.givePoints(gameCode, self.teamB.name, -self.points)
-                    } catch GameWalkerError.serverError(let text){
-                        print(text)
-                        serverAlert(text)
-                        return
-                    }
-                }
-                UserData.writeMax("false", "maxB")
-                maxB = UserData.readMax("maxB")!
-            }
-            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = true
-            }
-            rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
-            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                gestureRecognizer.isEnabled = false
-            }
-            rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-        }
-    }
     
     private lazy var rightScoreLabel: UILabel = {
         let attributedText = NSMutableAttributedString()
@@ -941,7 +696,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func addSubviewsPVP() {
-        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(leftBorderView)
         self.view.addSubview(leftWinButton)
@@ -954,7 +708,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func combineSubviewsPVP() {
-        self.view.addSubview(gameCodeLabel)
         self.view.addSubview(roundLabel)
         self.view.addSubview(leftWinButton)
         self.view.addSubview(leftLoseButton)
@@ -971,7 +724,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func addConstraintsPVP() {
-        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         leftBorderView.translatesAutoresizingMaskIntoConstraints = false
         leftWinButton.translatesAutoresizingMaskIntoConstraints = false
@@ -982,13 +734,9 @@ class RefereePVEController: BaseViewController {
         rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
         rightScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
             roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.15),
             roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
             roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
             
@@ -1078,7 +826,6 @@ class RefereePVEController: BaseViewController {
     }
     
     func combineConstraintsPVP() {
-        gameCodeLabel.translatesAutoresizingMaskIntoConstraints = false
         roundLabel.translatesAutoresizingMaskIntoConstraints = false
         leftTeamNumLabel.translatesAutoresizingMaskIntoConstraints = false
         leftIconButton.translatesAutoresizingMaskIntoConstraints = false
@@ -1093,13 +840,9 @@ class RefereePVEController: BaseViewController {
         rightWinButton.translatesAutoresizingMaskIntoConstraints = false
         rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.035),
-            gameCodeLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2),
-            gameCodeLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.08),
             
             roundLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            roundLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.055),
+            roundLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.size.height * 0.15),
             roundLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.579),
             roundLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.0751),
             
@@ -1210,21 +953,12 @@ class RefereePVEController: BaseViewController {
     }
 }
 
-//MARK: - Protocols
-extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamUpdateListener {
-    func updateReferee(_ referee: Referee) {
-        if !referee.assigned && !isSeguePerformed {
-            performSegue(withIdentifier: "toWait", sender: self)
-            isSeguePerformed = true
-        }
-    }
+// MARK: - @objc
+extension RefereePVEController {
     
-    func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp("referee")
-            self.awardViewControllerPresented = true
-            return
-        }
+    @objc func hostUpdate(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
+        
         if host.confirmStations {
             Task { @MainActor in
                 let stations = try await S.getStationList(gameCode)
@@ -1352,7 +1086,9 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
         }
     }
     
-    func updateTeams(_ teams: [Team]) {
+    @objc func teamsUpdate(notification: Notification) {
+        guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
+        
         count = teams.count
         if teams.count == self.number && !teamOrderSet {
             teamOrderSet = true
@@ -1387,15 +1123,249 @@ extension RefereePVEController: RefereeUpdateListener, HostUpdateListener, TeamU
         }
     }
     
-    func listen(_ _ : [String : Any]){
+    @objc func playSound() {
+        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
-    func callProtocols() {
-        R.delegates.append(self)
-        H.delegates.append(WeakHostUpdateListener(value: self))
-        T.delegates.append(WeakTeamUpdateListener(value: self))
-        R.listenReferee(gameCode, referee.uuid, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
+        if unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
+                }
+            }
+        } else {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
+                }
+            }
+        }
+    }
+    
+    @objc func buttonTapped() {
+        if self.team.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            UserData.writeTeam(self.team, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func winButtonTapped() {
+        if self.team.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if max != "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.team.name, self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("true", "max")
+                max = UserData.readMax("max")!
+            }
+            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func loseButtonTapped() {
+        if self.team.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if max == "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.team.name, -self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("false", "max")
+                max = UserData.readMax("max")!
+            }
+            winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func leftButtonTapped() {
+        if self.teamA.number == 0 {
+            alert(title: "", message: "The Team doesn't exist")
+        } else {
+            UserData.writeTeam(self.teamA, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func rightButtonTapped() {
+        if self.teamB.number == 0 {
+            alert(title: "", message: "The Team doesn't exist")
+        } else {
+            UserData.writeTeam(self.teamB, "Team")
+            let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
+            self.present(popUpWindow, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func leftWinButtonTapped() {
+        if self.teamA.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if maxA != "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamA.name, self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("true", "maxA")
+                maxA = UserData.readMax("maxA")!
+            }
+            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func rightWinButtonTapped() {
+        if self.teamB.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if maxB != "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamB.name, self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("true", "maxB")
+                maxB = UserData.readMax("maxB")!
+            }
+            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func leftLoseButtonTapped() {
+        if self.teamA.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if maxA == "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamA.name, -self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("false", "maxA")
+                maxA = UserData.readMax("maxA")!
+            }
+            leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func rightLoseButtonTapped() {
+        if self.teamB.number == 0 {
+            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+        } else {
+            if maxB == "true" {
+                Task {
+                    do {
+                        try await T.givePoints(gameCode, self.teamB.name, -self.points)
+                    } catch GameWalkerError.serverError(let text){
+                        print(text)
+                        serverAlert(text)
+                        return
+                    }
+                }
+                UserData.writeMax("false", "maxB")
+                maxB = UserData.readMax("maxB")!
+            }
+            rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = true
+            }
+            rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                gestureRecognizer.isEnabled = false
+            }
+            rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+        }
+    }
+    
+    @objc func leaveAction() {
+        self.navigationController?.popToRegisterViewController(animated: true)
+    }
+    
+    @objc override func infoAction() {
+        if !teamOrderSet {
+            alert(title: "The board is not ready yet", message: "Please try again when it is ready")
+        } else {
+            if pvp {
+                showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])
+            } else {
+                showOverlay(pvp: pvp, components: [iconButton, scoreLabel, winButton, loseButton])
+            }
+        }
+    }
+    
+    @objc override func announceAction() {
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
     }
 }

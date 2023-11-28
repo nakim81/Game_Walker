@@ -19,15 +19,19 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     private var stations : [Station] = []
     private var isSeguePerformed = false
     private var pvp : Bool?
-    private var gameStart : Bool?
+    private var gameStart = true
     private var host : Host = Host()
     private let audioPlayerManager = AudioPlayerManager()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     override func viewDidLoad() {
         Task {
             self.navigationController?.setNavigationBarHidden(false, animated: false)
             configureNavItem()
-            callProtocols()
             gamecodeTextField.keyboardType = .asciiCapableNumberPad
             gamecodeTextField.delegate = self
             gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
@@ -104,7 +108,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     // Rejoining the game.
                     else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                         let oldReferee = UserData.readReferee("referee")!
-                        if oldReferee.assigned && gameStart! {
+                        if oldReferee.assigned && gameStart {
                             for station in stations {
                                 if station.name == oldReferee.stationName {
                                     self.pvp = station.pvp
@@ -165,7 +169,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         UserData.writeGamecode(storedGameCode, "gamecode")
                         UserData.writeUsername(newReferee.name, "username")
                         UserData.writeReferee(newReferee, "referee")
-                        if oldReferee.assigned && gameStart! {
+                        if oldReferee.assigned && gameStart {
                             for station in stations {
                                 if station.name == oldReferee.stationName {
                                     self.pvp = station.pvp
@@ -209,21 +213,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 
             }
         }
-    }
-}
-
-// MARK: - Protocols
-extension RegisterController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.gameStart = host.gameStart
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        H.delegates.append(WeakHostUpdateListener(value: self))
-        H.listenHost(storedGameCode, onListenerUpdate: listen(_:))
     }
 }
 

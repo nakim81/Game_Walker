@@ -15,7 +15,7 @@ import SwiftUI
 struct R {
     
     static let db = Firestore.firestore()
-    static var delegates : [RefereeUpdateListener] = []
+    static var delegates : [WeakRefereeUpdateListener] = []
     
     //MARK: - Referee Control Functions
     
@@ -84,7 +84,7 @@ struct R {
             guard let data = document.data() else { return }
             let ref = convertDataToReferee(data)
             for delegate in delegates {
-                delegate.updateReferee(ref)
+                delegate.value?.updateReferee(ref)
             }
         }
     }

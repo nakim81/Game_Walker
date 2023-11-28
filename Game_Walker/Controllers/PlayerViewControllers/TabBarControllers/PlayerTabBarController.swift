@@ -35,7 +35,6 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     
     private func removeListeners() {
         H.detatchHost()
-        //T.detatchHost()
     }
     
     

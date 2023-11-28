@@ -53,6 +53,7 @@ class TimerViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    
 // MARK: - UI components
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -165,24 +166,21 @@ class TimerViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
         if TeamViewController.unread {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.unreadSome, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
                 }
             }
         } else {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.readAll, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
                 }
             }
         }
@@ -465,24 +463,21 @@ extension TimerViewController {
         guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
         if unread {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.unreadSome, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
                 }
             }
         } else {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.readAll, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
                 }
             }
         }

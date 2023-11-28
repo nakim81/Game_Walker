@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - Protocols
 
-protocol RefereeUpdateListener {
+protocol RefereeUpdateListener: AnyObject {
     func updateReferee(_ referee: Referee)
 }
 
@@ -42,4 +42,8 @@ struct WeakHostUpdateListener {
 
 struct WeakTeamUpdateListener {
     weak var value: TeamUpdateListener?
+}
+
+struct WeakRefereeUpdateListener {
+    weak var value: RefereeUpdateListener?
 }
