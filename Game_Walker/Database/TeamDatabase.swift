@@ -24,6 +24,11 @@ struct T {
         do {
             let document = try await docRef.getDocument()
             if document.exists {
+                // Check if the team number already exists
+                var existingTeams = try await getTeamList(gamecode)
+                if existingTeams.contains(where: { $0.number == team.number }) {
+                    throw GameWalkerError.teamNumberAlreadyExists("Team number \(team.number) already exists.")
+                }
                 updateTeam(gamecode, team)
                 print("Team added")
             } else {
