@@ -58,11 +58,12 @@ class RefereeTimerController: BaseViewController {
     
     @IBAction func announcementButtonPressed(_ sender: UIButton) {
         guard let pvp = self.pvp else { return }
-        if pvp {
-            showRefereeMessagePopUp(messages: RefereeRankingPVPViewController.localMessages)
-        } else {
-            showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
-        }
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+//        if pvp {
+//            showRefereeMessagePopUp(messages: RefereeRankingPVPViewController.localMessages)
+//        } else {
+//            showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+//        }
     }
     
     @IBAction func settingButtonPressed(_ sender: Any) {
@@ -75,12 +76,13 @@ class RefereeTimerController: BaseViewController {
         
         var unread: Bool
         
-        if pvp {
-            unread = RefereeRankingPVPViewController.unread
-        } else {
-            unread = RefereeRankingPVEViewController.unread
-        }
+//        if pvp {
+//            unread = RefereeRankingPVPViewController.unread
+//        } else {
+//            unread = RefereeRankingPVEViewController.unread
+//        }
         
+        unread = RefereeRankingPVEViewController.unread
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
         if unread {

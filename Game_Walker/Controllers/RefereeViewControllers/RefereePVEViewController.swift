@@ -240,7 +240,7 @@ class RefereePVEController: BaseViewController {
     }
     
     private func showOverlay(pvp: Bool, components: [UIView]) {
-        let overlayViewController = RefereePVEGuideViewController(pvp: pvp)
+        let overlayViewController = RefereeGuideViewController(pvp: pvp)
         overlayViewController.modalPresentationStyle = .overFullScreen
         let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info"]
         var componentPositions: [CGPoint] = []

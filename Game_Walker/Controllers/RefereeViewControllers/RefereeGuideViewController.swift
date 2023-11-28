@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereePVEGuideViewController : UIViewController {
+class RefereeGuideViewController : UIViewController {
     var pvp: Bool
     
     init(pvp: Bool) {
