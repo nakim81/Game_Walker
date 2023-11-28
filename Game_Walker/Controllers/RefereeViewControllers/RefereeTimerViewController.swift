@@ -448,7 +448,7 @@ class RefereeTimerController: BaseViewController {
 extension RefereeTimerController: HostUpdateListener {
     func updateHost(_ host: Host) {
         if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
+            showAwardPopUp("host")
             self.awardViewControllerPresented = true
             return
         }

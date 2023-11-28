@@ -63,7 +63,7 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
         let data: [String:Host] = ["host":host]
         NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
         if host.gameover {
-            showAwardPopUp()
+            showAwardPopUp("player")
         }
     }
     

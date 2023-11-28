@@ -12,6 +12,8 @@ class AwardViewController: UIViewController {
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
     private var newTeamList: [Team] = []
     
+    public var from: String?
+    
     private let leaderBoard = UITableView(frame: .zero)
     private let cellSpacingHeight: CGFloat = 3
     
@@ -444,7 +446,8 @@ class AwardViewController: UIViewController {
     
     @objc func callMainVC() {
 //        audioPlayerManager.stop()
-        self.navigationController?.popToMainViewController(animated: true)
+        guard let from = self.from else { return }
+        self.navigationController?.popToMainViewController(from, animated: true)
     }
     
     init() {
@@ -478,11 +481,18 @@ extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 extension UINavigationController {
-    func popToMainViewController(animated: Bool) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
-           let mainViewController = rootController.viewControllers.first(where: { $0 is MainViewController }) {
-            popToViewController(mainViewController, animated: animated)
+    func popToMainViewController(_ from: String, animated: Bool) {
+        if from == "host" {
+            if let destinationViewController = navigationController?.viewControllers.filter({$0 is MainViewController}).first {
+                navigationController?.popToViewController(destinationViewController, animated: true)
+            }
+        } else {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
+               let mainViewController = rootController.viewControllers.first(where: { $0 is MainViewController }) {
+                print(mainViewController)
+                popToViewController(mainViewController, animated: animated)
+            }
         }
     }
 }
