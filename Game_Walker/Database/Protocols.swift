@@ -34,6 +34,7 @@ protocol AddStationDelegate: AnyObject {
 enum GameWalkerError: Error {
     case invalidGamecode(String)
     case serverError(String)
+    case teamNumberAlreadyExists(String)
 }
 // MARK: - sturct for protocols
 struct WeakHostUpdateListener {
