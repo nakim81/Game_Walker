@@ -197,7 +197,14 @@ extension RankingViewController {
     }
     
     @objc func updateLeaderboard(notification: Notification) {
-        guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
+        guard var teams = notification.userInfo?["teams"] as? [Team] else { return }
+        teams.sort { (team1, team2) -> Bool in
+            if team1.points == team2.points {
+                return team1.number < team2.number
+            } else {
+                return team1.points > team2.points
+            }
+        }
         self.teamList = teams
         if self.showScore {
             self.leaderBoard.reloadData()

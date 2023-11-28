@@ -114,8 +114,6 @@ class EndGameViewController: UIViewController {
         let view = UIStackView()
         view.spacing = 17.0
         view.distribution = .fillEqually
-        buttonStackView.addArrangedSubview(noButton)
-        buttonStackView.addArrangedSubview(yesButton)
         return view
     }()
     
@@ -149,6 +147,8 @@ class EndGameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonStackView.addArrangedSubview(noButton)
+        buttonStackView.addArrangedSubview(yesButton)
         setUpViews()
         makeConstraints()
     }

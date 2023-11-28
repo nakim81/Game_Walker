@@ -115,8 +115,9 @@ extension UIViewController {
 }
 // MARK: - AwardPopUps
 extension UIViewController {
-    func showAwardPopUp() {
+    func showAwardPopUp( _ from: String) {
         let awardViewController = AwardViewController()
+        awardViewController.from = from
         self.navigationController?.pushViewController(awardViewController, animated: true)
     }
 }

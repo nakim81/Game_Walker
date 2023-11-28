@@ -42,30 +42,27 @@ class TeamViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
+            guard let items = strongSelf.navigationItem.rightBarButtonItems else { return }
             // true if some announcements are unread, false if all read
             let unread = strongSelf.checkUnreadAnnouncements(announcements: TeamViewController.localMessages)
             TeamViewController.unread = unread
             if unread{
                 NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                if let items = strongSelf.navigationItem.rightBarButtonItems {
-                    for barButtonItem in items {
-                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                            // 이미지 변경
-                            btn.setImage(strongSelf.unreadSome, for: .normal)
-                            break
-                        }
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(strongSelf.unreadSome, for: .normal)
+                        break
                     }
                 }
                 NotificationCenter.default.post(name: .newDataNotif, object: nil)
             } else {
                 NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                if let items = strongSelf.navigationItem.rightBarButtonItems {
-                    for barButtonItem in items {
-                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                            // 이미지 변경
-                            btn.setImage(strongSelf.readAll, for: .normal)
-                            break
-                        }
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(strongSelf.readAll, for: .normal)
+                        break
                     }
                 }
             }
