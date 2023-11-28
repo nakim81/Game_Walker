@@ -948,7 +948,7 @@ extension RefereePVPController: RefereeUpdateListener, HostUpdateListener, TeamU
     
     func updateHost(_ host: Host) {
         if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
+            showAwardPopUp("referee")
             self.awardViewControllerPresented = true
             return
         }

@@ -107,7 +107,15 @@ class CreateTeamViewController: UIViewController {
                     return
                 }
                 
-                if Int(teamNumber) ?? 0 > 0 {
+                guard let tn = Int(teamNumber) else { return }
+                guard let hn = self.host?.teams else { return }
+                
+                if tn > 0 {
+                    if (tn > hn) {
+                        alert(title: "Invalid Team Number", message: "Please try other team numbers")
+                        return
+                    }
+                        
                     if standardStyle {
                         guard let temp = self.host?.algorithm else { return }
                         let algorithm = convert1DArrayTo2D(temp)
@@ -116,9 +124,9 @@ class CreateTeamViewController: UIViewController {
                             teamNameTextField.resignFirstResponder()
                             
                             ///find the order of stations for player's team
-                            let stationOrder = self.getStationOrder(algorithm , Int(teamNumber) ?? 0, self.stationList)
+                            let stationOrder = self.getStationOrder(algorithm , tn , self.stationList)
                             print("stationorder: \(stationOrder)")
-                            let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
+                            let newTeam = Team(gamecode: gameCode, name: teamName, number: tn , players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                             UserData.writeTeam(newTeam, "team")
                             UserData.setStandardStyle(standardStyle)
                             Task { @MainActor in
@@ -136,7 +144,7 @@ class CreateTeamViewController: UIViewController {
                             return
                         }
                     } else {
-                        let newTeam = Team(gamecode: gameCode, name: teamName, number: Int(teamNumber) ?? 0, players: [currentPlayer], points: 0, stationOrder: [], iconName: selectedIconName)
+                        let newTeam = Team(gamecode: gameCode, name: teamName, number: tn , players: [currentPlayer], points: 0, stationOrder: [], iconName: selectedIconName)
                         UserData.writeTeam(newTeam, "team")
                         UserData.setStandardStyle(standardStyle)
                         Task { @MainActor in

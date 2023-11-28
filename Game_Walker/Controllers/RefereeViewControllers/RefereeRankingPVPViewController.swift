@@ -189,7 +189,7 @@ extension RefereeRankingPVPViewController: TeamUpdateListener {
 extension RefereeRankingPVPViewController: HostUpdateListener {
     func updateHost(_ host: Host) {
         if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
+            showAwardPopUp("referee")
             self.awardViewControllerPresented = true
             return
         }

@@ -72,7 +72,7 @@ class TeamTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 24)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 22)
         label.numberOfLines = 1
         return label
     }()
@@ -149,7 +149,7 @@ class TeamTableViewCell: UITableViewCell {
             
             scoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             scoreLabel.centerYAnchor.constraint(equalTo: teamIconImage.centerYAnchor),
-            scoreLabel.widthAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1.0),
+            scoreLabel.widthAnchor.constraint(equalTo: containerView.heightAnchor),
             
             borderView.widthAnchor.constraint(equalTo: containerView.layoutMarginsGuide.widthAnchor),
             borderView.heightAnchor.constraint(equalToConstant: 3.0),
