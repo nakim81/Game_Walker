@@ -32,6 +32,10 @@ class WaitingController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        R.delegates = R.delegates.filter { $0.value != nil }
+    }
+    
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
         let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
@@ -139,7 +143,7 @@ extension WaitingController: RefereeUpdateListener {
     }
     
     func callProtocols() {
-        R.delegates.append(self)
+        R.delegates.append(WeakRefereeUpdateListener(value: self))
         R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
     }
 }

@@ -11,9 +11,6 @@ import UIKit
 class RefereeRankingPVEViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
     
     private var teamList: [Team] = []
     
@@ -28,80 +25,53 @@ class RefereeRankingPVEViewController: UIViewController {
     private var diff: Int?
     
     private let audioPlayerManager = AudioPlayerManager()
-    private var awardViewControllerPresented = false
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addObservers()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
         configureTableView()
-        configureGamecodeLabel()
-        configureListeners()
+        configureNavigationBar()
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
             }
+            guard let items = strongSelf.navigationItem.rightBarButtonItems else { return }
             let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeRankingPVEViewController.localMessages)
             RefereeRankingPVEViewController.unread = unread
             if unread{
                 NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                strongSelf.announcementButton.setImage(strongSelf.unreadSome, for: .normal)
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(strongSelf.unreadSome, for: .normal)
+                        break
+                    }
+                }
                 NotificationCenter.default.post(name: .newDataNotif, object: nil)
             } else {
                 NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                strongSelf.announcementButton.setImage(strongSelf.readAll, for: .normal)
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(strongSelf.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }
     
-    private func configureListeners(){
-        T.delegates.append(WeakTeamUpdateListener(value: self))
-        H.delegates.append(WeakHostUpdateListener(value: self))
-        R.delegates.append(self)
-        T.listenTeams(gameCode, onListenerUpdate: listen(_:))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        R.listenReferee(gameCode, UserData.readReferee("referee")!.uuid, onListenerUpdate: listen(_:))
-    }
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: UIButton) {
-    }
-    
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
-        self.showOverlay()
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(teamsUpdate), name: .teamsUpdate, object: nil)
     }
     
     private func configureTableView() {
@@ -113,13 +83,6 @@ class RefereeRankingPVEViewController: UIViewController {
         leaderBoard.separatorStyle = .none
     }
     
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
-        ])
-    }
 }
 // MARK: - TableView
 extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataSource {
@@ -182,32 +145,30 @@ extension RefereeRankingPVEViewController {
         present(overlayViewController, animated: true, completion: nil)
     }
 }
-// MARK: - TeamProtocol
-extension RefereeRankingPVEViewController: TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        self.teamList = teams
-        if self.showScore {
-            leaderBoard.reloadData()
-        }
+// MARK: - @objc
+extension RefereeRankingPVEViewController {
+    
+    @objc override func announceAction() {
+        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
     }
-}
-// MARK: - HostProtocol
-extension RefereeRankingPVEViewController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp("referee")
-            self.awardViewControllerPresented = true
-            return
-        }
+    
+    @objc override func infoAction() {
+        self.showOverlay()
+    }
+    
+    @objc func hostUpdate (notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
+        
         self.showScore = host.showScoreboard
         leaderBoard.reloadData()
-        var hostAnnouncements = Array(host.announcements)
-        if RefereeRankingPVEViewController.localMessages.count > hostAnnouncements.count {
-            removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: hostAnnouncements)
+        
+        if RefereeRankingPVEViewController.localMessages.count > host.announcements.count {
+            removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: host.announcements)
             NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
         } else {
-            for announcement in hostAnnouncements {
-                if !RefereeRankingPVEViewController.localMessages.contains(announcement) {
+            for announcement in host.announcements {
+                let ids: [String] = RefereeRankingPVEViewController.localMessages.map({ $0.uuid })
+                if !ids.contains(announcement.uuid) {
                     RefereeRankingPVEViewController.localMessages.append(announcement)
                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                     NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
@@ -224,15 +185,19 @@ extension RefereeRankingPVEViewController: HostUpdateListener {
             }
         }
     }
-}
-// MARK: - RefereeProtocol
-extension RefereeRankingPVEViewController: RefereeUpdateListener {
-    func updateReferee(_ referee: Referee) {
-        if !referee.assigned && !isSeguePerformed {
-            print("A")
-            //A (segue) is triggered only once, but somehow destination controller is loaded twice...seems like something has to do with navigation stack and tab bar.
-            performSegue(withIdentifier: "toWait2", sender: self)
-            isSeguePerformed = true
+    
+    @objc func teamsUpdate (notification: Notification) {
+        guard var teams = notification.userInfo?["teams"] as? [Team] else { return }
+        teams.sort { (team1, team2) -> Bool in
+            if team1.points == team2.points {
+                return team1.number < team2.number
+            } else {
+                return team1.points > team2.points
+            }
+        }
+        self.teamList = teams
+        if self.showScore {
+            self.leaderBoard.reloadData()
         }
     }
 }

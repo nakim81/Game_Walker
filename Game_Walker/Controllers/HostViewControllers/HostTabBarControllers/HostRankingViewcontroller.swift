@@ -31,8 +31,6 @@ class HostRankingViewcontroller: UIViewController {
     // MARK: - methods related to the view lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.navigationController?.isNavigationBarHidden = true
-        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidLoad() {
