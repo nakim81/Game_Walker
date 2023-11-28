@@ -121,14 +121,8 @@ class WaitingController: BaseViewController {
             stations = try await S.getStationList(gameCode)
             for station in stations! {
                 if referee.name == station.referee!.name && !isSeguePerformed {
-                    if station.pvp {
-                        performSegue(withIdentifier: "goToPVP", sender: self)
-                        isSeguePerformed = true
-                    }
-                    else {
-                        performSegue(withIdentifier: "goToPVE", sender: self)
-                        isSeguePerformed = true
-                    }
+                    performSegue(withIdentifier: "goToPVE", sender: self)
+                    isSeguePerformed = true
                 }
             }
         }
