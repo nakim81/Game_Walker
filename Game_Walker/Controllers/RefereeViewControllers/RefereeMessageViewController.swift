@@ -105,7 +105,7 @@ class RefereeMessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
-            self.messages = RefereeRankingPVEViewController.localMessages
+            self.messages = RefereeTabBarPVEController.localMessages
             messageTableView.reloadData()
         }
     }
@@ -182,8 +182,8 @@ extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSour
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        RefereeRankingPVEViewController.localMessages[indexPath.row].readStatus = true
-        showRefereeAnnouncementPopUp(announcement: RefereeRankingPVEViewController.localMessages[indexPath.row])
+        RefereeTabBarPVEController.localMessages[indexPath.row].readStatus = true
+        showRefereeAnnouncementPopUp(announcement: RefereeTabBarPVEController.localMessages[indexPath.row])
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }
