@@ -133,6 +133,10 @@ class CreateTeamViewController: UIViewController {
                                 do {
                                     try await T.addTeam(gameCode, newTeam)
                                     performSegue(withIdentifier: "goToTPF4", sender: self)
+                                } catch GameWalkerError.teamNumberAlreadyExists(let e) {
+                                    print(e)
+                                    teamNumberAlert(e)
+                                    return
                                 } catch GameWalkerError.serverError(let text){
                                     print(text)
                                     serverAlert(text)
@@ -151,6 +155,10 @@ class CreateTeamViewController: UIViewController {
                             do {
                                 try await T.addTeam(gameCode, newTeam)
                                 performSegue(withIdentifier: "goToTPF4", sender: self)
+                            } catch GameWalkerError.teamNumberAlreadyExists(let e) {
+                                print(e)
+                                teamNumberAlert(e)
+                                return
                             } catch GameWalkerError.serverError(let text){
                                 print(text)
                                 serverAlert(text)
