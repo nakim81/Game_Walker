@@ -12,7 +12,6 @@ import AVFoundation
 class TimerViewController: BaseViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    private var messages: [String] = []
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -167,7 +166,7 @@ class TimerViewController: BaseViewController {
         super.viewWillAppear(animated)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else { return }
-        if TeamViewController.unread {
+        if PlayerTabBarController.unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
                     // 이미지 변경
@@ -205,7 +204,6 @@ class TimerViewController: BaseViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
     }
     
@@ -483,10 +481,6 @@ extension TimerViewController {
         }
     }
     
-    @objc func playSound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
         if !tapped {
             timerCircle.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
@@ -510,6 +504,6 @@ extension TimerViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: TeamViewController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
 }

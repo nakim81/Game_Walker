@@ -13,18 +13,10 @@ class RefereeRankingPVEViewController: UIViewController {
     @IBOutlet weak var leaderBoard: UITableView!
     
     private var teamList: [Team] = []
-    
-    static var localMessages: [Announcement] = []
+
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private let refreshController: UIRefreshControl = UIRefreshControl()
     private var showScore = true
-    
-    private var isSeguePerformed = false
-    private var timer = Timer()
-    static var unread: Bool = false
-    private var diff: Int?
-    
-    private let audioPlayerManager = AudioPlayerManager()
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -32,36 +24,23 @@ class RefereeRankingPVEViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tabBarController?.navigationController?.isNavigationBarHidden = true
-        configureTableView()
-        configureNavigationBar()
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            guard let items = strongSelf.navigationItem.rightBarButtonItems else { return }
-            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeRankingPVEViewController.localMessages)
-            RefereeRankingPVEViewController.unread = unread
-            if unread{
-                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+        
+        if RefereeTabBarPVEController.unread {
+            if let items = self.navigationItem.rightBarButtonItems {
                 for barButtonItem in items {
                     if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
                         // 이미지 변경
-                        btn.setImage(strongSelf.unreadSome, for: .normal)
+                        btn.setImage(self.unreadSome, for: .normal)
                         break
                     }
                 }
-                NotificationCenter.default.post(name: .newDataNotif, object: nil)
-            } else {
-                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+            }
+        } else {
+            if let items = self.navigationItem.rightBarButtonItems {
                 for barButtonItem in items {
                     if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
                         // 이미지 변경
-                        btn.setImage(strongSelf.readAll, for: .normal)
+                        btn.setImage(self.readAll, for: .normal)
                         break
                     }
                 }
@@ -69,9 +48,17 @@ class RefereeRankingPVEViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+        configureTableView()
+        configureNavigationBar()
+    }
+    
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(teamsUpdate), name: .teamsUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
     }
     
     private func configureTableView() {
@@ -149,7 +136,7 @@ extension RefereeRankingPVEViewController {
 extension RefereeRankingPVEViewController {
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
     }
     
     @objc override func infoAction() {
@@ -161,29 +148,6 @@ extension RefereeRankingPVEViewController {
         
         self.showScore = host.showScoreboard
         leaderBoard.reloadData()
-        
-        if RefereeRankingPVEViewController.localMessages.count > host.announcements.count {
-            removeAnnouncementsNotInHost(from: &RefereeRankingPVEViewController.localMessages, targetArray: host.announcements)
-            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
-        } else {
-            for announcement in host.announcements {
-                let ids: [String] = RefereeRankingPVEViewController.localMessages.map({ $0.uuid })
-                if !ids.contains(announcement.uuid) {
-                    RefereeRankingPVEViewController.localMessages.append(announcement)
-                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                } else {
-                    if let localIndex = RefereeRankingPVEViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                        if RefereeRankingPVEViewController.localMessages[localIndex].content != announcement.content {
-                            RefereeRankingPVEViewController.localMessages[localIndex].content = announcement.content
-                            RefereeRankingPVEViewController.localMessages[localIndex].readStatus = false
-                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                        }
-                    }
-                }
-            }
-        }
     }
     
     @objc func teamsUpdate (notification: Notification) {
@@ -198,6 +162,30 @@ extension RefereeRankingPVEViewController {
         self.teamList = teams
         if self.showScore {
             self.leaderBoard.reloadData()
+        }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
+        if unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
+                }
+            }
+        } else {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
+                }
+            }
         }
     }
 }

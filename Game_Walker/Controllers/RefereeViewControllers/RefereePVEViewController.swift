@@ -11,10 +11,8 @@ import AVFoundation
 
 class RefereePVEController: BaseViewController {
     
-    private let audioPlayerManager = AudioPlayerManager()
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
-    private var messages: [String] = []
     
     private var teamOrderSet: Bool = false
     private var isSeguePerformed : Bool = false
@@ -48,7 +46,7 @@ class RefereePVEController: BaseViewController {
         super.viewWillAppear(animated)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        var unread = RefereeRankingPVEViewController.unread
+        var unread = RefereeTabBarPVEController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -160,7 +158,6 @@ class RefereePVEController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(teamsUpdate), name: .teamsUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
     }
 //MARK: - Team Order
     func setTeamOrder() {
@@ -1123,10 +1120,6 @@ extension RefereePVEController {
         }
     }
     
-    @objc func playSound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
     @objc func readAll(notification: Notification) {
         guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
@@ -1366,6 +1359,6 @@ extension RefereePVEController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
     }
 }
