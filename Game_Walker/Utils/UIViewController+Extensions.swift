@@ -158,6 +158,12 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
+    
+    func teamNumberAlert(_ message: String) {
+        let alert = UIAlertController(title: "Team Number Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
 }
 // MARK: - textField
 extension UITextField {

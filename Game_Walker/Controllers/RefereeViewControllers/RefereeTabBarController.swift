@@ -11,36 +11,43 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
     
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     
-    func updateReferee(_ referee: Referee) {
-        let data: [String:Referee] = ["referee":referee]
-        if (!referee.assigned) {
-            navigationController?.popToWaitingViewController(animated: true)
-        }
-        NotificationCenter.default.post(name: .refereeUpdate, object: nil, userInfo: data)
-    }
+    static var localMessages: [Announcement] = []
     
-    func updateHost(_ host: Host) {
-        let data: [String:Host] = ["host":host]
-        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
-        if host.gameover {
-            showAwardPopUp("referee")
-        }
-    }
+    private var timer = Timer()
+    static var unread: Bool = false
     
-    func updateTeams(_ teams: [Team]) {
-        let data: [String:[Team]] = ["teams":teams]
-        NotificationCenter.default.post(name: .teamsUpdate, object: nil, userInfo: data)
-    }
+    private let audioPlayerManager = AudioPlayerManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.navigationController?.isNavigationBarHidden = true
-        print("------------H.delegates------------")
-        H.delegates = H.delegates.filter { $0.value != nil }
-        for delegate in H.delegates {
-            print(delegate)
+        
+        Task {@MainActor in
+            do {
+                guard let host = try await H.getHost(gameCode) else { return }
+                RefereeTabBarPVEController.localMessages = host.announcements
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
+                return
+            }
         }
-        print("------------H.delegates------------")
+        
+        print("tabbar prints: \(H.delegates.count)")
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeTabBarPVEController.localMessages)
+            RefereeTabBarPVEController.unread = unread
+            if unread{
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +73,55 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
         R.listenReferee(gameCode, referee.uuid , onListenerUpdate: listen(_:))
+    }
+    
+    func updateReferee(_ referee: Referee) {
+        let data: [String:Referee] = ["referee":referee]
+        if (!referee.assigned) {
+            navigationController?.popToWaitingViewController(animated: true)
+        }
+        NotificationCenter.default.post(name: .refereeUpdate, object: nil, userInfo: data)
+    }
+    
+    func updateHost(_ host: Host) {
+        if host.gameover {
+            showAwardPopUp("referee")
+        }
+        
+        let data: [String:Host] = ["host":host]
+        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
+        
+        if RefereeTabBarPVEController.localMessages.count > host.announcements.count {
+            removeAnnouncementsNotInHost(from: &RefereeTabBarPVEController.localMessages, targetArray: host.announcements)
+            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
+        } else {
+            // compare server announcements and local announcements
+            for announcement in host.announcements {
+                let ids: [String] = RefereeTabBarPVEController.localMessages.map({ $0.uuid })
+                // new announcements
+                if !ids.contains(announcement.uuid) {
+                    RefereeTabBarPVEController.localMessages.append(announcement)
+                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                } else {
+                    // modified announcements
+                    if let localIndex = RefereeTabBarPVEController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                        if RefereeTabBarPVEController.localMessages[localIndex].content != announcement.content {
+                            RefereeTabBarPVEController.localMessages[localIndex].content = announcement.content
+                            RefereeTabBarPVEController.localMessages[localIndex].readStatus = false
+                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    func updateTeams(_ teams: [Team]) {
+        let data: [String:[Team]] = ["teams":teams]
+        NotificationCenter.default.post(name: .teamsUpdate, object: nil, userInfo: data)
     }
     
     func listen(_ _ : [String : Any]){

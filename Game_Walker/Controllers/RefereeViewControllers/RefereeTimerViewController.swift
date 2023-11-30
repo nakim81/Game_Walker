@@ -18,7 +18,6 @@ class RefereeTimerController: BaseViewController {
     private var host: Host = Host()
     private var pvp: Bool?
     
-    private var messages: [String] = []
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
@@ -45,7 +44,7 @@ class RefereeTimerController: BaseViewController {
         super.viewWillAppear(animated)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        var unread = RefereeRankingPVEViewController.unread
+        var unread = RefereeTabBarPVEController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -77,7 +76,6 @@ class RefereeTimerController: BaseViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
     }
     
     func callProtocols() {
@@ -425,10 +423,6 @@ extension RefereeTimerController {
         }
     }
     
-    @objc func playSound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-    }
-    
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
         if !tapped {
             timerCircle.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
@@ -458,6 +452,6 @@ extension RefereeTimerController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
+        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
     }
 }

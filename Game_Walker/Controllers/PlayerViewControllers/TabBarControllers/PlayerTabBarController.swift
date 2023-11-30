@@ -12,6 +12,13 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     var standardStyle: Bool = true // Default value is true
     let gameCode = UserData.readGamecode("gamecode") ?? ""
     
+    static var localMessages: [Announcement] = []
+    
+    private var timer = Timer()
+    static var unread: Bool = false
+    
+    private let audioPlayerManager = AudioPlayerManager()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         H.delegates.append(WeakHostUpdateListener(value: self))
@@ -23,11 +30,38 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
         super.viewDidLoad()
         self.delegate = self
         customizeTimerTabBarItem()
+        
+        Task {@MainActor in
+            do {
+                guard let host = try await H.getHost(gameCode) else { return }
+                PlayerTabBarController.localMessages = host.announcements
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
+                return
+            }
+        }
+        
         print("tabbar prints: \(H.delegates.count)")
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+            guard let strongSelf = self else {
+                return
+            }
+            let unread = strongSelf.checkUnreadAnnouncements(announcements: PlayerTabBarController.localMessages)
+            PlayerTabBarController.unread = unread
+            if unread{
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         H.delegates = H.delegates.filter { $0.value != nil }
         T.delegates = T.delegates.filter { $0.value != nil}
         removeListeners()
@@ -59,10 +93,38 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     }
     
     func updateHost(_ host: Host) {
-        let data: [String:Host] = ["host":host]
-        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
         if host.gameover {
             showAwardPopUp("player")
+        }
+        
+        let data: [String:Host] = ["host":host]
+        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
+        
+        if PlayerTabBarController.localMessages.count > host.announcements.count {
+            removeAnnouncementsNotInHost(from: &PlayerTabBarController.localMessages, targetArray: host.announcements)
+            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
+        } else {
+            // compare server announcements and local announcements
+            for announcement in host.announcements {
+                let ids: [String] = PlayerTabBarController.localMessages.map({ $0.uuid })
+                // new announcements
+                if !ids.contains(announcement.uuid) {
+                    PlayerTabBarController.localMessages.append(announcement)
+                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                } else {
+                    // modified announcements
+                    if let localIndex = PlayerTabBarController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                        if PlayerTabBarController.localMessages[localIndex].content != announcement.content {
+                            PlayerTabBarController.localMessages[localIndex].content = announcement.content
+                            PlayerTabBarController.localMessages[localIndex].readStatus = false
+                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                        }
+                    }
+                }
+                
+            }
         }
     }
     

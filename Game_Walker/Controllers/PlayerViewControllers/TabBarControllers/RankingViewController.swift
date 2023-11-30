@@ -24,12 +24,10 @@ class RankingViewController: UIViewController {
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
-    private let audioPlayerManager = AudioPlayerManager()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
-        if TeamViewController.unread {
+        if PlayerTabBarController.unread {
             if let items = self.navigationItem.rightBarButtonItems {
                 for barButtonItem in items {
                     if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -54,7 +52,6 @@ class RankingViewController: UIViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showOrHideScore), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateLeaderboard), name: .teamsUpdate, object: nil)
     }
@@ -175,7 +172,7 @@ extension RankingViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: TeamViewController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
     
     @objc override func infoAction() {
@@ -184,10 +181,6 @@ extension RankingViewController {
     
     @objc override func settingApp() {
         
-    }
-    
-    @objc func sound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @objc func showOrHideScore(notification: Notification) {
