@@ -84,9 +84,29 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         Task {
             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
-                host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
+                do {
+                    host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
+                    return
+                }
             } else {
-                host = try await H.getHost(gamecodeTextField.text!) ?? Host()
+                do {
+                    host = try await H.getHost(gamecodeTextField.text!) ?? Host()
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
+                    return
+                }
             }
             if host.standardStyle == false {
                 alert(title: "Point Style", message: "Referee is unavailable in point style.")
