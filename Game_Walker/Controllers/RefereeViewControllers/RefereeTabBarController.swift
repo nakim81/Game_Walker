@@ -78,6 +78,7 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
     func updateReferee(_ referee: Referee) {
         let data: [String:Referee] = ["referee":referee]
         if (!referee.assigned) {
+            print("popToWaiting treggered")
             navigationController?.popToWaitingViewController(animated: true)
         }
         NotificationCenter.default.post(name: .refereeUpdate, object: nil, userInfo: data)
