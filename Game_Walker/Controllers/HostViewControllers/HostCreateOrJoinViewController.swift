@@ -19,11 +19,7 @@ class HostCreateOrJoinViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(performPointsOnlySegue), name: Notification.Name("PointsOnly"), object: nil)
         
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("StandardMode"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("PointsOnly"), object: nil)
-    }
+
     
     @objc private func performStandardModeSegue() {
         performSegue(withIdentifier: "CreateStandardGameSegue", sender: self)

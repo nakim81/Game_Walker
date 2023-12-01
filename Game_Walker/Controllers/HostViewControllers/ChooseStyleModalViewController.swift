@@ -72,6 +72,7 @@ class ChooseStyleModalViewController: BaseViewController {
         dismiss(animated: true) { [weak self] in
             NotificationCenter.default.post(name: Notification.Name("StandardMode"), object: nil)
         }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("StandardMode"), object: nil)
     }
 
     @objc func pointsOnlyViewTapped() {
@@ -94,6 +95,7 @@ class ChooseStyleModalViewController: BaseViewController {
             print("Dismissed view controller")
             NotificationCenter.default.post(name: Notification.Name("PointsOnly"), object: nil)
         }
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("PointsOnly"), object: nil)
     }
 }
 
