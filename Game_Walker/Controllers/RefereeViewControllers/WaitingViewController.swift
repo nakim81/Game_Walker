@@ -16,7 +16,6 @@ class WaitingController: BaseViewController {
     
     private var stations : [Station]?
     private var teamCreated = false
-    private var isSeguePerformed = false
     private var currentIndex: Int = 0
     private var index : Int = 0
     let waitingImagesArray = ["waiting 1.png", "waiting 2.png", "waiting 3.png"]
@@ -124,9 +123,8 @@ class WaitingController: BaseViewController {
         Task { @MainActor in
             stations = try await S.getStationList(gameCode)
             for station in stations! {
-                if referee.name == station.referee!.name && !isSeguePerformed {
+                if referee.name == station.referee!.name {
                     performSegue(withIdentifier: "goToPVE", sender: self)
-                    isSeguePerformed = true
                 }
             }
         }
