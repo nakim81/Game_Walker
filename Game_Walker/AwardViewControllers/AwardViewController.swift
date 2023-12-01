@@ -12,6 +12,8 @@ class AwardViewController: UIViewController {
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
     private var newTeamList: [Team] = []
     
+    public var from: String?
+    
     private let leaderBoard = UITableView(frame: .zero)
     private let cellSpacingHeight: CGFloat = 3
     
@@ -444,7 +446,8 @@ class AwardViewController: UIViewController {
     
     @objc func callMainVC() {
 //        audioPlayerManager.stop()
-        self.navigationController?.popToMainViewController(animated: true)
+        guard let from = self.from else { return }
+        self.navigationController?.popToMainViewController(from, animated: true)
     }
     
     init() {
@@ -475,15 +478,6 @@ extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-}
-extension UINavigationController {
-    func popToMainViewController(animated: Bool) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
-           let mainViewController = rootController.viewControllers.first(where: { $0 is MainViewController }) {
-            popToViewController(mainViewController, animated: animated)
-        }
     }
 }
 

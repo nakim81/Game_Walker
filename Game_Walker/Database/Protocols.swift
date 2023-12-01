@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: - Protocols
 
-protocol RefereeUpdateListener {
+protocol RefereeUpdateListener: AnyObject {
     func updateReferee(_ referee: Referee)
 }
 
@@ -34,6 +34,7 @@ protocol AddStationDelegate: AnyObject {
 enum GameWalkerError: Error {
     case invalidGamecode(String)
     case serverError(String)
+    case teamNumberAlreadyExists(String)
 }
 // MARK: - sturct for protocols
 struct WeakHostUpdateListener {
@@ -42,4 +43,8 @@ struct WeakHostUpdateListener {
 
 struct WeakTeamUpdateListener {
     weak var value: TeamUpdateListener?
+}
+
+struct WeakRefereeUpdateListener {
+    weak var value: RefereeUpdateListener?
 }

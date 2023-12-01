@@ -14,7 +14,6 @@ class TeamViewController: UIViewController {
     @IBOutlet weak var teamNumLbl: UILabel!
     @IBOutlet weak var teamNameLbl: UILabel!
     
-    static var localMessages: [Announcement] = []
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
@@ -24,11 +23,32 @@ class TeamViewController: UIViewController {
     private var teamName = UserData.readTeam("team")?.name ?? ""
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
-    private var timer = Timer()
-    static var unread: Bool = false
-    private var diff: Int?
-    
-    private let audioPlayerManager = AudioPlayerManager()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        
+        if PlayerTabBarController.unread {
+            if let items = self.navigationItem.rightBarButtonItems {
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
+            }
+        } else {
+            if let items = self.navigationItem.rightBarButtonItems {
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,46 +57,6 @@ class TeamViewController: UIViewController {
         configureTableView()
         configureLabel()
         tabBarController?.navigationController?.isNavigationBarHidden = true
-        // timer checks if all the announcements are read or not
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
-                return
-            }
-            // true if some announcements are unread, false if all read
-            let unread = strongSelf.checkUnreadAnnouncements(announcements: TeamViewController.localMessages)
-            TeamViewController.unread = unread
-            if unread{
-                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                if let items = strongSelf.navigationItem.rightBarButtonItems {
-                    for barButtonItem in items {
-                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                            // 이미지 변경
-                            btn.setImage(strongSelf.unreadSome, for: .normal)
-                            break
-                        }
-                    }
-                }
-                NotificationCenter.default.post(name: .newDataNotif, object: nil)
-            } else {
-                NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
-                if let items = strongSelf.navigationItem.rightBarButtonItems {
-                    for barButtonItem in items {
-                        if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                            // 이미지 변경
-                            btn.setImage(strongSelf.readAll, for: .normal)
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        NotificationCenter.default.addObserver(self, selector: #selector(announceUpdate), name: .hostUpdate, object: nil)
-        print("------------H.delegates------------")
-        H.delegates = H.delegates.filter { $0.value != nil }
-        for delegate in H.delegates {
-            print(delegate)
-        }
-        print("------------H.delegates------------")
     }
     
     func configureLeaveBtn() {
@@ -219,38 +199,7 @@ extension TeamViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: TeamViewController.localMessages)
-    }
-    
-    @objc func announceUpdate(notification: Notification) {
-        guard let host = notification.userInfo?["host"] as? Host else { return }
-        // if some announcements were deleted from the server
-        if TeamViewController.localMessages.count > host.announcements.count {
-            removeAnnouncementsNotInHost(from: &TeamViewController.localMessages, targetArray: host.announcements)
-            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
-        } else {
-            // compare server announcements and local announcements
-            for announcement in host.announcements {
-                let ids: [String] = TeamViewController.localMessages.map({ $0.uuid })
-                // new announcements
-                if !ids.contains(announcement.uuid) {
-                    TeamViewController.localMessages.append(announcement)
-                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                } else {
-                    // modified announcements
-                    if let localIndex = TeamViewController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                        if TeamViewController.localMessages[localIndex].content != announcement.content {
-                            TeamViewController.localMessages[localIndex].content = announcement.content
-                            TeamViewController.localMessages[localIndex].readStatus = false
-                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                        }
-                    }
-                }
-                
-            }
-        }
+        showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
     
     @objc func refreshFunction() {
@@ -261,6 +210,33 @@ extension TeamViewController {
                 table.reloadData()
             } catch {
                 alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
+            }
+        }
+    }
+    
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        if unread {
+            if let items = self.navigationItem.rightBarButtonItems {
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.unreadSome, for: .normal)
+                        break
+                    }
+                }
+            }
+        } else {
+            if let items = self.navigationItem.rightBarButtonItems {
+                for barButtonItem in items {
+                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                        // 이미지 변경
+                        btn.setImage(self.readAll, for: .normal)
+                        break
+                    }
+                }
             }
         }
     }

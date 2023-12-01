@@ -19,6 +19,7 @@ class CreateOrJoinTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         configureSettingBtn()
         configureBackButton()
         configureTitleLabel()
@@ -26,6 +27,7 @@ class CreateOrJoinTeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         configureBtns()
     }
     

@@ -11,18 +11,13 @@ import UIKit
 class RefereeTimerController: BaseViewController {
     
     // Variables
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var announcementButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var referee: Referee = UserData.readReferee("referee") ?? Referee()
     private var station: Station?
     private var host: Host = Host()
     private var pvp: Bool?
-    private var awardViewControllerPresented = false
     
-    private var messages: [String] = []
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
@@ -44,99 +39,70 @@ class RefereeTimerController: BaseViewController {
     private var isPaused = true
     private var t : Int = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        Task {
-            callProtocols()
-            configureGamecodeLabel()
-        }
-    }
-
-    @IBAction func infoButtonPressed(_ sender: UIButton) {
-        self.showOverlay()
-    }
-    
-    @IBAction func announcementButtonPressed(_ sender: UIButton) {
-        guard let pvp = self.pvp else { return }
-        if pvp {
-            showRefereeMessagePopUp(messages: RefereeRankingPVPViewController.localMessages)
-        } else {
-            showRefereeMessagePopUp(messages: RefereeRankingPVEViewController.localMessages)
-        }
-    }
-    
-    @IBAction func settingButtonPressed(_ sender: Any) {
-    }
-    
-    //MARK: - Messages
+    //MARK: - View Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let pvp = self.pvp else { return }
-        
-        var unread: Bool
-        
-        if pvp {
-            unread = RefereeRankingPVPViewController.unread
+        addObservers()
+        guard let items = self.navigationItem.rightBarButtonItems else {return}
+        var unread = RefereeTabBarPVEController.unread
+        if unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
+                }
+            }
         } else {
-            unread = RefereeRankingPVEViewController.unread
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
+                }
+            }
         }
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNavigationBar()
+        callProtocols()
+        tabBarController?.navigationController?.isNavigationBarHidden = true
+    }
+    
+// MARK: - ETC
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sound), name: .announceNoti, object: nil)
-        if unread {
-            self.announcementButton.setImage(unreadSome, for: .normal)
-        } else {
-            self.announcementButton.setImage(readAll, for: .normal)
-        }
-    }
-
-    //MARK: - UI Elements
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize : 20),
-            .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        label.numberOfLines = 2
-        label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private func configureGamecodeLabel() {
-        view.addSubview(gameCodeLabel)
-        NSLayoutConstraint.activate([
-            gameCodeLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            gameCodeLabel.centerYAnchor.constraint(equalTo: announcementButton.centerYAnchor),
-        ])
     }
     
-    @objc func readAll(notification: Notification) {
-        guard let unread = notification.userInfo?["unread"] as? Bool else {
-            return
+    func callProtocols() {
+        Task {
+            let stations = try await S.getStationList(gameCode)
+            host = try await H.getHost(gameCode) ?? Host()
+            
+            self.seconds = host.gameTime
+            self.moveSeconds = host.movingTime
+            self.startTime = host.startTimestamp
+            self.isPaused = host.paused
+            self.pauseTime = host.pauseTimestamp
+            self.pausedTime = host.pausedTime
+            self.rounds = host.rounds
+            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+            self.round = host.currentRound
+            
+            calculateTime()
+            configureTimerLabel()
+            
+            for station in stations {
+                if station.name == referee.stationName {
+                    self.station = station
+                    self.pvp = station.pvp
+                }
+            }
         }
-        if unread {
-            self.announcementButton.setImage(self.unreadSome, for: .normal)
-        } else {
-            self.announcementButton.setImage(self.readAll, for: .normal)
-        }
-    }
-    
-    @objc func sound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     //MARK: - UI Elements
@@ -164,24 +130,6 @@ class RefereeTimerController: BaseViewController {
         view.isUserInteractionEnabled = true
         return view
     }()
-    
-    @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
-        if !tapped {
-            timerCircle.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
-            timerLabel.alpha = 0.0
-            timeTypeLabel.alpha = 0.0
-            roundLabel.alpha = 1.0
-            totalTimeLabel.alpha = 1.0
-            tapped = true
-        } else {
-            timerCircle.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.6).cgColor
-            timerLabel.alpha = 1.0
-            timeTypeLabel.alpha = 1.0
-            roundLabel.alpha = 0.0
-            totalTimeLabel.alpha = 0.0
-            tapped = false
-        }
-    }
     
     private lazy var timeTypeLabel: UILabel = {
         let label = UILabel()
@@ -250,12 +198,6 @@ class RefereeTimerController: BaseViewController {
         return view
     }()
     
-    @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
-        guard let station = self.station else { return }
-        showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
-    }
-    
     func configureTimerLabel(){
         self.view.addSubview(titleLabel)
         self.view.addSubview(timerCircle)
@@ -269,7 +211,7 @@ class RefereeTimerController: BaseViewController {
         currentStationInfoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: gameCodeLabel.bottomAnchor, constant:  UIScreen.main.bounds.size.height * 0.02),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant:  UIScreen.main.bounds.size.height * 0.15),
             titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.55),
             titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.076),
             
@@ -444,14 +386,11 @@ class RefereeTimerController: BaseViewController {
         }
     }
 }
-//MARK: - Protocol
-extension RefereeTimerController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        if host.gameover && !awardViewControllerPresented {
-            showAwardPopUp()
-            self.awardViewControllerPresented = true
-            return
-        }
+// MARK: - @objc
+extension RefereeTimerController {
+    
+    @objc func hostUpdate(notification: Notification) {
+        guard let host = notification.userInfo?["host"] as? Host else { return }
         roundLabel.text = "Round \(host.currentRound)"
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
@@ -460,48 +399,59 @@ extension RefereeTimerController: HostUpdateListener {
         self.isPaused = host.paused
     }
     
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        H.delegates.append(WeakHostUpdateListener(value: self))
-        H.listenHost(gameCode, onListenerUpdate: listen(_:))
-        
-        Task {
-            let stations = try await S.getStationList(gameCode)
-            host = try await H.getHost(gameCode) ?? Host()
-            
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            
-            calculateTime()
-            configureTimerLabel()
-            
-            for station in stations {
-                if station.name == referee.stationName {
-                    self.station = station
-                    self.pvp = station.pvp
+    @objc func readAll(notification: Notification) {
+        guard let unread = notification.userInfo?["unread"] as? Bool else {
+            return
+        }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
+        if unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
+                }
+            }
+        } else {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
                 }
             }
         }
     }
     
-    func setSetting(){
-        self.seconds = host.gameTime
-        self.moveSeconds = host.movingTime
-        self.startTime = host.startTimestamp
-        self.isPaused = host.paused
-        self.pauseTime = host.pauseTimestamp
-        self.pausedTime = host.pausedTime
-        self.rounds = host.rounds
-        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-        self.round = host.currentRound
+    @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
+        if !tapped {
+            timerCircle.layer.borderColor = UIColor(red: 40.0 / 255.0, green: 209.0 / 255.0, blue: 113.0 / 255.0, alpha: 1.0).cgColor
+            timerLabel.alpha = 0.0
+            timeTypeLabel.alpha = 0.0
+            roundLabel.alpha = 1.0
+            totalTimeLabel.alpha = 1.0
+            tapped = true
+        } else {
+            timerCircle.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 0.6).cgColor
+            timerLabel.alpha = 1.0
+            timeTypeLabel.alpha = 1.0
+            roundLabel.alpha = 0.0
+            totalTimeLabel.alpha = 0.0
+            tapped = false
+        }
+    }
+    
+    @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
+        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        guard let station = self.station else { return }
+        showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
+    }
+    
+    @objc override func infoAction() {
+        self.showOverlay()
+    }
+    
+    @objc override func announceAction() {
+        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
     }
 }

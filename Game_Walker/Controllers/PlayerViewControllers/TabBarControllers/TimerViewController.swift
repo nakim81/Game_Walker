@@ -12,7 +12,6 @@ import AVFoundation
 class TimerViewController: BaseViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    private var messages: [String] = []
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -53,6 +52,7 @@ class TimerViewController: BaseViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    
 // MARK: - UI components
     private let timerCircle: UILabel = {
         var view = UILabel()
@@ -161,53 +161,25 @@ class TimerViewController: BaseViewController {
             showGameInfoPopUp(gameName: nextGameName, gameLocation: nextGameLocation, gamePoitns: nextGamePoints, refereeName: nextRefereeName, gameRule: nextGameRule)
         }
     }
-    
-    private lazy var gameCodeLabel: UILabel = {
-        let label = UILabel()
-        let attributedText = NSMutableAttributedString()
-        let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
-            .foregroundColor: UIColor.black
-        ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
-        attributedText.append(gameCodeAttributedString)
-        let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
-        attributedText.append(numberAttributedString)
-        label.backgroundColor = .white
-        label.attributedText = attributedText
-        label.textColor = UIColor(red: 0, green: 0, blue: 0 , alpha: 1)
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = false
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
 // MARK: - View Life Cycle methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addObservers()
-        if TeamViewController.unread {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.unreadSome, for: .normal)
-                        break
-                    }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
+        if PlayerTabBarController.unread {
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
                 }
             }
         } else {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.readAll, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
                 }
             }
         }
@@ -232,7 +204,6 @@ class TimerViewController: BaseViewController {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playSound), name: .announceNoti, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
     }
     
@@ -490,31 +461,24 @@ extension TimerViewController {
         guard let unread = notification.userInfo?["unread"] as? Bool else {
             return
         }
+        guard let items = self.navigationItem.rightBarButtonItems else { return }
         if unread {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.unreadSome, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.unreadSome, for: .normal)
+                    break
                 }
             }
         } else {
-            if let items = self.navigationItem.rightBarButtonItems {
-                for barButtonItem in items {
-                    if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                        // 이미지 변경
-                        btn.setImage(self.readAll, for: .normal)
-                        break
-                    }
+            for barButtonItem in items {
+                if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
+                    // 이미지 변경
+                    btn.setImage(self.readAll, for: .normal)
+                    break
                 }
             }
         }
-    }
-    
-    @objc func playSound() {
-        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
     }
     
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
@@ -540,6 +504,6 @@ extension TimerViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: TeamViewController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
 }

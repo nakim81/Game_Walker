@@ -1279,7 +1279,6 @@ extension  ManualAlgorithmViewController : ModalViewControllerDelegate {
                 let grid =  createIntegerGrid()
                 let temp = convert2DArrayTo1D(grid)
                 try await H.setAlgorithm(gamecode, temp)
-
             }
 
         }

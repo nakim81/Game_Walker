@@ -50,11 +50,6 @@ class HostTimerViewController: UIViewController {
     private var segueCalled : Bool = false
     
     // MARK: - methods related to the view lifecycle
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.navigationController?.isNavigationBarHidden = true
-        tabBarController?.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +60,10 @@ class HostTimerViewController: UIViewController {
             do {
                 host = try await H.getHost(gameCode) ?? Host()
                 setSettings()
-                configureTimerLabel()
+                if UserData.isStandardStyle() {
+                    configureTimerLabel()
+                }
+                
             } catch GameWalkerError.serverError(let message) {
                 print(message)
                 serverAlert(message)
@@ -80,7 +78,9 @@ class HostTimerViewController: UIViewController {
     // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
         let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        print(endGamePopUp)
         endGamePopUp.delegate = self
+        print(endGamePopUp.delegate)
         present(endGamePopUp, animated: true)
     }
     
@@ -134,6 +134,20 @@ class HostTimerViewController: UIViewController {
         self.gameStart = host.gameStart
         self.gameOver = host.gameover
     }
+    
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    
+    func registerBackgroundTask() {
+        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+            self?.endBackgroundTask()
+        }
+    }
+    
+    func endBackgroundTask() {
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
+    }
+    
     // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -412,6 +426,7 @@ class HostTimerViewController: UIViewController {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
             }
+            registerBackgroundTask()
             runTimer()
         }
     }
@@ -439,6 +454,7 @@ extension HostTimerViewController {
     
     @objc func updateTeamsInfo(notification: Notification) {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
+        print("K")
         if teams.count == self.number {
             ready = true
         }
@@ -465,6 +481,6 @@ extension HostTimerViewController {
 // MARK: - ModalViewControllerDelegate
 extension HostTimerViewController: ModalViewControllerDelegate {
     func modalViewControllerDidRequestPush() {
-        self.showAwardPopUp()
+        self.showAwardPopUp("host")
     }
 }

@@ -32,6 +32,10 @@ class WaitingController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        R.delegates = R.delegates.filter { $0.value != nil }
+    }
+    
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
         let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
@@ -121,14 +125,8 @@ class WaitingController: BaseViewController {
             stations = try await S.getStationList(gameCode)
             for station in stations! {
                 if referee.name == station.referee!.name && !isSeguePerformed {
-                    if station.pvp {
-                        performSegue(withIdentifier: "goToPVP", sender: self)
-                        isSeguePerformed = true
-                    }
-                    else {
-                        performSegue(withIdentifier: "goToPVE", sender: self)
-                        isSeguePerformed = true
-                    }
+                    performSegue(withIdentifier: "goToPVE", sender: self)
+                    isSeguePerformed = true
                 }
             }
         }
@@ -145,7 +143,7 @@ extension WaitingController: RefereeUpdateListener {
     }
     
     func callProtocols() {
-        R.delegates.append(self)
+        R.delegates.append(WeakRefereeUpdateListener(value: self))
         R.listenReferee(self.gameCode, UserData.readUUID()!, onListenerUpdate: listen(_:))
     }
 }

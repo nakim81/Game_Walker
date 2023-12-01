@@ -105,7 +105,7 @@ class MessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
-            self.messages = TeamViewController.localMessages
+            self.messages = PlayerTabBarController.localMessages
             messageTableView.reloadData()
         }
     }
@@ -167,7 +167,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.row + 1
-        let announcement = TeamViewController.localMessages[indexPath.row]
+        let announcement = PlayerTabBarController.localMessages[indexPath.row]
         cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
         cell.selectionStyle = .none
         return cell
@@ -182,8 +182,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        TeamViewController.localMessages[indexPath.row].readStatus = true
-        showAnnouncementPopUp(announcement: TeamViewController.localMessages[indexPath.row])
+        PlayerTabBarController.localMessages[indexPath.row].readStatus = true
+        showAnnouncementPopUp(announcement: PlayerTabBarController.localMessages[indexPath.row])
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }

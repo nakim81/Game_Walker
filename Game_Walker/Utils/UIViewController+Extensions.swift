@@ -115,8 +115,9 @@ extension UIViewController {
 }
 // MARK: - AwardPopUps
 extension UIViewController {
-    func showAwardPopUp() {
+    func showAwardPopUp( _ from: String) {
         let awardViewController = AwardViewController()
+        awardViewController.from = from
         self.navigationController?.pushViewController(awardViewController, animated: true)
     }
 }
@@ -154,6 +155,12 @@ extension UIViewController {
     }
     func serverAlert(_ message: String) {
         let alert = UIAlertController(title: "Server Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    func teamNumberAlert(_ message: String) {
+        let alert = UIAlertController(title: "Team Number Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }

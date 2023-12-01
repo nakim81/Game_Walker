@@ -13,30 +13,49 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var gamecodeLbl: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
+    
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedRefereeName = UserData.readUsername("username") ?? ""
     private var refereeUserID = UserData.readUUID()!
     private var stations : [Station] = []
     private var isSeguePerformed = false
     private var pvp : Bool?
-    private var gameStart : Bool?
     private var host : Host = Host()
     private let audioPlayerManager = AudioPlayerManager()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureSettingBtn()
+        configureBackButton()
+        configureTitleLabel()
+    }
+    
     override func viewDidLoad() {
-        Task {
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-            configureNavItem()
-            callProtocols()
-            gamecodeTextField.keyboardType = .asciiCapableNumberPad
-            gamecodeTextField.delegate = self
-            gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
-            usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
-            if storedGameCode != "" {
-                stations = try await S.getStationList(storedGameCode)
-            }
-        }
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        setUp()
         super.viewDidLoad()
+    }
+    
+    private func setUp() {
+        gamecodeTextField.delegate = self
+        usernameTextField.delegate = self
+        gamecodeTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        gamecodeTextField.keyboardType = .asciiCapableNumberPad
+        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
+        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
+        gamecodeTextField.layer.borderWidth = 3
+        gamecodeTextField.layer.borderColor = UIColor.black.cgColor
+        gamecodeTextField.layer.cornerRadius = 10
+        usernameTextField.layer.borderWidth = 3
+        usernameTextField.layer.borderColor = UIColor.black.cgColor
+        usernameTextField.layer.cornerRadius = 10
+        gamecodeLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        nextButton.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
+        nextButton.layer.cornerRadius = 8
     }
     
     private func configureNavItem() {
@@ -104,18 +123,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                     // Rejoining the game.
                     else if (gameCode.isEmpty || gameCode == storedGameCode) && (name.isEmpty || name == storedRefereeName) {
                         let oldReferee = UserData.readReferee("referee")!
-                        if oldReferee.assigned && gameStart! {
-                            for station in stations {
-                                if station.name == oldReferee.stationName {
-                                    self.pvp = station.pvp
-                                    break;
-                                }
-                            }
-                            if self.pvp! {
-                                performSegue(withIdentifier: "toPVP", sender: self)
-                            } else {
-                                performSegue(withIdentifier: "toPVE", sender: self)
-                            }
+                        if oldReferee.assigned {
+                            performSegue(withIdentifier: "toPVE", sender: self)
                         } else {
                             performSegue(withIdentifier: "goToWait", sender: self)
                         }
@@ -165,18 +174,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                         UserData.writeGamecode(storedGameCode, "gamecode")
                         UserData.writeUsername(newReferee.name, "username")
                         UserData.writeReferee(newReferee, "referee")
-                        if oldReferee.assigned && gameStart! {
-                            for station in stations {
-                                if station.name == oldReferee.stationName {
-                                    self.pvp = station.pvp
-                                    break;
-                                }
-                            }
-                            if self.pvp! {
-                                performSegue(withIdentifier: "toPVP", sender: self)
-                            } else {
-                                performSegue(withIdentifier: "toPVE", sender: self)
-                            }
+                        if oldReferee.assigned {
+                            performSegue(withIdentifier: "toPVE", sender: self)
                         } else {
                             performSegue(withIdentifier: "goToWait", sender: self)
                         }
@@ -209,21 +208,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 
             }
         }
-    }
-}
-
-// MARK: - Protocols
-extension RegisterController: HostUpdateListener {
-    func updateHost(_ host: Host) {
-        self.gameStart = host.gameStart
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
-    func callProtocols() {
-        H.delegates.append(WeakHostUpdateListener(value: self))
-        H.listenHost(storedGameCode, onListenerUpdate: listen(_:))
     }
 }
 

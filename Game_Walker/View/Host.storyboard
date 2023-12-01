@@ -1088,7 +1088,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ranking" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEr-D6-pdY">
-                                <rect key="frame" x="29.5" y="137.5" width="355" height="70"/>
+                                <rect key="frame" x="29.5" y="97" width="355" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="QeA-12-nk2"/>
                                 </constraints>
@@ -1097,11 +1097,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="F4M-EA-8mT">
-                                <rect key="frame" x="29.5" y="240.5" width="355" height="593.5"/>
+                                <rect key="frame" x="29.5" y="201" width="355" height="609"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" placeholderIntrinsicWidth="79" placeholderIntrinsicHeight="35" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5O-CG-hVP" customClass="CustomSwitchButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="305.5" y="207.5" width="79" height="33"/>
+                                <rect key="frame" x="305.5" y="167" width="79" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
@@ -1117,10 +1117,10 @@
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.857488" id="ELI-5y-dNp"/>
                             <constraint firstItem="Z5O-CG-hVP" firstAttribute="height" secondItem="F4M-EA-8mT" secondAttribute="height" multiplier="0.056" id="HVC-ja-ZdW"/>
                             <constraint firstItem="NEr-D6-pdY" firstAttribute="leading" secondItem="F4M-EA-8mT" secondAttribute="leading" id="Na3-XN-1Bd"/>
-                            <constraint firstItem="F4M-EA-8mT" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="1.19" id="UUs-hz-hUk"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="1.12" id="UUs-hz-hUk"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" id="ZwM-qw-uk8"/>
                             <constraint firstItem="Z5O-CG-hVP" firstAttribute="trailing" secondItem="F4M-EA-8mT" secondAttribute="trailing" id="diK-OR-vF6"/>
-                            <constraint firstItem="F4M-EA-8mT" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.75" id="lX4-Y3-EX8"/>
+                            <constraint firstItem="F4M-EA-8mT" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.77" id="lX4-Y3-EX8"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="top" secondItem="Z5O-CG-hVP" secondAttribute="bottom" id="pXA-tN-khE"/>
                             <constraint firstItem="Z5O-CG-hVP" firstAttribute="top" secondItem="NEr-D6-pdY" secondAttribute="bottom" id="rhc-NQ-rMj"/>
                         </constraints>
