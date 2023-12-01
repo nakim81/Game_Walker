@@ -3,12 +3,16 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Dosis-Bold.ttf">
+            <string>Dosis-Bold</string>
+        </array>
         <array key="Dosis-Regular.ttf">
             <string>Dosis-Regular</string>
         </array>
@@ -34,111 +38,119 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="RefereeFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="RegisterController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" id="8QH-ME-NiJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AOq-eE-Ep7">
-                                <rect key="frame" x="47" y="112" width="320" height="396"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-A0-pld">
+                                <rect key="frame" x="52" y="146" width="310.5" height="416.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjB-Gh-99w">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXG-KM-GNL">
+                                        <rect key="frame" x="0.0" y="0.0" width="310.5" height="204.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Code" translatesAutoresizingMaskIntoConstraints="NO" id="R2P-Hb-2ch">
-                                                <rect key="frame" x="84.5" y="52" width="151" height="34.5"/>
-                                            </imageView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="gamecode #" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="4M3-nc-0rD">
-                                                <rect key="frame" x="38.5" y="96" width="243" height="85.5"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjd-te-ado">
+                                                <rect key="frame" x="68" y="7.5" width="174" height="47"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
+                                                <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="gamecode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OgJ-vk-kS2">
+                                                <rect key="frame" x="33.5" y="54.5" width="243.5" height="85.5"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Fe6-Ju-w32">
-                                                <rect key="frame" x="34" y="179.5" width="252" height="17.5"/>
-                                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="13"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-0k-oAn">
+                                                <rect key="frame" x="33.5" y="148" width="243.5" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="17" id="vB5-KN-MhC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="13"/>
+                                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="R2P-Hb-2ch" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="0.7" id="2Ra-GF-ezy"/>
-                                            <constraint firstItem="4M3-nc-0rD" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.433" id="2a8-Pw-XHG"/>
-                                            <constraint firstItem="4M3-nc-0rD" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="1.4" id="4jr-OC-mSL"/>
-                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.09" id="Au3-2Q-jLg"/>
-                                            <constraint firstItem="R2P-Hb-2ch" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="IEg-Bt-dMW"/>
-                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="JHg-sz-Zs2"/>
-                                            <constraint firstItem="4M3-nc-0rD" firstAttribute="centerX" secondItem="yjB-Gh-99w" secondAttribute="centerX" id="Uhq-ch-jGO"/>
-                                            <constraint firstItem="R2P-Hb-2ch" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.472" id="aAv-4l-VFb"/>
-                                            <constraint firstItem="R2P-Hb-2ch" firstAttribute="height" secondItem="yjB-Gh-99w" secondAttribute="height" multiplier="0.175" id="iXS-5y-Yv0"/>
-                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.7875" id="kH1-tb-0sE"/>
-                                            <constraint firstItem="Fe6-Ju-w32" firstAttribute="centerY" secondItem="yjB-Gh-99w" secondAttribute="centerY" multiplier="1.9" id="mtn-7B-DVJ"/>
-                                            <constraint firstItem="4M3-nc-0rD" firstAttribute="width" secondItem="yjB-Gh-99w" secondAttribute="width" multiplier="0.76" id="yoT-Q0-u8t"/>
+                                            <constraint firstItem="OgJ-vk-kS2" firstAttribute="width" secondItem="JXG-KM-GNL" secondAttribute="width" multiplier="0.784219" id="DmY-UM-wkD"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="Dnu-7d-1Xg"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="width" secondItem="JXG-KM-GNL" secondAttribute="width" multiplier="0.56" id="R9H-jo-4mb"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="centerY" secondItem="JXG-KM-GNL" secondAttribute="centerY" multiplier="0.3" id="RGf-Yz-I00"/>
+                                            <constraint firstItem="eNX-0k-oAn" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="afj-fp-Xod"/>
+                                            <constraint firstItem="OgJ-vk-kS2" firstAttribute="top" secondItem="Jjd-te-ado" secondAttribute="bottom" id="e31-5K-Ye4"/>
+                                            <constraint firstItem="eNX-0k-oAn" firstAttribute="width" secondItem="OgJ-vk-kS2" secondAttribute="width" id="fOz-Aw-eiS"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="height" secondItem="JXG-KM-GNL" secondAttribute="height" multiplier="0.23" id="oO9-Jp-HoR"/>
+                                            <constraint firstItem="OgJ-vk-kS2" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="uJF-20-dpO"/>
+                                            <constraint firstItem="eNX-0k-oAn" firstAttribute="top" secondItem="OgJ-vk-kS2" secondAttribute="bottom" constant="8" symbolic="YES" id="uhU-pi-gc9"/>
+                                            <constraint firstItem="OgJ-vk-kS2" firstAttribute="height" secondItem="JXG-KM-GNL" secondAttribute="height" multiplier="0.42" id="z42-bY-VLI"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ede-ac-NpO">
-                                        <rect key="frame" x="0.0" y="198" width="320" height="198"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU8-ER-OXw">
+                                        <rect key="frame" x="0.0" y="212.5" width="310.5" height="204"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Username" translatesAutoresizingMaskIntoConstraints="NO" id="lWx-cB-HGA">
-                                                <rect key="frame" x="93.5" y="82" width="133" height="34.5"/>
-                                            </imageView>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="game id text" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" background="text box 1" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-sD-k2a">
-                                                <rect key="frame" x="38.5" y="125.5" width="243" height="86"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="27"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpM-Jf-UvV">
+                                                <rect key="frame" x="68" y="37.5" width="174" height="47"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL6-IT-kne">
+                                                <rect key="frame" x="33.5" y="84.5" width="243.5" height="86"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="height" secondItem="ede-ac-NpO" secondAttribute="height" multiplier="0.433" id="BJM-uW-ueb"/>
-                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" id="L07-py-q18"/>
-                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="height" secondItem="ede-ac-NpO" secondAttribute="height" multiplier="0.175" id="W3e-QF-W5j"/>
-                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="centerY" secondItem="ede-ac-NpO" secondAttribute="centerY" multiplier="1.7" id="bV7-TN-758"/>
-                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="centerX" secondItem="ede-ac-NpO" secondAttribute="centerX" id="jee-9u-ftU"/>
-                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="width" secondItem="ede-ac-NpO" secondAttribute="width" multiplier="0.415" id="kgk-mh-8uT"/>
-                                            <constraint firstItem="QN8-sD-k2a" firstAttribute="width" secondItem="ede-ac-NpO" secondAttribute="width" multiplier="0.76" id="qhn-XW-eD3"/>
-                                            <constraint firstItem="lWx-cB-HGA" firstAttribute="centerX" secondItem="ede-ac-NpO" secondAttribute="centerX" id="v73-Td-AXE"/>
+                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="height" secondItem="EU8-ER-OXw" secondAttribute="height" multiplier="0.23" id="2TB-xV-2uM"/>
+                                            <constraint firstItem="kL6-IT-kne" firstAttribute="centerX" secondItem="EU8-ER-OXw" secondAttribute="centerX" id="Vit-Wb-Ut1"/>
+                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="centerY" secondItem="EU8-ER-OXw" secondAttribute="centerY" multiplier="0.6" id="YNO-Np-EKJ"/>
+                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="width" secondItem="EU8-ER-OXw" secondAttribute="width" multiplier="0.56" id="Ycw-JO-9ph"/>
+                                            <constraint firstItem="kL6-IT-kne" firstAttribute="height" secondItem="EU8-ER-OXw" secondAttribute="height" multiplier="0.42" id="aGN-bo-sYz"/>
+                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="centerX" secondItem="EU8-ER-OXw" secondAttribute="centerX" id="eCA-B7-ylZ"/>
+                                            <constraint firstItem="kL6-IT-kne" firstAttribute="width" secondItem="EU8-ER-OXw" secondAttribute="width" multiplier="0.784219" id="eD1-eE-xtB"/>
+                                            <constraint firstItem="kL6-IT-kne" firstAttribute="top" secondItem="jpM-Jf-UvV" secondAttribute="bottom" id="oKd-c1-Onf"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="yjB-Gh-99w" firstAttribute="centerX" secondItem="AOq-eE-Ep7" secondAttribute="centerX" id="75x-RK-Mrq"/>
-                                    <constraint firstItem="ede-ac-NpO" firstAttribute="centerX" secondItem="AOq-eE-Ep7" secondAttribute="centerX" id="NGT-9Z-K3g"/>
-                                    <constraint firstItem="yjB-Gh-99w" firstAttribute="height" secondItem="AOq-eE-Ep7" secondAttribute="height" multiplier="0.5" id="NdQ-2h-TBn"/>
-                                    <constraint firstItem="yjB-Gh-99w" firstAttribute="width" secondItem="AOq-eE-Ep7" secondAttribute="width" id="V0A-X2-KN0"/>
-                                    <constraint firstItem="ede-ac-NpO" firstAttribute="height" secondItem="AOq-eE-Ep7" secondAttribute="height" multiplier="0.5" id="cQx-38-puX"/>
-                                    <constraint firstItem="ede-ac-NpO" firstAttribute="width" secondItem="AOq-eE-Ep7" secondAttribute="width" id="l9N-2P-LJX"/>
+                                    <constraint firstItem="JXG-KM-GNL" firstAttribute="centerX" secondItem="J5j-A0-pld" secondAttribute="centerX" id="Dyk-4R-pfp"/>
+                                    <constraint firstItem="JXG-KM-GNL" firstAttribute="width" secondItem="J5j-A0-pld" secondAttribute="width" id="Ruu-02-bru"/>
+                                    <constraint firstItem="EU8-ER-OXw" firstAttribute="centerX" secondItem="J5j-A0-pld" secondAttribute="centerX" id="SqZ-Wm-U0H"/>
+                                    <constraint firstItem="EU8-ER-OXw" firstAttribute="width" secondItem="J5j-A0-pld" secondAttribute="width" id="iOB-xK-9Sw"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mt-aS-C4U">
-                                <rect key="frame" x="145" y="748.5" width="124" height="53.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3c-FJ-oOM">
+                                <rect key="frame" x="120" y="691" width="174" height="62"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="next button 1"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" image="join button 2"/>
-                                </buttonConfiguration>
+                                <state key="normal" title="JOIN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="nextButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hE4-lp-FXr"/>
+                                    <action selector="nextButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kGp-x4-51X"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="SQm-9U-CwM"/>
+                        <viewLayoutGuide key="safeArea" id="s5c-ma-xQD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="centerX" secondItem="SQm-9U-CwM" secondAttribute="centerX" id="8eo-FR-H7E"/>
-                            <constraint firstItem="7mt-aS-C4U" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.06" id="8lj-tc-EMp"/>
-                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.447" id="OTF-dT-h0H"/>
-                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.772947" id="RQU-14-DL2"/>
-                            <constraint firstItem="7mt-aS-C4U" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.3" id="Rdj-LP-6fl"/>
-                            <constraint firstItem="7mt-aS-C4U" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" multiplier="1.75" id="hAR-nm-Mbf"/>
-                            <constraint firstItem="AOq-eE-Ep7" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" multiplier="0.7" id="qT7-op-mFW"/>
-                            <constraint firstItem="7mt-aS-C4U" firstAttribute="centerX" secondItem="SQm-9U-CwM" secondAttribute="centerX" id="y3b-R6-gwy"/>
+                            <constraint firstItem="J5j-A0-pld" firstAttribute="centerY" secondItem="s5c-ma-xQD" secondAttribute="centerY" multiplier="0.8" id="3mw-wx-RAb"/>
+                            <constraint firstItem="z3c-FJ-oOM" firstAttribute="height" secondItem="s5c-ma-xQD" secondAttribute="height" multiplier="0.07" id="7uS-uN-iUt"/>
+                            <constraint firstItem="J5j-A0-pld" firstAttribute="height" secondItem="s5c-ma-xQD" secondAttribute="height" multiplier="0.47" id="9lZ-zx-cie"/>
+                            <constraint firstItem="z3c-FJ-oOM" firstAttribute="centerY" secondItem="s5c-ma-xQD" secondAttribute="centerY" multiplier="1.63" id="IcY-DK-3In"/>
+                            <constraint firstItem="z3c-FJ-oOM" firstAttribute="width" secondItem="s5c-ma-xQD" secondAttribute="width" multiplier="0.42" id="O0P-N9-veS"/>
+                            <constraint firstItem="J5j-A0-pld" firstAttribute="centerX" secondItem="s5c-ma-xQD" secondAttribute="centerX" id="Qad-vG-tik"/>
+                            <constraint firstItem="J5j-A0-pld" firstAttribute="width" secondItem="s5c-ma-xQD" secondAttribute="width" multiplier="0.75" id="gXd-F1-xmv"/>
+                            <constraint firstItem="z3c-FJ-oOM" firstAttribute="centerX" secondItem="s5c-ma-xQD" secondAttribute="centerX" id="td0-0C-3LN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RXe-jy-b9y"/>
                     <connections>
-                        <outlet property="gamecodeTextField" destination="4M3-nc-0rD" id="WLt-Hs-uRA"/>
-                        <outlet property="nextButton" destination="7mt-aS-C4U" id="sMC-Qd-M5A"/>
-                        <outlet property="usernameTextField" destination="QN8-sD-k2a" id="2dL-tD-L4u"/>
+                        <outlet property="gamecodeLbl" destination="Jjd-te-ado" id="AVx-Kg-Qhs"/>
+                        <outlet property="gamecodeTextField" destination="OgJ-vk-kS2" id="R4U-H1-Hun"/>
+                        <outlet property="nextButton" destination="z3c-FJ-oOM" id="Lrw-BL-QlG"/>
+                        <outlet property="usernameLbl" destination="jpM-Jf-UvV" id="L1j-Vv-ORe"/>
+                        <outlet property="usernameTextField" destination="kL6-IT-kne" id="Hnw-bY-keK"/>
                         <segue destination="d9X-u1-YmW" kind="show" identifier="goToWait" id="ylf-AR-8el"/>
                         <segue destination="4eu-zS-s9n" kind="show" identifier="toPVE" id="qww-74-glH"/>
                         <segue destination="dnK-uh-cbX" kind="show" identifier="toMainVC" animates="NO" id="DUG-by-QlL"/>
@@ -327,18 +339,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qww-74-glH"/>
-        <segue reference="s6S-2S-uEn"/>
-        <segue reference="KeI-Qk-QLQ"/>
+        <segue reference="ylf-AR-8el"/>
+        <segue reference="prp-YP-ubG"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Game Code" width="168" height="27.5"/>
         <image name="MemberButton" width="76" height="76"/>
         <image name="RankingButton" width="76" height="76"/>
         <image name="TimerButton1" width="76" height="76"/>
-        <image name="Username" width="152" height="26.5"/>
-        <image name="join button 2" width="176" height="57"/>
-        <image name="next button 1" width="175.5" height="57"/>
-        <image name="text box 1" width="244" height="79"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
