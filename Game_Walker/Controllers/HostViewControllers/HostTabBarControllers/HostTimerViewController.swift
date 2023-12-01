@@ -134,6 +134,20 @@ class HostTimerViewController: UIViewController {
         self.gameStart = host.gameStart
         self.gameOver = host.gameover
     }
+    
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    
+    func registerBackgroundTask() {
+        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+            self?.endBackgroundTask()
+        }
+    }
+    
+    func endBackgroundTask() {
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
+    }
+    
     // MARK: - overlay Guide view
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
@@ -412,6 +426,7 @@ class HostTimerViewController: UIViewController {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
             }
+            registerBackgroundTask()
             runTimer()
         }
     }
@@ -439,6 +454,7 @@ extension HostTimerViewController {
     
     @objc func updateTeamsInfo(notification: Notification) {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
+        print("K")
         if teams.count == self.number {
             ready = true
         }

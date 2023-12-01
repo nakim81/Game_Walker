@@ -987,26 +987,6 @@ extension RefereePVEController {
                     }
                 }
             }
-        } else {
-            if pvp {
-                self.view.addSubview(leftBorderView)
-                self.view.addSubview(rightBorderView)
-                roundLabel.text = "Round 0"
-                leftTeamNumLabel.removeFromSuperview()
-                leftIconButton.removeFromSuperview()
-                leftTeamNameLabel.removeFromSuperview()
-                rightTeamNumLabel.removeFromSuperview()
-                rightIconButton.removeFromSuperview()
-                rightTeamNameLabel.removeFromSuperview()
-                addConstraintsPVP()
-            } else {
-                self.view.addSubview(borderView)
-                roundLabel.text = "Round 0"
-                teamNumLabel.removeFromSuperview()
-                iconButton.removeFromSuperview()
-                teamNameLabel.removeFromSuperview()
-                addConstraintsPVE()
-            }
         }
         if host.gameTime + host.movingTime == 0 {
             if let tabBarController = self.tabBarController {
