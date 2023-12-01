@@ -27,8 +27,12 @@ class WaitingController: BaseViewController {
         callProtocols()
         addSubviews()
         makeConstraints()
-        animateWaitingScreen()
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        animateWaitingScreen()
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,9 +56,6 @@ class WaitingController: BaseViewController {
     
     //MARK: - Animating Screen
     func animateWaitingScreen() {
-        if timer != nil {
-            return
-        }
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             if self.currentIndex == 2 {
