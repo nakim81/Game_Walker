@@ -14,11 +14,15 @@ class HostCreateOrJoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         configureNavItem()
         NotificationCenter.default.addObserver(self, selector: #selector(performStandardModeSegue), name: Notification.Name("StandardMode"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(performPointsOnlySegue), name: Notification.Name("PointsOnly"), object: nil)
         
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("StandardMode"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("PointsOnly"), object: nil)
     }
     
     @objc private func performStandardModeSegue() {
@@ -58,8 +62,6 @@ class HostCreateOrJoinViewController: UIViewController {
     @IBAction func createButtonPressed(_ sender: UIButton) {
 
     }
-    
-    
-    
+
 }
 

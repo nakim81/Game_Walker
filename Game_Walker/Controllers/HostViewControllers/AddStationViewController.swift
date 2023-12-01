@@ -90,13 +90,16 @@ class AddStationViewController: UIViewController {
                 if stationExists {
                     stationUuid = station!.uuid
                     
-                    gamenameTextfield.attributedPlaceholder = NSAttributedString(string: station!.name, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamenameTextfield.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamenameTextfield.text = station!.name
                     gamename = station!.name
                     
                     gamelocationTextfield.attributedPlaceholder = NSAttributedString(string: station!.place, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamelocationTextfield.text = station!.place
                     gamelocation = station!.place
                     
                     gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+                    gamepointsTextfield.text = String(station!.points) 
                     rulesTextfield.text = station?.description
                     rules = station?.description ?? ""
                     gamepoints = station!.points
