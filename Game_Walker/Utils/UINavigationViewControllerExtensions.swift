@@ -26,9 +26,12 @@ extension UINavigationController {
     }
     
     func popToWaitingViewController(animated: Bool) {
-        if let destinationViewController = navigationController?.viewControllers.filter({$0 is WaitingController
-        }).first {
-            navigationController?.popToViewController(destinationViewController, animated: true)
+        print("going back to waiting")
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
+           let waitingController = rootController.viewControllers.first(where: { $0 is WaitingController }) {
+            print(waitingController)
+            popToViewController(waitingController, animated: animated)
         }
     }
     
