@@ -27,9 +27,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
-        configureBackButton()
-        configureTitleLabel()
+        configureSimpleNavBar()
     }
     
     override func viewDidLoad() {
@@ -56,18 +54,6 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         nextButton.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
         nextButton.layer.cornerRadius = 8
-    }
-    
-    private func configureNavItem() {
-        self.navigationItem.hidesBackButton = true
-        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
-        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
-        newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
-        self.navigationItem.leftBarButtonItem = newBackButton
-    }
-    
-    @objc override func onBackPressed() {
-        performSegue(withIdentifier: "toMainVC", sender: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

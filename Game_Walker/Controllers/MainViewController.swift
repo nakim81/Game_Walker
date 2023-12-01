@@ -76,6 +76,10 @@ class MainViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         configureNavBarItems()
         configureButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
     }
     
