@@ -16,6 +16,7 @@ class HostGameCodeViewController: UIViewController {
     private var gamecode = UserData.readGamecode("gamecode")
     
     private var usestoredcode = true
+    private var gameDidEnd = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,6 @@ class HostGameCodeViewController: UIViewController {
     
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         setGameCode()
-        //FIX:- need to fix this logic
         guard let userGamecodeInput = gameCodeInput.text else {
             return
         }
@@ -56,6 +56,7 @@ class HostGameCodeViewController: UIViewController {
                     do {
                         let hostTemp = try await H.getHost(userGamecodeInput)
                         let isStandard = hostTemp?.standardStyle ?? true
+                        gameDidEnd = hostTemp?.gameover ?? false
                         
                         if !isStandard {
                             UserData.writeGamecode(gamecode!, "gamecode")
@@ -70,7 +71,12 @@ class HostGameCodeViewController: UIViewController {
                         } else {
                             if UserData.isHostConfirmed() ?? false {
                                 UserData.writeGamecode(gamecode!, "gamecode")
-                                performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                                if gameDidEnd { // host is confirmed and game has already ended
+                                    self.showAwardPopUp("host")
+                                    
+                                } else {
+                                    performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                                }
                             } else{
                                 alert(title: "", message: "Invalid Host!")
                             }
@@ -90,6 +96,7 @@ class HostGameCodeViewController: UIViewController {
                     do {
                         let hostTemp = try await H.getHost(gamecode!)
                         let isStandard = hostTemp?.standardStyle ?? true
+                        gameDidEnd = hostTemp?.gameover ?? false
                         
                         if !isStandard {
                             UserData.writeGamecode(gamecode!, "gamecode")
@@ -102,7 +109,12 @@ class HostGameCodeViewController: UIViewController {
                         } else {
                             if UserData.isHostConfirmed() ?? false {
                                 UserData.writeGamecode(gamecode!, "gamecode")
-                                performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                                if gameDidEnd { // host is confirmed and game has already ended
+                                    self.showAwardPopUp("host")
+                                    
+                                } else {
+                                    performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                                }
                             } else{
                                 alert(title: "", message: "Invalid Host!")
                             }
