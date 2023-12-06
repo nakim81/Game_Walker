@@ -15,11 +15,8 @@ class HostCreateOrJoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavItem()
-        NotificationCenter.default.addObserver(self, selector: #selector(performStandardModeSegue), name: Notification.Name("StandardMode"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(performPointsOnlySegue), name: Notification.Name("PointsOnly"), object: nil)
         
     }
-
     
     @objc private func performStandardModeSegue() {
         performSegue(withIdentifier: "CreateStandardGameSegue", sender: self)
@@ -47,17 +44,36 @@ class HostCreateOrJoinViewController: UIViewController {
     @IBAction func resumeButtonPressed(_ sender: UIButton) {
         
             if UserData.readGamecode("gamecode") != nil {
-//                print("host resume game segue")
-//                performSegue(withIdentifier: "ResumeGameToCodeSegue", sender: self)
+
             } else {
                 alert(title: "", message: "No game exists")
         }
     }
 
     
-    @IBAction func createButtonPressed(_ sender: UIButton) {
-
+    @IBAction func createGameButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "showChooseModalSegue", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showChooseModalSegue",
+           let chooseStyleModalVC = segue.destination as? ChooseStyleModalViewController {
+            chooseStyleModalVC.delegate = self
+        }
+    }
+
+    
+}
+
+extension HostCreateOrJoinViewController: ChooseStyleModalDelegate {
+    func didSelectStandardMode() {
+        performStandardModeSegue()
+    }
+    
+    func didSelectPointsOnlyMode() {
+        performPointsOnlySegue()
+    }
+    
 
 }
 
