@@ -1,0 +1,119 @@
+/* 
+  Localizable.strings
+  Game_Walker
+
+  Created by Paul on 12/7/23.
+  
+*/
+
+//key -- string
+
+//Intro
+"Player" = "Player";
+"Referee" = "Referee";
+"Host" = "Host";
+"Host Info" = "※ Host is a person or people who is organizing the event.";
+"Player Guide" = "Join as a team member.";
+"Referee Guide" = "Allocate points and manage individual games.";
+"Host Guide" = "Organzie and oversee the entire event.";
+
+//General
+"Game Code" = "Game Code";
+"Username" = "Username";
+"Join" = "Join";
+"Ranking" = "Ranking";
+"Timer" = "Timer";
+"Game Time" = "Game Time";
+"CLOSE" = "CLOSE";
+"NEXT" = "NEXT"
+"SAVE" = "SAVE"
+
+
+//Player Branch & Shared
+"Create Team" = "Create Team";
+"Join Team" = "Join Team";
+"Team Name" = "Team Name";
+"Team Number" = "Team Number";
+"Icon Choose" = "Choose Your Team Icon";
+"Create Team" = "Create Team";
+"Team Choose" = "Choose Your Team";
+"Current Station Info" = "Current Station Info";
+"Next Station Info" = "Next Station Info";
+"Station Time" = "Station Time";
+"Moving Time" = "Moving Time";
+"Round" = "Round";
+"TOTAL TIME" = "TOTAL TIME";
+"Station Info" = "Station Info";
+"Station Name" = "Station Name";
+"Station Location" = "Station Location";
+"Station Points" = "Station Points";
+"Rules" = "Rules";
+"Announcements" = "Announcements";
+
+//Referee Branch
+"WIN" = "WIN";
+"LOSE" = "LOSE";
+"CONFIRM" = "CONFIRM";
+"TBD" = "TO BE DETERMINED";
+"Waiting" = "Waiting";
+"Give Points" = "Give Points";
+
+//Host Branch
+"Choose Style" = "Choose the style that fits your event!"
+"Standard Mode" = "Standard Mode"
+"Standard Mode Info" = "This mode includes all of our features (Points, Stations, Matching, Timer, etc)";
+"Points Only" = "Points Only";
+"Points Only Info" = "This mode includes points and rankings only";
+"All staions" = "※ All stations have equal play time";
+"Total Time Equation" = "※ Total  Time = Rounds x (Station Time + Moving Time)";
+"SETTINGS" = "SETTINGS";
+"Rounds" = "Rounds";
+"Number of Teams" = "Number of Teams";
+"MATCHING" = "MATCHING";
+"STATIONS" = "STATIONS";
+"ROUNDS" = "ROUNDS";
+"Duplicated Opponent" = "Duplicated Opponent";
+"Duplicated Station" = "Duplicated Station";
+"Duplicated Appearance" = "Duplicated Appearance";
+"Station List" = "Station List";
+"Create Game" = "Create Game";
+"Create Warning" = "Once the game is created, you won't be able to change the game settings.";
+"HEADS UP!" = "HEADS UP!";
+"DISMISS" = "DISMISS";
+"Game Start" = "Game Start";
+"End Game" = "End Game";
+"End Warning" = "Do you really want to end the game?";
+"NO" = "NO";
+"YES" = "YES";
+"EDIT" = "EDIT";
+
+//ETC
+"Settings" = "Settings";
+"Sounds" = "Sounds";
+"Vibrations" = "Vibrations";
+"Language" = "Language";
+"CONGRATULATIONS" = "CONGRATULATIONS";
+
+//Guide
+"Team Members" = "Team Members";
+"Ranking Status" = "Ranking Status";
+"Timer & Station Info" = "Timer & Station Info";
+"Points Show" = "Points can be hidden";
+"Click" = "Click!";
+
+"Remote your Station" = "Remote your Station";
+"Click to give points" = "Click to give points to the Team";
+"Don't forget" = "Don't forget to give points before the round ends";
+
+"Matching Info 1" = "Tap \"Stations\" to see the new order of Stations.";
+"Matching Info 2" = "Swap teams by click.";
+"Matching Info 3" = "Manually change teams by long-click.";
+"Matching Info 4" = "Beware, micing teams can cause errors.";
+"Matching Error 1" = "Team is playing the same station on multiple rounds.";
+"Matching Error 2" = "Team is playing multiple stations on the same round.";
+"Matching Error 3" = "Team is playing against same opponents multiple times on PVP stations.";
+"Matching Error 4" = "There are multiple errors shown previously at the same time.";
+
+
+
+
