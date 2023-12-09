@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,8 +49,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="HostCreateGameButtonLarge"/>
                                 <connections>
-                                    <action selector="createButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cg6-Ei-Hb0"/>
-                                    <segue destination="dTc-Om-aUZ" kind="presentation" id="c5a-T7-MqK"/>
+                                    <action selector="createGameButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AQK-E6-Ihj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NZ-by-CrW">
@@ -82,6 +81,7 @@
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.65" id="Awl-hY-Dio"/>
                             <constraint firstItem="8NZ-by-CrW" firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="width" id="D56-He-p9g"/>
                             <constraint firstItem="Fi8-Nq-hZE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Jwz-Kv-Egb"/>
+                            <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Kbd-9B-pou"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Fi8-Nq-hZE" secondAttribute="bottom" constant="9" id="Med-nJ-2fh"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="X8G-4e-xhE"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="iRk-Jk-CUw"/>
@@ -90,11 +90,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="bie-XC-ACB"/>
                     <connections>
-                        <outlet property="createButton" destination="tyS-bJ-dkx" id="Geg-Ux-L43"/>
                         <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
                         <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="Ksp-7h-L4K"/>
                         <segue destination="1L0-Oz-afr" kind="show" identifier="CreateStandardGameSegue" id="tce-ii-ly8"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="CreatePointsOnlySegue" id="7rv-rP-bSv"/>
+                        <segue destination="dTc-Om-aUZ" kind="presentation" identifier="showChooseModalSegue" id="RUk-4S-IYn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1195,8 +1195,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7rv-rP-bSv"/>
-        <segue reference="tce-ii-ly8"/>
+        <segue reference="nWr-2f-mnX"/>
+        <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
@@ -1230,13 +1230,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
