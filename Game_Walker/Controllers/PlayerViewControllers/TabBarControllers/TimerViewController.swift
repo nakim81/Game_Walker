@@ -106,7 +106,7 @@ class TimerViewController: BaseViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: "GAME TIME\n", attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: "TOTAL TIME\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -199,6 +199,8 @@ class TimerViewController: BaseViewController {
         titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
         tabBarController?.navigationController?.isNavigationBarHidden = true
     }
+    
+    
     
 // MARK: - others
     
@@ -352,17 +354,18 @@ class TimerViewController: BaseViewController {
                     strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
                 }
-                if strongSelf.remainingTime == 10 {
+                let interval = strongSelf.moveSeconds + strongSelf.seconds
+                let timeRemainder = strongSelf.remainingTime % interval
+
+                switch timeRemainder {
+                case 300, 180, 60, 30, 10:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
-                }
-                if strongSelf.remainingTime == 9 {
-                    strongSelf.audioPlayerManager.stop()
-                }
-                if strongSelf.remainingTime <= 5 {
+                case 5:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
+                case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
+                default:
+                    break
                 }
                 if timer.isValid {
                     if strongSelf.time < 1 {
@@ -386,10 +389,12 @@ class TimerViewController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
+            } else {
+                strongSelf.audioPlayerManager.stop()
             }
         }
     }
@@ -413,17 +418,17 @@ class TimerViewController: BaseViewController {
         }
         else {
             self.timeTypeLabel.text = "Station Time"
-            self.time = (seconds - remainder%moveSeconds)
+            self.time = (seconds - remainder + moveSeconds)
             self.moving = false
-            let minute = (seconds - remainder%moveSeconds)/60
-            let second = (seconds - remainder%moveSeconds) % 60
+            let minute = (seconds - remainder + moveSeconds)/60
+            let second = (seconds - remainder + moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
@@ -433,7 +438,7 @@ class TimerViewController: BaseViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds)"
@@ -455,6 +460,11 @@ extension TimerViewController {
         self.pausedTime = host.pausedTime
         self.startTime = host.startTimestamp
         self.isPaused = host.paused
+    }
+    
+    @objc func addBackGroundTime(_ notification:Notification) {
+        timer.invalidate()
+        calculateTime()
     }
     
     @objc func readAll(notification: Notification) {
