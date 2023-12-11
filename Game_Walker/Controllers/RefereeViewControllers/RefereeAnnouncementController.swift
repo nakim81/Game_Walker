@@ -10,7 +10,7 @@ import UIKit
 
 class RefereeAnnouncementViewController: UIViewController {
     private var announcement: Announcement?
-    private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+    private let fontColor: UIColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
     
     private lazy var containerView: UIView = {
         let view = UIView()

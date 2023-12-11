@@ -93,7 +93,7 @@
 		DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E84288BA9CB00C75DC7 /* Main.storyboard */; };
 		DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */; };
 		DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */; };
-		DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */; };
+		DABC1E90288BAA8B00C75DC7 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */; };
 		DABE5EF72A42B8970072203F /* Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA96396F28A33CDA00853F05 /* Host.swift */; };
 		DAC313272858619900BECF89 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC313262858619900BECF89 /* Player.swift */; };
 		DAC31329285862EF00BECF89 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC31328285862EF00BECF89 /* Station.swift */; };
@@ -137,6 +137,7 @@
 		FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */; };
 		FCB13E1F2A97A1FD00F4AE99 /* AudioPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */; };
 		FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */; };
+		FCEF5E0A2B1E186700B0CD17 /* UITableViewCellExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */; };
 		FCF4C95229C8B43100CE8F42 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */; };
 		FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB43298A9D3D00473FCE /* HostRankingViewcontroller.swift */; };
 		FCF6FB46298A9D4A00473FCE /* HostTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF6FB45298A9D4A00473FCE /* HostTimerViewController.swift */; };
@@ -233,7 +234,7 @@
 		DABC1E84288BA9CB00C75DC7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = View/Main.storyboard; sourceTree = "<group>"; };
 		DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
-		DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		DAC313262858619900BECF89 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player.swift; path = Model/Player.swift; sourceTree = "<group>"; };
 		DAC31328285862EF00BECF89 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Station.swift; path = Model/Station.swift; sourceTree = "<group>"; };
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 		FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
 		FCCE41792AE2DE6300A099C8 /* koverwatch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = koverwatch.ttf; path = ../../../../Downloads/koverwatch.ttf; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
+		FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtensions.swift; sourceTree = "<group>"; };
 		FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Bold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Bold.ttf"; sourceTree = "<group>"; };
 		FCF6A5F82AA0A45A001683EA /* GemunuLibre-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Light.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Light.ttf"; sourceTree = "<group>"; };
@@ -590,7 +592,7 @@
 		FCF4C95029C8B40800CE8F42 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				DABC1E8D288BAA8B00C75DC7 /* UIViewController+Extensions.swift */,
+				DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */,
 				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 				DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */,
 				FCF4C95129C8B43100CE8F42 /* InfoViewController.swift */,
@@ -600,6 +602,7 @@
 				FCB1274B2AD5223000E47FF0 /* RorTOverlayViewController.swift */,
 				FC5240A02AF12E6F00999282 /* NotificationNames.swift */,
 				FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */,
+				FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -839,7 +842,8 @@
 				DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */,
 				DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */,
 				DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */,
-				DABC1E90288BAA8B00C75DC7 /* UIViewController+Extensions.swift in Sources */,
+				DABC1E90288BAA8B00C75DC7 /* UIViewControllerExtensions.swift in Sources */,
+				FCEF5E0A2B1E186700B0CD17 /* UITableViewCellExtensions.swift in Sources */,
 				61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */,
 				FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,

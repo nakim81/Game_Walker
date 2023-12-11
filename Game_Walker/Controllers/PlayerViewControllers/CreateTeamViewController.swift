@@ -111,12 +111,13 @@ class CreateTeamViewController: UIViewController {
                 guard let hn = self.host?.teams else { return }
                 
                 if tn > 0 {
-                    if (tn > hn) {
-                        alert(title: "Invalid Team Number", message: "Please try other team numbers")
-                        return
-                    }
-                        
                     if standardStyle {
+                        
+                        if (tn > hn) {
+                            alert(title: "Invalid Team Number", message: "Please try other team numbers")
+                            return
+                        }
+                        
                         guard let temp = self.host?.algorithm else { return }
                         let algorithm = convert1DArrayTo2D(temp)
                         print(algorithm)
