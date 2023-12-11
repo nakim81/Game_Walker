@@ -414,3 +414,10 @@ extension UIViewController {
         label.attributedText = labelText
     }
 }
+
+//MARK: - Language String extension
+extension String {
+    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
+        return NSLocalizedString(self, tableName: tableName, value: self, comment: "")
+    }
+}
