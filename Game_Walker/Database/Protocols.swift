@@ -30,6 +30,12 @@ protocol AddStationDelegate: AnyObject {
     func didUpdateStationData(completion: @escaping () -> Void)
 }
 
+protocol ChooseStyleModalDelegate: AnyObject {
+    func didSelectStandardMode()
+    func didSelectPointsOnlyMode()
+}
+
+
 //MARK: - Errors
 enum GameWalkerError: Error {
     case invalidGamecode(String)

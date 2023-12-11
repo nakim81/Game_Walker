@@ -11,17 +11,15 @@ import UIKit
 class ChooseStyleModalViewController: BaseViewController {
     @IBOutlet weak var modalContainerView: UIView!
     
-    //CreateStandardGameSegue
-    //CreatePointsOnlySegue
-    
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var pointsOnlyView: UIView!
     @IBOutlet weak var standardModeView: UIView!
     
+    weak var delegate: ChooseStyleModalDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        T.delegates.append(WeakTeamUpdateListener(value: self))
+        
         let standardModeTapGesture = UITapGestureRecognizer(target: self, action: #selector(standardModeViewTapped))
         standardModeView.addGestureRecognizer(standardModeTapGesture)
 
@@ -34,9 +32,6 @@ class ChooseStyleModalViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         setupUIElements()
-    }
-    
-    func listen(_ _ : [String : Any]){
     }
     
     private func setupUIElements() {
@@ -59,7 +54,7 @@ class ChooseStyleModalViewController: BaseViewController {
         host.standardStyle = true
         Task { @MainActor in
             do {
-            try await H.createGame(gc, host)
+            try H.createGame(gc, host)
             } catch (let e) {
                 print("error : ", e)
             }
@@ -67,12 +62,9 @@ class ChooseStyleModalViewController: BaseViewController {
         UserData.writeGamecode(gc, "gamecode")
         UserData.setStandardStyle(true)
         print("created game. mode is: ", host.standardStyle)
-        T.listenTeams(gc, onListenerUpdate: listen(_:))
         
-        dismiss(animated: true) { [weak self] in
-            NotificationCenter.default.post(name: Notification.Name("StandardMode"), object: nil)
-        }
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("StandardMode"), object: nil)
+        delegate?.didSelectStandardMode()
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func pointsOnlyViewTapped() {
@@ -81,7 +73,7 @@ class ChooseStyleModalViewController: BaseViewController {
         host.standardStyle = false
         Task { @MainActor in
             do {
-            try await H.createGame(gc, host)
+            try H.createGame(gc, host)
             } catch (let e) {
                 print("error : ", e)
             }
@@ -89,18 +81,9 @@ class ChooseStyleModalViewController: BaseViewController {
         UserData.writeGamecode(gc, "gamecode")
         UserData.setStandardStyle(false)
         print("created game. mode is: ", host.standardStyle)
-        T.listenTeams(gc, onListenerUpdate: listen(_:))
      
-        dismiss(animated: true) { [weak self] in
-            print("Dismissed view controller")
-            NotificationCenter.default.post(name: Notification.Name("PointsOnly"), object: nil)
-        }
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("PointsOnly"), object: nil)
+        delegate?.didSelectPointsOnlyMode()
+        dismiss(animated: true, completion: nil)
     }
 }
 
-extension ChooseStyleModalViewController: TeamUpdateListener {
-    func updateTeams(_ teams: [Team]) {
-        
-    }
-}
