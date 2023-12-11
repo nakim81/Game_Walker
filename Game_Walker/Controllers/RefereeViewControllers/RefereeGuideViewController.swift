@@ -47,7 +47,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var explanationLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Click win to give points of standard station points"
+        label.text = "Remember to choose 'WIN' or 'LOSE' before the round ends!"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -107,17 +107,11 @@ class RefereeGuideViewController : UIViewController {
     
     func setupOverlayViewPVE() {
         view.addSubview(overlayView)
-        overlayView.addSubview(explanationLabel)
         NSLayoutConstraint.activate([
             overlayView.topAnchor.constraint(equalTo: view.topAnchor),
             overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
-            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.025),
-            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.3),
-            explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
         ])
     }
     
@@ -160,10 +154,12 @@ class RefereeGuideViewController : UIViewController {
             
         overlayView.addSubview(buttonBorder)
         overlayView.addSubview(teamPointsLabel)
+        overlayView.addSubview(explanationLabel)
         overlayView.addSubview(winButton)
         overlayView.addSubview(loseButton)
         buttonBorder.translatesAutoresizingMaskIntoConstraints = false
         teamPointsLabel.translatesAutoresizingMaskIntoConstraints = false
+        explanationLabel.translatesAutoresizingMaskIntoConstraints = false
         winButton.translatesAutoresizingMaskIntoConstraints = false
         loseButton.translatesAutoresizingMaskIntoConstraints = false
 
@@ -177,6 +173,11 @@ class RefereeGuideViewController : UIViewController {
             teamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 1].minY - frameList[count + 1].height/2),
             teamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 1].width),
             teamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 1].height),
+            
+            explanationLabel.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.8),
+            explanationLabel.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.025),
+            explanationLabel.bottomAnchor.constraint(equalTo: teamPointsLabel.topAnchor, constant: -self.view.bounds.height * 0.02),
+            explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
 
             winButton.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count + 2].minX),
             winButton.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 2].minY),
@@ -278,7 +279,6 @@ class RefereeGuideViewController : UIViewController {
     
     func setupOverlayViewPVP() {
         view.addSubview(overlayView)
-        overlayView.addSubview(explanationLabel)
         overlayView.addSubview(buttonLabel)
         NSLayoutConstraint.activate([
             overlayView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -290,11 +290,6 @@ class RefereeGuideViewController : UIViewController {
             buttonLabel.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.045),
             buttonLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: self.view.bounds.height * 0.230),
             buttonLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
-            
-            explanationLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
-            explanationLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.025),
-            explanationLabel.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -self.view.bounds.height * 0.35),
-            explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor)
         ])
     }
     
@@ -342,6 +337,7 @@ class RefereeGuideViewController : UIViewController {
             overlayView.addSubview(leftLoseButton)
             overlayView.addSubview(rightWinButton)
             overlayView.addSubview(rightLoseButton)
+            overlayView.addSubview(explanationLabel)
             leftButtonBorder.translatesAutoresizingMaskIntoConstraints = false
             rightButtonBorder.translatesAutoresizingMaskIntoConstraints = false
             leftTeamPointsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -350,6 +346,7 @@ class RefereeGuideViewController : UIViewController {
             leftLoseButton.translatesAutoresizingMaskIntoConstraints = false
             rightWinButton.translatesAutoresizingMaskIntoConstraints = false
             rightLoseButton.translatesAutoresizingMaskIntoConstraints = false
+            explanationLabel.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 leftButtonBorder.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: frameList[count].minX),
@@ -391,6 +388,11 @@ class RefereeGuideViewController : UIViewController {
                 rightTeamPointsLabel.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count + 7].minY - frameList[count + 7].height/2),
                 rightTeamPointsLabel.widthAnchor.constraint(equalToConstant: frameList[count + 7].width),
                 rightTeamPointsLabel.heightAnchor.constraint(equalToConstant: frameList[count + 7].height),
+                
+                explanationLabel.widthAnchor.constraint(equalTo: overlayView.widthAnchor, multiplier: 0.8),
+                explanationLabel.heightAnchor.constraint(equalTo: overlayView.heightAnchor, multiplier: 0.025),
+                explanationLabel.bottomAnchor.constraint(equalTo: leftTeamPointsLabel.topAnchor, constant: -self.view.bounds.height * 0.02),
+                explanationLabel.centerXAnchor.constraint(equalTo: overlayView.centerXAnchor),
             ])
         }
     }

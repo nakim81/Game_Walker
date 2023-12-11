@@ -41,11 +41,17 @@ class HostTimerViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
-    private let end = UIImage(named: "Game End Button")
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var gameStart : Bool = false
-    private var ready : Bool = false
+    private var ready : Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "readyKey")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "readyKey")
+        }
+    }
     private var gameOver : Bool = false
     private var segueCalled : Bool = false
     
@@ -62,25 +68,28 @@ class HostTimerViewController: UIViewController {
                 setSettings()
                 if UserData.isStandardStyle() {
                     configureTimerLabel()
+                } else {
+                    pauseOrPlayButton.isHidden = true
                 }
-                
             } catch GameWalkerError.serverError(let message) {
                 print(message)
                 serverAlert(message)
                 return
             }
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(updateHostInfo), name: .hostUpdate, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(updateTeamsInfo), name: .teamsUpdate, object: nil)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHostInfo), name: .hostUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTeamsInfo), name: .teamsUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
     }
     
     // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
         let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
-        print(endGamePopUp)
         endGamePopUp.delegate = self
-        print(endGamePopUp.delegate)
         present(endGamePopUp, animated: true)
     }
     
@@ -135,18 +144,6 @@ class HostTimerViewController: UIViewController {
         self.gameOver = host.gameover
     }
     
-    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
-    
-    func registerBackgroundTask() {
-        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
-            self?.endBackgroundTask()
-        }
-    }
-    
-    func endBackgroundTask() {
-        UIApplication.shared.endBackgroundTask(backgroundTask)
-        backgroundTask = .invalid
-    }
     
     // MARK: - overlay Guide view
     private func showOverlay() {
@@ -237,7 +234,7 @@ class HostTimerViewController: UIViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: "GAME TIME\n", attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: "TOTAL TIME\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -309,17 +306,18 @@ class HostTimerViewController: UIViewController {
                     strongSelf.pauseOrPlayButton.isHidden = true
                     timer.invalidate()
                 }
-                if strongSelf.remainingTime == 10 {
+                let interval = strongSelf.moveSeconds + strongSelf.seconds
+                let timeRemainder = strongSelf.remainingTime % interval
+
+                switch timeRemainder {
+                case 300, 180, 60, 30, 10:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
-                }
-                if strongSelf.remainingTime == 9 {
-                    strongSelf.audioPlayerManager.stop()
-                }
-                if strongSelf.remainingTime <= 5 {
+                case 3...5:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
+                case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
+                default:
+                    break
                 }
                 if timer.isValid {
                     if strongSelf.time! < 1 {
@@ -354,10 +352,12 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
+            } else {
+                strongSelf.audioPlayerManager.stop()
             }
         }
     }
@@ -381,17 +381,17 @@ class HostTimerViewController: UIViewController {
         }
         else {
             self.timeTypeLabel.text = "Station Time"
-            self.time = (seconds - remainder%moveSeconds)
+            self.time = (seconds - remainder + moveSeconds)
             self.moving = false
-            let minute = (seconds - remainder%moveSeconds)/60
-            let second = (seconds - remainder%moveSeconds) % 60
+            let minute = (seconds - remainder + moveSeconds)/60
+            let second = (seconds - remainder + moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
@@ -411,7 +411,7 @@ class HostTimerViewController: UIViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds!
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds!)"
@@ -426,7 +426,6 @@ class HostTimerViewController: UIViewController {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
             }
-            registerBackgroundTask()
             runTimer()
         }
     }
@@ -443,6 +442,10 @@ extension HostTimerViewController {
         self.number = host.teams
     }
     
+    @objc func addBackGroundTime(_ notification:Notification) {
+        timer.invalidate()
+        calculateTime()
+    }
     
     @objc override func announceAction() {
         showHostMessagePopUp(messages: HostRankingViewcontroller.messages)
@@ -454,7 +457,6 @@ extension HostTimerViewController {
     
     @objc func updateTeamsInfo(notification: Notification) {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
-        print("K")
         if teams.count == self.number {
             ready = true
         }

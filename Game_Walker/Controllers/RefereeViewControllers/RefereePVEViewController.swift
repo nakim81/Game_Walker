@@ -85,36 +85,36 @@ class RefereePVEController: BaseViewController {
                 maxA = UserData.readMax("maxA") ?? ""
                 maxB = UserData.readMax("maxB") ?? ""
                 if maxA == "true" {
-                    leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                    leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-                } else if maxA == "false" {
                     leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
                     leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                } else {
-                    leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                } else if maxA == "false" {
+                    leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                     leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                } else {
+                    leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 }
                 if maxB == "true" {
-                    rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                    rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-                } else if maxB == "false" {
                     rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
                     rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                } else {
-                    rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                } else if maxB == "false" {
+                    rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                     rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                } else {
+                    rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 }
             } else {
                 max = UserData.readMax("max") ?? ""
                 if max == "true" {
-                    winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                    loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
-                } else if max == "false" {
                     winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
                     loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                } else {
-                    winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                } else if max == "false" {
+                    winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                     loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                } else {
+                    winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 }
             }
             if host.algorithm != [] && host.teams == teams.count {
@@ -324,7 +324,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("WIN", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(winButtonTapped), for: .touchUpInside)
         return button
@@ -335,7 +335,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("LOSE", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(loseButtonTapped), for: .touchUpInside)
         return button
@@ -532,7 +532,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("WIN", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(leftWinButtonTapped), for: .touchUpInside)
         return button
@@ -543,7 +543,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("LOSE", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(leftLoseButtonTapped), for: .touchUpInside)
         return button
@@ -603,7 +603,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("WIN", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(rightWinButtonTapped), for: .touchUpInside)
         return button
@@ -614,7 +614,7 @@ class RefereePVEController: BaseViewController {
         button.setTitle("LOSE", for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
-        button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+        button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
         button.addTarget(self, action: #selector(rightLoseButtonTapped), for: .touchUpInside)
         return button
@@ -1022,19 +1022,19 @@ extension RefereePVEController {
                 leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 self.round = host.currentRound
                 self.teamA = self.teamOrder[2 * host.currentRound - 2]
                 self.teamB = self.teamOrder[2 * host.currentRound - 1]
@@ -1050,11 +1050,11 @@ extension RefereePVEController {
                 winButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+                winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 loseButton.gestureRecognizers?.forEach { gestureRecognizer in
                     gestureRecognizer.isEnabled = true
                 }
-                loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+                loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 self.round = host.currentRound
                 self.team = self.teamOrder[host.currentRound - 1]
                 UserData.writeMax("", "max")
@@ -1154,11 +1154,11 @@ extension RefereePVEController {
             winButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
             loseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+            loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         }
     }
     
@@ -1182,11 +1182,11 @@ extension RefereePVEController {
             winButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            winButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
             loseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            loseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         }
     }
     
@@ -1230,11 +1230,11 @@ extension RefereePVEController {
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
             leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+            leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         }
     }
     
@@ -1258,11 +1258,11 @@ extension RefereePVEController {
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
             rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
+            rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
         }
     }
     
@@ -1286,11 +1286,11 @@ extension RefereePVEController {
             leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            leftWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
             leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            leftLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         }
     }
     
@@ -1314,11 +1314,11 @@ extension RefereePVEController {
             rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = true
             }
-            rightWinButton.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
             rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
                 gestureRecognizer.isEnabled = false
             }
-            rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+            rightLoseButton.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         }
     }
     

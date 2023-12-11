@@ -15,6 +15,7 @@ class RefereeTimerController: BaseViewController {
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var referee: Referee = UserData.readReferee("referee") ?? Referee()
     private var station: Station?
+    private var stations : [Station] = [Station()]
     private var host: Host = Host()
     private var pvp: Bool?
     
@@ -64,6 +65,10 @@ class RefereeTimerController: BaseViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -76,11 +81,12 @@ class RefereeTimerController: BaseViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
     }
     
     func callProtocols() {
         Task {
-            let stations = try await S.getStationList(gameCode)
+            stations = try await S.getStationList(gameCode)
             host = try await H.getHost(gameCode) ?? Host()
             
             self.seconds = host.gameTime
@@ -172,7 +178,7 @@ class RefereeTimerController: BaseViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: "GAME TIME\n", attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: "TOTAL TIME\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -189,13 +195,15 @@ class RefereeTimerController: BaseViewController {
         return label
     }()
     
-    private lazy var currentStationInfoButton: UIImageView = {
-        var view = UIImageView()
-        view.image = UIImage(named: "RefereeCurrentStationInfo")
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(currentStationInfoButtonTapped))
-        view.addGestureRecognizer(tapGesture)
-        view.isUserInteractionEnabled = true
-        return view
+    private lazy var currentStationInfoButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("Current Station Info", for: .normal)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
+        button.layer.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(currentStationInfoButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     func configureTimerLabel(){
@@ -295,17 +303,18 @@ class RefereeTimerController: BaseViewController {
                     strongSelf.audioPlayerManager.stop()
                     timer.invalidate()
                 }
-                if strongSelf.remainingTime == 10 {
+                let interval = strongSelf.moveSeconds + strongSelf.seconds
+                let timeRemainder = strongSelf.remainingTime % interval
+
+                switch timeRemainder {
+                case 300, 180, 60, 30, 10:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
-                }
-                if strongSelf.remainingTime == 9 {
-                    strongSelf.audioPlayerManager.stop()
-                }
-                if strongSelf.remainingTime <= 5 {
+                case 5:
                     strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                }
-                if strongSelf.remainingTime <= 3 {
+                case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
+                default:
+                    break
                 }
                 if timer.isValid {
                     if strongSelf.time < 1 {
@@ -329,10 +338,12 @@ class RefereeTimerController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
+            } else {
+                strongSelf.audioPlayerManager.stop()
             }
         }
     }
@@ -356,17 +367,17 @@ class RefereeTimerController: BaseViewController {
         }
         else {
             self.timeTypeLabel.text = "Station Time"
-            self.time = (seconds - remainder%moveSeconds)
+            self.time = (seconds - remainder + moveSeconds)
             self.moving = false
-            let minute = (seconds - remainder%moveSeconds)/60
-            let second = (seconds - remainder%moveSeconds) % 60
+            let minute = (seconds - remainder + moveSeconds)/60
+            let second = (seconds - remainder + moveSeconds) % 60
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         self.totalTime = t
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
@@ -376,7 +387,7 @@ class RefereeTimerController: BaseViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "GAME TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = "Round \(self.rounds)"
@@ -421,6 +432,11 @@ extension RefereeTimerController {
                 }
             }
         }
+    }
+    
+    @objc func addBackGroundTime(_ notification:Notification) {
+        timer.invalidate()
+        calculateTime()
     }
     
     @objc func buttonTapped(_ gesture: UITapGestureRecognizer) {
