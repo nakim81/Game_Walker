@@ -186,7 +186,9 @@ extension RankingViewController {
     @objc func showOrHideScore(notification: Notification) {
         guard let host = notification.userInfo?["host"] as? Host else {return}
         self.showScore = host.showScoreboard
-        self.leaderBoard.reloadData()
+        if showScore {
+            self.leaderBoard.reloadData()
+        }
     }
     
     @objc func updateLeaderboard(notification: Notification) {

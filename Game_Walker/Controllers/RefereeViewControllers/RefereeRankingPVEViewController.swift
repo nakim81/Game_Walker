@@ -53,6 +53,16 @@ class RefereeRankingPVEViewController: UIViewController {
         tabBarController?.navigationController?.isNavigationBarHidden = true
         configureTableView()
         configureNavigationBar()
+        
+        Task {@MainActor in
+            do {
+                self.teamList = try await T.getTeamList(gameCode)
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
+                return
+            }
+        }
     }
     
     private func addObservers() {

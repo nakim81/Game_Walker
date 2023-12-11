@@ -38,6 +38,8 @@ class HostRankingViewcontroller: UIViewController {
         Task {@MainActor in
             do {
                 teamList = try await T.getTeamList(gameCode)
+                guard let host = try await H.getHost(gameCode) else { return }
+                HostRankingViewcontroller.messages = host.announcements
                 if standardStyle {
                     getAlgorithmAndStation()
                 } else {

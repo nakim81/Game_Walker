@@ -31,7 +31,7 @@ class HostRankingTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 20))
         label.numberOfLines = 1
         return label
     }()
@@ -40,7 +40,7 @@ class HostRankingTableViewCell: UITableViewCell {
        let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 15))
         label.numberOfLines = 1
         return label
     }()
@@ -49,7 +49,7 @@ class HostRankingTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 24)
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 24))
         label.numberOfLines = 1
         return label
     }()
@@ -58,7 +58,7 @@ class HostRankingTableViewCell: UITableViewCell {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Medium", size: 13)
+        label.font = UIFont(name: "Dosis-Medium", size: fontSize(size: 13))
         label.numberOfLines = 2
         return label
     }()
