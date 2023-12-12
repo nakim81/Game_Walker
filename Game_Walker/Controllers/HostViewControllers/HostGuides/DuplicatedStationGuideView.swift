@@ -51,8 +51,8 @@ class DuplicatedStationGuideView : UIView {
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = """
-        Duplicated Stations means team is planned
-        to take station more than twice.
+        Team is playing the same station
+        on multiple rounds.
         """
         return label
     }()
