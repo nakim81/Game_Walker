@@ -1232,8 +1232,7 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
     
                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
-                    let number = Int(numberString),
-                    let previousNumber = cell.number{
+                    let number = Int(numberString) {
                         
                         if number > self.num_teams {
                             self.alert(title: "Invalid Team Number", message: "The number entered is greater than the number of current teams.")
