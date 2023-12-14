@@ -42,8 +42,8 @@ class MultiErrorGuideView : UIView {
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = """
-        Multiple errors means there are more than one
-        errors that were explained previously.
+        There are multiple errors shown 
+        previously at the same time.
         """
         return label
     }()

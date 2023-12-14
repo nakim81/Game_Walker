@@ -87,10 +87,13 @@ class FirstAlgGuideView : UIView {
     private func setupGuideText() {
         
         let instructionText = """
-        \u{2022} Tap "Stations" to see the new order of Stations.
+        \u{2022} Tap "Stations" to see the 
+        new order of Stations.
         \u{2022} Swap teams by click.
-        \u{2022} Manually change team by long-click.
-        \u{2022} Beware, mixing teams can cause errors.
+        \u{2022} Manually change team 
+        by long-click.
+        \u{2022} Beware, mixing teams 
+        can cause errors.
         """
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
@@ -100,9 +103,9 @@ class FirstAlgGuideView : UIView {
         instructionLabel.attributedText = attributedString
         instructionLabel.translatesAutoresizingMaskIntoConstraints = false
         instructionLabel.textAlignment = .left
-        instructionLabel.font = UIFont(name: "Dosis-Regular", size: 15)
+        instructionLabel.font = UIFont(name: "Dosis-Regular", size: 20)
         instructionLabel.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
-        instructionLabel.numberOfLines = 4
+        instructionLabel.numberOfLines = 7
         instructionLabel.adjustsFontForContentSizeCategory = true
         
         textBorderView.addSubview(instructionLabel)

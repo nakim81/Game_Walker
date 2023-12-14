@@ -64,25 +64,14 @@
                                     <segue destination="4gK-PM-WO8" kind="show" identifier="ResumeGameToCodeSegue" id="efF-m6-uwV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fi8-Nq-hZE">
-                                <rect key="frame" x="0.0" y="818" width="414" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="noah"/>
-                                <connections>
-                                    <segue destination="zJX-xS-UAe" kind="show" id="04U-VV-mAD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fi8-Nq-hZE" secondAttribute="trailing" id="4Vt-99-44X"/>
                             <constraint firstItem="8NZ-by-CrW" firstAttribute="centerX" secondItem="tyS-bJ-dkx" secondAttribute="centerX" id="84H-LA-uHn"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.65" id="Awl-hY-Dio"/>
                             <constraint firstItem="8NZ-by-CrW" firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="width" id="D56-He-p9g"/>
-                            <constraint firstItem="Fi8-Nq-hZE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Jwz-Kv-Egb"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Kbd-9B-pou"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Fi8-Nq-hZE" secondAttribute="bottom" constant="9" id="Med-nJ-2fh"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" multiplier="0.7" id="X8G-4e-xhE"/>
                             <constraint firstItem="tyS-bJ-dkx" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="iRk-Jk-CUw"/>
                             <constraint firstItem="8NZ-by-CrW" firstAttribute="top" secondItem="tyS-bJ-dkx" secondAttribute="bottom" constant="146" id="zTU-cw-RCj"/>
@@ -106,11 +95,11 @@
             <objects>
                 <viewController id="dgu-WT-CVq" customClass="SecondTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YgV-Ck-Ynp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECOND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbY-C2-CHe">
-                                <rect key="frame" x="127" y="394.5" width="160" height="48"/>
+                                <rect key="frame" x="127" y="406.5" width="160" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -135,11 +124,11 @@
             <objects>
                 <viewController id="iY9-31-wfI" customClass="ThirdTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fWW-2L-K70">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIRD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X00-Em-HtQ">
-                                <rect key="frame" x="150" y="394.5" width="114" height="48"/>
+                                <rect key="frame" x="150" y="406.5" width="114" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -164,11 +153,11 @@
             <objects>
                 <viewController id="F0Z-Xl-HH5" customClass="FirstTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UAT-Vw-3aD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzZ-kR-qiZ">
-                                <rect key="frame" x="155.5" y="394.5" width="103" height="48"/>
+                                <rect key="frame" x="155.5" y="406.5" width="103" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1195,8 +1184,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nWr-2f-mnX"/>
-        <segue reference="D0i-05-1lI"/>
+        <segue reference="7rv-rP-bSv"/>
+        <segue reference="tce-ii-ly8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
@@ -1230,13 +1219,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
