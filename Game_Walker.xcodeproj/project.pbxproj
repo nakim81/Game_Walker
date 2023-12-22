@@ -29,6 +29,7 @@
 		A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */; };
 		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD82AAA4CF500B7BD8A /* IntPair.swift */; };
+		A15812A32B364DC6007C6653 /* SoundsVibrationsCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */; };
 		A1A4CD1E29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */; };
 		A1A4CD202A371AA100704BF8 /* HostDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1F2A371AA100704BF8 /* HostDatabase.swift */; };
 		A1A4CD222A371AC700704BF8 /* PlayerDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD212A371AC700704BF8 /* PlayerDatabase.swift */; };
@@ -62,6 +63,7 @@
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
+		A1FBEDCA2B35563B008B9494 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEDC92B35563B008B9494 /* SettingsViewController.swift */; };
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
 		A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */; };
 		A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */; };
@@ -168,6 +170,7 @@
 		A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1521DD82AAA4CF500B7BD8A /* IntPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntPair.swift; path = Model/IntPair.swift; sourceTree = "<group>"; };
+		A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsVibrationsCustomButton.swift; sourceTree = "<group>"; };
 		A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCustomFlowLayout.swift; sourceTree = "<group>"; };
 		A1A4CD1F2A371AA100704BF8 /* HostDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostDatabase.swift; path = Database/HostDatabase.swift; sourceTree = "<group>"; };
 		A1A4CD212A371AC700704BF8 /* PlayerDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerDatabase.swift; path = Database/PlayerDatabase.swift; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
+		A1FBEDC92B35563B008B9494 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAlgGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedStationGuideView.swift; sourceTree = "<group>"; };
@@ -603,6 +607,8 @@
 				FC5240A02AF12E6F00999282 /* NotificationNames.swift */,
 				FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */,
 				FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */,
+				A1FBEDC92B35563B008B9494 /* SettingsViewController.swift */,
+				A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -845,6 +851,7 @@
 				DABC1E90288BAA8B00C75DC7 /* UIViewControllerExtensions.swift in Sources */,
 				FCEF5E0A2B1E186700B0CD17 /* UITableViewCellExtensions.swift in Sources */,
 				61C33E2D299B25A800A512E5 /* RefereeMessageTableViewCell.swift in Sources */,
+				A1FBEDCA2B35563B008B9494 /* SettingsViewController.swift in Sources */,
 				FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */,
 				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
 				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
@@ -859,6 +866,7 @@
 				A1A5689F2AF478A000577CFF /* FirstTabTestViewController.swift in Sources */,
 				6174CED22ADA8412007CA70B /* RefereeGuideViewController.swift in Sources */,
 				6149DB5E2992036900DD4DC2 /* HostGivePointsController.swift in Sources */,
+				A15812A32B364DC6007C6653 /* SoundsVibrationsCustomButton.swift in Sources */,
 				DAC3132B285862FB00BECF89 /* Referee.swift in Sources */,
 				A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */,
 				A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */,

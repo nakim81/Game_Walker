@@ -227,7 +227,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
 }
 // MARK: - SwitchBtn
 extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
-    func isOnValueChange(isOn: Bool) {
+    func isOnValueChange(_ sender: UIButton, isOn: Bool) {
         self.showScore = isOn
         Task { @MainActor in
             do {
@@ -240,7 +240,7 @@ extension HostRankingViewcontroller: CustomSwitchButtonDelegate {
             }
         }
     }
-}
+    }
 // MARK: - @objc
 extension HostRankingViewcontroller {
     @objc func updateLeaderboard(notification: Notification) {
