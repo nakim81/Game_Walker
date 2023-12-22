@@ -147,10 +147,11 @@ class ManualAlgorithmViewController: UIViewController {
         
         do {
             self.host = try await H.getHost(gamecode)
-//            num_teams = host!.teams
-            num_teams = 6
-//            num_rounds = host!.rounds
-            num_rounds = 6
+            num_teams = host!.teams
+            // TODO: be aware that this might be needing during testing
+//            num_teams = 6
+            num_rounds = host!.rounds
+//            num_rounds = 6
         } catch(let e) {
             print(e)
             return
@@ -263,7 +264,6 @@ class ManualAlgorithmViewController: UIViewController {
                 let cellData = cellDataGrid[rowIndex][column]
                 if cellData.number != -1 {
                     changeCellGridData(cellDataInstance: cellData, to: "empty")
-                    //   print("have to change cell to empty")
                 }
             }
         }
@@ -1186,17 +1186,17 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             } else if teamNumberLabel == 0 {
                 cell.makeCellEmpty()
             }  else {
-                cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
+                    cell.configureAlgorithmNormalCell(cellteamnum : teamNumberLabel!)
 
-                if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
-                    cell.makeBlueWarning()
-                } else if (cellData.hasPvpYellowWarning || cellData.hasYellowWarning) && !cellData.hasRedWarning {
-                    cell.makeYellowWarning()
-                } else if cellData.hasPurpleWarning && !cellData.hasRedWarning {
-                    cell.makePurpleWarning()
-                } else if cellData.hasRedWarning {
-                    cell.makeRedWarning()
-                }
+                    if cellData.hasPvpBlueWarning && !cellData.hasRedWarning {
+                        cell.makeBlueWarning()
+                    } else if (cellData.hasPvpYellowWarning || cellData.hasYellowWarning) && !cellData.hasRedWarning {
+                        cell.makeYellowWarning()
+                    } else if cellData.hasPurpleWarning && !cellData.hasRedWarning {
+                        cell.makePurpleWarning()
+                    } else if cellData.hasRedWarning {
+                        cell.makeRedWarning()
+                    }
             }
             return cell
         }
@@ -1233,7 +1233,12 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
                     let number = Int(numberString) {
-    
+                        
+                        if number > self.num_teams {
+                            self.alert(title: "Invalid Team Number", message: "The number entered is greater than the number of current teams.")
+                            return
+                        }
+                        
                         cell.numberLabel.text = "\(number)"
                         if number == 0 {
                             cell.makeCellEmpty()

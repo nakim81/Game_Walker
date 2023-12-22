@@ -51,9 +51,8 @@ class SameRoundGuideView : UIView {
         label.textAlignment = .center
         label.numberOfLines = 3
         label.text = """
-        Same round duplicated appearance means
-        team is planned to appear in two or more
-        stations at the same round.
+        Team is playing multiple stations
+        on the same round.
         """
         return label
     }()

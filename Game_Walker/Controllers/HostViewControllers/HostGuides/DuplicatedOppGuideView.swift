@@ -51,10 +51,8 @@ class DuplicatedOppGuideView : UIView {
         label.textAlignment = .center
         label.numberOfLines = 4
         label.text = """
-        Duplicated opponents means team is planned
-        to have a game match with a duplicated
-        opponents more than once through
-        out the whole event.
+        Team is playing against same opponents
+        multiple times on PVP stations.
         """
         return label
     }()

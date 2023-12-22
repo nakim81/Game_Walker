@@ -85,78 +85,107 @@ class JoinGameViewController: UIViewController {
         guard let username = usernameTextField.text else { return }
         guard let uuid = UserData.readUUID() else { return }
         
-        if gamecode.isEmpty && username.isEmpty {
-            if !savedGameCode.isEmpty && !savedUserName.isEmpty {
-                if (UserData.readTeam("team") != nil) {
-                    // User wants to join the game with the stored game code, username, and player object
-                    performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+        if (UserData.getUserRole() == nil || UserData.getUserRole() == "player") {
+            if gamecode.isEmpty && username.isEmpty {
+                if !savedGameCode.isEmpty && !savedUserName.isEmpty {
+                    joinExistingGameWithSavedUserInfo()
                 } else {
-                    // User chooses between creating or joining a team
-                    performSegue(withIdentifier: "goToPF2VC", sender: self)
+                    alert(title: "", message: "Please enter gamecode and username")
+                    return
                 }
+            } else if gamecode == savedGameCode && username == savedUserName {
+                joinExistingGameWithSavedUserInfo()
+            } else if savedGameCode.isEmpty && savedUserName.isEmpty {
+                createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
+            } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
+                joinNewGameWithSavedUsername(savedGameCode, player, uuid, gamecode, savedUserName)
+            } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
+                modifyUsername(savedGameCode, uuid, username)
+            } else if gamecode != savedGameCode && username != savedUserName {
+                transitionToNewGameWithNewUsername(savedGameCode, gamecode, player, uuid, username)
             } else {
-                alert(title: "", message: "Please enter gamecode and username")
+                alert(title: "", message: "Invalid Input!")
                 return
             }
-        } else if gamecode == savedGameCode && username == savedUserName {
-            if (UserData.readTeam("team") != nil) {
-                // User wants to join the game with the stored game code, username, and player object
-                performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+        } else {
+            // user switching from other roles
+            
+            if UserData.getUserRole() == "referee" {
+                UserData.removeReferee()
+            }
+            
+            UserData.setUserRole("player")
+            
+            if gamecode.isEmpty && username.isEmpty {
+                if !savedGameCode.isEmpty && !savedUserName.isEmpty {
+                    createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
+                } else {
+                    alert(title: "", message: "Please enter gamecode and username")
+                }
+            } else if gamecode == savedGameCode && username == savedUserName {
+                createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
+            } else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty {
+                switchToPlayerFromOtherRoles(savedGameCode, gamecode, savedUserName, username, uuid)
+            } else if savedGameCode.isEmpty && savedUserName.isEmpty {
+                createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
+            } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
+                createPlayerAndJoinGame(gamecode, savedUserName, uuid)
+            } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
+                createPlayerAndJoinGame(savedGameCode, username, uuid)
+            } else if gamecode != savedGameCode && username != savedUserName {
+                createPlayerAndJoinGame(gamecode, username, uuid)
             } else {
-                // User chooses between creating or joining a team
+                alert(title: "", message: "Invalid Input!")
+                return
+            }
+        }
+    }
+   // MARK: - modulize functions for joining game
+    
+    private func joinExistingGameWithSavedUserInfo(){
+        if (UserData.readTeam("team") != nil) {
+            // User wants to join the game with the stored game code, username, and player object
+            performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+        } else {
+            // User chooses between creating or joining a team
+            performSegue(withIdentifier: "goToPF2VC", sender: self)
+        }
+    }
+    
+    private func createPlayerAndJoinGame(_ gamecode: String, _ username: String, _ uuid: String) {
+        let player = Player(gamecode: gamecode, name: username)
+        UserData.writePlayer(player, "player")
+        UserData.writeGamecode(gamecode, "gamecode")
+        UserData.writeUsername(username, "username")
+        UserData.setUserRole("player")
+        Task {@MainActor in
+            do {
+                try await P.addPlayer(gamecode, player, uuid)
                 performSegue(withIdentifier: "goToPF2VC", sender: self)
-            }
-        } else if savedGameCode.isEmpty && savedUserName.isEmpty {
-            
-            // User is joining a new game
-            if !gamecode.isEmpty && !username.isEmpty {
-                // Create a new player object for the new game
-                player = Player(gamecode: gamecode, name: username)
-                
-                // Join the game
-                Task { @MainActor in
-                    // Try await P.addPlayer(gamecode, player, uuid)
-                    do {
-                        try await P.addPlayer(gamecode, player, uuid)
-                        UserData.writeGamecode(gamecode, "gamecode")
-                        UserData.writeUsername(username, "username")
-                        UserData.writePlayer(player, "player")
-                        performSegue(withIdentifier: "goToPF2VC", sender: self)
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-
-                }
-            } else {
-                // Invalid input
-                alert(title: "", message: "Please enter both game code and username.")
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
                 return
             }
+        }
+    }
+    
+    private func createNewPlayerAndJoinNewGameWithUserInput(_ gamecode: String, _ username: String, _ uuid: String) {
+        // User is joining a new game
+        if !gamecode.isEmpty && !username.isEmpty {
+        // Create a new player object for the new game
+            let player = Player(gamecode: gamecode, name: username)
             
-        } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
+            // Join the game
             Task { @MainActor in
-                if let team = UserData.readTeam("team") {
-                    do {
-                        try await T.leaveTeam(savedGameCode, team.name, player)
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                }
-                P.removePlayer(savedGameCode, uuid)
-                player = Player(gamecode: gamecode, name: savedUserName)
-                do{
+                // Try await P.addPlayer(gamecode, player, uuid)
+                do {
                     try await P.addPlayer(gamecode, player, uuid)
                     UserData.writeGamecode(gamecode, "gamecode")
+                    UserData.writeUsername(username, "username")
                     UserData.writePlayer(player, "player")
-                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+                    UserData.setUserRole("player")
+                    performSegue(withIdentifier: "goToPF2VC", sender: self)
                 } catch GameWalkerError.invalidGamecode(let message) {
                     print(message)
                     gamecodeAlert(message)
@@ -167,70 +196,77 @@ class JoinGameViewController: UIViewController {
                     return
                 }
             }
-        } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
-            Task { @MainActor in
+        } else {
+            // Invalid input
+            alert(title: "", message: "Please enter both game code and username.")
+            return
+        }
+    }
+    
+    private func joinNewGameWithSavedUsername(_ savedGameCode: String, _ player: Player, _ uuid: String, _ gamecode:String, _ savedUserName: String) {
+        Task { @MainActor in
+            if let team = UserData.readTeam("team") {
                 do {
-                    try await P.modifyName(savedGameCode, uuid, username)
-                    player = Player(gamecode: gamecode, name: username)
-                    UserData.writePlayer(player, "player")
-                    UserData.writeUsername(username, "username")
-                } catch GameWalkerError.invalidGamecode(let message) {
-                    print(message)
-                    gamecodeAlert(message)
-                    return
+                    try await T.leaveTeam(savedGameCode, team.name, player)
                 } catch GameWalkerError.serverError(let message) {
                     print(message)
                     serverAlert(message)
                     return
                 }
-                if (UserData.readTeam("team") != nil) {
-                    self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
-                } else {
-                    self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-                }
             }
-        } else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty {
-            if let username = usernameTextField.text {
-                Task {@MainActor in
-                    let player = Player(gamecode: savedGameCode, name: username)
-                    UserData.writePlayer(player, "player")
-                    UserData.writeUsername(username, "username")
-                    UserData.writeGamecode(savedGameCode, "gamecode")
-                    do {
-                        try await P.addPlayer(savedGameCode, player, uuid)
-                        self.performSegue(withIdentifier: "goToPF2VC", sender: self)
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                }
-            } else {
-                alert(title: "", message: "Please enter username")
+            P.removePlayer(savedGameCode, uuid)
+            let newPlayer = Player(gamecode: gamecode, name: savedUserName)
+            do{
+                try await P.addPlayer(gamecode, newPlayer, uuid)
+                UserData.writeGamecode(gamecode, "gamecode")
+                UserData.writePlayer(newPlayer, "player")
+                UserData.setUserRole("player")
+                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
                 return
             }
-        } else if gamecode != savedGameCode && username != savedUserName {
+        }
+    }
+    
+    private func modifyUsername(_ savedGameCode: String, _ uuid: String, _ username: String) {
+        Task { @MainActor in
+            do {
+                try await P.modifyName(savedGameCode, uuid, username)
+                let player = Player(gamecode: savedGameCode, name: username)
+                UserData.writePlayer(player, "player")
+                UserData.writeUsername(username, "username")
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+            if (UserData.readTeam("team") != nil) {
+                self.performSegue(withIdentifier: "ResumeGameSegue", sender: self)
+            } else {
+                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+            }
+        }
+    }
+    
+    private func switchToPlayerFromOtherRoles(_ savedGameCode: String, _ gamecode: String, _ savedUserName: String, _ username: String, _ uuid: String){
+        if let username = usernameTextField.text {
             Task {@MainActor in
-                if let team = UserData.readTeam("team") {
-                    do {
-                        try await T.leaveTeam(savedGameCode, team.name, player)
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                }
-                P.removePlayer(savedGameCode, uuid)
-                player = Player(gamecode: gamecode, name: username)
+                let player = Player(gamecode: savedGameCode, name: username)
+                UserData.writePlayer(player, "player")
+                UserData.writeUsername(username, "username")
+                UserData.writeGamecode(savedGameCode, "gamecode")
                 do {
-                    try await P.addPlayer(gamecode, player, uuid)
-                    UserData.writeGamecode(gamecode, "gamecode")
-                    UserData.writeUsername(username, "username")
-                    UserData.writePlayer(player, "player")
+                    try await P.addPlayer(savedGameCode, player, uuid)
                     self.performSegue(withIdentifier: "goToPF2VC", sender: self)
                 } catch GameWalkerError.invalidGamecode(let message) {
                     print(message)
@@ -243,10 +279,43 @@ class JoinGameViewController: UIViewController {
                 }
             }
         } else {
-            alert(title: "", message: "Invalid Input!")
+            alert(title: "", message: "Please enter username")
             return
         }
     }
+    
+    private func transitionToNewGameWithNewUsername(_ savedGameCode: String, _ gamecode: String, _ player: Player, _ uuid: String, _ username: String ) {
+        Task {@MainActor in
+            if let team = UserData.readTeam("team") {
+                do {
+                    try await T.leaveTeam(savedGameCode, team.name, player)
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
+                    return
+                }
+            }
+            P.removePlayer(savedGameCode, uuid)
+            let newPlayer = Player(gamecode: gamecode, name: username)
+            do {
+                try await P.addPlayer(gamecode, newPlayer, uuid)
+                UserData.writeGamecode(gamecode, "gamecode")
+                UserData.writeUsername(username, "username")
+                UserData.writePlayer(newPlayer, "player")
+                UserData.setUserRole("player")
+                self.performSegue(withIdentifier: "goToPF2VC", sender: self)
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+        }
+    }
+    // MARK: - prepare
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tabBarController = segue.destination as? PlayerTabBarController {

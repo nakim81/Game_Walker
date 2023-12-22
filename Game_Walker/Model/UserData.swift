@@ -9,6 +9,14 @@ import Foundation
 
 class UserData {
     
+    static func setUserRole(_ role: String) {
+        UserDefaults.standard.set(role, forKey: "role")
+    }
+    
+    static func getUserRole() -> String? {
+        return UserDefaults.standard.string(forKey: "role")
+    }
+    
     static func setStandardStyle(_ standardStyle: Bool) {
         UserDefaults.standard.set(standardStyle, forKey: "standardstyle")
     }
@@ -131,5 +139,9 @@ class UserData {
             }
         }
         return nil
+    }
+    
+    static func removeReferee() {
+        UserDefaults.standard.removeObject(forKey: "referee")
     }
 }
