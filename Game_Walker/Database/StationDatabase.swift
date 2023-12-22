@@ -108,13 +108,16 @@ struct S {
                 stations.append(station)
             }
             
-            stations.sort { $0.pvp && !$1.pvp }
+            stations.sort {
+                if $0.pvp == $1.pvp { return $0.name < $1.name }
+                return $0.pvp && !$1.pvp
+            }
+            
             if stations.first?.number == 0 {
-                for i in 0..<stations.count {
-                    stations[i].number = i + 1
+                for (index, station) in stations.enumerated() {
+                    station.number = index + 1
                 }
             }
-            stations.sort { $0.number < $1.number }
             return stations
         }
         catch{

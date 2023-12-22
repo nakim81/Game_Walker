@@ -1,0 +1,132 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "eNX-0k-oAn.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"※ Game Code will be provided by the host.\"; ObjectID = \"eNX-0k-oAn\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "※ Game Code will be provided by the host."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "※ 게임코드는 주최자가 지급합니다"
+          }
+        }
+      }
+    },
+    "Jjd-te-ado.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Game Code\"; ObjectID = \"Jjd-te-ado\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Game Code"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 코드"
+          }
+        }
+      }
+    },
+    "jpM-Jf-UvV.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Username\"; ObjectID = \"jpM-Jf-UvV\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Username"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름"
+          }
+        }
+      }
+    },
+    "K4T-2R-IAd.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"RANKING\"; ObjectID = \"K4T-2R-IAd\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "RANKING"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "순위"
+          }
+        }
+      }
+    },
+    "kL6-IT-kne.placeholder" : {
+      "comment" : "Class = \"UITextField\"; placeholder = \"username\"; ObjectID = \"kL6-IT-kne\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "username"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름"
+          }
+        }
+      }
+    },
+    "OgJ-vk-kS2.placeholder" : {
+      "comment" : "Class = \"UITextField\"; placeholder = \"gamecode\"; ObjectID = \"OgJ-vk-kS2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "gamecode"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 코드"
+          }
+        }
+      }
+    },
+    "z3c-FJ-oOM.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"JOIN\"; ObjectID = \"z3c-FJ-oOM\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "JOIN"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "참가"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

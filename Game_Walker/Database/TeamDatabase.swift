@@ -36,6 +36,9 @@ struct T {
                 throw GameWalkerError.serverError("Something went wrong while adding Team")
             }
         } catch {
+            if case GameWalkerError.teamNumberAlreadyExists = error {
+                throw error
+            }
             print("Error adding Team: \(error)")
             throw GameWalkerError.serverError("Something went wrong while adding Team")
         }
