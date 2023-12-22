@@ -114,10 +114,11 @@ struct S {
             }
             
             if stations.first?.number == 0 {
-                for (index, station) in stations.enumerated() {
-                    station.number = index + 1
+                for index in stations.indices {
+                    stations[index].number = index + 1
                 }
             }
+            
             return stations
         }
         catch{
