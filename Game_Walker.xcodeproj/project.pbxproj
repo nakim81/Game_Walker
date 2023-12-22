@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -85,12 +85,12 @@
 		DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139328B47EDA000A395F /* JoinGameViewController.swift */; };
 		DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139428B47EDA000A395F /* CreateTeamViewController.swift */; };
 		DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* TimerViewController.swift */; };
-		DA6FE6A72B21D2C8000F6D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA6FE6A92B21D2C8000F6D01 /* Localizable.strings */; };
-		DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */; };
-		DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */; };
-		DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E82288BA9CA00C75DC7 /* Host.storyboard */; };
+		DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */; };
+		DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEB2B35FF3E00401C42 /* Main.storyboard */; };
+		DAA78FED2B36153500401C42 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEF2B36153500401C42 /* Player.storyboard */; };
+		DAA78FF12B36153A00401C42 /* Referee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FF32B36153A00401C42 /* Referee.storyboard */; };
+		DAA78FF52B36153F00401C42 /* Host.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FF72B36153F00401C42 /* Host.storyboard */; };
 		DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */; };
-		DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E84288BA9CB00C75DC7 /* Main.storyboard */; };
 		DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */; };
 		DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */; };
 		DABC1E90288BAA8B00C75DC7 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */; };
@@ -224,14 +224,17 @@
 		DA42139328B47EDA000A395F /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		DA42139428B47EDA000A395F /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		DA42139528B47EDA000A395F /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		DA6FE6A82B21D2C8000F6D01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA6FE6AA2B21D2CD000F6D01 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
-		DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Player.storyboard; path = View/Player.storyboard; sourceTree = "<group>"; };
-		DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Referee.storyboard; path = View/Referee.storyboard; sourceTree = "<group>"; };
-		DABC1E82288BA9CA00C75DC7 /* Host.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Host.storyboard; path = View/Host.storyboard; sourceTree = "<group>"; };
+		DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		DAA78FEA2B35FF3E00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DAA78FEC2B35FF3E00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Main.xcstrings; sourceTree = "<group>"; };
+		DAA78FEE2B36153500401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Player.storyboard; sourceTree = "<group>"; };
+		DAA78FF02B36153500401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Player.xcstrings; sourceTree = "<group>"; };
+		DAA78FF22B36153A00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Referee.storyboard; sourceTree = "<group>"; };
+		DAA78FF42B36153A00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Referee.xcstrings; sourceTree = "<group>"; };
+		DAA78FF62B36153F00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Host.storyboard; sourceTree = "<group>"; };
+		DAA78FF82B36153F00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Host.xcstrings; sourceTree = "<group>"; };
 		DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = View/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DABC1E84288BA9CB00C75DC7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = View/Main.storyboard; sourceTree = "<group>"; };
 		DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -402,7 +405,6 @@
 		DA28D783284FF9CE00EA1B94 = {
 			isa = PBXGroup;
 			children = (
-				DA6FE6A92B21D2C8000F6D01 /* Localizable.strings */,
 				DA28D78E284FF9CE00EA1B94 /* Game_Walker */,
 				DA28D78D284FF9CE00EA1B94 /* Products */,
 				4332FA625A04330489170BE4 /* Pods */,
@@ -422,6 +424,7 @@
 		DA28D78E284FF9CE00EA1B94 /* Game_Walker */ = {
 			isa = PBXGroup;
 			children = (
+				DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */,
 				FC18D25A2A9899E100E6B144 /* Assets.xcassets */,
 				FCF4C94F29C8B35100CE8F42 /* Supporting Files */,
 				FCFE6C4C29B77FC5002FCD19 /* Database */,
@@ -464,10 +467,10 @@
 			isa = PBXGroup;
 			children = (
 				DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */,
-				DABC1E84288BA9CB00C75DC7 /* Main.storyboard */,
-				DABC1E7F288BA9CA00C75DC7 /* Player.storyboard */,
-				DABC1E81288BA9CA00C75DC7 /* Referee.storyboard */,
-				DABC1E82288BA9CA00C75DC7 /* Host.storyboard */,
+				DAA78FEB2B35FF3E00401C42 /* Main.storyboard */,
+				DAA78FEF2B36153500401C42 /* Player.storyboard */,
+				DAA78FF32B36153A00401C42 /* Referee.storyboard */,
+				DAA78FF72B36153F00401C42 /* Host.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -702,22 +705,22 @@
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */,
-				DABC1E87288BA9CB00C75DC7 /* Referee.storyboard in Resources */,
+				DAA78FF12B36153A00401C42 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
 				FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */,
-				DABC1E8A288BA9CB00C75DC7 /* Main.storyboard in Resources */,
+				DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */,
 				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
+				DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */,
 				FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */,
-				DABC1E85288BA9CB00C75DC7 /* Player.storyboard in Resources */,
+				DAA78FED2B36153500401C42 /* Player.storyboard in Resources */,
 				FCB13E192A97A04B00F4AE99 /* timer_end.wav in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				A1FFDC902AD7F6E5000DF76E /* duplicated-opponents-sample.gif in Resources */,
 				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
-				DA6FE6A72B21D2C8000F6D01 /* Localizable.strings in Resources */,
 				FC03BA122AAB6DE5005E11BD /* GemunuLibre-ExtraLight.ttf in Resources */,
 				FC03BA152AAB6DEC005E11BD /* GemunuLibre-Regular.ttf in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
-				DABC1E88288BA9CB00C75DC7 /* Host.storyboard in Resources */,
+				DAA78FF52B36153F00401C42 /* Host.storyboard in Resources */,
 				FCB13E172A97A04B00F4AE99 /* green.wav in Resources */,
 				FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */,
 				A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */,
@@ -875,14 +878,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DA6FE6A92B21D2C8000F6D01 /* Localizable.strings */ = {
+		DAA78FEB2B35FF3E00401C42 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA6FE6A82B21D2C8000F6D01 /* en */,
-				DA6FE6AA2B21D2CD000F6D01 /* ko */,
+				DAA78FEA2B35FF3E00401C42 /* Base */,
+				DAA78FEC2B35FF3E00401C42 /* mul */,
 			);
-			name = Localizable.strings;
-			path = "Game_Walker/Supporting Files";
+			name = Main.storyboard;
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAA78FEF2B36153500401C42 /* Player.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA78FEE2B36153500401C42 /* Base */,
+				DAA78FF02B36153500401C42 /* mul */,
+			);
+			name = Player.storyboard;
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAA78FF32B36153A00401C42 /* Referee.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA78FF22B36153A00401C42 /* Base */,
+				DAA78FF42B36153A00401C42 /* mul */,
+			);
+			name = Referee.storyboard;
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAA78FF72B36153F00401C42 /* Host.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA78FF62B36153F00401C42 /* Base */,
+				DAA78FF82B36153F00401C42 /* mul */,
+			);
+			name = Host.storyboard;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1013,7 +1046,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;

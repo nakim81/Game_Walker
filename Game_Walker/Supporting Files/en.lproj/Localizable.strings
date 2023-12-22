@@ -25,8 +25,8 @@
 "Timer" = "Timer";
 "Game Time" = "Game Time";
 "CLOSE" = "CLOSE";
-"NEXT" = "NEXT"
-"SAVE" = "SAVE"
+"NEXT" = "NEXT";
+"SAVE" = "SAVE";
 
 
 //Player Branch & Shared
@@ -59,8 +59,8 @@
 "Give Points" = "Give Points";
 
 //Host Branch
-"Choose Style" = "Choose the style that fits your event!"
-"Standard Mode" = "Standard Mode"
+"Choose Style" = "Choose the style that fits your event!";
+"Standard Mode" = "Standard Mode";
 "Standard Mode Info" = "This mode includes all of our features (Points, Stations, Matching, Timer, etc)";
 "Points Only" = "Points Only";
 "Points Only Info" = "This mode includes points and rankings only";
