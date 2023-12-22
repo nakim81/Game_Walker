@@ -31,6 +31,7 @@ class HostRankingViewcontroller: UIViewController {
     // MARK: - methods related to the view lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -60,6 +61,11 @@ class HostRankingViewcontroller: UIViewController {
             let host = try await H.getHost(gameCode)
             switchBtn.isOn = host?.showScoreboard ?? true
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - others

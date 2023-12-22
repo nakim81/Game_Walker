@@ -45,7 +45,7 @@ class AnnouncementViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
         button.setTitle("Close", for: .normal)

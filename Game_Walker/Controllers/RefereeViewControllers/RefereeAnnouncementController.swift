@@ -15,7 +15,7 @@ class RefereeAnnouncementViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
-        view.layer.cornerRadius = 13
+        view.layer.cornerRadius = 20
         
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
@@ -36,7 +36,7 @@ class RefereeAnnouncementViewController: UIViewController {
         label.text = self.announcement?.content
         label.backgroundColor = .clear
         label.textAlignment = .left
-        label.font = UIFont(name: "Dosis-Regular", size: 18)
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -45,7 +45,7 @@ class RefereeAnnouncementViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
         button.setTitle("Close", for: .normal)

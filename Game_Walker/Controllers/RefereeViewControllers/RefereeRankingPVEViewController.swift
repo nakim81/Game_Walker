@@ -57,6 +57,7 @@ class RefereeRankingPVEViewController: UIViewController {
         Task {@MainActor in
             do {
                 self.teamList = try await T.getTeamList(gameCode)
+                self.leaderBoard.reloadData()
             } catch GameWalkerError.serverError(let e) {
                 print(e)
                 serverAlert(e)
@@ -110,7 +111,7 @@ extension RefereeRankingPVEViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info", "Points can be hidden by the Host"]
+        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info", "Points can be hidden"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: Int(self.leaderBoard.frame.maxX - 85), y: Int(self.leaderBoard.frame.minY + 42.5), width: 85, height: 17)
@@ -157,7 +158,20 @@ extension RefereeRankingPVEViewController {
         guard let host = notification.userInfo?["host"] as? Host else { return }
         
         self.showScore = host.showScoreboard
-        leaderBoard.reloadData()
+        if showScore {
+            Task {@MainActor in
+                do {
+                    self.teamList = try await T.getTeamList(gameCode)
+                    self.leaderBoard.reloadData()
+                } catch GameWalkerError.serverError(let e) {
+                    print(e)
+                    serverAlert(e)
+                    return
+                }
+            }
+        } else {
+            self.leaderBoard.reloadData()
+        }
     }
     
     @objc func teamsUpdate (notification: Notification) {
@@ -169,8 +183,8 @@ extension RefereeRankingPVEViewController {
                 return team1.points > team2.points
             }
         }
-        self.teamList = teams
         if self.showScore {
+            self.teamList = teams
             self.leaderBoard.reloadData()
         }
     }

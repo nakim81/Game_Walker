@@ -167,7 +167,7 @@ extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: RefereeMessageTableViewCell.identifier, for: indexPath) as! RefereeMessageTableViewCell
         let ind = indexPath.row + 1
-        let announcement = messages[indexPath.row]
+        let announcement = RefereeTabBarPVEController.localMessages[indexPath.row]
         cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
         cell.selectionStyle = .none
         return cell
