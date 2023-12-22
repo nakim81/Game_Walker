@@ -87,35 +87,35 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
     func updateHost(_ host: Host) {
         if host.gameover {
             showAwardPopUp("referee")
-        }
-        
-        let data: [String:Host] = ["host":host]
-        NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
-        
-        if RefereeTabBarPVEController.localMessages.count > host.announcements.count {
-            removeAnnouncementsNotInHost(from: &RefereeTabBarPVEController.localMessages, targetArray: host.announcements)
-            NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
         } else {
-            // compare server announcements and local announcements
-            for announcement in host.announcements {
-                let ids: [String] = RefereeTabBarPVEController.localMessages.map({ $0.uuid })
-                // new announcements
-                if !ids.contains(announcement.uuid) {
-                    RefereeTabBarPVEController.localMessages.append(announcement)
-                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                    NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
-                } else {
-                    // modified announcements
-                    if let localIndex = RefereeTabBarPVEController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                        if RefereeTabBarPVEController.localMessages[localIndex].content != announcement.content {
-                            RefereeTabBarPVEController.localMessages[localIndex].content = announcement.content
-                            RefereeTabBarPVEController.localMessages[localIndex].readStatus = false
-                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
-                            NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+            let data: [String:Host] = ["host":host]
+            NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
+            
+            if RefereeTabBarPVEController.localMessages.count > host.announcements.count {
+                removeAnnouncementsNotInHost(from: &RefereeTabBarPVEController.localMessages, targetArray: host.announcements)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
+            } else {
+                // compare server announcements and local announcements
+                for announcement in host.announcements {
+                    let ids: [String] = RefereeTabBarPVEController.localMessages.map({ $0.uuid })
+                    // new announcements
+                    if !ids.contains(announcement.uuid) {
+                        RefereeTabBarPVEController.localMessages.append(announcement)
+                        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                        NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                    } else {
+                        // modified announcements
+                        if let localIndex = RefereeTabBarPVEController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                            if RefereeTabBarPVEController.localMessages[localIndex].content != announcement.content {
+                                RefereeTabBarPVEController.localMessages[localIndex].content = announcement.content
+                                RefereeTabBarPVEController.localMessages[localIndex].readStatus = false
+                                self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                                NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
+                            }
                         }
                     }
+                    
                 }
-                
             }
         }
     }

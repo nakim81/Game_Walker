@@ -318,14 +318,13 @@ class GivePointsController: UIViewController {
         button.titleLabel?.font = self.buttonsFont
         button.layer.borderColor = UIColor.clear.cgColor
         button.layer.borderWidth = 0.0
-        button.addTarget(self, action: #selector(GMStepper.leftButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpInside)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.handleLeftLongPress(gesture:)))
         longPressGestureRecognizer.minimumPressDuration = 1.0
         longPressGestureRecognizer.allowableMovement = 50
         button.addGestureRecognizer(longPressGestureRecognizer)
+        let shortPressGesture = UITapGestureRecognizer(target: self, action: #selector(handleLeftShortPress))
+        shortPressGesture.numberOfTapsRequired = 1
+        button.addGestureRecognizer(shortPressGesture)
         return button
     }()
 
@@ -337,14 +336,13 @@ class GivePointsController: UIViewController {
         button.titleLabel?.font = self.buttonsFont
         button.layer.borderColor = UIColor.clear.cgColor
         button.layer.borderWidth = 0.0
-        button.addTarget(self, action: #selector(GMStepper.rightButtonTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpInside)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchUpOutside)
-        button.addTarget(self, action: #selector(GMStepper.buttonTouchUp), for: .touchCancel)
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GMStepper.handleRightLongPress(gesture:)))
         longPressGestureRecognizer.minimumPressDuration = 1.0
         longPressGestureRecognizer.allowableMovement = 50
         button.addGestureRecognizer(longPressGestureRecognizer)
+        let shortPressGesture = UITapGestureRecognizer(target: self, action: #selector(handleRightShortPress))
+        shortPressGesture.numberOfTapsRequired = 1
+        button.addGestureRecognizer(shortPressGesture)
         return button
     }()
     
@@ -435,9 +433,9 @@ class GivePointsController: UIViewController {
         } else if stepperState == .ShouldDecrease {
             value -= stepValue
         } else if stepperState == .MoreIncrease {
-            value += 20
+            value += 10
         } else if stepperState == .MoreDecrease {
-            value -= 20
+            value -= 10
         }
     }
     
@@ -488,25 +486,20 @@ extension GMStepper {
 
 // MARK: Button Events
 extension GMStepper {
-    @objc func leftButtonTouchDown(button: UIButton) {
+    @objc func handleLeftShortPress(gesture: UITapGestureRecognizer) {
         rightButton.isEnabled = false
-        label.isUserInteractionEnabled = false
         if value != minimumValue {
             stepperState = .ShouldDecrease
         }
+        reset()
     }
-
-    @objc func rightButtonTouchDown(button: UIButton) {
+    
+    @objc func handleRightShortPress(gesture: UITapGestureRecognizer) {
         leftButton.isEnabled = false
-        label.isUserInteractionEnabled = false
         if value != maximumValue {
             stepperState = .ShouldIncrease
         }
-    }
-
-    @objc func buttonTouchUp(button: UIButton) {
-        leftButton.isEnabled = true
-        rightButton.isEnabled = true
+        reset()
     }
 }
 

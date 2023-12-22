@@ -183,6 +183,19 @@ class TimerViewController: BaseViewController {
                 }
             }
         }
+        Task { @MainActor in
+            host = try await H.getHost(gameCode) ?? Host()
+            self.seconds = host.gameTime
+            self.moveSeconds = host.movingTime
+            self.startTime = host.startTimestamp
+            self.isPaused = host.paused
+            self.pauseTime = host.pauseTimestamp
+            self.pausedTime = host.pausedTime
+            self.rounds = host.rounds
+            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+            self.round = host.currentRound
+            calculateOnly()
+        }
     }
     
     override func viewDidLoad() {
@@ -200,6 +213,11 @@ class TimerViewController: BaseViewController {
         tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneWillEnterForeground"), object: nil)
+    }
+    
     
     
 // MARK: - others
@@ -207,6 +225,7 @@ class TimerViewController: BaseViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
     }
     
     func setSettings() {
@@ -447,6 +466,54 @@ class TimerViewController: BaseViewController {
             runTimer()
         }
     }
+    
+    func calculateOnly() {
+        if isPaused {
+            t = pauseTime - startTime - pausedTime
+        }
+        else {
+            t = Int(Date().timeIntervalSince1970) - startTime - pausedTime
+        }
+        let quotient = t/(moveSeconds + seconds)
+        let remainder = t%(moveSeconds + seconds)
+        if (remainder/moveSeconds) == 0 {
+            self.timeTypeLabel.text = "Moving Time"
+            self.time = (moveSeconds - remainder%moveSeconds)
+            self.moving = true
+            let minute = (moveSeconds - remainder%moveSeconds)/60
+            let second = (moveSeconds - remainder%moveSeconds) % 60
+            self.timerLabel.text = String(format:"%02i : %02i", minute, second)
+        }
+        else {
+            self.timeTypeLabel.text = "Station Time"
+            self.time = (seconds - remainder + moveSeconds)
+            self.moving = false
+            let minute = (seconds - remainder + moveSeconds)/60
+            let second = (seconds - remainder + moveSeconds) % 60
+            self.timerLabel.text = String(format:"%02i : %02i", minute, second)
+        }
+        self.totalTime = t
+        self.remainingTime = (rounds * (seconds + moveSeconds)) - t
+        let totalMinute = t/60
+        let totalSecond = t % 60
+        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+        self.totalTimeLabel.attributedText = attributedString
+        self.round = quotient + 1
+        if (moveSeconds + seconds) * self.rounds <= t  {
+            self.timeTypeLabel.text = "Station Time"
+            self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
+            self.totalTime = (moveSeconds + seconds) * self.rounds
+            let totalMinute = totalTime/60
+            let totalSecond = totalTime % 60
+            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+            self.totalTimeLabel.attributedText = attributedString
+            self.roundLabel.text = "Round \(self.rounds)"
+        } else {
+            self.roundLabel.text = "Round \(quotient + 1)"
+        }
+    }
 }
 // MARK: - @objc
 extension TimerViewController {
@@ -464,7 +531,11 @@ extension TimerViewController {
     
     @objc func addBackGroundTime(_ notification:Notification) {
         timer.invalidate()
-        calculateTime()
+        Task { @MainActor in
+            host = try await H.getHost(gameCode) ?? Host()
+            setSettings()
+            calculateTime()
+        }
     }
     
     @objc func readAll(notification: Notification) {
