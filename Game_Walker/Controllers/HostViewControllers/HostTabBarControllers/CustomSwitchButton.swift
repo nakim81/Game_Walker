@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 protocol CustomSwitchButtonDelegate: AnyObject {
-    func isOnValueChange(isOn: Bool)
-}
+    func isOnValueChange(_ sender: UIButton, isOn: Bool)}
 
 class CustomSwitchButton: UIButton {
     typealias SwitchImage = (bar: UIImage, circle: UIImage)
@@ -127,7 +126,7 @@ class CustomSwitchButton: UIButton {
             }) { [weak self] _ in
                 guard let self = self else { return }
 
-                self.delegate?.isOnValueChange(isOn: self.isOn)
+                self.delegate?.isOnValueChange(self, isOn: self.isOn)
                 self.isAnimated = false
             }
         }
