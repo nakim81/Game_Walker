@@ -175,8 +175,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "※ 게임코드는 주최자가 지급합니다"
+            "state" : "translated",
+            "value" : "※ 게임코드는 주최자가 지급합니다."
           }
         }
       }

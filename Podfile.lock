@@ -696,7 +696,7 @@ PODS:
     - PromisesObjC (~> 2.1)
   - FirebaseSharedSwift (10.19.0)
   - FLAnimatedImage (1.0.17)
-  - GMStepper (2.2)
+  - GMStepper (2.3)
   - GoogleAppMeasurement (10.19.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.19.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -860,7 +860,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 033d199474164db20c8350736842a94fe717b960
   FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
   FLAnimatedImage: bbf914596368867157cc71b38a8ec834b3eeb32b
-  GMStepper: 89fb106944dfcc3aa3add7164e3ebd463ea2104b
+  GMStepper: 518da687acedd49a28dd1ae2b1dca4e1fb0412ad
   GoogleAppMeasurement: 68afe759316673c6554dac35a0c7ae8f5d6cb4ed
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
@@ -874,4 +874,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: afa720d0f65bdbbdaa32e4426c755d14b13a3d52
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.12.1
