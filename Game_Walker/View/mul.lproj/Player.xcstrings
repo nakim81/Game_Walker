@@ -164,19 +164,19 @@
       }
     },
     "mM6-Pv-lZC.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"※ Game Code will be provided by the host.\"; ObjectID = \"mM6-Pv-lZC\";",
+      "comment" : "Class = \"UILabel\"; text = \"※ Game Code will be provided by the Host.\"; ObjectID = \"mM6-Pv-lZC\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "※ Game Code will be provided by the host."
+            "value" : "※ Game Code will be provided by the Host."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "※ 게임코드는 주최자가 지급합니다"
+            "value" : "※ 게임코드는 주최자가 지급합니다."
           }
         }
       }
