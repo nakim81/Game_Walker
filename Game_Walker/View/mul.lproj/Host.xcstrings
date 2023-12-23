@@ -219,7 +219,7 @@
     },
     "Fi8-Nq-hZE.configuration.title" : {
       "comment" : "Class = \"UIButton\"; configuration.title = \"noah\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -237,7 +237,7 @@
     },
     "Fi8-Nq-hZE.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -489,7 +489,6 @@
     },
     "RFd-2O-0qr.text" : {
       "comment" : "Class = \"UILabel\"; text = \"00\"; ObjectID = \"RFd-2O-0qr\";",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
