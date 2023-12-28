@@ -69,7 +69,7 @@ class FirstAlgGuideView : UIView {
         textBorderView.layer.borderColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00).cgColor
         containerView.addSubview(textBorderView)
         NSLayoutConstraint.activate([
-            textBorderView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.94),
+            textBorderView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.80),
             textBorderView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.7),
             textBorderView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             textBorderView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
@@ -87,13 +87,13 @@ class FirstAlgGuideView : UIView {
     private func setupGuideText() {
         
         let instructionText = """
-        \u{2022} Tap "Stations" to see the 
-        new order of Stations.
+        \u{2022} Tap "Stations" to see the new
+        order of Stations.
         \u{2022} Swap teams by click.
-        \u{2022} Manually change team 
-        by long-click.
-        \u{2022} Beware, mixing teams 
-        can cause errors.
+        \u{2022} Manually change team by
+        long-click.
+        \u{2022} Beware, mixing teams can
+        cause errors.
         """
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6

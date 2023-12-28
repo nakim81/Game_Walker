@@ -49,7 +49,7 @@ class HostGameCodeViewController: UIViewController {
             return
         }
 
-        if ((storedgamecode?.isEmpty) != nil) && userGamecodeInput.isEmpty && gameCodeInput.placeholder == "" {
+        if gamecode == nil && userGamecodeInput.isEmpty && gameCodeInput.placeholder == "" {
             alert(title: "Warning",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
@@ -95,21 +95,25 @@ class HostGameCodeViewController: UIViewController {
             } else {
                 Task { @MainActor in
                     do {
-                        let hostTemp = try await H.getHost(gamecode!)
+                        guard let gamecode = gamecode else {
+                            alert(title: "Warning",message:"You never created a game!")
+                            return
+                        }
+                        let hostTemp = try await H.getHost(gamecode)
                         let isStandard = hostTemp?.standardStyle ?? true
                         gameDidEnd = hostTemp?.gameover ?? false
                         
                         if !isStandard {
-                            UserData.writeGamecode(gamecode!, "gamecode")
+                            UserData.writeGamecode(gamecode, "gamecode")
                             performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             return
                         }
                         if !(hostTemp?.confirmCreated ?? true) {
-                            UserData.writeGamecode(gamecode!, "gamecode")
+                            UserData.writeGamecode(gamecode, "gamecode")
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
                         } else {
                             if UserData.isHostConfirmed() ?? false {
-                                UserData.writeGamecode(gamecode!, "gamecode")
+                                UserData.writeGamecode(gamecode, "gamecode")
                                 if gameDidEnd { // host is confirmed and game has already ended
                                     self.showAwardPopUp("host")
                                     
