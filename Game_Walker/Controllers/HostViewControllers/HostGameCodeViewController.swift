@@ -48,8 +48,9 @@ class HostGameCodeViewController: UIViewController {
         guard let userGamecodeInput = gameCodeInput.text else {
             return
         }
-        if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
-            alert(title: "No Input",message:"You never created a game!")
+
+        if ((storedgamecode?.isEmpty) != nil) && userGamecodeInput.isEmpty && gameCodeInput.placeholder == "" {
+            alert(title: "Warning",message:"You never created a game!")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
