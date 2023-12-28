@@ -18,6 +18,8 @@ class HostGameCodeViewController: UIViewController {
     private var usestoredcode = true
     private var gameDidEnd = false
     
+    private var gameCodeError = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +35,7 @@ class HostGameCodeViewController: UIViewController {
     
     func setGameCode() {
         let gameCodeText = gameCodeInput.text
+        print(gameCodeText , " this is what is entered")
 
         if (gameCodeText != storedgamecode && gameCodeText != "") {
             gamecode = gameCodeText
@@ -40,6 +43,13 @@ class HostGameCodeViewController: UIViewController {
         } else {
             gamecode = storedgamecode
             usestoredcode = true
+            if let gamecode = gamecode {
+                gameCodeError = false
+                print("Game code error is false")
+            } else {
+                gameCodeError = true
+                print("Game code error is true")
+            }
         }
     }
     
@@ -49,8 +59,8 @@ class HostGameCodeViewController: UIViewController {
             return
         }
 
-        if gamecode == nil && userGamecodeInput.isEmpty && gameCodeInput.placeholder == "" {
-            alert(title: "Warning",message:"You never created a game!")
+        if gameCodeError == true {
+            alert(title: "Warning",message:"No Game Exists!")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
@@ -95,25 +105,21 @@ class HostGameCodeViewController: UIViewController {
             } else {
                 Task { @MainActor in
                     do {
-                        guard let gamecode = gamecode else {
-                            alert(title: "Warning",message:"You never created a game!")
-                            return
-                        }
-                        let hostTemp = try await H.getHost(gamecode)
+                        let hostTemp = try await H.getHost(gamecode!)
                         let isStandard = hostTemp?.standardStyle ?? true
                         gameDidEnd = hostTemp?.gameover ?? false
                         
                         if !isStandard {
-                            UserData.writeGamecode(gamecode, "gamecode")
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                             return
                         }
                         if !(hostTemp?.confirmCreated ?? true) {
-                            UserData.writeGamecode(gamecode, "gamecode")
+                            UserData.writeGamecode(gamecode!, "gamecode")
                             performSegue(withIdentifier: "HostJoinSegue", sender: self)
                         } else {
                             if UserData.isHostConfirmed() ?? false {
-                                UserData.writeGamecode(gamecode, "gamecode")
+                                UserData.writeGamecode(gamecode!, "gamecode")
                                 if gameDidEnd { // host is confirmed and game has already ended
                                     self.showAwardPopUp("host")
                                     
