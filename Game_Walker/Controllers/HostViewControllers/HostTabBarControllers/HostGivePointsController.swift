@@ -66,6 +66,14 @@ class HostGivePointsController : UIViewController {
         return button
     }()
     
+    private lazy var editButton: UIButton = {
+        var button = UIButton()
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: "icon _close_"), for: .normal)
+        button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var confirmButton: UIButton = {
         var button = UIButton()
         button.setTitle("CONFIRM", for: .normal)
@@ -95,6 +103,30 @@ class HostGivePointsController : UIViewController {
         self.presentingViewController?.dismiss(animated: true)
     }
     
+    @objc func editButtonTapped(_ sender: UITapGestureRecognizer) {
+        showNumberInputPopup()
+    }
+
+    func showNumberInputPopup() {
+        let alertController = UIAlertController(title: "Enter Number", message: nil, preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Type the number"
+            textField.keyboardType = .numberPad
+        }
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
+                guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
+                self?.stepper.label.text = enteredNumber
+                self?.stepper.value = max(Double(enteredNumber) ?? 0.0, Double(999))
+            }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func addConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.widthAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.416).isActive = true
@@ -107,6 +139,12 @@ class HostGivePointsController : UIViewController {
         givePointsLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.15).isActive = true
         givePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         givePointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 53/812 * UIScreen.main.bounds.size.height).isActive = true
+        
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125).isActive = true
+        editButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.125).isActive = true
+        editButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
+        editButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
         
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125).isActive = true
@@ -130,6 +168,7 @@ class HostGivePointsController : UIViewController {
     func addSubViews() {
         self.view.addSubview(containerView)
         containerView.addSubview(givePointsLabel)
+        containerView.addSubview(editButton)
         containerView.addSubview(closeButton)
         containerView.addSubview(stepper)
         containerView.addSubview(confirmButton)
