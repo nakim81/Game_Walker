@@ -59,7 +59,11 @@ class RorTOverlayViewController: UIViewController {
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
-                explanationLbl.widthAnchor.constraint(equalToConstant: 90).isActive = true
+                if textList[i] == "Timer & \n Start/End Game" {
+                    explanationLbl.widthAnchor.constraint(equalToConstant: 150).isActive = true
+                } else {
+                    explanationLbl.widthAnchor.constraint(equalToConstant: 90).isActive = true
+                }
             } else {
                 explanationLbl.widthAnchor.constraint(equalToConstant: 200).isActive = true
             }

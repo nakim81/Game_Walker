@@ -64,8 +64,8 @@ class CustomSwitchButton: UIButton {
             super.init(coder: coder)
 
             self.buttonInit(frame: frame)
-            let width = frame.width * 0.9438202247
-            let height = frame.height
+            _ = frame.width * 0.9438202247
+            _ = frame.height
             print(frame)
         }
 
@@ -105,11 +105,11 @@ class CustomSwitchButton: UIButton {
             var circleViewColor: UIImage
 
             if self.isOn {
-                circleCenter = self.circleView.frame.width / 2
+                circleCenter = self.circleView.frame.width / 1.7
                 barViewColor = self.onImage.bar
                 circleViewColor = self.onImage.circle
             } else {
-                circleCenter = self.frame.width - (self.circleView.frame.width / 2)
+                circleCenter = self.frame.width - (self.circleView.frame.width / 2.3)
                 barViewColor = self.offImage.bar
                 circleViewColor = self.offImage.circle
             }

@@ -51,10 +51,10 @@
 		A1A568A12AF478C300577CFF /* SecondTabTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A568A02AF478C300577CFF /* SecondTabTestViewController.swift */; };
 		A1A568A32AF478D700577CFF /* ThirdTabTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A568A22AF478D700577CFF /* ThirdTabTestViewController.swift */; };
 		A1C9708929DC5FD6009C6109 /* ManualAlgorithmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */; };
-		A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		A1D8CAC328811EEF005CCE0E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A1E3BBFA2AD0B24900613BC9 /* StationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */; };
-		A1E3DDB52880F506008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
-		A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		A1E3DDB52880F506008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A1E3DDB72880F5D6008D7060 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */; };
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
 		A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */; };
@@ -708,8 +708,8 @@
 				A1A4CD3A2A371C0500704BF8 /* Dosis-Medium.ttf in Resources */,
 				FCB13E182A97A04B00F4AE99 /* bgm.wav in Resources */,
 				A1FFDC8E2AD7F410000DF76E /* sameround-duplicated-sample.gif in Resources */,
-				A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */,
-				A1D8CAC328811EEF005CCE0E /* BuildFile in Resources */,
+				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
+				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */,
 				DAA78FF12B36153A00401C42 /* Referee.storyboard in Resources */,
 				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
@@ -832,9 +832,9 @@
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
 				FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */,
 				61C33E2B299B259000A512E5 /* RefereeMessageViewController.swift in Sources */,
-				A1E3DDB52880F506008D7060 /* BuildFile in Sources */,
+				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingViewController.swift in Sources */,
-				A1E3DDB72880F5D6008D7060 /* BuildFile in Sources */,
+				A1E3DDB72880F5D6008D7060 /* (null) in Sources */,
 				A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */,
 				FCE76F772970FF98009A3EB1 /* GameInfoViewController.swift in Sources */,
 				A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */,
@@ -1054,7 +1054,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1089,7 +1089,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
