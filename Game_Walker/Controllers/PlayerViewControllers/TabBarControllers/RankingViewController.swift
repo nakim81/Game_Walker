@@ -60,10 +60,13 @@ class RankingViewController: UIViewController {
         super.viewDidLoad()
         tabBarController?.navigationController?.isNavigationBarHidden = true
         configureNavigationBar()
+        configureTableView()
         Task{@MainActor in
             do {
                 teamList = try await T.getTeamList(gameCode)
-                configureTableView()
+                guard let host = try await H.getHost(gameCode) else { return }
+                showScore = host.showScoreboard
+                leaderBoard.reloadData()
             } catch GameWalkerError.serverError(let message) {
                 print(message)
                 serverAlert(message)
@@ -138,7 +141,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return fontSize(size: 85)
     }
 }
 // MARK: - @objc
