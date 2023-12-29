@@ -46,18 +46,24 @@ class DuplicatedOppGuideView : UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 15)
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
-        label.textAlignment = .center
-        label.numberOfLines = 4
-        label.text = """
+        label.numberOfLines = 2
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.2
+
+        let attributedString = NSMutableAttributedString(string: """
         Team is playing against same opponents
         multiple times on PVP stations.
-        """
+        """)
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
+
+        label.attributedText = attributedString
+        label.textAlignment = .center
+
         return label
     }()
-    
-    private let titleImage = UIImageView(image: UIImage(named: "Duplicated Opponents Title"))
     
     private let gifImageView = UIImageView()
     private let flaniImageView = FLAnimatedImageView()
@@ -79,6 +85,24 @@ class DuplicatedOppGuideView : UIView {
         setupGif()
     }
     private func setupBasicUI() {
+        
+        // Create the title of each guide error
+        // Create UIImageView
+        let sharpImage = UIImageView(image: UIImage(named: "blue-sharp"))
+        sharpImage.contentMode = .scaleAspectFit
+        
+        // Create UILabel
+        let label = UILabel()
+        label.text = "Duplicated Opponent"
+        label.textColor = UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00)
+        label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
+        
+        // Create Horizontal UIStackView
+        let titleView = UIStackView(arrangedSubviews: [sharpImage, label])
+        titleView.axis = .horizontal
+        titleView.spacing = 4
+        titleView.alignment = .center
+        
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.layer.cornerRadius = 20.0
         containerView.backgroundColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 0.98)
@@ -98,16 +122,18 @@ class DuplicatedOppGuideView : UIView {
             closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -13)
         ])
         
-        titleImage.translatesAutoresizingMaskIntoConstraints = false
+        titleView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.addSubview(titleImage)
+        containerView.addSubview(titleView)
         containerView.addSubview(instructionLabel)
         NSLayoutConstraint.activate([
-            titleImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 18),
-            titleImage.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            titleView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            titleView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            titleView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.12),
             
-            instructionLabel.centerXAnchor.constraint(equalTo: titleImage.centerXAnchor),
-            instructionLabel.topAnchor.constraint(equalTo: titleImage.bottomAnchor, constant: 10)
+            instructionLabel.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            instructionLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10),
+            instructionLabel.heightAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 1.12)
             ])
         
     }
@@ -129,7 +155,7 @@ class DuplicatedOppGuideView : UIView {
         containerView.addSubview(flaniImageView)
         NSLayoutConstraint.activate([
             flaniImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            flaniImageView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 30),
+            flaniImageView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 40),
             flaniImageView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5),
             flaniImageView.heightAnchor.constraint(equalTo: flaniImageView.widthAnchor, multiplier: 0.80972),
             

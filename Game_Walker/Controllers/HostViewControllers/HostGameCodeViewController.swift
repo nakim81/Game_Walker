@@ -18,6 +18,8 @@ class HostGameCodeViewController: UIViewController {
     private var usestoredcode = true
     private var gameDidEnd = false
     
+    private var gameCodeError = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +35,7 @@ class HostGameCodeViewController: UIViewController {
     
     func setGameCode() {
         let gameCodeText = gameCodeInput.text
+        print(gameCodeText , " this is what is entered")
 
         if (gameCodeText != storedgamecode && gameCodeText != "") {
             gamecode = gameCodeText
@@ -40,6 +43,13 @@ class HostGameCodeViewController: UIViewController {
         } else {
             gamecode = storedgamecode
             usestoredcode = true
+            if let gamecode = gamecode {
+                gameCodeError = false
+                print("Game code error is false")
+            } else {
+                gameCodeError = true
+                print("Game code error is true")
+            }
         }
     }
     
@@ -48,8 +58,9 @@ class HostGameCodeViewController: UIViewController {
         guard let userGamecodeInput = gameCodeInput.text else {
             return
         }
-        if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
-            alert(title: "No Input",message:"You never created a game!")
+
+        if gameCodeError == true {
+            alert(title: "Warning",message:"No Game Exists!")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
