@@ -88,7 +88,7 @@ class HostTimerViewController: UIViewController {
     
     // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
-        let endGamePopUp = EndGameViewController(announcement: "Do you really want to end this game?", source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: NSLocalizedString("Do you really want to end this game?", comment: ""), source: "", gamecode: gameCode)
         endGamePopUp.delegate = self
         present(endGamePopUp, animated: true)
     }
@@ -125,7 +125,7 @@ class HostTimerViewController: UIViewController {
             }
         }
         else {
-            alert(title: "Teams are not ready yet.", message: "You don't have enough teams to start the game.")
+            alert(title: NSLocalizedString("Teams are not ready yet.", comment: ""), message: NSLocalizedString("You don't have enough teams to start the game.", comment: ""))
         }
     }
     
@@ -150,7 +150,11 @@ class HostTimerViewController: UIViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Ranking Status", "Timer & Start/End Game", "Click to see what happens"]
+        let explanationTexts = [
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & Start/End Game", comment: ""),
+            NSLocalizedString("Click to see what happens", comment: "")
+        ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
@@ -207,7 +211,7 @@ class HostTimerViewController: UIViewController {
     
     private lazy var timeTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Moving Time"
+        label.text = NSLocalizedString("Moving Time", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
@@ -234,7 +238,7 @@ class HostTimerViewController: UIViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: "TOTAL TIME\n", attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -324,12 +328,12 @@ class HostTimerViewController: UIViewController {
                         if strongSelf.moving {
                             strongSelf.time = strongSelf.seconds
                             strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = "Station Time"
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                         } else {
                             strongSelf.time = strongSelf.moveSeconds
                             strongSelf.moving = true
-                            strongSelf.timeTypeLabel.text = "Moving Time"
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time!/60, strongSelf.time! % 60)
                             strongSelf.round += 1
                             Task {
@@ -341,7 +345,7 @@ class HostTimerViewController: UIViewController {
                                     return
                                 }
                             }
-                            strongSelf.roundLabel.text = "Round \(strongSelf.round)"
+                            strongSelf.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(strongSelf.round)"
                         }
                     }
                     strongSelf.time! -= 1
@@ -352,7 +356,7 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
@@ -372,7 +376,7 @@ class HostTimerViewController: UIViewController {
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            self.timeTypeLabel.text = "Moving Time"
+            self.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
             self.time = (moveSeconds - remainder%moveSeconds)
             self.moving = true
             let minute = (moveSeconds - remainder%moveSeconds)/60
@@ -380,7 +384,7 @@ class HostTimerViewController: UIViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.time = (seconds - remainder + moveSeconds)
             self.moving = false
             let minute = (seconds - remainder + moveSeconds)/60
@@ -391,7 +395,7 @@ class HostTimerViewController: UIViewController {
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
@@ -406,18 +410,18 @@ class HostTimerViewController: UIViewController {
             }
         }
         if (moveSeconds + seconds) * self.rounds! <= t  {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds!
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
-            self.roundLabel.text = "Round \(self.rounds!)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds!)"
             pauseOrPlayButton.isHidden = true
         } else {
-            self.roundLabel.text = "Round \(quotient + 1)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
             if gameStart {
                 if isPaused {
                     pauseOrPlayButton.setImage(play, for: .normal)

@@ -26,7 +26,7 @@ struct H {
             print("Created Game")
         } catch {
             print("Error creating Game: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while creating Host")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while creating Host", comment: ""))
         }
     }
     
@@ -39,7 +39,7 @@ struct H {
             print("Stations complete! with: ", finished)
         } catch {
             print("Error completing stations: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while completing Stations")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while completing Stations", comment: ""))
         }
     }
         
@@ -55,7 +55,7 @@ struct H {
             print("Host setted Settings")
         } catch {
             print("Error setting settings Host: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while setting Settings")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Settings", comment: ""))
         }
     }
     
@@ -72,11 +72,11 @@ struct H {
                 print("Setted Algorithm")
             } else {
                 print("Host does not exist")
-                throw GameWalkerError.serverError("Something went wrong while setting Algorithm")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Algorithm", comment: ""))
             }
         } catch {
             print("Error setting Algorithm Host: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while setting Algorithm")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Algorithm", comment: ""))
         }
     }
     
@@ -91,7 +91,7 @@ struct H {
             print("Started Game")
         } catch {
             print("Error starting Game: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while starting Game")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while starting Game", comment: ""))
         }
     }
     
@@ -116,11 +116,11 @@ struct H {
                 print("Paused/Resumed Game")
             } else {
                 print("Host does not exist")
-                throw GameWalkerError.serverError("Something went wrong while pauseing/resuming Game")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game", comment: ""))
             }
         } catch {
             print("Error pausing/resuming Game: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while pauseing/resuming Game")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game", comment: ""))
         }
     }
     
@@ -133,7 +133,7 @@ struct H {
             print("End Game")
         } catch {
             print("Error ending Game: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while ending Host")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while ending Host", comment: ""))
         }
     }
     
@@ -146,7 +146,7 @@ struct H {
             print("Updated Current Round")
         } catch {
             print("Error updating Current Round: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while updating Current Round")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Current Round", comment: ""))
         }
     }
     
@@ -160,7 +160,7 @@ struct H {
             print("Updated Paused Time")
         } catch {
             print("Error updating Paused Time: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while updating Paused Time")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Paused Time", comment: ""))
         }
     }
     
@@ -174,7 +174,7 @@ struct H {
             print("Hid/Showed Score")
         } catch {
             print("Error hiding/showing score: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while hiding/showing Score")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while hiding/showing Score", comment: ""))
         }
     }
     
@@ -192,11 +192,11 @@ struct H {
                 print("Added Announcement")
             } else {
                 print("Host does not exist")
-                throw GameWalkerError.serverError("Something went wrong while adding Announcement")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement", comment: ""))
             }
         } catch {
             print("Error adding Announcement: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while adding Announcement")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement", comment: ""))
         }
     }
     
@@ -213,16 +213,14 @@ struct H {
                     print("Modified Announcement")
                 } else {
                     print("Invalid index of announcement")
-                    throw GameWalkerError.serverError("Wrong index while modifying Announcement")
+                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while modifying Announcement", comment: ""))
                 }
             } else {
                 print("Host does not exist")
-                throw GameWalkerError.serverError("Something went wrong while modifying Announcement")
-            }
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement", comment: ""))            }
         } catch {
             print("Error modfiying Announcement: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while modifying Announcement")
-        }
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement", comment: ""))        }
     }
     
     static func removeAnnouncement(_ gamecode: String, _ index: Int) async throws {
@@ -238,17 +236,17 @@ struct H {
                     print("Removed Announcement")
                 } else {
                     print("Invalid announcement index")
-                    throw GameWalkerError.serverError("Wrong index while removing Announcement")
+                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while removing Announcement", comment: ""))
                 }
             } else {
                 print("Host does not exist")
-                throw GameWalkerError.serverError("Something went wrong while removing Announcement")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement", comment: ""))        }
             }
-        } catch {
+        catch {
             print("Error removing Announcement: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while removing Announcement")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement", comment: ""))        }
         }
-    }
+
     
     //MARK: - Database Functions
     
@@ -278,11 +276,11 @@ struct H {
                 return host
             } else {
                 print("Error getting Host by Gamecode")
-                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode. \n Please check again!", comment: ""))
             }
         } catch {
             print("Error getting Host")
-            throw GameWalkerError.serverError("Something went wrong while getting Host")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Host", comment: ""))
         }
     }
 

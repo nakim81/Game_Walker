@@ -1,10 +1,515 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Localize Test" : {
+    "(gamecode) is not an existing gamecode.\nPlease check again!" : {
 
     },
-    "string test" : {
+    "(gamecode) is not an existing gamecode. \n Please check again!" : {
+
+    },
+    "Announcement" : {
+
+    },
+    "Be careful! There are more teams than available stations." : {
+
+    },
+    "Beware, mixing teams" : {
+
+    },
+    "by long-click." : {
+
+    },
+    "can cause errors." : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Choose Referee" : {
+
+    },
+    "Click to give points of the Team" : {
+
+    },
+    "Click to hide points from others" : {
+
+    },
+    "Click to see what happens" : {
+
+    },
+    "Close" : {
+
+    },
+    "Confirm" : {
+
+    },
+    "CONFIRM" : {
+
+    },
+    "CONGRATULATIONS" : {
+
+    },
+    "Connection Error" : {
+
+    },
+    "Current Station Info" : {
+
+    },
+    "Currently not playing." : {
+
+    },
+    "Delete" : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "Do you really want to end this game?" : {
+
+    },
+    "Do you really want to leave your team?" : {
+
+    },
+    "Done" : {
+
+    },
+    "Duplicated Opponents" : {
+
+    },
+    "Duplicated Stations" : {
+
+    },
+    "Edit" : {
+
+    },
+    "Enter a number" : {
+
+    },
+    "Excess Teams" : {
+
+    },
+    "Game Code" : {
+
+    },
+    "Game Type Not Specified" : {
+
+    },
+    "Gamecode Error" : {
+
+    },
+    "gamepoints should be an integer" : {
+
+    },
+    "Give Points" : {
+
+    },
+    "HEADS UP!" : {
+
+    },
+    "Invalid Host!" : {
+
+    },
+    "Invalid Input!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시 입력해주세요!"
+          }
+        }
+      }
+    },
+    "Invalid round." : {
+
+    },
+    "Invalid Team Number" : {
+
+    },
+    "LOSE" : {
+
+    },
+    "Manually change team" : {
+
+    },
+    "minutes" : {
+
+    },
+    "Moving Time" : {
+
+    },
+    "new order of Stations." : {
+
+    },
+    "Next" : {
+
+    },
+    "NO" : {
+
+    },
+    "No game exists" : {
+
+    },
+    "No Game Name" : {
+
+    },
+    "No Game Points" : {
+
+    },
+    "No Icon Selected" : {
+
+    },
+    "No Input" : {
+
+    },
+    "No Referee Selected" : {
+
+    },
+    "No Referees yet? Share the game code." : {
+
+    },
+    "No Team Selected" : {
+
+    },
+    "OFF" : {
+
+    },
+    "OK" : {
+
+    },
+    "ON" : {
+
+    },
+    "Once the game is created, you won't be able to change the game settings" : {
+
+    },
+    "Please add a station" : {
+
+    },
+    "Please enter a number for rounds and teams" : {
+
+    },
+    "Please enter all information to set timer" : {
+
+    },
+    "Please enter both game code and username!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임코드와 이름을 입력해주세요!"
+          }
+        }
+      }
+    },
+    "Please enter gamecode and username!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임코드 입력하세요!"
+          }
+        }
+      }
+    },
+    "Please enter the game name." : {
+
+    },
+    "Please enter username!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름을 입력해주세요!"
+          }
+        }
+      }
+    },
+    "Please select a referee." : {
+
+    },
+    "Please select a team icon!" : {
+
+    },
+    "Please select either PVP or PVE" : {
+
+    },
+    "Please select your team" : {
+
+    },
+    "Please set the game points." : {
+
+    },
+    "Please try again when it is ready" : {
+
+    },
+    "Please try other team numbers!" : {
+
+    },
+    "Point Style" : {
+
+    },
+    "Points can be hidden" : {
+
+    },
+    "PVE for goals." : {
+
+    },
+    "PVP for competition" : {
+
+    },
+    "Ranking Status" : {
+
+    },
+    "Referee is unavailable in point style." : {
+
+    },
+    "Remember to choose 'WIN' or 'LOSE' before the round ends!" : {
+
+    },
+    "Round" : {
+
+    },
+    "Round 1" : {
+
+    },
+    "Rules" : {
+
+    },
+    "Same Round Duplicated Appearance" : {
+
+    },
+    "seconds" : {
+
+    },
+    "Send" : {
+
+    },
+    "Server Error" : {
+
+    },
+    "Something went wrong while adding Announcement" : {
+
+    },
+    "Something went wrong while adding Player" : {
+
+    },
+    "Something went wrong while adding Referee" : {
+
+    },
+    "Something went wrong while adding Station" : {
+
+    },
+    "Something went wrong while adding Team" : {
+
+    },
+    "Something went wrong while assigning Referee" : {
+
+    },
+    "Something went wrong while assigning Station" : {
+
+    },
+    "Something went wrong while completing Stations" : {
+
+    },
+    "Something went wrong while creating Host" : {
+
+    },
+    "Something went wrong while ending Host" : {
+
+    },
+    "Something went wrong while getting Host" : {
+
+    },
+    "Something went wrong while getting Referee" : {
+
+    },
+    "Something went wrong while getting RefereeList" : {
+
+    },
+    "Something went wrong while getting Station" : {
+
+    },
+    "Something went wrong while getting StationList" : {
+
+    },
+    "Something went wrong while getting Team" : {
+
+    },
+    "Something went wrong while getting TeamList" : {
+
+    },
+    "Something went wrong while giving points to a Team" : {
+
+    },
+    "Something went wrong while hiding/showing Score" : {
+
+    },
+    "Something went wrong while joining Team" : {
+
+    },
+    "Something went wrong while leaving Team" : {
+
+    },
+    "Something went wrong while modifying Announcement" : {
+
+    },
+    "Something went wrong while modifying Player Name" : {
+
+    },
+    "Something went wrong while modifying Referee" : {
+
+    },
+    "Something went wrong while pausing/resuming Game" : {
+
+    },
+    "Something went wrong while removing Announcement" : {
+
+    },
+    "Something went wrong while setting Algorithm" : {
+
+    },
+    "Something went wrong while setting Settings" : {
+
+    },
+    "Something went wrong while starting Game" : {
+
+    },
+    "Something went wrong while updating Current Round" : {
+
+    },
+    "Something went wrong while updating Paused Time" : {
+
+    },
+    "Something went wrong while updating Station order" : {
+
+    },
+    "Something went wrong while updating Team Order of Station" : {
+
+    },
+    "Station Info" : {
+
+    },
+    "Station List" : {
+
+    },
+    "Station Location" : {
+
+    },
+    "Station Name" : {
+
+    },
+    "Station Points" : {
+
+    },
+    "Station Status" : {
+
+    },
+    "Station Time" : {
+
+    },
+    "Swap teams by click." : {
+
+    },
+    "Swipe down the screen again to reload team list!" : {
+
+    },
+    "Swipe down your screen to see your team members!" : {
+
+    },
+    "Tap \"Stations\" to see the" : {
+
+    },
+    "Team is playing against same opponents\nmultiple times on PVP stations." : {
+
+    },
+    "Team is playing multiple stations\non the same round." : {
+
+    },
+    "Team is playing the same station\non multiple rounds." : {
+
+    },
+    "Team Members" : {
+
+    },
+    "Team Name Error" : {
+
+    },
+    "Team name should exist! Fill out the team name box." : {
+
+    },
+    "Team number (team.number) already exists." : {
+
+    },
+    "Team Number Error" : {
+
+    },
+    "Team number should be greater than 0!" : {
+
+    },
+    "Team number should exist! Fill out the team number box." : {
+
+    },
+    "Team's total points" : {
+
+    },
+    "Teams are not ready yet." : {
+
+    },
+    "The board is not ready yet" : {
+
+    },
+    "The game has not started yet. Please try few minutes later!" : {
+
+    },
+    "The number entered is greater than the number of current teams." : {
+
+    },
+    "The Team doesn't exist" : {
+
+    },
+    "There are multiple errors shown\npreviously at the same time." : {
+
+    },
+    "This is an invalid team." : {
+
+    },
+    "TIMER" : {
+
+    },
+    "Timer & Start/End Game" : {
+
+    },
+    "Timer & Station Info" : {
+
+    },
+    "TO BE\nDETERMINED" : {
+
+    },
+    "TOTAL TIME" : {
+
+    },
+    "WIN" : {
+
+    },
+    "Woops" : {
+
+    },
+    "Wrong index while modifying Announcement" : {
+
+    },
+    "Wrong index while removing Announcement" : {
+
+    },
+    "YES" : {
+
+    },
+    "You don't have enough teams to start the game." : {
+
+    },
+    "You need at least 1 Station" : {
+
+    },
+    "You never created a game!" : {
 
     }
   },

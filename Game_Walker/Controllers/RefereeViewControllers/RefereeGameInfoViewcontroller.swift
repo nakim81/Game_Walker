@@ -28,7 +28,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var gameInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Station Info"
+        label.text = NSLocalizedString("Station Info", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var gameNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Station Name"
+        label.text = NSLocalizedString("Station Name", comment: "")
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var gameLocationLabel: UILabel = {
         let label = UILabel()
-        label.text = "Station Location"
+        label.text = NSLocalizedString("Station Location", comment: "")
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var gamePointsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Station Points"
+        label.text = NSLocalizedString("Station Points", comment: "")
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
     
     private lazy var gameRuleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Rules"
+        label.text = NSLocalizedString("Rules", comment: "")
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false

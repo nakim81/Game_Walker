@@ -24,10 +24,8 @@
 		61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E509522988D91400F37E79 /* RefereeTableViewCell.swift */; };
 		7911ED9A7B238D9919F8697B /* Pods_Game_Walker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A00601C5EB4E6FBE3E977BE9 /* Pods_Game_Walker.framework */; };
 		A109F2E7296F47C000FBC695 /* AlgorithmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */; };
-		A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */; };
 		A10D18A32AE256B0005DFCF5 /* ChooseStyleModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */; };
 		A11A379A2ABD8DB8000C2222 /* AlgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */; };
-		A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */; };
 		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD82AAA4CF500B7BD8A /* IntPair.swift */; };
 		A15812A32B364DC6007C6653 /* SoundsVibrationsCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */; };
@@ -59,10 +57,8 @@
 		A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */; };
 		A1EBA6A8296F21DF00228501 /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */; };
 		A1EBA6A9296F21DF00228501 /* StationRefereeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */; };
-		A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */; };
 		A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69D296F21DF00228501 /* AddStationViewController.swift */; };
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
-		A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
 		A1FBEDCA2B35563B008B9494 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FBEDC92B35563B008B9494 /* SettingsViewController.swift */; };
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
@@ -93,6 +89,10 @@
 		DAA78FED2B36153500401C42 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEF2B36153500401C42 /* Player.storyboard */; };
 		DAA78FF12B36153A00401C42 /* Referee.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FF32B36153A00401C42 /* Referee.storyboard */; };
 		DAA78FF52B36153F00401C42 /* Host.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FF72B36153F00401C42 /* Host.storyboard */; };
+		DAA78FF92B3EF02100401C42 /* AlgorithmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FFB2B3EF02100401C42 /* AlgorithmCollectionViewCell.xib */; };
+		DAA78FFD2B3EF27E00401C42 /* HostStationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FFF2B3EF27E00401C42 /* HostStationsTableViewCell.xib */; };
+		DAA790012B3EF3F700401C42 /* StationRefereeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA790032B3EF3F700401C42 /* StationRefereeTableViewCell.xib */; };
+		DAA7900B2B3F4D7800401C42 /* AlgCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA7900D2B3F4D7800401C42 /* AlgCollectionViewCell.xib */; };
 		DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */; };
 		DABC1E8E288BAA8B00C75DC7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */; };
 		DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */; };
@@ -165,10 +165,8 @@
 		61E509522988D91400F37E79 /* RefereeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTableViewCell.swift; sourceTree = "<group>"; };
 		A00601C5EB4E6FBE3E977BE9 /* Pods_Game_Walker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Game_Walker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCollectionViewCell.swift; sourceTree = "<group>"; };
-		A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
 		A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseStyleModalViewController.swift; sourceTree = "<group>"; };
 		A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgCollectionViewCell.swift; sourceTree = "<group>"; };
-		A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlgCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1521DD82AAA4CF500B7BD8A /* IntPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntPair.swift; path = Model/IntPair.swift; sourceTree = "<group>"; };
 		A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsVibrationsCustomButton.swift; sourceTree = "<group>"; };
@@ -196,10 +194,8 @@
 		A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTimeHostViewController.swift; sourceTree = "<group>"; };
 		A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsTableViewController.swift; sourceTree = "<group>"; };
 		A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationRefereeTableViewCell.swift; sourceTree = "<group>"; };
-		A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostStationsTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA69D296F21DF00228501 /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
-		A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
 		A1FBEDC92B35563B008B9494 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
@@ -238,6 +234,14 @@
 		DAA78FF42B36153A00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Referee.xcstrings; sourceTree = "<group>"; };
 		DAA78FF62B36153F00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Host.storyboard; sourceTree = "<group>"; };
 		DAA78FF82B36153F00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Host.xcstrings; sourceTree = "<group>"; };
+		DAA78FFA2B3EF02100401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AlgorithmCollectionViewCell.xib; sourceTree = "<group>"; };
+		DAA78FFC2B3EF02100401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/AlgorithmCollectionViewCell.xcstrings; sourceTree = "<group>"; };
+		DAA78FFE2B3EF27E00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/HostStationsTableViewCell.xib; sourceTree = "<group>"; };
+		DAA790002B3EF27E00401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/HostStationsTableViewCell.xcstrings; sourceTree = "<group>"; };
+		DAA790022B3EF3F700401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StationRefereeTableViewCell.xib; sourceTree = "<group>"; };
+		DAA790042B3EF3F700401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/StationRefereeTableViewCell.xcstrings; sourceTree = "<group>"; };
+		DAA7900C2B3F4D7800401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AlgCollectionViewCell.xib; sourceTree = "<group>"; };
+		DAA7900E2B3F4D7800401C42 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/AlgCollectionViewCell.xcstrings; sourceTree = "<group>"; };
 		DABC1E83288BA9CB00C75DC7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = View/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DABC1E8B288BAA8B00C75DC7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DABC1E8C288BAA8B00C75DC7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
@@ -368,15 +372,15 @@
 				A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */,
 				A1EBA695296F21DF00228501 /* HostGameCodeViewController.swift */,
 				A109F2E5296F47C000FBC695 /* AlgorithmCollectionViewCell.swift */,
-				A109F2E6296F47C000FBC695 /* AlgorithmCollectionViewCell.xib */,
+				DAA78FFB2B3EF02100401C42 /* AlgorithmCollectionViewCell.xib */,
 				A1EBA697296F21DF00228501 /* SettingTimeHostViewController.swift */,
 				A1A4CD3E2A43C58600704BF8 /* VerticalBorderView.swift */,
 				A1A4CD1D29DCA42100704BF8 /* AlgorithmCustomFlowLayout.swift */,
 				A1EBA69A296F21DF00228501 /* StationsTableViewController.swift */,
 				A1EBA69B296F21DF00228501 /* StationRefereeTableViewCell.swift */,
-				A1EBA69C296F21DF00228501 /* HostStationsTableViewCell.xib */,
+				DAA78FFF2B3EF27E00401C42 /* HostStationsTableViewCell.xib */,
 				A1EBA69D296F21DF00228501 /* AddStationViewController.swift */,
-				A1EBA69F296F21DF00228501 /* StationRefereeTableViewCell.xib */,
+				DAA790032B3EF3F700401C42 /* StationRefereeTableViewCell.xib */,
 				A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */,
 				A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */,
 				FC152E6D29C4C423007A85CA /* HostTabBarControllers */,
@@ -385,7 +389,7 @@
 				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
 				A1521DD62AA9B81C00B7BD8A /* CellData.swift */,
 				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
-				A11A37992ABD8DB8000C2222 /* AlgCollectionViewCell.xib */,
+				DAA7900D2B3F4D7800401C42 /* AlgCollectionViewCell.xib */,
 				A1E3BBF92AD0B24900613BC9 /* StationNotificationController.swift */,
 				A10D18A22AE256B0005DFCF5 /* ChooseStyleModalViewController.swift */,
 			);
@@ -700,7 +704,6 @@
 				FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */,
 				FCB13E1A2A97A04B00F4AE99 /* congrats_ending.wav in Resources */,
 				A1A4CD362A371C0500704BF8 /* Dosis-Bold.ttf in Resources */,
-				A11A379B2ABD8DB8000C2222 /* AlgCollectionViewCell.xib in Resources */,
 				A1A4CD372A371C0500704BF8 /* Dosis-ExtraBold.ttf in Resources */,
 				A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */,
 				FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */,
@@ -712,7 +715,7 @@
 				A1D8CAC328811EEF005CCE0E /* (null) in Resources */,
 				A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */,
 				DAA78FF12B36153A00401C42 /* Referee.storyboard in Resources */,
-				A1EBA6AD296F21DF00228501 /* StationRefereeTableViewCell.xib in Resources */,
+				DAA790012B3EF3F700401C42 /* StationRefereeTableViewCell.xib in Resources */,
 				FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */,
 				DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */,
 				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
@@ -722,14 +725,15 @@
 				FCB13E192A97A04B00F4AE99 /* timer_end.wav in Resources */,
 				DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */,
 				A1FFDC902AD7F6E5000DF76E /* duplicated-opponents-sample.gif in Resources */,
-				A1EBA6AA296F21DF00228501 /* HostStationsTableViewCell.xib in Resources */,
+				DAA78FFD2B3EF27E00401C42 /* HostStationsTableViewCell.xib in Resources */,
 				FC03BA122AAB6DE5005E11BD /* GemunuLibre-ExtraLight.ttf in Resources */,
 				FC03BA152AAB6DEC005E11BD /* GemunuLibre-Regular.ttf in Resources */,
 				DABC1E89288BA9CB00C75DC7 /* LaunchScreen.storyboard in Resources */,
 				DAA78FF52B36153F00401C42 /* Host.storyboard in Resources */,
 				FCB13E172A97A04B00F4AE99 /* green.wav in Resources */,
 				FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */,
-				A109F2E8296F47C000FBC695 /* AlgorithmCollectionViewCell.xib in Resources */,
+				DAA78FF92B3EF02100401C42 /* AlgorithmCollectionViewCell.xib in Resources */,
+				DAA7900B2B3F4D7800401C42 /* AlgCollectionViewCell.xib in Resources */,
 				FC03BA142AAB6DE9005E11BD /* GemunuLibre-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,6 +930,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DAA78FFB2B3EF02100401C42 /* AlgorithmCollectionViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA78FFA2B3EF02100401C42 /* Base */,
+				DAA78FFC2B3EF02100401C42 /* mul */,
+			);
+			name = AlgorithmCollectionViewCell.xib;
+			sourceTree = "<group>";
+		};
+		DAA78FFF2B3EF27E00401C42 /* HostStationsTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA78FFE2B3EF27E00401C42 /* Base */,
+				DAA790002B3EF27E00401C42 /* mul */,
+			);
+			name = HostStationsTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		DAA790032B3EF3F700401C42 /* StationRefereeTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA790022B3EF3F700401C42 /* Base */,
+				DAA790042B3EF3F700401C42 /* mul */,
+			);
+			name = StationRefereeTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		DAA7900D2B3F4D7800401C42 /* AlgCollectionViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA7900C2B3F4D7800401C42 /* Base */,
+				DAA7900E2B3F4D7800401C42 /* mul */,
+			);
+			name = AlgCollectionViewCell.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1054,8 +1094,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;

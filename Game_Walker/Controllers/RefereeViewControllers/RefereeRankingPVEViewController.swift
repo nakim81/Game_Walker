@@ -113,7 +113,12 @@ extension RefereeRankingPVEViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info", "Points can be hidden"]
+        let explanationTexts = [
+            NSLocalizedString("Station Status", comment: ""),
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & Station Info", comment: ""),
+            NSLocalizedString("Points can be hidden", comment: "")
+        ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: Int(self.leaderBoard.frame.maxX - 85), y: Int(self.leaderBoard.frame.minY + 42.5), width: 85, height: 17)

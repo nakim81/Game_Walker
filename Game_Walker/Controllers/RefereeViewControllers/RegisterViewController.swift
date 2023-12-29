@@ -158,7 +158,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
             if host.standardStyle == false {
-                alert(title: "Point Style", message: "Referee is unavailable in point style.")
+                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("Referee is unavailable in point style.", comment: ""))
+
             } else {
                 if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
                     //Joining the game for the first time
@@ -187,7 +188,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                 performSegue(withIdentifier: "goToWait", sender: self)
                             }
                         } else {
-                            alert(title: "", message: "Please enter both game code and username.")
+                            alert(title: "", message: NSLocalizedString("Please enter gamecode and username!", comment: ""))
                         }
                     }
                     // Rejoining the game.

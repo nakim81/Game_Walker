@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "2OQ-S3-b2q.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"0\"; ObjectID = \"2OQ-S3-b2q\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

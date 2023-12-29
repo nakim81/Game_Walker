@@ -101,16 +101,15 @@ class SettingTimeHostViewController: UIViewController {
         moveToolBar.sizeToFit()
         
         
-        let gamedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
-        let movedoneButton = UIBarButtonItem(title: "Done", style: .done, target: self,  action: #selector(self.applyDone))
-
-        let gamenextButton = UIBarButtonItem(title: "Next", style: .plain, target: self,  action: #selector(self.applyNext))
+        let gamedoneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(self.applyDone))
+        let movedoneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(self.applyDone))
+        let gamenextButton = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""), style: .plain, target: self, action: #selector(self.applyNext))
         gamenextButton.tag = 1
-        let movenextButton = UIBarButtonItem(title: "Next", style: .plain, target: self,  action: #selector(self.applyNext))
+        let movenextButton = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""), style: .plain, target: self, action: #selector(self.applyNext))
         movenextButton.tag = 2
         print("my move next tag: ", movenextButton.tag)
         
-        let roundnextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(self.applyNext))
+        let roundnextButton = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""), style: .plain, target: self, action: #selector(self.applyNext))
         roundnextButton.tag = 3
         
         gameToolBar.setItems([gamenextButton, UIBarButtonItem.flexibleSpace(), gamedoneButton], animated: true)
@@ -318,7 +317,7 @@ class SettingTimeHostViewController: UIViewController {
             Task { @MainActor in
                 guard let roundInt = Int(rounds),
                       let teamcountInt = Int(teamcount) else {
-                    self.alert(title: "Enter a number", message: "Please enter a number for rounds and teams")
+                    self.alert(title: NSLocalizedString("Enter a number", comment: ""), message: NSLocalizedString("Please enter a number for rounds and teams", comment: ""))
                     return
                 }
                 self.rounds = roundInt
@@ -334,7 +333,7 @@ class SettingTimeHostViewController: UIViewController {
 
             
         } else {
-            alert(title: "Woops", message: "Please enter all information to set timer")
+            alert(title: NSLocalizedString("Woops", comment: ""), message: NSLocalizedString("Please enter all information to set timer", comment: ""))
         }
         
         H.listenHost(gamecode, onListenerUpdate: listen(_:))
@@ -372,9 +371,9 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return "\(row)  minutes"
+            return "\(row) \(NSLocalizedString("minutes", comment: ""))"
         case 1:
-            return "\(row)  seconds"
+            return "\(row) \(NSLocalizedString("seconds", comment: ""))"
         default:
             return ""
         }    }

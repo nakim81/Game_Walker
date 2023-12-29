@@ -34,8 +34,6 @@ class MainViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         configureNavBarItems()
         configureButtons()
-        Text("Localize Test")
-        String(localized: "string test")
     }
     
     override func viewWillAppear(_ animated: Bool) {

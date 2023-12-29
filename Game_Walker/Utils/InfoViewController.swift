@@ -47,7 +47,7 @@ class InfoViewController: UIViewController {
         button.layer.cornerRadius = 8
 
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 

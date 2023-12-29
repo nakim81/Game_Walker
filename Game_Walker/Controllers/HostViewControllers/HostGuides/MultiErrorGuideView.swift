@@ -41,14 +41,13 @@ class MultiErrorGuideView : UIView {
         label.font = UIFont(name: "GemunuLibre-Bold", size: 15)
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         label.numberOfLines = 2
-
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
 
-        let attributedString = NSMutableAttributedString(string: """
-        There are multiple errors shown previously
-        at the same time.
-        """)
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("""
+        There are multiple errors shown
+        previously at the same time.
+        """, comment: ""))
         attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
         label.attributedText = attributedString

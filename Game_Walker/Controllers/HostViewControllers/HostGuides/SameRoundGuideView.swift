@@ -53,10 +53,10 @@ class SameRoundGuideView : UIView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
 
-        let attributedString = NSMutableAttributedString(string: """
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("""
         Team is playing multiple stations
         on the same round.
-        """)
+        """, comment: ""))
         attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
 
         label.attributedText = attributedString

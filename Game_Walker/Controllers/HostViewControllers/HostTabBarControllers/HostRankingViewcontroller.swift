@@ -130,8 +130,13 @@ extension HostRankingViewcontroller {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
-        
-        let explanationTexts = ["Ranking Status", "Timer & \n Start/End Game", "Click to hide points from others"]
+
+        let explanationTexts = [
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & \n Start/End Game", comment: ""),
+            NSLocalizedString("Click to hide points from others", comment: "")
+        ]
+
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: self.leaderBoard.frame.maxX - 85.0, y: self.leaderBoard.frame.minY, width: self.leaderBoard.frame.width, height: 17)
@@ -206,7 +211,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     
     private func findStation( _ round: Int, _ teamNum: Int) -> String {
         guard round >= 0, round < self.algorithm.count else {
-            return "Invalid round"
+            return NSLocalizedString("Invalid round.", comment: "")
         }
         
         let currentRound = self.algorithm[round]
@@ -227,7 +232,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
                 }
             }
         } else {
-            return "currently not playing"
+            return NSLocalizedString("Currently not playing.", comment: "")
         }
     }
 }

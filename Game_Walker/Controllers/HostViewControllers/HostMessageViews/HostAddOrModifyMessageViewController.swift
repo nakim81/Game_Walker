@@ -45,7 +45,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
@@ -65,7 +65,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
-        button.setTitle("Send", for: .normal)
+        button.setTitle(NSLocalizedString("Send", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
@@ -85,7 +85,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         // enable
-        button.setTitle("Edit", for: .normal)
+        button.setTitle(NSLocalizedString("Edit", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 

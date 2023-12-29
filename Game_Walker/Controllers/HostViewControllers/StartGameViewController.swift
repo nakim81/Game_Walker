@@ -27,7 +27,7 @@ class StartGameViewController: UIViewController {
     
     private lazy var  warningLbl: UILabel = {
         let view = UILabel()
-        view.text = "HEADS UP!"
+        view.text = NSLocalizedString("HEADS UP!", comment: "")
         view.backgroundColor = .clear
         view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         view.textColor = .white
@@ -52,7 +52,7 @@ class StartGameViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
-        button.setTitle("Dismiss", for: .normal)
+        button.setTitle(NSLocalizedString("Dismiss", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setBackgroundImage(UIColor.clear.image(), for: .normal)
 
@@ -74,7 +74,7 @@ class StartGameViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
-        button.setTitle("Confirm", for: .normal)
+        button.setTitle(NSLocalizedString("Confirm", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 

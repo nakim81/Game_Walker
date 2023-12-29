@@ -226,7 +226,12 @@ class RefereePVEController: BaseViewController {
     private func showOverlay(pvp: Bool, components: [UIView]) {
         let overlayViewController = RefereeGuideViewController(pvp: pvp)
         overlayViewController.modalPresentationStyle = .overFullScreen
-        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info"]
+        let explanationTexts = [
+            NSLocalizedString("Station Status", comment: ""),
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & Station Info", comment: "")
+        ]
+
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         var tabBarTop: CGFloat = 0
@@ -321,7 +326,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var winButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -332,7 +337,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var loseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -350,7 +355,7 @@ class RefereePVEController: BaseViewController {
         var label = UILabel()
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "TO BE\n" + "DETERMINED"
+        label.text = NSLocalizedString("TO BE\nDETERMINED", comment: "")
         label.numberOfLines = 2
         label.textColor = .black
         label.textAlignment = .center
@@ -529,7 +534,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var leftWinButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -540,7 +545,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var leftLoseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -600,7 +605,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var rightWinButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -611,7 +616,7 @@ class RefereePVEController: BaseViewController {
     
     private lazy var rightLoseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
@@ -646,7 +651,7 @@ class RefereePVEController: BaseViewController {
         var label = UILabel()
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "TO BE\n" + "DETERMINED"
+        label.text = NSLocalizedString("TO BE\nDETERMINED", comment: "")
         label.numberOfLines = 2
         label.textColor = .black
         label.textAlignment = .center
@@ -668,7 +673,7 @@ class RefereePVEController: BaseViewController {
         var label = UILabel()
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "TO BE\n" + "DETERMINED"
+        label.text = NSLocalizedString("TO BE\nDETERMINED", comment: "")
         label.numberOfLines = 2
         label.textColor = .black
         label.textAlignment = .center
@@ -917,7 +922,7 @@ class RefereePVEController: BaseViewController {
                 }
             }
         }
-        roundLabel.text = "Round " + "\(self.round)"
+        roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.round)"
         if pvp {
             self.teamA = self.teamOrder[2 * self.round - 2]
             leftTeamNumLabel.text = "Team \(self.teamA.number)"
@@ -1008,9 +1013,9 @@ extension RefereePVEController {
             self.number = host.teams
         }
         if self.round != host.currentRound {
-            roundLabel.text = "Round " + "\(host.currentRound)"
+            roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
             if pvp {
-                roundLabel.text = "Round " + "\(host.currentRound)"
+//                roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
                 leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
                 leftIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 2].iconName)
                 leftTeamNameLabel.text = "\(self.teamOrder[2 * host.currentRound - 2].name)"
@@ -1126,7 +1131,7 @@ extension RefereePVEController {
     
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1136,7 +1141,7 @@ extension RefereePVEController {
     
     @objc func winButtonTapped() {
         if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if max != "true" {
                 Task {
@@ -1164,7 +1169,7 @@ extension RefereePVEController {
     
     @objc func loseButtonTapped() {
         if self.team.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if max == "true" {
                 Task {
@@ -1192,7 +1197,7 @@ extension RefereePVEController {
     
     @objc func leftButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: "", message: "The Team doesn't exist")
+            alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("The Team doesn't exist", comment: ""))
         } else {
             UserData.writeTeam(self.teamA, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1202,7 +1207,7 @@ extension RefereePVEController {
     
     @objc func rightButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: "", message: "The Team doesn't exist")
+            alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("The Team doesn't exist", comment: ""))
         } else {
             UserData.writeTeam(self.teamB, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1212,7 +1217,7 @@ extension RefereePVEController {
     
     @objc func leftWinButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA != "true" {
                 Task {
@@ -1240,7 +1245,7 @@ extension RefereePVEController {
     
     @objc func rightWinButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxB != "true" {
                 Task {
@@ -1268,7 +1273,7 @@ extension RefereePVEController {
     
     @objc func leftLoseButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA == "true" {
                 Task {
@@ -1296,7 +1301,7 @@ extension RefereePVEController {
     
     @objc func rightLoseButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: "The Team doesn't exist", message: "This is an invalid team.")
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxB == "true" {
                 Task {
@@ -1328,7 +1333,7 @@ extension RefereePVEController {
     
     @objc override func infoAction() {
         if !teamOrderSet {
-            alert(title: "The board is not ready yet", message: "Please try again when it is ready")
+            alert(title: NSLocalizedString("The board is not ready yet", comment: ""), message: NSLocalizedString("Please try again when it is ready", comment: ""))
         } else {
             if pvp {
                 showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])

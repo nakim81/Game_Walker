@@ -28,13 +28,13 @@ struct R {
                 print("Referee added")
             } else {
                 print("Gamecode does not exist")
-                throw GameWalkerError.invalidGamecode("\(gamecode) is not an existing gamecode. \n Please check again!")
+                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode.\nPlease check again!", comment: ""))
             }
         } catch GameWalkerError.invalidGamecode(let message) {
             throw GameWalkerError.invalidGamecode(message)
         } catch {
             print("Error adding Referee: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while adding Referee")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Referee", comment: ""))
         }
     }
     
@@ -57,7 +57,7 @@ struct R {
             print("Referee name modified")
         } catch {
             print("Gamecode does not exist")
-            throw GameWalkerError.serverError("Something went wrong while modifying Referee name")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Referee", comment: ""))
         }
     }
     
@@ -72,7 +72,7 @@ struct R {
             print("Referee assigned station")
         } catch {
             print("Error assigning Referee a station: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while assigning Referee a station")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Referee", comment: ""))
         }
     }
     
@@ -98,7 +98,7 @@ struct R {
             return referee
         } else {
             print("Error in getting Referee")
-            throw GameWalkerError.serverError("Something went wrong while getting Referee")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Referee", comment: ""))
         }
     }
     
@@ -116,7 +116,7 @@ struct R {
         }
         catch{
             print("Error in getting RefereeList")
-            throw GameWalkerError.serverError("Something went wrong while getting RefereeList")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting RefereeList", comment: ""))
         }
     }
     

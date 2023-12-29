@@ -27,20 +27,20 @@ struct T {
                 // Check if the team number already exists
                 var existingTeams = try await getTeamList(gamecode)
                 if existingTeams.contains(where: { $0.number == team.number }) {
-                    throw GameWalkerError.teamNumberAlreadyExists("Team number \(team.number) already exists.")
+                    throw GameWalkerError.teamNumberAlreadyExists(NSLocalizedString("Team number \(team.number) already exists.", comment: ""))
                 }
                 updateTeam(gamecode, team)
                 print("Team added")
             } else {
                 print("Gamecode does not exist")
-                throw GameWalkerError.serverError("Something went wrong while adding Team")
+                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode.\nPlease check again!", comment: ""))
             }
         } catch {
             if case GameWalkerError.teamNumberAlreadyExists = error {
                 throw error
             }
             print("Error adding Team: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while adding Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Team", comment: ""))
         }
     }
     
@@ -67,11 +67,11 @@ struct T {
                 print("Team joined")
             } else {
                 print("Team does not exist")
-                throw GameWalkerError.serverError("Something went wrong while joining Team")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while joining Team", comment: ""))
             }
         } catch {
             print("Error joining Team: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while joining Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while joining Team", comment: ""))
         }
     }
     
@@ -89,11 +89,11 @@ struct T {
                 print("Left Team")
             } else {
                 print("Team does not exist")
-                throw GameWalkerError.serverError("Something went wrong while leaving Team")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while leaving Team", comment: ""))
             }
         } catch {
             print("Error leaving team: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while leaving Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while leaving Team", comment: ""))
         }
     }
     
@@ -108,11 +108,11 @@ struct T {
                 updateTeam(gamecode, team)
             } else {
                 print("Team does not exist")
-                throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while giving points to a Team", comment: ""))
             }
         } catch {
             print("Error giving points to Team: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while giving points to a Team", comment: ""))
         }
     }
     
@@ -125,7 +125,7 @@ struct T {
             print("Updated Station Order")
         } catch {
             print("Error updating Station Order: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while giving points to a Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Station order", comment: ""))
         }
     }
     
@@ -154,7 +154,7 @@ struct T {
             return team
         } else {
             print("Error getting Team")
-            throw GameWalkerError.serverError("Something went wrong while getting Team")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Team", comment: ""))
         }
     }
     
@@ -179,7 +179,7 @@ struct T {
         }
         catch {
             print("Error getting TeamList")
-            throw GameWalkerError.serverError("Something went wrong while getting TeamList")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting TeamList", comment: ""))
         }
     }
     

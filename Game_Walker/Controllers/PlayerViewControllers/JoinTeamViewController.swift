@@ -40,7 +40,8 @@ class JoinTeamViewController: UIViewController {
                 self.host = try await H.getHost(gameCode)
                 collectionView.reloadData()
             } catch {
-                alert(title: "Connection Error", message: "Swipe down the screen again to reload team list!")
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down the screen again to reload team list!", comment: ""))
+
             }
         }
         configureCollectionView()
@@ -89,7 +90,8 @@ class JoinTeamViewController: UIViewController {
                 collectionView.reloadData()
             } catch(let e) {
                 print(e)
-                alert(title: "Conncetion Error", message: e.localizedDescription)
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: e.localizedDescription)
+
                 return
             }
         }
@@ -119,7 +121,8 @@ class JoinTeamViewController: UIViewController {
                 }
             }
         } else {
-            alert(title: "No Team Selected", message: "Please select your team")
+            alert(title: NSLocalizedString("No Team Selected", comment: ""), message: NSLocalizedString("Please select your team", comment: ""))
+
             return
         }
     }

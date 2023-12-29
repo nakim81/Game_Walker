@@ -32,7 +32,7 @@ class MessageViewController: UIViewController {
     
     private lazy var  messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Announcement"
+        label.text = NSLocalizedString("Announcement", comment: "")
         label.font = UIFont(name: "GemunuLibre-Bold", size: 40)
         label.textAlignment = .center
         label.textColor = .white
@@ -46,7 +46,7 @@ class MessageViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
@@ -168,7 +168,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.row + 1
         let announcement = PlayerTabBarController.localMessages[indexPath.row]
-        cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
+        cell.configureTableViewCell(name: NSLocalizedString("Announcement", comment: "") + " \(ind)", read: announcement.readStatus)
         cell.selectionStyle = .none
         return cell
     }
