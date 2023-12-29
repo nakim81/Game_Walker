@@ -13,16 +13,13 @@
     "Be careful! There are more teams than available stations." : {
 
     },
-    "Beware, mixing teams" : {
-
-    },
-    "by long-click." : {
-
-    },
-    "can cause errors." : {
+    "Beware, mixing teams can" : {
 
     },
     "Cancel" : {
+
+    },
+    "cause errors." : {
 
     },
     "Choose Referee" : {
@@ -125,19 +122,19 @@
     "Invalid Team Number" : {
 
     },
+    "long-click." : {
+
+    },
     "LOSE" : {
 
     },
-    "Manually change team" : {
+    "Manually change team by" : {
 
     },
     "minutes" : {
 
     },
     "Moving Time" : {
-
-    },
-    "new order of Stations." : {
 
     },
     "Next" : {
@@ -149,6 +146,9 @@
     "No game exists" : {
 
     },
+    "No Game Exists!" : {
+
+    },
     "No Game Name" : {
 
     },
@@ -156,9 +156,6 @@
 
     },
     "No Icon Selected" : {
-
-    },
-    "No Input" : {
 
     },
     "No Referee Selected" : {
@@ -170,16 +167,13 @@
     "No Team Selected" : {
 
     },
-    "OFF" : {
-
-    },
     "OK" : {
 
     },
-    "ON" : {
+    "Once the game is created, you won't be able to change the game settings" : {
 
     },
-    "Once the game is created, you won't be able to change the game settings" : {
+    "order of Stations." : {
 
     },
     "Please add a station" : {
@@ -416,7 +410,7 @@
     "Swipe down your screen to see your team members!" : {
 
     },
-    "Tap \"Stations\" to see the" : {
+    "Tap \"Stations\" to see the new" : {
 
     },
     "Team is playing against same opponents\nmultiple times on PVP stations." : {
@@ -476,6 +470,9 @@
     "TIMER" : {
 
     },
+    "Timer & \n Start/End Game" : {
+
+    },
     "Timer & Start/End Game" : {
 
     },
@@ -486,6 +483,9 @@
 
     },
     "TOTAL TIME" : {
+
+    },
+    "Warning" : {
 
     },
     "WIN" : {
@@ -507,9 +507,6 @@
 
     },
     "You need at least 1 Station" : {
-
-    },
-    "You never created a game!" : {
 
     }
   },
