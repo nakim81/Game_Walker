@@ -57,6 +57,8 @@ class RefereeRankingPVEViewController: UIViewController {
         Task {@MainActor in
             do {
                 self.teamList = try await T.getTeamList(gameCode)
+                guard let host = try await H.getHost(gameCode) else { return }
+                self.showScore = host.showScoreboard
                 self.leaderBoard.reloadData()
             } catch GameWalkerError.serverError(let e) {
                 print(e)
@@ -102,7 +104,7 @@ extension RefereeRankingPVEViewController: UITableViewDelegate, UITableViewDataS
      }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85.0
+        return fontSize(size: 85)
     }
 }
 // MARK: - overlay guide

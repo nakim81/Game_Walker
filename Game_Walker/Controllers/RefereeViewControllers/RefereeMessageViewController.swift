@@ -22,7 +22,7 @@ class RefereeMessageViewController: UIViewController {
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
-        view.layer.cornerRadius = 13
+        view.layer.cornerRadius = 20
         
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)

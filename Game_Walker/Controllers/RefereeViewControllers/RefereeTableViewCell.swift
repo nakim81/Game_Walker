@@ -106,9 +106,9 @@ class RefereeTableViewCell: UITableViewCell {
             scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1),
             scoreLabel.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8),
             
-            borderView.widthAnchor.constraint(equalTo: contentView.layoutMarginsGuide.widthAnchor),
+            borderView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            borderView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             borderView.heightAnchor.constraint(equalToConstant: 3.0),
-            borderView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
             borderView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
         

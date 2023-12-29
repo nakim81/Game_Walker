@@ -130,12 +130,13 @@ extension HostRankingViewcontroller {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
-        
+
         let explanationTexts = [
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Start/End Game", comment: ""),
+            NSLocalizedString("Timer & \n Start/End Game", comment: ""),
             NSLocalizedString("Click to hide points from others", comment: "")
         ]
+
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let component1Frame = CGRect(x: self.leaderBoard.frame.maxX - 85.0, y: self.leaderBoard.frame.minY, width: self.leaderBoard.frame.width, height: 17)
@@ -196,7 +197,7 @@ extension HostRankingViewcontroller: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return fontSize(size: 85)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
