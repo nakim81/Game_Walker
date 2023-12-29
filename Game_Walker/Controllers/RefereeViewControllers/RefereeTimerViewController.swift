@@ -43,6 +43,7 @@ class RefereeTimerController: BaseViewController {
     //MARK: - View Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        currentStationInfoButton.setTitleColor(UIColor.white, for: .normal)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
         var unread = RefereeTabBarPVEController.unread
@@ -497,9 +498,20 @@ extension RefereeTimerController {
     }
     
     @objc func addBackGroundTime(_ notification:Notification) {
-        timer.invalidate()
+        currentStationInfoButton.setTitleColor(UIColor.black, for: .normal)
         Task { @MainActor in
-            host = try await H.getHost(gameCode) ?? Host()
+            do {
+                host = try await H.getHost(gameCode) ?? Host()
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+            print(host)
             self.seconds = host.gameTime
             self.moveSeconds = host.movingTime
             self.startTime = host.startTimestamp
@@ -509,7 +521,7 @@ extension RefereeTimerController {
             self.rounds = host.rounds
             self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
             self.round = host.currentRound
-            calculateTime()
+            calculateOnly()
         }
     }
     
