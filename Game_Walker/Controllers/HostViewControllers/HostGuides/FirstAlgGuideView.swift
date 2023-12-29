@@ -87,14 +87,15 @@ class FirstAlgGuideView : UIView {
     private func setupGuideText() {
         
         let instructionText = """
-        \u{2022} Tap "Stations" to see the 
-        new order of Stations.
-        \u{2022} Swap teams by click.
-        \u{2022} Manually change team 
-        by long-click.
-        \u{2022} Beware, mixing teams 
-        can cause errors.
+        \u{2022} \(NSLocalizedString("Tap \"Stations\" to see the", comment: ""))
+        \(NSLocalizedString("new order of Stations.", comment: ""))
+        \u{2022} \(NSLocalizedString("Swap teams by click.", comment: ""))
+        \u{2022} \(NSLocalizedString("Manually change team", comment: ""))
+        \(NSLocalizedString("by long-click.", comment: ""))
+        \u{2022} \(NSLocalizedString("Beware, mixing teams", comment: ""))
+        \(NSLocalizedString("can cause errors.", comment: ""))
         """
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
 

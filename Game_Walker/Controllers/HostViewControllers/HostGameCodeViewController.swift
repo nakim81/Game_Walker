@@ -49,7 +49,7 @@ class HostGameCodeViewController: UIViewController {
             return
         }
         if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
-            alert(title: "No Input",message:"You never created a game!")
+            alert(title: NSLocalizedString("No Input", comment: ""), message: NSLocalizedString("You never created a game!", comment: ""))
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in
@@ -78,7 +78,7 @@ class HostGameCodeViewController: UIViewController {
                                     performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                                 }
                             } else{
-                                alert(title: "", message: "Invalid Host!")
+                                alert(title: "", message: NSLocalizedString("Invalid Host!", comment: ""))
                             }
                         }
                     } catch GameWalkerError.invalidGamecode(let message) {
@@ -116,7 +116,7 @@ class HostGameCodeViewController: UIViewController {
                                     performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                                 }
                             } else{
-                                alert(title: "", message: "Invalid Host!")
+                                alert(title: "", message: NSLocalizedString("Invalid Host!", comment: ""))
                             }
                         }
 

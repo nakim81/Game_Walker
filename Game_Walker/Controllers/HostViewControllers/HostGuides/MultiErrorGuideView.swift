@@ -41,10 +41,10 @@ class MultiErrorGuideView : UIView {
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.text = """
-        There are multiple errors shown 
+        label.text = NSLocalizedString("""
+        There are multiple errors shown
         previously at the same time.
-        """
+        """, comment: "")
         return label
     }()
     

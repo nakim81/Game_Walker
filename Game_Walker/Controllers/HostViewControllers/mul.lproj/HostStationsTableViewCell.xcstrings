@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "cJ6-a7-auZ.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"StationLabel\"; ObjectID = \"cJ6-a7-auZ\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "StationLabel"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -47,7 +47,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var explanationLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Remember to choose 'WIN' or 'LOSE' before the round ends!"
+        label.text = NSLocalizedString("Remember to choose 'WIN' or 'LOSE' before the round ends!", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -64,7 +64,7 @@ class RefereeGuideViewController : UIViewController {
         view.layer.cornerRadius = 10.0
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Click to give points of the Team"
+        label.text = NSLocalizedString("Click to give points of the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -78,7 +78,7 @@ class RefereeGuideViewController : UIViewController {
 
     private lazy var teamPointsLabel: UILabel = {
         var label = UILabel()
-        label.text = "Team's total points"
+        label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -87,7 +87,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var winButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
@@ -97,7 +97,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var loseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
@@ -194,7 +194,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var buttonLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Click to give points of the Team"
+        label.text = NSLocalizedString("Click to give points of the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: 13)
@@ -221,7 +221,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var leftTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.text = "Team's total points"
+        label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -230,7 +230,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var rightTeamPointsLabel: UILabel = {
         var label = UILabel()
-        label.text = "Team's total points"
+        label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
@@ -239,7 +239,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var leftWinButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
@@ -249,7 +249,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var leftLoseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
@@ -259,7 +259,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var rightWinButton: UIButton = {
         var button = UIButton()
-        button.setTitle("WIN", for: .normal)
+        button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
@@ -269,7 +269,7 @@ class RefereeGuideViewController : UIViewController {
     
     private lazy var rightLoseButton: UIButton = {
         var button = UIButton()
-        button.setTitle("LOSE", for: .normal)
+        button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor

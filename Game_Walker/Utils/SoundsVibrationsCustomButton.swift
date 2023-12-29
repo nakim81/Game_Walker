@@ -44,12 +44,12 @@ class SoundsVibrationsCustomButton: UIButton {
         addSubview(iconImageView)
 
         // ON Label
-        onLabel.text = "ON"
+        onLabel.text = NSLocalizedString("ON", comment: "")
         onLabel.textAlignment = .center
         addSubview(onLabel)
 
         // OFF Label
-        offLabel.text = "OFF"
+        offLabel.text = NSLocalizedString("OFF", comment: "")
         offLabel.textAlignment = .center
         addSubview(offLabel)
 

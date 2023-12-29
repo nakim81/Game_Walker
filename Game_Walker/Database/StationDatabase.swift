@@ -27,11 +27,11 @@ struct S {
                 print("Station added")
             } else {
                 print("Gamecode does not exist")
-                throw GameWalkerError.serverError("Something went wrong while adding Station")
+                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode.\nPlease check again!", comment: ""))
             }
         } catch {
             print("Error adding Station: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while adding Station")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Station", comment: ""))
         }
     }
     
@@ -59,7 +59,7 @@ struct S {
             }
         } catch {
             print("Error assigning Referee: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while assigning Station a referee")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Station", comment: ""))
         }
     }
     
@@ -77,7 +77,7 @@ struct S {
             }
         } catch {
             print("Error updating team order: \(error)")
-            throw GameWalkerError.serverError("Something went wrong while updating Team Order of Station")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Team Order of Station", comment: ""))
         }
     }
     
@@ -92,7 +92,7 @@ struct S {
             return station
         } else {
             print("Error getting Station")
-            throw GameWalkerError.serverError("Something went wrong while getting Station")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Station", comment: ""))
         }
     }
     
@@ -123,7 +123,7 @@ struct S {
         }
         catch{
             print("Error getting StationList")
-            throw GameWalkerError.serverError("Something went wrong while getting StationList")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting StationList", comment: ""))
         }
     }
     

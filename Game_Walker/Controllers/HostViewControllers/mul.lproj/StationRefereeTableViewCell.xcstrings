@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "qCv-sW-Qtk.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Referee Name\"; ObjectID = \"qCv-sW-Qtk\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Referee Name"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

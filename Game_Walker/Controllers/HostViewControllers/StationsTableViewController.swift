@@ -127,7 +127,7 @@ class StationsTableViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if currentStations.count < 1 {
-            alert(title: "You need at least 1 Station", message: "Please add a station")
+            alert(title: NSLocalizedString("You need at least 1 Station", comment: ""), message: NSLocalizedString("Please add a station", comment: ""))
             return
         }
         Task { @MainActor in
@@ -147,7 +147,7 @@ class StationsTableViewController: UIViewController {
 
 extension StationsTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
             
             Task {

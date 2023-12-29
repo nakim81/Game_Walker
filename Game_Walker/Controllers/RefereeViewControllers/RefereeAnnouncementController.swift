@@ -16,10 +16,8 @@ class RefereeAnnouncementViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
         view.layer.cornerRadius = 20
-        
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        
         return view
     }()
     
@@ -48,7 +46,7 @@ class RefereeAnnouncementViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         

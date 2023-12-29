@@ -48,7 +48,7 @@ class AnnouncementViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         

@@ -128,7 +128,7 @@ class RefereeTimerController: BaseViewController {
     //MARK: - UI Elements
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "TIMER"
+        label.text = NSLocalizedString("TIMER", comment: "")
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -153,7 +153,7 @@ class RefereeTimerController: BaseViewController {
     
     private lazy var timeTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Moving Time"
+        label.text = NSLocalizedString("Moving Time", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38)) ?? UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
@@ -175,7 +175,7 @@ class RefereeTimerController: BaseViewController {
     
     private lazy var roundLabel: UILabel = {
         let label = UILabel()
-        label.text = "Round 1"
+        label.text = NSLocalizedString("Round 1", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38)) ?? UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
@@ -192,7 +192,8 @@ class RefereeTimerController: BaseViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: "TOTAL TIME\n", attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
+
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -211,7 +212,7 @@ class RefereeTimerController: BaseViewController {
     
     private lazy var currentStationInfoButton: UIButton = {
         var button = UIButton()
-        button.setTitle("Current Station Info", for: .normal)
+        button.setTitle(NSLocalizedString("Current Station Info", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
@@ -274,7 +275,12 @@ class RefereeTimerController: BaseViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Station Status", "Ranking Status", "Timer & Station Info", "Click to see what happens"]
+        let explanationTexts = [
+            NSLocalizedString("Station Status", comment: ""),
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & Station Info", comment: ""),
+            NSLocalizedString("Click to see what happens", comment: "")
+        ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
@@ -335,12 +341,12 @@ class RefereeTimerController: BaseViewController {
                         if strongSelf.moving {
                             strongSelf.time = strongSelf.seconds
                             strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = "Station Time"
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
                         } else {
                             strongSelf.time = strongSelf.moveSeconds
                             strongSelf.moving = true
-                            strongSelf.timeTypeLabel.text = "Moving Time"
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
                             strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
                         }
                     }
@@ -352,7 +358,7 @@ class RefereeTimerController: BaseViewController {
                     strongSelf.totalTime += 1
                     let totalMinute = strongSelf.totalTime/60
                     let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                    let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                     attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
@@ -372,7 +378,7 @@ class RefereeTimerController: BaseViewController {
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            self.timeTypeLabel.text = "Moving Time"
+            self.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
             self.time = (moveSeconds - remainder%moveSeconds)
             self.moving = true
             let minute = (moveSeconds - remainder%moveSeconds)/60
@@ -380,7 +386,7 @@ class RefereeTimerController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.time = (seconds - remainder + moveSeconds)
             self.moving = false
             let minute = (seconds - remainder + moveSeconds)/60
@@ -391,22 +397,22 @@ class RefereeTimerController: BaseViewController {
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
-            self.roundLabel.text = "Round \(self.rounds)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
         } else {
-            self.roundLabel.text = "Round \(quotient + 1)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
             runTimer()
         }
     }
@@ -421,7 +427,7 @@ class RefereeTimerController: BaseViewController {
         let quotient = t/(moveSeconds + seconds)
         let remainder = t%(moveSeconds + seconds)
         if (remainder/moveSeconds) == 0 {
-            self.timeTypeLabel.text = "Moving Time"
+            self.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
             self.time = (moveSeconds - remainder%moveSeconds)
             self.moving = true
             let minute = (moveSeconds - remainder%moveSeconds)/60
@@ -429,7 +435,7 @@ class RefereeTimerController: BaseViewController {
             self.timerLabel.text = String(format:"%02i : %02i", minute, second)
         }
         else {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.time = (seconds - remainder + moveSeconds)
             self.moving = false
             let minute = (seconds - remainder + moveSeconds)/60
@@ -440,22 +446,22 @@ class RefereeTimerController: BaseViewController {
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
         attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
-            self.timeTypeLabel.text = "Station Time"
+            self.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
             self.timerLabel.text = String(format:"%02i : %02i", 0, 0)
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
-            self.roundLabel.text = "Round \(self.rounds)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
         } else {
-            self.roundLabel.text = "Round \(quotient + 1)"
+            self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
         }
     }
 }
@@ -464,7 +470,7 @@ extension RefereeTimerController {
     
     @objc func hostUpdate(notification: Notification) {
         guard let host = notification.userInfo?["host"] as? Host else { return }
-        roundLabel.text = "Round \(host.currentRound)"
+        roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
         self.round = host.currentRound
         self.pauseTime = host.pauseTimestamp
         self.pausedTime = host.pausedTime

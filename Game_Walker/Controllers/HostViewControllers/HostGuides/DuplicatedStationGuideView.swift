@@ -50,10 +50,10 @@ class DuplicatedStationGuideView : UIView {
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         label.textAlignment = .center
         label.numberOfLines = 2
-        label.text = """
+        label.text = NSLocalizedString("""
         Team is playing the same station
         on multiple rounds.
-        """
+        """, comment: "")
         return label
     }()
     

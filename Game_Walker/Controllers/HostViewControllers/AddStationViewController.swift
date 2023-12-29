@@ -200,7 +200,7 @@ class AddStationViewController: UIViewController {
     
     func checkReferee() {
         if refereename == "" && !stationExists{
-            refereeLabel.text = "Choose Referee"
+            refereeLabel.text = NSLocalizedString("Choose Referee", comment: "")
         } else{
             refereeLabel.text = refereename
         }
@@ -237,22 +237,22 @@ class AddStationViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if !stationExists {
             if gamenameTextfield.text!.isEmpty {
-                alert(title: "No Game Name", message: "Please enter the game name.")
+                alert(title: NSLocalizedString("No Game Name", comment: ""), message: NSLocalizedString("Please enter the game name.", comment: ""))
                 return
             }
             
             if gamepointsTextfield.text!.isEmpty {
-                alert(title: "No Game Points", message: "Please set the game points.")
+                alert(title: NSLocalizedString("No Game Points", comment: ""), message: NSLocalizedString("Please set the game points.", comment: ""))
                 return
             }
             
             if pvpnotchosen {
-                alert(title: "Game Type Not Specified", message: "Please select either PVP or PVE")
+                alert(title: NSLocalizedString("Game Type Not Specified", comment: ""), message: NSLocalizedString("Please select either PVP or PVE", comment: ""))
                 return
             }
 
             if refereeUuid.isEmpty {
-                alert(title: "No Referee Selected", message: "Please select a referee.")
+                alert(title: NSLocalizedString("No Referee Selected", comment: ""), message: NSLocalizedString("Please select a referee.", comment: ""))
                 return
             }
             
@@ -356,7 +356,7 @@ class AddStationViewController: UIViewController {
         overlay.giveCornerRadius(of: CGFloat(20))
         popupView.addSubview(overlay)
         let refereeOverlay = OverlayComponentView(frame : refereeButton.frame)
-        refereeOverlay.addLabel(with: "No Referees yet? Share the game code.", width: refereeButton.frame.width)
+        refereeOverlay.addLabel(with: NSLocalizedString("No Referees yet? Share the game code.", comment: ""), width: refereeButton.frame.width)
         popupView.addSubview(refereeOverlay)
         
 
@@ -366,8 +366,9 @@ class AddStationViewController: UIViewController {
         let pvpOverlay = OverlayComponentView(frame: pvpButtonFrameInPopupView)
         let pveOverlay = OverlayComponentView(frame: pveButtonFrameInPopupView)
 
-        pvpOverlay.addLabel(with: "PVP for competition", width: pvpButton.frame.width)
-        pveOverlay.addLabel(with: "PVE for goals.", width : pveButton.frame.width)
+        pvpOverlay.addLabel(with: NSLocalizedString("PVP for competition", comment: ""), width: pvpButton.frame.width)
+        pveOverlay.addLabel(with: NSLocalizedString("PVE for goals.", comment: ""), width: pveButton.frame.width)
+
         
         popupView.addSubview(pvpOverlay)
         popupView.addSubview(pveOverlay)
@@ -404,7 +405,7 @@ extension AddStationViewController: UITextFieldDelegate {
                     gamepoints = newGamePoints
                     print("gamepoints : ", gamepoints)
                 } else {
-                    alert(title: "", message: "gamepoints should be an integer")
+                    alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("gamepoints should be an integer", comment: ""))
                 }
             }
             modified = true
@@ -419,10 +420,7 @@ extension AddStationViewController: UITextViewDelegate {
             modified = true
             // appends all text rules being typed in
             let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-            
             rules = newText
-            
-//            print(rules)
         }
         return true
     }

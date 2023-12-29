@@ -90,11 +90,11 @@ class CreateTeamViewController: UIViewController {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         
         guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
-            alert(title: "Team Name Error", message: "Team name should exist! Fill out the team name box")
+            alert(title: NSLocalizedString("Team Name Error", comment: ""), message: NSLocalizedString("Team name should exist! Fill out the team name box.", comment: ""))
             return
         }
         guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
-            alert(title: "Team Number Error", message: "Team number should exist! Fill out the team number box")
+            alert(title: NSLocalizedString("Team Number Error", comment: ""), message: NSLocalizedString("Team number should exist! Fill out the team number box.", comment: ""))
             return
         }
         Task { @MainActor in
@@ -103,7 +103,8 @@ class CreateTeamViewController: UIViewController {
                 self.stationList = try await S.getStationList(gameCode)
                 guard let standardStyle = self.host?.standardStyle else {return}
                 guard let selectedIconName = selectedIconName else {
-                    alert(title: "No Icon Selected", message: "Please select a team icon")
+                    alert(title: NSLocalizedString("No Icon Selected", comment: ""), message: NSLocalizedString("Please select a team icon!", comment: ""))
+
                     return
                 }
                 
@@ -114,7 +115,8 @@ class CreateTeamViewController: UIViewController {
                     if standardStyle {
                         
                         if (tn > hn) {
-                            alert(title: "Invalid Team Number", message: "Please try other team numbers")
+                            alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("Please try other team numbers!", comment: ""))
+
                             return
                         }
                         
@@ -145,7 +147,8 @@ class CreateTeamViewController: UIViewController {
                                 }
                             }
                         } else {
-                            alert(title: "", message: "The game has not started yet. Please try few minutes later!")
+                            alert(title: "", message: NSLocalizedString("The game has not started yet. Please try few minutes later!", comment: ""))
+
                             return
                         }
                     } else {
@@ -168,12 +171,14 @@ class CreateTeamViewController: UIViewController {
                         }
                     }
                 } else {
-                    alert(title: "Team Number Error", message: "Team number should be greater than 0!")
+                    alert(title: NSLocalizedString("Team Number Error", comment: ""), message: NSLocalizedString("Team number should be greater than 0!", comment: ""))
+
                     return
                 }
             } catch(let e) {
                 print(e)
-                alert(title: "Connection Error", message: e.localizedDescription)
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: e.localizedDescription)
+
                 return
             }
         }

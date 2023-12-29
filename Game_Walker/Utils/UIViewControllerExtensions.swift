@@ -8,7 +8,7 @@
 import UIKit
 // MARK: - GameInfoPopUps
 extension UIViewController {
-    func showGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, refereeName: String? = nil, gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, refereeName: String? = nil, gameRule: String? = nil, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = GameInfoViewController(gameName: gameName ?? "", gameLocation: gameLocation ?? "", gamePoints: gamePoitns ?? "", refereeName: refereeName ?? "", gameRule: gameRule ?? "")
         showGameInfoPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -20,7 +20,7 @@ extension UIViewController {
         present(popUpViewController, animated: false, completion: nil)
     }
     
-    func showRefereeGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, gameRule: String? = nil, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showRefereeGameInfoPopUp(gameName: String? = nil, gameLocation: String? = nil, gamePoitns: String? = nil, gameRule: String? = nil, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = RefereeGameInfoViewcontroller(gameName: gameName ?? "", gameLocation: gameLocation ?? "", gamePoints: gamePoitns ?? "", gameRule: gameRule ?? "")
         showRefereeGameInfoPopUp(popUpViewController: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -34,7 +34,7 @@ extension UIViewController {
 }
 // MARK: - PlayerMessagePopUps
 extension UIViewController {
-    func showMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = MessageViewController(messages: messages)
         showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -46,7 +46,7 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
     
-    func showAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = AnnouncementViewController(announcement: announcement)
         showAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -60,7 +60,7 @@ extension UIViewController {
 }
 // MARK: - RefereeMessagePopUps
 extension UIViewController {
-    func showRefereeMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showRefereeMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = RefereeMessageViewController(messages: messages)
         showRefereeMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -72,7 +72,7 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
     
-    func showRefereeAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showRefereeAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = RefereeAnnouncementViewController(announcement: announcement)
         showRefereeAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -87,7 +87,7 @@ extension UIViewController {
 
 // MARK: - InfoPopUp
 extension UIViewController {
-    func showInfoPopUp(_ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showInfoPopUp(_ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = InfoViewController(select: true)
         showInfoPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -101,7 +101,7 @@ extension UIViewController {
 }
 // MARK: - HostMessagePopUps
 extension UIViewController {
-    func showHostMessagePopUp(messages: [Announcement], _ actionTitle: String = "Close", _ actionCompletion: (() -> Void)? = nil) {
+    func showHostMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
         let popUpViewController = HostMessageViewController(messages: messages)
         showHostMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
@@ -145,23 +145,23 @@ extension UIViewController {
 extension UIViewController {
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     func gamecodeAlert(_ message: String) {
-        let alert = UIAlertController(title: "Gamecode Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Gamecode Error", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     func serverAlert(_ message: String) {
-        let alert = UIAlertController(title: "Server Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Server Error", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
     func teamNumberAlert(_ message: String) {
-        let alert = UIAlertController(title: "Team Number Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Team Number Error", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
 }
@@ -265,7 +265,7 @@ extension UIViewController {
                 .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
                 .foregroundColor: UIColor.black
             ]
-            let gameCodeAttributedString = NSAttributedString(string: "Game Code\n", attributes: gameCodeAttributes)
+            let gameCodeAttributedString = NSAttributedString(string: NSLocalizedString("Game Code", comment: "") + "\n", attributes: gameCodeAttributes)
             attributedText.append(gameCodeAttributedString)
             let numberAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
@@ -399,8 +399,8 @@ extension UIViewController {
     
     func alert2(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default) {value in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default) {value in
             self.performSegue(withIdentifier: "ManageGameSegue", sender: (Any).self)
         })
         present(alert, animated: true)
@@ -415,12 +415,5 @@ extension UIViewController {
                                     range: NSRange(location: 0, length: labelText.length))
 
         label.attributedText = labelText
-    }
-}
-
-//MARK: - Language String extension
-extension String {
-    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
-        return NSLocalizedString(self, tableName: tableName, value: self, comment: "")
     }
 }

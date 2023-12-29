@@ -92,7 +92,8 @@ class TeamViewController: UIViewController {
                 self.team = try await T.getTeam(gameCode, teamName)
                 table.reloadData()
             } catch {
-                alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members!", comment: ""))
+
             }
         }
     }
@@ -158,7 +159,12 @@ extension TeamViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info"]
+        let explanationTexts = [
+            NSLocalizedString("Team Members", comment: ""),
+            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Timer & Station Info", comment: "")
+        ]
+
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         var tabBarTop: CGFloat = 0
@@ -191,7 +197,8 @@ extension TeamViewController {
 extension TeamViewController {
     
     @objc func customBackAction(_ sender: UIBarButtonItem) {
-        self.alert2(title: "", message: "Do you really want to leave your team?", sender: sender)
+        self.alert2(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Do you really want to leave your team?", comment: ""), sender: sender)
+
     }
     
     @objc override func infoAction() {
@@ -209,7 +216,8 @@ extension TeamViewController {
                 refreshController.endRefreshing()
                 table.reloadData()
             } catch {
-                alert(title: "Connection Error", message: "Swipe down your screen to see your team members!")
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members!", comment: ""))
+
             }
         }
     }

@@ -39,7 +39,6 @@ class RefereeMessageTableViewCell: UITableViewCell {
         containerView.layer.cornerRadius = 10
         containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
         messageNameLabel.backgroundColor = .clear
         messageNameLabel.textAlignment = .left
         messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 20)

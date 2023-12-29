@@ -31,7 +31,7 @@ class AwardViewController: UIViewController {
         var view = UILabel()
         view.textColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1)
         view.font = UIFont(name: "GemunuLibre-SemiBold", size: 40)
-        view.text = "CONGRATULATIONS"
+        view.text = NSLocalizedString("CONGRATULATIONS", comment: "")
         view.textAlignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -254,7 +254,7 @@ class AwardViewController: UIViewController {
             .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
             .foregroundColor: UIColor.black
         ]
-        let gameCodeAttributedString = NSAttributedString(string: "Game Code" + "\n", attributes: gameCodeAttributes)
+        let gameCodeAttributedString = NSAttributedString(string: NSLocalizedString("Game Code", comment: "") + "\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),

@@ -33,7 +33,7 @@ class HostMessageViewController: UIViewController {
     
     private lazy var  messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Announcement"
+        label.text = NSLocalizedString("Announcement", comment: "")
         label.font = UIFont(name: "GemunuLibre-Bold", size: 40)
         label.textAlignment = .center
         label.textColor = .white
@@ -59,7 +59,7 @@ class HostMessageViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
 
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
