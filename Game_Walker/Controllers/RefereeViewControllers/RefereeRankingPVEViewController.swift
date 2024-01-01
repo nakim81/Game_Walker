@@ -116,7 +116,7 @@ extension RefereeRankingPVEViewController {
         let explanationTexts = [
             NSLocalizedString("Station Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: ""),
+            NSLocalizedString("Timer & \n Station Info", comment: ""),
             NSLocalizedString("Points can be hidden", comment: "")
         ]
         var componentPositions: [CGPoint] = []

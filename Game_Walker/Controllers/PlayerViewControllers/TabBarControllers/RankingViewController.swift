@@ -93,7 +93,7 @@ extension RankingViewController {
         let explanationTexts = [
             NSLocalizedString("Team Members", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: ""),
+            NSLocalizedString("Timer & \n Station Info", comment: ""),
             NSLocalizedString("Points can be hidden", comment: "")
         ]
 
@@ -132,9 +132,11 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
         let team = teamList[indexPath.row]
-        let teamNum = String(team.number)
+        let teamNum = team.number
         let points = String(team.points)
-        cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: "Team \(teamNum)", teamName: team.name, points: points, showScore: self.showScore)
+        var previous = (indexPath.row < teamList.count - 1 && teamList[indexPath.row + 1].number  == UserData.readTeam("team")?.number) ? true : false
+        
+        cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: teamNum, teamName: team.name, points: points, showScore: self.showScore, previous: previous)
         return cell
     }
     
