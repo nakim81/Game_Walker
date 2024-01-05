@@ -27,10 +27,9 @@ class HostGameCodeViewController: UIViewController {
         gameCodeInput.delegate = self
         gameCodeInput.textAlignment = NSTextAlignment.center
         gameCodeInput.keyboardType = .asciiCapableNumberPad
-//        H.delegate_getHost = self
-
         gameCodeInput.placeholder = storedgamecode
         configureSimpleNavBar()
+        configureButtonVisuals()
     }
     
     func setGameCode() {
@@ -143,7 +142,11 @@ class HostGameCodeViewController: UIViewController {
             }
         }
     }
-    
+
+    private func configureButtonVisuals() {
+        joinButton.layer.cornerRadius = 10.0
+    }
+
 }
 
 extension HostGameCodeViewController: UITextFieldDelegate {

@@ -39,7 +39,7 @@
     },
     "6g1-fo-e1k.title" : {
       "comment" : "Class = \"UITabBarItem\"; title = \"Item 2\"; ObjectID = \"6g1-fo-e1k\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -56,18 +56,18 @@
       }
     },
     "8NZ-by-CrW.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"8NZ-by-CrW\";",
+      "comment" : "Class = \"UIButton\"; normalTitle = \"Resume Game\"; ObjectID = \"8NZ-by-CrW\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Button"
+            "value" : "Resume Game"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "버튼"
           }
         }
@@ -165,7 +165,7 @@
     },
     "DzZ-kR-qiZ.text" : {
       "comment" : "Class = \"UILabel\"; text = \"FIRST\"; ObjectID = \"DzZ-kR-qiZ\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -363,7 +363,7 @@
     },
     "lY3-Xd-8Dv.title" : {
       "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"lY3-Xd-8Dv\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -381,7 +381,7 @@
     },
     "MbY-C2-CHe.text" : {
       "comment" : "Class = \"UILabel\"; text = \"SECOND\"; ObjectID = \"MbY-C2-CHe\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -393,6 +393,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "둘째"
+          }
+        }
+      }
+    },
+    "mew-pS-Laf.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"SAVE\"; ObjectID = \"mew-pS-Laf\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "SAVE"
           }
         }
       }
@@ -433,9 +445,21 @@
         }
       }
     },
+    "p0n-80-Fkc.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"NEXT\"; ObjectID = \"p0n-80-Fkc\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NEXT"
+          }
+        }
+      }
+    },
     "pbE-AE-cmi.title" : {
       "comment" : "Class = \"UITabBarItem\"; title = \"Item 1\"; ObjectID = \"pbE-AE-cmi\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -487,6 +511,18 @@
         }
       }
     },
+    "Rd9-KY-2cP.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"NEXT\"; ObjectID = \"Rd9-KY-2cP\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "NEXT"
+          }
+        }
+      }
+    },
     "RFd-2O-0qr.text" : {
       "comment" : "Class = \"UILabel\"; text = \"00\"; ObjectID = \"RFd-2O-0qr\";",
       "localizations" : {
@@ -506,7 +542,7 @@
     },
     "rv8-bI-M6D.title" : {
       "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"rv8-bI-M6D\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -524,7 +560,7 @@
     },
     "SO7-2l-M1e.title" : {
       "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"SO7-2l-M1e\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -542,7 +578,7 @@
     },
     "txX-ue-Meo.title" : {
       "comment" : "Class = \"UITabBarItem\"; title = \"Item\"; ObjectID = \"txX-ue-Meo\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -559,19 +595,31 @@
       }
     },
     "tyS-bJ-dkx.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"tyS-bJ-dkx\";",
+      "comment" : "Class = \"UIButton\"; normalTitle = \"Create Game\"; ObjectID = \"tyS-bJ-dkx\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Button"
+            "value" : "Create Game"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "버튼"
+          }
+        }
+      }
+    },
+    "U83-h1-qtH.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"RESUME\"; ObjectID = \"U83-h1-qtH\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "RESUME"
           }
         }
       }
@@ -594,9 +642,21 @@
         }
       }
     },
+    "wCP-FP-9sr.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"Create Game\"; ObjectID = \"wCP-FP-9sr\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Create Game"
+          }
+        }
+      }
+    },
     "X00-Em-HtQ.text" : {
       "comment" : "Class = \"UILabel\"; text = \"THIRD\"; ObjectID = \"X00-Em-HtQ\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

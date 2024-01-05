@@ -43,22 +43,30 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="CreateGameButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyS-bJ-dkx">
                                 <rect key="frame" x="72.5" y="274.5" width="269" height="88"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="height" multiplier="245:80" id="Wan-Qp-l4G"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="HostCreateGameButtonLarge"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Create Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="createGameButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AQK-E6-Ihj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NZ-by-CrW">
                                 <rect key="frame" x="72.5" y="508.5" width="269" height="88"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8NZ-by-CrW" secondAttribute="height" multiplier="245:80" id="c52-Ne-J07"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="HostResumeGameButton"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Resume Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="resumeButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SzG-ND-FUq"/>
                                     <segue destination="4gK-PM-WO8" kind="show" identifier="ResumeGameToCodeSegue" id="efF-m6-uwV"/>
@@ -79,6 +87,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bie-XC-ACB"/>
                     <connections>
+                        <outlet property="createButton" destination="tyS-bJ-dkx" id="iH2-1z-sqm"/>
                         <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
                         <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="Ksp-7h-L4K"/>
                         <segue destination="1L0-Oz-afr" kind="show" identifier="CreateStandardGameSegue" id="tce-ii-ly8"/>
@@ -108,11 +117,15 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U83-h1-qtH">
                                 <rect key="frame" x="107" y="720.5" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="U83-h1-qtH" secondAttribute="height" multiplier="175:57" id="1g7-As-aRW"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="HostResumeButton"/>
+                                <state key="normal" title="RESUME">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="h9p-9d-cMp"/>
                                 </connections>
@@ -309,9 +322,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
-                                <rect key="frame" x="119.5" y="774" width="175" height="57"/>
+                                <rect key="frame" x="107" y="766" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rd9-KY-2cP" secondAttribute="height" multiplier="175:57" id="1zJ-JX-ltq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="HostNextButton"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="1L0-Oz-afr" eventType="touchUpInside" id="5Ej-nt-O5X"/>
                                 </connections>
@@ -343,6 +363,7 @@
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="height" secondItem="txZ-n6-kgn" secondAttribute="height" multiplier="0.55" id="PPH-SR-rCd"/>
                             <constraint firstItem="427-kj-OdI" firstAttribute="centerY" secondItem="txZ-n6-kgn" secondAttribute="centerY" multiplier="0.3" id="S7H-KQ-gFa"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" id="VV8-fQ-jPl"/>
+                            <constraint firstItem="Rd9-KY-2cP" firstAttribute="width" secondItem="OQk-vm-7Sx" secondAttribute="width" multiplier="0.483092" id="j0b-tq-ake"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="top" secondItem="427-kj-OdI" secondAttribute="bottom" constant="15" id="nVa-de-gWS"/>
                             <constraint firstItem="0cn-lG-6rY" firstAttribute="centerX" secondItem="Rd9-KY-2cP" secondAttribute="centerX" id="qlu-tP-Pup"/>
                             <constraint firstItem="txZ-n6-kgn" firstAttribute="bottom" secondItem="Rd9-KY-2cP" secondAttribute="bottom" constant="55" id="zve-b7-A7a"/>
@@ -351,6 +372,7 @@
                     <navigationItem key="navigationItem" id="DML-sP-Zbz"/>
                     <connections>
                         <outlet property="addButton" destination="0cn-lG-6rY" id="Mzb-us-q2q"/>
+                        <outlet property="nextButton" destination="Rd9-KY-2cP" id="NgV-UF-cTQ"/>
                         <outlet property="stationTable" destination="LOv-V0-Zcn" id="D5J-Du-ZrP"/>
                         <outlet property="stationsLabel" destination="427-kj-OdI" id="p7U-hs-swJ"/>
                         <segue destination="KzH-J8-5vd" kind="show" identifier="ToSettingsSegue" id="3Ok-9v-lov"/>
@@ -515,11 +537,15 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
                                         <rect key="frame" x="130" y="609" width="146" height="48"/>
+                                        <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="126:41" id="VeK-ka-nJC"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="HostSaveButton"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
                                         </connections>
@@ -730,9 +756,16 @@
                                 <rect key="frame" x="97.5" y="476.5" width="219" height="66"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="107" y="766" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="p0n-80-Fkc" secondAttribute="height" multiplier="175:57" id="MAx-4n-z2k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Next button 1-1"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
                                     <segue destination="Vjg-e5-r3Z" kind="show" identifier="ShowAlgorithmSegue" id="flX-6b-8Ik"/>
@@ -820,6 +853,7 @@
                             <constraint firstItem="Vix-LA-Y4c" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="q90-0A-0BT"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="rDo-Ff-Ss8"/>
                             <constraint firstItem="fc8-so-AwG" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="0.9" id="ruE-69-iIn"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.483092" id="tEo-Yy-jxP"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="top" secondItem="EBr-2e-ORF" secondAttribute="bottom" constant="3" id="vED-Ec-S1O"/>
                             <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="wgT-gd-33E"/>
                             <constraint firstItem="WYz-bV-YWp" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="yFX-W8-1yb"/>
@@ -832,6 +866,7 @@
                         <outlet property="gameSecondsLabel" destination="Ko8-vf-QFy" id="G2n-ea-P38"/>
                         <outlet property="movingMinutesLabel" destination="RFd-2O-0qr" id="5DQ-PQ-4M9"/>
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
+                        <outlet property="nextButton" destination="p0n-80-Fkc" id="L4Q-cv-HgM"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
                         <outlet property="teamcountTextField" destination="fc8-so-AwG" id="2It-gy-vHo"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
@@ -863,9 +898,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button">
-                                <rect key="frame" x="119.5" y="769" width="175" height="57"/>
+                                <rect key="frame" x="107" y="761" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wCP-FP-9sr" secondAttribute="height" multiplier="175:57" id="7Zk-CP-yKb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="CreateGameButtonSmall"/>
+                                <state key="normal" title="Create Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Vjg-e5-r3Z" eventType="touchUpInside" id="pPw-TG-BfL"/>
                                 </connections>
@@ -887,6 +929,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="16F-GJ-EhV"/>
+                            <constraint firstItem="wCP-FP-9sr" firstAttribute="width" secondItem="imv-QA-M8c" secondAttribute="width" multiplier="0.483092" id="1e9-6Y-D3r"/>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.3" id="K2q-UD-6vk"/>
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="fbN-Cg-74W"/>
                             <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="60" id="jQa-0I-HWX"/>
@@ -894,6 +937,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
+                        <outlet property="createGameButton" destination="wCP-FP-9sr" id="gob-mP-8nN"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>
@@ -1084,16 +1128,9 @@
         <image name="Add Station Button Host" width="315" height="50"/>
         <image name="BoxFour" width="267" height="33"/>
         <image name="BoxOne" width="245" height="80"/>
-        <image name="CreateGameButtonSmall" width="175" height="57"/>
         <image name="EndGameButton" width="126" height="41"/>
         <image name="GameStartButton" width="126" height="41"/>
         <image name="GameTime Label" width="125.5" height="21"/>
-        <image name="HostCreateGameButtonLarge" width="245" height="80"/>
-        <image name="HostNextButton" width="175" height="57"/>
-        <image name="HostResumeButton" width="175" height="57"/>
-        <image name="HostResumeGameButton" width="245" height="80"/>
-        <image name="HostSaveButton" width="126" height="41"/>
-        <image name="Next button 1-1" width="176" height="57"/>
         <image name="Num Teams label" width="201" height="21"/>
         <image name="PVEButton" width="111" height="33"/>
         <image name="PVPButton" width="111" height="33"/>
