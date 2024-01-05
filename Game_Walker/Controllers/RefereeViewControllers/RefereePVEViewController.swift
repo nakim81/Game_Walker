@@ -1015,7 +1015,6 @@ extension RefereePVEController {
         if self.round != host.currentRound {
             roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
             if pvp {
-//                roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
                 leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
                 leftIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 2].iconName)
                 leftTeamNameLabel.text = "\(self.teamOrder[2 * host.currentRound - 2].name)"

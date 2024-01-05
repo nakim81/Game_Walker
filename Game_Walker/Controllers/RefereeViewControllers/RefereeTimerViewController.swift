@@ -27,7 +27,7 @@ class RefereeTimerController: BaseViewController {
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
-    private var timer = Timer()
+    private var timer: Timer?
     private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int = 0
@@ -66,22 +66,15 @@ class RefereeTimerController: BaseViewController {
         }
         Task { @MainActor in
             host = try await H.getHost(gameCode) ?? Host()
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            calculateOnly()
+            await setTime()
+            await calculateOnly()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneDidEnterBackground"), object: nil)
     }
     
     override func viewDidLoad() {
@@ -96,7 +89,8 @@ class RefereeTimerController: BaseViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(_:)), name: NSNotification.Name("sceneDidEnterBackground"), object: nil)
     }
     
     func callProtocols() {
@@ -418,7 +412,7 @@ class RefereeTimerController: BaseViewController {
         }
     }
     
-    func calculateOnly() {
+    func calculateOnly() async {
         if isPaused {
             t = pauseTime - startTime - pausedTime
         }
@@ -464,6 +458,20 @@ class RefereeTimerController: BaseViewController {
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
         }
+        print("C")
+    }
+    
+    func setTime() async {
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
+        print("B")
     }
 }
 // MARK: - @objc
@@ -503,11 +511,19 @@ extension RefereeTimerController {
         }
     }
     
-    @objc func addBackGroundTime(_ notification:Notification) {
-        currentStationInfoButton.setTitleColor(UIColor.black, for: .normal)
-        Task { @MainActor in
+    @objc func appDidEnterBackground(_ notification:Notification) {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    @objc func appWillEnterForeground(_ notification:Notification) {
+        Task(priority: .high) { @MainActor in
             do {
-                host = try await H.getHost(gameCode) ?? Host()
+                async let fetchedHost = H.getHost(gameCode) ?? Host()
+                host = try await fetchedHost
+                await self.setTime()
+                await self.calculateOnly()
+                self.runTimer()
             } catch GameWalkerError.invalidGamecode(let message) {
                 print(message)
                 gamecodeAlert(message)
@@ -517,17 +533,6 @@ extension RefereeTimerController {
                 serverAlert(message)
                 return
             }
-            print(host)
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            calculateOnly()
         }
     }
     
