@@ -1131,7 +1131,7 @@ extension RefereePVEController {
     
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist!", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1141,7 +1141,7 @@ extension RefereePVEController {
     
     @objc func winButtonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             if max != "true" {
                 Task {
@@ -1169,7 +1169,7 @@ extension RefereePVEController {
     
     @objc func loseButtonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             if max == "true" {
                 Task {
@@ -1197,7 +1197,7 @@ extension RefereePVEController {
     
     @objc func leftButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("The Team doesn't exist", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             UserData.writeTeam(self.teamA, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1207,7 +1207,7 @@ extension RefereePVEController {
     
     @objc func rightButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("The Team doesn't exist", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             UserData.writeTeam(self.teamB, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1217,7 +1217,7 @@ extension RefereePVEController {
     
     @objc func leftWinButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist.", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA != "true" {
                 Task {
@@ -1245,7 +1245,7 @@ extension RefereePVEController {
     
     @objc func rightWinButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             if maxB != "true" {
                 Task {
@@ -1273,7 +1273,7 @@ extension RefereePVEController {
     
     @objc func leftLoseButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             if maxA == "true" {
                 Task {
@@ -1301,7 +1301,7 @@ extension RefereePVEController {
     
     @objc func rightLoseButtonTapped() {
         if self.teamB.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: "", message: NSLocalizedString("There is no Team yet.", comment: ""))
         } else {
             if maxB == "true" {
                 Task {
@@ -1333,7 +1333,7 @@ extension RefereePVEController {
     
     @objc override func infoAction() {
         if !teamOrderSet {
-            alert(title: NSLocalizedString("The board is not ready yet", comment: ""), message: NSLocalizedString("Please try again when it is ready", comment: ""))
+            alert(title: NSLocalizedString("The board is not ready yet!", comment: ""), message: NSLocalizedString("Please try again when it is ready.", comment: ""))
         } else {
             if pvp {
                 showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])

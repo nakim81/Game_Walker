@@ -46,7 +46,7 @@ class HostCreateOrJoinViewController: UIViewController {
             if UserData.readGamecode("gamecode") != nil {
 
             } else {
-                alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("No game exists", comment: ""))
+                alert(title: NSLocalizedString("No game exists!", comment: ""), message: "")
         }
     }
 

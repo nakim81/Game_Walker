@@ -154,7 +154,7 @@ class TimerViewController: BaseViewController {
     @objc func nextStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         if round == rounds {
-            alert(title: "Warning", message: "You are in your last round!")
+            alert(title: "Woops!", message: "You are in your last round.")
         }
         else {
             findStation()
