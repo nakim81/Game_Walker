@@ -126,7 +126,6 @@ class SettingsViewController: BaseViewController {
         vibrationsSwitchButton.addTarget(self, action: #selector(vibrationsSwitchValueChanged(_:)), for: .valueChanged)
         soundsSwitchButton.delegate = self
         vibrationsSwitchButton.delegate = self
-
     }
     
     @objc func soundsSwitchValueChanged(_ sender: CustomSwitchButton) {
