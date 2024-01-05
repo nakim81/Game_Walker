@@ -1012,7 +1012,7 @@ extension RefereePVEController {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
         }
-        if self.round != host.currentRound {
+        if (self.round != host.currentRound) && (host.currentRound < host.rounds) {
             roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
             if pvp {
                 leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
