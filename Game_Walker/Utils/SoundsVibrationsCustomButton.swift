@@ -77,7 +77,6 @@ class SoundsVibrationsCustomButton: UIButton {
         circleView = UIImageView()
         circleView.translatesAutoresizingMaskIntoConstraints = false
         circleView.image = self.onImage.circle
-//        circleView.contentMode = .scaleAspectFit
         self.addSubview(circleView)
 
         NSLayoutConstraint.activate([
@@ -91,8 +90,6 @@ class SoundsVibrationsCustomButton: UIButton {
             circleView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             circleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: circleViewTopBottomMargin)
         ])
-
-//        layoutIfNeeded()
 
         print("circleView frame in buttonInit: \(circleView.frame)")
         print("circleViewTopBottomMargin: ", circleViewTopBottomMargin)

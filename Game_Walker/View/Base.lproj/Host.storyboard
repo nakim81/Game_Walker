@@ -90,113 +90,6 @@
             </objects>
             <point key="canvasLocation" x="-430" y="199"/>
         </scene>
-        <!--000000-->
-        <scene sceneID="woW-1R-LMh">
-            <objects>
-                <viewController id="dgu-WT-CVq" customClass="SecondTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YgV-Ck-Ynp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECOND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbY-C2-CHe">
-                                <rect key="frame" x="127" y="406.5" width="160" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="zIC-7n-23L"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                        <constraints>
-                            <constraint firstItem="MbY-C2-CHe" firstAttribute="centerY" secondItem="zIC-7n-23L" secondAttribute="centerY" id="Ya3-9a-d1y"/>
-                            <constraint firstItem="MbY-C2-CHe" firstAttribute="centerX" secondItem="zIC-7n-23L" secondAttribute="centerX" id="uX0-Fh-LlO"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="6g1-fo-e1k"/>
-                    <navigationItem key="navigationItem" title="000000" id="lY3-Xd-8Dv"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nx2-B5-ipF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="2038"/>
-        </scene>
-        <!--000000-->
-        <scene sceneID="Z2l-sT-RGX">
-            <objects>
-                <viewController id="iY9-31-wfI" customClass="ThirdTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fWW-2L-K70">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIRD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X00-Em-HtQ">
-                                <rect key="frame" x="150" y="406.5" width="114" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="XxK-bd-SpI"/>
-                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                        <constraints>
-                            <constraint firstItem="X00-Em-HtQ" firstAttribute="centerY" secondItem="XxK-bd-SpI" secondAttribute="centerY" id="F7U-Db-mkx"/>
-                            <constraint firstItem="X00-Em-HtQ" firstAttribute="centerX" secondItem="XxK-bd-SpI" secondAttribute="centerX" id="ajJ-PN-Dq6"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="txX-ue-Meo"/>
-                    <navigationItem key="navigationItem" title="000000" id="rv8-bI-M6D"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdk-mD-gJY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="2703"/>
-        </scene>
-        <!--000000-->
-        <scene sceneID="sYW-xE-MAr">
-            <objects>
-                <viewController id="F0Z-Xl-HH5" customClass="FirstTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UAT-Vw-3aD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzZ-kR-qiZ">
-                                <rect key="frame" x="155.5" y="406.5" width="103" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="bQy-Ch-gXV"/>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
-                        <constraints>
-                            <constraint firstItem="DzZ-kR-qiZ" firstAttribute="centerX" secondItem="bQy-Ch-gXV" secondAttribute="centerX" id="6m2-eb-7C5"/>
-                            <constraint firstItem="DzZ-kR-qiZ" firstAttribute="centerY" secondItem="bQy-Ch-gXV" secondAttribute="centerY" id="ZqA-8Z-O5U"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="pbE-AE-cmi"/>
-                    <navigationItem key="navigationItem" title="000000" id="SO7-2l-M1e"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OJb-Xt-hW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="1363"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="guo-r7-VbF">
-            <objects>
-                <tabBarController id="zJX-xS-UAe" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="WKH-3T-cXl"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bgK-pv-OTk">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="F0Z-Xl-HH5" kind="relationship" relationship="viewControllers" id="F0B-lp-Oky"/>
-                        <segue destination="dgu-WT-CVq" kind="relationship" relationship="viewControllers" id="a3j-RG-cjj"/>
-                        <segue destination="iY9-31-wfI" kind="relationship" relationship="viewControllers" id="aUN-Sz-lHM"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u92-cP-r4s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1164" y="2038"/>
-        </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
             <objects>
@@ -418,7 +311,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
                                 <rect key="frame" x="119.5" y="774" width="175" height="57"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="HostNextButton"/>
+                                <state key="normal" backgroundImage="HostNextButton"/>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="1L0-Oz-afr" eventType="touchUpInside" id="5Ej-nt-O5X"/>
                                 </connections>
@@ -1184,7 +1077,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nWr-2f-mnX"/>
+        <segue reference="OK4-sB-gpM"/>
         <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1217,15 +1110,6 @@
         <image name="time-tick" width="9" height="66"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
