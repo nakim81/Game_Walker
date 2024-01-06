@@ -79,7 +79,7 @@ class JoinGameViewController: UIViewController {
         
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
-        var player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")
+        let player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")
         
         guard let gamecode = gamecodeTextField.text else { return }
         guard let username = usernameTextField.text else { return }

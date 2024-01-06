@@ -53,8 +53,8 @@ class StartGameViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("Dismiss", comment: ""), for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setBackgroundImage(UIColor.clear.image(), for: .normal)
+        button.setTitleColor(fontColor, for: .normal)
+        button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
         // disable
         button.setTitleColor(fontColor, for: .disabled)
@@ -75,9 +75,9 @@ class StartGameViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("Confirm", comment: ""), for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
-        button.setBackgroundImage(UIColor.white.image(), for: .normal)
-
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setBackgroundImage(UIColor.clear.image(), for: .normal)
+        
         // disable
         button.setTitleColor(fontColor, for: .disabled)
         button.setBackgroundImage(UIColor.white.image(), for: .disabled)
@@ -104,8 +104,8 @@ class StartGameViewController: UIViewController {
         let view = UIStackView()
         view.spacing = 17.0
         view.distribution = .fillEqually
-        view.addArrangedSubview(dismissButton)
         view.addArrangedSubview(confirmButton)
+        view.addArrangedSubview(dismissButton)
         return view
     }()
     
@@ -175,7 +175,7 @@ class StartGameViewController: UIViewController {
 
             buttonStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
             buttonStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             buttonStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.13)
         ])
     }

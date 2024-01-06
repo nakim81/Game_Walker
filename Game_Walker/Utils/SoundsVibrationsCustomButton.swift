@@ -66,6 +66,7 @@ class SoundsVibrationsCustomButton: UIButton {
     
     private func buttonInit(frame: CGRect) {
         let circleViewHeight = frame.height - (circleViewTopBottomMargin * 2)
+        print("circleViewHeight: ", circleViewHeight)
 
         barView = UIImageView()
         barView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +77,6 @@ class SoundsVibrationsCustomButton: UIButton {
         circleView = UIImageView()
         circleView.translatesAutoresizingMaskIntoConstraints = false
         circleView.image = self.onImage.circle
-        circleView.contentMode = .scaleAspectFit
         self.addSubview(circleView)
 
         NSLayoutConstraint.activate([
@@ -85,24 +85,15 @@ class SoundsVibrationsCustomButton: UIButton {
             barView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             barView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
-            circleView.widthAnchor.constraint(equalTo: circleView.heightAnchor),
-            circleView.heightAnchor.constraint(equalToConstant: circleViewHeight),
+            circleView.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
+            circleView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
             circleView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-
             circleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: circleViewTopBottomMargin)
         ])
 
-        layoutIfNeeded()
-
-        let circleCenter: CGFloat = isOn ?
-            circleView.frame.width / 2 + circleViewTopBottomMargin :
-            frame.width - (circleView.frame.width / 2) - circleViewTopBottomMargin
-
-        circleView.center.x = circleCenter
-
         print("circleView frame in buttonInit: \(circleView.frame)")
+        print("circleViewTopBottomMargin: ", circleViewTopBottomMargin)
     }
-
 
 
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

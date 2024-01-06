@@ -22,7 +22,7 @@ class TimerViewController: BaseViewController {
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
-    private var timer = Timer()
+    private var timer: Timer?
     private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int = 0
@@ -186,16 +186,8 @@ class TimerViewController: BaseViewController {
         }
         Task { @MainActor in
             host = try await H.getHost(gameCode) ?? Host()
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            calculateOnly()
+            await setTime()
+            await calculateOnly()
         }
     }
     
@@ -217,6 +209,7 @@ class TimerViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneDidEnterBackground"), object: nil)
     }
     
     
@@ -226,7 +219,8 @@ class TimerViewController: BaseViewController {
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(_:)), name: NSNotification.Name("sceneDidEnterBackground"), object: nil)
     }
     
     func setSettings() {
@@ -468,7 +462,7 @@ class TimerViewController: BaseViewController {
         }
     }
     
-    func calculateOnly() {
+    func calculateOnly() async {
         if isPaused {
             t = pauseTime - startTime - pausedTime
         }
@@ -515,6 +509,18 @@ class TimerViewController: BaseViewController {
             self.roundLabel.text = "Round \(quotient + 1)"
         }
     }
+    
+    func setTime() async {
+        self.seconds = host.gameTime
+        self.moveSeconds = host.movingTime
+        self.startTime = host.startTimestamp
+        self.isPaused = host.paused
+        self.pauseTime = host.pauseTimestamp
+        self.pausedTime = host.pausedTime
+        self.rounds = host.rounds
+        self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
+        self.round = host.currentRound
+    }
 }
 // MARK: - @objc
 extension TimerViewController {
@@ -530,11 +536,19 @@ extension TimerViewController {
         self.isPaused = host.paused
     }
     
-    @objc func addBackGroundTime(_ notification:Notification) {
-        currentStationInfoButton.setTitleColor(UIColor.black, for: .normal)
-        Task { @MainActor in
+    @objc func appDidEnterBackground(_ notification:Notification) {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    @objc func appWillEnterForeground(_ notification:Notification) {
+        Task(priority: .high) { @MainActor in
             do {
-                host = try await H.getHost(gameCode) ?? Host()
+                async let fetchedHost = H.getHost(gameCode) ?? Host()
+                host = try await fetchedHost
+                await self.setTime()
+                await self.calculateOnly()
+                self.runTimer()
             } catch GameWalkerError.invalidGamecode(let message) {
                 print(message)
                 gamecodeAlert(message)
@@ -544,17 +558,6 @@ extension TimerViewController {
                 serverAlert(message)
                 return
             }
-            print(host)
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            calculateOnly()
         }
     }
     

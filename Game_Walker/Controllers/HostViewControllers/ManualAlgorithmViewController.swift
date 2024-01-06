@@ -15,6 +15,7 @@ class ManualAlgorithmViewController: UIViewController {
     private var rectWidth = 0.98 * UIScreen.main.bounds.width
     private var modalRect : CGRect = CGRect()
     
+    @IBOutlet weak var createGameButton: UIButton!
     @IBOutlet weak var stationsLabelImageView: UIImageView!
     @IBOutlet weak var roundsLabelImageView: UIImageView!
     
@@ -90,6 +91,7 @@ class ManualAlgorithmViewController: UIViewController {
         roundsLabelImageView.isHidden = true
         configureSimpleNavBar()
         addTapGesture()
+        configureButtonVisuals()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +114,10 @@ class ManualAlgorithmViewController: UIViewController {
         if collectionViewCellWidth! > 0  {
             createBorderLines()
         }
+    }
+
+    private func configureButtonVisuals() {
+        createGameButton.layer.cornerRadius = 10.0
     }
 
     func fetchHostForAlgorithm() async throws -> Host {
@@ -1403,7 +1409,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
         makeConstraints()
         print(self.stationList)
     }
-    
+
     private func configureTableView() {
         stationTableView.delegate = self
         stationTableView.dataSource = self

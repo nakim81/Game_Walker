@@ -15,7 +15,8 @@ class HostCreateOrJoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavItem()
-        
+        configureButtonVisuals()
+
     }
     
     @objc private func performStandardModeSegue() {
@@ -42,7 +43,6 @@ class HostCreateOrJoinViewController: UIViewController {
     }
         
     @IBAction func resumeButtonPressed(_ sender: UIButton) {
-        
             if UserData.readGamecode("gamecode") != nil {
 
             } else {
@@ -60,6 +60,11 @@ class HostCreateOrJoinViewController: UIViewController {
            let chooseStyleModalVC = segue.destination as? ChooseStyleModalViewController {
             chooseStyleModalVC.delegate = self
         }
+    }
+
+    private func configureButtonVisuals() {
+        createButton.layer.cornerRadius = 10.0
+        resumeButton.layer.cornerRadius = 10.0
     }
 
     

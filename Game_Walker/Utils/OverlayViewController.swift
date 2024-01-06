@@ -20,7 +20,7 @@ class OverlayViewController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "icon _close_"), for: .normal)
-        button.addTarget(self, action: #selector(dismissOverlay), for: .touchUpInside)
+        button.addTarget(OverlayViewController.self, action: #selector(dismissOverlay), for: .touchUpInside)
         return button
     }()
     

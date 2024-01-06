@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,22 +43,30 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="CreateGameButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyS-bJ-dkx">
                                 <rect key="frame" x="72.5" y="274.5" width="269" height="88"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tyS-bJ-dkx" secondAttribute="height" multiplier="245:80" id="Wan-Qp-l4G"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="HostCreateGameButtonLarge"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Create Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="createGameButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AQK-E6-Ihj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NZ-by-CrW">
                                 <rect key="frame" x="72.5" y="508.5" width="269" height="88"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8NZ-by-CrW" secondAttribute="height" multiplier="245:80" id="c52-Ne-J07"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="HostResumeGameButton"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Resume Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="resumeButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SzG-ND-FUq"/>
                                     <segue destination="4gK-PM-WO8" kind="show" identifier="ResumeGameToCodeSegue" id="efF-m6-uwV"/>
@@ -79,6 +87,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bie-XC-ACB"/>
                     <connections>
+                        <outlet property="createButton" destination="tyS-bJ-dkx" id="iH2-1z-sqm"/>
                         <outlet property="resumeButton" destination="8NZ-by-CrW" id="O2h-0j-ajl"/>
                         <segue destination="mef-gJ-a9R" kind="show" identifier="ToMainVC" id="Ksp-7h-L4K"/>
                         <segue destination="1L0-Oz-afr" kind="show" identifier="CreateStandardGameSegue" id="tce-ii-ly8"/>
@@ -90,113 +99,6 @@
             </objects>
             <point key="canvasLocation" x="-430" y="199"/>
         </scene>
-        <!--000000-->
-        <scene sceneID="woW-1R-LMh">
-            <objects>
-                <viewController id="dgu-WT-CVq" customClass="SecondTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YgV-Ck-Ynp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECOND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbY-C2-CHe">
-                                <rect key="frame" x="127" y="406.5" width="160" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="zIC-7n-23L"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                        <constraints>
-                            <constraint firstItem="MbY-C2-CHe" firstAttribute="centerY" secondItem="zIC-7n-23L" secondAttribute="centerY" id="Ya3-9a-d1y"/>
-                            <constraint firstItem="MbY-C2-CHe" firstAttribute="centerX" secondItem="zIC-7n-23L" secondAttribute="centerX" id="uX0-Fh-LlO"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="6g1-fo-e1k"/>
-                    <navigationItem key="navigationItem" title="000000" id="lY3-Xd-8Dv"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nx2-B5-ipF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="2038"/>
-        </scene>
-        <!--000000-->
-        <scene sceneID="Z2l-sT-RGX">
-            <objects>
-                <viewController id="iY9-31-wfI" customClass="ThirdTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fWW-2L-K70">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIRD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X00-Em-HtQ">
-                                <rect key="frame" x="150" y="406.5" width="114" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="XxK-bd-SpI"/>
-                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                        <constraints>
-                            <constraint firstItem="X00-Em-HtQ" firstAttribute="centerY" secondItem="XxK-bd-SpI" secondAttribute="centerY" id="F7U-Db-mkx"/>
-                            <constraint firstItem="X00-Em-HtQ" firstAttribute="centerX" secondItem="XxK-bd-SpI" secondAttribute="centerX" id="ajJ-PN-Dq6"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="txX-ue-Meo"/>
-                    <navigationItem key="navigationItem" title="000000" id="rv8-bI-M6D"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdk-mD-gJY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="2703"/>
-        </scene>
-        <!--000000-->
-        <scene sceneID="sYW-xE-MAr">
-            <objects>
-                <viewController id="F0Z-Xl-HH5" customClass="FirstTabTestViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UAT-Vw-3aD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzZ-kR-qiZ">
-                                <rect key="frame" x="155.5" y="406.5" width="103" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="bQy-Ch-gXV"/>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
-                        <constraints>
-                            <constraint firstItem="DzZ-kR-qiZ" firstAttribute="centerX" secondItem="bQy-Ch-gXV" secondAttribute="centerX" id="6m2-eb-7C5"/>
-                            <constraint firstItem="DzZ-kR-qiZ" firstAttribute="centerY" secondItem="bQy-Ch-gXV" secondAttribute="centerY" id="ZqA-8Z-O5U"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="pbE-AE-cmi"/>
-                    <navigationItem key="navigationItem" title="000000" id="SO7-2l-M1e"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OJb-Xt-hW3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="270" y="1363"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="guo-r7-VbF">
-            <objects>
-                <tabBarController id="zJX-xS-UAe" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="WKH-3T-cXl"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bgK-pv-OTk">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="F0Z-Xl-HH5" kind="relationship" relationship="viewControllers" id="F0B-lp-Oky"/>
-                        <segue destination="dgu-WT-CVq" kind="relationship" relationship="viewControllers" id="a3j-RG-cjj"/>
-                        <segue destination="iY9-31-wfI" kind="relationship" relationship="viewControllers" id="aUN-Sz-lHM"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u92-cP-r4s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1164" y="2038"/>
-        </scene>
         <!--Host Game Code View Controller-->
         <scene sceneID="sVL-Jh-5Fa">
             <objects>
@@ -206,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" minimumFontSize="17" background="BoxOne" translatesAutoresizingMaskIntoConstraints="NO" id="8bU-vL-2hU">
-                                <rect key="frame" x="85.5" y="364" width="243" height="79.5"/>
+                                <rect key="frame" x="45" y="366" width="324" height="105.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8bU-vL-2hU" secondAttribute="height" multiplier="245:80" id="hBc-CJ-HEn"/>
                                 </constraints>
@@ -215,17 +117,21 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U83-h1-qtH">
                                 <rect key="frame" x="107" y="720.5" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="U83-h1-qtH" secondAttribute="height" multiplier="175:57" id="1g7-As-aRW"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="HostResumeButton"/>
+                                <state key="normal" title="RESUME">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="joinButtonPressed:" destination="4gK-PM-WO8" eventType="touchUpInside" id="h9p-9d-cMp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-o1-Ip2">
-                                <rect key="frame" x="126" y="310.5" width="162" height="43.5"/>
+                                <rect key="frame" x="99" y="309" width="216" height="47"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                 <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -271,25 +177,25 @@
                                         <rect key="frame" x="28" y="25" width="308" height="320"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the style that fits your event!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtQ-t2-3Ba">
-                                                <rect key="frame" x="16" y="0.0" width="276.5" height="65.5"/>
+                                                <rect key="frame" x="7.5" y="0.0" width="293.5" height="70"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-UZ-7lT">
-                                                <rect key="frame" x="0.0" y="89" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="90.5" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pi3-zN-szb">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-ys-a2b">
-                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40"/>
+                                                                <rect key="frame" x="84.5" y="0.0" width="139" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
-                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
+                                                                <rect key="frame" x="59.5" y="25.5" width="189.5" height="40.5"/>
                                                                 <string key="text">This mode includes all of our features
 (Points, Stations, Matching, Timer, etc)</string>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
@@ -309,19 +215,19 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMs-Uc-B0K">
-                                                <rect key="frame" x="0.0" y="178" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="178.5" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-qL-haN">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdt-89-RkS">
-                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40"/>
+                                                                <rect key="frame" x="102.5" y="0.0" width="103" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This mode includes points and rankings only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFs-Tm-uFC">
-                                                                <rect key="frame" x="72.5" y="26" width="163" height="40"/>
+                                                                <rect key="frame" x="44.5" y="25.5" width="219" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
@@ -403,7 +309,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
-                                <rect key="frame" x="116" y="105.5" width="182.5" height="54.5"/>
+                                <rect key="frame" x="91" y="103.5" width="232.5" height="58.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="STATIONS">
                                         <attributes>
@@ -416,19 +322,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
-                                <rect key="frame" x="119.5" y="774" width="175" height="57"/>
+                                <rect key="frame" x="107" y="766" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rd9-KY-2cP" secondAttribute="height" multiplier="175:57" id="1zJ-JX-ltq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" backgroundImage="HostNextButton"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="1L0-Oz-afr" eventType="touchUpInside" id="5Ej-nt-O5X"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
-                                <rect key="frame" x="31" y="175" width="352" height="487.5"/>
+                                <rect key="frame" x="31" y="177" width="352" height="487.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-lG-6rY" userLabel="Add Button">
-                                <rect key="frame" x="49.5" y="677.5" width="315" height="50"/>
+                                <rect key="frame" x="49.5" y="679.5" width="315" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0cn-lG-6rY" secondAttribute="height" multiplier="315:50" id="Dbi-1s-kEz"/>
                                 </constraints>
@@ -450,6 +363,7 @@
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="height" secondItem="txZ-n6-kgn" secondAttribute="height" multiplier="0.55" id="PPH-SR-rCd"/>
                             <constraint firstItem="427-kj-OdI" firstAttribute="centerY" secondItem="txZ-n6-kgn" secondAttribute="centerY" multiplier="0.3" id="S7H-KQ-gFa"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="centerX" secondItem="txZ-n6-kgn" secondAttribute="centerX" id="VV8-fQ-jPl"/>
+                            <constraint firstItem="Rd9-KY-2cP" firstAttribute="width" secondItem="OQk-vm-7Sx" secondAttribute="width" multiplier="0.483092" id="j0b-tq-ake"/>
                             <constraint firstItem="LOv-V0-Zcn" firstAttribute="top" secondItem="427-kj-OdI" secondAttribute="bottom" constant="15" id="nVa-de-gWS"/>
                             <constraint firstItem="0cn-lG-6rY" firstAttribute="centerX" secondItem="Rd9-KY-2cP" secondAttribute="centerX" id="qlu-tP-Pup"/>
                             <constraint firstItem="txZ-n6-kgn" firstAttribute="bottom" secondItem="Rd9-KY-2cP" secondAttribute="bottom" constant="55" id="zve-b7-A7a"/>
@@ -458,6 +372,7 @@
                     <navigationItem key="navigationItem" id="DML-sP-Zbz"/>
                     <connections>
                         <outlet property="addButton" destination="0cn-lG-6rY" id="Mzb-us-q2q"/>
+                        <outlet property="nextButton" destination="Rd9-KY-2cP" id="NgV-UF-cTQ"/>
                         <outlet property="stationTable" destination="LOv-V0-Zcn" id="D5J-Du-ZrP"/>
                         <outlet property="stationsLabel" destination="427-kj-OdI" id="p7U-hs-swJ"/>
                         <segue destination="KzH-J8-5vd" kind="show" identifier="ToSettingsSegue" id="3Ok-9v-lov"/>
@@ -482,31 +397,31 @@
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iML-mv-p7Y" userLabel="Station Label">
-                                        <rect key="frame" x="57.5" y="58.5" width="158.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="56.5" width="158.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kB-BH-qBQ" userLabel="Location Label">
-                                        <rect key="frame" x="57.5" y="139.5" width="135.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="139.5" width="168.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QME-XF-J55" userLabel="Points Label">
-                                        <rect key="frame" x="57.5" y="221" width="118.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="223" width="144" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-L9-4OF" userLabel="Referee Label">
-                                        <rect key="frame" x="57.5" y="302" width="66.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="306" width="79.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZT-6z-gXz" userLabel="Rules Label">
-                                        <rect key="frame" x="57.5" y="436.5" width="47.5" height="25"/>
+                                        <rect key="frame" x="57.5" y="442.5" width="57.5" height="27"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -525,27 +440,27 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0RL-II-XhM" userLabel="text Game Location">
-                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-P8-uwc" userLabel="Game Location Text">
-                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fW0-Ap-xmH" userLabel="text Game Points">
-                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-DB-iAK" userLabel="Game Points Text">
-                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQY-JV-gHm" userLabel="Referee Button">
-                                        <rect key="frame" x="44" y="332" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="338" width="318" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="BoxFour"/>
@@ -554,13 +469,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="149" y="342" width="108" height="19.5"/>
+                                        <rect key="frame" x="139.5" y="348" width="127.5" height="19.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIc-0l-Lvr" userLabel="Pvp Pve View">
-                                        <rect key="frame" x="44" y="385.5" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="391.5" width="318" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sd-pw-gIC" userLabel="PVP">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="39"/>
@@ -608,7 +523,7 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xx1-Tw-m3A" userLabel="Rules text view">
-                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xx1-Tw-m3A" secondAttribute="height" multiplier="267:103" id="ls9-as-iQd"/>
@@ -618,15 +533,19 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rules Box" translatesAutoresizingMaskIntoConstraints="NO" id="BkX-2h-b6N">
-                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
                                         <rect key="frame" x="130" y="609" width="146" height="48"/>
+                                        <color key="backgroundColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mew-pS-Laf" secondAttribute="height" multiplier="126:41" id="VeK-ka-nJC"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" backgroundImage="HostSaveButton"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="CRC-dh-1RI"/>
                                         </connections>
@@ -734,31 +653,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GameTime Label" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
-                                <rect key="frame" x="137" y="168" width="140" height="36"/>
+                                <rect key="frame" x="137" y="170" width="140" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="128:33" id="In3-dF-mbz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
-                                <rect key="frame" x="97.5" y="207" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="209" width="219" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="200:60" id="89c-SK-TFL"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                <rect key="frame" x="108.5" y="209" width="197" height="62.5"/>
+                                <rect key="frame" x="108.5" y="211" width="197" height="62.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
                                         <rect key="frame" x="94" y="-2" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="42.5" y="4.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="40.5" y="6.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="108" y="4.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="108" y="6.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -783,28 +702,28 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transitino Time Label" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="110.5" y="303" width="193" height="35.5"/>
+                                <rect key="frame" x="110.5" y="305" width="193" height="35.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="179:33" id="wkB-x3-fMl"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
-                                <rect key="frame" x="97.5" y="341.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                <rect key="frame" x="97.5" y="341.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
                                         <rect key="frame" x="105" y="0.0" width="9" height="66"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="52" y="6.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="50" y="8.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="121" y="6.5" width="45" height="53.5"/>
+                                        <rect key="frame" x="121" y="8.5" width="47" height="49"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -828,46 +747,53 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rounds Label" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="158.5" y="437.5" width="97" height="36"/>
+                                <rect key="frame" x="158.5" y="439.5" width="97" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="88:33" id="gC4-9S-8sz"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
-                                <rect key="frame" x="97.5" y="476.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="478.5" width="219" height="66"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="119" y="774" width="176" height="57"/>
+                                <rect key="frame" x="107" y="766" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="p0n-80-Fkc" secondAttribute="height" multiplier="175:57" id="MAx-4n-z2k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="Next button 1-1"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
                                     <segue destination="Vjg-e5-r3Z" kind="show" identifier="ShowAlgorithmSegue" id="flX-6b-8Ik"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                <rect key="frame" x="108.5" y="480" width="197" height="59"/>
+                                <rect key="frame" x="108.5" y="482" width="197" height="59"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Num Teams label" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-bV-YWp" userLabel="Team Count label">
-                                <rect key="frame" x="95.5" y="572.5" width="223" height="36"/>
+                                <rect key="frame" x="95.5" y="574.5" width="223" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="WYz-bV-YWp" secondAttribute="height" multiplier="203:33" id="sJQ-7T-Ic5"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Vix-LA-Y4c" userLabel="Team Count box">
-                                <rect key="frame" x="97.5" y="611.5" width="219" height="66"/>
+                                <rect key="frame" x="97.5" y="613.5" width="219" height="66"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                <rect key="frame" x="108.5" y="615" width="197" height="59"/>
+                                <rect key="frame" x="108.5" y="617" width="197" height="59"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw">
-                                <rect key="frame" x="115" y="83.5" width="184.5" height="54.5"/>
+                                <rect key="frame" x="87" y="81.5" width="240" height="58.5"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -927,6 +853,7 @@
                             <constraint firstItem="Vix-LA-Y4c" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="q90-0A-0BT"/>
                             <constraint firstItem="id3-FJ-dYb" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="rDo-Ff-Ss8"/>
                             <constraint firstItem="fc8-so-AwG" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="0.9" id="ruE-69-iIn"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.483092" id="tEo-Yy-jxP"/>
                             <constraint firstItem="LEY-kG-BRL" firstAttribute="top" secondItem="EBr-2e-ORF" secondAttribute="bottom" constant="3" id="vED-Ec-S1O"/>
                             <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="wgT-gd-33E"/>
                             <constraint firstItem="WYz-bV-YWp" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="yFX-W8-1yb"/>
@@ -939,6 +866,7 @@
                         <outlet property="gameSecondsLabel" destination="Ko8-vf-QFy" id="G2n-ea-P38"/>
                         <outlet property="movingMinutesLabel" destination="RFd-2O-0qr" id="5DQ-PQ-4M9"/>
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
+                        <outlet property="nextButton" destination="p0n-80-Fkc" id="L4Q-cv-HgM"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
                         <outlet property="teamcountTextField" destination="fc8-so-AwG" id="2It-gy-vHo"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
@@ -957,7 +885,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
-                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
+                                <rect key="frame" x="77.5" y="103.5" width="259.5" height="58.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="MATCHING">
                                         <attributes>
@@ -970,9 +898,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button">
-                                <rect key="frame" x="119.5" y="769" width="175" height="57"/>
+                                <rect key="frame" x="107" y="761" width="200" height="65"/>
+                                <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="wCP-FP-9sr" secondAttribute="height" multiplier="175:57" id="7Zk-CP-yKb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="CreateGameButtonSmall"/>
+                                <state key="normal" title="Create Game">
+                                    <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <action selector="createButtonPressed:" destination="Vjg-e5-r3Z" eventType="touchUpInside" id="pPw-TG-BfL"/>
                                 </connections>
@@ -994,6 +929,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="16F-GJ-EhV"/>
+                            <constraint firstItem="wCP-FP-9sr" firstAttribute="width" secondItem="imv-QA-M8c" secondAttribute="width" multiplier="0.483092" id="1e9-6Y-D3r"/>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.3" id="K2q-UD-6vk"/>
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="fbN-Cg-74W"/>
                             <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="60" id="jQa-0I-HWX"/>
@@ -1001,6 +937,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
+                        <outlet property="createGameButton" destination="wCP-FP-9sr" id="gob-mP-8nN"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>
@@ -1184,23 +1121,16 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7rv-rP-bSv"/>
-        <segue reference="tce-ii-ly8"/>
+        <segue reference="OK4-sB-gpM"/>
+        <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
         <image name="BoxFour" width="267" height="33"/>
         <image name="BoxOne" width="245" height="80"/>
-        <image name="CreateGameButtonSmall" width="175" height="57"/>
         <image name="EndGameButton" width="126" height="41"/>
         <image name="GameStartButton" width="126" height="41"/>
         <image name="GameTime Label" width="125.5" height="21"/>
-        <image name="HostCreateGameButtonLarge" width="245" height="80"/>
-        <image name="HostNextButton" width="175" height="57"/>
-        <image name="HostResumeButton" width="175" height="57"/>
-        <image name="HostResumeGameButton" width="245" height="80"/>
-        <image name="HostSaveButton" width="126" height="41"/>
-        <image name="Next button 1-1" width="176" height="57"/>
         <image name="Num Teams label" width="201" height="21"/>
         <image name="PVEButton" width="111" height="33"/>
         <image name="PVPButton" width="111" height="33"/>
@@ -1217,15 +1147,6 @@
         <image name="time-tick" width="9" height="66"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

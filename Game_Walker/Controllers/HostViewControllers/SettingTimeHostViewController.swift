@@ -10,6 +10,7 @@ import UIKit
 class SettingTimeHostViewController: UIViewController {
 
     
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var gameMinutesLabel: UILabel!
     @IBOutlet weak var gameSecondsLabel: UILabel!
     @IBOutlet weak var movingMinutesLabel: UILabel!
@@ -99,8 +100,7 @@ class SettingTimeHostViewController: UIViewController {
         
         gameToolBar.sizeToFit()
         moveToolBar.sizeToFit()
-        
-        
+
         let gamedoneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(self.applyDone))
         let movedoneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(self.applyDone))
         let gamenextButton = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""), style: .plain, target: self, action: #selector(self.applyNext))
@@ -167,6 +167,8 @@ class SettingTimeHostViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        configureButtonVisuals()
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -178,6 +180,7 @@ class SettingTimeHostViewController: UIViewController {
         navBarHidden = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowAlgorithmSegue" {
             if let destinationVC = segue.destination as? ManualAlgorithmViewController {
@@ -420,7 +423,10 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
         }
         return tempStationList
     }
-    
+
+    private func configureButtonVisuals() {
+        nextButton.layer.cornerRadius = 10.0
+    }
 }
 
 
