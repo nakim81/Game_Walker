@@ -16,6 +16,7 @@ class StationsTableViewController: UIViewController {
     private let refreshController : UIRefreshControl = UIRefreshControl()
     
     
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var stationsLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stationTable: UITableView!
@@ -36,6 +37,7 @@ class StationsTableViewController: UIViewController {
         
         stationTable.refreshControl = refreshController
         settingRefreshControl()
+        configureButtonVisuals()
 
     }
     
@@ -235,7 +237,10 @@ extension StationsTableViewController: UITableViewDataSource {
         performSegue(withIdentifier: "AddStationSegue", sender: currentStations[indexPath.row])
     }
     
-    
+    private func configureButtonVisuals() {
+        nextButton.layer.cornerRadius = 10.0
+    }
+
 }
 
 extension StationsTableViewController: AddStationDelegate {

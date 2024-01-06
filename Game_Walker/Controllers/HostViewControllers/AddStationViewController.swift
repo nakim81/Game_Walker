@@ -71,7 +71,7 @@ class AddStationViewController: UIViewController {
         rulesTextfield.delegate = self
         gamepointsTextfield.keyboardType = .numberPad
 
-
+        saveButton.layer.cornerRadius = 10.0
         
         refereeTableView.register(UINib(nibName: "StationRefereeTableViewCell", bundle: nil), forCellReuseIdentifier: "StationRefereeTableViewCell")
         refereeTableView.delegate = self
