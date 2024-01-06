@@ -118,7 +118,7 @@
 		FC197FEB29A3439200E084C4 /* AwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */; };
 		FC1D68F1288B97C500C529DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1D68F0288B97C500C529DA /* UserData.swift */; };
 		FC21701E29A3198B00FD5F66 /* AwardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21701D29A3198B00FD5F66 /* AwardViewController.swift */; };
-		FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21CB6F29F036F00024A248 /* endGameViewController.swift */; };
+		FC21CB7029F036F00024A248 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC21CB6F29F036F00024A248 /* EndGameViewController.swift */; };
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */; };
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
@@ -259,7 +259,7 @@
 		FC197FEA29A3439200E084C4 /* AwardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardTableViewCell.swift; sourceTree = "<group>"; };
 		FC1D68F0288B97C500C529DA /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserData.swift; path = Model/UserData.swift; sourceTree = "<group>"; };
 		FC21701D29A3198B00FD5F66 /* AwardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardViewController.swift; sourceTree = "<group>"; };
-		FC21CB6F29F036F00024A248 /* endGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = endGameViewController.swift; sourceTree = "<group>"; };
+		FC21CB6F29F036F00024A248 /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65929B76BA70072946F /* HostMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 				A1C9708829DC5FD6009C6109 /* ManualAlgorithmViewController.swift */,
 				FC152E6D29C4C423007A85CA /* HostTabBarControllers */,
 				FC44B65729B76B480072946F /* HostMessageViews */,
-				FC21CB6F29F036F00024A248 /* endGameViewController.swift */,
+				FC21CB6F29F036F00024A248 /* EndGameViewController.swift */,
 				FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */,
 				A1521DD62AA9B81C00B7BD8A /* CellData.swift */,
 				A11A37982ABD8DB8000C2222 /* AlgCollectionViewCell.swift */,
@@ -800,7 +800,7 @@
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
 				A1A568A12AF478C300577CFF /* SecondTabTestViewController.swift in Sources */,
 				FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */,
-				FC21CB7029F036F00024A248 /* endGameViewController.swift in Sources */,
+				FC21CB7029F036F00024A248 /* EndGameViewController.swift in Sources */,
 				A1FFDC7E2AD7B92A000DF76E /* DuplicatedOppGuideView.swift in Sources */,
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				FC44B65A29B76BA70072946F /* HostMessageTableViewCell.swift in Sources */,
@@ -1094,7 +1094,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1129,7 +1129,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WZS33QTKD;
+				DEVELOPMENT_TEAM = UG3NAUMUS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;

@@ -46,7 +46,7 @@ class RefereeTimerController: BaseViewController {
         currentStationInfoButton.setTitleColor(UIColor.white, for: .normal)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        var unread = RefereeTabBarPVEController.unread
+        let unread = RefereeTabBarPVEController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {

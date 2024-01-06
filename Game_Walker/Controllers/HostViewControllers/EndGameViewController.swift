@@ -52,8 +52,8 @@ class EndGameViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("NO", comment: ""), for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setBackgroundImage(UIColor.clear.image(), for: .normal)
+        button.setTitleColor(fontColor, for: .normal)
+        button.setBackgroundImage(UIColor.white.image(), for: .normal)
 
         // disable
         button.setTitleColor(fontColor, for: .disabled)
@@ -74,8 +74,8 @@ class EndGameViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("YES", comment: ""), for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
-        button.setBackgroundImage(UIColor.white.image(), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.setBackgroundImage(UIColor.clear.image(), for: .normal)
 
         // disable
         button.setTitleColor(.gray, for: .disabled)
@@ -112,6 +112,8 @@ class EndGameViewController: UIViewController {
     
     private lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
+        buttonStackView.addArrangedSubview(yesButton)
+        buttonStackView.addArrangedSubview(noButton)
         view.spacing = 17.0
         view.distribution = .fillEqually
         return view
@@ -147,8 +149,6 @@ class EndGameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buttonStackView.addArrangedSubview(noButton)
-        buttonStackView.addArrangedSubview(yesButton)
         setUpViews()
         makeConstraints()
     }
@@ -185,7 +185,7 @@ class EndGameViewController: UIViewController {
 
             buttonStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
             buttonStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
+            buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             buttonStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.13)
         ])
     }

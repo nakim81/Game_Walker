@@ -282,7 +282,7 @@ class AwardViewController: UIViewController {
     private let homeBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "homeBtn"), for: .normal)
-        button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
+        button.addTarget(AwardViewController.self, action: #selector(callMainVC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

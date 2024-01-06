@@ -51,7 +51,7 @@ class RefereeTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 24))
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 22))
         label.numberOfLines = 0
         return label
     }()
