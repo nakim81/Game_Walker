@@ -278,6 +278,8 @@ struct H {
                 print("Error getting Host by Gamecode")
                 throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode. \n Please check again!", comment: ""))
             }
+        } catch GameWalkerError.invalidGamecode(let message) {
+            throw GameWalkerError.invalidGamecode(message)
         } catch {
             print("Error getting Host")
             throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Host", comment: ""))

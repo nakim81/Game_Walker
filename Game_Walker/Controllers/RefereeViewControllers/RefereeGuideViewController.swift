@@ -64,7 +64,7 @@ class RefereeGuideViewController : UIViewController {
         view.layer.cornerRadius = 10.0
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("Click to give points of the Team", comment: "")
+        label.text = NSLocalizedString("Click to give points to the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
