@@ -310,7 +310,9 @@ class AwardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+        if UserData.getUserSoundPreference() {
+            self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+        }
         configureViews()
         getTeamList(gameCode)
     }

@@ -18,7 +18,10 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     static var unread: Bool = false
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    var soundEnabled: Bool = true
+    var vibrationEnabled: Bool = true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         H.delegates.append(WeakHostUpdateListener(value: self))
@@ -110,7 +113,9 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
                 // new announcements
                 if !ids.contains(announcement.uuid) {
                     PlayerTabBarController.localMessages.append(announcement)
-                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    if soundEnabled {
+                        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                    }
                     NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                 } else {
                     // modified announcements
@@ -118,7 +123,9 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
                         if PlayerTabBarController.localMessages[localIndex].content != announcement.content {
                             PlayerTabBarController.localMessages[localIndex].content = announcement.content
                             PlayerTabBarController.localMessages[localIndex].readStatus = false
-                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            if soundEnabled {
+                                self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                            }
                             NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                         }
                     }
@@ -149,5 +156,12 @@ extension PlayerTabBarController: UITabBarControllerDelegate {
         }
         
         return true
+    }
+}
+
+extension PlayerTabBarController: SettingsDelegate {
+    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
+        self.soundEnabled = soundEnabled
+        self.vibrationEnabled = vibrationEnabled
     }
 }
