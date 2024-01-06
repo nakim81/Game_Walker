@@ -10,12 +10,15 @@ import UIKit
 
 class SettingsViewController: BaseViewController {
     
-    var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-    var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
+    private var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+    private var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
 
+    private var usesSound : Bool = UserData.getUserSoundPreference()
+    private var usesVibration : Bool = true //TODO: - true for now but needs change
+    //private var usesVibration = UserData.getUserVibrationPreference()
 
+    weak var delegate: SettingsDelegate?
 
-    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = yellow
@@ -81,7 +84,7 @@ class SettingsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.addSubview(containerView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(stackView)
@@ -138,6 +141,10 @@ class SettingsViewController: BaseViewController {
     
     @objc func confirmTapped() {
         //TODO:- save user defaults
+        UserData.setUserSoundPreference(usesSound)
+        //UserData.setUserVibrationPreference(usesVibration)
+
+        delegate?.didChangeSettings(usesSound, usesVibration)
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -152,6 +159,9 @@ class SettingsViewController: BaseViewController {
 extension SettingsViewController: CustomSwitchButtonDelegate {
     func isOnValueChange(_ sender: UIButton, isOn: Bool) {
         //TODO:- change vibrations or sounds accordingly
+        usesSound = isOn
+        //usesVibration = isOn
+        // need to implement if case that the isOn varies by button
     }
     
 }

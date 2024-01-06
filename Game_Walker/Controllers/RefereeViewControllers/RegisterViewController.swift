@@ -82,7 +82,9 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        if UserData.getUserSoundPreference() {
+            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        }
         //
         Task {
             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {

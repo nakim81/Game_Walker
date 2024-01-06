@@ -25,6 +25,9 @@ class JoinGameViewController: UIViewController {
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     private let standardStyle = UserData.isStandardStyle()
     
+    var soundEnabled: Bool = true
+    var vibrationEnabled: Bool = true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureSettingBtn()
@@ -75,8 +78,10 @@ class JoinGameViewController: UIViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
+
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
         let player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")
@@ -336,5 +341,12 @@ extension JoinGameViewController: UITextFieldDelegate {
             nextButtonPressed(nextButton)
         }
         return true
+    }
+}
+
+extension JoinGameViewController: SettingsDelegate {
+    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
+        self.soundEnabled = soundEnabled
+        self.vibrationEnabled = vibrationEnabled
     }
 }

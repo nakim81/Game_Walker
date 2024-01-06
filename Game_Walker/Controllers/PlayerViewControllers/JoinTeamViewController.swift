@@ -23,7 +23,10 @@ class JoinTeamViewController: UIViewController {
     private let refreshController: UIRefreshControl = UIRefreshControl()
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    var soundEnabled: Bool = true
+    var vibrationEnabled: Bool = true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureSettingBtn()
@@ -98,7 +101,9 @@ class JoinTeamViewController: UIViewController {
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
@@ -181,5 +186,12 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 84, height: 130)
+    }
+}
+
+extension JoinTeamViewController: SettingsDelegate {
+    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
+        self.soundEnabled = soundEnabled
+        self.vibrationEnabled = vibrationEnabled
     }
 }

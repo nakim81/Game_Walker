@@ -360,6 +360,7 @@ extension UIViewController {
     
     @objc func settingApp() {
         let settingsVC = SettingsViewController()
+//        settingsVC.delegate = self
         settingsVC.modalPresentationStyle = .overFullScreen
         present(settingsVC, animated: true, completion: nil)
         

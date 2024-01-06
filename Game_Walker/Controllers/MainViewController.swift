@@ -14,7 +14,7 @@ import AVFoundation
 import SwiftUI
 
 class MainViewController: UIViewController {
-   
+
     @IBOutlet weak var gameWalkerImage: UIImageView!
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var refereeButton: UIButton!
@@ -22,7 +22,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var testBtn: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    var soundEnabled: Bool = true
+    var vibrationEnabled: Bool = true
+
     override func viewDidLoad() {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
@@ -34,13 +37,21 @@ class MainViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         configureNavBarItems()
         configureButtons()
+        setDefaultSoundVibrationPreference()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+        }
     }
-    
+
+    private func setDefaultSoundVibrationPreference() {
+        UserData.setUserSoundPreference(true)
+        //TODO: - Vibrations need to be implemented
+    }
+
     private func configureButtons(){
         playerButton.layer.cornerRadius = 10
         playerButton.layer.borderWidth = 3
@@ -57,17 +68,23 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func playerBtnPressed(_ sender: Any) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToPlayer", sender: self)
     }
     
     @IBAction func refereeBtnPressed(_ sender: Any) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToReferee", sender: self)
     }
     
     @IBAction func hostBtnPressed(_ sender: Any) {
-        self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToHost", sender: self)
     }
     
@@ -121,3 +138,9 @@ class MainViewController: UIViewController {
 }
 
 
+extension MainViewController: SettingsDelegate {
+    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
+        self.soundEnabled = soundEnabled
+        self.vibrationEnabled = vibrationEnabled
+    }
+}

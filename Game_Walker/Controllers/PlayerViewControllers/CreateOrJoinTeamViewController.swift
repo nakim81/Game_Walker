@@ -16,7 +16,10 @@ class CreateOrJoinTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
-    
+
+    var soundEnabled: Bool = true
+    var vibrationEnabled: Bool = true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -51,12 +54,16 @@ class CreateOrJoinTeamViewController: UIViewController {
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToPF3_1VC", sender: self)
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
     }
     
@@ -76,5 +83,12 @@ extension CreateOrJoinTeamViewController: ModalViewControllerDelegate {
             tabBarController.selectedIndex = 0
             navigationController?.pushViewController(tabBarController, animated: true)
         }
+    }
+}
+
+extension CreateOrJoinTeamViewController: SettingsDelegate {
+    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
+        self.soundEnabled = soundEnabled
+        self.vibrationEnabled = vibrationEnabled
     }
 }
