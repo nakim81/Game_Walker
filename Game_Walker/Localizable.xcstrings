@@ -8,7 +8,14 @@
 
     },
     "Announcement" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공지사항"
+          }
+        }
+      }
     },
     "Be careful! There are more teams than available stations." : {
 
@@ -17,6 +24,17 @@
 
     },
     "Cancel" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        }
+      }
+    },
+    "Cancel!" : {
 
     },
     "cause errors." : {
@@ -46,10 +64,13 @@
     "CONFIRM" : {
 
     },
+    "Confirm!" : {
+
+    },
     "CONGRATULATIONS" : {
 
     },
-    "Connection Error" : {
+    "Connection Error!" : {
 
     },
     "Current Station Info" : {
@@ -62,6 +83,9 @@
 
     },
     "Dismiss" : {
+
+    },
+    "Dismiss!" : {
 
     },
     "Do you really want to end this game?" : {
@@ -82,22 +106,19 @@
     "Edit" : {
 
     },
-    "Enter a number" : {
+    "Enter a number!" : {
 
     },
-    "Excess Teams" : {
+    "Excessed Teams!" : {
 
     },
     "Game Code" : {
 
     },
-    "Game Type Not Specified" : {
+    "Gamecode Error!" : {
 
     },
-    "Gamecode Error" : {
-
-    },
-    "gamepoints should be an integer" : {
+    "Gamepoints should be an integer!" : {
 
     },
     "Give Points" : {
@@ -106,10 +127,11 @@
     "HEADS UP!" : {
 
     },
-    "Invalid Host!" : {
+    "Invalid Host." : {
 
     },
     "Invalid Input!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -119,10 +141,13 @@
         }
       }
     },
+    "Invalid Input." : {
+
+    },
     "Invalid round." : {
 
     },
-    "Invalid Team Number" : {
+    "Invalid Team Number!" : {
 
     },
     "long-click." : {
@@ -146,31 +171,31 @@
     "NO" : {
 
     },
-    "No game exists" : {
+    "No game exists!" : {
 
     },
-    "No Game Exists!" : {
+    "No Game Exists." : {
 
     },
-    "No Game Name" : {
+    "No Icon Selected!" : {
 
     },
-    "No Game Points" : {
-
-    },
-    "No Icon Selected" : {
-
-    },
-    "No Referee Selected" : {
+    "No Referee Selected!" : {
 
     },
     "No Referees yet? Share the game code." : {
 
     },
-    "No Team Selected" : {
+    "No Station Name!" : {
 
     },
-    "OK" : {
+    "No Station Points!" : {
+
+    },
+    "No Team Selected!" : {
+
+    },
+    "OK!" : {
 
     },
     "Once the game is created, you won't be able to change the game settings" : {
@@ -179,16 +204,17 @@
     "order of Stations." : {
 
     },
-    "Please add a station" : {
+    "Please add a station." : {
 
     },
-    "Please enter a number for rounds and teams" : {
+    "Please enter a number for rounds and teams." : {
 
     },
-    "Please enter all information to set timer" : {
+    "Please enter all information to set timer." : {
 
     },
     "Please enter both game code and username!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -198,7 +224,11 @@
         }
       }
     },
+    "Please enter both game code and username." : {
+
+    },
     "Please enter gamecode and username!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -208,10 +238,14 @@
         }
       }
     },
+    "Please enter gamecode and username." : {
+
+    },
     "Please enter the game name." : {
 
     },
     "Please enter username!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -221,28 +255,31 @@
         }
       }
     },
+    "Please enter username." : {
+
+    },
     "Please select a referee." : {
 
     },
-    "Please select a team icon!" : {
+    "Please select a team icon." : {
 
     },
-    "Please select either PVP or PVE" : {
+    "Please select either PVP or PVE." : {
 
     },
-    "Please select your team" : {
+    "Please select your team." : {
 
     },
-    "Please set the game points." : {
+    "Please set the station points." : {
 
     },
-    "Please try again when it is ready" : {
+    "Please try again when it is ready." : {
 
     },
-    "Please try other team numbers!" : {
+    "Please try other team numbers." : {
 
     },
-    "Point Style" : {
+    "Point Style!" : {
 
     },
     "Points can be hidden" : {
@@ -281,7 +318,7 @@
     "Send" : {
 
     },
-    "Server Error" : {
+    "Server Error!" : {
 
     },
     "Something went wrong while adding Announcement" : {
@@ -404,13 +441,16 @@
     "Station Time" : {
 
     },
+    "Station Type Not Specified!" : {
+
+    },
     "Swap teams by click." : {
 
     },
-    "Swipe down the screen again to reload team list!" : {
+    "Swipe down the screen again to reload team list." : {
 
     },
-    "Swipe down your screen to see your team members!" : {
+    "Swipe down your screen to see your team members." : {
 
     },
     "Tap \"Stations\" to see the new" : {
@@ -428,7 +468,7 @@
     "Team Members" : {
 
     },
-    "Team Name Error" : {
+    "Team Name Error!" : {
 
     },
     "Team name should exist! Fill out the team name box." : {
@@ -437,10 +477,10 @@
     "Team number (team.number) already exists." : {
 
     },
-    "Team Number Error" : {
+    "Team Number Error!" : {
 
     },
-    "Team number should be greater than 0!" : {
+    "Team number should be greater than 0." : {
 
     },
     "Team number should exist! Fill out the team number box." : {
@@ -449,22 +489,28 @@
     "Team's total points" : {
 
     },
-    "Teams are not ready yet." : {
+    "Teams are not ready yet!" : {
 
     },
-    "The board is not ready yet" : {
+    "The board is not ready yet!" : {
 
     },
-    "The game has not started yet. Please try few minutes later!" : {
+    "The game has not started yet. Please try again a few minutes later." : {
 
     },
     "The number entered is greater than the number of current teams." : {
 
     },
-    "The Team doesn't exist" : {
+    "The Team doesn't exist!" : {
+
+    },
+    "The Team doesn't exist." : {
 
     },
     "There are multiple errors shown\npreviously at the same time." : {
+
+    },
+    "There is no Team yet." : {
 
     },
     "This is an invalid team." : {
@@ -491,13 +537,10 @@
     "TOTAL TIME" : {
 
     },
-    "Warning" : {
-
-    },
     "WIN" : {
 
     },
-    "Woops" : {
+    "Woops!" : {
 
     },
     "Wrong index while modifying Announcement" : {
@@ -512,7 +555,7 @@
     "You don't have enough teams to start the game." : {
 
     },
-    "You need at least 1 Station" : {
+    "You need at least 1 Station!" : {
 
     }
   },

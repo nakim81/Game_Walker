@@ -129,7 +129,7 @@ class StationsTableViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if currentStations.count < 1 {
-            alert(title: NSLocalizedString("You need at least 1 Station", comment: ""), message: NSLocalizedString("Please add a station", comment: ""))
+            alert(title: NSLocalizedString("You need at least 1 Station!", comment: ""), message: NSLocalizedString("Please add a station.", comment: ""))
             return
         }
         Task { @MainActor in

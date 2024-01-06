@@ -92,7 +92,7 @@ class TeamViewController: UIViewController {
                 self.team = try await T.getTeam(gameCode, teamName)
                 table.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members!", comment: ""))
+                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
 
             }
         }
@@ -100,7 +100,7 @@ class TeamViewController: UIViewController {
     
     private func alert2(title: String, message: String, sender: AnyObject) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Leave", style: .destructive, handler: { [self]action in
+        let action = UIAlertAction(title: "Leave!", style: .destructive, handler: { [self]action in
             Task { @MainActor in
                 do {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
@@ -119,7 +119,7 @@ class TeamViewController: UIViewController {
             }
         })
         alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Stay!", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
@@ -216,7 +216,7 @@ extension TeamViewController {
                 refreshController.endRefreshing()
                 table.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members!", comment: ""))
+                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
 
             }
         }

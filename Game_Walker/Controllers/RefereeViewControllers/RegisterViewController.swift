@@ -111,7 +111,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
             if host.standardStyle == false {
-                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("Referee is unavailable in point style.", comment: ""))
+                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Refereee in point style.", comment: ""))
             } else {
                 if (UserData.getUserRole() == nil || UserData.getUserRole() == "referee") {
                     if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {

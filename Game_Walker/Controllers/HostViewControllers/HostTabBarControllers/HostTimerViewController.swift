@@ -125,7 +125,7 @@ class HostTimerViewController: UIViewController {
             }
         }
         else {
-            alert(title: NSLocalizedString("Teams are not ready yet.", comment: ""), message: NSLocalizedString("You don't have enough teams to start the game.", comment: ""))
+            alert(title: NSLocalizedString("Teams are not ready yet!", comment: ""), message: NSLocalizedString("You don't have enough teams to start the game.", comment: ""))
         }
     }
     

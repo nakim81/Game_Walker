@@ -347,7 +347,7 @@ class ManualAlgorithmViewController: UIViewController {
         
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
-            alert(title: NSLocalizedString("Excess Teams", comment: ""), message: NSLocalizedString("Be careful! There are more teams than available stations.", comment: ""))
+            alert(title: NSLocalizedString("Excessed Teams!", comment: ""), message: NSLocalizedString("Be careful! There are more teams than available stations.", comment: ""))
 
             return teamCells - stationCells
         }
@@ -1210,21 +1210,21 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             guard let cell = sender.view as? AlgCollectionViewCell else { return }
     
             if sender.state == .began {
-                    let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Enter the team number!", message: nil, preferredStyle: .alert)
                     alertController.addTextField { textField in
                     textField.keyboardType = .numberPad
                 }
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { action in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel!", comment: ""), style: .cancel, handler: { action in
                     cell.isSelected = false
                     alertController.dismiss(animated: true, completion: nil)
                 }))
     
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK!", comment: ""), style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
                     let number = Int(numberString) {
                         
                         if number > self.num_teams {
-                            self.alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("The number entered is greater than the number of current teams.", comment: ""))
+                            self.alert(title: NSLocalizedString("Invalid Team Number!", comment: ""), message: NSLocalizedString("The number entered is greater than the number of current teams.", comment: ""))
                             return
                         }
                         

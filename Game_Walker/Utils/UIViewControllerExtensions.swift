@@ -145,23 +145,23 @@ extension UIViewController {
 extension UIViewController {
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss!", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     func gamecodeAlert(_ message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Gamecode Error", comment: ""), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Gamecode Error!", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss!", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     func serverAlert(_ message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Server Error", comment: ""), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Server Error!", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss!", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
     func teamNumberAlert(_ message: String) {
-        let alert = UIAlertController(title: NSLocalizedString("Team Number Error", comment: ""), message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("Team Number Error!", comment: ""), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss!", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
 }
@@ -399,8 +399,8 @@ extension UIViewController {
     
     func alert2(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: ""), style: .default) {value in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss!", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Confirm!", comment: ""), style: .default) {value in
             self.performSegue(withIdentifier: "ManageGameSegue", sender: (Any).self)
         })
         present(alert, animated: true)
