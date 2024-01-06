@@ -62,6 +62,7 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        timer.invalidate()
         H.delegates = H.delegates.filter { $0.value != nil }
         T.delegates = T.delegates.filter { $0.value != nil }
         R.delegates = R.delegates.filter { $0.value != nil }

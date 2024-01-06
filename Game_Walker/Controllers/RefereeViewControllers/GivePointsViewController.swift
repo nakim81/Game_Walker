@@ -43,7 +43,7 @@ class GivePointsController: UIViewController {
         var view = UILabel()
         view.text = NSLocalizedString("Give Points", comment: "")
         view.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: 45)
+        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 45))
         view.textAlignment = .center
         return view
     }()
@@ -52,10 +52,10 @@ class GivePointsController: UIViewController {
         var view = GMStepper()
         view.frame = CGRect()
         view.buttonsBackgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
-        view.buttonsFont = UIFont(name: "Dosis-Regular", size: 100) ?? UIFont(name: "AvenirNext-Bold", size: 20.0)!
+        view.buttonsFont = UIFont(name: "Dosis-Regular", size: fontSize(size: 80)) ?? UIFont(name: "AvenirNext-Bold", size: 20.0)!
         view.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
         view.labelBackgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
-        view.labelFont = UIFont(name: "Dosis-Bold", size: 100) ?? UIFont(name: "AvenirNext-Bold", size: 25.0)!
+        view.labelFont = UIFont(name: "Dosis-Bold", size: fontSize(size: 80)) ?? UIFont(name: "AvenirNext-Bold", size: 25.0)!
         return view
     }()
     
@@ -70,7 +70,7 @@ class GivePointsController: UIViewController {
     private lazy var editButton: UIButton = {
         var button = UIButton()
         button.setTitle("", for: .normal)
-        button.setImage(UIImage(named: "icon _close_"), for: .normal)
+        button.setImage(UIImage(named: "edit_green"), for: .normal)
         button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -114,14 +114,21 @@ class GivePointsController: UIViewController {
             textField.placeholder = "Type the number"
             textField.keyboardType = .numberPad
         }
-
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
-                guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
-                self?.stepper.label.text = enteredNumber
-                self?.stepper.value = max(Double(enteredNumber) ?? 0.0, Double(999))
+            guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
+            self?.stepper.minimumValue = -999
+            self?.stepper.label.text = enteredNumber
+            if Double(enteredNumber)! > 999 {
+                self?.stepper.value = 999
             }
+            else if Double(enteredNumber)! < -999 {
+                self?.stepper.value = -999
+            }
+            else {
+                self?.stepper.value = Double(enteredNumber)!
+            }
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -129,40 +136,42 @@ class GivePointsController: UIViewController {
     
     func addConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.widthAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.416).isActive = true
-        containerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.416).isActive = true
-        containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        
         givePointsLabel.translatesAutoresizingMaskIntoConstraints = false
-        givePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.714).isActive = true
-        givePointsLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.15).isActive = true
-        givePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        givePointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 53/812 * UIScreen.main.bounds.size.height).isActive = true
-        
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        editButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125).isActive = true
-        editButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.125).isActive = true
-        editButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10).isActive = true
-        editButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125).isActive = true
-        closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.125).isActive = true
-        closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
-        closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10).isActive = true
-        
         stepper.translatesAutoresizingMaskIntoConstraints = false
-        stepper.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8).isActive = true
-        stepper.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.35).isActive = true
-        stepper.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        stepper.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        
+        editButton.translatesAutoresizingMaskIntoConstraints = false
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
-        confirmButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.38).isActive = true
-        confirmButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.11).isActive = true
-        confirmButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        confirmButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -UIScreen.main.bounds.size.height * 20/812).isActive = true
+        NSLayoutConstraint.activate([
+            containerView.widthAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4),
+            containerView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.473),
+            containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            
+            givePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.620),
+            givePointsLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.13),
+            givePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            givePointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25/812 * UIScreen.main.bounds.size.height),
+            
+            closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.125),
+            closeButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.125),
+            closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+
+            stepper.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30),
+            stepper.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -30),
+            stepper.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.35),
+            stepper.topAnchor.constraint(equalTo: givePointsLabel.bottomAnchor, constant: 20/812 * UIScreen.main.bounds.size.height),
+            
+            editButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.0861),
+            editButton.heightAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.0861),
+            editButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            editButton.topAnchor.constraint(equalTo: stepper.bottomAnchor, constant: 15/812 * UIScreen.main.bounds.size.height),
+            
+            confirmButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.38),
+            confirmButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.11),
+            confirmButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            confirmButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -UIScreen.main.bounds.size.height * 20/812)
+        ])
     }
     
     func addSubViews() {
@@ -204,14 +213,14 @@ class GivePointsController: UIViewController {
     }
 
 
-    /// Minimum value. Must be less than maximumValue. Defaults to 0.
+    /// Minimum value. Must be less than maximumValue.
     @objc @IBInspectable public var minimumValue: Double = 0 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
         }
     }
 
-    /// Maximum value. Must be more than minimumValue. Defaults to 100.
+    /// Maximum value. Must be more than minimumValue.
     @objc @IBInspectable public var maximumValue: Double = 999 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
@@ -269,7 +278,7 @@ class GivePointsController: UIViewController {
     }
 
     /// Font of the buttons. Defaults to AvenirNext-Bold, 20.0 points in size.
-    @objc public var buttonsFont = UIFont(name: "AvenirNext-Bold", size: 20.0)! {
+    @objc public var buttonsFont = UIFont(name: "AvenirNext-Bold", size: 20)! {
         didSet {
             for button in [leftButton, rightButton] {
                 button.titleLabel?.font = buttonsFont

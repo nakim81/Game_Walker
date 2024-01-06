@@ -118,7 +118,7 @@ class TeamTableViewCell: UITableViewCell {
         
     }
     
-    func configureRankTableViewCellWithScore(imageName: String, teamNum: String, teamName: String, points: String, showScore: Bool) {
+    func configureRankTableViewCellWithScore(imageName: String, teamNum: Int, teamName: String, points: String, showScore: Bool, previous: Bool) {
         contentView.addSubview(containerView)
         containerView.addSubview(borderView)
         containerView.addSubview(teamIconImage)
@@ -149,16 +149,31 @@ class TeamTableViewCell: UITableViewCell {
             
             scoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             scoreLabel.centerYAnchor.constraint(equalTo: teamIconImage.centerYAnchor),
-            scoreLabel.widthAnchor.constraint(equalTo: containerView.heightAnchor),
-            
-            borderView.widthAnchor.constraint(equalTo: containerView.layoutMarginsGuide.widthAnchor),
-            borderView.heightAnchor.constraint(equalToConstant: 3.0),
-            borderView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor),
-            borderView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            scoreLabel.widthAnchor.constraint(equalTo: containerView.heightAnchor)
         ])
         teamIconImage.image = UIImage(named: imageName)
         teamNameLabel.text = teamName
-        teamNumLabel.text = teamNum
+        teamNumLabel.text = "Team \(teamNum)"
+        
+        guard let myTeamNum = UserData.readTeam("team")?.number else { return }
+        
+        if myTeamNum == teamNum {
+            containerView.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+            containerView.layer.borderWidth = 5
+            containerView.layer.cornerRadius = fontSize(size: 8)
+        } else {
+            containerView.layer.borderColor = UIColor.clear.cgColor
+            containerView.layer.borderWidth = 0
+            containerView.layer.cornerRadius = 0
+            
+            if !previous {
+                borderView.widthAnchor.constraint(equalTo: containerView.layoutMarginsGuide.widthAnchor).isActive = true
+                borderView.heightAnchor.constraint(equalToConstant: 3.0).isActive = true
+                borderView.centerXAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerXAnchor).isActive = true
+                borderView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+            }
+        }
+        
         if showScore {
             scoreLabel.text = points
             scoreLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 1).isActive = true
