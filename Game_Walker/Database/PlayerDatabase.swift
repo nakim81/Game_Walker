@@ -28,7 +28,10 @@ struct P {
                 print("Player added")
             } else {
                 print("Gamecode does not exist")
-                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode.\nPlease check again!", comment: ""))
+                let errorMessage = NSLocalizedString("%@ is not an existing gamecode.\nPlease check again!", comment: "")
+                let formattedErrorMessage = String.localizedStringWithFormat(errorMessage, gamecode)
+                throw GameWalkerError.invalidGamecode(formattedErrorMessage)
+
             }
         } catch GameWalkerError.invalidGamecode(let message) {
             throw GameWalkerError.invalidGamecode(message)

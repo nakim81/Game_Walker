@@ -154,7 +154,7 @@ class TimerViewController: BaseViewController {
     @objc func nextStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         if round == rounds {
-            alert(title: "Woops!", message: "You are in your last round.")
+            alert(title: NSLocalizedString("Woops!", comment: ""), message: "You are in your last round.")
         }
         else {
             findStation()
@@ -240,7 +240,7 @@ class TimerViewController: BaseViewController {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
-        let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info", "Click to see what happens"]
+        let explanationTexts = ["Team Members", "Ranking Status", "Timer & \n Station Info", "Click to see what happens"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame

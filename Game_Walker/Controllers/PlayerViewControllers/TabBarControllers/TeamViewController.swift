@@ -92,7 +92,7 @@ class TeamViewController: UIViewController {
                 self.team = try await T.getTeam(gameCode, teamName)
                 table.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
 
             }
         }
@@ -162,7 +162,7 @@ extension TeamViewController {
         let explanationTexts = [
             NSLocalizedString("Team Members", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: "")
+            NSLocalizedString("Timer & \n Station Info", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []
@@ -216,7 +216,7 @@ extension TeamViewController {
                 refreshController.endRefreshing()
                 table.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
 
             }
         }

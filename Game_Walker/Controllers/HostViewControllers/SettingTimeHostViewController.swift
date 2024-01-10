@@ -320,7 +320,7 @@ class SettingTimeHostViewController: UIViewController {
             Task { @MainActor in
                 guard let roundInt = Int(rounds),
                       let teamcountInt = Int(teamcount) else {
-                    self.alert(title: NSLocalizedString("Enter a number!", comment: ""), message: NSLocalizedString("Please enter a number for rounds and teams.", comment: ""))
+                    self.alert(title: NSLocalizedString("Enter a number", comment: ""), message: NSLocalizedString("Please enter a number for rounds and teams.", comment: ""))
                     return
                 }
                 self.rounds = roundInt

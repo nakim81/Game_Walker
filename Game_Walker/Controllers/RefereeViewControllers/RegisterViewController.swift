@@ -111,7 +111,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
             if host.standardStyle == false {
-                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Refereee in point style.", comment: ""))
+                alert(title: NSLocalizedString("Point Style Mode", comment: ""), message: NSLocalizedString("There is no Refereee in Point Style Mode.", comment: ""))
             } else {
                 if (UserData.getUserRole() == nil || UserData.getUserRole() == "referee") {
                     if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
@@ -140,7 +140,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                     performSegue(withIdentifier: "goToWait", sender: self)
                                 }
                             } else {
-                                alert(title: "", message: "Please enter gamecode and username")
+                                alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
                             }
                         } else if gameCode == storedGameCode && name == storedRefereeName {
                             let oldReferee = UserData.readReferee("referee")!
@@ -242,7 +242,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                 performSegue(withIdentifier: "goToWait", sender: self)
                             }
                         } else {
-                            alert(title: "", message: "Invalid Input!")
+                            alert(title: "", message: NSLocalizedString("Invalid Input.", comment: ""))
                         }
                     }
                 } else {
@@ -275,7 +275,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                     performSegue(withIdentifier: "goToWait", sender: self)
                                 }
                             } else {
-                                alert(title: "", message: "Please enter gamecode and username")
+                                alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
                             }
                         } else if gameCode == storedGameCode && name == storedRefereeName {
                             let oldReferee = UserData.readReferee("referee")!
@@ -286,7 +286,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                             }
                         } else if (!storedGameCode.isEmpty || gameCode == storedGameCode) && storedRefereeName.isEmpty {
                             if name.isEmpty {
-                                alert(title: "", message: NSLocalizedString("Please enter username!", comment: ""))
+                                alert(title: "", message: NSLocalizedString("Please enter username.", comment: ""))
                                 return
                             } else {
                                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -405,7 +405,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                 performSegue(withIdentifier: "goToWait", sender: self)
                             }
                         } else {
-                            alert(title: "", message: "Invalid Input!")
+                            alert(title: "", message: NSLocalizedString("Invalid Input.", comment: ""))
                         }
                     }
                 }
@@ -470,7 +470,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 //                                performSegue(withIdentifier: "goToWait", sender: self)
 //                            }
 //                        } else {
-//                            alert(title: "", message: NSLocalizedString("Please enter gamecode and username!", comment: ""))
+//                            alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
 //                        }
 //                    }
 //                    // Rejoining the game.

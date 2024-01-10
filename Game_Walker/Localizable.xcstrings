@@ -1,11 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "(gamecode) is not an existing gamecode.\nPlease check again!" : {
-
-    },
-    "(gamecode) is not an existing gamecode. \n Please check again!" : {
-
+    "%@ is not an existing gamecode.\nPlease check again!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 는 존재하지 않는 게임코드입니다. 다시 확인해주세요!"
+          }
+        }
+      }
     },
     "Announcement" : {
       "localizations" : {
@@ -18,13 +22,26 @@
       }
     },
     "Be careful! There are more teams than available stations." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주의하세요! 가능한 스테이션 수보다 팀 수가 더 많습니다."
+          }
+        }
+      }
     },
     "Beware, mixing teams can" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "조심하세요! 팀 순서를 바꾸면"
+          }
+        }
+      }
     },
     "Cancel" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -34,17 +51,25 @@
         }
       }
     },
-    "Cancel!" : {
-
-    },
     "cause errors." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오류가 발생 할 수 있습니다."
+          }
+        }
+      }
     },
     "Choose Referee" : {
-
-    },
-    "Click to give points of the Team" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심판을 골라주세요"
+          }
+        }
+      }
     },
     "Click to give points to the Team" : {
 
@@ -64,13 +89,10 @@
     "CONFIRM" : {
 
     },
-    "Confirm!" : {
-
-    },
     "CONGRATULATIONS" : {
 
     },
-    "Connection Error!" : {
+    "Connection Error" : {
 
     },
     "Current Station Info" : {
@@ -83,9 +105,6 @@
 
     },
     "Dismiss" : {
-
-    },
-    "Dismiss!" : {
 
     },
     "Do you really want to end this game?" : {
@@ -106,19 +125,19 @@
     "Edit" : {
 
     },
-    "Enter a number!" : {
+    "Enter a number" : {
 
     },
-    "Excessed Teams!" : {
+    "Excessed Teams" : {
 
     },
     "Game Code" : {
 
     },
-    "Gamecode Error!" : {
+    "Gamecode Error" : {
 
     },
-    "Gamepoints should be an integer!" : {
+    "Gamepoints should be an integer." : {
 
     },
     "Give Points" : {
@@ -130,24 +149,13 @@
     "Invalid Host." : {
 
     },
-    "Invalid Input!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "다시 입력해주세요!"
-          }
-        }
-      }
-    },
     "Invalid Input." : {
 
     },
     "Invalid round." : {
 
     },
-    "Invalid Team Number!" : {
+    "Invalid Team Number" : {
 
     },
     "long-click." : {
@@ -171,34 +179,31 @@
     "NO" : {
 
     },
-    "No game exists!" : {
+    "No game exists." : {
 
     },
-    "No Game Exists." : {
+    "No Icon Selected" : {
 
     },
-    "No Icon Selected!" : {
-
-    },
-    "No Referee Selected!" : {
+    "No Referee Selected" : {
 
     },
     "No Referees yet? Share the game code." : {
 
     },
-    "No Station Name!" : {
+    "No Station Name" : {
 
     },
-    "No Station Points!" : {
+    "No Station Points" : {
 
     },
-    "No Team Selected!" : {
+    "No Team Selected" : {
 
     },
-    "OK!" : {
+    "OK" : {
 
     },
-    "Once the game is created, you won't be able to change the game settings" : {
+    "Once the game is created, you won't be able to change the game settings." : {
 
     },
     "order of Stations." : {
@@ -213,50 +218,38 @@
     "Please enter all information to set timer." : {
 
     },
-    "Please enter both game code and username!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "게임코드와 이름을 입력해주세요!"
-          }
-        }
-      }
-    },
     "Please enter both game code and username." : {
-
-    },
-    "Please enter gamecode and username!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게임코드 입력하세요!"
+            "value" : "게임코드와 이름을 입력해주세요."
           }
         }
       }
     },
     "Please enter gamecode and username." : {
-
-    },
-    "Please enter the game name." : {
-
-    },
-    "Please enter username!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이름을 입력해주세요!"
+            "value" : "게임코드와 이름을 입력해주세요."
           }
         }
       }
     },
-    "Please enter username." : {
+    "Please enter the game name." : {
 
+    },
+    "Please enter username." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름을 입력해주세요."
+          }
+        }
+      }
     },
     "Please select a referee." : {
 
@@ -279,7 +272,10 @@
     "Please try other team numbers." : {
 
     },
-    "Point Style!" : {
+    "Point Style" : {
+
+    },
+    "Point Style Mode" : {
 
     },
     "Points can be hidden" : {
@@ -318,7 +314,7 @@
     "Send" : {
 
     },
-    "Server Error!" : {
+    "Server Error" : {
 
     },
     "Something went wrong while adding Announcement" : {
@@ -441,7 +437,7 @@
     "Station Time" : {
 
     },
-    "Station Type Not Specified!" : {
+    "Station Type Not Specified" : {
 
     },
     "Swap teams by click." : {
@@ -468,7 +464,7 @@
     "Team Members" : {
 
     },
-    "Team Name Error!" : {
+    "Team Name Error" : {
 
     },
     "Team name should exist! Fill out the team name box." : {
@@ -477,7 +473,7 @@
     "Team number (team.number) already exists." : {
 
     },
-    "Team Number Error!" : {
+    "Team Number Error" : {
 
     },
     "Team number should be greater than 0." : {
@@ -492,22 +488,22 @@
     "Teams are not ready yet!" : {
 
     },
-    "The board is not ready yet!" : {
-
-    },
     "The game has not started yet. Please try again a few minutes later." : {
 
     },
-    "The number entered is greater than the number of current teams." : {
+    "The Host is completing the settings" : {
 
     },
-    "The Team doesn't exist!" : {
+    "The number entered is greater than the number of current teams." : {
 
     },
     "The Team doesn't exist." : {
 
     },
     "There are multiple errors shown\npreviously at the same time." : {
+
+    },
+    "There is no Refereee in Point Style Mode." : {
 
     },
     "There is no Team yet." : {
@@ -525,16 +521,13 @@
     "Timer & \n Station Info" : {
 
     },
-    "Timer & Start/End Game" : {
-
-    },
-    "Timer & Station Info" : {
-
-    },
     "TO BE\nDETERMINED" : {
 
     },
     "TOTAL TIME" : {
+
+    },
+    "Type the number" : {
 
     },
     "WIN" : {
