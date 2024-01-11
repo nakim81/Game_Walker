@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RegisterController: BaseViewController, UITextFieldDelegate {
+class RegisterController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var gamecodeTextField: UITextField!

@@ -1,16 +1,15 @@
 //
-//  RefereeMessageViewController.swift
+//  HostMessageViewController.swift
 //  Game_Walker
 //
-//  Created by 김현식 on 2/13/23.
+//  Created by Noah Kim on 3/7/23.
 //
 
 import Foundation
 import UIKit
 
-class RefereeMessageViewController: UIViewController {
-    
-    private let fontColor: UIColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+class HostMessageViewController: UIViewController {
+    private let fontColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
     private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     
@@ -19,10 +18,12 @@ class RefereeMessageViewController: UIViewController {
         return tableview
     }()
     
+    private let gameCode = UserData.readGamecode("gamecode")
+    
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
-        view.layer.cornerRadius = 20
+        view.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        view.layer.cornerRadius = 13
         
         ///for animation effect
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
@@ -40,20 +41,32 @@ class RefereeMessageViewController: UIViewController {
         return label
     }()
     
+    private lazy var addAnnouncementBtn: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 10
+        button.setBackgroundImage(UIImage(named: "AddAnnouncementBtn"), for: .normal)
+        button.addTarget(self, action: #selector(showPopUp), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func showPopUp(sender: UIButton) {
+        showAddHostMessagePopUp(announcement: Announcement(), source: "btn")
+    }
+    
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
-        
+
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
-        
+
         // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
-        
+
         // layer
         button.layer.cornerRadius = 6
         button.layer.masksToBounds = true
@@ -105,7 +118,7 @@ class RefereeMessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
-            self.messages = RefereeTabBarPVEController.localMessages
+            self.messages = HostRankingViewcontroller.messages
             messageTableView.reloadData()
         }
     }
@@ -113,18 +126,20 @@ class RefereeMessageViewController: UIViewController {
     private func configureTableView() {
         messageTableView.delegate = self
         messageTableView.dataSource = self
-        messageTableView.register(RefereeMessageTableViewCell.self, forCellReuseIdentifier: RefereeMessageTableViewCell.identifier)
+        messageTableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.identifier)
         messageTableView.backgroundColor = .clear
         messageTableView.allowsSelection = false
         messageTableView.separatorStyle = .none
         messageTableView.allowsSelection = true
         messageTableView.allowsMultipleSelection = false
+        messageTableView.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
     }
     
     private func setUpViews() {
         self.view.addSubview(containerView)
         containerView.addSubview(messageLabel)
         containerView.addSubview(messageTableView)
+        containerView.addSubview(addAnnouncementBtn)
         containerView.addSubview(closeButton)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
@@ -133,6 +148,7 @@ class RefereeMessageViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageTableView.translatesAutoresizingMaskIntoConstraints = false
+        addAnnouncementBtn.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -151,8 +167,14 @@ class RefereeMessageViewController: UIViewController {
             messageTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
             messageTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
             messageTableView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 5),
-            messageTableView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -15),
+            messageTableView.bottomAnchor.constraint(equalTo: addAnnouncementBtn.topAnchor, constant: -15),
             messageTableView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            addAnnouncementBtn.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 40),
+            addAnnouncementBtn.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -40),
+            addAnnouncementBtn.widthAnchor.constraint(equalTo: messageTableView.widthAnchor),
+            addAnnouncementBtn.heightAnchor.constraint(equalToConstant: 40),
+            NSLayoutConstraint(item: addAnnouncementBtn, attribute: .bottom, relatedBy: .equal, toItem: closeButton, attribute: .top, multiplier: 1, constant: -20),
             
             closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3877),
@@ -163,12 +185,11 @@ class RefereeMessageViewController: UIViewController {
 }
 
 // MARK: - TableView
-extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSource {    
+extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = messageTableView.dequeueReusableCell(withIdentifier: RefereeMessageTableViewCell.identifier, for: indexPath) as! RefereeMessageTableViewCell
-        let ind = indexPath.row + 1
-        let announcement = RefereeTabBarPVEController.localMessages[indexPath.row]
-        cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
+        let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
+        let ind = indexPath.item + 1
+        cell.configureTableViewCell(name: "Announcement \(ind)", read: false, role: "host")
         cell.selectionStyle = .none
         return cell
     }
@@ -182,10 +203,51 @@ extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSour
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        RefereeTabBarPVEController.localMessages[indexPath.row].readStatus = true
-        showRefereeAnnouncementPopUp(announcement: RefereeTabBarPVEController.localMessages[indexPath.row])
+        let announcement = messages[indexPath.row]
+        showModifyHostMessagePopUp(announcement: announcement, index: indexPath.row, source: "table")
         messageTableView.deselectRow(at: indexPath, animated: true)
-        messageTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, success in
+            HostRankingViewcontroller.messages.remove(at: indexPath.row)
+            self?.messages.remove(at: indexPath.row)
+            self?.messageTableView.deleteRows(at: [indexPath], with: .automatic)
+            Task { @MainActor in
+                try await H.removeAnnouncement(self?.gameCode ?? "", indexPath.row)
+                try await Task.sleep(nanoseconds: 200_000_000)
+                NotificationCenter.default.post(name: .newDataNotif, object: nil)
+            }
+            success(true)
+        }
+        deleteAction.image = UIImage(named: "delete")
+        deleteAction.backgroundColor = UIColor(red: 0.396, green: 0.246, blue: 0.454, alpha: 1)
+        
+        let favoriteAction = UIContextualAction(style: .normal, title: "") { [weak self] _, _, success in
+            self?.messageTableView.reloadRows(at: [indexPath], with: .automatic)
+            success(true)
+        }
+        favoriteAction.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        return UISwipeActionsConfiguration(actions: [deleteAction, favoriteAction])
     }
 }
-
+// MARK: - AnnouncementPopUp
+extension HostMessageViewController {
+    func showAddHostMessagePopUp(announcement: Announcement, source: String) {
+        let popUpViewController = HostAddOrModifyMessageViewController(announcement: announcement, source: source)
+        showAddHostMessagePopUp(popUpViewController: popUpViewController)
+    }
+    
+    private func showAddHostMessagePopUp(popUpViewController: HostAddOrModifyMessageViewController) {
+        present(popUpViewController, animated: false, completion: nil)
+    }
+    
+    func showModifyHostMessagePopUp(announcement: Announcement, index: Int, source: String) {
+        let popUpViewController = HostAddOrModifyMessageViewController(announcement: announcement, index: index, source: source)
+        showAddHostMessagePopUp(popUpViewController: popUpViewController)
+    }
+    
+    private func showModifyHostMessagePopUp(popUpViewController: HostAddOrModifyMessageViewController) {
+        present(popUpViewController, animated: false, completion: nil)
+    }
+}

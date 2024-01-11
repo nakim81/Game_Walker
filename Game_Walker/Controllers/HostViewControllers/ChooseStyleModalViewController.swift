@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ChooseStyleModalViewController: BaseViewController {
+class ChooseStyleModalViewController: UIViewController {
     @IBOutlet weak var modalContainerView: UIView!
     
     @IBOutlet weak var closeButton: UIButton!

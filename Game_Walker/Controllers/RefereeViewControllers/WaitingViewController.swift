@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WaitingController: BaseViewController {
+class WaitingController: UIViewController {
     
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!

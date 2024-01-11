@@ -228,7 +228,6 @@
 
     },
     "Please enter gamecode and username!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -245,7 +244,6 @@
 
     },
     "Please enter username!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -277,6 +275,9 @@
 
     },
     "Please try other team numbers." : {
+
+    },
+    "Point Style" : {
 
     },
     "Point Style!" : {
@@ -508,6 +509,9 @@
 
     },
     "There are multiple errors shown\npreviously at the same time." : {
+
+    },
+    "There is no Refereee in point style." : {
 
     },
     "There is no Team yet." : {

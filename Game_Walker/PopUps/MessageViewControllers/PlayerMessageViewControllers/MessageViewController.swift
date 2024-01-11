@@ -10,7 +10,8 @@ import UIKit
 
 class MessageViewController: UIViewController {
     
-    private let fontColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+    private var role: String = ""
+    private var roleColor: UIColor = UIColor.clear
     private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     
@@ -21,7 +22,7 @@ class MessageViewController: UIViewController {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
+        view.backgroundColor = roleColor
         view.layer.cornerRadius = 20
         
         ///for animation effect
@@ -47,7 +48,7 @@ class MessageViewController: UIViewController {
         
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
+        button.setTitleColor(roleColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
         // disable
@@ -67,10 +68,16 @@ class MessageViewController: UIViewController {
         }
     }
     
-    convenience init(messages: [Announcement]) {
+    convenience init(messages: [Announcement], role: String) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.messages = messages
+        self.role = role
+        if role == "player" {
+            roleColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        } else {
+            roleColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+        }
         self.modalPresentationStyle = .overFullScreen
     }
     
@@ -167,8 +174,13 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.row + 1
-        let announcement = PlayerTabBarController.localMessages[indexPath.row]
-        cell.configureTableViewCell(name: NSLocalizedString("Announcement", comment: "") + " \(ind)", read: announcement.readStatus)
+        let announcement: Announcement
+        if role == "player" {
+            announcement = PlayerTabBarController.localMessages[indexPath.row]
+        } else {
+            announcement = RefereeTabBarController.localMessages[indexPath.row]
+        }
+        cell.configureTableViewCell(name: NSLocalizedString("Announcement", comment: "") + " \(ind)", read: announcement.readStatus, role: self.role)
         cell.selectionStyle = .none
         return cell
     }
@@ -182,8 +194,13 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerTabBarController.localMessages[indexPath.row].readStatus = true
-        showAnnouncementPopUp(announcement: PlayerTabBarController.localMessages[indexPath.row])
+        if role == "player" {
+            PlayerTabBarController.localMessages[indexPath.row].readStatus = true
+            showAnnouncementPopUp(announcement: PlayerTabBarController.localMessages[indexPath.row], role: "player")
+        } else {
+            RefereeTabBarController.localMessages[indexPath.row].readStatus = true
+            showAnnouncementPopUp(announcement: RefereeTabBarController.localMessages[indexPath.row], role: "referee")
+        }
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RefereeTimerController: BaseViewController {
+class RefereeTimerController: UIViewController {
     
     // Variables
     
@@ -46,7 +46,7 @@ class RefereeTimerController: BaseViewController {
         currentStationInfoButton.setTitleColor(UIColor.white, for: .normal)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        let unread = RefereeTabBarPVEController.unread
+        let unread = RefereeTabBarController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -565,6 +565,6 @@ extension RefereeTimerController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
+        showMessagePopUp(messages: RefereeTabBarController.localMessages, role: "referee")
     }
 }

@@ -25,7 +25,7 @@ class RefereeRankingPVEViewController: UIViewController {
         super.viewWillAppear(animated)
         addObservers()
         
-        if RefereeTabBarPVEController.unread {
+        if RefereeTabBarController.unread {
             if let items = self.navigationItem.rightBarButtonItems {
                 for barButtonItem in items {
                     if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -154,7 +154,7 @@ extension RefereeRankingPVEViewController {
 extension RefereeRankingPVEViewController {
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
+        showMessagePopUp(messages: RefereeTabBarController.localMessages, role: "referee")
     }
     
     @objc override func infoAction() {

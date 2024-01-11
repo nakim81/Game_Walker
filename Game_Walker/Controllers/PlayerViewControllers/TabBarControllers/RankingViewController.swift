@@ -134,7 +134,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
         let team = teamList[indexPath.row]
         let teamNum = team.number
         let points = String(team.points)
-        var previous = (indexPath.row < teamList.count - 1 && teamList[indexPath.row + 1].number  == UserData.readTeam("team")?.number) ? true : false
+        let previous = (indexPath.row < teamList.count - 1 && teamList[indexPath.row + 1].number  == UserData.readTeam("team")?.number) ? true : false
         
         cell.configureRankTableViewCellWithScore(imageName: team.iconName, teamNum: teamNum, teamName: team.name, points: points, showScore: self.showScore, previous: previous)
         return cell
@@ -183,7 +183,7 @@ extension RankingViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: PlayerTabBarController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages, role: "player")
     }
     
     @objc override func infoAction() {

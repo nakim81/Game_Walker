@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class RefereePVEController: BaseViewController {
+class RefereePVEController: UIViewController {
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -46,7 +46,7 @@ class RefereePVEController: BaseViewController {
         super.viewWillAppear(animated)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        let unread = RefereeTabBarPVEController.unread
+        let unread = RefereeTabBarController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -1343,6 +1343,6 @@ extension RefereePVEController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
+        showMessagePopUp(messages: RefereeTabBarController.localMessages, role: "referee")
     }
 }

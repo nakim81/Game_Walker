@@ -1,32 +1,42 @@
 //
-//  RefereeMessageTableViewCell.swift
+//  MessageTableViewCell.swift
 //  Game_Walker
 //
-//  Created by 김현식 on 2/13/23.
+//  Created by Noah Kim on 1/25/23.
 //
 
 import Foundation
 import UIKit
 
-class RefereeMessageTableViewCell: UITableViewCell {
+class MessageTableViewCell: UITableViewCell {
     
-    static let identifier = "RefereeMessageTableViewCell"
-
+    static let identifier = "MessageTableViewCell"
+    
     lazy var messageNameLabel: UILabel = {
         let label = UILabel()
+        label.backgroundColor = .clear
+        label.textAlignment = .left
+        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
         return label
     }()
     
     private lazy var containerView: UIView = {
         let view = UIView()
+        view.layer.borderWidth = 3
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    func configureTableViewCell(name: String, read: Bool) {
+    func configureTableViewCell(name: String, read: Bool, role: String) {
         contentView.addSubview(containerView)
         containerView.addSubview(messageNameLabel)
         
-        contentView.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
+        chooseBackgroundColor(role: role)
         
         if (read) {
             containerView.layer.borderColor = UIColor.lightText.cgColor
@@ -35,16 +45,6 @@ class RefereeMessageTableViewCell: UITableViewCell {
             containerView.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
             messageNameLabel.textColor = .white
         }
-        containerView.layer.borderWidth = 3
-        containerView.layer.cornerRadius = 10
-        containerView.backgroundColor = .clear
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        messageNameLabel.backgroundColor = .clear
-        messageNameLabel.textAlignment = .left
-        messageNameLabel.font = UIFont(name: "Dosis-Regular", size: 20)
-        messageNameLabel.numberOfLines = 1
-        messageNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageNameLabel.clipsToBounds = true
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -59,17 +59,29 @@ class RefereeMessageTableViewCell: UITableViewCell {
             messageNameLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             messageNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
         ])
+        
         messageNameLabel.text = name
+    }
+    
+    private func chooseBackgroundColor(role: String) {
+        switch (role) {
+        case "player":
+            contentView.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        case "referee":
+            contentView.backgroundColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+        default:
+            contentView.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
