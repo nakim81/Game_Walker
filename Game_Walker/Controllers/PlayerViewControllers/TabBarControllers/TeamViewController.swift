@@ -162,7 +162,7 @@ extension TeamViewController {
         let explanationTexts = [
             NSLocalizedString("Team Members", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Station Info", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []

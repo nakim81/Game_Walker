@@ -25,9 +25,9 @@ struct R {
             let document = try await docRef.getDocument()
             if document.exists {
                 try db.collection("\(gamecode) : Referees").document(uuid).setData(from: referee)
-                print("Referee added")
+                print("Referee added.")
             } else {
-                print("Gamecode does not exist")
+                print("Gamecode does not exist.")
                 let errorMessage = NSLocalizedString("%@ is not an existing gamecode.\nPlease check again!", comment: "")
                 let formattedErrorMessage = String.localizedStringWithFormat(errorMessage, gamecode)
                 throw GameWalkerError.invalidGamecode(formattedErrorMessage)
@@ -35,17 +35,17 @@ struct R {
         } catch GameWalkerError.invalidGamecode(let message) {
             throw GameWalkerError.invalidGamecode(message)
         } catch {
-            print("Error adding Referee: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Referee", comment: ""))
+            print("Error adding Referee: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Referee.", comment: ""))
         }
     }
     
     static func removeReferee(_ gamecode: String, _ uuid: String) {
         db.collection("\(gamecode) : Referees").document(uuid).delete() { err in
             if let err = err {
-                print("Error removing Referee: \(err)")
+                print("Error removing Referee: \(err).")
             } else {
-                print("Referee removed")
+                print("Referee removed.")
             }
         }
     }
@@ -56,10 +56,10 @@ struct R {
             try await server.updateData([
                 "name": name
             ])
-            print("Referee name modified")
+            print("Referee name modified.")
         } catch {
-            print("Gamecode does not exist")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Referee", comment: ""))
+            print("Gamecode does not exist.")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Referee.", comment: ""))
         }
     }
     
@@ -71,10 +71,10 @@ struct R {
                 "stationName": stationName,
                 "assigned": assigned
             ])
-            print("Referee assigned station")
+            print("Referee assigned station.")
         } catch {
-            print("Error assigning Referee a station: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Referee", comment: ""))
+            print("Error assigning Referee a station: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Referee.", comment: ""))
         }
     }
     
@@ -99,8 +99,8 @@ struct R {
             let referee = convertDataToReferee(data)
             return referee
         } else {
-            print("Error in getting Referee")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Referee", comment: ""))
+            print("Error in getting Referee.")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Referee.", comment: ""))
         }
     }
     
@@ -117,8 +117,8 @@ struct R {
             return referees
         }
         catch{
-            print("Error in getting RefereeList")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting RefereeList", comment: ""))
+            print("Error in getting RefereeList.")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting RefereeList.", comment: ""))
         }
     }
     
@@ -132,7 +132,7 @@ struct R {
             let decoded = try decoder.decode(Referee.self, from: json)
             return decoded
         } catch {
-            print("Converting json data to Referee \(error)")
+            print("Converting json data to Referee \(error).")
         }
         //blank host
         return Referee()

@@ -273,8 +273,8 @@ class RefereeTimerController: BaseViewController {
         let explanationTexts = [
             NSLocalizedString("Station Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Station Info", comment: ""),
-            NSLocalizedString("Click to see what happens", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: ""),
+            NSLocalizedString("Tap to see what happens", comment: "")
         ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []

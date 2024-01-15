@@ -111,7 +111,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                 }
             }
             if host.standardStyle == false {
-                alert(title: NSLocalizedString("Point Style Mode", comment: ""), message: NSLocalizedString("There is no Refereee in Point Style Mode.", comment: ""))
+                alert(title: NSLocalizedString("Point Style Mode", comment: ""), message: NSLocalizedString("There is no Referee in Point Style Mode.", comment: ""))
             } else {
                 if (UserData.getUserRole() == nil || UserData.getUserRole() == "referee") {
                     if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
@@ -140,7 +140,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                     performSegue(withIdentifier: "goToWait", sender: self)
                                 }
                             } else {
-                                alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                                alert(title: "", message: NSLocalizedString("Please enter both game code and username.", comment: ""))
                             }
                         } else if gameCode == storedGameCode && name == storedRefereeName {
                             let oldReferee = UserData.readReferee("referee")!
@@ -275,7 +275,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
                                     performSegue(withIdentifier: "goToWait", sender: self)
                                 }
                             } else {
-                                alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                                alert(title: "", message: NSLocalizedString("Please enter both game code and username.", comment: ""))
                             }
                         } else if gameCode == storedGameCode && name == storedRefereeName {
                             let oldReferee = UserData.readReferee("referee")!
@@ -470,7 +470,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
 //                                performSegue(withIdentifier: "goToWait", sender: self)
 //                            }
 //                        } else {
-//                            alert(title: "", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+//                            alert(title: "", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
 //                        }
 //                    }
 //                    // Rejoining the game.

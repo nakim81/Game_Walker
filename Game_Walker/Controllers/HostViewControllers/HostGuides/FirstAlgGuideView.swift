@@ -89,9 +89,9 @@ class FirstAlgGuideView : UIView {
         let instructionText = """
         \u{2022} \(NSLocalizedString("Tap \"Stations\" to see the new", comment: ""))
         \(NSLocalizedString("order of Stations.", comment: ""))
-        \u{2022} \(NSLocalizedString("Swap teams by click.", comment: ""))
+        \u{2022} \(NSLocalizedString("Swap teams by tap.", comment: ""))
         \u{2022} \(NSLocalizedString("Manually change team by", comment: ""))
-        \(NSLocalizedString("long-click.", comment: ""))
+        \(NSLocalizedString("long-tap.", comment: ""))
         \u{2022} \(NSLocalizedString("Beware, mixing teams can", comment: ""))
         \(NSLocalizedString("cause errors.", comment: ""))
         """

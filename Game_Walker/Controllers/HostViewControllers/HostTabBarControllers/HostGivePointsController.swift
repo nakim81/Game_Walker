@@ -111,7 +111,7 @@ class HostGivePointsController : UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Enter a number", comment: ""), message: nil, preferredStyle: .alert)
 
         alertController.addTextField { textField in
-            textField.placeholder = NSLocalizedString("Type the number", comment: "")
+            textField.placeholder = NSLocalizedString("Enter a number", comment: "")
             textField.keyboardType = .numberPad
         }
 

@@ -32,17 +32,17 @@ struct S {
                 throw GameWalkerError.invalidGamecode(formattedErrorMessage)
             }
         } catch {
-            print("Error adding Station: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Station", comment: ""))
+            print("Error adding Station: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Station.", comment: ""))
         }
     }
     
     static func removeStation(_ gamecode: String, _ station: Station) {
         db.collection("\(gamecode) : Stations").document(station.uuid).delete() { err in
             if let err = err {
-                print("Error removing Station: \(err)")
+                print("Error removing Station: \(err).")
             } else {
-                print("Station removed")
+                print("Station removed.")
             }
         }
     }
@@ -57,11 +57,11 @@ struct S {
                 station.referee = referee
                 updateStation(gamecode, station)
             } else {
-                print("Station assigned Referee")
+                print("Station assigned Referee.")
             }
         } catch {
-            print("Error assigning Referee: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Station", comment: ""))
+            print("Error assigning Referee: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while assigning Station.", comment: ""))
         }
     }
     
@@ -75,11 +75,11 @@ struct S {
                 station.teamOrder = teamOrder
                 updateStation(gamecode, station)
             } else {
-                print("Updated Team order")
+                print("Updated Team order.")
             }
         } catch {
-            print("Error updating team order: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Team Order of Station", comment: ""))
+            print("Error updating team order: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Team Order of Station.", comment: ""))
         }
     }
     
@@ -94,7 +94,7 @@ struct S {
             return station
         } else {
             print("Error getting Station")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Station", comment: ""))
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Station.", comment: ""))
         }
     }
     
@@ -125,7 +125,7 @@ struct S {
         }
         catch{
             print("Error getting StationList")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting StationList", comment: ""))
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting StationList.", comment: ""))
         }
     }
     
@@ -133,9 +133,9 @@ struct S {
     static func updateStation(_ gamecode: String, _ station: Station) {
         do {
             try db.collection("\(gamecode) : Stations").document("\(station.uuid)").setData(from: station)
-            print("Station successfully saved")
+            print("Station successfully saved.")
         } catch {
-            print("Error updating Team: \(error)")
+            print("Error updating Team: \(error).")
         }
     }
     
@@ -149,7 +149,7 @@ struct S {
             let decoded = try decoder.decode(Station.self, from: json)
             return decoded
         } catch {
-            print("Converting json data to Station \(error)")
+            print("Converting json data to Station \(error).")
         }
         //blank station
         return Station()

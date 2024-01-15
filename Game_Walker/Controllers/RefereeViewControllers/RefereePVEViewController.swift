@@ -229,7 +229,7 @@ class RefereePVEController: BaseViewController {
         let explanationTexts = [
             NSLocalizedString("Station Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Station Info", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []
@@ -1130,7 +1130,7 @@ extension RefereePVEController {
     
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist.", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1216,7 +1216,7 @@ extension RefereePVEController {
     
     @objc func leftWinButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist.", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA != "true" {
                 Task {

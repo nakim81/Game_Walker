@@ -40,7 +40,7 @@ class JoinTeamViewController: UIViewController {
                 self.host = try await H.getHost(gameCode)
                 collectionView.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down the screen again to reload team list.", comment: ""))
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down the screen to reload the Team List.", comment: ""))
 
             }
         }

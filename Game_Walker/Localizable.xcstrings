@@ -71,152 +71,465 @@
         }
       }
     },
-    "Click to give points to the Team" : {
-
-    },
-    "Click to hide points from others" : {
-
-    },
-    "Click to see what happens" : {
-
-    },
     "Close" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
+          }
+        }
+      }
     },
     "Confirm" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
+          }
+        }
+      }
     },
     "CONFIRM" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
+          }
+        }
+      }
     },
     "CONGRATULATIONS" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축하합니다"
+          }
+        }
+      }
     },
     "Connection Error" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 오류"
+          }
+        }
+      }
     },
     "Current Station Info" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 스테이션 정보"
+          }
+        }
+      }
     },
     "Currently not playing." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 게임 중이 아닙니다."
+          }
+        }
+      }
     },
     "Delete" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "삭제"
+          }
+        }
+      }
     },
     "Dismiss" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
+          }
+        }
+      }
     },
     "Do you really want to end this game?" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정말 게임을 끝내실건가요?"
+          }
+        }
+      }
     },
     "Do you really want to leave your team?" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정말 팀을 나가실건가요?"
+          }
+        }
+      }
     },
     "Done" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "완료"
+          }
+        }
+      }
     },
-    "Duplicated Opponents" : {
-
+    "Duplicated Appearance" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "동시간대 존재"
+          }
+        }
+      }
     },
-    "Duplicated Stations" : {
-
+    "Duplicated Opponent" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "같은 상대 만남"
+          }
+        }
+      }
+    },
+    "Duplicated Station" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 중복"
+          }
+        }
+      }
     },
     "Edit" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정"
+          }
+        }
+      }
     },
     "Enter a number" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "숫자를 입력하세요"
+          }
+        }
+      }
     },
     "Excessed Teams" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 수 초과"
+          }
+        }
+      }
     },
     "Game Code" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임코드"
+          }
+        }
+      }
     },
     "Gamecode Error" : {
-
-    },
-    "Gamepoints should be an integer." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임코드 에러"
+          }
+        }
+      }
     },
     "Give Points" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수 부여"
+          }
+        }
+      }
     },
     "HEADS UP!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주의!"
+          }
+        }
+      }
     },
     "Invalid Host." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 주최자입니다."
+          }
+        }
+      }
     },
     "Invalid Input." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 입력값입니다."
+          }
+        }
+      }
     },
     "Invalid round." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 라운드입니다."
+          }
+        }
+      }
     },
     "Invalid Team Number" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 팀 번호입니다."
+          }
+        }
+      }
     },
-    "long-click." : {
-
+    "long-tap." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "바꿔보세요."
+          }
+        }
+      }
     },
     "LOSE" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "패배"
+          }
+        }
+      }
     },
     "Manually change team by" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "꾹 탭해서 팀을 수동으로"
+          }
+        }
+      }
     },
     "minutes" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "분"
+          }
+        }
+      }
     },
     "Moving Time" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이동 시간"
+          }
+        }
+      }
     },
     "Next" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
+          }
+        }
+      }
     },
     "NO" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아니오"
+          }
+        }
+      }
     },
     "No game exists." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "존재하지 않는 게임입니다."
+          }
+        }
+      }
     },
     "No Icon Selected" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아이콘이 선택되지 않았습니다."
+          }
+        }
+      }
     },
     "No Referee Selected" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심판이 선택되지 않았습니다."
+          }
+        }
+      }
     },
     "No Referees yet? Share the game code." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심판이 안보이나요? 게임코드를 공유해주세요."
+          }
+        }
+      }
     },
     "No Station Name" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름을 입력해주세요."
+          }
+        }
+      }
     },
     "No Station Points" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수를 입력해주세요."
+          }
+        }
+      }
     },
     "No Team Selected" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀을 선택해주세요."
+          }
+        }
+      }
     },
     "OK" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예"
+          }
+        }
+      }
     },
     "Once the game is created, you won't be able to change the game settings." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모든 설정을 완료하셨습니까? 확인 후에는 더 이상 수정 할 수 없습니다."
+          }
+        }
+      }
     },
     "order of Stations." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 순서를 확인 할 수 있습니다."
+          }
+        }
+      }
     },
     "Please add a station." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션을 추가해주세요."
+          }
+        }
+      }
     },
     "Please enter a number for rounds and teams." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드 수와 팀 수를 입력해주세요."
+          }
+        }
+      }
     },
     "Please enter all information to set timer." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머에 필요한 시간을 다 입력해주세요."
+          }
+        }
+      }
     },
     "Please enter both game code and username." : {
       "localizations" : {
@@ -228,18 +541,25 @@
         }
       }
     },
-    "Please enter gamecode and username." : {
+    "Please enter both gamecode and username." : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게임코드와 이름을 입력해주세요."
+            "value" : "게임코드와 이름 모두 입력해주세요!"
           }
         }
       }
     },
-    "Please enter the game name." : {
-
+    "Please enter the station name." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 이름을 입력해주세요."
+          }
+        }
+      }
     },
     "Please enter username." : {
       "localizations" : {
@@ -252,304 +572,1024 @@
       }
     },
     "Please select a referee." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심판은 선택해주세요."
+          }
+        }
+      }
     },
     "Please select a team icon." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 아이콘은 선택해주세요."
+          }
+        }
+      }
     },
     "Please select either PVP or PVE." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PVP나 PVE를 선택해주세요."
+          }
+        }
+      }
     },
     "Please select your team." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀은 선택해주세요."
+          }
+        }
+      }
     },
     "Please set the station points." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 점수를 설정해주세요."
+          }
+        }
+      }
     },
     "Please try again when it is ready." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나중에 다시 시도해주세요."
+          }
+        }
+      }
     },
     "Please try other team numbers." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다른 팀 숫자를 시도해주세요."
+          }
+        }
+      }
     },
     "Point Style" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수 방식"
+          }
+        }
+      }
     },
     "Point Style Mode" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수 방식"
+          }
+        }
+      }
     },
-    "Points can be hidden" : {
-
+    "Points can be hidden." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수는 숨길 수 있습니다."
+          }
+        }
+      }
     },
     "PVE for goals." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PVE는 목표 달성 방식."
+          }
+        }
+      }
     },
-    "PVP for competition" : {
-
+    "PVP for competition." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PVP는 경쟁 방식."
+          }
+        }
+      }
     },
     "Ranking Status" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 순위"
+          }
+        }
+      }
     },
     "Referee is unavailable in point style." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수 방식에서는 심판이 없습니다."
+          }
+        }
+      }
     },
     "Remember to choose 'WIN' or 'LOSE' before the round ends!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드가 끝나기 전에 승패를 결정해주셔야 점수가 부여됩니다!"
+          }
+        }
+      }
     },
     "Round" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드"
+          }
+        }
+      }
     },
     "Round 1" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드 1"
+          }
+        }
+      }
     },
     "Rules" : {
-
-    },
-    "Same Round Duplicated Appearance" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "규칙"
+          }
+        }
+      }
     },
     "seconds" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "초"
+          }
+        }
+      }
     },
     "Send" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전송"
+          }
+        }
+      }
     },
     "Server Error" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서버 에러"
+          }
+        }
+      }
     },
-    "Something went wrong while adding Announcement" : {
-
+    "Something went wrong while adding Announcement." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while adding Player" : {
-
+    "Something went wrong while adding Player." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while adding Referee" : {
-
+    "Something went wrong while adding Referee." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while adding Station" : {
-
+    "Something went wrong while adding Station." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while adding Team" : {
-
+    "Something went wrong while adding Team." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while assigning Referee" : {
-
+    "Something went wrong while assigning Referee." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while assigning Station" : {
-
+    "Something went wrong while assigning Station." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while completing Stations" : {
-
+    "Something went wrong while completing Stations." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while creating Host" : {
-
+    "Something went wrong while creating Host." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while ending Host" : {
-
+    "Something went wrong while ending Host." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting Host" : {
-
+    "Something went wrong while getting Host." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting Referee" : {
-
+    "Something went wrong while getting Referee." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting RefereeList" : {
-
+    "Something went wrong while getting RefereeList." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting Station" : {
-
+    "Something went wrong while getting Station." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting StationList" : {
-
+    "Something went wrong while getting StationList." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting Team" : {
-
+    "Something went wrong while getting Team." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while getting TeamList" : {
-
+    "Something went wrong while getting TeamList." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while giving points to a Team" : {
-
+    "Something went wrong while giving points to a Team." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while hiding/showing Score" : {
-
+    "Something went wrong while hiding/showing Score." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while joining Team" : {
-
+    "Something went wrong while joining Team." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while leaving Team" : {
-
+    "Something went wrong while leaving Team." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while modifying Announcement" : {
-
+    "Something went wrong while modifying Announcement." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while modifying Player Name" : {
-
+    "Something went wrong while modifying Player Name." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while modifying Referee" : {
-
+    "Something went wrong while modifying Referee." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while pausing/resuming Game" : {
-
+    "Something went wrong while pausing/resuming Game." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while removing Announcement" : {
-
+    "Something went wrong while removing Announcement." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while setting Algorithm" : {
-
+    "Something went wrong while setting Matching Algorithm." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while setting Settings" : {
-
+    "Something went wrong while setting Settings." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while starting Game" : {
-
+    "Something went wrong while starting Game." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while updating Current Round" : {
-
+    "Something went wrong while updating Current Round." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while updating Paused Time" : {
-
+    "Something went wrong while updating Paused Time." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while updating Station order" : {
-
+    "Something went wrong while updating Station order." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Something went wrong while updating Team Order of Station" : {
-
+    "Something went wrong while updating Team Order of Station." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Station Info" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 정보"
+          }
+        }
+      }
     },
     "Station List" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 목록"
+          }
+        }
+      }
     },
     "Station Location" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 장소"
+          }
+        }
+      }
     },
     "Station Name" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 이름"
+          }
+        }
+      }
     },
     "Station Points" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 점수"
+          }
+        }
+      }
+    },
+    "Station points should be an integer." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 점수는 정수이어야 합니다."
+          }
+        }
+      }
     },
     "Station Status" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 정보"
+          }
+        }
+      }
     },
     "Station Time" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 시간"
+          }
+        }
+      }
     },
     "Station Type Not Specified" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 방식 미정"
+          }
+        }
+      }
     },
-    "Swap teams by click." : {
-
+    "Swap teams by tap." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "순서를 바꾸려면 탭해보세요."
+          }
+        }
+      }
     },
-    "Swipe down the screen again to reload team list." : {
-
+    "Swipe down the screen to reload the Team List." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밑으로 스와이프하면 팀 목록을 다시 불러올 수 있습니다."
+          }
+        }
+      }
     },
     "Swipe down your screen to see your team members." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밑으로 스와이프하면 팀원 목록을 다시 불러올 수 있습니다."
+          }
+        }
+      }
+    },
+    "Swipe to hide points from others" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밀어서 점수를 비공개로 전환하세요"
+          }
+        }
+      }
     },
     "Tap \"Stations\" to see the new" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션을 눌러보세요."
+          }
+        }
+      }
+    },
+    "Tap to give points to the Team" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "탭해서 팀에게 점수를 주세요"
+          }
+        }
+      }
+    },
+    "Tap to see what happens" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "탭해보세요"
+          }
+        }
+      }
     },
     "Team is playing against same opponents\nmultiple times on PVP stations." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀이 동일한 대결 상대를 여러 번 만나게 배정 받았습니다."
+          }
+        }
+      }
     },
     "Team is playing multiple stations\non the same round." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀이 동일한 라운드에 여러 개의 스테이션에 배정 받았습니다."
+          }
+        }
+      }
     },
     "Team is playing the same station\non multiple rounds." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀이 동일한 스테이션에 여러 번 배정 받았습니다."
+          }
+        }
+      }
     },
     "Team Members" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀원"
+          }
+        }
+      }
     },
     "Team Name Error" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 이름 오류"
+          }
+        }
+      }
     },
     "Team name should exist! Fill out the team name box." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 이름은 반드시 필요합니다! 이름을 입력해주세요."
+          }
+        }
+      }
     },
     "Team number (team.number) already exists." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 번호 (team.number) 는 이미 존재합니다."
+          }
+        }
+      }
     },
     "Team Number Error" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 번호 오류"
+          }
+        }
+      }
     },
     "Team number should be greater than 0." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 번호는 0보다 커야합니다."
+          }
+        }
+      }
     },
     "Team number should exist! Fill out the team number box." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 번호는 반드시 필요합니다! 번호를 입력해주세요."
+          }
+        }
+      }
     },
     "Team's total points" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 점수"
+          }
+        }
+      }
     },
     "Teams are not ready yet!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀들이 아직 준비중입니다!"
+          }
+        }
+      }
     },
     "The game has not started yet. Please try again a few minutes later." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임이 아직 시작 안했습니다. 잠시 후 다시 시도해주세요."
+          }
+        }
+      }
     },
     "The Host is completing the settings" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주최자가 아직 게임 설정 중입니다"
+          }
+        }
+      }
     },
-    "The number entered is greater than the number of current teams." : {
-
+    "The Team doesn't exist" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀이 존재하지 않습니다"
+          }
+        }
+      }
     },
-    "The Team doesn't exist." : {
-
+    "The team number is too big. Check again!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀 번호가 전체 팀수보다 큽니다. 다시 한번 확인해주세요!"
+          }
+        }
+      }
     },
     "There are multiple errors shown\npreviously at the same time." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앞서 설명한 오류들이 중첩되어 있습니다."
+          }
+        }
+      }
     },
-    "There is no Refereee in Point Style Mode." : {
-
+    "There is no Referee in Point Style Mode." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점수 방식 모드에는 심판이 없습니다."
+          }
+        }
+      }
     },
     "There is no Team yet." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아직 팀 생성 중입니다."
+          }
+        }
+      }
     },
     "This is an invalid team." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "존재하지 않는 팀입니다."
+          }
+        }
+      }
     },
     "TIMER" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머"
+          }
+        }
+      }
     },
-    "Timer & \n Start/End Game" : {
-
+    "Timer &\nStart/End Game" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머 & 게임 시작하기/끝내기"
+          }
+        }
+      }
     },
-    "Timer & \n Station Info" : {
-
+    "Timer &\nStation Info" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머 & 스테이션 정보"
+          }
+        }
+      }
     },
     "TO BE\nDETERMINED" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "미정"
+          }
+        }
+      }
     },
     "TOTAL TIME" : {
-
-    },
-    "Type the number" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 시간"
+          }
+        }
+      }
     },
     "WIN" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "승리"
+          }
+        }
+      }
     },
     "Woops!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앗!"
+          }
+        }
+      }
     },
-    "Wrong index while modifying Announcement" : {
-
+    "Wrong index while modifying Announcement." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
-    "Wrong index while removing Announcement" : {
-
+    "Wrong index while removing Announcement." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "YES" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예"
+          }
+        }
+      }
     },
     "You don't have enough teams to start the game." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임을 시작하기에 팀이 부족합니다."
+          }
+        }
+      }
     },
     "You need at least 1 Station!" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최소한 한개의 스테이션이 필요합니다!"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

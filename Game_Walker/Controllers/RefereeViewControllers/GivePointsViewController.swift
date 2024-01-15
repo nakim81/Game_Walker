@@ -111,7 +111,7 @@ class GivePointsController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Enter a number", comment: ""), message: nil, preferredStyle: .alert)
 
         alertController.addTextField { textField in
-            textField.placeholder = NSLocalizedString("Type the number", comment: "")
+            textField.placeholder = NSLocalizedString("Enter a number", comment: "")
             textField.keyboardType = .numberPad
         }
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
@@ -353,7 +353,7 @@ class GivePointsController: UIViewController {
     let formatter = NumberFormatter()
     
     /**
-        Width of the sliding animation. When buttons clicked, the middle label does a slide animation towards to the clicked button. Defaults to 5.
+        Width of the sliding animation. When buttons tapped, the middle label does a slide animation towards to the tapped button. Defaults to 5.
     */
     let labelSlideLength: CGFloat = 5
 
