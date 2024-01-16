@@ -304,7 +304,7 @@ class ManualAlgorithmViewController: UIViewController {
     
     
     @IBAction func createButtonPressed(_ sender: UIButton) {
-        let startGameViewController = StartGameViewController(announcement: NSLocalizedString("Once the game is created, you won't be able to change the game settings", comment: ""), source: "", gamecode: gamecode)
+        let startGameViewController = StartGameViewController(announcement: NSLocalizedString("Once the game is created, you won't be able to change the game settings.", comment: ""), source: "", gamecode: gamecode)
         startGameViewController.delegate = self
         present(startGameViewController, animated: true)
     }
@@ -347,7 +347,7 @@ class ManualAlgorithmViewController: UIViewController {
         
         if teamCells > stationCells {
             print("Be cautious there are omitted Team Cells.")
-            alert(title: NSLocalizedString("Excessed Teams!", comment: ""), message: NSLocalizedString("Be careful! There are more teams than available stations.", comment: ""))
+            alert(title: NSLocalizedString("Excessed Teams", comment: ""), message: NSLocalizedString("Be careful! There are more teams than available stations.", comment: ""))
 
             return teamCells - stationCells
         }
@@ -848,9 +848,9 @@ class ManualAlgorithmViewController: UIViewController {
     }
     
     private func setUpButtons() {
-        duplicatedOpponentsButton = createButton(withTitle: NSLocalizedString("Duplicated Opponents", comment: ""))
-        duplicatedStationsButton = createButton(withTitle: NSLocalizedString("Duplicated Stations", comment: ""))
-        sameRoundDuplicatedButton = createButton(withTitle: NSLocalizedString("Same Round Duplicated Appearance", comment: ""))
+        duplicatedOpponentsButton = createButton(withTitle: NSLocalizedString("Duplicated Opponent", comment: ""))
+        duplicatedStationsButton = createButton(withTitle: NSLocalizedString("Duplicated Station", comment: ""))
+        sameRoundDuplicatedButton = createButton(withTitle: NSLocalizedString("Duplicated Appearance", comment: ""))
         view.addSubview(duplicatedOpponentsButton)
         view.addSubview(duplicatedStationsButton)
         view.addSubview(sameRoundDuplicatedButton)
@@ -868,13 +868,13 @@ class ManualAlgorithmViewController: UIViewController {
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: 20)
         
-        if title == NSLocalizedString("Duplicated Opponents", comment: "") {
+        if title == NSLocalizedString("Duplicated Opponent", comment: "") {
             button.setTitleColor(UIColor(red: 0.91, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
             button.setTitleColor(UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00), for: .selected)
-        } else if title == NSLocalizedString("Duplicated Stations", comment: "") {
+        } else if title == NSLocalizedString("Duplicated Station", comment: "") {
             button.setTitleColor(UIColor(red: 0.98, green: 0.94, blue: 0.85, alpha: 1.00), for: .normal)
             button.setTitleColor(UIColor(red: 0.95, green: 0.75, blue: 0.22, alpha: 1.00), for: .selected)
-        } else if title == NSLocalizedString("Same Round Duplicated Appearance", comment: "") {
+        } else if title == NSLocalizedString("Duplicated Appearance", comment: "") {
             button.setTitleColor(UIColor(red: 0.96, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
             button.setTitleColor(UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00), for: .selected)
         }
@@ -1210,21 +1210,21 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
             guard let cell = sender.view as? AlgCollectionViewCell else { return }
     
             if sender.state == .began {
-                    let alertController = UIAlertController(title: "Enter the team number!", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Enter the team number", message: nil, preferredStyle: .alert)
                     alertController.addTextField { textField in
                     textField.keyboardType = .numberPad
                 }
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel!", comment: ""), style: .cancel, handler: { action in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { action in
                     cell.isSelected = false
                     alertController.dismiss(animated: true, completion: nil)
                 }))
     
-                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK!", comment: ""), style: .default, handler: { action in
+                alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
                     let number = Int(numberString) {
                         
                         if number > self.num_teams {
-                            self.alert(title: NSLocalizedString("Invalid Team Number!", comment: ""), message: NSLocalizedString("The number entered is greater than the number of current teams.", comment: ""))
+                            self.alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("The team number is too big. Check again!", comment: ""))
                             return
                         }
                         

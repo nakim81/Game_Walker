@@ -93,8 +93,8 @@ extension RankingViewController {
         let explanationTexts = [
             NSLocalizedString("Team Members", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Station Info", comment: ""),
-            NSLocalizedString("Points can be hidden", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: ""),
+            NSLocalizedString("Points can be hidden.", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []

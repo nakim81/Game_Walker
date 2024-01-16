@@ -152,8 +152,8 @@ class HostTimerViewController: UIViewController {
         
         let explanationTexts = [
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Start/End Game", comment: ""),
-            NSLocalizedString("Click to see what happens", comment: "")
+            NSLocalizedString("Timer &\nStart/End Game", comment: ""),
+            NSLocalizedString("Tap to see what happens", comment: "")
         ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []

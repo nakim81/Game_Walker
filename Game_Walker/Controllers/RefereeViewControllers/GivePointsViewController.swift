@@ -108,13 +108,13 @@ class GivePointsController: UIViewController {
     }
 
     func showNumberInputPopup() {
-        let alertController = UIAlertController(title: "Enter Number!", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Enter a number", comment: ""), message: nil, preferredStyle: .alert)
 
         alertController.addTextField { textField in
-            textField.placeholder = "Type the number"
+            textField.placeholder = NSLocalizedString("Enter a number", comment: "")
             textField.keyboardType = .numberPad
         }
-        let okAction = UIAlertAction(title: "OK!", style: .default) { [weak self, weak alertController] _ in
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
             self?.stepper.minimumValue = -999
             self?.stepper.label.text = enteredNumber
@@ -128,7 +128,7 @@ class GivePointsController: UIViewController {
                 self?.stepper.value = Double(enteredNumber)!
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel!", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -353,7 +353,7 @@ class GivePointsController: UIViewController {
     let formatter = NumberFormatter()
     
     /**
-        Width of the sliding animation. When buttons clicked, the middle label does a slide animation towards to the clicked button. Defaults to 5.
+        Width of the sliding animation. When buttons tapped, the middle label does a slide animation towards to the tapped button. Defaults to 5.
     */
     let labelSlideLength: CGFloat = 5
 
