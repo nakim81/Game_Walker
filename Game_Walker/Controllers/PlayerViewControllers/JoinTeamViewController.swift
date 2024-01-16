@@ -24,12 +24,11 @@ class JoinTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -62,7 +61,20 @@ class JoinTeamViewController: UIViewController {
             tabBarController.standardStyle = isStandardStyle
         }
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                soundEnabled = settingsData.0
+            }
+        }
+    }
+
     private func configureBtn(){
         joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         joinTeamButton.layer.cornerRadius = 8
@@ -189,9 +201,3 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension JoinTeamViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
-    }
-}

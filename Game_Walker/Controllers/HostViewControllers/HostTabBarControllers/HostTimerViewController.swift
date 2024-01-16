@@ -41,7 +41,9 @@ class HostTimerViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var gameStart : Bool = false
     private var ready : Bool {
@@ -306,7 +308,7 @@ class HostTimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.totalTime == strongSelf.rounds!*(strongSelf.seconds + strongSelf.moveSeconds) {
-                    if UserData.getUserSoundPreference() {
+                    if self!.soundEnabled {
                         strongSelf.audioPlayerManager.stop()
                     }
                     strongSelf.pauseOrPlayButton.isHidden = true
@@ -317,11 +319,11 @@ class HostTimerViewController: UIViewController {
 
                 switch timeRemainder {
                 case 300, 180, 60, 30, 10:
-                    if UserData.getUserSoundPreference() {
+                    if self!.soundEnabled {
                         strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
                     }
                 case 3...5:
-                    if UserData.getUserSoundPreference() {
+                    if self!.soundEnabled {
                         strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                     }
                 case 0...3:
@@ -367,7 +369,7 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             } else {
-                if UserData.getUserSoundPreference() {
+                if self!.soundEnabled {
                     strongSelf.audioPlayerManager.stop()
                 }
             }

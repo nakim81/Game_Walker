@@ -23,8 +23,8 @@ class MainViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = true
+    private var vibrationEnabled: Bool = true
 
     override func viewDidLoad() {
         if UserData.readUUID() == nil {
@@ -43,13 +43,45 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if soundEnabled {
+            print("View will appear and sound is enabled.")
             self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
         }
     }
 
+    private func configureSettings() {
+            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+    
+    @objc private func applyChangedSettings(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                soundEnabled = settingsData.0
+                vibrationEnabled = settingsData.1
+            }
+            if !soundEnabled {
+                // Stop background music if sound is no longer enabled
+                self.audioPlayerManager.stop()
+            }
+            if soundEnabled && !audioPlayerManager.isPlaying() {
+                // Start background music if sound is enabled and bgm is not being played.
+                self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+            }
+        }
+    }
+
     private func setDefaultSoundVibrationPreference() {
-        UserData.setUserSoundPreference(true)
-        //TODO: - Vibrations need to be implemented
+        if let userSoundPreference = UserData.getUserSoundPreference()  {
+            soundEnabled = userSoundPreference
+        } else {
+            // Set default if user preference is nil (initial)
+            UserData.setUserSoundPreference(true)
+        }
+        if let userVibrationPreference = UserData.getUserVibrationPreference() {
+            vibrationEnabled = userVibrationPreference
+        } else {
+            // Set default if user preference is nil (initial)
+            UserData.setUserVibrationPreference(true)
+        }
     }
 
     private func configureButtons(){
@@ -122,6 +154,8 @@ class MainViewController: UIViewController {
         let info = UIBarButtonItem(customView: infoBtn)
 
         self.navigationItem.rightBarButtonItems = [setting, spacer, info]
+
+        configureSettings()
     }
     
     @objc func guide() {
@@ -134,13 +168,5 @@ class MainViewController: UIViewController {
         overlayViewController.configureGuide(componentPositions, layerList, explanationTexts)
         
         present(overlayViewController, animated: true, completion: nil)
-    }
-}
-
-
-extension MainViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
     }
 }

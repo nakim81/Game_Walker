@@ -25,8 +25,7 @@ class CreateTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     private let iconImageNames : [String] = [
         "iconBoy", "iconBear", "iconJam-min 1", "iconGeum-Jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
@@ -48,7 +47,7 @@ class CreateTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -59,7 +58,20 @@ class CreateTeamViewController: UIViewController {
         configureCollectionView()
         configureBackButton()
     }
-    
+
+    private func configureSettings() {
+            configureSettingBtn()
+            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+           if let userInfo = notification.userInfo {
+               if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                   soundEnabled = settingsData.0
+               }
+           }
+    }
+
     private func viewSetUp(){
         teamNameTextField.delegate = self
         teamNumberTextField.delegate = self
@@ -325,12 +337,5 @@ extension CreateTeamViewController: UITextFieldDelegate {
             createTeamButtonPressed(createTeamButton)
         }
         return true
-    }
-}
-
-extension CreateTeamViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
     }
 }

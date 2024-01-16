@@ -15,6 +15,8 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var gamecodeLbl: UILabel!
     @IBOutlet weak var usernameLbl: UILabel!
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
     
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedRefereeName = UserData.readUsername("username") ?? ""
@@ -82,7 +84,7 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        if UserData.getUserSoundPreference() {
+        if soundEnabled {
             self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         }
         //
@@ -567,4 +569,3 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
         //
     }
 }
-

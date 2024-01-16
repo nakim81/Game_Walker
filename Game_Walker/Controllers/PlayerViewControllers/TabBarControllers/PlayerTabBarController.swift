@@ -19,8 +19,7 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -157,12 +156,5 @@ extension PlayerTabBarController: UITabBarControllerDelegate {
         }
         
         return true
-    }
-}
-
-extension PlayerTabBarController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
     }
 }

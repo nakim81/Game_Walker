@@ -13,8 +13,7 @@ class TimerViewController: BaseViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -372,7 +371,7 @@ class TimerViewController: BaseViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
-                    if self?.soundEnabled {
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
                         strongSelf.audioPlayerManager.stop()
                     }
                     timer.invalidate()
@@ -382,11 +381,11 @@ class TimerViewController: BaseViewController {
 
                 switch timeRemainder {
                 case 300, 180, 60, 30, 10:
-                    if soundEnabled {
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
                         strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
                     }
                 case 5:
-                    if soundEnabled {
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
                         strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
                     }
                 case 0...3:
@@ -421,7 +420,7 @@ class TimerViewController: BaseViewController {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             } else {
-                if soundEnabled {
+                if let soundEnabled = self?.soundEnabled, soundEnabled {
                     strongSelf.audioPlayerManager.stop()
                 }
             }
@@ -627,9 +626,3 @@ extension TimerViewController {
     }
 }
 
-extension TimerViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
-    }
-}

@@ -18,7 +18,9 @@ class AwardViewController: UIViewController {
     private let cellSpacingHeight: CGFloat = 3
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    private var soundEnabled: Bool = true
+
     private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -310,7 +312,7 @@ class AwardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserData.getUserSoundPreference() {
+        if soundEnabled {
             self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
         }
         configureViews()

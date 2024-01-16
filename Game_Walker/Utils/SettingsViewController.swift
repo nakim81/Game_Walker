@@ -13,11 +13,8 @@ class SettingsViewController: BaseViewController {
     private var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
     private var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
 
-    private var usesSound : Bool = UserData.getUserSoundPreference()
-    private var usesVibration : Bool = true //TODO: - true for now but needs change
-    //private var usesVibration = UserData.getUserVibrationPreference()
-
-    weak var delegate: SettingsDelegate?
+    private var usesSound : Bool = UserData.getUserSoundPreference() ?? true
+    private var usesVibration : Bool = UserData.getUserVibrationPreference() ?? true 
 
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -143,8 +140,10 @@ class SettingsViewController: BaseViewController {
         //TODO:- save user defaults
         UserData.setUserSoundPreference(usesSound)
         //UserData.setUserVibrationPreference(usesVibration)
-
-        delegate?.didChangeSettings(usesSound, usesVibration)
+        let settingsData: (Bool, Bool) = (usesSound, usesVibration)
+        print("USER SOUND IS ON : ", usesSound)
+        print("USER VIBRATION IS ON: ", usesVibration)
+        NotificationCenter.default.post(name: Notification.Name("SettingsChanged"), object: nil, userInfo: ["settingsData": settingsData])
         self.presentingViewController?.dismiss(animated: true)
     }
     

@@ -32,5 +32,13 @@ class AudioPlayerManager {
         audioPlayer?.stop()
         audioPlayer = nil
     }
+
+    func isPlaying() -> Bool {
+        if let audioPlayer = audioPlayer {
+            return audioPlayer.isPlaying
+        } else {
+            return false
+        }
+    }
 }
 

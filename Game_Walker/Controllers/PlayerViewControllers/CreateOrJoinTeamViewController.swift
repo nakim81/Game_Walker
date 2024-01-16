@@ -17,13 +17,12 @@ class CreateOrJoinTeamViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
 
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -33,7 +32,20 @@ class CreateOrJoinTeamViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         configureBtns()
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+            if let userInfo = notification.userInfo {
+                if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                    soundEnabled = settingsData.0
+                }
+            }
+    }
+
     private func configureBtns(){
         creatTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         creatTeamButton.layer.cornerRadius = 8
@@ -86,9 +98,3 @@ extension CreateOrJoinTeamViewController: ModalViewControllerDelegate {
     }
 }
 
-extension CreateOrJoinTeamViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
-    }
-}

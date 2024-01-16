@@ -25,12 +25,11 @@ class JoinGameViewController: UIViewController {
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     private let standardStyle = UserData.isStandardStyle()
     
-    var soundEnabled: Bool = true
-    var vibrationEnabled: Bool = true
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -39,7 +38,20 @@ class JoinGameViewController: UIViewController {
         super.viewDidLoad()
         setUp()
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                soundEnabled = settingsData.0
+            }
+        }
+    }
+
     private func setUp() {
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
@@ -341,12 +353,5 @@ extension JoinGameViewController: UITextFieldDelegate {
             nextButtonPressed(nextButton)
         }
         return true
-    }
-}
-
-extension JoinGameViewController: SettingsDelegate {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool) {
-        self.soundEnabled = soundEnabled
-        self.vibrationEnabled = vibrationEnabled
     }
 }

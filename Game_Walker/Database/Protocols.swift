@@ -10,10 +10,6 @@ import UIKit
 
 //MARK: - Protocols
 
-protocol SettingsDelegate: AnyObject {
-    func didChangeSettings(_ soundEnabled: Bool, _ vibrationEnabled: Bool)
-}
-
 protocol RefereeUpdateListener: AnyObject {
     func updateReferee(_ referee: Referee)
 }
