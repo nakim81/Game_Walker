@@ -147,7 +147,7 @@ class RorTOverlayViewController: UIViewController {
             label.numberOfLines = 0
             label.textAlignment = .center
             label.textColor = .white
-            label.font = UIFont(name: "Dosis-Bold", size: 15)
+            label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
             overlayView.addSubview(label)
              
             label.layer.cornerRadius = frameList[count].size.width / 2

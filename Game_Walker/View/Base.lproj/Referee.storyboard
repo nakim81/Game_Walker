@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="-2918" y="142"/>
         </scene>
-        <!--Register Controller-->
+        <!--Register View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="RefereeFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="RegisterController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RefereeFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="RegisterViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8QH-ME-NiJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="-2054" y="131"/>
         </scene>
-        <!--Waiting Controller-->
+        <!--Waiting View Controller-->
         <scene sceneID="fXC-CU-wpN">
             <objects>
-                <viewController id="d9X-u1-YmW" customClass="WaitingController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d9X-u1-YmW" customClass="WaitingViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DhH-6s-bpn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,10 +180,10 @@
             </objects>
             <point key="canvasLocation" x="-378" y="131"/>
         </scene>
-        <!--Referee Tab BarPVE Controller-->
+        <!--Referee Tab Bar Controller-->
         <scene sceneID="58K-jT-5gZ">
             <objects>
-                <tabBarController id="4eu-zS-s9n" customClass="RefereeTabBarPVEController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="4eu-zS-s9n" customClass="RefereeTabBarController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="mJL-GX-SXs"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CVM-aw-N87">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -340,7 +340,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="qww-74-glH"/>
         <segue reference="ylf-AR-8el"/>
-        <segue reference="prp-YP-ubG"/>
+        <segue reference="KeI-Qk-QLQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MemberButton" width="76" height="76"/>

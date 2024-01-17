@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, HostUpdateListener, TeamUpdateListener {
+class RefereeTabBarController: UITabBarController, RefereeUpdateListener, HostUpdateListener, TeamUpdateListener {
     
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     
@@ -27,7 +27,7 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
         Task {@MainActor in
             do {
                 guard let host = try await H.getHost(gameCode) else { return }
-                RefereeTabBarPVEController.localMessages = host.announcements
+                RefereeTabBarController.localMessages = host.announcements
             } catch GameWalkerError.serverError(let e) {
                 print(e)
                 serverAlert(e)
@@ -41,8 +41,8 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
             guard let strongSelf = self else {
                 return
             }
-            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeTabBarPVEController.localMessages)
-            RefereeTabBarPVEController.unread = unread
+            let unread = strongSelf.checkUnreadAnnouncements(announcements: RefereeTabBarController.localMessages)
+            RefereeTabBarController.unread = unread
             if unread{
                 NotificationCenter.default.post(name: .readNotification, object: nil, userInfo: ["unread":unread])
                 NotificationCenter.default.post(name: .newDataNotif, object: nil)
@@ -94,26 +94,26 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
             let data: [String:Host] = ["host":host]
             NotificationCenter.default.post(name: .hostUpdate, object: nil, userInfo: data)
             
-            if RefereeTabBarPVEController.localMessages.count > host.announcements.count {
-                removeAnnouncementsNotInHost(from: &RefereeTabBarPVEController.localMessages, targetArray: host.announcements)
+            if RefereeTabBarController.localMessages.count > host.announcements.count {
+                removeAnnouncementsNotInHost(from: &RefereeTabBarController.localMessages, targetArray: host.announcements)
                 NotificationCenter.default.post(name: .newDataNotif, object: nil, userInfo: nil)
             } else {
                 // compare server announcements and local announcements
                 for announcement in host.announcements {
-                    let ids: [String] = RefereeTabBarPVEController.localMessages.map({ $0.uuid })
+                    let ids: [String] = RefereeTabBarController.localMessages.map({ $0.uuid })
                     // new announcements
                     if !ids.contains(announcement.uuid) {
-                        RefereeTabBarPVEController.localMessages.append(announcement)
+                        RefereeTabBarController.localMessages.append(announcement)
                         if soundEnabled {
                             self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                         }
                         NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                     } else {
                         // modified announcements
-                        if let localIndex = RefereeTabBarPVEController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
-                            if RefereeTabBarPVEController.localMessages[localIndex].content != announcement.content {
-                                RefereeTabBarPVEController.localMessages[localIndex].content = announcement.content
-                                RefereeTabBarPVEController.localMessages[localIndex].readStatus = false
+                        if let localIndex = RefereeTabBarController.localMessages.firstIndex(where: {$0.uuid == announcement.uuid}) {
+                            if RefereeTabBarController.localMessages[localIndex].content != announcement.content {
+                                RefereeTabBarController.localMessages[localIndex].content = announcement.content
+                                RefereeTabBarController.localMessages[localIndex].readStatus = false
                                 if soundEnabled {
                                     self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
                                 }

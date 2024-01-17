@@ -116,7 +116,6 @@ class GivePointsController: UIViewController {
         }
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
-            self?.stepper.minimumValue = -999
             self?.stepper.label.text = enteredNumber
             if Double(enteredNumber)! > 999 {
                 self?.stepper.value = 999
@@ -186,8 +185,6 @@ class GivePointsController: UIViewController {
 
 //MARK: - GMStepper
 @IBDesignable public class GMStepper: UIControl {
-
-    /// Current value of the stepper. Defaults to 0.
     @objc @IBInspectable public var value: Double = 0 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
@@ -203,7 +200,6 @@ class GivePointsController: UIViewController {
     private var formattedValue: String? {
         let isInteger = Decimal(value).exponent >= 0
         
-        // If we have items, we will display them as steps
         if isInteger && stepValue == 1.0 && items.count > 0 {
             return items[Int(value)]
         }
@@ -212,53 +208,44 @@ class GivePointsController: UIViewController {
         }
     }
 
-
-    /// Minimum value. Must be less than maximumValue.
-    @objc @IBInspectable public var minimumValue: Double = 0 {
+    @objc @IBInspectable public var minimumValue: Double = -999 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
         }
     }
 
-    /// Maximum value. Must be more than minimumValue.
     @objc @IBInspectable public var maximumValue: Double = 999 {
         didSet {
             value = min(maximumValue, max(minimumValue, value))
         }
     }
 
-    /// Step/Increment value as in UIStepper. Defaults to 1.
     @objc @IBInspectable public var stepValue: Double = 1 {
         didSet {
             setupNumberFormatter()
         }
     }
 
-    /// The same as UIStepper's autorepeat. If true, holding on the buttons or keeping the pan gesture alters the value repeatedly. Defaults to true.
     @objc @IBInspectable public var autorepeat: Bool = true
 
-    /// If the value is integer, it is shown without floating point.
     @objc @IBInspectable public var showIntegerIfDoubleIsInteger: Bool = true {
         didSet {
             setupNumberFormatter()
         }
     }
 
-    /// Text on the left button. Be sure that it fits in the button. Defaults to "−".
     @objc @IBInspectable public var leftButtonText: String = "−" {
         didSet {
             leftButton.setTitle(leftButtonText, for: .normal)
         }
     }
 
-    /// Text on the right button. Be sure that it fits in the button. Defaults to "+".
     @objc @IBInspectable public var rightButtonText: String = "+" {
         didSet {
             rightButton.setTitle(rightButtonText, for: .normal)
         }
     }
 
-    /// Text color of the buttons. Defaults to white.
     @objc @IBInspectable public var buttonsTextColor: UIColor = UIColor.white {
         didSet {
             for button in [leftButton, rightButton] {
@@ -267,7 +254,6 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Background color of the buttons. Defaults to dark blue.
     @objc @IBInspectable public var buttonsBackgroundColor: UIColor = UIColor(red:0.21, green:0.5, blue:0.74, alpha:1) {
         didSet {
             for button in [leftButton, rightButton] {
@@ -277,7 +263,6 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Font of the buttons. Defaults to AvenirNext-Bold, 20.0 points in size.
     @objc public var buttonsFont = UIFont(name: "AvenirNext-Bold", size: 20)! {
         didSet {
             for button in [leftButton, rightButton] {
@@ -286,27 +271,24 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Text color of the middle label. Defaults to white.
     @objc @IBInspectable public var labelTextColor: UIColor = UIColor.white {
         didSet {
             label.textColor = labelTextColor
         }
     }
 
-    /// Text color of the middle label. Defaults to lighter blue.
     @objc @IBInspectable public var labelBackgroundColor: UIColor = UIColor(red:0.26, green:0.6, blue:0.87, alpha:1) {
         didSet {
             label.backgroundColor = labelBackgroundColor
         }
     }
 
-    /// Font of the middle label. Defaults to AvenirNext-Bold, 25.0 points in size.
     @objc public var labelFont = UIFont(name: "AvenirNext-Bold", size: 25.0)! {
         didSet {
             label.font = labelFont
         }
     }
-       /// Corner radius of the middle label. Defaults to 0.
+       
     @objc @IBInspectable public var labelCornerRadius: CGFloat = 0 {
         didSet {
             label.layer.cornerRadius = labelCornerRadius
@@ -314,7 +296,6 @@ class GivePointsController: UIViewController {
             }
     }
 
-    /// Corner radius of the stepper's layer. Defaults to 4.0.
     @objc @IBInspectable public var cornerRadius: CGFloat = 4.0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -322,7 +303,6 @@ class GivePointsController: UIViewController {
         }
     }
     
-    /// Border width of the stepper and middle label's layer. Defaults to 0.0.
     @objc @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
             layer.borderWidth = borderWidth
@@ -330,7 +310,6 @@ class GivePointsController: UIViewController {
         }
     }
     
-    /// Color of the border of the stepper and middle label's layer. Defaults to clear color.
     @objc @IBInspectable public var borderColor: UIColor = UIColor.clear {
         didSet {
             layer.borderColor = borderColor.cgColor
@@ -338,7 +317,6 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Percentage of the middle label's width. Must be between 0 and 1. Defaults to 0.5. Be sure that it is wide enough to show the value.
     @objc @IBInspectable public var labelWidthWeight: CGFloat = 0.7 {
         didSet {
             labelWidthWeight = min(1, max(0, labelWidthWeight))
@@ -346,17 +324,11 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Color of the flashing animation on the buttons in case the value hit the limit.
     @objc @IBInspectable public var limitHitAnimationColor: UIColor = UIColor(red:0.26, green:0.6, blue:0.87, alpha:1)
 
-    /// Formatter for displaying the current value
     let formatter = NumberFormatter()
-    
-    /**
-        Width of the sliding animation. When buttons tapped, the middle label does a slide animation towards to the tapped button. Defaults to 5.
-    */
-    let labelSlideLength: CGFloat = 5
 
+    let labelSlideLength: CGFloat = 5
 
     lazy var leftButton: UIButton = {
         let button = UIButton()
@@ -429,7 +401,6 @@ class GivePointsController: UIViewController {
         }
     }
 
-    /// Timer used for autorepeat option
     var timer: Timer?
 
     let timerInterval = TimeInterval(0.7)
@@ -487,7 +458,6 @@ class GivePointsController: UIViewController {
         }
     }
     
-
     deinit {
         resetTimer()
         NotificationCenter.default.removeObserver(self)
@@ -569,7 +539,7 @@ extension GMStepper {
     }
 }
 
-
+// MARK: Decimal
 extension Decimal {
     var significantFractionalDecimalDigits: Int {
         return max(-exponent, 0)

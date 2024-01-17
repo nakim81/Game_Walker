@@ -312,6 +312,7 @@
       }
     },
     "Invalid round." : {
+
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -1111,6 +1112,9 @@
         }
       }
     },
+    "Station \n Status" : {
+
+    },
     "Station Info" : {
       "localizations" : {
         "ko" : {
@@ -1450,6 +1454,9 @@
           }
         }
       }
+    },
+    "There is no Referee in point style." : {
+
     },
     "There is no Team yet." : {
       "localizations" : {
