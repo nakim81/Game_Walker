@@ -133,8 +133,8 @@ extension HostRankingViewcontroller {
 
         let explanationTexts = [
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Start/End Game", comment: ""),
-            NSLocalizedString("Click to hide points from others", comment: "")
+            NSLocalizedString("Timer &\nStart/End Game", comment: ""),
+            NSLocalizedString("Swipe to hide points from others", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []
