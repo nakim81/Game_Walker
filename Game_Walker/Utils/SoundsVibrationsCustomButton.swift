@@ -14,7 +14,7 @@ class SoundsVibrationsCustomButton: UIButton {
     private var barView: UIImageView!
     private var circleView: UIImageView!
 
-    var isOn: Bool = true {
+    var isSwitchOn: Bool = true {
         didSet {
             self.changeState()
         }
@@ -23,7 +23,7 @@ class SoundsVibrationsCustomButton: UIButton {
     // button image when the button is on
     var onImage: SwitchImage = (UIImage(named: "onstate-switch")!, UIImage(named: "SwitchBtnImage")!) {
         didSet {
-            if isOn {
+            if isSwitchOn {
                 self.barView.image = self.onImage.bar
                 self.circleView.image = self.onImage.circle
             }
@@ -33,7 +33,7 @@ class SoundsVibrationsCustomButton: UIButton {
     // button image when the button is off
     var offImage: SwitchImage = (UIImage(named: "offstate-switch")!, UIImage(named: "SwitchBtnImage")!) {
         didSet {
-               if isOn == false {
+               if isSwitchOn == false {
                 self.barView.image = self.offImage.bar
                 self.circleView.image = self.offImage.circle
             }
@@ -63,7 +63,7 @@ class SoundsVibrationsCustomButton: UIButton {
         self.buttonInit(frame: frame)
         print(frame)
     }
-    
+
     private func buttonInit(frame: CGRect) {
         let circleViewHeight = frame.height - (circleViewTopBottomMargin * 2)
         print("circleViewHeight: ", circleViewHeight)
@@ -79,43 +79,50 @@ class SoundsVibrationsCustomButton: UIButton {
         circleView.image = self.onImage.circle
         self.addSubview(circleView)
 
-        NSLayoutConstraint.activate([
-            barView.topAnchor.constraint(equalTo: self.topAnchor),
-            barView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            barView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            barView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            NSLayoutConstraint.activate([
+                barView.topAnchor.constraint(equalTo: self.topAnchor),
+                barView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                barView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                barView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
-            circleView.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
-            circleView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
-            circleView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            circleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: circleViewTopBottomMargin)
-        ])
+                circleView.widthAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
+                circleView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -circleViewTopBottomMargin),
+                circleView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                circleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: circleViewTopBottomMargin)
+            ])
 
         print("circleView frame in buttonInit: \(circleView.frame)")
         print("circleViewTopBottomMargin: ", circleViewTopBottomMargin)
     }
 
 
-        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.setOn(on: !self.isOn, animated: true)
-        }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.setSwitchOn(on: !self.isSwitchOn, animated: true)
+    }
 
-        func setOn(on: Bool, animated: Bool) {
+    func setSwitchOn(on: Bool, animated: Bool) {
             self.isAnimated = animated
-            self.isOn = on
-        }
+            self.isSwitchOn = on
+    }
+
     
     private func changeState() {
         var circleCenter: CGFloat = 0
         var barViewColor: UIImage
         var circleViewColor: UIImage
 
-        if self.isOn {
+        if self.isSwitchOn {
             circleCenter = self.circleView.frame.width / 2 + circleViewTopBottomMargin
             barViewColor = self.onImage.bar
             circleViewColor = self.onImage.circle
+            print("circle Center when is ON: ", self.circleView.frame.width)
+            print("self.frame.width: ", self.frame.width)
+            print("self.circleView.frame.width: ", self.circleView.frame.width)
         } else {
             circleCenter = self.frame.width - (self.circleView.frame.width / 2) - circleViewTopBottomMargin
+            print("circle Center when is OFF: ", self.circleView.frame.width)
+            print("self.frame.width: ", self.frame.width)
+            print("self.circleView.frame.width: ", self.circleView.frame.width)
             barViewColor = self.offImage.bar
             circleViewColor = self.offImage.circle
         }
@@ -132,7 +139,7 @@ class SoundsVibrationsCustomButton: UIButton {
         }) { [weak self] _ in
             guard let self = self else { return }
 
-            self.delegate?.isOnValueChange(self, isOn: self.isOn)
+            self.delegate?.isOnValueChange(self, isOn: self.isSwitchOn)
             self.isAnimated = false
         }
     }

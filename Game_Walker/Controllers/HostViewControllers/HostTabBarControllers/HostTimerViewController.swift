@@ -41,7 +41,9 @@ class HostTimerViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let play = UIImage(named: "Polygon 1")
     private let pause = UIImage(named: "Group 359")
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var gameStart : Bool = false
     private var ready : Bool {
@@ -306,7 +308,9 @@ class HostTimerViewController: UIViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.totalTime == strongSelf.rounds!*(strongSelf.seconds + strongSelf.moveSeconds) {
-                    strongSelf.audioPlayerManager.stop()
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.stop()
+                    }
                     strongSelf.pauseOrPlayButton.isHidden = true
                     timer.invalidate()
                 }
@@ -315,9 +319,13 @@ class HostTimerViewController: UIViewController {
 
                 switch timeRemainder {
                 case 300, 180, 60, 30, 10:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    }
                 case 3...5:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    }
                 case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
                 default:
@@ -361,7 +369,9 @@ class HostTimerViewController: UIViewController {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             } else {
-                strongSelf.audioPlayerManager.stop()
+                if self!.soundEnabled {
+                    strongSelf.audioPlayerManager.stop()
+                }
             }
         }
     }

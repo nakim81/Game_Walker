@@ -108,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="center" minimumFontSize="17" background="BoxOne" translatesAutoresizingMaskIntoConstraints="NO" id="8bU-vL-2hU">
-                                <rect key="frame" x="45" y="366" width="324" height="105.5"/>
+                                <rect key="frame" x="85.5" y="364" width="243" height="79.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8bU-vL-2hU" secondAttribute="height" multiplier="245:80" id="hBc-CJ-HEn"/>
                                 </constraints>
@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTP-o1-Ip2">
-                                <rect key="frame" x="99" y="309" width="216" height="47"/>
+                                <rect key="frame" x="126" y="310.5" width="162" height="43.5"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                 <color key="textColor" red="0.1764705882" green="0.1764705882" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -177,25 +177,25 @@
                                         <rect key="frame" x="28" y="25" width="308" height="320"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the style that fits your event!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtQ-t2-3Ba">
-                                                <rect key="frame" x="7.5" y="0.0" width="293.5" height="70"/>
+                                                <rect key="frame" x="16" y="0.0" width="276.5" height="65.5"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GH2-UZ-7lT">
-                                                <rect key="frame" x="0.0" y="90.5" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="89" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pi3-zN-szb">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-ys-a2b">
-                                                                <rect key="frame" x="84.5" y="0.0" width="139" height="40.5"/>
+                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
-                                                                <rect key="frame" x="59.5" y="25.5" width="189.5" height="40.5"/>
+                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
                                                                 <string key="text">This mode includes all of our features
 (Points, Stations, Matching, Timer, etc)</string>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
@@ -215,19 +215,19 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMs-Uc-B0K">
-                                                <rect key="frame" x="0.0" y="178.5" width="308" height="66"/>
+                                                <rect key="frame" x="0.0" y="178" width="308" height="66"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-qL-haN">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdt-89-RkS">
-                                                                <rect key="frame" x="102.5" y="0.0" width="103" height="40.5"/>
+                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This mode includes points and rankings only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFs-Tm-uFC">
-                                                                <rect key="frame" x="44.5" y="25.5" width="219" height="40.5"/>
+                                                                <rect key="frame" x="72.5" y="26" width="163" height="40"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
@@ -309,7 +309,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
-                                <rect key="frame" x="91" y="103.5" width="232.5" height="58.5"/>
+                                <rect key="frame" x="116" y="105.5" width="182.5" height="54.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="STATIONS">
                                         <attributes>
@@ -337,11 +337,11 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LOv-V0-Zcn">
-                                <rect key="frame" x="31" y="177" width="352" height="487.5"/>
+                                <rect key="frame" x="31" y="175" width="352" height="487.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-lG-6rY" userLabel="Add Button">
-                                <rect key="frame" x="49.5" y="679.5" width="315" height="50"/>
+                                <rect key="frame" x="49.5" y="677.5" width="315" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0cn-lG-6rY" secondAttribute="height" multiplier="315:50" id="Dbi-1s-kEz"/>
                                 </constraints>
@@ -397,31 +397,31 @@
                                         <rect key="frame" x="20.5" y="7" width="365" height="721"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iML-mv-p7Y" userLabel="Station Label">
-                                        <rect key="frame" x="57.5" y="56.5" width="158.5" height="27"/>
+                                        <rect key="frame" x="57.5" y="58.5" width="158.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kB-BH-qBQ" userLabel="Location Label">
-                                        <rect key="frame" x="57.5" y="139.5" width="168.5" height="27"/>
+                                        <rect key="frame" x="57.5" y="139.5" width="135.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QME-XF-J55" userLabel="Points Label">
-                                        <rect key="frame" x="57.5" y="223" width="144" height="27"/>
+                                        <rect key="frame" x="57.5" y="221" width="118.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4e-L9-4OF" userLabel="Referee Label">
-                                        <rect key="frame" x="57.5" y="306" width="79.5" height="27"/>
+                                        <rect key="frame" x="57.5" y="302" width="66.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZT-6z-gXz" userLabel="Rules Label">
-                                        <rect key="frame" x="57.5" y="442.5" width="57.5" height="27"/>
+                                        <rect key="frame" x="57.5" y="436.5" width="47.5" height="25"/>
                                         <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -440,27 +440,27 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0RL-II-XhM" userLabel="text Game Location">
-                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="0WW-P8-uwc" userLabel="Game Location Text">
-                                        <rect key="frame" x="44" y="171.5" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="169.5" width="318" height="39.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fW0-Ap-xmH" userLabel="text Game Points">
-                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="22"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxFour" translatesAutoresizingMaskIntoConstraints="NO" id="QBZ-DB-iAK" userLabel="Game Points Text">
-                                        <rect key="frame" x="44" y="255" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="251" width="318" height="39"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQY-JV-gHm" userLabel="Referee Button">
-                                        <rect key="frame" x="44" y="338" width="318" height="39.5"/>
+                                        <rect key="frame" x="44" y="332" width="318" height="39.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" backgroundImage="BoxFour"/>
@@ -469,13 +469,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referee Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-us-q7L" userLabel="Referee Placeholder">
-                                        <rect key="frame" x="139.5" y="348" width="127.5" height="19.5"/>
+                                        <rect key="frame" x="149" y="342" width="108" height="19.5"/>
                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIc-0l-Lvr" userLabel="Pvp Pve View">
-                                        <rect key="frame" x="44" y="391.5" width="318" height="39"/>
+                                        <rect key="frame" x="44" y="385.5" width="318" height="39"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sd-pw-gIC" userLabel="PVP">
                                                 <rect key="frame" x="0.0" y="0.0" width="132" height="39"/>
@@ -523,7 +523,7 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xx1-Tw-m3A" userLabel="Rules text view">
-                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xx1-Tw-m3A" secondAttribute="height" multiplier="267:103" id="ls9-as-iQd"/>
@@ -533,7 +533,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rules Box" translatesAutoresizingMaskIntoConstraints="NO" id="BkX-2h-b6N">
-                                        <rect key="frame" x="44" y="474.5" width="318" height="122.5"/>
+                                        <rect key="frame" x="44" y="466.5" width="318" height="122.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mew-pS-Laf" userLabel="Save Button">
                                         <rect key="frame" x="130" y="609" width="146" height="48"/>
@@ -652,111 +652,186 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GameTime Label" translatesAutoresizingMaskIntoConstraints="NO" id="EBr-2e-ORF" userLabel="Game Time Label">
-                                <rect key="frame" x="137" y="170" width="140" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EBr-2e-ORF" secondAttribute="height" multiplier="128:33" id="In3-dF-mbz"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-kG-BRL" userLabel="Gametime Box">
-                                <rect key="frame" x="97.5" y="209" width="219" height="66"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="200:60" id="89c-SK-TFL"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                <rect key="frame" x="108.5" y="211" width="197" height="62.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw">
+                                <rect key="frame" x="105" y="12" width="204" height="54.5"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
+                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="kHE-Wp-se9" userLabel="Settings Stack View">
+                                <rect key="frame" x="89.5" y="92" width="235" height="504"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
-                                        <rect key="frame" x="94" y="-2" width="9" height="66"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                        <rect key="frame" x="40.5" y="6.5" width="47" height="49"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                        <rect key="frame" x="108" y="6.5" width="47" height="49"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
-                                        <rect key="frame" x="-11" y="-2" width="219" height="66"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <connections>
-                                            <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8yQ-2P-oGV" userLabel="Station Time View">
+                                        <rect key="frame" x="0.0" y="0.0" width="235" height="111.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-Sk-V31">
+                                                <rect key="frame" x="49" y="0.0" width="137.5" height="33"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
+                                                <rect key="frame" x="0.0" y="41" width="235" height="70.5"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
+                                                        <rect key="frame" x="113" y="2.5" width="9" height="66"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
+                                                        <rect key="frame" x="58.5" y="8.5" width="45" height="53.5"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
+                                                        <rect key="frame" x="130" y="8.5" width="45" height="53.5"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="70.5"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="XV6-dh-1tR" secondAttribute="trailing" id="5Rm-27-YLS"/>
+                                                    <constraint firstItem="XV6-dh-1tR" firstAttribute="leading" secondItem="id3-FJ-dYb" secondAttribute="leading" id="BAp-lx-6a8"/>
+                                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerY" secondItem="id3-FJ-dYb" secondAttribute="centerY" id="JHQ-Wx-1Qr"/>
+                                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="leading" secondItem="IZU-Z9-5GC" secondAttribute="leading" multiplier="1.15" id="NfW-XB-C7X"/>
+                                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerX" secondItem="id3-FJ-dYb" secondAttribute="centerX" id="Pzo-mS-AIm"/>
+                                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="Sji-VX-0b9"/>
+                                                    <constraint firstItem="XV6-dh-1tR" firstAttribute="top" secondItem="id3-FJ-dYb" secondAttribute="top" id="ZV0-ae-GYd"/>
+                                                    <constraint firstAttribute="width" secondItem="id3-FJ-dYb" secondAttribute="height" multiplier="200:60" id="hzS-J6-XPc"/>
+                                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="mip-mT-svf"/>
+                                                    <constraint firstAttribute="bottom" secondItem="XV6-dh-1tR" secondAttribute="bottom" id="quB-Kw-CEo"/>
+                                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="trailing" secondItem="IZU-Z9-5GC" secondAttribute="trailing" multiplier="0.85" id="yx1-Kn-fnf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="gxM-Sk-V31" firstAttribute="centerX" secondItem="8yQ-2P-oGV" secondAttribute="centerX" id="LA2-Gm-sa3"/>
+                                            <constraint firstAttribute="trailing" secondItem="id3-FJ-dYb" secondAttribute="trailing" id="uUo-iw-NyI"/>
+                                            <constraint firstItem="id3-FJ-dYb" firstAttribute="leading" secondItem="8yQ-2P-oGV" secondAttribute="leading" id="y99-li-kyr"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-nS-ETV" userLabel="Moving Time Stack View">
+                                        <rect key="frame" x="0.0" y="129.5" width="235" height="111.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moving Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i75-qV-gy2">
+                                                <rect key="frame" x="48.5" y="0.0" width="138.5" height="33"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
+                                                <rect key="frame" x="0.0" y="41" width="235" height="70.5"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
+                                                        <rect key="frame" x="113" y="2.5" width="9" height="66"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
+                                                        <rect key="frame" x="58.5" y="8.5" width="45" height="53.5"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
+                                                        <rect key="frame" x="130" y="8.5" width="45" height="53.5"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="70.5"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="RKr-I9-Cod" secondAttribute="trailing" id="Cyb-bJ-Qoy"/>
+                                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="trailing" secondItem="Wz5-gO-hPN" secondAttribute="trailing" multiplier="0.85" id="FFJ-h9-l61"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RKr-I9-Cod" secondAttribute="bottom" id="K87-W0-O5m"/>
+                                                    <constraint firstItem="RKr-I9-Cod" firstAttribute="top" secondItem="sQu-MN-J2c" secondAttribute="top" id="N0b-5f-xsN"/>
+                                                    <constraint firstItem="RKr-I9-Cod" firstAttribute="leading" secondItem="sQu-MN-J2c" secondAttribute="leading" id="N9Y-48-2kU"/>
+                                                    <constraint firstAttribute="width" secondItem="sQu-MN-J2c" secondAttribute="height" multiplier="200:60" id="Zuw-iY-pjt"/>
+                                                    <constraint firstItem="F64-vA-BnX" firstAttribute="leading" secondItem="Wz5-gO-hPN" secondAttribute="leading" multiplier="1.15" id="iJe-9S-dhH"/>
+                                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="upC-Yd-Qi4"/>
+                                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerX" secondItem="sQu-MN-J2c" secondAttribute="centerX" id="w2x-5d-isB"/>
+                                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerY" secondItem="sQu-MN-J2c" secondAttribute="centerY" id="wXn-3X-Xbq"/>
+                                                    <constraint firstItem="F64-vA-BnX" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="wk1-j0-Nu6"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="i75-qV-gy2" firstAttribute="centerX" secondItem="Rhr-nS-ETV" secondAttribute="centerX" id="9fS-Lz-E3o"/>
+                                            <constraint firstAttribute="trailing" secondItem="sQu-MN-J2c" secondAttribute="trailing" id="Q3B-oh-wr9"/>
+                                            <constraint firstItem="sQu-MN-J2c" firstAttribute="leading" secondItem="Rhr-nS-ETV" secondAttribute="leading" id="qt4-Cv-Ktz"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-JK-3fn" userLabel="Rounds StackView">
+                                        <rect key="frame" x="0.0" y="259" width="235" height="115.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-eY-NOH">
+                                                <rect key="frame" x="76" y="0.0" width="83" height="33"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
+                                                <rect key="frame" x="0.0" y="45" width="235" height="70.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Ug1-se-9Lv" secondAttribute="height" multiplier="200:60" id="ng4-lf-WxO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="leading" secondItem="y7r-JK-3fn" secondAttribute="leading" id="143-mh-qju"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ug1-se-9Lv" secondAttribute="trailing" id="9tF-af-jeV"/>
+                                            <constraint firstItem="aqb-eY-NOH" firstAttribute="centerX" secondItem="y7r-JK-3fn" secondAttribute="centerX" id="Z9a-p6-WIO"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-8W-jvA" userLabel="Teams StackView">
+                                        <rect key="frame" x="0.0" y="392.5" width="235" height="111.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRB-mk-xpK">
+                                                <rect key="frame" x="0.0" y="0.0" width="235" height="33"/>
+                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
+                                                <rect key="frame" x="0.0" y="41" width="235" height="70.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="fc8-so-AwG" secondAttribute="height" multiplier="200:60" id="8gQ-ik-dPU"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="fc8-so-AwG" secondAttribute="trailing" id="KD9-Oh-kfb"/>
+                                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="LLq-63-1XW"/>
+                                            <constraint firstItem="fc8-so-AwG" firstAttribute="leading" secondItem="pV7-8W-jvA" secondAttribute="leading" id="iyx-kG-xUq"/>
+                                            <constraint firstItem="SRB-mk-xpK" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="vTP-IY-Gkn"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerY" secondItem="id3-FJ-dYb" secondAttribute="centerY" id="JHQ-Wx-1Qr"/>
-                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="leading" secondItem="IZU-Z9-5GC" secondAttribute="leading" multiplier="1.15" id="NfW-XB-C7X"/>
-                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerX" secondItem="id3-FJ-dYb" secondAttribute="centerX" id="Pzo-mS-AIm"/>
-                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="Sji-VX-0b9"/>
-                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="mip-mT-svf"/>
-                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="trailing" secondItem="IZU-Z9-5GC" secondAttribute="trailing" multiplier="0.85" id="yx1-Kn-fnf"/>
-                                </constraints>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Transitino Time Label" translatesAutoresizingMaskIntoConstraints="NO" id="iZ1-Rk-GG3" userLabel="Moving Time Label">
-                                <rect key="frame" x="110.5" y="305" width="193" height="35.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iZ1-Rk-GG3" secondAttribute="height" multiplier="179:33" id="wkB-x3-fMl"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-su-fJD" userLabel="Movingtime Box">
-                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                <rect key="frame" x="97.5" y="343.5" width="219" height="66"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
-                                        <rect key="frame" x="105" y="0.0" width="9" height="66"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                        <rect key="frame" x="50" y="8.5" width="47" height="49"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                        <rect key="frame" x="121" y="8.5" width="47" height="49"/>
-                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="219" height="66"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <connections>
-                                            <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="trailing" secondItem="Wz5-gO-hPN" secondAttribute="trailing" multiplier="0.85" id="FFJ-h9-l61"/>
-                                    <constraint firstItem="F64-vA-BnX" firstAttribute="leading" secondItem="Wz5-gO-hPN" secondAttribute="leading" multiplier="1.15" id="iJe-9S-dhH"/>
-                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="upC-Yd-Qi4"/>
-                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerX" secondItem="sQu-MN-J2c" secondAttribute="centerX" id="w2x-5d-isB"/>
-                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerY" secondItem="sQu-MN-J2c" secondAttribute="centerY" id="wXn-3X-Xbq"/>
-                                    <constraint firstItem="F64-vA-BnX" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="wk1-j0-Nu6"/>
-                                </constraints>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rounds Label" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-hQ-NGt" userLabel="Round Label">
-                                <rect key="frame" x="158.5" y="439.5" width="97" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="QMr-hQ-NGt" secondAttribute="height" multiplier="88:33" id="gC4-9S-8sz"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-r6-JBT" userLabel="Rounds Box">
-                                <rect key="frame" x="97.5" y="478.5" width="219" height="66"/>
-                            </imageView>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="107" y="766" width="200" height="65"/>
+                                <rect key="frame" x="113" y="770" width="188" height="61"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="p0n-80-Fkc" secondAttribute="height" multiplier="175:57" id="MAx-4n-z2k"/>
@@ -771,110 +846,37 @@
                                     <segue destination="Vjg-e5-r3Z" kind="show" identifier="ShowAlgorithmSegue" id="flX-6b-8Ik"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                <rect key="frame" x="108.5" y="482" width="197" height="59"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Num Teams label" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-bV-YWp" userLabel="Team Count label">
-                                <rect key="frame" x="95.5" y="574.5" width="223" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="WYz-bV-YWp" secondAttribute="height" multiplier="203:33" id="sJQ-7T-Ic5"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings box" translatesAutoresizingMaskIntoConstraints="NO" id="Vix-LA-Y4c" userLabel="Team Count box">
-                                <rect key="frame" x="97.5" y="613.5" width="219" height="66"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                <rect key="frame" x="108.5" y="617" width="197" height="59"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw">
-                                <rect key="frame" x="87" y="81.5" width="240" height="58.5"/>
-                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
-                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bbE-Tk-Afq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EBr-2e-ORF" firstAttribute="top" secondItem="Zyi-2H-iJw" secondAttribute="bottom" constant="30" id="0OK-TD-F6c"/>
-                            <constraint firstItem="RKr-I9-Cod" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="0X3-tc-6rv"/>
-                            <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="0eT-1R-WV7"/>
-                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="1S2-Ze-OU0"/>
-                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="top" secondItem="LEY-kG-BRL" secondAttribute="bottom" constant="30" id="27e-b7-VKT"/>
-                            <constraint firstItem="sQu-MN-J2c" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="3Ah-9g-rVY"/>
-                            <constraint firstItem="sQu-MN-J2c" firstAttribute="centerY" secondItem="Aa4-su-fJD" secondAttribute="centerY" id="3IG-6G-1BA"/>
-                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="5BH-IV-PFK"/>
-                            <constraint firstItem="LEY-kG-BRL" firstAttribute="width" secondItem="bbE-Tk-Afq" secondAttribute="width" multiplier="0.53" id="5bR-B4-1nk"/>
-                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" multiplier="0.88" id="5ic-Ju-1oO"/>
-                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="top" secondItem="Aa4-su-fJD" secondAttribute="bottom" constant="30" id="7bC-gq-GPw"/>
-                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="8JT-Zp-dG4"/>
-                            <constraint firstItem="LEY-kG-BRL" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="93v-Jo-VPP"/>
-                            <constraint firstItem="XV6-dh-1tR" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="9Fv-oA-wFn"/>
-                            <constraint firstItem="fc8-so-AwG" firstAttribute="height" secondItem="Vix-LA-Y4c" secondAttribute="height" multiplier="0.9" id="9NM-t9-J5E"/>
-                            <constraint firstItem="XV6-dh-1tR" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="9xw-Qf-m4S"/>
-                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="width" secondItem="aJl-r6-JBT" secondAttribute="width" multiplier="0.9" id="BCn-aX-fc7"/>
-                            <constraint firstItem="XV6-dh-1tR" firstAttribute="centerY" secondItem="LEY-kG-BRL" secondAttribute="centerY" id="BNh-FY-4zo"/>
-                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="top" secondItem="WYz-bV-YWp" secondAttribute="bottom" constant="3" id="CBv-IP-Hi3"/>
-                            <constraint firstItem="QMr-hQ-NGt" firstAttribute="width" secondItem="aJl-r6-JBT" secondAttribute="width" multiplier="0.44" id="D9t-LS-E0U"/>
-                            <constraint firstItem="Aa4-su-fJD" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="FHZ-hR-aL5"/>
-                            <constraint firstItem="id3-FJ-dYb" firstAttribute="centerY" secondItem="LEY-kG-BRL" secondAttribute="centerY" id="GEh-uX-6lm"/>
-                            <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="H0X-BB-44s"/>
-                            <constraint firstItem="aJl-r6-JBT" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="KKP-JQ-rPO"/>
-                            <constraint firstItem="EBr-2e-ORF" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="LIg-K4-0ww"/>
-                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="Lk0-Gi-XA6"/>
-                            <constraint firstItem="RKr-I9-Cod" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="OWH-rf-EtV"/>
-                            <constraint firstItem="sQu-MN-J2c" firstAttribute="height" secondItem="Aa4-su-fJD" secondAttribute="height" id="P46-6a-0hT"/>
-                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerY" secondItem="Vix-LA-Y4c" secondAttribute="centerY" id="PHZ-OR-Doa"/>
-                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="centerX" secondItem="aJl-r6-JBT" secondAttribute="centerX" id="PiO-fT-rkZ"/>
-                            <constraint firstItem="XV6-dh-1tR" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="Va1-nq-eHU"/>
-                            <constraint firstItem="aJl-r6-JBT" firstAttribute="top" secondItem="QMr-hQ-NGt" secondAttribute="bottom" constant="3" id="Yqr-DJ-bqP"/>
-                            <constraint firstItem="id3-FJ-dYb" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" multiplier="0.9" id="aRC-bE-YYo"/>
-                            <constraint firstItem="Aa4-su-fJD" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="bOk-sd-KSc"/>
-                            <constraint firstItem="Aa4-su-fJD" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="e4G-cg-TDm"/>
-                            <constraint firstItem="id3-FJ-dYb" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" multiplier="0.95" id="e6M-fo-STL"/>
-                            <constraint firstItem="sQu-MN-J2c" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="ev1-t5-6EQ"/>
-                            <constraint firstItem="WYz-bV-YWp" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="1.015" id="ewO-fc-aIT"/>
-                            <constraint firstItem="WYz-bV-YWp" firstAttribute="top" secondItem="aJl-r6-JBT" secondAttribute="bottom" constant="30" id="fBY-9u-IEg"/>
-                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="height" secondItem="aJl-r6-JBT" secondAttribute="height" multiplier="0.9" id="fPV-3l-Kum"/>
-                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.25" id="fRn-Dt-acs"/>
-                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerX" secondItem="Vix-LA-Y4c" secondAttribute="centerX" id="j6u-uo-4Wg"/>
-                            <constraint firstItem="aJl-r6-JBT" firstAttribute="centerX" secondItem="QMr-hQ-NGt" secondAttribute="centerX" id="kMn-5j-c9B"/>
-                            <constraint firstItem="iZ1-Rk-GG3" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="kZ7-iL-GbB"/>
-                            <constraint firstItem="RKr-I9-Cod" firstAttribute="width" secondItem="Aa4-su-fJD" secondAttribute="width" id="knA-gj-dV9"/>
-                            <constraint firstItem="Aa4-su-fJD" firstAttribute="top" secondItem="iZ1-Rk-GG3" secondAttribute="bottom" constant="3" id="mEj-Wa-kB8"/>
-                            <constraint firstItem="RKr-I9-Cod" firstAttribute="centerX" secondItem="Aa4-su-fJD" secondAttribute="centerX" id="mLa-cE-4J7"/>
-                            <constraint firstItem="aJl-r6-JBT" firstAttribute="height" secondItem="LEY-kG-BRL" secondAttribute="height" id="pWx-JM-0gy"/>
-                            <constraint firstItem="Vix-LA-Y4c" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" id="q90-0A-0BT"/>
-                            <constraint firstItem="id3-FJ-dYb" firstAttribute="centerX" secondItem="LEY-kG-BRL" secondAttribute="centerX" id="rDo-Ff-Ss8"/>
-                            <constraint firstItem="fc8-so-AwG" firstAttribute="width" secondItem="Vix-LA-Y4c" secondAttribute="width" multiplier="0.9" id="ruE-69-iIn"/>
-                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.483092" id="tEo-Yy-jxP"/>
-                            <constraint firstItem="LEY-kG-BRL" firstAttribute="top" secondItem="EBr-2e-ORF" secondAttribute="bottom" constant="3" id="vED-Ec-S1O"/>
-                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="centerY" secondItem="aJl-r6-JBT" secondAttribute="centerY" id="wgT-gd-33E"/>
-                            <constraint firstItem="WYz-bV-YWp" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="yFX-W8-1yb"/>
-                            <constraint firstItem="EBr-2e-ORF" firstAttribute="width" secondItem="LEY-kG-BRL" secondAttribute="width" multiplier="0.64" id="zg6-jo-PVc"/>
+                            <constraint firstItem="kHE-Wp-se9" firstAttribute="top" secondItem="Zyi-2H-iJw" secondAttribute="top" constant="80" id="GCa-vh-Hp6"/>
+                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="Iad-Ve-UeB"/>
+                            <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="PrQ-Za-4dV"/>
+                            <constraint firstItem="kHE-Wp-se9" firstAttribute="width" secondItem="Zyi-2H-iJw" secondAttribute="width" multiplier="1.15" id="Xh3-x6-rHv"/>
+                            <constraint firstItem="kHE-Wp-se9" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="bA2-ps-aKB"/>
+                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="top" secondItem="bbE-Tk-Afq" secondAttribute="top" constant="12" id="eSW-Ur-jZ2"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="kHE-Wp-se9" secondAttribute="width" multiplier="0.8" id="oXy-eZ-Unu"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="kHE-Wp-se9" secondAttribute="centerX" id="uOb-3p-FDu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ojA-0m-lks"/>
                     <connections>
                         <outlet property="gameMinutesLabel" destination="jop-Sf-8Yj" id="eED-2X-etp"/>
                         <outlet property="gameSecondsLabel" destination="Ko8-vf-QFy" id="G2n-ea-P38"/>
+                        <outlet property="gameTimeButton" destination="XV6-dh-1tR" id="uQQ-k1-iS9"/>
+                        <outlet property="moveTimeButton" destination="RKr-I9-Cod" id="gvK-ji-5Fg"/>
                         <outlet property="movingMinutesLabel" destination="RFd-2O-0qr" id="5DQ-PQ-4M9"/>
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
-                        <outlet property="nextButton" destination="p0n-80-Fkc" id="L4Q-cv-HgM"/>
+                        <outlet property="nextButton" destination="p0n-80-Fkc" id="Oj7-wb-Wot"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
-                        <outlet property="teamcountTextField" destination="fc8-so-AwG" id="2It-gy-vHo"/>
+                        <outlet property="teamcountTextField" destination="fc8-so-AwG" id="H2x-S6-il3"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2420" y="-517"/>
+            <point key="canvasLocation" x="2418.840579710145" y="-517.63392857142856"/>
         </scene>
         <!--Manual Algorithm View Controller-->
         <scene sceneID="Mj9-kg-wPY">
@@ -885,7 +887,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
-                                <rect key="frame" x="77.5" y="103.5" width="259.5" height="58.5"/>
+                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="MATCHING">
                                         <attributes>
@@ -1122,7 +1124,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="OK4-sB-gpM"/>
-        <segue reference="D0i-05-1lI"/>
+        <segue reference="tce-ii-ly8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
@@ -1130,19 +1132,14 @@
         <image name="BoxOne" width="245" height="80"/>
         <image name="EndGameButton" width="126" height="41"/>
         <image name="GameStartButton" width="126" height="41"/>
-        <image name="GameTime Label" width="125.5" height="21"/>
-        <image name="Num Teams label" width="201" height="21"/>
         <image name="PVEButton" width="111" height="33"/>
         <image name="PVPButton" width="111" height="33"/>
         <image name="RankingButton" width="76" height="76"/>
-        <image name="Rounds Label" width="85" height="21"/>
         <image name="TimerButton1" width="76" height="76"/>
-        <image name="Transitino Time Label" width="177.5" height="21"/>
         <image name="WhiteGuideIcon" width="30" height="30"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
-        <image name="settings box" width="200" height="60"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
         <systemColor name="systemBackgroundColor">

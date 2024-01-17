@@ -10,6 +10,8 @@ import UIKit
 class SettingTimeHostViewController: UIViewController {
 
     
+    @IBOutlet weak var gameTimeButton: UIButton!
+    @IBOutlet weak var moveTimeButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var gameMinutesLabel: UILabel!
     @IBOutlet weak var gameSecondsLabel: UILabel!
@@ -426,6 +428,19 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
 
     private func configureButtonVisuals() {
         nextButton.layer.cornerRadius = 10.0
+        teamcountTextField.layer.borderWidth = 3.0
+        teamcountTextField.layer.cornerRadius = 10.0
+        teamcountTextField.layer.borderColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1.00).cgColor
+        roundsTextField.layer.borderWidth = 3.0
+        roundsTextField.layer.cornerRadius = 10.0
+        roundsTextField.layer.borderColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1.00).cgColor
+        moveTimeButton.layer.borderWidth = 3.0
+        moveTimeButton.layer.cornerRadius = 10.0
+        moveTimeButton.layer.borderColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1.00).cgColor
+        gameTimeButton.layer.borderWidth = 3.0
+        gameTimeButton.layer.cornerRadius = 10.0
+        gameTimeButton.layer.borderColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1.00).cgColor
+
     }
 }
 

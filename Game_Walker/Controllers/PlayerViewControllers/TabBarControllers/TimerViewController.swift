@@ -12,7 +12,9 @@ import AVFoundation
 class TimerViewController: BaseViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
@@ -135,7 +137,9 @@ class TimerViewController: BaseViewController {
     }()
     
     @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         findStation()
         showGameInfoPopUp(gameName: gameName, gameLocation: gameLocation, gamePoitns: gamePoints, refereeName: refereeName, gameRule: gameRule)
     }
@@ -152,7 +156,9 @@ class TimerViewController: BaseViewController {
     }()
     
     @objc func nextStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         if round == rounds {
             alert(title: NSLocalizedString("Woops!", comment: ""), message: "You are in your last round.")
         }
@@ -365,7 +371,9 @@ class TimerViewController: BaseViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
-                    strongSelf.audioPlayerManager.stop()
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
+                        strongSelf.audioPlayerManager.stop()
+                    }
                     timer.invalidate()
                 }
                 let interval = strongSelf.moveSeconds + strongSelf.seconds
@@ -373,9 +381,13 @@ class TimerViewController: BaseViewController {
 
                 switch timeRemainder {
                 case 300, 180, 60, 30, 10:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    }
                 case 5:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    if let soundEnabled = self?.soundEnabled, soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    }
                 case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
                 default:
@@ -408,7 +420,9 @@ class TimerViewController: BaseViewController {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             } else {
-                strongSelf.audioPlayerManager.stop()
+                if let soundEnabled = self?.soundEnabled, soundEnabled {
+                    strongSelf.audioPlayerManager.stop()
+                }
             }
         }
     }
@@ -611,3 +625,4 @@ extension TimerViewController {
         showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
 }
+

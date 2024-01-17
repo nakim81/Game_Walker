@@ -23,7 +23,8 @@ class RefereeTimerController: BaseViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
@@ -315,7 +316,9 @@ class RefereeTimerController: BaseViewController {
             }
             if !strongSelf.isPaused {
                 if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
-                    strongSelf.audioPlayerManager.stop()
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.stop()
+                    }
                     timer.invalidate()
                 }
                 let interval = strongSelf.moveSeconds + strongSelf.seconds
@@ -323,9 +326,13 @@ class RefereeTimerController: BaseViewController {
 
                 switch timeRemainder {
                 case 300, 180, 60, 30, 10:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+                    }
                 case 5:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    if self!.soundEnabled {
+                        strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+                    }
                 case 0...3:
                     strongSelf.impactFeedbackGenerator.impactOccurred()
                 default:
@@ -358,7 +365,9 @@ class RefereeTimerController: BaseViewController {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
             } else {
-                strongSelf.audioPlayerManager.stop()
+                if self!.soundEnabled {
+                    strongSelf.audioPlayerManager.stop()
+                }
             }
         }
     }
@@ -555,7 +564,9 @@ extension RefereeTimerController {
     }
     
     @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        }
         guard let station = self.station else { return }
         showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
     }

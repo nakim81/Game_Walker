@@ -24,7 +24,9 @@ class CreateTeamViewController: UIViewController {
     private var stationList: [Station] = []
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private let iconImageNames : [String] = [
         "iconBoy", "iconBear", "iconJam-min 1", "iconGeum-Jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
         "iconDust", "iconFire", "iconWater", "iconRed", "iconOrange", "iconYellow", "iconGreen", "iconBlue",
@@ -45,7 +47,7 @@ class CreateTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -56,7 +58,20 @@ class CreateTeamViewController: UIViewController {
         configureCollectionView()
         configureBackButton()
     }
-    
+
+    private func configureSettings() {
+            configureSettingBtn()
+            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+           if let userInfo = notification.userInfo {
+               if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                   soundEnabled = settingsData.0
+               }
+           }
+    }
+
     private func viewSetUp(){
         teamNameTextField.delegate = self
         teamNumberTextField.delegate = self
@@ -87,7 +102,9 @@ class CreateTeamViewController: UIViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         
         guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
             alert(title: NSLocalizedString("Team Name Error", comment: ""), message: NSLocalizedString("Team name should exist! Fill out the team name box.", comment: ""))

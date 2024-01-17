@@ -357,12 +357,11 @@ extension UIViewController {
     
     @objc func infoAction() {
     }
-    
+
     @objc func settingApp() {
         let settingsVC = SettingsViewController()
         settingsVC.modalPresentationStyle = .overFullScreen
         present(settingsVC, animated: true, completion: nil)
-        
     }
     
     @objc func announceAction() {

@@ -17,7 +17,9 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
     static var unread: Bool = false
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.navigationController?.isNavigationBarHidden = true
@@ -102,7 +104,9 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
                     // new announcements
                     if !ids.contains(announcement.uuid) {
                         RefereeTabBarPVEController.localMessages.append(announcement)
-                        self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                        if soundEnabled {
+                            self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                        }
                         NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                     } else {
                         // modified announcements
@@ -110,7 +114,9 @@ class RefereeTabBarPVEController: UITabBarController, RefereeUpdateListener, Hos
                             if RefereeTabBarPVEController.localMessages[localIndex].content != announcement.content {
                                 RefereeTabBarPVEController.localMessages[localIndex].content = announcement.content
                                 RefereeTabBarPVEController.localMessages[localIndex].readStatus = false
-                                self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                                if soundEnabled {
+                                    self.audioPlayerManager.playAudioFile(named: "message", withExtension: "wav")
+                                }
                                 NotificationCenter.default.post(name: .announceNoti, object: nil, userInfo: nil)
                             }
                         }
