@@ -109,15 +109,12 @@ class HostGivePointsController : UIViewController {
 
     func showNumberInputPopup() {
         let alertController = UIAlertController(title: "Enter Number!", message: nil, preferredStyle: .alert)
-
         alertController.addTextField { textField in
             textField.placeholder = "Type the number"
             textField.keyboardType = .numberPad
         }
-
         let okAction = UIAlertAction(title: "OK!", style: .default) { [weak self, weak alertController] _ in
                 guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
-            self?.stepper.minimumValue = -999
             self?.stepper.label.text = enteredNumber
             if Double(enteredNumber)! > 999 {
                 self?.stepper.value = 999
@@ -130,7 +127,6 @@ class HostGivePointsController : UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel!", style: .cancel, handler: nil)
-
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)

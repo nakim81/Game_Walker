@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class RefereePVEController: BaseViewController {
+class RefereePVEController: UIViewController {
     
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
@@ -46,11 +46,10 @@ class RefereePVEController: BaseViewController {
         super.viewWillAppear(animated)
         addObservers()
         guard let items = self.navigationItem.rightBarButtonItems else {return}
-        let unread = RefereeTabBarPVEController.unread
+        let unread = RefereeTabBarController.unread
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.unreadSome, for: .normal)
                     break
                 }
@@ -58,7 +57,6 @@ class RefereePVEController: BaseViewController {
         } else {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.readAll, for: .normal)
                     break
                 }
@@ -145,12 +143,12 @@ class RefereePVEController: BaseViewController {
 // MARK: - ETC
     
     func configureLeaveBtn() {
-        let leaveImg = UIImage(named: "LEAVE 1")
         let leaveBtn = UIButton()
-        leaveBtn.setImage(leaveImg, for: .normal)
+        leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
+        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 25)
+        leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(leaveAction), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
-        
         self.navigationItem.leftBarButtonItem = leave
     }
     
@@ -1343,6 +1341,6 @@ extension RefereePVEController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
+        showRefereeMessagePopUp(messages: RefereeTabBarController.localMessages)
     }
 }

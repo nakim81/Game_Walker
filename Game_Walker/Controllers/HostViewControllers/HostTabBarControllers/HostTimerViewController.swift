@@ -60,6 +60,7 @@ class HostTimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
+        configureRefreshButton()
         Task {
             titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
@@ -153,22 +154,18 @@ class HostTimerViewController: UIViewController {
         let explanationTexts = [
             NSLocalizedString("Ranking Status", comment: ""),
             NSLocalizedString("Timer & Start/End Game", comment: ""),
-            NSLocalizedString("Click to see what happens", comment: "")
+            NSLocalizedString("Click!", comment: "")
         ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
-            // Loop through each view controller in the tab bar controller
             for viewController in tabBarController.viewControllers ?? [] {
                 if let tabItem = viewController.tabBarItem {
-                    // Access the tab bar item of the current view controller
                     if let tabItemView = tabItem.value(forKey: "view") as? UIView {
                         let tabItemFrame = tabItemView.frame
-                        // Calculate centerX position
                         let centerXPosition = tabItemFrame.midX
-                        // Calculate topAnchor position based on tab bar's frame
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
                         tabBarTop = tabBarFrame.minY
@@ -178,7 +175,6 @@ class HostTimerViewController: UIViewController {
                 }
             }
         }
-        print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "host")
@@ -254,6 +250,16 @@ class HostTimerViewController: UIViewController {
         label.alpha = 0.0
         return label
     }()
+    
+    func configureRefreshButton() {
+        let Button = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(RefreshPressed))
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 25))!,
+            .foregroundColor: UIColor.green
+        ]
+        Button.setTitleTextAttributes(titleAttributes, for: .normal)
+        navigationItem.leftBarButtonItem = Button
+    }
     
     func configureTimerLabel() {
         self.view.addSubview(timerCircle)
@@ -425,6 +431,7 @@ class HostTimerViewController: UIViewController {
             if gameStart {
                 if isPaused {
                     pauseOrPlayButton.setImage(play, for: .normal)
+                    
                 }
                 else {
                     pauseOrPlayButton.setImage(pause, for: .normal)
@@ -447,6 +454,11 @@ extension HostTimerViewController {
     }
     
     @objc func addBackGroundTime(_ notification:Notification) {
+        timer.invalidate()
+        calculateTime()
+    }
+    
+    @objc func RefreshPressed() {
         timer.invalidate()
         calculateTime()
     }

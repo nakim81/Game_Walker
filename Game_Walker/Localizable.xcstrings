@@ -52,7 +52,7 @@
     "Click to hide points from others" : {
 
     },
-    "Click to see what happens" : {
+    "Click!" : {
 
     },
     "Close" : {
@@ -150,6 +150,9 @@
     "Invalid Team Number!" : {
 
     },
+    "LEAVE" : {
+
+    },
     "long-click." : {
 
     },
@@ -227,6 +230,9 @@
     "Please enter both game code and username." : {
 
     },
+    "Please enter both gamecode and username." : {
+
+    },
     "Please enter gamecode and username!" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -292,9 +298,6 @@
 
     },
     "Ranking Status" : {
-
-    },
-    "Referee is unavailable in point style." : {
 
     },
     "Remember to choose 'WIN' or 'LOSE' before the round ends!" : {
@@ -420,6 +423,9 @@
     "Something went wrong while updating Team Order of Station" : {
 
     },
+    "Station \n Status" : {
+
+    },
     "Station Info" : {
 
     },
@@ -508,6 +514,9 @@
 
     },
     "There are multiple errors shown\npreviously at the same time." : {
+
+    },
+    "There is no Referee in point style." : {
 
     },
     "There is no Team yet." : {

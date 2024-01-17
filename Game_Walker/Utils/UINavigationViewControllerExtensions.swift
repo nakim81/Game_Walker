@@ -29,15 +29,15 @@ extension UINavigationController {
         print("going back to waiting")
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
-           let waitingController = rootController.viewControllers.first(where: { $0 is WaitingController }) {
+           let waitingController = rootController.viewControllers.first(where: { $0 is WaitingViewController }) {
             print(waitingController)
             popToViewController(waitingController, animated: animated)
         }
     }
     
     func popToRegisterViewController(animated: Bool) {
-        if let destinationViewController = navigationController?.viewControllers.filter({$0 is RegisterController
-        }).first {
+        if let destinationViewController = navigationController?.viewControllers.filter({$0 is RegisterViewController
+        }).last {
             navigationController?.popToViewController(destinationViewController, animated: true)
         }
     }

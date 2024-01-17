@@ -25,7 +25,7 @@ class RefereeRankingPVEViewController: UIViewController {
         super.viewWillAppear(animated)
         addObservers()
         
-        if RefereeTabBarPVEController.unread {
+        if RefereeTabBarController.unread {
             if let items = self.navigationItem.rightBarButtonItems {
                 for barButtonItem in items {
                     if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
@@ -114,7 +114,7 @@ extension RefereeRankingPVEViewController {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = [
-            NSLocalizedString("Station Status", comment: ""),
+            NSLocalizedString("Station \n Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
             NSLocalizedString("Timer & \n Station Info", comment: ""),
             NSLocalizedString("Points can be hidden", comment: "")
@@ -154,7 +154,7 @@ extension RefereeRankingPVEViewController {
 extension RefereeRankingPVEViewController {
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarPVEController.localMessages)
+        showRefereeMessagePopUp(messages: RefereeTabBarController.localMessages)
     }
     
     @objc override func infoAction() {
