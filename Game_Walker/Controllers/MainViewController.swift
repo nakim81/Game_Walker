@@ -110,8 +110,12 @@ class MainViewController: UIViewController {
     @objc func guide() {
         let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame, gameWalkerImage.frame]
         let layerList: [CALayer] = [playerButton.layer, refereeButton.layer, hostButton.layer]
-        let explanationTexts = ["Join as a team member", "Allocate points and manage individual games", "Organize and oversee the entire event"]
-        
+        let explanationTexts = [
+            NSLocalizedString("Join as a Team Member", comment: ""),
+            NSLocalizedString("Allocate points and manage individual Stations", comment: ""),
+            NSLocalizedString("Organize and oversee the entire Game Event", comment: "")
+        ]
+
         let overlayViewController = MainOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         overlayViewController.configureGuide(componentPositions, layerList, explanationTexts)
