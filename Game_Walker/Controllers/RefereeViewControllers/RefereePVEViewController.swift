@@ -227,7 +227,7 @@ class RefereePVEController: UIViewController {
         let explanationTexts = [
             NSLocalizedString("Station Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []
@@ -1128,7 +1128,7 @@ extension RefereePVEController {
     
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist!", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1214,7 +1214,7 @@ extension RefereePVEController {
     
     @objc func leftWinButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist.", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA != "true" {
                 Task {
@@ -1330,7 +1330,7 @@ extension RefereePVEController {
     
     @objc override func infoAction() {
         if !teamOrderSet {
-            alert(title: NSLocalizedString("The board is not ready yet!", comment: ""), message: NSLocalizedString("Please try again when it is ready.", comment: ""))
+            alert(title: NSLocalizedString("The Host is completing the settings", comment: ""), message: NSLocalizedString("Please try again when it is ready.", comment: ""))
         } else {
             if pvp {
                 showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])

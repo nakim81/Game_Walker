@@ -25,25 +25,28 @@ struct P {
             let document = try await docRef.getDocument()
             if document.exists {
                 try db.collection("\(gamecode) : Players").document(uuid).setData(from: player)
-                print("Player added")
+                print("Player added.")
             } else {
-                print("Gamecode does not exist")
-                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode.\nPlease check again!", comment: ""))
+                print("Gamecode does not exist.")
+                let errorMessage = NSLocalizedString("%@ is not an existing gamecode.\nPlease check again!", comment: "")
+                let formattedErrorMessage = String.localizedStringWithFormat(errorMessage, gamecode)
+                throw GameWalkerError.invalidGamecode(formattedErrorMessage)
+
             }
         } catch GameWalkerError.invalidGamecode(let message) {
             throw GameWalkerError.invalidGamecode(message)
         } catch {
-            print("Error adding Player: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Player", comment: ""))
+            print("Error adding Player: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Player.", comment: ""))
         }
     }
     
     static func removePlayer(_ gamecode: String, _ uuid: String) {
         db.collection("\(gamecode) : Players").document(uuid).delete() { err in
             if let err = err {
-                print("Error removing player: \(err)")
+                print("Error removing player: \(err).")
             } else {
-                print("Player removed")
+                print("Player removed.")
             }
         }
     }
@@ -54,10 +57,10 @@ struct P {
             try await server.updateData([
                 "name": name
             ])
-            print("Player name modified")
+            print("Player name modified.")
         } catch {
-            print("Error modifying Player name: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Player Name", comment: ""))
+            print("Error modifying Player name: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Player Name.", comment: ""))
 
         }
     }

@@ -237,22 +237,22 @@ class AddStationViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if !stationExists {
             if gamenameTextfield.text!.isEmpty {
-                alert(title: NSLocalizedString("No Station Name!", comment: ""), message: NSLocalizedString("Please enter the game name.", comment: ""))
+                alert(title: NSLocalizedString("No Station Name", comment: ""), message: NSLocalizedString("Please enter the station name.", comment: ""))
                 return
             }
             
             if gamepointsTextfield.text!.isEmpty {
-                alert(title: NSLocalizedString("No Station Points!", comment: ""), message: NSLocalizedString("Please set the station points.", comment: ""))
+                alert(title: NSLocalizedString("No Station Points", comment: ""), message: NSLocalizedString("Please set the station points.", comment: ""))
                 return
             }
             
             if pvpnotchosen {
-                alert(title: NSLocalizedString("Station Type Not Specified!", comment: ""), message: NSLocalizedString("Please select either PVP or PVE.", comment: ""))
+                alert(title: NSLocalizedString("Station Type Not Specified", comment: ""), message: NSLocalizedString("Please select either PVP or PVE.", comment: ""))
                 return
             }
 
             if refereeUuid.isEmpty {
-                alert(title: NSLocalizedString("No Referee Selected!", comment: ""), message: NSLocalizedString("Please select a referee.", comment: ""))
+                alert(title: NSLocalizedString("No Referee Selected", comment: ""), message: NSLocalizedString("Please select a referee.", comment: ""))
                 return
             }
             
@@ -366,7 +366,7 @@ class AddStationViewController: UIViewController {
         let pvpOverlay = OverlayComponentView(frame: pvpButtonFrameInPopupView)
         let pveOverlay = OverlayComponentView(frame: pveButtonFrameInPopupView)
 
-        pvpOverlay.addLabel(with: NSLocalizedString("PVP for competition", comment: ""), width: pvpButton.frame.width)
+        pvpOverlay.addLabel(with: NSLocalizedString("PVP for competition.", comment: ""), width: pvpButton.frame.width)
         pveOverlay.addLabel(with: NSLocalizedString("PVE for goals.", comment: ""), width: pveButton.frame.width)
 
         
@@ -405,7 +405,7 @@ extension AddStationViewController: UITextFieldDelegate {
                     gamepoints = newGamePoints
                     print("gamepoints : ", gamepoints)
                 } else {
-                    alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Gamepoints should be an integer!", comment: ""))
+                    alert(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Station points should be an integer.", comment: ""))
                 }
             }
             modified = true

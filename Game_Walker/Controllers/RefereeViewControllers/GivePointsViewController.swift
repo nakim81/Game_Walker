@@ -108,13 +108,13 @@ class GivePointsController: UIViewController {
     }
 
     func showNumberInputPopup() {
-        let alertController = UIAlertController(title: "Enter Number!", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Enter a number", comment: ""), message: nil, preferredStyle: .alert)
 
         alertController.addTextField { textField in
-            textField.placeholder = "Type the number"
+            textField.placeholder = NSLocalizedString("Enter a number", comment: "")
             textField.keyboardType = .numberPad
         }
-        let okAction = UIAlertAction(title: "OK!", style: .default) { [weak self, weak alertController] _ in
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
             self?.stepper.label.text = enteredNumber
             if Double(enteredNumber)! > 999 {
@@ -127,7 +127,7 @@ class GivePointsController: UIViewController {
                 self?.stepper.value = Double(enteredNumber)!
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel!", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -327,7 +327,7 @@ class GivePointsController: UIViewController {
     @objc @IBInspectable public var limitHitAnimationColor: UIColor = UIColor(red:0.26, green:0.6, blue:0.87, alpha:1)
 
     let formatter = NumberFormatter()
-    
+
     let labelSlideLength: CGFloat = 5
 
     lazy var leftButton: UIButton = {

@@ -23,10 +23,12 @@ class JoinTeamViewController: UIViewController {
     private let refreshController: UIRefreshControl = UIRefreshControl()
     
     private let audioPlayerManager = AudioPlayerManager()
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -40,7 +42,7 @@ class JoinTeamViewController: UIViewController {
                 self.host = try await H.getHost(gameCode)
                 collectionView.reloadData()
             } catch {
-                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: NSLocalizedString("Swipe down the screen again to reload team list.", comment: ""))
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down the screen to reload the Team List.", comment: ""))
 
             }
         }
@@ -59,7 +61,20 @@ class JoinTeamViewController: UIViewController {
             tabBarController.standardStyle = isStandardStyle
         }
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                soundEnabled = settingsData.0
+            }
+        }
+    }
+
     private func configureBtn(){
         joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         joinTeamButton.layer.cornerRadius = 8
@@ -90,7 +105,7 @@ class JoinTeamViewController: UIViewController {
                 collectionView.reloadData()
             } catch(let e) {
                 print(e)
-                alert(title: NSLocalizedString("Connection Error!", comment: ""), message: e.localizedDescription)
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: e.localizedDescription)
 
                 return
             }
@@ -98,7 +113,9 @@ class JoinTeamViewController: UIViewController {
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
@@ -121,7 +138,7 @@ class JoinTeamViewController: UIViewController {
                 }
             }
         } else {
-            alert(title: NSLocalizedString("No Team Selected!", comment: ""), message: NSLocalizedString("Please select your team.", comment: ""))
+            alert(title: NSLocalizedString("No Team Selected", comment: ""), message: NSLocalizedString("Please select your team.", comment: ""))
 
             return
         }

@@ -12,7 +12,9 @@ import Dispatch
 class TimerViewController: BaseViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
@@ -134,6 +136,7 @@ class TimerViewController: BaseViewController {
         return button
     }()
     
+
     private lazy var nextStationInfoButton: UIButton = {
         var button = UIButton()
         button.setTitle("Next Station Info", for: .normal)
@@ -232,8 +235,7 @@ class TimerViewController: BaseViewController {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
-        
-        let explanationTexts = ["Team Members", "Ranking Status", "Timer & Station Info", "Click!"]
+        let explanationTexts = ["Team Members", "Ranking Status", "Timer &\nStation Info", "Tap to see what happens"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
@@ -643,3 +645,4 @@ extension TimerViewController {
         showMessagePopUp(messages: PlayerTabBarController.localMessages)
     }
 }
+

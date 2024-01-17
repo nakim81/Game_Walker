@@ -58,7 +58,7 @@ class HostGameCodeViewController: UIViewController {
             return
         }
         if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
-            alert(title:  NSLocalizedString("No Game Exists.", comment: ""), message: "")
+            alert(title:  NSLocalizedString("No game exists.", comment: ""), message: "")
         } else {
             if (!usestoredcode) {
                 Task { @MainActor in

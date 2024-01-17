@@ -15,6 +15,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var gamecodeLbl: UILabel!
     @IBOutlet weak var usernameLbl: UILabel!
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
     
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedRefereeName = UserData.readUsername("username") ?? ""
@@ -198,6 +200,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
+
                                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
                                 Task { @MainActor in
                                     do {
@@ -774,4 +777,3 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-

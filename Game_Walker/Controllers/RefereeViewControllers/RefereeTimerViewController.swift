@@ -22,7 +22,8 @@ class RefereeTimerController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
@@ -270,8 +271,8 @@ class RefereeTimerController: UIViewController {
         let explanationTexts = [
             NSLocalizedString("Station \n Status", comment: ""),
             NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: ""),
-            NSLocalizedString("Click!", comment: "")
+            NSLocalizedString("Timer &\nStation Info", comment: ""),
+            NSLocalizedString("Tap to see what happens", comment: "")
         ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
@@ -340,6 +341,7 @@ class RefereeTimerController: UIViewController {
                         strongSelf.moving = true
                         strongSelf.timeTypeLabel.text = "Moving Time"
                         strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+
                     }
                 }
                 strongSelf.time -= 1
@@ -574,7 +576,9 @@ extension RefereeTimerController {
     }
     
     @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        }
         guard let station = self.station else { return }
         showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
     }
