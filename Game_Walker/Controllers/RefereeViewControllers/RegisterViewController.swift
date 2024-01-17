@@ -88,6 +88,68 @@ class RegisterController: BaseViewController, UITextFieldDelegate {
             self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         }
         //
+//        if (UserData.getUserRole() == nil || UserData.getUserRole() == "referee") {
+//            
+//        } else {
+//            UserDefaults.standard.removeObject(forKey: "player")
+//            UserDefaults.standard.removeObject(forKey: "host")
+//            UserData.setUserRole("referee")
+//            if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
+//                if gameCode.isEmpty && name.isEmpty {
+//                    if !storedGameCode.isEmpty && !storedRefereeName.isEmpty {
+//                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+//                        Task { @MainActor in
+//                            do {
+//                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+//                            } catch GameWalkerError.invalidGamecode(let message) {
+//                                print(message)
+//                                gamecodeAlert(message)
+//                                return
+//                            } catch GameWalkerError.serverError(let message) {
+//                                print(message)
+//                                serverAlert(message)
+//                                return
+//                            }
+//                            UserData.writeGamecode(gameCode, "gamecode")
+//                            UserData.writeUsername(newReferee.name, "username")
+//                            UserData.writeReferee(newReferee, "referee")
+//                            UserData.setUserRole("referee")
+//                            UserDefaults.standard.removeObject(forKey: "max")
+//                            UserDefaults.standard.removeObject(forKey: "maxA")
+//                            UserDefaults.standard.removeObject(forKey: "maxB")
+//                            performSegue(withIdentifier: "goToWait", sender: self)
+//                        }
+//                    } else {
+//                        alert(title: "", message: "Please enter gamecode and username")
+//                    }
+//                } else if gameCode == storedGameCode && name == storedRefereeName {
+//                    let oldReferee = UserData.readReferee("referee")!
+//                    if oldReferee.assigned {
+//                        performSegue(withIdentifier: "toPVE", sender: self)
+//                    } else {
+//                        performSegue(withIdentifier: "goToWait", sender: self)
+//                    }
+//                } else if (!storedGameCode.isEmpty || gameCode == storedRefereeName) && storedRefereeName.isEmpty {
+//                    let oldReferee = UserData.readReferee("referee")!
+//                    if oldReferee.assigned {
+//                        performSegue(withIdentifier: "toPVE", sender: self)
+//                    } else {
+//                        performSegue(withIdentifier: "goToWait", sender: self)
+//                    }
+//                } else if storedGameCode.isEmpty && storedRefereeName.isEmpty {
+//                    
+//                } else if (gameCode != storedGameCode ) && (name.isEmpty || name == storedRefereeName) {
+//                    
+//                } else if (gameCode.isEmpty || gameCode == storedGameCode ) && name != storedRefereeName {
+//                    
+//                } else if gameCode != storedGameCode  && name != storedRefereeName {
+//                    
+//                } else {
+//                    alert(title: "", message: "Invalid Input!")
+//                }
+//            }
+//        }
+//
         Task {
             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                 do {

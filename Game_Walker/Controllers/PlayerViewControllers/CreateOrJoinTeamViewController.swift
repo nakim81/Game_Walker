@@ -97,4 +97,3 @@ extension CreateOrJoinTeamViewController: ModalViewControllerDelegate {
         }
     }
 }
-

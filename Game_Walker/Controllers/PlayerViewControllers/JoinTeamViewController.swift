@@ -200,4 +200,3 @@ extension JoinTeamViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 84, height: 130)
     }
 }
-
