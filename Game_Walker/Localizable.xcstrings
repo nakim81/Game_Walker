@@ -166,7 +166,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "확인"
+            "value" : "취소"
           }
         }
       }
@@ -356,7 +356,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "떠나기"
+            "value" : "나가기"
           }
         }
       }
@@ -386,7 +386,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "꾹 탭해서 팀을 수동으로"
+            "value" : "꾹 탭 해서 팀을 수동으로"
           }
         }
       }
@@ -1216,7 +1216,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "순서를 바꾸려면 탭해보세요."
+            "value" : "순서를 바꾸려면 탭 해보세요."
           }
         }
       }
@@ -1266,7 +1266,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "탭해서 팀에게 점수를 주세요"
+            "value" : "탭 해서 팀에게 점수를 주세요"
           }
         }
       }
@@ -1276,7 +1276,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "탭해보세요"
+            "value" : "탭 해보세요"
           }
         }
       }

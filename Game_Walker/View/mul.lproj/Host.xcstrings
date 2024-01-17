@@ -55,6 +55,24 @@
         }
       }
     },
+    "427-kj-OdI.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"STATIONS\"; ObjectID = \"427-kj-OdI\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "STATIONS"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션"
+          }
+        }
+      }
+    },
     "Ama-Wu-a0u.text" : {
       "comment" : "Class = \"UILabel\"; text = \"TIMER\"; ObjectID = \"Ama-Wu-a0u\";",
       "extractionState" : "extracted_with_value",
@@ -81,6 +99,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Rounds"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드"
           }
         }
       }
@@ -193,42 +217,6 @@
         }
       }
     },
-    "Fi8-Nq-hZE.configuration.title" : {
-      "comment" : "Class = \"UIButton\"; configuration.title = \"noah\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "noah"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "노아"
-          }
-        }
-      }
-    },
-    "Fi8-Nq-hZE.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Button"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버튼"
-          }
-        }
-      }
-    },
     "gxM-Sk-V31.text" : {
       "comment" : "Class = \"UILabel\"; text = \"Station Time\"; ObjectID = \"gxM-Sk-V31\";",
       "extractionState" : "extracted_with_value",
@@ -237,6 +225,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Station Time"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 시간"
           }
         }
       }
@@ -249,6 +243,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Moving Time"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이동 시간"
           }
         }
       }
@@ -495,6 +495,12 @@
             "state" : "translated",
             "value" : "000000"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
@@ -507,23 +513,11 @@
             "state" : "new",
             "value" : "Number of Teams"
           }
-        }
-      }
-    },
-    "txX-ue-Meo.title" : {
-      "comment" : "Class = \"UITabBarItem\"; title = \"Item\"; ObjectID = \"txX-ue-Meo\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item"
-          }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "00"
+            "value" : "팀 수"
           }
         }
       }
