@@ -107,7 +107,7 @@ class JoinGameViewController: UIViewController {
                 if !savedGameCode.isEmpty && !savedUserName.isEmpty {
                     joinExistingGameWithSavedUserInfo()
                 } else {
-                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both game code and username.", comment: ""))
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                     return
                 }
             } else if gamecode == savedGameCode && username == savedUserName {
@@ -137,7 +137,7 @@ class JoinGameViewController: UIViewController {
                 if !savedGameCode.isEmpty && !savedUserName.isEmpty {
                     createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
                 } else {
-                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both game code and username.", comment: ""))
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                 }
             } else if gamecode == savedGameCode && username == savedUserName {
                 createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
@@ -215,7 +215,7 @@ class JoinGameViewController: UIViewController {
             }
         } else {
             // Invalid input
-            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both game code and username.", comment: ""))
+            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
             return
         }
     }

@@ -269,8 +269,8 @@ class RefereeTimerController: UIViewController {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = [
-            NSLocalizedString("Station \n Status", comment: ""),
-            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Station\nStatus", comment: ""),
+            NSLocalizedString("Ranking\nStatus", comment: ""),
             NSLocalizedString("Timer &\nStation Info", comment: ""),
             NSLocalizedString("Tap to see what happens", comment: "")
         ]

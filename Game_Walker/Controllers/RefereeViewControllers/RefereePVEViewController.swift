@@ -225,8 +225,8 @@ class RefereePVEController: UIViewController {
         let overlayViewController = RefereeGuideViewController(pvp: pvp)
         overlayViewController.modalPresentationStyle = .overFullScreen
         let explanationTexts = [
-            NSLocalizedString("Station Status", comment: ""),
-            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Station\nStatus", comment: ""),
+            NSLocalizedString("Ranking\nStatus", comment: ""),
             NSLocalizedString("Timer &\nStation Info", comment: "")
         ]
 

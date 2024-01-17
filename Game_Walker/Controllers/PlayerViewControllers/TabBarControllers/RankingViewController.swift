@@ -91,8 +91,8 @@ extension RankingViewController {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = [
-            NSLocalizedString("Team Members", comment: ""),
-            NSLocalizedString("Ranking Status", comment: ""),
+            NSLocalizedString("Team\nMembers", comment: ""),
+            NSLocalizedString("Ranking\nStatus", comment: ""),
             NSLocalizedString("Timer &\nStation Info", comment: ""),
             NSLocalizedString("Points can be hidden.", comment: "")
         ]
