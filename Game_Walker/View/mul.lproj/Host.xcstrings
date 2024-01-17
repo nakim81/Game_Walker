@@ -91,6 +91,18 @@
         }
       }
     },
+    "aqb-eY-NOH.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Rounds\"; ObjectID = \"aqb-eY-NOH\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds"
+          }
+        }
+      }
+    },
     "Bdt-89-RkS.text" : {
       "comment" : "Class = \"UILabel\"; text = \"Points Only\"; ObjectID = \"Bdt-89-RkS\";",
       "extractionState" : "extracted_with_value",
@@ -249,6 +261,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "버튼"
+          }
+        }
+      }
+    },
+    "gxM-Sk-V31.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Station Time\"; ObjectID = \"gxM-Sk-V31\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Station Time"
+          }
+        }
+      }
+    },
+    "i75-qV-gy2.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Moving Time\"; ObjectID = \"i75-qV-gy2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Moving Time"
           }
         }
       }
@@ -572,6 +608,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "000000"
+          }
+        }
+      }
+    },
+    "SRB-mk-xpK.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Number of Teams\"; ObjectID = \"SRB-mk-xpK\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Number of Teams"
           }
         }
       }

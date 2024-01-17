@@ -11,7 +11,7 @@ import FirebaseFirestore
 import IQKeyboardManagerSwift
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+gclass AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
