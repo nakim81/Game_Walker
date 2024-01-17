@@ -48,6 +48,12 @@ class MainViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.audioPlayerManager.isPlaying() {
+            self.audioPlayerManager.stop()
+        }
+    }
+
     private func configureSettings() {
             NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
     }
@@ -63,8 +69,16 @@ class MainViewController: UIViewController {
                 self.audioPlayerManager.stop()
             }
             if soundEnabled && !audioPlayerManager.isPlaying() {
-                // Start background music if sound is enabled and bgm is not being played.
-                self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+                // Check if the current view controller is MainViewController
+                if let viewControllers = navigationController?.viewControllers {
+                    for viewController in viewControllers {
+                        print("View Controller: \(type(of: viewController))")
+                    }
+                }
+                print("Current View Controller: \(type(of: self))")
+                if let lastViewController = navigationController?.viewControllers.last, lastViewController is MainViewController {
+                    self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+                }
             }
         }
     }

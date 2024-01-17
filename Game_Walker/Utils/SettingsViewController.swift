@@ -29,7 +29,12 @@ class SettingsViewController: BaseViewController {
         label.text = "Settings"
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        if let customFont = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 40)) {
+            label.font = customFont
+        } else {
+            // Fallback to system font if the custom font is not available
+            label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        }
 
         return label
     }()
@@ -121,28 +126,26 @@ class SettingsViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
-        
-        soundsSwitchButton.addTarget(self, action: #selector(soundsSwitchValueChanged(_:)), for: .valueChanged)
-        vibrationsSwitchButton.addTarget(self, action: #selector(vibrationsSwitchValueChanged(_:)), for: .valueChanged)
+
         soundsSwitchButton.delegate = self
         vibrationsSwitchButton.delegate = self
     }
     
-    @objc func soundsSwitchValueChanged(_ sender: CustomSwitchButton) {
-        print("Sounds Switch Value Changed: \(sender.isOn)")
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        DispatchQueue.main.async { [weak self] in
+            self?.view.layoutIfNeeded()
+            self?.soundsSwitchButton.isSwitchOn = self!.usesSound
+            self?.vibrationsSwitchButton.isSwitchOn = self!.usesVibration
+        }
     }
 
-    @objc func vibrationsSwitchValueChanged(_ sender: CustomSwitchButton) {
-        print("Vibrations Switch Value Changed: \(sender.isOn)")
-    }
-    
     @objc func confirmTapped() {
         //TODO:- save user defaults
         UserData.setUserSoundPreference(usesSound)
-        //UserData.setUserVibrationPreference(usesVibration)
+        UserData.setUserVibrationPreference(usesVibration)
         let settingsData: (Bool, Bool) = (usesSound, usesVibration)
-        print("USER SOUND IS ON : ", usesSound)
-        print("USER VIBRATION IS ON: ", usesVibration)
         NotificationCenter.default.post(name: Notification.Name("SettingsChanged"), object: nil, userInfo: ["settingsData": settingsData])
         self.presentingViewController?.dismiss(animated: true)
     }
@@ -157,10 +160,11 @@ class SettingsViewController: BaseViewController {
 
 extension SettingsViewController: CustomSwitchButtonDelegate {
     func isOnValueChange(_ sender: UIButton, isOn: Bool) {
-        //TODO:- change vibrations or sounds accordingly
-        usesSound = isOn
-        //usesVibration = isOn
-        // need to implement if case that the isOn varies by button
+        if sender == soundsSwitchButton {
+            usesSound = isOn
+        } else if sender == vibrationsSwitchButton {
+            usesVibration = isOn
+        }
     }
     
 }

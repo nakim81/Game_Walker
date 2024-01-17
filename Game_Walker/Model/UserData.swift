@@ -17,8 +17,8 @@ class UserData {
         return UserDefaults.standard.bool(forKey: "soundpreference")
     }
 
-    static func setUserVibrationPreference(_ usesSound: Bool) {
-        UserDefaults.standard.set(usesSound, forKey: "vibrationpreference")
+    static func setUserVibrationPreference(_ usesVibration: Bool) {
+        UserDefaults.standard.set(usesVibration, forKey: "vibrationpreference")
     }
 
     static func getUserVibrationPreference() -> Bool? {
