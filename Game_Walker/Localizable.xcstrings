@@ -322,7 +322,6 @@
       }
     },
     "Invalid round." : {
-
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -348,6 +347,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "팀원으로 게임에 참여"
+          }
+        }
+      }
+    },
+    "LEAVE" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "떠나기"
           }
         }
       }
@@ -562,22 +571,12 @@
         }
       }
     },
-    "Please enter both game code and username." : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "게임코드와 이름을 입력해주세요."
-          }
-        }
-      }
-    },
     "Please enter both gamecode and username." : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게임코드와 이름 모두 입력해주세요!"
+            "value" : "게임코드와 이름 모두 입력해주세요."
           }
         }
       }
@@ -682,16 +681,6 @@
         }
       }
     },
-    "Point Style Mode" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "점수 방식"
-          }
-        }
-      }
-    },
     "Points can be hidden." : {
       "localizations" : {
         "ko" : {
@@ -722,22 +711,12 @@
         }
       }
     },
-    "Ranking Status" : {
+    "Ranking\nStatus" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "현재 순위"
-          }
-        }
-      }
-    },
-    "Referee is unavailable in point style." : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "점수 방식에서는 심판이 없습니다."
           }
         }
       }
@@ -1142,8 +1121,15 @@
         }
       }
     },
-    "Station \n Status" : {
-
+    "Station\nStatus" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션 정보"
+          }
+        }
+      }
     },
     "Station Info" : {
       "localizations" : {
@@ -1201,16 +1187,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "스테이션 점수는 정수이어야 합니다."
-          }
-        }
-      }
-    },
-    "Station Status" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "스테이션 정보"
           }
         }
       }
@@ -1305,6 +1281,16 @@
         }
       }
     },
+    "Team\nMembers" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팀원"
+          }
+        }
+      }
+    },
     "Team is playing against same opponents\nmultiple times on PVP stations." : {
       "localizations" : {
         "ko" : {
@@ -1331,16 +1317,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "팀이 동일한 스테이션에 여러 번 배정 받았습니다."
-          }
-        }
-      }
-    },
-    "Team Members" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "팀원"
           }
         }
       }
@@ -1475,7 +1451,7 @@
         }
       }
     },
-    "There is no Referee in Point Style Mode." : {
+    "There is no Referee in point style." : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -1484,9 +1460,6 @@
           }
         }
       }
-    },
-    "There is no Referee in point style." : {
-
     },
     "There is no Team yet." : {
       "localizations" : {

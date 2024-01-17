@@ -235,7 +235,7 @@ class TimerViewController: BaseViewController {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
-        let explanationTexts = ["Team Members", "Ranking Status", "Timer &\nStation Info", "Tap to see what happens"]
+        let explanationTexts = ["Team\nMembers", "Ranking\nStatus", "Timer &\nStation Info", "Tap to see what happens"]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame

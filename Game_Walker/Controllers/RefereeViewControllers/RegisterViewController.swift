@@ -118,7 +118,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
                                 let oldReferee = UserData.readReferee("referee")!
@@ -129,7 +129,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if gameCode == storedGameCode && name == storedRefereeName {
@@ -159,7 +159,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let oldReferee = UserData.readReferee("referee")!
@@ -197,7 +197,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
 
@@ -255,7 +255,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -308,7 +308,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let oldReferee = UserData.readReferee("referee")!
@@ -362,7 +362,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -426,7 +426,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
                                 let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -453,7 +453,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if gameCode == storedGameCode && name == storedRefereeName {
@@ -483,7 +483,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let oldReferee = UserData.readReferee("referee")!
@@ -524,7 +524,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
                                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -579,7 +579,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
                                 let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -636,7 +636,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -689,7 +689,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: "", assigned: false)
@@ -742,7 +742,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style!", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
