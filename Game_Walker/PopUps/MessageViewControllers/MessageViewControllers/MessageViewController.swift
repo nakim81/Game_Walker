@@ -1,16 +1,17 @@
 //
-//  RefereeMessageViewController.swift
+//  MessageViewController.swift
 //  Game_Walker
 //
-//  Created by 김현식 on 2/13/23.
+//  Created by Noah Kim on 1/25/23.
 //
 
 import Foundation
 import UIKit
 
-class RefereeMessageViewController: UIViewController {
+class MessageViewController: UIViewController {
     
-    private let fontColor: UIColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+    private var role: String = ""
+    private var roleColor: UIColor = UIColor.clear
     private var messages: [Announcement] = []
     private let cellSpacingHeight: CGFloat = 0
     
@@ -21,7 +22,7 @@ class RefereeMessageViewController: UIViewController {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(cgColor: .init(red: 0.333, green: 0.745, blue: 0.459, alpha: 1))
+        view.backgroundColor = roleColor
         view.layer.cornerRadius = 20
         
         ///for animation effect
@@ -47,7 +48,7 @@ class RefereeMessageViewController: UIViewController {
         
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
+        button.setTitleColor(roleColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
         // disable
@@ -67,33 +68,39 @@ class RefereeMessageViewController: UIViewController {
         }
     }
     
-    convenience init(messages: [Announcement]) {
+    convenience init(messages: [Announcement], role: String) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         self.messages = messages
+        self.role = role
+        if role == "player" {
+            roleColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        } else {
+            roleColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+        }
         self.modalPresentationStyle = .overFullScreen
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         //curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         //curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = true
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -105,7 +112,11 @@ class RefereeMessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
-            self.messages = RefereeTabBarController.localMessages
+            if (self.role == "player") {
+                self.messages = PlayerTabBarController.localMessages
+            } else {
+                self.messages = RefereeTabBarController.localMessages
+            }
             messageTableView.reloadData()
         }
     }
@@ -113,7 +124,7 @@ class RefereeMessageViewController: UIViewController {
     private func configureTableView() {
         messageTableView.delegate = self
         messageTableView.dataSource = self
-        messageTableView.register(RefereeMessageTableViewCell.self, forCellReuseIdentifier: RefereeMessageTableViewCell.identifier)
+        messageTableView.register(MessageTableViewCell.self, forCellReuseIdentifier: MessageTableViewCell.identifier)
         messageTableView.backgroundColor = .clear
         messageTableView.allowsSelection = false
         messageTableView.separatorStyle = .none
@@ -134,7 +145,7 @@ class RefereeMessageViewController: UIViewController {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageTableView.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
@@ -163,29 +174,38 @@ class RefereeMessageViewController: UIViewController {
 }
 
 // MARK: - TableView
-extension RefereeMessageViewController: UITableViewDelegate, UITableViewDataSource {    
+extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = messageTableView.dequeueReusableCell(withIdentifier: RefereeMessageTableViewCell.identifier, for: indexPath) as! RefereeMessageTableViewCell
+        let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.row + 1
-        let announcement = RefereeTabBarController.localMessages[indexPath.row]
-        cell.configureTableViewCell(name: "Announcement \(ind)", read: announcement.readStatus)
+        let announcement: Announcement
+        if role == "player" {
+            announcement = PlayerTabBarController.localMessages[indexPath.row]
+        } else {
+            announcement = RefereeTabBarController.localMessages[indexPath.row]
+        }
+        cell.configureTableViewCell(name: NSLocalizedString("Announcement", comment: "") + " \(ind)", read: announcement.readStatus, role: self.role)
         cell.selectionStyle = .none
         return cell
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
-     }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        RefereeTabBarController.localMessages[indexPath.row].readStatus = true
-        showRefereeAnnouncementPopUp(announcement: RefereeTabBarController.localMessages[indexPath.row])
+        if role == "player" {
+            PlayerTabBarController.localMessages[indexPath.row].readStatus = true
+            showAnnouncementPopUp(announcement: PlayerTabBarController.localMessages[indexPath.row], role: "player")
+        } else {
+            RefereeTabBarController.localMessages[indexPath.row].readStatus = true
+            showAnnouncementPopUp(announcement: RefereeTabBarController.localMessages[indexPath.row], role: "referee")
+        }
         messageTableView.deselectRow(at: indexPath, animated: true)
         messageTableView.reloadData()
     }
 }
-

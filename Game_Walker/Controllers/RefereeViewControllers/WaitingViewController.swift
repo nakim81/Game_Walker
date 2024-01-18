@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class WaitingViewController: UIViewController {
     
     private var gameCode = UserData.readGamecode("gamecode")!

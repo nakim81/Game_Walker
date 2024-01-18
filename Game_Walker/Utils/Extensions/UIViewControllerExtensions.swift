@@ -34,8 +34,8 @@ extension UIViewController {
 }
 // MARK: - PlayerMessagePopUps
 extension UIViewController {
-    func showMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = MessageViewController(messages: messages)
+    func showMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil, role: String) {
+        let popUpViewController = MessageViewController(messages: messages, role: role)
         showMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
@@ -46,53 +46,12 @@ extension UIViewController {
         present(popUpViewcontroller, animated: false, completion: nil)
     }
     
-    func showAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = AnnouncementViewController(announcement: announcement)
+    func showAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil, role: String) {
+        let popUpViewController = AnnouncementViewController(announcement: announcement, role: role)
         showAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
     }
     
     private func showAnnouncementPopUp(popUpViewcontroller: AnnouncementViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
-        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
-            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
-        }
-        present(popUpViewcontroller, animated: false, completion: nil)
-    }
-}
-// MARK: - RefereeMessagePopUps
-extension UIViewController {
-    func showRefereeMessagePopUp(messages: [Announcement], _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = RefereeMessageViewController(messages: messages)
-        showRefereeMessagePopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
-    }
-    
-    private func showRefereeMessagePopUp(popUpViewcontroller: RefereeMessageViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
-        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
-            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
-        }
-        present(popUpViewcontroller, animated: false, completion: nil)
-    }
-    
-    func showRefereeAnnouncementPopUp(announcement: Announcement, _ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = RefereeAnnouncementViewController(announcement: announcement)
-        showRefereeAnnouncementPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
-    }
-    
-    private func showRefereeAnnouncementPopUp(popUpViewcontroller: RefereeAnnouncementViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
-        popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
-            popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
-        }
-        present(popUpViewcontroller, animated: false, completion: nil)
-    }
-}
-
-// MARK: - InfoPopUp
-extension UIViewController {
-    func showInfoPopUp(_ actionTitle: String = NSLocalizedString("Close", comment: ""), _ actionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = InfoViewController(select: true)
-        showInfoPopUp(popUpViewcontroller: popUpViewController, actionTitle: actionTitle, actionCompletion: actionCompletion)
-    }
-    
-    private func showInfoPopUp(popUpViewcontroller: InfoViewController, actionTitle: String, actionCompletion: (() -> Void)?) {
         popUpViewcontroller.addActionToButton(title: actionTitle, titleColor: .systemGray, backgroundColor: .secondarySystemBackground) {
             popUpViewcontroller.dismiss(animated: false, completion: actionCompletion)
         }

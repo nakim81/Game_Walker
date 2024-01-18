@@ -109,10 +109,13 @@ class CustomSwitchButton: UIButton {
                 barViewColor = self.onImage.bar
                 circleViewColor = self.onImage.circle
             } else {
-                circleCenter = self.frame.width - (self.circleView.frame.width / 2.3)
+                circleCenter = self.frame.width - self.circleView.frame.width / 2.2
                 barViewColor = self.offImage.bar
                 circleViewColor = self.offImage.circle
             }
+            
+            print("cercle center: \(circleCenter)")
+            print("frame's width: \(frame.width)")
 
             let duration = self.isAnimated ? self.animationDuration : 0
 

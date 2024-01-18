@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!

@@ -130,18 +130,17 @@ class CreateTeamViewController: UIViewController {
                 
                 if tn > 0 {
                     if standardStyle {
-                        
-                        if (tn > hn) {
-                            alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("Please try other team numbers.", comment: ""))
-
-                            return
-                        }
-                        
                         guard let temp = self.host?.algorithm else { return }
                         let algorithm = convert1DArrayTo2D(temp)
                         print(algorithm)
                         if !(algorithm.isEmpty ) {
                             teamNameTextField.resignFirstResponder()
+                            
+                            if (tn > hn) {
+                                alert(title: NSLocalizedString("Invalid Team Number!", comment: ""), message: NSLocalizedString("Please try other team numbers.", comment: ""))
+
+                                return
+                            }
                             
                             ///find the order of stations for player's team
                             let stationOrder = self.getStationOrder(algorithm , tn , self.stationList)

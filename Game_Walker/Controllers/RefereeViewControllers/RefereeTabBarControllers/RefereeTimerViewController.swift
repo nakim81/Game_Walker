@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 import Dispatch
 
-class RefereeTimerController: UIViewController {
+class RefereeTimerViewController: UIViewController {
+    
+    // Variables
     
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var referee: Referee = UserData.readReferee("referee") ?? Referee()
@@ -480,7 +482,7 @@ class RefereeTimerController: UIViewController {
     }
 }
 // MARK: - @objc
-extension RefereeTimerController {
+extension RefereeTimerViewController {
     
     @objc func hostUpdate(notification: Notification) {
         guard let host = notification.userInfo?["host"] as? Host else { return }
@@ -588,6 +590,6 @@ extension RefereeTimerController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarController.localMessages)
+        showMessagePopUp(messages: RefereeTabBarController.localMessages, role: "referee")
     }
 }

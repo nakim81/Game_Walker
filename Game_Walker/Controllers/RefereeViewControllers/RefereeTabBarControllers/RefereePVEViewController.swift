@@ -1341,6 +1341,6 @@ extension RefereePVEController {
     }
     
     @objc override func announceAction() {
-        showRefereeMessagePopUp(messages: RefereeTabBarController.localMessages)
+        showMessagePopUp(messages: RefereeTabBarController.localMessages, role: "referee")
     }
 }

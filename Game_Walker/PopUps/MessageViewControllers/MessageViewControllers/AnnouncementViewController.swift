@@ -10,11 +10,11 @@ import UIKit
 
 class AnnouncementViewController: UIViewController {
     private var announcement: Announcement?
-    private let fontColor: UIColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+    private var roleColor: UIColor = UIColor.clear
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(cgColor: .init(red: 0.208, green: 0.671, blue: 0.953, alpha: 1))
+        view.backgroundColor = roleColor
         view.layer.cornerRadius = 20
         
         ///for animation effect
@@ -49,7 +49,7 @@ class AnnouncementViewController: UIViewController {
         
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-        button.setTitleColor(fontColor, for: .normal)
+        button.setTitleColor(roleColor, for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
         // disable
@@ -69,9 +69,14 @@ class AnnouncementViewController: UIViewController {
         }
     }
     
-    convenience init(announcement: Announcement) {
+    convenience init(announcement: Announcement, role: String) {
         self.init()
         /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
+        if role == "player" {
+            roleColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
+        } else {
+            roleColor = UIColor(red: 0.333, green: 0.745, blue: 0.459, alpha: 1)
+        }
         self.announcement = announcement
         self.modalPresentationStyle = .overFullScreen
     }
