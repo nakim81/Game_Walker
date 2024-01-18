@@ -137,7 +137,7 @@ class CreateTeamViewController: UIViewController {
                             teamNameTextField.resignFirstResponder()
                             
                             if (tn > hn) {
-                                alert(title: NSLocalizedString("Invalid Team Number!", comment: ""), message: NSLocalizedString("Please try other team numbers.", comment: ""))
+                                alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("Please try other team numbers.", comment: ""))
 
                                 return
                             }
