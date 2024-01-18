@@ -57,7 +57,7 @@
     },
     "427-kj-OdI.text" : {
       "comment" : "Class = \"UILabel\"; text = \"STATIONS\"; ObjectID = \"427-kj-OdI\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
