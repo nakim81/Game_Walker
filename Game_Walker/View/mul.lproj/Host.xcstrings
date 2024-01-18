@@ -37,24 +37,6 @@
         }
       }
     },
-    "6g1-fo-e1k.title" : {
-      "comment" : "Class = \"UITabBarItem\"; title = \"Item 2\"; ObjectID = \"6g1-fo-e1k\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item 2"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "아이템 2"
-          }
-        }
-      }
-    },
     "8NZ-by-CrW.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"Resume Game\"; ObjectID = \"8NZ-by-CrW\";",
       "extractionState" : "extracted_with_value",
@@ -67,8 +49,26 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "버튼"
+            "state" : "translated",
+            "value" : "게임 재개"
+          }
+        }
+      }
+    },
+    "427-kj-OdI.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"STATIONS\"; ObjectID = \"427-kj-OdI\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "STATIONS"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스테이션"
           }
         }
       }
@@ -87,6 +87,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "타이머"
+          }
+        }
+      }
+    },
+    "aqb-eY-NOH.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Rounds\"; ObjectID = \"aqb-eY-NOH\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "라운드"
           }
         }
       }
@@ -163,24 +181,6 @@
         }
       }
     },
-    "DzZ-kR-qiZ.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"FIRST\"; ObjectID = \"DzZ-kR-qiZ\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "FIRST"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "첫째"
-          }
-        }
-      }
-    },
     "Edr-0Z-bW1.text" : {
       "comment" : "Class = \"UILabel\"; text = \"This mode includes all of our features\\n(Points, Stations, Matching, Timer, etc)\"; ObjectID = \"Edr-0Z-bW1\";",
       "extractionState" : "extracted_with_value",
@@ -217,38 +217,38 @@
         }
       }
     },
-    "Fi8-Nq-hZE.configuration.title" : {
-      "comment" : "Class = \"UIButton\"; configuration.title = \"noah\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "stale",
+    "gxM-Sk-V31.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Station Time\"; ObjectID = \"gxM-Sk-V31\";",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "noah"
+            "value" : "Station Time"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "노아"
+            "value" : "스테이션 시간"
           }
         }
       }
     },
-    "Fi8-Nq-hZE.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"Fi8-Nq-hZE\";",
-      "extractionState" : "stale",
+    "i75-qV-gy2.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Moving Time\"; ObjectID = \"i75-qV-gy2\";",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Button"
+            "value" : "Moving Time"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "버튼"
+            "value" : "이동 시간"
           }
         }
       }
@@ -361,42 +361,6 @@
         }
       }
     },
-    "lY3-Xd-8Dv.title" : {
-      "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"lY3-Xd-8Dv\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "000000"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "000000"
-          }
-        }
-      }
-    },
-    "MbY-C2-CHe.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"SECOND\"; ObjectID = \"MbY-C2-CHe\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "SECOND"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "둘째"
-          }
-        }
-      }
-    },
     "mew-pS-Laf.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"SAVE\"; ObjectID = \"mew-pS-Laf\";",
       "extractionState" : "extracted_with_value",
@@ -405,6 +369,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "SAVE"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장"
           }
         }
       }
@@ -454,23 +424,11 @@
             "state" : "new",
             "value" : "NEXT"
           }
-        }
-      }
-    },
-    "pbE-AE-cmi.title" : {
-      "comment" : "Class = \"UITabBarItem\"; title = \"Item 1\"; ObjectID = \"pbE-AE-cmi\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item 1"
-          }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "아이템 1"
+            "value" : "다음"
           }
         }
       }
@@ -520,6 +478,12 @@
             "state" : "new",
             "value" : "NEXT"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
+          }
         }
       }
     },
@@ -529,67 +493,31 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "00"
+            "value" : "000000"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "00"
+            "value" : ""
           }
         }
       }
     },
-    "rv8-bI-M6D.title" : {
-      "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"rv8-bI-M6D\";",
-      "extractionState" : "stale",
+    "SRB-mk-xpK.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Number of Teams\"; ObjectID = \"SRB-mk-xpK\";",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "000000"
+            "value" : "Number of Teams"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "000000"
-          }
-        }
-      }
-    },
-    "SO7-2l-M1e.title" : {
-      "comment" : "Class = \"UINavigationItem\"; title = \"000000\"; ObjectID = \"SO7-2l-M1e\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "000000"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "000000"
-          }
-        }
-      }
-    },
-    "txX-ue-Meo.title" : {
-      "comment" : "Class = \"UITabBarItem\"; title = \"Item\"; ObjectID = \"txX-ue-Meo\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "아이템"
+            "value" : "팀 수"
           }
         }
       }
@@ -606,8 +534,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "버튼"
+            "state" : "translated",
+            "value" : "게임 생성"
           }
         }
       }
@@ -620,6 +548,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "RESUME"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재개"
           }
         }
       }
@@ -651,23 +585,11 @@
             "state" : "new",
             "value" : "Create Game"
           }
-        }
-      }
-    },
-    "X00-Em-HtQ.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"THIRD\"; ObjectID = \"X00-Em-HtQ\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "THIRD"
-          }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "셋째"
+            "value" : "게임 생성"
           }
         }
       }

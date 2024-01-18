@@ -25,9 +25,11 @@ class JoinGameViewController: UIViewController {
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     private let standardStyle = UserData.isStandardStyle()
     
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -36,7 +38,20 @@ class JoinGameViewController: UIViewController {
         super.viewDidLoad()
         setUp()
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                soundEnabled = settingsData.0
+            }
+        }
+    }
+
     private func setUp() {
         gamecodeTextField.delegate = self
         usernameTextField.delegate = self
@@ -75,8 +90,10 @@ class JoinGameViewController: UIViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
+
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
         let player = UserData.readPlayer("player") ?? Player(gamecode: "", name: "")
@@ -90,7 +107,7 @@ class JoinGameViewController: UIViewController {
                 if !savedGameCode.isEmpty && !savedUserName.isEmpty {
                     joinExistingGameWithSavedUserInfo()
                 } else {
-                    alert(title: "Woops!", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                     return
                 }
             } else if gamecode == savedGameCode && username == savedUserName {
@@ -104,7 +121,7 @@ class JoinGameViewController: UIViewController {
             } else if gamecode != savedGameCode && username != savedUserName {
                 transitionToNewGameWithNewUsername(savedGameCode, gamecode, player, uuid, username)
             } else {
-                alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
+                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Invalid Input.", comment: ""))
                 return
             }
         } else {
@@ -120,7 +137,7 @@ class JoinGameViewController: UIViewController {
                 if !savedGameCode.isEmpty && !savedUserName.isEmpty {
                     createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
                 } else {
-                    alert(title: "Woops!", message: NSLocalizedString("Please enter gamecode and username.", comment: ""))
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                 }
             } else if gamecode == savedGameCode && username == savedUserName {
                 createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
@@ -198,7 +215,7 @@ class JoinGameViewController: UIViewController {
             }
         } else {
             // Invalid input
-            alert(title: "Woops!", message: NSLocalizedString("Please enter both game code and username.", comment: ""))
+            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
             return
         }
     }
@@ -279,7 +296,7 @@ class JoinGameViewController: UIViewController {
                 }
             }
         } else {
-            alert(title: "Woops!", message: NSLocalizedString("Please enter username.", comment: ""))
+            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter username.", comment: ""))
             return
         }
     }

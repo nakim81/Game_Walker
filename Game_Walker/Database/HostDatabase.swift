@@ -23,10 +23,10 @@ struct H {
     static func createGame(_ gamecode: String, _ host: Host) throws {
         do {
             try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
-            print("Created Game")
+            print("Created Game.")
         } catch {
-            print("Error creating Game: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while creating Host", comment: ""))
+            print("Error creating Game: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while creating Host.", comment: ""))
         }
     }
     
@@ -38,8 +38,8 @@ struct H {
             ])
             print("Stations complete! with: ", finished)
         } catch {
-            print("Error completing stations: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while completing Stations", comment: ""))
+            print("Error completing stations: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while completing Stations.", comment: ""))
         }
     }
         
@@ -52,10 +52,10 @@ struct H {
                 "rounds": rounds,
                 "teams": teams
             ])
-            print("Host setted Settings")
+            print("Host setted Settings.")
         } catch {
-            print("Error setting settings Host: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Settings", comment: ""))
+            print("Error setting settings Host: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Settings.", comment: ""))
         }
     }
     
@@ -69,14 +69,14 @@ struct H {
                 host.algorithm = algorithm
                 host.confirmCreated = true
                 updateHost(gamecode, host)
-                print("Setted Algorithm")
+                print("Setted Matching Algorithm.")
             } else {
-                print("Host does not exist")
-                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Algorithm", comment: ""))
+                print("Host does not exist.")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Matching Algorithm.", comment: ""))
             }
         } catch {
             print("Error setting Algorithm Host: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Algorithm", comment: ""))
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while setting Matching Algorithm.", comment: ""))
         }
     }
     
@@ -88,10 +88,10 @@ struct H {
                 "paused": false,
                 "gameStart": true
             ])
-            print("Started Game")
+            print("Started Game.")
         } catch {
-            print("Error starting Game: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while starting Game", comment: ""))
+            print("Error starting Game: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while starting Game.", comment: ""))
         }
     }
     
@@ -113,14 +113,14 @@ struct H {
                 }
                 host.paused = !host.paused
                 updateHost(gamecode, host)
-                print("Paused/Resumed Game")
+                print("Paused/Resumed Game.")
             } else {
-                print("Host does not exist")
-                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game", comment: ""))
+                print("Host does not exist.")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game.", comment: ""))
             }
         } catch {
-            print("Error pausing/resuming Game: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game", comment: ""))
+            print("Error pausing/resuming Game: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while pausing/resuming Game.", comment: ""))
         }
     }
     
@@ -130,10 +130,10 @@ struct H {
             try await server.updateData([
                 "gameover": true
             ])
-            print("End Game")
+            print("End Game.")
         } catch {
-            print("Error ending Game: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while ending Host", comment: ""))
+            print("Error ending Game: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while ending Host.", comment: ""))
         }
     }
     
@@ -143,10 +143,10 @@ struct H {
             try await server.updateData([
                 "currentRound": currentRound
             ])
-            print("Updated Current Round")
+            print("Updated Current Round.")
         } catch {
-            print("Error updating Current Round: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Current Round", comment: ""))
+            print("Error updating Current Round: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Current Round.", comment: ""))
         }
     }
     
@@ -157,10 +157,10 @@ struct H {
             try await server.updateData([
                 "pausedTime": pausedTime
             ])
-            print("Updated Paused Time")
+            print("Updated Paused Time.")
         } catch {
-            print("Error updating Paused Time: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Paused Time", comment: ""))
+            print("Error updating Paused Time: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while updating Paused Time.", comment: ""))
         }
     }
     
@@ -171,10 +171,10 @@ struct H {
             try await server.updateData([
                 "showScoreboard": show
             ])
-            print("Hid/Showed Score")
+            print("Hid/Showed Score.")
         } catch {
-            print("Error hiding/showing score: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while hiding/showing Score", comment: ""))
+            print("Error hiding/showing score: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while hiding/showing Score.", comment: ""))
         }
     }
     
@@ -189,14 +189,14 @@ struct H {
                 var host = convertDataToHost(data)
                 host.announcements.append(announcement)
                 updateHost(gamecode, host)
-                print("Added Announcement")
+                print("Added Announcement.")
             } else {
-                print("Host does not exist")
-                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement", comment: ""))
+                print("Host does not exist.")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement.", comment: ""))
             }
         } catch {
-            print("Error adding Announcement: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement", comment: ""))
+            print("Error adding Announcement: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while adding Announcement.", comment: ""))
         }
     }
     
@@ -210,17 +210,17 @@ struct H {
                 if index >= 0 && index < host.announcements.count {
                     host.announcements[index] = announcement
                     updateHost(gamecode, host)
-                    print("Modified Announcement")
+                    print("Modified Announcement.")
                 } else {
-                    print("Invalid index of announcement")
-                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while modifying Announcement", comment: ""))
+                    print("Invalid index of announcement.")
+                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while modifying Announcement.", comment: ""))
                 }
             } else {
-                print("Host does not exist")
-                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement", comment: ""))            }
+                print("Host does not exist.")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement.", comment: ""))            }
         } catch {
-            print("Error modfiying Announcement: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement", comment: ""))        }
+            print("Error modfiying Announcement: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while modifying Announcement.", comment: ""))        }
     }
     
     static func removeAnnouncement(_ gamecode: String, _ index: Int) async throws {
@@ -233,18 +233,18 @@ struct H {
                 if index >= 0 && index < host.announcements.count {
                     host.announcements.remove(at: index)
                     updateHost(gamecode, host)
-                    print("Removed Announcement")
+                    print("Removed Announcement.")
                 } else {
-                    print("Invalid announcement index")
-                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while removing Announcement", comment: ""))
+                    print("Invalid announcement index.")
+                    throw GameWalkerError.serverError(NSLocalizedString("Wrong index while removing Announcement.", comment: ""))
                 }
             } else {
-                print("Host does not exist")
-                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement", comment: ""))        }
+                print("Host does not exist.")
+                throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement.", comment: ""))        }
             }
         catch {
-            print("Error removing Announcement: \(error)")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement", comment: ""))        }
+            print("Error removing Announcement: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement.", comment: ""))        }
         }
 
     
@@ -252,8 +252,8 @@ struct H {
     
     static func listenHost(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
         listener = db.collection("Servers").document("Gamecode : \(gamecode)").addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else { print("Error listening Host"); return }
-            guard let data = document.data() else { print("Error listening Host"); return }
+            guard let document = documentSnapshot else { print("Error listening Host."); return }
+            guard let data = document.data() else { print("Error listening Host."); return }
             let host = convertDataToHost(data)
             H.delegates = H.delegates.filter { $0.value != nil }
             for delegate in delegates {
@@ -275,14 +275,16 @@ struct H {
                 let host = convertDataToHost(data)
                 return host
             } else {
-                print("Error getting Host by Gamecode")
-                throw GameWalkerError.invalidGamecode(NSLocalizedString("\(gamecode) is not an existing gamecode. \n Please check again!", comment: ""))
+                print("Error getting Host by Gamecode.")
+                let errorMessage = NSLocalizedString("%@ is not an existing gamecode.\nPlease check again!", comment: "")
+                let formattedErrorMessage = String.localizedStringWithFormat(errorMessage, gamecode)
+                throw GameWalkerError.invalidGamecode(formattedErrorMessage)
             }
         } catch GameWalkerError.invalidGamecode(let message) {
             throw GameWalkerError.invalidGamecode(message)
         } catch {
-            print("Error getting Host")
-            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Host", comment: ""))
+            print("Error getting Host.")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while getting Host.", comment: ""))
         }
     }
 
@@ -291,7 +293,7 @@ struct H {
         do {
             try db.collection("Servers").document("Gamecode : \(gamecode)").setData(from: host)
         } catch {
-            print("Error updating Host: \(error)")
+            print("Error updating Host: \(error).")
         }
     }
     
@@ -305,7 +307,7 @@ struct H {
             let host = try decoder.decode(Host.self, from: json)
             return host
         } catch {
-            print("Converting json data to Host \(error)")
+            print("Converting json data to Host \(error).")
         }
         //blank team
         return Host()

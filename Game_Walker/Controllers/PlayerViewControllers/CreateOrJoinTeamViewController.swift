@@ -16,11 +16,13 @@ class CreateOrJoinTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
-    
+
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        configureSettingBtn()
+        configureSettings()
         configureBackButton()
         configureTitleLabel()
     }
@@ -30,7 +32,20 @@ class CreateOrJoinTeamViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         configureBtns()
     }
-    
+
+    private func configureSettings() {
+        configureSettingBtn()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
+    }
+
+    @objc private func applyChangedSettings(_ notification: Notification) {
+            if let userInfo = notification.userInfo {
+                if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
+                    soundEnabled = settingsData.0
+                }
+            }
+    }
+
     private func configureBtns(){
         creatTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         creatTeamButton.layer.cornerRadius = 8
@@ -51,12 +66,16 @@ class CreateOrJoinTeamViewController: UIViewController {
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToPF3_1VC", sender: self)
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+        }
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
     }
     

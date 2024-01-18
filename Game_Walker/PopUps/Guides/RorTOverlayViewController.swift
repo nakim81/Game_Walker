@@ -59,7 +59,7 @@ class RorTOverlayViewController: UIViewController {
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
-                if textList[i] == "Timer & \n Start/End Game" || textList[i] == "Timer & \n Station Info" {
+                if textList[i] == "Timer &\nStart/End Game" || textList[i] == "Timer & \n Station Info" {
                     explanationLbl.widthAnchor.constraint(equalToConstant: 150).isActive = true
                 } else {
                     explanationLbl.widthAnchor.constraint(equalToConstant: 90).isActive = true
@@ -147,7 +147,7 @@ class RorTOverlayViewController: UIViewController {
             label.numberOfLines = 0
             label.textAlignment = .center
             label.textColor = .white
-            label.font = UIFont(name: "Dosis-Bold", size: 15)
+            label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
             overlayView.addSubview(label)
              
             label.layer.cornerRadius = frameList[count].size.width / 2

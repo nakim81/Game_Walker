@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import Dispatch
 
-class RefereeTimerController: UIViewController {
+class RefereeTimerViewController: UIViewController {
     
     // Variables
     
@@ -23,11 +24,12 @@ class RefereeTimerController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
-    private var timer: Timer?
+    private var timer: DispatchSourceTimer?
     private var remainingTime: Int = 0
     private var totalTime: Int = 0
     private var time: Int = 0
@@ -50,7 +52,6 @@ class RefereeTimerController: UIViewController {
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.unreadSome, for: .normal)
                     break
                 }
@@ -58,7 +59,6 @@ class RefereeTimerController: UIViewController {
         } else {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.readAll, for: .normal)
                     break
                 }
@@ -79,12 +79,13 @@ class RefereeTimerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureRefreshButton()
         configureNavigationBar()
         callProtocols()
         tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
-// MARK: - ETC
+    // MARK: - ETC
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(hostUpdate), name: .hostUpdate, object: nil)
@@ -97,20 +98,9 @@ class RefereeTimerController: UIViewController {
         Task {
             stations = try await S.getStationList(gameCode)
             host = try await H.getHost(gameCode) ?? Host()
-            
-            self.seconds = host.gameTime
-            self.moveSeconds = host.movingTime
-            self.startTime = host.startTimestamp
-            self.isPaused = host.paused
-            self.pauseTime = host.pauseTimestamp
-            self.pausedTime = host.pausedTime
-            self.rounds = host.rounds
-            self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
-            self.round = host.currentRound
-            
+            await setTime()
             calculateTime()
             configureTimerLabel()
-            
             for station in stations {
                 if station.name == referee.stationName {
                     self.station = station
@@ -188,7 +178,7 @@ class RefereeTimerController: UIViewController {
             .foregroundColor: UIColor.black
         ]
         let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
-
+        
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
@@ -215,6 +205,16 @@ class RefereeTimerController: UIViewController {
         button.addTarget(self, action: #selector(currentStationInfoButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    func configureRefreshButton() {
+        let Button = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(RefreshPressed))
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 25))!,
+            .foregroundColor: UIColor.green
+        ]
+        Button.setTitleTextAttributes(titleAttributes, for: .normal)
+        navigationItem.leftBarButtonItem = Button
+    }
     
     func configureTimerLabel(){
         self.view.addSubview(titleLabel)
@@ -271,25 +271,25 @@ class RefereeTimerController: UIViewController {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
         
         let explanationTexts = [
-            NSLocalizedString("Station Status", comment: ""),
-            NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: ""),
-            NSLocalizedString("Click to see what happens", comment: "")
+            NSLocalizedString("Station\nStatus", comment: ""),
+            NSLocalizedString("Ranking\nStatus", comment: ""),
+            NSLocalizedString("Timer &\nStation Info", comment: ""),
+            NSLocalizedString("Tap to see what happens", comment: "")
         ]
         var componentPositions: [CGPoint] = []
         var componentFrames: [CGRect] = []
         let timerFrame = timerCircle.frame
         var tabBarTop: CGFloat = 0
         if let tabBarController = self.tabBarController {
-            // Loop through each view controller in the tab bar controller
+            
             for viewController in tabBarController.viewControllers ?? [] {
                 if let tabItem = viewController.tabBarItem {
-                    // Access the tab bar item of the current view controller
+                    
                     if let tabItemView = tabItem.value(forKey: "view") as? UIView {
                         let tabItemFrame = tabItemView.frame
-                        // Calculate centerX position
+                        
                         let centerXPosition = tabItemFrame.midX
-                        // Calculate topAnchor position based on tab bar's frame
+                        
                         let tabBarFrame = tabBarController.tabBar.frame
                         let topAnchorPosition = tabItemFrame.minY + tabBarFrame.origin.y
                         tabBarTop = tabBarFrame.minY
@@ -299,70 +299,79 @@ class RefereeTimerController: UIViewController {
                 }
             }
         }
-        print(componentPositions)
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "referee")
-        
         present(overlayViewController, animated: true, completion: nil)
     }
     
     //MARK: - Timer
-    func runTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-            guard let strongSelf = self else {
+    func startTimer() {
+        let queue = DispatchQueue.global(qos: .background)
+        timer = DispatchSource.makeTimerSource(queue: queue)
+        timer?.schedule(deadline: .now(), repeating: 1.0)
+        timer?.setEventHandler { [weak self] in
+            guard let strongSelf = self, !strongSelf.isPaused else {
                 return
             }
-            if !strongSelf.isPaused {
-                if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
-                    strongSelf.audioPlayerManager.stop()
-                    timer.invalidate()
-                }
-                let interval = strongSelf.moveSeconds + strongSelf.seconds
-                let timeRemainder = strongSelf.remainingTime % interval
+            if strongSelf.totalTime == strongSelf.rounds * (strongSelf.seconds + strongSelf.moveSeconds) {
+                strongSelf.audioPlayerManager.stop()
+                strongSelf.timer?.cancel()
+            }
+            let interval = strongSelf.moveSeconds + strongSelf.seconds
+            let timeRemainder = strongSelf.remainingTime % interval
+            switch timeRemainder {
+            case 300, 180, 60, 30, 10:
+                strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
+            case 5:
+                strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
+            case 0...3:
+                strongSelf.impactFeedbackGenerator.impactOccurred()
+            default:
+                break
+            }
+            
+            if strongSelf.timer?.isCancelled == false {
+                if strongSelf.time < 1 {
+                    if strongSelf.moving {
+                        strongSelf.time = strongSelf.seconds
+                        strongSelf.moving = false
+                        strongSelf.timeTypeLabel.text = "Station Time"
+                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                    } else {
+                        strongSelf.time = strongSelf.moveSeconds
+                        strongSelf.moving = true
+                        strongSelf.timeTypeLabel.text = "Moving Time"
+                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
 
-                switch timeRemainder {
-                case 300, 180, 60, 30, 10:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer-warning", withExtension: "wav")
-                case 5:
-                    strongSelf.audioPlayerManager.playAudioFile(named: "timer_end", withExtension: "wav")
-                case 0...3:
-                    strongSelf.impactFeedbackGenerator.impactOccurred()
-                default:
-                    break
-                }
-                if timer.isValid {
-                    if strongSelf.time < 1 {
-                        if strongSelf.moving {
-                            strongSelf.time = strongSelf.seconds
-                            strongSelf.moving = false
-                            strongSelf.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
-                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-                        } else {
-                            strongSelf.time = strongSelf.moveSeconds
-                            strongSelf.moving = true
-                            strongSelf.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
-                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-                        }
                     }
-                    strongSelf.time -= 1
-                    strongSelf.remainingTime -= 1
-                    let minute = strongSelf.time/60
-                    let second = strongSelf.time % 60
+                }
+                strongSelf.time -= 1
+                strongSelf.remainingTime -= 1
+                let minute = strongSelf.time/60
+                let second = strongSelf.time % 60
+                DispatchQueue.main.async {
                     strongSelf.timerLabel.text = String(format:"%02i : %02i", minute, second)
-                    strongSelf.totalTime += 1
-                    let totalMinute = strongSelf.totalTime/60
-                    let totalSecond = strongSelf.totalTime % 60
-                    let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
-                    attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
+                }
+                strongSelf.totalTime += 1
+                let totalMinute = strongSelf.totalTime/60
+                let totalSecond = strongSelf.totalTime % 60
+                
+                let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
+                DispatchQueue.main.async {
                     strongSelf.totalTimeLabel.attributedText = attributedString
                 }
-            } else {
-                strongSelf.audioPlayerManager.stop()
             }
         }
+        timer?.resume()
     }
-    
+
+    func stopTimer() {
+        timer?.cancel()
+        timer = nil
+    }
+
     func calculateTime() {
         if isPaused {
             t = pauseTime - startTime - pausedTime
@@ -408,7 +417,7 @@ class RefereeTimerController: UIViewController {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
-            runTimer()
+            startTimer()
         }
     }
     
@@ -458,7 +467,6 @@ class RefereeTimerController: UIViewController {
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
         }
-        print("C")
     }
     
     func setTime() async {
@@ -471,11 +479,10 @@ class RefereeTimerController: UIViewController {
         self.rounds = host.rounds
         self.remainingTime = host.rounds * (host.gameTime + host.movingTime)
         self.round = host.currentRound
-        print("B")
     }
 }
 // MARK: - @objc
-extension RefereeTimerController {
+extension RefereeTimerViewController {
     
     @objc func hostUpdate(notification: Notification) {
         guard let host = notification.userInfo?["host"] as? Host else { return }
@@ -495,7 +502,6 @@ extension RefereeTimerController {
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.unreadSome, for: .normal)
                     break
                 }
@@ -503,7 +509,6 @@ extension RefereeTimerController {
         } else {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.readAll, for: .normal)
                     break
                 }
@@ -512,8 +517,7 @@ extension RefereeTimerController {
     }
     
     @objc func appDidEnterBackground(_ notification:Notification) {
-        timer?.invalidate()
-        timer = nil
+        stopTimer()
     }
 
     @objc func appWillEnterForeground(_ notification:Notification) {
@@ -523,7 +527,26 @@ extension RefereeTimerController {
                 host = try await fetchedHost
                 await self.setTime()
                 await self.calculateOnly()
-                self.runTimer()
+                self.startTimer()
+            } catch GameWalkerError.invalidGamecode(let message) {
+                print(message)
+                gamecodeAlert(message)
+                return
+            } catch GameWalkerError.serverError(let message) {
+                print(message)
+                serverAlert(message)
+                return
+            }
+        }
+    }
+    
+    @objc func RefreshPressed() {
+        Task(priority: .high) { @MainActor in
+            do {
+                async let fetchedHost = H.getHost(gameCode) ?? Host()
+                host = try await fetchedHost
+                await self.setTime()
+                await self.calculateOnly()
             } catch GameWalkerError.invalidGamecode(let message) {
                 print(message)
                 gamecodeAlert(message)
@@ -555,7 +578,9 @@ extension RefereeTimerController {
     }
     
     @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
+        }
         guard let station = self.station else { return }
         showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
     }

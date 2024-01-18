@@ -514,13 +514,13 @@
 			path = HostMessageViews;
 			sourceTree = "<group>";
 		};
-		FC44B65829B76B6B0072946F /* PlayerMessageViewControllers */ = {
+		FC44B65829B76B6B0072946F /* MessageViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				FC3CF4012980BCAE00645204 /* MessageViewController.swift */,
 				FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */,
 			);
-			path = PlayerMessageViewControllers;
+			path = MessageViewControllers;
 			sourceTree = "<group>";
 		};
 		FC7643392B4FB061006C566E /* PopUps */ = {
@@ -560,7 +560,7 @@
 			children = (
 				FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */,
 				FC44B65729B76B480072946F /* HostMessageViews */,
-				FC44B65829B76B6B0072946F /* PlayerMessageViewControllers */,
+				FC44B65829B76B6B0072946F /* MessageViewControllers */,
 			);
 			path = MessageViewControllers;
 			sourceTree = "<group>";
@@ -1120,7 +1120,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
@@ -1155,7 +1155,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;

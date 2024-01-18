@@ -112,7 +112,11 @@ class MessageViewController: UIViewController {
     @objc func refresh() {
         Task {
             try await Task.sleep(nanoseconds: 250_000_000)
-            self.messages = PlayerTabBarController.localMessages
+            if (self.role == "player") {
+                self.messages = PlayerTabBarController.localMessages
+            } else {
+                self.messages = RefereeTabBarController.localMessages
+            }
             messageTableView.reloadData()
         }
     }

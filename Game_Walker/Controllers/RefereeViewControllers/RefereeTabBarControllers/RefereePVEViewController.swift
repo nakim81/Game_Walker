@@ -50,7 +50,6 @@ class RefereePVEController: UIViewController {
         if unread {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.unreadSome, for: .normal)
                     break
                 }
@@ -58,7 +57,6 @@ class RefereePVEController: UIViewController {
         } else {
             for barButtonItem in items {
                 if let btn = barButtonItem.customView as? UIButton, btn.tag == 120 {
-                    // 이미지 변경
                     btn.setImage(self.readAll, for: .normal)
                     break
                 }
@@ -145,12 +143,12 @@ class RefereePVEController: UIViewController {
 // MARK: - ETC
     
     func configureLeaveBtn() {
-        let leaveImg = UIImage(named: "LEAVE 1")
         let leaveBtn = UIButton()
-        leaveBtn.setImage(leaveImg, for: .normal)
+        leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
+        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 25)
+        leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(leaveAction), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
-        
         self.navigationItem.leftBarButtonItem = leave
     }
     
@@ -227,9 +225,9 @@ class RefereePVEController: UIViewController {
         let overlayViewController = RefereeGuideViewController(pvp: pvp)
         overlayViewController.modalPresentationStyle = .overFullScreen
         let explanationTexts = [
-            NSLocalizedString("Station Status", comment: ""),
-            NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & Station Info", comment: "")
+            NSLocalizedString("Station\nStatus", comment: ""),
+            NSLocalizedString("Ranking\nStatus", comment: ""),
+            NSLocalizedString("Timer &\nStation Info", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []
@@ -1130,7 +1128,7 @@ extension RefereePVEController {
     
     @objc func buttonTapped() {
         if self.team.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist!", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             UserData.writeTeam(self.team, "Team")
             let popUpWindow = GivePointsController(team: UserData.readTeam("Team")!, gameCode: UserData.readGamecode("gamecode")!)
@@ -1216,7 +1214,7 @@ extension RefereePVEController {
     
     @objc func leftWinButtonTapped() {
         if self.teamA.number == 0 {
-            alert(title: NSLocalizedString("The Team doesn't exist.", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
+            alert(title: NSLocalizedString("The Team doesn't exist", comment: ""), message: NSLocalizedString("This is an invalid team.", comment: ""))
         } else {
             if maxA != "true" {
                 Task {
@@ -1332,7 +1330,7 @@ extension RefereePVEController {
     
     @objc override func infoAction() {
         if !teamOrderSet {
-            alert(title: NSLocalizedString("The board is not ready yet!", comment: ""), message: NSLocalizedString("Please try again when it is ready.", comment: ""))
+            alert(title: NSLocalizedString("The Host is completing the settings", comment: ""), message: NSLocalizedString("Please try again when it is ready.", comment: ""))
         } else {
             if pvp {
                 showOverlay(pvp: pvp, components: [leftIconButton, leftWinButton, leftLoseButton, leftScoreLabel, rightIconButton, rightWinButton, rightLoseButton, rightScoreLabel])

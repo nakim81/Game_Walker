@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class WaitingController: UIViewController {
+
+class WaitingViewController: UIViewController {
     
     private var gameCode = UserData.readGamecode("gamecode")!
     private var referee = UserData.readReferee("referee")!
@@ -42,7 +43,7 @@ class WaitingController: UIViewController {
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
         let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
-        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(RegisterController.onBackPressed))
+        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(RegisterViewController.onBackPressed))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
     }
@@ -132,7 +133,7 @@ class WaitingController: UIViewController {
     }
 }
 // MARK: - Protocols
-extension WaitingController: RefereeUpdateListener {
+extension WaitingViewController: RefereeUpdateListener {
     func updateReferee(_ referee: Referee) {
         UserData.writeReferee(referee, "referee")
         self.referee = UserData.readReferee("referee")!

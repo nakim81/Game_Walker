@@ -132,9 +132,9 @@ extension HostRankingViewcontroller {
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
 
         let explanationTexts = [
-            NSLocalizedString("Ranking Status", comment: ""),
-            NSLocalizedString("Timer & \n Start/End Game", comment: ""),
-            NSLocalizedString("Click to hide points from others", comment: "")
+            NSLocalizedString("Ranking\nStatus", comment: ""),
+            NSLocalizedString("Timer &\nStart/End Game", comment: ""),
+            NSLocalizedString("Swipe to hide points from others", comment: "")
         ]
 
         var componentPositions: [CGPoint] = []

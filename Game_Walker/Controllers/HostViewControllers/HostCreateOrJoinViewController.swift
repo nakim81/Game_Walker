@@ -33,11 +33,9 @@ class HostCreateOrJoinViewController: UIViewController {
         let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
         newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         self.navigationItem.leftBarButtonItem = newBackButton
-        
         configureSettingBtn()
-
     }
-    
+
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "ToMainVC", sender: self)
     }
@@ -46,7 +44,7 @@ class HostCreateOrJoinViewController: UIViewController {
             if UserData.readGamecode("gamecode") != nil {
 
             } else {
-                alert(title: NSLocalizedString("No game exists!", comment: ""), message: "")
+                alert(title: NSLocalizedString("No game exists.", comment: ""), message: "")
         }
     }
 
@@ -65,6 +63,10 @@ class HostCreateOrJoinViewController: UIViewController {
     private func configureButtonVisuals() {
         createButton.layer.cornerRadius = 10.0
         resumeButton.layer.cornerRadius = 10.0
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     

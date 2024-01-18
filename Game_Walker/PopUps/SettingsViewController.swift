@@ -10,12 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-    var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
+    private var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+    private var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
 
+    private var usesSound : Bool = UserData.getUserSoundPreference() ?? true
+    private var usesVibration : Bool = UserData.getUserVibrationPreference() ?? true 
 
-
-    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = yellow
@@ -29,7 +29,12 @@ class SettingsViewController: UIViewController {
         label.text = "Settings"
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        if let customFont = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 40)) {
+            label.font = customFont
+        } else {
+            // Fallback to system font if the custom font is not available
+            label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        }
 
         return label
     }()
@@ -81,7 +86,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.addSubview(containerView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(stackView)
@@ -121,23 +126,27 @@ class SettingsViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
-        
-        soundsSwitchButton.addTarget(self, action: #selector(soundsSwitchValueChanged(_:)), for: .valueChanged)
-        vibrationsSwitchButton.addTarget(self, action: #selector(vibrationsSwitchValueChanged(_:)), for: .valueChanged)
+
         soundsSwitchButton.delegate = self
         vibrationsSwitchButton.delegate = self
     }
     
-    @objc func soundsSwitchValueChanged(_ sender: CustomSwitchButton) {
-        print("Sounds Switch Value Changed: \(sender.isOn)")
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        DispatchQueue.main.async { [weak self] in
+            self?.view.layoutIfNeeded()
+            self?.soundsSwitchButton.isSwitchOn = self!.usesSound
+            self?.vibrationsSwitchButton.isSwitchOn = self!.usesVibration
+        }
     }
 
-    @objc func vibrationsSwitchValueChanged(_ sender: CustomSwitchButton) {
-        print("Vibrations Switch Value Changed: \(sender.isOn)")
-    }
-    
     @objc func confirmTapped() {
         //TODO:- save user defaults
+        UserData.setUserSoundPreference(usesSound)
+        UserData.setUserVibrationPreference(usesVibration)
+        let settingsData: (Bool, Bool) = (usesSound, usesVibration)
+        NotificationCenter.default.post(name: Notification.Name("SettingsChanged"), object: nil, userInfo: ["settingsData": settingsData])
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -151,7 +160,11 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: CustomSwitchButtonDelegate {
     func isOnValueChange(_ sender: UIButton, isOn: Bool) {
-        //TODO:- change vibrations or sounds accordingly
+        if sender == soundsSwitchButton {
+            usesSound = isOn
+        } else if sender == vibrationsSwitchButton {
+            usesVibration = isOn
+        }
     }
     
 }
