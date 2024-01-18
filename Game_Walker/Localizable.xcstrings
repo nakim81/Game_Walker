@@ -421,6 +421,16 @@
         }
       }
     },
+    "Next Station Info" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음 스테이션 정보"
+          }
+        }
+      }
+    },
     "NO" : {
       "localizations" : {
         "ko" : {
@@ -717,6 +727,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "현재 순위"
+          }
+        }
+      }
+    },
+    "Referee" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심판"
           }
         }
       }

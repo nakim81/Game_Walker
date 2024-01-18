@@ -72,7 +72,7 @@ class JoinGameViewController: UIViewController {
         nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         nextButton.layer.cornerRadius = 8
     }
-    
+       
     private func configureNavItem() {
         self.navigationItem.hidesBackButton = true
         let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)

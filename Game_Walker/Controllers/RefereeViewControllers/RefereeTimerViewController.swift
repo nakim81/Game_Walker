@@ -195,7 +195,7 @@ class RefereeTimerController: UIViewController {
     
     private lazy var currentStationInfoButton: UIButton = {
         var button = UIButton()
-        button.setTitle(NSLocalizedString("Current Station Info", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("Station Info", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor

@@ -127,7 +127,7 @@ class TimerViewController: BaseViewController {
     
     private lazy var currentStationInfoButton: UIButton = {
         var button = UIButton()
-        button.setTitle("Current Station Info", for: .normal)
+        button.setTitle(NSLocalizedString("Current Station Info", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
@@ -139,7 +139,7 @@ class TimerViewController: BaseViewController {
 
     private lazy var nextStationInfoButton: UIButton = {
         var button = UIButton()
-        button.setTitle("Next Station Info", for: .normal)
+        button.setTitle(NSLocalizedString("Next Station Info", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
