@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Dispatch
 
-class TimerViewController: BaseViewController {
+class TimerViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
 
@@ -642,7 +642,7 @@ extension TimerViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: PlayerTabBarController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages, role: "player")
     }
 }
 

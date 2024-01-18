@@ -206,7 +206,7 @@ extension TeamViewController {
     }
     
     @objc override func announceAction() {
-        showMessagePopUp(messages: PlayerTabBarController.localMessages)
+        showMessagePopUp(messages: PlayerTabBarController.localMessages, role: "player")
     }
     
     @objc func refreshFunction() {

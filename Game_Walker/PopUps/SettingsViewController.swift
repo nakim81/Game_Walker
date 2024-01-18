@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SettingsViewController: BaseViewController {
+class SettingsViewController: UIViewController {
     
     private var white = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
     private var yellow = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
