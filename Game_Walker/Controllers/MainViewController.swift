@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         }
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        configureNavBarItems()
+        configureInfoButton()
         configureButtons()
         setDefaultSoundVibrationPreference()
     }
@@ -51,35 +51,6 @@ class MainViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if self.audioPlayerManager.isPlaying() {
             self.audioPlayerManager.stop()
-        }
-    }
-
-    private func configureSettings() {
-            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-    
-    @objc private func applyChangedSettings(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                soundEnabled = settingsData.0
-                vibrationEnabled = settingsData.1
-            }
-            if !soundEnabled {
-                // Stop background music if sound is no longer enabled
-                self.audioPlayerManager.stop()
-            }
-            if soundEnabled && !audioPlayerManager.isPlaying() {
-                // Check if the current view controller is MainViewController
-                if let viewControllers = navigationController?.viewControllers {
-                    for viewController in viewControllers {
-                        print("View Controller: \(type(of: viewController))")
-                    }
-                }
-                print("Current View Controller: \(type(of: self))")
-                if let lastViewController = navigationController?.viewControllers.last, lastViewController is MainViewController {
-                    self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
-                }
-            }
         }
     }
 
@@ -144,7 +115,7 @@ class MainViewController: UIViewController {
         UserData.writeUUID(UUID().uuidString)
     }
     
-    private func configureNavBarItems() {
+    private func configureInfoButton() {
         print("configuring nav bar items")
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
@@ -153,8 +124,6 @@ class MainViewController: UIViewController {
         let info = UIBarButtonItem(customView: infoBtn)
 
         self.navigationItem.rightBarButtonItems = [info]
-
-        configureSettings()
     }
     
     @objc func guide() {
