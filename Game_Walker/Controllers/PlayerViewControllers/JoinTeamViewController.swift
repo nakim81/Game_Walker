@@ -28,9 +28,7 @@ class JoinTeamViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettings()
-        configureBackButton()
-        configureTitleLabel()
+        configureSimpleNavBar()
     }
     
     override func viewDidLoad() {
@@ -48,7 +46,6 @@ class JoinTeamViewController: UIViewController {
         }
         configureCollectionView()
         configureBtn()
-        configureBackButton()
         chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
     }
     
@@ -59,19 +56,6 @@ class JoinTeamViewController: UIViewController {
 
             // Pass the "standardStyle" value to the tab bar controller
             tabBarController.standardStyle = isStandardStyle
-        }
-    }
-
-    private func configureSettings() {
-        configureSettingBtn()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-
-    @objc private func applyChangedSettings(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                soundEnabled = settingsData.0
-            }
         }
     }
 

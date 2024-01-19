@@ -47,29 +47,13 @@ class CreateTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettings()
-        configureBackButton()
-        configureTitleLabel()
+        configureSimpleNavBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSetUp()
         configureCollectionView()
-        configureBackButton()
-    }
-
-    private func configureSettings() {
-            configureSettingBtn()
-            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-
-    @objc private func applyChangedSettings(_ notification: Notification) {
-           if let userInfo = notification.userInfo {
-               if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                   soundEnabled = settingsData.0
-               }
-           }
     }
 
     private func viewSetUp(){

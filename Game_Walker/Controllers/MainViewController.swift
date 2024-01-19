@@ -142,32 +142,17 @@ class MainViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "team")
         UserDefaults.standard.removeObject(forKey: "standardstyle")
         UserData.writeUUID(UUID().uuidString)
-        self.alert(title: "", message: "UUID: \(UserData.readUUID()), \(UserData.readPlayer("player")), \(UserData.readReferee("referee")), \(UserData.readReferee("referee")), \(UserData.readGamecode("gamecode")), \(UserData.readTeam("team"))")
-        print(UserData.readUUID())
-        print(UserData.readPlayer("player"))
-        print(UserData.readReferee("referee"))
-        print(UserData.readGamecode("gamecode"))
-        print(UserData.readTeam("team"))
     }
     
     private func configureNavBarItems() {
         print("configuring nav bar items")
-        
-        let settingImage = UIImage(named: "settingIcon")
-        let settingBtn = UIButton()
-        settingBtn.setImage(settingImage, for: .normal)
-        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
-        let setting = UIBarButtonItem(customView: settingBtn)
-        
-        let spacer = createSpacer()
-        
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
         infoBtn.setImage(infoImage, for: .normal)
         infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
         let info = UIBarButtonItem(customView: infoBtn)
 
-        self.navigationItem.rightBarButtonItems = [setting, spacer, info]
+        self.navigationItem.rightBarButtonItems = [info]
 
         configureSettings()
     }

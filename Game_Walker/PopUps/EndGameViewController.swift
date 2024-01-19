@@ -83,7 +83,7 @@ class EndGameViewController: UIViewController {
 
         // layer
         button.layer.cornerRadius = 6
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 4.0
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(endGame), for: .touchUpInside)
@@ -112,8 +112,6 @@ class EndGameViewController: UIViewController {
     
     private lazy var buttonStackView: UIStackView = {
         let view = UIStackView()
-        buttonStackView.addArrangedSubview(yesButton)
-        buttonStackView.addArrangedSubview(noButton)
         view.spacing = 17.0
         view.distribution = .fillEqually
         return view
@@ -158,6 +156,8 @@ class EndGameViewController: UIViewController {
         containerView.addSubview(warningLbl)
         containerView.addSubview(warningTextLbl)
         containerView.addSubview(buttonStackView)
+        buttonStackView.addArrangedSubview(yesButton)
+        buttonStackView.addArrangedSubview(noButton)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
     

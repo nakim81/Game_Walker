@@ -85,7 +85,7 @@ class StartGameViewController: UIViewController {
         // layer
         button.layer.cornerRadius = 6
         button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 3.0
+        button.layer.borderWidth = 4.0
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         return button

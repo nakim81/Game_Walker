@@ -34,7 +34,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         storedRefereeName = UserData.readUsername("username") ?? ""
         setUp()
         configureNavItem()
-        configureSettingBtn()
         configureTitleLabel()
     }
     
