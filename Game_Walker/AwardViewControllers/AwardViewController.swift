@@ -284,7 +284,7 @@ class AwardViewController: UIViewController {
     private let homeBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "homeBtn"), for: .normal)
-        button.addTarget(AwardViewController.self, action: #selector(callMainVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -378,7 +378,7 @@ class AwardViewController: UIViewController {
             navStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             navStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),
             navStackView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.04),
-            navStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 40),
+            navStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: self.view.bounds.height * 0.063),
             
             congratulationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             congratulationLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.780322),

@@ -29,27 +29,12 @@ class JoinGameViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureSettings()
-        configureBackButton()
-        configureTitleLabel()
+        configureSimpleNavBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-    }
-
-    private func configureSettings() {
-        configureSettingBtn()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-
-    @objc private func applyChangedSettings(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                soundEnabled = settingsData.0
-            }
-        }
     }
 
     private func setUp() {
@@ -72,22 +57,6 @@ class JoinGameViewController: UIViewController {
         nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         nextButton.layer.cornerRadius = 8
     }
-       
-    private func configureNavItem() {
-        self.navigationItem.hidesBackButton = true
-        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
-        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
-        newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
-        self.navigationItem.leftBarButtonItem = newBackButton
-    }
-    
-    @objc func back(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "ToMainVC", sender: self)
-    }
-    
-    @objc func setting(sender: UIBarButtonItem) {
-        
-    }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         if soundEnabled {
@@ -102,56 +71,94 @@ class JoinGameViewController: UIViewController {
         guard let username = usernameTextField.text else { return }
         guard let uuid = UserData.readUUID() else { return }
         
-        if (UserData.getUserRole() == nil || UserData.getUserRole() == "player") {
-            if gamecode.isEmpty && username.isEmpty {
-                if !savedGameCode.isEmpty && !savedUserName.isEmpty {
+        if (UserData.getUserRole() == nil || UserData.getUserRole() == "player")
+        {
+            if gamecode.isEmpty && username.isEmpty
+            {
+                if !savedGameCode.isEmpty && !savedUserName.isEmpty
+                {
                     joinExistingGameWithSavedUserInfo()
-                } else {
+                }
+                else
+                {
                     alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                     return
                 }
-            } else if gamecode == savedGameCode && username == savedUserName {
+            }
+            else if gamecode == savedGameCode && username == savedUserName
+            {
                 joinExistingGameWithSavedUserInfo()
-            } else if savedGameCode.isEmpty && savedUserName.isEmpty {
+            }
+            else if savedGameCode.isEmpty && savedUserName.isEmpty
+            {
                 createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
-            } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
+            }
+            else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName)
+            {
                 joinNewGameWithSavedUsername(savedGameCode, player, uuid, gamecode, savedUserName)
-            } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
+            }
+            else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName
+            {
                 modifyUsername(savedGameCode, uuid, username)
-            } else if gamecode != savedGameCode && username != savedUserName {
+            }
+            else if gamecode != savedGameCode && username != savedUserName
+            {
                 transitionToNewGameWithNewUsername(savedGameCode, gamecode, player, uuid, username)
-            } else {
+            }
+            else
+            {
                 alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Invalid Input.", comment: ""))
                 return
             }
-        } else {
+        }
+        else
+        {
             // user switching from other roles
             
-            if UserData.getUserRole() == "referee" {
+            if UserData.getUserRole() == "referee"
+            {
                 UserData.removeReferee()
             }
             
             UserData.setUserRole("player")
             
-            if gamecode.isEmpty && username.isEmpty {
-                if !savedGameCode.isEmpty && !savedUserName.isEmpty {
+            if gamecode.isEmpty && username.isEmpty
+            {
+                if !savedGameCode.isEmpty && !savedUserName.isEmpty
+                {
                     createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
-                } else {
+                }
+                else
+                {
                     alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                 }
-            } else if gamecode == savedGameCode && username == savedUserName {
+            }
+            else if gamecode == savedGameCode && username == savedUserName
+            {
                 createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
-            } else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty {
+            }
+            else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty
+            {
                 switchToPlayerFromOtherRoles(savedGameCode, gamecode, savedUserName, username, uuid)
-            } else if savedGameCode.isEmpty && savedUserName.isEmpty {
+            }
+            else if savedGameCode.isEmpty && savedUserName.isEmpty
+            {
                 createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
-            } else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName) {
+            }
+            else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName)
+            {
                 createPlayerAndJoinGame(gamecode, savedUserName, uuid)
-            } else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName {
+            }
+            else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName
+            {
                 createPlayerAndJoinGame(savedGameCode, username, uuid)
-            } else if gamecode != savedGameCode && username != savedUserName {
+            }
+            else if gamecode != savedGameCode && username != savedUserName
+            {
                 createPlayerAndJoinGame(gamecode, username, uuid)
-            } else {
+            }
+            else
+            {
                 alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
                 return
             }

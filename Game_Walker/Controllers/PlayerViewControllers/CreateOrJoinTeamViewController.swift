@@ -22,9 +22,7 @@ class CreateOrJoinTeamViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        configureSettings()
-        configureBackButton()
-        configureTitleLabel()
+        configureSimpleNavBar()
     }
     
     override func viewDidLoad() {
@@ -33,36 +31,11 @@ class CreateOrJoinTeamViewController: UIViewController {
         configureBtns()
     }
 
-    private func configureSettings() {
-        configureSettingBtn()
-        NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-
-    @objc private func applyChangedSettings(_ notification: Notification) {
-            if let userInfo = notification.userInfo {
-                if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                    soundEnabled = settingsData.0
-                }
-            }
-    }
-
     private func configureBtns(){
         creatTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         creatTeamButton.layer.cornerRadius = 8
         joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         joinTeamButton.layer.cornerRadius = 8
-    }
-    
-    func configureNavItem() {
-        self.navigationItem.hidesBackButton = true
-        let backButtonImage = UIImage(named: "BackIcon")?.withRenderingMode(.alwaysTemplate)
-        let newBackButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(back))
-        newBackButton.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
-        self.navigationItem.leftBarButtonItem = newBackButton
-    }
-    
-    @objc func back(sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "goToJoinGameVC", sender: self)
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {

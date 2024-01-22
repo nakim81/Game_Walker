@@ -60,12 +60,12 @@ class TeamViewController: UIViewController {
     }
     
     func configureLeaveBtn() {
-        let leaveImg = UIImage(named: "LEAVE 1")
         let leaveBtn = UIButton()
-        leaveBtn.setImage(leaveImg, for: .normal)
+        leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
+        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 25)
+        leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(customBackAction(_:)), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
-        
         self.navigationItem.leftBarButtonItem = leave
     }
     

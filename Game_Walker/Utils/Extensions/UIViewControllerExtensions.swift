@@ -245,16 +245,6 @@ extension UIViewController {
         navigationItem.titleView = gameCodeLabel
     }
     
-    func configureSettingBtn() {
-        let settingImage = UIImage(named: "settingIcon")
-        let settingBtn = UIButton()
-        settingBtn.setImage(settingImage, for: .normal)
-        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
-        let setting = UIBarButtonItem(customView: settingBtn)
-        
-        self.navigationItem.rightBarButtonItems = [setting]
-    }
-    
     func createSpacer() -> UIBarButtonItem {
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = 5
@@ -262,11 +252,6 @@ extension UIViewController {
     }
     
     func configureRightBarButtonItems() {
-        let settingImage = UIImage(named: "settingIcon")
-        let settingBtn = UIButton()
-        settingBtn.setImage(settingImage, for: .normal)
-        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
-        let setting = UIBarButtonItem(customView: settingBtn)
         
         let spacer = createSpacer()
         
@@ -283,7 +268,7 @@ extension UIViewController {
         announceBtn.tag = 120
         let announce = UIBarButtonItem(customView: announceBtn)
         
-        self.navigationItem.rightBarButtonItems = [setting, spacer, announce, spacer, info]
+        self.navigationItem.rightBarButtonItems = [announce, spacer, info]
     }
     
     func configureBackButton() {
@@ -306,8 +291,20 @@ extension UIViewController {
     
     func configureSimpleNavBar() {
         configureBackButton()
-        configureSettingBtn()
         configureTitleLabel()
+    }
+    
+    func configureSimpleNavBarWithInfo() {
+        configureSimpleNavBar()
+        
+        let infoImage = UIImage(named: "infoIcon")
+        let infoBtn = UIButton()
+        infoBtn.setImage(infoImage, for: .normal)
+        infoBtn.addTarget(self, action: #selector(infoAction), for: .touchUpInside)
+        let info = UIBarButtonItem(customView: infoBtn)
+        
+        self.navigationItem.rightBarButtonItems = [info]
+
     }
     
     @objc func onBackPressed() {
@@ -315,12 +312,6 @@ extension UIViewController {
     }
     
     @objc func infoAction() {
-    }
-
-    @objc func settingApp() {
-        let settingsVC = SettingsViewController()
-        settingsVC.modalPresentationStyle = .overFullScreen
-        present(settingsVC, animated: true, completion: nil)
     }
     
     @objc func announceAction() {

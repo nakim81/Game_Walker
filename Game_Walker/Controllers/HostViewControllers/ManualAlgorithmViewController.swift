@@ -89,7 +89,7 @@ class ManualAlgorithmViewController: UIViewController {
         scrollView.isHidden = true
         stationsLabelImageView.isHidden = true
         roundsLabelImageView.isHidden = true
-        configureSimpleNavBar()
+        configureSimpleNavBarWithInfo()
         addTapGesture()
         configureButtonVisuals()
     }
@@ -103,7 +103,6 @@ class ManualAlgorithmViewController: UIViewController {
         scrollView.isHidden = false
         stationsLabelImageView.isHidden = false
         roundsLabelImageView.isHidden = false
-        setNavBarButtons()
 
     }
     
@@ -937,22 +936,7 @@ class ManualAlgorithmViewController: UIViewController {
         
     }
     
-    private func setNavBarButtons() {
-        let helpImage = UIImage(named: "help-button")
-        let helpButton = UIBarButtonItem(image: helpImage, style: .plain, target: self, action: #selector(helpButtonTapped))
-        let settingsImage = UIImage(named: "settings-icon")
-        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
-
-        helpButton.tintColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
-        settingsButton.tintColor = UIColor(red: 0.27, green: 0.66, blue: 0.91, alpha: 1.00)
-        
-        let fixedSpace = createSpacer()
-        let rightBarButtonItems: [UIBarButtonItem] = [settingsButton, fixedSpace, helpButton]
-
-        self.navigationItem.rightBarButtonItems = rightBarButtonItems
-    }
-    
-    @objc func helpButtonTapped() {
+    @objc override func infoAction() {
         let screenWidth = UIScreen.main.bounds.width
         let rectX = (screenWidth - rectWidth) / 2
         let rectY = (UIScreen.main.bounds.height - rectWidth) / 2
@@ -967,10 +951,6 @@ class ManualAlgorithmViewController: UIViewController {
         firstModalView.onCloseButtonTapped = { [weak firstModalView] in
             firstModalView?.removeFromSuperview()
         }
-    }
-
-    @objc func settingsButtonTapped() {
-
     }
     
     //MARK: - Modal related functions for Guide

@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         }
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        configureNavBarItems()
+        configureInfoButton()
         configureButtons()
         setDefaultSoundVibrationPreference()
     }
@@ -51,35 +51,6 @@ class MainViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if self.audioPlayerManager.isPlaying() {
             self.audioPlayerManager.stop()
-        }
-    }
-
-    private func configureSettings() {
-            NotificationCenter.default.addObserver(self, selector: #selector(applyChangedSettings), name: Notification.Name("SettingsChanged"), object: nil)
-    }
-    
-    @objc private func applyChangedSettings(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let settingsData = userInfo["settingsData"] as? (Bool, Bool) {
-                soundEnabled = settingsData.0
-                vibrationEnabled = settingsData.1
-            }
-            if !soundEnabled {
-                // Stop background music if sound is no longer enabled
-                self.audioPlayerManager.stop()
-            }
-            if soundEnabled && !audioPlayerManager.isPlaying() {
-                // Check if the current view controller is MainViewController
-                if let viewControllers = navigationController?.viewControllers {
-                    for viewController in viewControllers {
-                        print("View Controller: \(type(of: viewController))")
-                    }
-                }
-                print("Current View Controller: \(type(of: self))")
-                if let lastViewController = navigationController?.viewControllers.last, lastViewController is MainViewController {
-                    self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
-                }
-            }
         }
     }
 
@@ -142,34 +113,17 @@ class MainViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "team")
         UserDefaults.standard.removeObject(forKey: "standardstyle")
         UserData.writeUUID(UUID().uuidString)
-        self.alert(title: "", message: "UUID: \(UserData.readUUID()), \(UserData.readPlayer("player")), \(UserData.readReferee("referee")), \(UserData.readReferee("referee")), \(UserData.readGamecode("gamecode")), \(UserData.readTeam("team"))")
-        print(UserData.readUUID())
-        print(UserData.readPlayer("player"))
-        print(UserData.readReferee("referee"))
-        print(UserData.readGamecode("gamecode"))
-        print(UserData.readTeam("team"))
     }
     
-    private func configureNavBarItems() {
+    private func configureInfoButton() {
         print("configuring nav bar items")
-        
-        let settingImage = UIImage(named: "settingIcon")
-        let settingBtn = UIButton()
-        settingBtn.setImage(settingImage, for: .normal)
-        settingBtn.addTarget(self, action: #selector(settingApp), for: .touchUpInside)
-        let setting = UIBarButtonItem(customView: settingBtn)
-        
-        let spacer = createSpacer()
-        
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
         infoBtn.setImage(infoImage, for: .normal)
         infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
         let info = UIBarButtonItem(customView: infoBtn)
 
-        self.navigationItem.rightBarButtonItems = [setting, spacer, info]
-
-        configureSettings()
+        self.navigationItem.rightBarButtonItems = [info]
     }
     
     @objc func guide() {
