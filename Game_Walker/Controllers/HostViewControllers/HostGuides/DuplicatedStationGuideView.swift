@@ -93,7 +93,7 @@ class DuplicatedStationGuideView : UIView {
         
         // Create UILabel
         let label = UILabel()
-        label.text = "Duplicated Station"
+        label.text = NSLocalizedString("Duplicated Station", comment: "")
         label.textColor = UIColor(red: 0.94, green: 0.71, blue: 0.11, alpha: 1.00)
         label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
         

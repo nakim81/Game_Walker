@@ -93,7 +93,7 @@ class DuplicatedOppGuideView : UIView {
         
         // Create UILabel
         let label = UILabel()
-        label.text = "Duplicated Opponent"
+        label.text = NSLocalizedString("Duplicated Opponent", comment: "")
         label.textColor = UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00)
         label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
         
