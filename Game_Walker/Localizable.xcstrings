@@ -421,6 +421,16 @@
         }
       }
     },
+    "Multiple Errors" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다수의 오류"
+          }
+        }
+      }
+    },
     "Next" : {
       "localizations" : {
         "ko" : {
