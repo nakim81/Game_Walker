@@ -55,24 +55,6 @@
         }
       }
     },
-    "427-kj-OdI.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"STATIONS\"; ObjectID = \"427-kj-OdI\";",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "STATIONS"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "스테이션"
-          }
-        }
-      }
-    },
     "Ama-Wu-a0u.text" : {
       "comment" : "Class = \"UILabel\"; text = \"TIMER\"; ObjectID = \"Ama-Wu-a0u\";",
       "extractionState" : "extracted_with_value",
