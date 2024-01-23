@@ -706,7 +706,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "점수는 숨길 수 있습니다."
+            "value" : "점수는 비공개 될 수 있습니다."
           }
         }
       }

@@ -16,8 +16,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var gamecodeLbl: UILabel!
     @IBOutlet weak var usernameLbl: UILabel!
-
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
     
     private var storedGameCode = UserData.readGamecode("gamecode") ?? ""
     private var storedRefereeName = UserData.readUsername("username") ?? ""

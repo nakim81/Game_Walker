@@ -194,8 +194,8 @@
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
-                                                                <rect key="frame" x="59.5" y="25.5" width="189.5" height="40.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1">
+                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
                                                                 <string key="text">This mode includes all of our features
 (Points, Stations, Matching, Timer, etc)</string>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
@@ -308,17 +308,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
-                                <rect key="frame" x="91" y="103.5" width="232.5" height="58.5"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="STATIONS">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="50" name="GemunuLibre-SemiBold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="427-kj-OdI">
+                                <rect key="frame" x="116" y="105.5" width="182.5" height="54.5"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rd9-KY-2cP" userLabel="Next Button">
@@ -653,37 +646,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw">
-                                <rect key="frame" x="86.5" y="12" width="241" height="58.5"/>
+                                <rect key="frame" x="86.5" y="12" width="241" height="54.5"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="kHE-Wp-se9" userLabel="Settings Stack View">
-                                <rect key="frame" x="68.5" y="92" width="277" height="562"/>
+                                <rect key="frame" x="68.5" y="92" width="277" height="554.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8yQ-2P-oGV" userLabel="Station Time View">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="126"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="277" height="124"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-Sk-V31">
-                                                <rect key="frame" x="54" y="0.0" width="169" height="35"/>
+                                                <rect key="frame" x="70" y="0.0" width="137.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                                <rect key="frame" x="0.0" y="43" width="277" height="83"/>
+                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
                                                         <rect key="frame" x="134" y="8.5" width="9" height="66"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                                        <rect key="frame" x="74.5" y="17" width="47" height="49"/>
+                                                        <rect key="frame" x="76.5" y="15" width="45" height="53.5"/>
                                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                                        <rect key="frame" x="154" y="17" width="47" height="49"/>
+                                                        <rect key="frame" x="154" y="15" width="45" height="53.5"/>
                                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -720,28 +713,28 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-nS-ETV" userLabel="Moving Time Stack View">
-                                        <rect key="frame" x="0.0" y="144" width="277" height="126"/>
+                                        <rect key="frame" x="0.0" y="142" width="277" height="124"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moving Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i75-qV-gy2">
-                                                <rect key="frame" x="52" y="0.0" width="173" height="35"/>
+                                                <rect key="frame" x="69.5" y="0.0" width="138.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                                <rect key="frame" x="0.0" y="43" width="277" height="83"/>
+                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
                                                         <rect key="frame" x="134" y="8.5" width="9" height="66"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                                        <rect key="frame" x="74.5" y="17" width="47" height="49"/>
+                                                        <rect key="frame" x="76.5" y="15" width="45" height="53.5"/>
                                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                                        <rect key="frame" x="154" y="17" width="47" height="49"/>
+                                                        <rect key="frame" x="154" y="15" width="45" height="53.5"/>
                                                         <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -777,16 +770,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-JK-3fn" userLabel="Rounds StackView">
-                                        <rect key="frame" x="0.0" y="288" width="277" height="130"/>
+                                        <rect key="frame" x="0.0" y="284" width="277" height="128.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-eY-NOH">
-                                                <rect key="frame" x="86.5" y="0.0" width="104" height="35"/>
+                                                <rect key="frame" x="97" y="0.0" width="83" height="33"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                                <rect key="frame" x="0.0" y="47" width="277" height="83"/>
+                                                <rect key="frame" x="0.0" y="45" width="277" height="83.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Ug1-se-9Lv" secondAttribute="height" multiplier="200:60" id="ng4-lf-WxO"/>
@@ -802,16 +795,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-8W-jvA" userLabel="Teams StackView">
-                                        <rect key="frame" x="0.0" y="436" width="277" height="126"/>
+                                        <rect key="frame" x="0.0" y="430.5" width="277" height="124"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRB-mk-xpK">
-                                                <rect key="frame" x="0.0" y="0.0" width="277" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="277" height="33"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                 <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                                <rect key="frame" x="0.0" y="43" width="277" height="83"/>
+                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="fc8-so-AwG" secondAttribute="height" multiplier="200:60" id="8gQ-ik-dPU"/>
@@ -831,7 +824,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button">
-                                <rect key="frame" x="96.5" y="759" width="221" height="72"/>
+                                <rect key="frame" x="96" y="759" width="222" height="72"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="p0n-80-Fkc" secondAttribute="height" multiplier="175:57" id="MAx-4n-z2k"/>
@@ -842,8 +835,7 @@
                                     <color key="titleColor" red="0.98039215800000001" green="0.98039215800000001" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="63g-GB-yJG"/>
-                                    <segue destination="Vjg-e5-r3Z" kind="show" identifier="ShowAlgorithmSegue" id="flX-6b-8Ik"/>
+                                    <action selector="nextButtonPressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="JmP-Zi-CoP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -872,31 +864,25 @@
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
                         <outlet property="teamcountTextField" destination="fc8-so-AwG" id="H2x-S6-il3"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
+                        <segue destination="Vjg-e5-r3Z" kind="show" identifier="ToMatchingSegue" id="so1-dY-HYJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dM3-et-9Md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2418.840579710145" y="-517.63392857142856"/>
         </scene>
-        <!--Manual Algorithm View Controller-->
+        <!--ManualAlgorithmViewController-->
         <scene sceneID="Mj9-kg-wPY">
             <objects>
-                <viewController id="Vjg-e5-r3Z" customClass="ManualAlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="&quot;ManualAlgorithmViewController&quot;" title="ManualAlgorithmViewController" interactionActivityTrackingBaseName="ManualAlgorithmViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vjg-e5-r3Z" customClass="ManualAlgorithmViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="imv-QA-M8c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
-                                <rect key="frame" x="77.5" y="103.5" width="259.5" height="58.5"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="MATCHING">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="50" name="GemunuLibre-SemiBold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MATCHING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Hr-kV2">
+                                <rect key="frame" x="107.5" y="105.5" width="199.5" height="54.5"/>
+                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
+                                <color key="textColor" red="0.18196699020000001" green="0.18196699020000001" blue="0.20994293689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button">

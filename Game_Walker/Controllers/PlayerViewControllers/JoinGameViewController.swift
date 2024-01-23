@@ -24,8 +24,6 @@ class JoinGameViewController: UIViewController {
     private var storedPlayer = UserData.readPlayer("player") ?? nil
     private var storedTeamName = UserData.readTeam("team")?.name ?? ""
     private let standardStyle = UserData.isStandardStyle()
-    
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,9 +57,7 @@ class JoinGameViewController: UIViewController {
     }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
 
         let savedGameCode = UserData.readGamecode("gamecode") ?? ""
         let savedUserName = UserData.readUsername("username") ?? ""
