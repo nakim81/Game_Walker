@@ -14,6 +14,10 @@ protocol RefereeUpdateListener: AnyObject {
     func updateReferee(_ referee: Referee)
 }
 
+protocol RefereeListUpdateListener: AnyObject {
+    func updateRefereeList(_ refereeList: [Referee])
+}
+
 protocol TeamUpdateListener: AnyObject {
     func updateTeams(_ teams: [Team])
 }
@@ -53,4 +57,8 @@ struct WeakTeamUpdateListener {
 
 struct WeakRefereeUpdateListener {
     weak var value: RefereeUpdateListener?
+}
+
+struct WeakRefereeListUpdateListener {
+    weak var value: RefereeListUpdateListener?
 }

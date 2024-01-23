@@ -16,6 +16,7 @@ struct R {
     
     static let db = Firestore.firestore()
     static var delegates : [WeakRefereeUpdateListener] = []
+    static var delegatesList : [WeakRefereeListUpdateListener] = []
     
     //MARK: - Referee Control Functions
     
@@ -87,6 +88,17 @@ struct R {
             let ref = convertDataToReferee(data)
             for delegate in delegates {
                 delegate.value?.updateReferee(ref)
+            }
+        }
+    }
+    
+    static func listenRefereeList(_ gamecode: String, onListenerUpdate: @escaping ([String : Any]) -> Void) {
+        db.collection("\(gamecode) : Referees").addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else { print("Error listening Referees"); return }
+            let referees = documents.compactMap { convertDataToReferee($0.data()) }
+
+            for delegate in delegatesList {
+                delegate.value?.updateRefereeList(referees)
             }
         }
     }

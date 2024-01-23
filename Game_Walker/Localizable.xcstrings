@@ -176,7 +176,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "정말 게임을 끝내실건가요?"
+            "value" : "정말 게임을 끝내실 건가요?"
           }
         }
       }
@@ -186,7 +186,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "정말 팀을 나가실건가요?"
+            "value" : "정말 팀을 나가실 건가요?"
           }
         }
       }
@@ -426,7 +426,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "다수의 오류"
+            "value" : "오류 중첩"
           }
         }
       }
@@ -496,7 +496,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "심판이 안보이나요? 게임코드를 공유해주세요."
+            "value" : "심판이 안보이나요? 게임코드를 공유해주세요."
           }
         }
       }
@@ -536,7 +536,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "예"
+            "value" : "확인"
           }
         }
       }
@@ -1536,7 +1536,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "타이머 & 게임 시작하기/끝내기"
+            "value" : "타이머 & 게임 시작/종료"
           }
         }
       }
