@@ -9,12 +9,12 @@ import Foundation
 
 class UserData {
 
-    static func setUserVibrationPreference(_ usesVibration: Bool) {
-        UserDefaults.standard.set(usesVibration, forKey: "vibrationpreference")
+    static func setUserSoundPreference(_ usesVibration: Bool) {
+        UserDefaults.standard.set(usesVibration, forKey: "soundpreference")
     }
 
-    static func getUserVibrationPreference() -> Bool? {
-        return UserDefaults.standard.bool(forKey: "vibrationpreference")
+    static func getUserSoundPreference() -> Bool? {
+        return UserDefaults.standard.bool(forKey: "soundpreference")
     }
 
     static func setUserRole(_ role: String) {
