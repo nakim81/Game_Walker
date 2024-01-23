@@ -293,7 +293,7 @@ extension UIViewController {
         configureBackButton()
         configureTitleLabel()
     }
-    
+
     func configureSimpleNavBarWithInfo() {
         configureSimpleNavBar()
         
