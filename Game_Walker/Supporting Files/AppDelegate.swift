@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Inserting a toolbar above the keyboard without additional lines of code
         IQKeyboardManager.shared.enableAutoToolbar = true
         // Touch anywhere outside the keyboard will hide the keyboard
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
         
         return true
     }
