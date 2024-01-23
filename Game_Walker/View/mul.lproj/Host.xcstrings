@@ -585,6 +585,12 @@
             "state" : "new",
             "value" : "ManualAlgorithmViewController"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
