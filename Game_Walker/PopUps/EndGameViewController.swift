@@ -41,7 +41,7 @@ class EndGameViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 25))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 24))
         label.numberOfLines = 2
         return label
     }()

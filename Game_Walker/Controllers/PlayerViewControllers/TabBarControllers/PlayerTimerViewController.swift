@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Dispatch
 
-class TimerViewController: UIViewController {
+class PlayerTimerViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
 
@@ -525,7 +525,7 @@ class TimerViewController: UIViewController {
     }
 }
 // MARK: - @objc
-extension TimerViewController {
+extension PlayerTimerViewController {
     
     @objc func hostUpdate(notification: Notification) {
         guard let host = notification.userInfo?["host"] as? Host else { return }

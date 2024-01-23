@@ -447,6 +447,7 @@ class AwardViewController: UIViewController {
     @objc func callMainVC() {
 //        audioPlayerManager.stop()
         guard let from = self.from else { return }
+        print("tapped")
         self.navigationController?.popToMainViewController(from, animated: true)
     }
     

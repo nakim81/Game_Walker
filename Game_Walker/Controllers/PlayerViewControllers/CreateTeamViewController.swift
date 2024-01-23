@@ -110,10 +110,14 @@ class CreateTeamViewController: UIViewController {
                 
                 if tn > 0 {
                     if standardStyle {
-                        guard let temp = self.host?.algorithm else { return }
+                        guard let temp = self.host?.algorithm, !temp.isEmpty else {
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game has not started yet. Please try again a few minutes later.", comment: ""))
+                            return
+                        }
+                        print(temp)
                         let algorithm = convert1DArrayTo2D(temp)
                         print(algorithm)
-                        if !(algorithm.isEmpty ) {
+                        if (!algorithm.isEmpty) {
                             teamNameTextField.resignFirstResponder()
                             
                             if (tn > hn) {
@@ -168,13 +172,11 @@ class CreateTeamViewController: UIViewController {
                     }
                 } else {
                     alert(title: NSLocalizedString("Team Number Error", comment: ""), message: NSLocalizedString("Team number should be greater than 0.", comment: ""))
-
                     return
                 }
             } catch(let e) {
                 print(e)
                 alert(title: NSLocalizedString("Connection Error", comment: ""), message: e.localizedDescription)
-
                 return
             }
         }

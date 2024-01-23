@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TeamTableViewCell: UITableViewCell {
+class PlayerTableViewCell: UITableViewCell {
     
     static let identifier = "TeamTableViewCell"
     private let blindImage = UIImage(named: "blindScore")
