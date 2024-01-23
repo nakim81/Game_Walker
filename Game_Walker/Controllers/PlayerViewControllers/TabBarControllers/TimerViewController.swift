@@ -106,7 +106,7 @@ class TimerViewController: UIViewController {
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
-        let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME\n", comment: ""), attributes: totaltimeAttributes)
+        let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: ""), attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
