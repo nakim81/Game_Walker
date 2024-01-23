@@ -114,6 +114,7 @@
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
+		FC4BCA7E2B5FA0B000D06650 /* koverwatch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4BCA7D2B5FA0A600D06650 /* koverwatch.ttf */; };
 		FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5240A02AF12E6F00999282 /* NotificationNames.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
 		FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */; };
@@ -244,6 +245,7 @@
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
+		FC4BCA7D2B5FA0A600D06650 /* koverwatch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = koverwatch.ttf; path = "Supporting Files/Fonts/koverwatch.ttf"; sourceTree = "<group>"; };
 		FC5240A02AF12E6F00999282 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		FC63396F298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeGameInfoViewcontroller.swift; sourceTree = "<group>"; };
@@ -259,7 +261,6 @@
 		FCB13E142A97A04B00F4AE99 /* message.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = message.wav; path = "Supporting Files/message.wav"; sourceTree = "<group>"; };
 		FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = LaunchScreenMusic.wav; path = "Supporting Files/LaunchScreenMusic.wav"; sourceTree = "<group>"; };
 		FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerManager.swift; sourceTree = "<group>"; };
-		FCCE41792AE2DE6300A099C8 /* koverwatch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = koverwatch.ttf; path = ../../../../Downloads/koverwatch.ttf; sourceTree = "<group>"; };
 		FCE76F762970FF98009A3EB1 /* GameInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewController.swift; sourceTree = "<group>"; };
 		FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtensions.swift; sourceTree = "<group>"; };
 		FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GemunuLibre-Bold.ttf"; path = "Supporting Files/Fonts/GemunuLibre-Bold.ttf"; sourceTree = "<group>"; };
@@ -489,7 +490,7 @@
 				A1A4CD332A371C0500704BF8 /* Dosis-Medium.ttf */,
 				A1A4CD312A371C0400704BF8 /* Dosis-Regular.ttf */,
 				A1A4CD2E2A371C0400704BF8 /* Dosis-SemiBold.ttf */,
-				FCCE41792AE2DE6300A099C8 /* koverwatch.ttf */,
+				FC4BCA7D2B5FA0A600D06650 /* koverwatch.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -744,6 +745,7 @@
 				A1A4CD352A371C0500704BF8 /* Dosis-SemiBold.ttf in Resources */,
 				FCB13E152A97A04B00F4AE99 /* purple.wav in Resources */,
 				FCB13E1A2A97A04B00F4AE99 /* congrats_ending.wav in Resources */,
+				FC4BCA7E2B5FA0B000D06650 /* koverwatch.ttf in Resources */,
 				A1A4CD362A371C0500704BF8 /* Dosis-Bold.ttf in Resources */,
 				A1A4CD372A371C0500704BF8 /* Dosis-ExtraBold.ttf in Resources */,
 				A1A4CD382A371C0500704BF8 /* Dosis-Regular.ttf in Resources */,
