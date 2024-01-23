@@ -886,7 +886,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button">
-                                <rect key="frame" x="107" y="761" width="200" height="65"/>
+                                <rect key="frame" x="107" y="781" width="200" height="65"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wCP-FP-9sr" secondAttribute="height" multiplier="175:57" id="7Zk-CP-yKb"/>
@@ -920,12 +920,13 @@
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="width" secondItem="imv-QA-M8c" secondAttribute="width" multiplier="0.483092" id="1e9-6Y-D3r"/>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.3" id="K2q-UD-6vk"/>
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="fbN-Cg-74W"/>
-                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="60" id="jQa-0I-HWX"/>
+                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="40" id="jQa-0I-HWX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
                         <outlet property="createGameButton" destination="wCP-FP-9sr" id="gob-mP-8nN"/>
+                        <outlet property="matchingLabel" destination="quw-Hr-kV2" id="7ga-U4-ZhW"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>

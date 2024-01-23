@@ -25,6 +25,7 @@
 		A1521DD72AA9B81C00B7BD8A /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD62AA9B81C00B7BD8A /* CellData.swift */; };
 		A1521DD92AAA4CF500B7BD8A /* IntPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1521DD82AAA4CF500B7BD8A /* IntPair.swift */; };
 		A15812A32B364DC6007C6653 /* SoundsVibrationsCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */; };
+		A18763702B5FBF1B00CC990E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A187636F2B5FBF1B00CC990E /* UIButtonExtension.swift */; };
 		A1A4CD202A371AA100704BF8 /* HostDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD1F2A371AA100704BF8 /* HostDatabase.swift */; };
 		A1A4CD222A371AC700704BF8 /* PlayerDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD212A371AC700704BF8 /* PlayerDatabase.swift */; };
 		A1A4CD242A371AEF00704BF8 /* RefereeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A4CD232A371AEF00704BF8 /* RefereeDatabase.swift */; };
@@ -156,6 +157,7 @@
 		A1521DD62AA9B81C00B7BD8A /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		A1521DD82AAA4CF500B7BD8A /* IntPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntPair.swift; path = Model/IntPair.swift; sourceTree = "<group>"; };
 		A15812A22B364DC6007C6653 /* SoundsVibrationsCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsVibrationsCustomButton.swift; sourceTree = "<group>"; };
+		A187636F2B5FBF1B00CC990E /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		A1A4CD1F2A371AA100704BF8 /* HostDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostDatabase.swift; path = Database/HostDatabase.swift; sourceTree = "<group>"; };
 		A1A4CD212A371AC700704BF8 /* PlayerDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerDatabase.swift; path = Database/PlayerDatabase.swift; sourceTree = "<group>"; };
 		A1A4CD232A371AEF00704BF8 /* RefereeDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RefereeDatabase.swift; path = Database/RefereeDatabase.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				DABC1E8D288BAA8B00C75DC7 /* UIViewControllerExtensions.swift */,
 				FC9AEC542B16221E00B445AD /* UINavigationViewControllerExtensions.swift */,
 				FCEF5E092B1E186700B0CD17 /* UITableViewCellExtensions.swift */,
+				A187636F2B5FBF1B00CC990E /* UIButtonExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				A1A568A32AF478D700577CFF /* ThirdTabTestViewController.swift in Sources */,
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
 				A1A568A12AF478C300577CFF /* SecondTabTestViewController.swift in Sources */,
+				A18763702B5FBF1B00CC990E /* UIButtonExtension.swift in Sources */,
 				FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */,
 				FC21CB7029F036F00024A248 /* EndGameViewController.swift in Sources */,
 				A1FFDC7E2AD7B92A000DF76E /* DuplicatedOppGuideView.swift in Sources */,
