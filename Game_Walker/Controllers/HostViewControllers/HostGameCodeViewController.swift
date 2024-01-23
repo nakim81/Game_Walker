@@ -59,7 +59,7 @@ class HostGameCodeViewController: UIViewController {
         }
 
         // Check if storedgamecode is nil or empty
-        if let storedGamecode = storedgamecode, !storedGamecode.isEmpty || !usestoredcode {
+        if let storedGamecode = gamecode, !storedGamecode.isEmpty || !usestoredcode {
             Task { @MainActor in
                 do {
                     let hostTemp = try await H.getHost(usestoredcode ? storedGamecode : userGamecodeInput)
@@ -99,7 +99,11 @@ class HostGameCodeViewController: UIViewController {
             }
         } else {
             // Storedgamecode is nil or empty and usestoredcode is false
-            alert(title: NSLocalizedString("No game exists.", comment: ""), message: "")
+            guard let gamecode = gamecode else {
+                alert(title: NSLocalizedString("No game exists.", comment: ""), message: "")
+                return
+            }
+            UserData.writeGamecode(gamecode, "gamecode")
         }
     }
 

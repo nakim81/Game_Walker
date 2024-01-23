@@ -131,8 +131,8 @@ class AddStationViewController: UIViewController {
                 return
             }
         }
+        addRefereeListener()
 
-    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,6 +147,9 @@ class AddStationViewController: UIViewController {
             }
         }
         return nil
+    }
+    private func addRefereeListener() {
+        
     }
 
     func addRefereeTable() {
