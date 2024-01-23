@@ -239,7 +239,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            gameInfoLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57),
+            gameInfoLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.65),
             gameInfoLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             gameInfoLabel.heightAnchor.constraint(equalTo: gameInfoLabel.widthAnchor, multiplier: 0.232),
             gameInfoLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),

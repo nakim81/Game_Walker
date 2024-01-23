@@ -91,6 +91,7 @@ class RefereeTimerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(_:)), name: NSNotification.Name("sceneDidEnterBackground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(_:)), name: NSNotification.Name("stop"), object: nil)
     }
     
     func callProtocols() {
@@ -206,12 +207,8 @@ class RefereeTimerViewController: UIViewController {
     }()
     
     func configureRefreshButton() {
-        let Button = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(RefreshPressed))
-        let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 25))!,
-            .foregroundColor: UIColor.green
-        ]
-        Button.setTitleTextAttributes(titleAttributes, for: .normal)
+        let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
+        Button.tintColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     
@@ -335,14 +332,17 @@ class RefereeTimerViewController: UIViewController {
                     if strongSelf.moving {
                         strongSelf.time = strongSelf.seconds
                         strongSelf.moving = false
-                        strongSelf.timeTypeLabel.text = "Station Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                        DispatchQueue.main.async {
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Station Time", comment: "")
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                        }
                     } else {
                         strongSelf.time = strongSelf.moveSeconds
                         strongSelf.moving = true
-                        strongSelf.timeTypeLabel.text = "Moving Time"
-                        strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
-
+                        DispatchQueue.main.async {
+                            strongSelf.timeTypeLabel.text = NSLocalizedString("Moving Time", comment: "")
+                            strongSelf.timerLabel.text = String(format:"%02i : %02i", strongSelf.time/60, strongSelf.time % 60)
+                        }
                     }
                 }
                 strongSelf.time -= 1
@@ -356,7 +356,7 @@ class RefereeTimerViewController: UIViewController {
                 let totalMinute = strongSelf.totalTime/60
                 let totalSecond = strongSelf.totalTime % 60
                 
-                let attributedString = NSMutableAttributedString(string: "TOTAL TIME\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
+                let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes:[NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: 30)!])
                 attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: strongSelf.fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: 25)!]))
                 DispatchQueue.main.async {
                     strongSelf.totalTimeLabel.attributedText = attributedString
@@ -413,6 +413,7 @@ class RefereeTimerViewController: UIViewController {
             let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
+            self.round = self.rounds
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
@@ -462,6 +463,7 @@ class RefereeTimerViewController: UIViewController {
             let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
             attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
+            self.round = self.rounds
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"

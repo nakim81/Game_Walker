@@ -32,6 +32,7 @@ class HostGivePointsController : UIViewController {
         super.viewDidLoad()
     }
     
+    //MARK: - UI elements
     private let containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 15
@@ -42,9 +43,9 @@ class HostGivePointsController : UIViewController {
     
     private lazy var givePointsLabel: UILabel = {
         var view = UILabel()
-        view.text = "Give Points"
+        view.text = NSLocalizedString("Give Points", comment: "")
         view.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: 45)
+        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 45))
         view.textAlignment = .center
         return view
     }()
@@ -76,7 +77,7 @@ class HostGivePointsController : UIViewController {
     
     private lazy var confirmButton: UIButton = {
         var button = UIButton()
-        button.setTitle("CONFIRM", for: .normal)
+        button.setTitle(NSLocalizedString("CONFIRM", comment: ""), for: .normal)
         button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
         button.setTitleColor(UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
@@ -111,20 +112,20 @@ class HostGivePointsController : UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Enter a number", comment: ""), message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = NSLocalizedString("Enter a number", comment: "")
-            textField.keyboardType = .numberPad
+            textField.keyboardType = .numbersAndPunctuation
         }
 
         let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { [weak self, weak alertController] _ in
                 guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
             self?.stepper.label.text = enteredNumber
-            if Double(enteredNumber)! > 999 {
+            if Double(enteredNumber) ?? 0 > 999 {
                 self?.stepper.value = 999
             }
-            else if Double(enteredNumber)! < -999 {
+            else if Double(enteredNumber) ?? 0 < -999 {
                 self?.stepper.value = -999
             }
             else {
-                self?.stepper.value = Double(enteredNumber)!
+                self?.stepper.value = Double(enteredNumber) ?? 0
             }
         }
 

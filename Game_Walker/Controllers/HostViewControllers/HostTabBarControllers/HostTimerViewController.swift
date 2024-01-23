@@ -85,6 +85,12 @@ class HostTimerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateHostInfo), name: .hostUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTeamsInfo), name: .teamsUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addBackGroundTime(_:)), name: NSNotification.Name("sceneWillEnterForeground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(stop(_:)), name: NSNotification.Name("stop"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("sceneWillEnterForeground"), object: nil)
     }
     
     // MARK: - others
@@ -104,7 +110,11 @@ class HostTimerViewController: UIViewController {
                     serverAlert(text)
                     return
                 }
+                pauseOrPlayButton.setTitle("", for: .normal)
+                pauseOrPlayButton.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+                pauseOrPlayButton.backgroundColor = UIColor.clear
                 sender.setImage(pause, for: .normal)
+                pauseOrPlayButton.tintColor = UIColor.black
             }
         }
         else if gameStart && ready {
@@ -124,6 +134,7 @@ class HostTimerViewController: UIViewController {
                     return
                 }
             }
+            pauseOrPlayButton.tintColor = UIColor.black
         }
         else {
             alert(title: NSLocalizedString("Teams are not ready yet!", comment: ""), message: NSLocalizedString("You don't have enough teams to start the game.", comment: ""))
@@ -252,12 +263,8 @@ class HostTimerViewController: UIViewController {
     }()
     
     func configureRefreshButton() {
-        let Button = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(RefreshPressed))
-        let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 25))!,
-            .foregroundColor: UIColor.green
-        ]
-        Button.setTitleTextAttributes(titleAttributes, for: .normal)
+        let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
+        Button.tintColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     
@@ -429,14 +436,22 @@ class HostTimerViewController: UIViewController {
         } else {
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(quotient + 1)"
             if gameStart {
+                pauseOrPlayButton.setTitle("", for: .normal)
+                pauseOrPlayButton.tintColor = UIColor.black
                 if isPaused {
                     pauseOrPlayButton.setImage(play, for: .normal)
-                    
                 }
                 else {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
+            } else {
+                pauseOrPlayButton.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+                pauseOrPlayButton.backgroundColor = UIColor(red: 0.84, green: 0.5, blue: 0.98, alpha: 1)
+                pauseOrPlayButton.layer.cornerRadius = 6
             }
+            endGameBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+            endGameBtn.backgroundColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
+            endGameBtn.layer.cornerRadius = 6
             runTimer()
         }
     }
@@ -456,6 +471,10 @@ extension HostTimerViewController {
     @objc func addBackGroundTime(_ notification:Notification) {
         timer.invalidate()
         calculateTime()
+    }
+    
+    @objc func stop(_ notification:Notification) {
+        timer.invalidate()
     }
     
     @objc func RefreshPressed() {

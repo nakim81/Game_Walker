@@ -112,22 +112,22 @@ class GivePointsController: UIViewController {
 
         alertController.addTextField { textField in
             textField.placeholder = NSLocalizedString("Enter a number", comment: "")
-            textField.keyboardType = .numberPad
+            textField.keyboardType = .numbersAndPunctuation
         }
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { [weak self, weak alertController] _ in
             guard let textField = alertController?.textFields?.first, let enteredNumber = textField.text else { return }
             self?.stepper.label.text = enteredNumber
-            if Double(enteredNumber)! > 999 {
+            if Double(enteredNumber) ?? 0 > 999 {
                 self?.stepper.value = 999
             }
-            else if Double(enteredNumber)! < -999 {
+            else if Double(enteredNumber) ?? 0 < -999 {
                 self?.stepper.value = -999
             }
             else {
-                self?.stepper.value = Double(enteredNumber)!
+                self?.stepper.value = Double(enteredNumber) ?? 0
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
