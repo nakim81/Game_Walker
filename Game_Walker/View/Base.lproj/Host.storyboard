@@ -495,7 +495,7 @@
                                                     <constraint firstAttribute="width" secondItem="bPp-63-odf" secondAttribute="height" multiplier="1:1" id="fvz-6E-a1A"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="WhiteGuideIcon"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="white-questionmark"/>
                                                 <connections>
                                                     <action selector="getGuideButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="A2Y-1V-kma"/>
                                                 </connections>
@@ -1126,12 +1126,12 @@
         <image name="PVPButton" width="111" height="33"/>
         <image name="RankingButton" width="76" height="76"/>
         <image name="TimerButton1" width="76" height="76"/>
-        <image name="WhiteGuideIcon" width="30" height="30"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
+        <image name="white-questionmark" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
