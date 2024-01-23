@@ -13,8 +13,6 @@ class TimerViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
-
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     

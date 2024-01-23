@@ -8,8 +8,6 @@
 import UIKit
 
 class SettingTimeHostViewController: UIViewController {
-
-    
     @IBOutlet weak var gameTimeButton: UIButton!
     @IBOutlet weak var moveTimeButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -95,8 +93,6 @@ class SettingTimeHostViewController: UIViewController {
         teamcountTextField.textAlignment = .center
         teamcountTextField.delegate = self
 
-        
-        
         gameMinutesLabel.text = changeTimeToString(timeInteger: gameminutes)
         movingMinutesLabel.text = changeTimeToString(timeInteger: moveminutes)
         
@@ -161,7 +157,6 @@ class SettingTimeHostViewController: UIViewController {
         
         let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
-        //TODO: - make keyboard dismissed
         
         tapGesture1.require(toFail: tapGesture2)
         view.addGestureRecognizer(tapGesture1)
@@ -184,7 +179,7 @@ class SettingTimeHostViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowAlgorithmSegue" {
+        if segue.identifier == "ToMatchingSegue" {
             if let destinationVC = segue.destination as? ManualAlgorithmViewController {
                 destinationVC.host = self.host
                 destinationVC.stationList = self.stationList
@@ -317,40 +312,47 @@ class SettingTimeHostViewController: UIViewController {
         //FIX:- have to get rid of automatic segue
         teamcountTextField.resignFirstResponder()
         roundsTextField.resignFirstResponder()
+
+        var shouldPresentViewController = true  // Introduce a variable to track whether the view controller should be presented
+
         if let rounds = roundsTextField.text, !rounds.isEmpty, let teamcount = teamcountTextField.text, !teamcount.isEmpty {
-//            H.setTimer(gamecode, 110, 120, 13, 14)
             Task { @MainActor in
                 guard let roundInt = Int(rounds),
                       let teamcountInt = Int(teamcount) else {
+                    shouldPresentViewController = false  // Set to false if an error occurs
                     self.alert(title: NSLocalizedString("Enter a number", comment: ""), message: NSLocalizedString("Please enter a number for rounds and teams.", comment: ""))
                     return
                 }
                 self.rounds = roundInt
                 self.teamcount = teamcountInt
                 try await H.setSettings(gamecode,
-                              timeConvert(min:gameminutes , sec:gameseconds ),
-                              timeConvert(min:moveminutes , sec:moveseconds ),
+                              timeConvert(min: gameminutes, sec: gameseconds),
+                              timeConvert(min: moveminutes, sec: moveseconds),
                               Int(rounds) ?? 0,
                               Int(teamcount) ?? 0)
-                print ("rounds and teamcount", rounds," , ", teamcount)
+                print("rounds and teamcount", rounds, " , ", teamcount)
             }
-            
-
-            
         } else {
+            shouldPresentViewController = false  // Set to false if an error occurs
             alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter all information to set timer.", comment: ""))
         }
-        
+
         H.listenHost(gamecode, onListenerUpdate: listen(_:))
         T.listenTeams(gamecode, onListenerUpdate: listen(_:))
-        
+
         Task {
             await self.manualAlgorithmViewController?.fetchDataSimple(gamecode: gamecode)
+            if shouldPresentViewController {
+                performSegue(withIdentifier: "ToMatchingSegue", sender: self)
+            } else {
+                return
+            }
         }
-
     }
+
+
     
-    func timeConvert(min : Int, sec : Int) -> Int {
+    private func timeConvert(min : Int, sec : Int) -> Int {
         return (min * 60 + sec)
     }
     func listen(_ _ : [String : Any]){

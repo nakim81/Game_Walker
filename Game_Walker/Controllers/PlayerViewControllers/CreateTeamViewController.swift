@@ -25,8 +25,6 @@ class CreateTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
-
     private let iconImageNames : [String] = [
         "iconBoy", "iconBear", "iconJam-min 1", "iconGeum-Jjok", "iconGirl", "iconBunny", "iconPenguin", "iconDuck", "iconSheep", "iconMonkey", "iconCat", "iconPig", "iconPanda", "iconWholeApple", "iconCutApple", "iconCherry", "iconDaisy", "iconpeas", "iconPea 1", "iconPlant", "iconAir",
         "iconDust", "iconFire", "iconWater", "iconRed", "iconOrange", "iconYellow", "iconGreen", "iconBlue",
@@ -86,10 +84,8 @@ class CreateTeamViewController: UIViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
-        
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+
         guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
             alert(title: NSLocalizedString("Team Name Error", comment: ""), message: NSLocalizedString("Team name should exist! Fill out the team name box.", comment: ""))
             return

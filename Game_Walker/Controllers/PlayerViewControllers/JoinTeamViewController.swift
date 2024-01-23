@@ -24,8 +24,6 @@ class JoinTeamViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureSimpleNavBar()
@@ -97,10 +95,8 @@ class JoinTeamViewController: UIViewController {
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
-        
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
+
         if let selectedIndex = selectedIndex {
             let selectedTeam = teamList[selectedIndex]
             UserData.writeTeam(selectedTeam, "team")

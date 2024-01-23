@@ -23,9 +23,6 @@ class MainViewController: UIViewController {
     
     private let audioPlayerManager = AudioPlayerManager()
 
-    private var soundEnabled: Bool = true
-    private var vibrationEnabled: Bool = true
-
     override func viewDidLoad() {
         if UserData.readUUID() == nil {
             UserData.writeUUID(UUID().uuidString)
@@ -37,35 +34,16 @@ class MainViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         configureInfoButton()
         configureButtons()
-        setDefaultSoundVibrationPreference()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if soundEnabled {
-            print("View will appear and sound is enabled.")
-            self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         if self.audioPlayerManager.isPlaying() {
             self.audioPlayerManager.stop()
-        }
-    }
-
-    private func setDefaultSoundVibrationPreference() {
-        if let userSoundPreference = UserData.getUserSoundPreference()  {
-            soundEnabled = userSoundPreference
-        } else {
-            // Set default if user preference is nil (initial)
-            UserData.setUserSoundPreference(true)
-        }
-        if let userVibrationPreference = UserData.getUserVibrationPreference() {
-            vibrationEnabled = userVibrationPreference
-        } else {
-            // Set default if user preference is nil (initial)
-            UserData.setUserVibrationPreference(true)
         }
     }
 
@@ -85,23 +63,17 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func playerBtnPressed(_ sender: Any) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPlayer", sender: self)
     }
     
     @IBAction func refereeBtnPressed(_ sender: Any) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         performSegue(withIdentifier: "goToReferee", sender: self)
     }
     
     @IBAction func hostBtnPressed(_ sender: Any) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
         performSegue(withIdentifier: "goToHost", sender: self)
     }
     
