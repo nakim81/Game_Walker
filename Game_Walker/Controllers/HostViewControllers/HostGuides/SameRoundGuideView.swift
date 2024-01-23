@@ -93,7 +93,7 @@ class SameRoundGuideView : UIView {
         
         // Create UILabel
         let label = UILabel()
-        label.text = "Duplicated Appearance"
+        label.text = NSLocalizedString("Duplicated Appearance", comment: "")
         label.textColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
         label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
         
