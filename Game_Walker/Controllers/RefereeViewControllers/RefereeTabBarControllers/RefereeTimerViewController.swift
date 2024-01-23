@@ -24,7 +24,6 @@ class RefereeTimerViewController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     private let audioPlayerManager = AudioPlayerManager()
     private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     private var startTime : Int = 0
     private var pauseTime : Int = 0
@@ -578,9 +577,7 @@ extension RefereeTimerViewController {
     }
     
     @objc func currentStationInfoButtonTapped(_ gesture: UITapGestureRecognizer) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "green", withExtension: "wav")
         guard let station = self.station else { return }
         showRefereeGameInfoPopUp(gameName: station.name, gameLocation: station.place, gamePoitns: String(station.points), gameRule: station.description)
     }

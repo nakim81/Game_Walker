@@ -57,7 +57,7 @@
     },
     "427-kj-OdI.text" : {
       "comment" : "Class = \"UILabel\"; text = \"STATIONS\"; ObjectID = \"427-kj-OdI\";",
-      "extractionState" : "stale",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -469,6 +469,24 @@
         }
       }
     },
+    "quw-Hr-kV2.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"MATCHING\"; ObjectID = \"quw-Hr-kV2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "MATCHING"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "대진표"
+          }
+        }
+      }
+    },
     "Rd9-KY-2cP.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"NEXT\"; ObjectID = \"Rd9-KY-2cP\";",
       "extractionState" : "extracted_with_value",
@@ -554,6 +572,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재개"
+          }
+        }
+      }
+    },
+    "Vjg-e5-r3Z.title" : {
+      "comment" : "Class = \"UIViewController\"; title = \"ManualAlgorithmViewController\"; ObjectID = \"Vjg-e5-r3Z\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ManualAlgorithmViewController"
           }
         }
       }

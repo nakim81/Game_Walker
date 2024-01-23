@@ -17,8 +17,6 @@ class CreateOrJoinTeamViewController: UIViewController {
     private let audioPlayerManager = AudioPlayerManager()
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
 
-    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -39,16 +37,12 @@ class CreateOrJoinTeamViewController: UIViewController {
     }
     
     @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_1VC", sender: self)
     }
     
     @IBAction func joinTeamButtonPressed(_ sender: UIButton) {
-        if soundEnabled {
-            self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
-        }
+        self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_2VC", sender: self)
     }
     

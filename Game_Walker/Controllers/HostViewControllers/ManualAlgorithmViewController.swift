@@ -886,13 +886,9 @@ class ManualAlgorithmViewController: UIViewController {
         duplicatedOpponentsButton.translatesAutoresizingMaskIntoConstraints = false
         duplicatedStationsButton.translatesAutoresizingMaskIntoConstraints = false
         sameRoundDuplicatedButton.translatesAutoresizingMaskIntoConstraints = false
-        duplicatedOpponentsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         
         let verticalSpacing: CGFloat = 7.0
-        
-        
-        
         // Constraint to keep buttons from interfering with createGameButton
         
         
@@ -903,7 +899,6 @@ class ManualAlgorithmViewController: UIViewController {
             duplicatedStationsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             sameRoundDuplicatedButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             sameRoundDuplicatedButton.topAnchor.constraint(equalTo: duplicatedStationsButton.bottomAnchor, constant: verticalSpacing),
-            duplicatedOpponentsButton.widthAnchor.constraint(equalToConstant: scrollView.frame.width * 0.53)
             
         ])
         let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
@@ -1072,7 +1067,7 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
 
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int{
-        if !self.stationList!.isEmpty && self.host != nil {
+        if !(self.stationList?.isEmpty ?? true) && self.host != nil {
             return cellDataGrid.count
         } else {
             return 0
