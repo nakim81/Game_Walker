@@ -86,7 +86,7 @@ class MultiErrorGuideView : UIView {
         
         // Create UILabel
         let label = UILabel()
-        label.text = "Multiple Errors"
+        label.text = NSLocalizedString("Multiple Errors", comment: "")
         label.textColor = UIColor(red: 1.00, green: 0.05, blue: 0.05, alpha: 1.00)
         label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
         
