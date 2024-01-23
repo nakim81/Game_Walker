@@ -20,19 +20,19 @@
       }
     },
     "4vl-0Q-0Cj.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"4vl-0Q-0Cj\";",
+      "comment" : "Class = \"UIButton\"; normalTitle = \"End Game\"; ObjectID = \"4vl-0Q-0Cj\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Button"
+            "value" : "End Game"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "버튼"
+            "value" : "게임 종료"
           }
         }
       }
@@ -380,19 +380,19 @@
       }
     },
     "NaI-KP-VEh.normalTitle" : {
-      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"NaI-KP-VEh\";",
+      "comment" : "Class = \"UIButton\"; normalTitle = \"Game Start\"; ObjectID = \"NaI-KP-VEh\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Button"
+            "value" : "Game Start"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "버튼"
+            "value" : "게임 시작"
           }
         }
       }

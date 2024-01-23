@@ -271,6 +271,16 @@
         }
       }
     },
+    "gamecode" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임코드"
+          }
+        }
+      }
+    },
     "Gamecode Error" : {
       "localizations" : {
         "ko" : {
@@ -1551,6 +1561,19 @@
         }
       }
     },
+    "TOTAL TIME\n" : {
+
+    },
+    "username" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름"
+          }
+        }
+      }
+    },
     "WIN" : {
       "localizations" : {
         "ko" : {
@@ -1597,6 +1620,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "예"
+          }
+        }
+      }
+    },
+    "You are in your last round." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막 라운드입니다."
           }
         }
       }

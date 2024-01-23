@@ -106,6 +106,7 @@ class EndGameViewController: UIViewController {
                 serverAlert(text)
                 return
             }
+            NotificationCenter.default.post(name: NSNotification.Name("stop"), object: nil, userInfo: ["note" : ""])
         }
         
     }

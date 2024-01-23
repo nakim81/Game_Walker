@@ -49,8 +49,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         gamecodeTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
-        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
-        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : "username"
+        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : NSLocalizedString("gamecode", comment: "")
+        usernameTextField.placeholder = storedRefereeName != "" ? storedRefereeName : NSLocalizedString("username", comment: "")
         gamecodeTextField.layer.borderWidth = 3
         gamecodeTextField.layer.borderColor = UIColor.black.cgColor
         gamecodeTextField.layer.cornerRadius = 10
@@ -129,7 +129,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if gameCode == storedGameCode && name == storedRefereeName {
@@ -225,7 +225,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if (gameCode != storedGameCode) && (name.isEmpty || name == storedRefereeName) {
@@ -389,7 +389,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                     } else {
-                        alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
+                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Invalid Input.", comment: ""))
                         return
                     }
                 }
@@ -453,7 +453,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if gameCode == storedGameCode && name == storedRefereeName {
@@ -495,7 +495,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                         }
                     } else if (!storedGameCode.isEmpty || gameCode == storedGameCode) && storedRefereeName.isEmpty {
                         if name.isEmpty {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter username.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter username.", comment: ""))
                             return
                         } else {
                             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
@@ -606,7 +606,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         } else {
-                            alert(title: "Woops!", message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
                             return
                         }
                     } else if (gameCode != storedGameCode ) && (name.isEmpty || name == storedRefereeName) {
@@ -769,7 +769,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                     } else {
-                        alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
+                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Invalid Input.", comment: ""))
                         return
                     }
                 }

@@ -128,10 +128,20 @@ class RefereeGuideViewController : UIViewController {
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
-                explanationLbl.widthAnchor.constraint(equalToConstant: 75).isActive = true
+                if textList[i] == "Timer &\nStart/End Game" || textList[i] == "Timer & \n Station Info" {
+                    explanationLbl.widthAnchor.constraint(equalToConstant: 150).isActive = true
+                } else {
+                    explanationLbl.widthAnchor.constraint(equalToConstant: 90).isActive = true
+                }
             } else {
                 explanationLbl.widthAnchor.constraint(equalToConstant: 200).isActive = true
             }
+            
+//            if positionList[i].y >= tabBarTop {
+//                explanationLbl.widthAnchor.constraint(equalToConstant: 75).isActive = true
+//            } else {
+//                explanationLbl.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//            }
             
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false

@@ -272,7 +272,7 @@ class RefereePVEController: UIViewController {
         view.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         view.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))!)
         view.textAlignment = .center
-        view.text = "Round 0"
+        view.text = NSLocalizedString("Round", comment: "") + " 0"
         view.adjustsFontForContentSizeCategory = true
         return view
     }()

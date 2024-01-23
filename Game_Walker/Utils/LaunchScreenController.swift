@@ -52,7 +52,7 @@ class LaunchScreenController: UIViewController {
         let label = UILabel(frame: rectangleView.bounds)
         label.text = words[index]
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 50)
+        label.font = UIFont.boldSystemFont(ofSize: fontSize(size: 50))
         label.textColor = .white
         rectangleView.addSubview(label)
         self.view.addSubview(rectangleView)
@@ -82,13 +82,13 @@ class LaunchScreenController: UIViewController {
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1), range: NSRange(location: 4, length: 5))
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1), range: NSRange(location: 10, length: 2))
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1), range: NSRange(location: 13, length: 5))
-        label.font = UIFont(name: "Dosis-Bold", size: 35)
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 35))
         label.textAlignment = .center
         label.attributedText = attributedString
         self.view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.widthAnchor.constraint(equalToConstant: 295).isActive = true
-        label.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        label.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 295/375).isActive = true
+        label.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 44/812).isActive = true
         label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         UIView.animate(withDuration: 0.9, animations: {
@@ -111,8 +111,8 @@ class LaunchScreenController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         self.view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.widthAnchor.constraint(equalToConstant: 278).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 181).isActive = true
+        imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 278/375).isActive = true
+        imageView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 181/812).isActive = true
         imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         UIView.animate(withDuration: 0.9, animations: {
