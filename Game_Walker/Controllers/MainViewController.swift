@@ -88,7 +88,6 @@ class MainViewController: UIViewController {
     }
     
     private func configureInfoButton() {
-        print("configuring nav bar items")
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
         infoBtn.setImage(infoImage, for: .normal)
