@@ -864,23 +864,23 @@ class ManualAlgorithmViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
 
-        var backgroundColor: UIColor = .clear
-        var selectedBackgroundColor: UIColor = .clear
+        var selectedBackgroundImage: UIImage?
+        var normalBackgroundImage: UIImage?
 
         if title == NSLocalizedString("Duplicated Opponent", comment: "") {
-            backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.98, alpha: 1.00)
-            selectedBackgroundColor = UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00)
+            selectedBackgroundImage = UIImage(named: "selected-image-opponents")
+            normalBackgroundImage = UIImage(named: "transparent-image-opponents")
         } else if title == NSLocalizedString("Duplicated Station", comment: "") {
-            backgroundColor = UIColor(red: 0.98, green: 0.94, blue: 0.85, alpha: 1.00)
-            selectedBackgroundColor = UIColor(red: 0.95, green: 0.75, blue: 0.22, alpha: 1.00)
+            selectedBackgroundImage = UIImage(named: "selected-image-station")
+            normalBackgroundImage = UIImage(named: "transparent-image-station")
         } else if title == NSLocalizedString("Duplicated Appearance", comment: "") {
-            backgroundColor = UIColor(red: 0.96, green: 0.91, blue: 0.98, alpha: 1.00)
-            selectedBackgroundColor = UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00)
+            selectedBackgroundImage = UIImage(named: "selected-image-appearance")
+            normalBackgroundImage = UIImage(named: "transparent-image-appearance")
         }
 
-        button.setBackgroundColor(backgroundColor.withAlphaComponent(0.5), for: .normal) // Set the initial transparency
+        button.setBackgroundImage(selectedBackgroundImage, for: .selected)
+        button.setBackgroundImage(normalBackgroundImage, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setBackgroundColor(selectedBackgroundColor, for: .selected) // Set the background color for the selected state
         button.isSelected = true
         return button
     }
