@@ -18,6 +18,7 @@ class AwardViewController: UIViewController {
     private let cellSpacingHeight: CGFloat = 3
     
     private let audioPlayerManager = AudioPlayerManager()
+    private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
 
     private let containerView: UIView = {
         let view = UIView()
@@ -26,7 +27,7 @@ class AwardViewController: UIViewController {
         view.contentMode = .scaleAspectFit
         return view
     }()
-    
+
     private lazy var congratulationLabel: UILabel = {
         var view = UILabel()
         view.textColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1)
@@ -278,15 +279,41 @@ class AwardViewController: UIViewController {
         
         return view
     }()
-    
+
     private let homeBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "homeBtn"), for: .normal)
-        button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
+        button.addTarget(AwardViewController.self, action: #selector(callMainVC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
+    private lazy var soundButton: UIButton = {
+        let button = UIButton()
+        let soundImage = UIImage(named: "sound-icon-on")
+        let soundImageOff = UIImage(named: "sound-icon-off")
+
+        if soundEnabled {
+            button.setImage(soundImage, for: .normal)
+        } else {
+            button.setImage(soundImageOff, for: .normal)
+        }
+        button.addTarget(self, action: #selector(soundButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var homeandSoundStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
+        stackView.addArrangedSubview(soundButton)
+        stackView.addArrangedSubview(homeBtn)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
     private lazy var navStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -295,7 +322,7 @@ class AwardViewController: UIViewController {
         view.spacing = 0
         view.addArrangedSubview(logoImage)
         view.addArrangedSubview(gameCodeLabel)
-        view.addArrangedSubview(homeBtn)
+        view.addArrangedSubview(homeandSoundStack)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -310,11 +337,37 @@ class AwardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
         configureViews()
+        configureSound()
         getTeamList(gameCode)
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+        }
     }
-    
+
+    private func configureSound() {
+        if UserData.getUserSoundPreference() == nil {
+            UserData.setUserSoundPreference(true)
+            soundEnabled = true
+        }
+    }
+
+    @objc func soundButtonTapped(_ sender: UIButton) {
+        soundEnabled = !soundEnabled
+        UserData.setUserSoundPreference(soundEnabled)
+        if !soundEnabled{
+            sender.setImage(UIImage(named: "sound-icon-off"), for: .normal)
+            if audioPlayerManager.isPlaying() {
+                self.audioPlayerManager.stop()
+            }
+        } else {
+            sender.setImage(UIImage(named: "sound-icon-on"), for: .normal)
+            if !audioPlayerManager.isPlaying() {
+                self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+            }
+        }
+    }
+
     private func getTeamList(_ gamecode: String) {
         Task { @MainActor in
             do {
