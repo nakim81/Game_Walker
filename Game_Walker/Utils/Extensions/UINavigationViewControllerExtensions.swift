@@ -14,6 +14,7 @@ extension UINavigationController {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootController = windowScene.windows.first?.rootViewController as? UINavigationController,
            let mainViewController = rootController.viewControllers.first(where: { $0 is MainViewController }) {
+            print(mainViewController)
             rootController.setViewControllers([mainViewController], animated: animated)
         }
     }

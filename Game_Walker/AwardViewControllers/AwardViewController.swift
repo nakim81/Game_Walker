@@ -279,10 +279,10 @@ class AwardViewController: UIViewController {
         return view
     }()
 
-    private let homeBtn: UIButton = {
+    private lazy var homeBtn: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "homeBtn"), for: .normal)
-        button.addTarget(AwardViewController.self, action: #selector(callMainVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(callMainVC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -497,7 +497,6 @@ class AwardViewController: UIViewController {
     }
     
     @objc func callMainVC() {
-//        audioPlayerManager.stop()
         guard let from = self.from else { return }
         print("tapped")
         self.navigationController?.popToMainViewController(from, animated: true)

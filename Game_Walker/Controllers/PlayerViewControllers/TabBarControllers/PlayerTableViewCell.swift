@@ -118,7 +118,6 @@ class PlayerTableViewCell: UITableViewCell {
             backGroundView.heightAnchor.constraint(equalToConstant: 50)
         ])
         nameLabel.text = name
-        
     }
     
     func configureRankTableViewCellWithScore(imageName: String, teamNum: Int, teamName: String, points: String, showScore: Bool, previous: Bool) {

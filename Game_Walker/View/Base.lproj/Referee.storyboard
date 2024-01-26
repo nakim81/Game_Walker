@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -39,28 +39,28 @@
             <objects>
                 <viewController storyboardIdentifier="RefereeFrame1VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="RegisterViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8QH-ME-NiJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-A0-pld">
-                                <rect key="frame" x="52" y="200.5" width="310.5" height="362"/>
+                                <rect key="frame" x="53.666666666666657" y="151.99999999999997" width="322.66666666666674" height="433.33333333333326"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXG-KM-GNL">
-                                        <rect key="frame" x="0.0" y="0.0" width="310.5" height="177"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="322.66666666666669" height="212.66666666666666"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjd-te-ado" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="68" y="6.5" width="174" height="40.5"/>
+                                                <rect key="frame" x="70.999999999999986" y="4.3333333333333464" width="180.66666666666663" height="55.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="gamecode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OgJ-vk-kS2">
-                                                <rect key="frame" x="33.5" y="47" width="243.5" height="74.5"/>
+                                                <rect key="frame" x="35.000000000000014" y="59.66666666666665" width="252.66666666666669" height="89.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-0k-oAn" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="33.5" y="129.5" width="243.5" height="17"/>
+                                                <rect key="frame" x="35.000000000000014" y="157" width="252.66666666666669" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="vB5-KN-MhC"/>
                                                 </constraints>
@@ -78,30 +78,30 @@
                                             <constraint firstItem="eNX-0k-oAn" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="afj-fp-Xod"/>
                                             <constraint firstItem="OgJ-vk-kS2" firstAttribute="top" secondItem="Jjd-te-ado" secondAttribute="bottom" id="e31-5K-Ye4"/>
                                             <constraint firstItem="eNX-0k-oAn" firstAttribute="width" secondItem="OgJ-vk-kS2" secondAttribute="width" id="fOz-Aw-eiS"/>
-                                            <constraint firstItem="Jjd-te-ado" firstAttribute="height" secondItem="JXG-KM-GNL" secondAttribute="height" multiplier="0.23" id="oO9-Jp-HoR"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="height" secondItem="JXG-KM-GNL" secondAttribute="height" multiplier="0.26" id="oO9-Jp-HoR"/>
                                             <constraint firstItem="OgJ-vk-kS2" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="uJF-20-dpO"/>
                                             <constraint firstItem="eNX-0k-oAn" firstAttribute="top" secondItem="OgJ-vk-kS2" secondAttribute="bottom" constant="8" symbolic="YES" id="uhU-pi-gc9"/>
                                             <constraint firstItem="OgJ-vk-kS2" firstAttribute="height" secondItem="JXG-KM-GNL" secondAttribute="height" multiplier="0.42" id="z42-bY-VLI"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU8-ER-OXw">
-                                        <rect key="frame" x="0.0" y="185" width="310.5" height="177"/>
+                                        <rect key="frame" x="0.0" y="220.66666666666669" width="322.66666666666669" height="212.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpM-Jf-UvV" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="68" y="33" width="174" height="40.5"/>
+                                                <rect key="frame" x="70.999999999999986" y="36.333333333333314" width="180.66666666666663" height="55.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL6-IT-kne">
-                                                <rect key="frame" x="33.5" y="73.5" width="243.5" height="74.5"/>
+                                                <rect key="frame" x="35.000000000000014" y="91.666666666666629" width="252.66666666666669" height="89.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="height" secondItem="EU8-ER-OXw" secondAttribute="height" multiplier="0.23" id="2TB-xV-2uM"/>
+                                            <constraint firstItem="jpM-Jf-UvV" firstAttribute="height" secondItem="EU8-ER-OXw" secondAttribute="height" multiplier="0.26" id="2TB-xV-2uM"/>
                                             <constraint firstItem="kL6-IT-kne" firstAttribute="centerX" secondItem="EU8-ER-OXw" secondAttribute="centerX" id="Vit-Wb-Ut1"/>
                                             <constraint firstItem="jpM-Jf-UvV" firstAttribute="centerY" secondItem="EU8-ER-OXw" secondAttribute="centerY" multiplier="0.6" id="YNO-Np-EKJ"/>
                                             <constraint firstItem="jpM-Jf-UvV" firstAttribute="width" secondItem="EU8-ER-OXw" secondAttribute="width" multiplier="0.56" id="Ycw-JO-9ph"/>
@@ -120,7 +120,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3c-FJ-oOM" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="120" y="750.5" width="174" height="54"/>
+                                <rect key="frame" x="124.66666666666667" y="719" width="180.66666666666663" height="64.666666666666629"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="JOIN">
@@ -165,7 +165,7 @@
             <objects>
                 <viewController id="d9X-u1-YmW" customClass="WaitingViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DhH-6s-bpn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="D6l-lh-G8K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -205,7 +205,7 @@
             <objects>
                 <viewController id="Zoa-T9-beL" customClass="RefereePVEController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iJp-w0-aMs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="q1A-ob-tej"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -225,7 +225,7 @@
             <objects>
                 <viewController id="hzK-Wl-SYs" customClass="RefereeTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e5s-g5-Ji1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="212-75-2aX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -242,15 +242,15 @@
             <objects>
                 <viewController id="05k-AC-OW6" customClass="RefereeRankingPVEViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1H6-ur-fmP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kYT-Cv-Qli">
-                                <rect key="frame" x="29.5" y="178" width="355" height="650"/>
+                                <rect key="frame" x="30.666666666666657" y="205.66666666666669" width="368.66666666666674" height="692.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-2R-IAd">
-                                <rect key="frame" x="29.5" y="117.5" width="355" height="45.5"/>
+                                <rect key="frame" x="30.666666666666657" y="138" width="368.66666666666674" height="52.666666666666657"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -263,7 +263,7 @@
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="width" secondItem="Plc-xj-FuK" secondAttribute="width" multiplier="0.857" id="6O3-qF-S8O"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="centerX" secondItem="Plc-xj-FuK" secondAttribute="centerX" id="FzB-qA-npl"/>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="height" secondItem="Plc-xj-FuK" secondAttribute="height" multiplier="0.0634371" id="KmU-VK-R8B"/>
-                            <constraint firstItem="K4T-2R-IAd" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.31" id="SU4-PW-t3Q"/>
+                            <constraint firstItem="K4T-2R-IAd" firstAttribute="centerY" secondItem="Plc-xj-FuK" secondAttribute="centerY" multiplier="0.35" id="SU4-PW-t3Q"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="top" secondItem="K4T-2R-IAd" secondAttribute="bottom" constant="15" id="Vp4-J2-Nt0"/>
                             <constraint firstItem="kYT-Cv-Qli" firstAttribute="bottom" secondItem="Plc-xj-FuK" secondAttribute="bottom" constant="15" id="W2v-Rk-Kxc"/>
                             <constraint firstItem="K4T-2R-IAd" firstAttribute="leading" secondItem="kYT-Cv-Qli" secondAttribute="leading" id="iM7-S8-aVy"/>
@@ -286,7 +286,7 @@
                     <tabBarItem key="tabBarItem" title="" image="MemberButton" selectedImage="MemberButton" id="0At-mo-4sZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hRR-Um-Jb5">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -305,7 +305,7 @@
                     <tabBarItem key="tabBarItem" title="" image="RankingButton" selectedImage="RankingButton" id="0dx-x9-DIU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G4G-2I-2LZ">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -324,7 +324,7 @@
                     <tabBarItem key="tabBarItem" title="" image="TimerButton1" selectedImage="TimerButton1" id="KwV-GR-Ld8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="K58-V8-GRq">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -338,9 +338,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jnb-r2-sLf"/>
-        <segue reference="nu7-bb-fST"/>
-        <segue reference="aOb-L3-ExC"/>
+        <segue reference="qww-74-glH"/>
+        <segue reference="s6S-2S-uEn"/>
         <segue reference="KeI-Qk-QLQ"/>
     </inferredMetricsTieBreakers>
     <resources>
