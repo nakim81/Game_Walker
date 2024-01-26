@@ -429,6 +429,26 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
     }
 
     private func configureButtonVisuals() {
+        if let originalFont = nextButton.titleLabel?.font {
+            nextButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = teamcountTextField.font {
+            teamcountTextField.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = roundsTextField.font {
+            roundsTextField.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = moveTimeButton.titleLabel?.font {
+            moveTimeButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = gameTimeButton.titleLabel?.font {
+            gameTimeButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
         nextButton.layer.cornerRadius = 10.0
         teamcountTextField.layer.borderWidth = 3.0
         teamcountTextField.layer.cornerRadius = 10.0

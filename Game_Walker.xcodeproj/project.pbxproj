@@ -78,6 +78,7 @@
 		DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139328B47EDA000A395F /* JoinGameViewController.swift */; };
 		DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139428B47EDA000A395F /* CreateTeamViewController.swift */; };
 		DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* TimerViewController.swift */; };
+		DA4ED4852B61EB98005766C0 /* LocalizedFontLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */; };
 		DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */; };
 		DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEB2B35FF3E00401C42 /* Main.storyboard */; };
 		DAA78FED2B36153500401C42 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEF2B36153500401C42 /* Player.storyboard */; };
@@ -95,6 +96,8 @@
 		DAC3132B285862FB00BECF89 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132A285862FB00BECF89 /* Referee.swift */; };
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDC4CE2ACAB80000533EE9 /* Announcement.swift */; };
+		DAF081512B6320EE0029958A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAF081532B6320EE0029958A /* InfoPlist.strings */; };
+		DAF081562B6326D10029958A /* LocalizedFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF081552B6326D00029958A /* LocalizedFontButton.swift */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */; };
 		FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FA2AA0A45A001683EA /* GemunuLibre-ExtraBold.ttf */; };
@@ -198,7 +201,6 @@
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "Supporting Files/SceneDelegate.swift"; sourceTree = "<group>"; };
-		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		DA42138C28B47EDA000A395F /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		DA42138D28B47EDA000A395F /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		DA42139328B47EDA000A395F /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		DA42139428B47EDA000A395F /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		DA42139528B47EDA000A395F /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedFontLabel.swift; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		DAA78FEA2B35FF3E00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -233,6 +236,10 @@
 		DAC3132A285862FB00BECF89 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Referee.swift; path = Model/Referee.swift; sourceTree = "<group>"; };
 		DAC3132C2858632100BECF89 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = Model/Team.swift; sourceTree = "<group>"; };
 		DACDC4CE2ACAB80000533EE9 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Announcement.swift; path = Model/Announcement.swift; sourceTree = "<group>"; };
+		DAF0814D2B630DC00029958A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
+		DAF081522B6320EE0029958A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAF081542B6321020029958A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAF081552B6326D00029958A /* LocalizedFontButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalizedFontButton.swift; path = /Users/paul/Side_Project/gamewalker/Game_Walker/Utils/LocalizedFontButton.swift; sourceTree = "<absolute>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
@@ -644,7 +651,8 @@
 				FC1AE24D28E9769B00D8C9D9 /* Fonts */,
 				DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */,
 				DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */,
-				DA28D79D284FF9D300EA1B94 /* Info.plist */,
+				DAF0814D2B630DC00029958A /* Info.plist */,
+				DAF081532B6320EE0029958A /* InfoPlist.strings */,
 				DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -658,6 +666,8 @@
 				FC76433A2B4FB104006C566E /* Extensions */,
 				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 				FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */,
+				DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */,
+				DAF081552B6326D00029958A /* LocalizedFontButton.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -737,6 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB13E162A97A04B00F4AE99 /* blue.wav in Resources */,
+				DAF081512B6320EE0029958A /* InfoPlist.strings in Resources */,
 				617745EA2B02FFBF009DBD8A /* timer-warning.wav in Resources */,
 				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
 				A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */,
@@ -837,6 +848,7 @@
 				A1A4CD222A371AC700704BF8 /* PlayerDatabase.swift in Sources */,
 				A1A4CD202A371AA100704BF8 /* HostDatabase.swift in Sources */,
 				61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */,
+				DAF081562B6326D10029958A /* LocalizedFontButton.swift in Sources */,
 				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
 				A1A568A32AF478D700577CFF /* ThirdTabTestViewController.swift in Sources */,
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
@@ -902,6 +914,7 @@
 				A1EBA6A5296F21DF00228501 /* SettingTimeHostViewController.swift in Sources */,
 				DABC1E8F288BAA8B00C75DC7 /* MainViewController.swift in Sources */,
 				A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */,
+				DA4ED4852B61EB98005766C0 /* LocalizedFontLabel.swift in Sources */,
 				DAC313272858619900BECF89 /* Player.swift in Sources */,
 				A1A5689F2AF478A000577CFF /* FirstTabTestViewController.swift in Sources */,
 				6174CED22ADA8412007CA70B /* RefereeGuideViewController.swift in Sources */,
@@ -988,6 +1001,16 @@
 				DAA7900E2B3F4D7800401C42 /* mul */,
 			);
 			name = AlgCollectionViewCell.xib;
+			sourceTree = "<group>";
+		};
+		DAF081532B6320EE0029958A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAF081522B6320EE0029958A /* ko */,
+				DAF081542B6321020029958A /* en */,
+			);
+			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1118,10 +1141,10 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Game Walker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1135,7 +1158,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
@@ -1151,12 +1174,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UG3NAUMUS7;
+				DEVELOPMENT_TEAM = 96F9ZYF44K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Game_Walker;
+				INFOPLIST_KEY_CFBundleDisplayName = "Game Walker";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1170,8 +1194,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joyful.GameWalker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;

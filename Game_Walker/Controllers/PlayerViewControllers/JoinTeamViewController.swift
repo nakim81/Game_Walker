@@ -44,7 +44,7 @@ class JoinTeamViewController: UIViewController {
         }
         configureCollectionView()
         configureBtn()
-        chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        chooseLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,6 +58,10 @@ class JoinTeamViewController: UIViewController {
     }
 
     private func configureBtn(){
+        if let originalFont = joinTeamButton.titleLabel?.font {
+            joinTeamButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
         joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         joinTeamButton.layer.cornerRadius = 8
     }
@@ -75,7 +79,7 @@ class JoinTeamViewController: UIViewController {
     private func settingRefreshControl() {
         refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
         refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: 15)])
     }
     
     @objc func refreshFunction() {

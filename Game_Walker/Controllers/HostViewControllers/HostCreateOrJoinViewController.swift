@@ -60,8 +60,17 @@ class HostCreateOrJoinViewController: UIViewController {
     }
 
     private func configureButtonVisuals() {
+        if let originalFont = createButton.titleLabel?.font {
+            createButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = resumeButton.titleLabel?.font {
+            resumeButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
         createButton.layer.cornerRadius = 10.0
         resumeButton.layer.cornerRadius = 10.0
+
     }
 
     deinit {

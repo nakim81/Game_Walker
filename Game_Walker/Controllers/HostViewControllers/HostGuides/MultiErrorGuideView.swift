@@ -38,7 +38,7 @@ class MultiErrorGuideView : UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = UIFont(name: "GemunuLibre-Bold", size: 15)
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 15)
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         label.numberOfLines = 2
         let paragraphStyle = NSMutableParagraphStyle()
@@ -88,7 +88,7 @@ class MultiErrorGuideView : UIView {
         let label = UILabel()
         label.text = NSLocalizedString("Multiple Errors", comment: "")
         label.textColor = UIColor(red: 1.00, green: 0.05, blue: 0.05, alpha: 1.00)
-        label.font = UIFont(name: "GemunuLibre-Medium", size: 30)
+        label.font = getFontForLanguage(font: "GemunuLibre-Medium", size: 30)
         
         // Create Horizontal UIStackView
         let titleView = UIStackView(arrangedSubviews: [sharpImage, label])
@@ -167,5 +167,24 @@ class MultiErrorGuideView : UIView {
         onPreviousButtonTapped?()
     }
     
+    //MARK: - Language
+    
+    func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
+        let finalSize = ksize ?? size
+        
+        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
+            if let customFont = UIFont(name: "koverwatch", size: finalSize) {
+                return customFont
+            }
+        }
+        
+        // Fallback to default font for English or other languages
+        if let defaultFont = UIFont(name: font, size: finalSize) {
+            return defaultFont
+        }
+        
+        // If both custom and default fonts are unavailable, return system font
+        return UIFont.systemFont(ofSize: finalSize)
+    }
     
 }

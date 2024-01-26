@@ -71,7 +71,7 @@ class TimerViewController: UIViewController {
         label.text = NSLocalizedString("Moving Time", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.textColor = .black
         label.numberOfLines = 1
         return label
@@ -81,7 +81,7 @@ class TimerViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 55))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 55))
         label.textColor = .black
         label.numberOfLines = 0
         return label
@@ -93,7 +93,7 @@ class TimerViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(red: 0.006, green: 0.45, blue: 0.721, alpha: 1)
         label.textAlignment = .center
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.numberOfLines = 1
         label.alpha = 0.0
         return label
@@ -103,13 +103,13 @@ class TimerViewController: UIViewController {
         let label = UILabel()
         let attributedText = NSMutableAttributedString()
         let totaltimeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)),
             .foregroundColor: UIColor.black
         ]
         let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: ""), attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)),
             .foregroundColor: UIColor.black
         ]
         let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)
@@ -126,7 +126,7 @@ class TimerViewController: UIViewController {
     private lazy var currentStationInfoButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("Current Station Info", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
         button.layer.cornerRadius = 8
@@ -138,7 +138,7 @@ class TimerViewController: UIViewController {
     private lazy var nextStationInfoButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("Next Station Info", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
         button.layer.cornerRadius = 8
@@ -192,7 +192,7 @@ class TimerViewController: UIViewController {
             configureTimerLabel()
         }
         titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
-        titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
+        titleLabel.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 50))
         tabBarController?.navigationController?.isNavigationBarHidden = true
     }
     
@@ -442,8 +442,8 @@ class TimerViewController: UIViewController {
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
@@ -452,8 +452,8 @@ class TimerViewController: UIViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.round = self.rounds
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"
@@ -492,8 +492,8 @@ class TimerViewController: UIViewController {
         self.remainingTime = (rounds * (seconds + moveSeconds)) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         if (moveSeconds + seconds) * self.rounds <= t  {
@@ -502,8 +502,8 @@ class TimerViewController: UIViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.round = self.rounds
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds)"

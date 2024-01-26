@@ -117,7 +117,7 @@ class RefereeTimerViewController: UIViewController {
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50)) ?? UIFont(name: "Dosis-SemiBold", size: fontSize(size: 50))
+        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 50))
         label.numberOfLines = 1
         return label
     }()
@@ -141,7 +141,7 @@ class RefereeTimerViewController: UIViewController {
         label.text = NSLocalizedString("Moving Time", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38)) ?? UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 1
         return label
@@ -163,7 +163,7 @@ class RefereeTimerViewController: UIViewController {
         label.text = NSLocalizedString("Round 1", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38)) ?? UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.textColor = UIColor(red: 0.111, green: 0.525, blue: 0.044, alpha: 1)
         label.numberOfLines = 1
         label.alpha = 0.0
@@ -174,14 +174,14 @@ class RefereeTimerViewController: UIViewController {
         let label = UILabel()
         let attributedText = NSMutableAttributedString()
         let totaltimeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)),
             .foregroundColor: UIColor.black
         ]
         let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
         
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)),
             .foregroundColor: UIColor.black
         ]
         let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)
@@ -198,7 +198,7 @@ class RefereeTimerViewController: UIViewController {
     private lazy var currentStationInfoButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("Station Info", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
         button.layer.cornerRadius = 8

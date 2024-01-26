@@ -16,7 +16,7 @@ class MessageTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .left
-        label.font = UIFont(name: "Dosis-Regular", size: 20)
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: 20)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true

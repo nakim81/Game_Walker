@@ -36,7 +36,7 @@ class AnnouncementViewController: UIViewController {
         label.text = self.announcement?.content
         label.backgroundColor = .clear
         label.textAlignment = .left
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 18))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -45,7 +45,7 @@ class AnnouncementViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)

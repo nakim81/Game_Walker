@@ -29,7 +29,7 @@ class StartGameViewController: UIViewController {
         let view = UILabel()
         view.text = NSLocalizedString("HEADS UP!", comment: "")
         view.backgroundColor = .clear
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        view.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 1
@@ -41,7 +41,7 @@ class StartGameViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 25))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 25))
         label.numberOfLines = 3
 
         return label
@@ -50,7 +50,7 @@ class StartGameViewController: UIViewController {
     private lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("Dismiss", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -72,7 +72,7 @@ class StartGameViewController: UIViewController {
     private lazy var confirmButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("Confirm", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)

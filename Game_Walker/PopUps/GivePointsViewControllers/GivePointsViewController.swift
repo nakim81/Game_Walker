@@ -43,7 +43,7 @@ class GivePointsController: UIViewController {
         var view = UILabel()
         view.text = NSLocalizedString("Give Points", comment: "")
         view.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 45))
+        view.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 45))
         view.textAlignment = .center
         return view
     }()
@@ -78,7 +78,7 @@ class GivePointsController: UIViewController {
     private lazy var confirmButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("CONFIRM", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
         button.setTitleColor(UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
         button.layer.cornerRadius = 10.0

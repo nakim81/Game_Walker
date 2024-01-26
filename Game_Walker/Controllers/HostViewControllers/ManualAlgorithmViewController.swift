@@ -117,6 +117,9 @@ class ManualAlgorithmViewController: UIViewController {
 
     private func configureButtonVisuals() {
         createGameButton.layer.cornerRadius = 10.0
+        if let originalFont = createGameButton.titleLabel?.font {
+            createGameButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
     }
 
     func fetchHostForAlgorithm() async throws -> Host {
@@ -865,7 +868,7 @@ class ManualAlgorithmViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .selected)
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: 20)
         
         if title == NSLocalizedString("Duplicated Opponent", comment: "") {
             button.setTitleColor(UIColor(red: 0.91, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
@@ -902,8 +905,8 @@ class ManualAlgorithmViewController: UIViewController {
             
         ])
         let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
-        sameRoundDuplicatedButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
-        duplicatedOpponentsButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
+        sameRoundDuplicatedButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontSize)
+        duplicatedOpponentsButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontSize)
         
     }
     
@@ -1310,7 +1313,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
     private lazy var  stationLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Station List", comment: "")
-        label.font = UIFont(name: "GemunuLibre-SemiBold", size: 40)
+        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: 40)
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -1325,7 +1328,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
         
         // enable
         button.setTitle("Close", for: .normal)
@@ -1471,7 +1474,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var indexLbl: UILabel = {
        let label = UILabel()
         label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-        label.font = UIFont(name: "Dosis-Bold", size: 20)
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.clipsToBounds = true
@@ -1483,7 +1486,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var stationLabel: UILabel = {
         let label = UILabel()
          label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-         label.font = UIFont(name: "Dosis-Bold", size: 20)
+         label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
          label.textAlignment = .left
          label.numberOfLines = 1
          label.clipsToBounds = true

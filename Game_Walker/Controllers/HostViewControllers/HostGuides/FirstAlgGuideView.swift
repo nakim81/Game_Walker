@@ -104,7 +104,7 @@ class FirstAlgGuideView : UIView {
         instructionLabel.attributedText = attributedString
         instructionLabel.translatesAutoresizingMaskIntoConstraints = false
         instructionLabel.textAlignment = .left
-        instructionLabel.font = UIFont(name: "Dosis-Regular", size: 20)
+        instructionLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 20)
         instructionLabel.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         instructionLabel.numberOfLines = 7
         instructionLabel.adjustsFontForContentSizeCategory = true
@@ -127,5 +127,23 @@ class FirstAlgGuideView : UIView {
     }
     @objc private func nextButtonTapped() {
         onNextButtonTapped?()
+    }
+    
+    func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
+        let finalSize = ksize ?? size
+        
+        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
+            if let customFont = UIFont(name: "koverwatch", size: finalSize) {
+                return customFont
+            }
+        }
+        
+        // Fallback to default font for English or other languages
+        if let defaultFont = UIFont(name: font, size: finalSize) {
+            return defaultFont
+        }
+        
+        // If both custom and default fonts are unavailable, return system font
+        return UIFont.systemFont(ofSize: finalSize)
     }
 }

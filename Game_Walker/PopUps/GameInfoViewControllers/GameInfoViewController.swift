@@ -33,7 +33,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 40))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 40))
         return label
     }()
     
@@ -43,7 +43,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 23))
         return label
     }()
     
@@ -53,7 +53,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 23))
         return label
     }()
     
@@ -63,7 +63,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 23))
         return label
     }()
     
@@ -73,7 +73,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 23))
         return label
     }()
     
@@ -83,7 +83,7 @@ class GameInfoViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Semibold", size: fontSize(size: 23))
+        label.font = getFontForLanguage(font: "GemunuLibre-Semibold", size: fontSize(size: 23))
         return label
     }()
     
@@ -95,7 +95,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -110,7 +110,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -125,7 +125,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -140,7 +140,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -155,7 +155,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label
@@ -170,7 +170,7 @@ class GameInfoViewController: UIViewController {
     public func addActionToButton(title: String? = nil, titleColor: UIColor, backgroundColor: UIColor = .white, completion: (() -> Void)? = nil) {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         
         // enable
         button.setTitle(title, for: .normal)

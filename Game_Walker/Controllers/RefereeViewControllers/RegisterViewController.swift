@@ -55,8 +55,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.layer.borderWidth = 3
         usernameTextField.layer.borderColor = UIColor.black.cgColor
         usernameTextField.layer.cornerRadius = 10
-        gamecodeLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
-        usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        gamecodeLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        usernameLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         nextButton.backgroundColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
         nextButton.layer.cornerRadius = 8
     }

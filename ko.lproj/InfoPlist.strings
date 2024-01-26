@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Game_Walker
+
+  Created by Paul on 1/25/24.
+  
+*/
+"CFBundleDisplayName" = "게임 워커";
+"CFBundleName" = "게임 워커";

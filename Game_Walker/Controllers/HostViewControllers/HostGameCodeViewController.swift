@@ -144,7 +144,12 @@ class HostGameCodeViewController: UIViewController {
     }
 
     private func configureButtonVisuals() {
+        if let originalFont = joinButton.titleLabel?.font {
+            joinButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
         joinButton.layer.cornerRadius = 10.0
+
     }
 
 }

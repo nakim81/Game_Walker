@@ -17,7 +17,6 @@ class AwardTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
         label.numberOfLines = 0
         return label
     }()
@@ -43,7 +42,6 @@ class AwardTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 15)
         label.numberOfLines = 0
         return label
     }()
@@ -53,13 +51,19 @@ class AwardTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: 25)
         label.numberOfLines = 0
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureLabel()
+    }
+    
+    private func configureLabel(){
+        teamNumLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 25)
+        teamNameLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 15)
+        scoreLabel.font = getFontForLanguage(font: "Dosis-SemiBold", size: 25)
     }
     
     override func layoutSubviews() {

@@ -62,7 +62,7 @@ class HostTimerViewController: UIViewController {
         configureNavigationBar()
         configureRefreshButton()
         Task {
-            titleLabel.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 50))
+            titleLabel.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 50))
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
             do {
                 host = try await H.getHost(gameCode) ?? Host()
@@ -111,7 +111,7 @@ class HostTimerViewController: UIViewController {
                     return
                 }
                 pauseOrPlayButton.setTitle("", for: .normal)
-                pauseOrPlayButton.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+                pauseOrPlayButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
                 pauseOrPlayButton.backgroundColor = UIColor.clear
                 sender.setImage(pause, for: .normal)
                 pauseOrPlayButton.tintColor = UIColor.black
@@ -210,7 +210,7 @@ class HostTimerViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 55))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 55))
         label.textColor = .black
         label.numberOfLines = 0
         return label
@@ -221,7 +221,7 @@ class HostTimerViewController: UIViewController {
         label.text = NSLocalizedString("Moving Time", comment: "")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.textColor = .black
         label.numberOfLines = 1
         return label
@@ -232,7 +232,7 @@ class HostTimerViewController: UIViewController {
         label.textAlignment = .center
         label.textColor = UIColor(red: 0.535, green: 0.006, blue: 0.721, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 38))
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 38))
         label.numberOfLines = 1
         label.alpha = 0.0
         return label
@@ -242,13 +242,13 @@ class HostTimerViewController: UIViewController {
         let label = UILabel()
         let attributedText = NSMutableAttributedString()
         let totaltimeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont.systemFont(ofSize: 13),
             .foregroundColor: UIColor.black
         ]
         let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)
@@ -408,8 +408,8 @@ class HostTimerViewController: UIViewController {
         self.remainingTime = (host.rounds) * (host.gameTime + host.movingTime) - t
         let totalMinute = t/60
         let totalSecond = t % 60
-        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+        attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
         self.totalTimeLabel.attributedText = attributedString
         self.round = quotient + 1
         Task {
@@ -428,8 +428,8 @@ class HostTimerViewController: UIViewController {
             self.totalTime = (moveSeconds + seconds) * self.rounds!
             let totalMinute = totalTime/60
             let totalSecond = totalTime % 60
-            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
-            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 30)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 30))!])
+            attributedString.append(NSAttributedString(string: String(format:"%02i : %02i", totalMinute, totalSecond), attributes: [NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont(name: "Dosis-Regular", size: fontSize(size: 25))!]))
             self.totalTimeLabel.attributedText = attributedString
             self.roundLabel.text = NSLocalizedString("Round", comment: "") + " \(self.rounds!)"
             pauseOrPlayButton.isHidden = true
@@ -445,11 +445,11 @@ class HostTimerViewController: UIViewController {
                     pauseOrPlayButton.setImage(pause, for: .normal)
                 }
             } else {
-                pauseOrPlayButton.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+                pauseOrPlayButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
                 pauseOrPlayButton.backgroundColor = UIColor(red: 0.84, green: 0.5, blue: 0.98, alpha: 1)
                 pauseOrPlayButton.layer.cornerRadius = 6
             }
-            endGameBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+            endGameBtn.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
             endGameBtn.backgroundColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
             endGameBtn.layer.cornerRadius = 6
             runTimer()

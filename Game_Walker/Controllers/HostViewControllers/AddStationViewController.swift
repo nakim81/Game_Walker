@@ -99,10 +99,12 @@ class AddStationViewController: UIViewController {
                     gamelocation = station!.place
                     
                     gamepointsTextfield.attributedPlaceholder = NSAttributedString(string: String(station!.points), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-                    gamepointsTextfield.text = String(station!.points) 
+                    gamepointsTextfield.text = String(station!.points)
+                    gamepoints = station!.points
+                    
                     rulesTextfield.text = station?.description
                     rules = station?.description ?? ""
-                    gamepoints = station!.points
+                    
                     
                     pvpnotchosen = false
                     if (station?.pvp == true) {
@@ -204,7 +206,7 @@ class AddStationViewController: UIViewController {
         } else{
             refereeLabel.text = refereename
         }
-        refereeLabel.font = UIFont(name:"Dosis", size: 20.0)
+        refereeLabel.font = getFontForLanguage(font: "Dosis", size: 20.0)
     }
     
     func setPaddings() {
@@ -437,7 +439,7 @@ extension AddStationViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = refereeTableView.dequeueReusableCell(withIdentifier: "StationRefereeTableViewCell", for: indexPath) as! StationRefereeTableViewCell
         let curr_cellname = availableReferees[indexPath.row].name
         cell.configureRefereeCell(refereeName: curr_cellname)
-        cell.refereenameLabel?.font = UIFont(name: "Dosis-Regular", size: 20.0)
+        cell.refereenameLabel?.font = getFontForLanguage(font: "Dosis-Regular", size: 20.0)
         return cell
     }
 

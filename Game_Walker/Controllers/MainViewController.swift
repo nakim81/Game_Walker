@@ -51,16 +51,31 @@ class MainViewController: UIViewController {
         playerButton.layer.cornerRadius = 10
         playerButton.layer.borderWidth = 3
         playerButton.layer.borderColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
+        if let originalFont = playerButton.titleLabel?.font {
+            playerButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+        
         refereeButton.layer.cornerRadius = 10
         refereeButton.layer.borderWidth = 3
         refereeButton.layer.borderColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1).cgColor
+        if let originalFont = refereeButton.titleLabel?.font {
+            refereeButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        
         hostButton.layer.cornerRadius = 10
         hostButton.layer.borderWidth = 3
         hostButton.layer.borderColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor
+        if let originalFont = hostButton.titleLabel?.font {
+            hostButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        
         testBtn.layer.cornerRadius = 10
         testBtn.layer.borderWidth = 3
         testBtn.layer.borderColor = UIColor.systemBlue.cgColor
     }
+        
     
     @IBAction func playerBtnPressed(_ sender: Any) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")

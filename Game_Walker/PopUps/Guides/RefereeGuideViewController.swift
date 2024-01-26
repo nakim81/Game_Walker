@@ -50,7 +50,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Remember to choose 'WIN' or 'LOSE' before the round ends!", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -67,7 +67,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Tap to give points to the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
         view.addSubview(label)
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -81,14 +81,14 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
     private lazy var winButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -98,7 +98,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var loseButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -124,7 +124,7 @@ class RefereeGuideViewController : UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
+            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: 15)
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
@@ -207,7 +207,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Tap to give points to the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: 13)
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: 13)
         return label
     }()
     
@@ -234,7 +234,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -243,14 +243,14 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
     private lazy var leftWinButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -260,7 +260,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var leftLoseButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -270,7 +270,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var rightWinButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("WIN", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -280,7 +280,7 @@ class RefereeGuideViewController : UIViewController {
     private lazy var rightLoseButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("LOSE", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 13)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 13)
         button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.942, green: 0.71, blue: 0.114, alpha: 1).cgColor
         button.layer.cornerRadius = 6.0
@@ -312,7 +312,7 @@ class RefereeGuideViewController : UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 15))
+            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 15))
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {

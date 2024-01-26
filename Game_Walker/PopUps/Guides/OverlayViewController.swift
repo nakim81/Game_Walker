@@ -68,7 +68,7 @@ class OverlayViewController: UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
+            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: 15)
             overlayView.addSubview(explanationLbl)
             var maxWidth: CGFloat = 0
             // Set maximum width constraint
