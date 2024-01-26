@@ -110,7 +110,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureNavButtons() {
-        let Image = UIImage(named: "infoIcon")
+        let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
         infoBtn.setImage(infoImage, for: .normal)
         infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
