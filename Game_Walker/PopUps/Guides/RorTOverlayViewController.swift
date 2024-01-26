@@ -154,11 +154,39 @@ class RorTOverlayViewController: UIViewController {
             label.layer.borderColor = color
             label.layer.borderWidth = 15
             
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            overlayView.addSubview(imageView)
+            if let image = UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) {
+                imageView.image = image
+                imageView.tintColor = UIColor(cgColor: color)
+            }
+            let refreshlabel = UILabel()
+            refreshlabel.translatesAutoresizingMaskIntoConstraints = false
+            refreshlabel.text = NSLocalizedString("Timer may be unsynchronized.", comment: "") + "\n" + NSLocalizedString("Press to sync time with others.", comment: "")
+            refreshlabel.numberOfLines = 2
+            refreshlabel.textAlignment = .left
+            refreshlabel.contentMode = .topLeft
+            refreshlabel.textColor = .white
+            refreshlabel.font = UIFont(name: "Dosis-Bold", size: 13)
+            overlayView.addSubview(refreshlabel)
+            
             NSLayoutConstraint.activate([
                 label.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[count].x),
                 label.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[count].y),
                 label.widthAnchor.constraint(equalToConstant: frameList[count].width),
-                label.heightAnchor.constraint(equalToConstant: frameList[count].height)
+                label.heightAnchor.constraint(equalToConstant: frameList[count].height),
+                
+                imageView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: positionList[count+1].y),
+                imageView.centerXAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: positionList[count+1].x),
+                imageView.widthAnchor.constraint(equalToConstant: frameList[count+1].width),
+                imageView.heightAnchor.constraint(equalToConstant: frameList[count+1].height),
+                
+                refreshlabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 9),
+                refreshlabel.centerYAnchor.constraint(equalTo: overlayView.topAnchor, constant: frameList[count+1].midY),
+                refreshlabel.widthAnchor.constraint(equalToConstant: 206),
+                refreshlabel.heightAnchor.constraint(equalToConstant: 35)
+                
             ])
         }
     }

@@ -70,6 +70,7 @@ class RefereePVEController: UIViewController {
                 stations = try await S.getStationList(gameCode)
                 teams = try await T.getTeamList(gameCode)
                 host = try await H.getHost(gameCode) ?? Host()
+                round = host.currentRound
             } catch GameWalkerError.serverError(let message) {
                 serverAlert(message)
                 return
@@ -116,8 +117,7 @@ class RefereePVEController: UIViewController {
                 }
             }
             if host.algorithm != [] && host.teams == teams.count {
-                getTeamOrder()
-                updateScore()
+                setTeamOrder()
                 if pvp {
                     combineSubviewsPVP()
                     combineConstraintsPVP()
@@ -1010,7 +1010,7 @@ extension RefereePVEController {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
         }
-        if (self.round != host.currentRound) && (host.currentRound < host.rounds) {
+        if (self.round != host.currentRound) && (host.currentRound <= host.rounds) {
             roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
             if pvp {
                 leftTeamNumLabel.text = "Team \(self.teamOrder[2 * host.currentRound - 2].number)"
@@ -1021,46 +1021,50 @@ extension RefereePVEController {
                 rightIconButton.image = UIImage(named: self.teamOrder[2 * host.currentRound - 1].iconName)
                 rightTeamNameLabel.text = "\(self.teamOrder[2 * host.currentRound - 1].name)"
                 rightScoreLabel.text = "\(self.teamOrder[2 * host.currentRound - 1].points)"
-                leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 self.round = host.currentRound
                 self.teamA = self.teamOrder[2 * host.currentRound - 2]
                 self.teamB = self.teamOrder[2 * host.currentRound - 1]
-                UserData.writeMax("", "maxA")
-                maxA = UserData.readMax("maxA")!
-                UserData.writeMax("", "maxB")
-                maxB = UserData.readMax("maxB")!
+                if self.host.algorithm != [] {
+                    leftWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    leftWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    leftLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    leftLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    rightWinButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    rightWinButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    rightLoseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    rightLoseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    UserData.writeMax("", "maxA")
+                    maxA = UserData.readMax("maxA")!
+                    UserData.writeMax("", "maxB")
+                    maxB = UserData.readMax("maxB")!
+                }
             } else {
                 teamNumLabel.text = "Team \(self.teamOrder[host.currentRound - 1].number)"
                 iconButton.image = UIImage(named: self.teamOrder[host.currentRound - 1].iconName)
                 teamNameLabel.text = "\(self.teamOrder[host.currentRound - 1].name)"
                 scoreLabel.text = "\(self.teamOrder[host.currentRound - 1].points)"
-                winButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
-                loseButton.gestureRecognizers?.forEach { gestureRecognizer in
-                    gestureRecognizer.isEnabled = true
-                }
-                loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 self.round = host.currentRound
                 self.team = self.teamOrder[host.currentRound - 1]
-                UserData.writeMax("", "max")
-                max = UserData.readMax("max")!
+                if self.host.algorithm != [] {
+                    winButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    winButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    loseButton.gestureRecognizers?.forEach { gestureRecognizer in
+                        gestureRecognizer.isEnabled = true
+                    }
+                    loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
+                    UserData.writeMax("", "max")
+                    max = UserData.readMax("max")!
+                }
             }
         }
     }

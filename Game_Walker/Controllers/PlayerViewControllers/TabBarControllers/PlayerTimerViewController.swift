@@ -148,7 +148,7 @@ class PlayerTimerViewController: UIViewController {
     
     func configureRefreshButton() {
         let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
-        Button.tintColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
+        Button.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     
@@ -252,6 +252,17 @@ class PlayerTimerViewController: UIViewController {
         }
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
+        if let leftButton = navigationItem.leftBarButtonItem {
+            if let view = leftButton.value(forKey: "view") as? UIView {
+                if let subview = view.subviews.first {
+                    let subviewFrameInWindow = view.convert(subview.frame, to: nil)
+                    let subviewX = subviewFrameInWindow.midX
+                    let subviewY = subviewFrameInWindow.minY
+                    componentPositions.append(CGPoint(x: subviewX, y: subviewY))
+                    componentFrames.append(subviewFrameInWindow)
+                }
+            }
+        }
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "player")
         
         present(overlayViewController, animated: true, completion: nil)

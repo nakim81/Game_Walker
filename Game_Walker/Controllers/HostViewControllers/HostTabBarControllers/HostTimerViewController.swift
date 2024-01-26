@@ -20,6 +20,7 @@ class HostTimerViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     private var host : Host = Host()
+    private var teams : [Team] = []
     private var startTime : Int = 0
     private var pauseTime : Int = 0
     private var pausedTime : Int = 0
@@ -44,14 +45,7 @@ class HostTimerViewController: UIViewController {
 
     private var gameCode: String = UserData.readGamecode("gamecode") ?? ""
     private var gameStart : Bool = false
-    private var ready : Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: "readyKey")
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: "readyKey")
-        }
-    }
+    private var ready : Bool = UserDefaults.standard.bool(forKey: "readyKey") 
     private var gameOver : Bool = false
     private var segueCalled : Bool = false
     
@@ -62,15 +56,27 @@ class HostTimerViewController: UIViewController {
         configureNavigationBar()
         configureRefreshButton()
         Task {
-            titleLabel.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 50))
+            UserDefaults.standard.set(false, forKey: "readyKey")
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
+            titleLabel.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 50))
             do {
                 host = try await H.getHost(gameCode) ?? Host()
+                teams = try await T.getTeamList(gameCode)
                 setSettings()
+                if teams.count == self.number {
+                    ready = true
+                }
                 if UserData.isStandardStyle() {
                     configureTimerLabel()
                 } else {
                     pauseOrPlayButton.isHidden = true
+                    endGameBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+                    endGameBtn.backgroundColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
+                    endGameBtn.layer.cornerRadius = 6
+                    NSLayoutConstraint.activate([
+                        titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.076),
+                        endGameBtn.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.506)
+                    ])
                 }
             } catch GameWalkerError.serverError(let message) {
                 print(message)
@@ -188,6 +194,17 @@ class HostTimerViewController: UIViewController {
         }
         componentPositions.append(CGPoint(x: timerFrame.midX, y: timerFrame.minY))
         componentFrames.append(timerFrame)
+        if let leftButton = navigationItem.leftBarButtonItem {
+            if let view = leftButton.value(forKey: "view") as? UIView {
+                if let subview = view.subviews.first {
+                    let subviewFrameInWindow = view.convert(subview.frame, to: nil)
+                    let subviewX = subviewFrameInWindow.midX
+                    let subviewY = subviewFrameInWindow.minY
+                    componentPositions.append(CGPoint(x: subviewX, y: subviewY))
+                    componentFrames.append(subviewFrameInWindow)
+                }
+            }
+        }
         overlayViewController.configureGuide(componentFrames, componentPositions, UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1).cgColor, explanationTexts, tabBarTop, "Timer", "host")
         
         present(overlayViewController, animated: true, completion: nil)
@@ -264,7 +281,7 @@ class HostTimerViewController: UIViewController {
     
     func configureRefreshButton() {
         let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
-        Button.tintColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
+        Button.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     
