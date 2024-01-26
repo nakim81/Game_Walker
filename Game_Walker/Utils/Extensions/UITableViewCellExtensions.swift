@@ -21,7 +21,7 @@ extension UITableViewCell {
 
 extension UITableViewCell {
     func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
-        let finalSize = ksize ?? size
+        let finalSize = fontSize(size: ksize ?? size)
         
         if let languageCode = Locale.current.languageCode, languageCode == "ko" {
             if let customFont = UIFont(name: "koverwatch", size: finalSize) {

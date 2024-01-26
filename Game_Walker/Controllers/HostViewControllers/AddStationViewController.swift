@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class AddStationViewController: UIViewController {
+class AddStationViewController: UIViewController, RefereeListUpdateListener {
 
     @IBOutlet var fullview: UIView!
     @IBOutlet weak var guideContainerView: UIView!
@@ -116,9 +116,6 @@ class AddStationViewController: UIViewController {
                         isPvp = false
                         modified = true
                     }
-                    //change to -> station?.referee!.uuid
-                    //and compare with uuids.
-                    // for every Referee.uuid == uuid
                     
                     refereename = (station?.referee!.name)!
                     refereeUuid = (station?.referee!.uuid)!
@@ -134,9 +131,13 @@ class AddStationViewController: UIViewController {
             }
         }
 
-    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        R.delegatesList.append(WeakRefereeListUpdateListener(value: self))
+        addRefereeListener()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let sender = sender as? StationsTableViewController else { return }
         stationsTableViewController = sender
@@ -151,6 +152,22 @@ class AddStationViewController: UIViewController {
         return nil
     }
 
+    private func addRefereeListener() {
+        R.listenRefereeList(gamecode, onListenerUpdate: listen(_:))
+    }
+
+    func listen(_ _ : [String : Any]){
+    }
+
+    func updateRefereeList(_ refereeList: [Referee]) {
+        print("UPDATE REFEREE LIST: ", refereeList)
+        allReferees = refereeList
+        availableReferees = allReferees.filter { !$0.assigned }
+        DispatchQueue.main.async { [weak self] in
+            self?.refereeTableView.reloadData()
+        }
+    }
+
     func addRefereeTable() {
 
         transparentView.frame = self.view.frame
@@ -162,8 +179,7 @@ class AddStationViewController: UIViewController {
         
         let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeRefereeTable))
         transparentView.addGestureRecognizer(tapgesture)
-//        transparentView.alpha = 0
-        
+
         //create anmiation
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.transparentView.alpha = 0.5
@@ -175,7 +191,6 @@ class AddStationViewController: UIViewController {
     }
     
     func giveConstraints() {
-//        transparentView.translatesAutoresizingMaskIntoConstraints = false
         refereeTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -196,10 +211,7 @@ class AddStationViewController: UIViewController {
         }
 
     }
-    
 
-
-    
     func checkReferee() {
         if refereename == "" && !stationExists{
             refereeLabel.text = NSLocalizedString("Choose Referee", comment: "")

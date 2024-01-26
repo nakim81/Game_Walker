@@ -51,95 +51,59 @@ class HostGameCodeViewController: UIViewController {
             }
         }
     }
-    
     @IBAction func joinButtonPressed(_ sender: UIButton) {
         setGameCode()
+
         guard let userGamecodeInput = gameCodeInput.text else {
             return
         }
-        if storedgamecode!.isEmpty && userGamecodeInput.isEmpty {
-            alert(title:  NSLocalizedString("No game exists.", comment: ""), message: "")
-        } else {
-            if (!usestoredcode) {
-                Task { @MainActor in
-                    do {
-                        let hostTemp = try await H.getHost(userGamecodeInput)
-                        let isStandard = hostTemp?.standardStyle ?? true
-                        gameDidEnd = hostTemp?.gameover ?? false
-                        
-                        if !isStandard {
-                            UserData.writeGamecode(gamecode!, "gamecode")
-                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                            return
-                        }
-                        
-                        if !(hostTemp?.confirmCreated ?? true) {
-                            UserData.writeGamecode(gamecode!, "gamecode")
-                            performSegue(withIdentifier: "HostJoinSegue", sender: self)
-                            
-                        } else {
-                            if UserData.isHostConfirmed() ?? false {
-                                UserData.writeGamecode(gamecode!, "gamecode")
-                                if gameDidEnd { // host is confirmed and game has already ended
-                                    self.showAwardPopUp("host")
-                                    
-                                } else {
-                                    performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                                }
-                            } else{
-                                alert(title: "", message: NSLocalizedString("Invalid Host.", comment: ""))
-                            }
-                        }
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
-                        return
-                    }
-                }
-            } else {
-                Task { @MainActor in
-                    do {
-                        let hostTemp = try await H.getHost(gamecode!)
-                        let isStandard = hostTemp?.standardStyle ?? true
-                        gameDidEnd = hostTemp?.gameover ?? false
-                        
-                        if !isStandard {
-                            UserData.writeGamecode(gamecode!, "gamecode")
-                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                            return
-                        }
-                        if !(hostTemp?.confirmCreated ?? true) {
-                            UserData.writeGamecode(gamecode!, "gamecode")
-                            performSegue(withIdentifier: "HostJoinSegue", sender: self)
-                        } else {
-                            if UserData.isHostConfirmed() ?? false {
-                                UserData.writeGamecode(gamecode!, "gamecode")
-                                if gameDidEnd { // host is confirmed and game has already ended
-                                    self.showAwardPopUp("host")
-                                    
-                                } else {
-                                    performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                                }
-                            } else{
-                                alert(title: "", message: NSLocalizedString("Invalid Host.", comment: ""))
-                            }
-                        }
 
-                    } catch GameWalkerError.invalidGamecode(let message) {
-                        print(message)
-                        gamecodeAlert(message)
-                        return
-                    } catch GameWalkerError.serverError(let message) {
-                        print(message)
-                        serverAlert(message)
+        // Check if storedgamecode is nil or empty
+        if let storedGamecode = gamecode, !storedGamecode.isEmpty || !usestoredcode {
+            Task { @MainActor in
+                do {
+                    let hostTemp = try await H.getHost(usestoredcode ? storedGamecode : userGamecodeInput)
+                    let isStandard = hostTemp?.standardStyle ?? true
+                    gameDidEnd = hostTemp?.gameover ?? false
+
+                    if !isStandard {
+                        UserData.writeGamecode(storedGamecode, "gamecode")
+                        performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
                         return
                     }
+
+                    if !(hostTemp?.confirmCreated ?? true) {
+                        UserData.writeGamecode(storedGamecode, "gamecode")
+                        performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                    } else {
+                        if UserData.isHostConfirmed() ?? false {
+                            UserData.writeGamecode(storedGamecode, "gamecode")
+                            if gameDidEnd {
+                                self.showAwardPopUp("host")
+                            } else {
+                                performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            }
+                        } else {
+                            alert(title: "", message: NSLocalizedString("Invalid Host.", comment: ""))
+                        }
+                    }
+                } catch GameWalkerError.invalidGamecode(let message) {
+                    print(message)
+                    gamecodeAlert(message)
+                    return
+                } catch GameWalkerError.serverError(let message) {
+                    print(message)
+                    serverAlert(message)
+                    return
                 }
             }
+        } else {
+            // Storedgamecode is nil or empty and usestoredcode is false
+            guard let gamecode = gamecode else {
+                alert(title: NSLocalizedString("No game exists.", comment: ""), message: "")
+                return
+            }
+            UserData.writeGamecode(gamecode, "gamecode")
         }
     }
 

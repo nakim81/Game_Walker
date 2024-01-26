@@ -41,9 +41,8 @@ class StartGameViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .white
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 25))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 24))
         label.numberOfLines = 3
-
         return label
     }()
     

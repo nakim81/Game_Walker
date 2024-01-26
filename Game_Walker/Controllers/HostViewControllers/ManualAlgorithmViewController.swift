@@ -15,6 +15,7 @@ class ManualAlgorithmViewController: UIViewController {
     private var rectWidth = 0.98 * UIScreen.main.bounds.width
     private var modalRect : CGRect = CGRect()
     
+    @IBOutlet weak var matchingLabel: UILabel!
     @IBOutlet weak var createGameButton: UIButton!
     @IBOutlet weak var stationsLabelImageView: UIImageView!
     @IBOutlet weak var roundsLabelImageView: UIImageView!
@@ -793,12 +794,6 @@ class ManualAlgorithmViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
 
-        
-        //        scrollView.backgroundColor = UIColor.yellow
-//        collectionView.backgroundColor = UIColor.tintColor
-        
-        
-        //        collectionView.register(AlgCollectionViewCell.self, forCellWithReuseIdentifier: AlgCollectionViewCell.identifier)
         collectionView.register(UINib(nibName: "AlgCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AlgCollectionViewCell")
         
         scrollView.showsVerticalScrollIndicator = false
@@ -807,10 +802,10 @@ class ManualAlgorithmViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
 
         
-        let centerYMultiplier: CGFloat = 0.96
+        let centerYMultiplier: CGFloat = 0.93
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: toTheRight) ,
-            scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant:  -view.frame.size.height * (1 - centerYMultiplier)),
+            scrollView.topAnchor.constraint(equalTo: matchingLabel.bottomAnchor, constant: 55),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
             scrollView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75), // Make it square
             collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -838,15 +833,13 @@ class ManualAlgorithmViewController: UIViewController {
             // Constraints for stationsLabelImageView
             stationsLabelImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: stationsLabelWidthMultiplier),
             stationsLabelImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stationsLabelImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -5 - stationsLabelImageView.frame.height),
-            
+            stationsLabelImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -8 - stationsLabelImageView.frame.height),
+
             // Constraints for roundsLabelImageView
             roundsLabelImageView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: roundsLabelHeightMultiplier),
-            roundsLabelImageView.trailingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: -5), // 5 points to the left of collectionView
+            roundsLabelImageView.trailingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: -8), // 5 points to the left of collectionView
             roundsLabelImageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
-        
-        
     }
     
     private func setUpButtons() {
@@ -868,41 +861,53 @@ class ManualAlgorithmViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .selected)
         button.setTitle(title, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: 20)
         
+        var selectedBackgroundImage: UIImage?
+        var normalBackgroundImage: UIImage?
+
         if title == NSLocalizedString("Duplicated Opponent", comment: "") {
-            button.setTitleColor(UIColor(red: 0.91, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
-            button.setTitleColor(UIColor(red: 0.50, green: 0.52, blue: 0.98, alpha: 1.00), for: .selected)
+            selectedBackgroundImage = UIImage(named: "selected-image-opponents")
+            normalBackgroundImage = UIImage(named: "transparent-image-opponents")
         } else if title == NSLocalizedString("Duplicated Station", comment: "") {
-            button.setTitleColor(UIColor(red: 0.98, green: 0.94, blue: 0.85, alpha: 1.00), for: .normal)
-            button.setTitleColor(UIColor(red: 0.95, green: 0.75, blue: 0.22, alpha: 1.00), for: .selected)
+            selectedBackgroundImage = UIImage(named: "selected-image-station")
+            normalBackgroundImage = UIImage(named: "transparent-image-station")
         } else if title == NSLocalizedString("Duplicated Appearance", comment: "") {
-            button.setTitleColor(UIColor(red: 0.96, green: 0.91, blue: 0.98, alpha: 1.00), for: .normal)
-            button.setTitleColor(UIColor(red: 0.84, green: 0.50, blue: 0.98, alpha: 1.00), for: .selected)
+            selectedBackgroundImage = UIImage(named: "selected-image-appearance")
+            normalBackgroundImage = UIImage(named: "transparent-image-appearance")
         }
+
+        button.setBackgroundImage(selectedBackgroundImage, for: .selected)
+        button.setBackgroundImage(normalBackgroundImage, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isSelected = true
-        
         return button
     }
-    
+
     private func setButtonConstraints() {
         duplicatedOpponentsButton.translatesAutoresizingMaskIntoConstraints = false
         duplicatedStationsButton.translatesAutoresizingMaskIntoConstraints = false
         sameRoundDuplicatedButton.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let verticalSpacing: CGFloat = 7.0
+        let verticalSpacing: CGFloat = 10.0
         // Constraint to keep buttons from interfering with createGameButton
-        
-        
+
         NSLayoutConstraint.activate([
-            duplicatedOpponentsButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10.0),
-            duplicatedOpponentsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            duplicatedOpponentsButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 20.0),
             duplicatedStationsButton.topAnchor.constraint(equalTo:  duplicatedOpponentsButton.bottomAnchor, constant: verticalSpacing),
-            duplicatedStationsButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            sameRoundDuplicatedButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             sameRoundDuplicatedButton.topAnchor.constraint(equalTo: duplicatedStationsButton.bottomAnchor, constant: verticalSpacing),
-            
+            duplicatedOpponentsButton.heightAnchor.constraint(equalToConstant: 35),
+            duplicatedStationsButton.heightAnchor.constraint(equalToConstant: 35),
+            sameRoundDuplicatedButton.heightAnchor.constraint(equalToConstant: 35),
+            duplicatedOpponentsButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.84),
+            duplicatedStationsButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.84),
+            sameRoundDuplicatedButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.84),
+            duplicatedOpponentsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            duplicatedStationsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sameRoundDuplicatedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
         sameRoundDuplicatedButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontSize)
@@ -1200,17 +1205,14 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
                     let number = Int(numberString) {
-                        
                         if number > self.num_teams {
                             self.alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("The team number is too big. Check again!", comment: ""))
                             return
                         }
-                        
                         cell.numberLabel.text = "\(number)"
                         if number == 0 {
                             cell.makeCellEmpty()
                         }
-    
                         if let indexPath = self.collectionView.indexPath(for: cell) {
                             let section = indexPath.section
                             let item = indexPath.item
@@ -1228,7 +1230,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 present(alertController, animated: true, completion: nil)
             }
         }
-    
 }
 
 
@@ -1294,6 +1295,7 @@ extension ManualAlgorithmViewController {
         }
     }
 }
+
 // MARK: - stationListViewController
 class StationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -1379,7 +1381,6 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -1460,6 +1461,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
         return 40
     }
 }
+
 // MARK: - stationTableViewCell
 class StationTableViewCell: UITableViewCell {
     static let identifier = "StationTableViewCell"

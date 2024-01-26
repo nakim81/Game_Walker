@@ -495,7 +495,7 @@
                                                     <constraint firstAttribute="width" secondItem="bPp-63-odf" secondAttribute="height" multiplier="1:1" id="fvz-6E-a1A"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="WhiteGuideIcon"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="white-questionmark"/>
                                                 <connections>
                                                     <action selector="getGuideButtonPressed:" destination="EDq-oM-bgK" eventType="touchUpInside" id="A2Y-1V-kma"/>
                                                 </connections>
@@ -920,12 +920,13 @@
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="width" secondItem="imv-QA-M8c" secondAttribute="width" multiplier="0.483092" id="1e9-6Y-D3r"/>
                             <constraint firstItem="quw-Hr-kV2" firstAttribute="centerY" secondItem="ULS-Ix-YMq" secondAttribute="centerY" multiplier="0.3" id="K2q-UD-6vk"/>
                             <constraint firstItem="wCP-FP-9sr" firstAttribute="centerX" secondItem="ULS-Ix-YMq" secondAttribute="centerX" id="fbN-Cg-74W"/>
-                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="60" id="jQa-0I-HWX"/>
+                            <constraint firstItem="ULS-Ix-YMq" firstAttribute="bottom" secondItem="wCP-FP-9sr" secondAttribute="bottom" constant="40" id="jQa-0I-HWX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fel-ra-70E"/>
                     <connections>
                         <outlet property="createGameButton" destination="wCP-FP-9sr" id="gob-mP-8nN"/>
+                        <outlet property="matchingLabel" destination="quw-Hr-kV2" id="7ga-U4-ZhW"/>
                         <outlet property="roundsLabelImageView" destination="fnH-QW-CvZ" id="u4N-F6-64o"/>
                         <outlet property="stationsLabelImageView" destination="HEJ-r5-Hr8" id="TU4-qo-wtW"/>
                     </connections>
@@ -1116,6 +1117,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="7rv-rP-bSv"/>
         <segue reference="tce-ii-ly8"/>
+        <segue reference="nWr-2f-mnX"/>
+        <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Station Button Host" width="315" height="50"/>
@@ -1125,12 +1128,12 @@
         <image name="PVPButton" width="111" height="33"/>
         <image name="RankingButton" width="76" height="76"/>
         <image name="TimerButton1" width="76" height="76"/>
-        <image name="WhiteGuideIcon" width="30" height="30"/>
         <image name="pop up long purple 1" width="325" height="541.5"/>
         <image name="roundscapit" width="20" height="100.5"/>
         <image name="rules Box" width="267" height="103"/>
         <image name="stations capit" width="114" height="20"/>
         <image name="time-tick" width="9" height="66"/>
+        <image name="white-questionmark" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

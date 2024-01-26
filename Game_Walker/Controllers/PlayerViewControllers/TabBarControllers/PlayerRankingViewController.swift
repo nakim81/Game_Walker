@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RankingViewController: UIViewController {
+class PlayerRankingViewController: UIViewController {
     
     @IBOutlet weak var leaderBoard: UITableView!
     @IBOutlet weak var rankingLbl: UILabel!
@@ -78,14 +78,14 @@ class RankingViewController: UIViewController {
     private func configureTableView() {
         leaderBoard.delegate = self
         leaderBoard.dataSource = self
-        leaderBoard.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
+        leaderBoard.register(PlayerTableViewCell.self, forCellReuseIdentifier: PlayerTableViewCell.identifier)
         leaderBoard.backgroundColor = .white
         leaderBoard.allowsSelection = false
         leaderBoard.separatorStyle = .none
     }
 }
 // MARK: - overlay guide
-extension RankingViewController {
+extension PlayerRankingViewController {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -128,9 +128,9 @@ extension RankingViewController {
     }
 }
 // MARK: - tableView
-extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlayerRankingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = leaderBoard.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
+        let cell = leaderBoard.dequeueReusableCell(withIdentifier: PlayerTableViewCell.identifier, for: indexPath) as! PlayerTableViewCell
         let team = teamList[indexPath.row]
         let teamNum = team.number
         let points = String(team.points)
@@ -153,7 +153,7 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 // MARK: - @objc
-extension RankingViewController {
+extension PlayerRankingViewController {
     
     @objc func readAll(notification: Notification) {
         guard let unread = notification.userInfo?["unread"] as? Bool else {
