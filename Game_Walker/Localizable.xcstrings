@@ -376,7 +376,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "바꿔보세요."
+            "value" : ""
           }
         }
       }
@@ -396,7 +396,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "꾹 탭 해서 팀을 수동으로"
+            "value" : "꾹 탭 해서 팀을 수동으로 바꿔보세요."
           }
         }
       }

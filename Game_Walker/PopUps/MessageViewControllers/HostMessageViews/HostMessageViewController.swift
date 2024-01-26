@@ -189,7 +189,7 @@ extension HostMessageViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.identifier, for: indexPath) as! MessageTableViewCell
         let ind = indexPath.item + 1
-        cell.configureTableViewCell(name: "Announcement \(ind)", read: false, role: "host")
+        cell.configureTableViewCell(name: NSLocalizedString("Announcement", comment: "") + " \(ind)", read: false, role: "host")
         cell.selectionStyle = .none
         return cell
     }
