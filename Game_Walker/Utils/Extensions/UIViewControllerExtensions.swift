@@ -221,13 +221,13 @@ extension UIViewController {
             label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
             let attributedText = NSMutableAttributedString()
             let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-                .font: getFontForLanguage(font: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+                .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
                 .foregroundColor: UIColor.black
             ]
             let gameCodeAttributedString = NSAttributedString(string: NSLocalizedString("Game Code", comment: "") + "\n", attributes: gameCodeAttributes)
             attributedText.append(gameCodeAttributedString)
             let numberAttributes: [NSAttributedString.Key: Any] = [
-                .font: getFontForLanguage(font: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
+                .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
                 .foregroundColor: UIColor.black
             ]
             let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
