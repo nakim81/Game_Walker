@@ -34,7 +34,7 @@ class HostMessageViewController: UIViewController {
     private lazy var  messageLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Announcement", comment: "")
-        label.font = UIFont(name: "GemunuLibre-Bold", size: 40)
+        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 40)
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +56,7 @@ class HostMessageViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
 
         // enable
         button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)

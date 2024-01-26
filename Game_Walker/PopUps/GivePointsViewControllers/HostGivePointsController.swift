@@ -45,7 +45,7 @@ class HostGivePointsController : UIViewController {
         var view = UILabel()
         view.text = NSLocalizedString("Give Points", comment: "")
         view.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 45))
+        view.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 45))
         view.textAlignment = .center
         return view
     }()
@@ -53,9 +53,9 @@ class HostGivePointsController : UIViewController {
     private lazy var stepper: GMStepper = {
         var view = GMStepper()
         view.buttonsBackgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-        view.buttonsFont = UIFont(name: "Dosis-Regular", size: fontSize(size: 80)) ?? UIFont(name: "AvenirNext-Bold", size: 20.0)!
+        view.buttonsFont = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 20.0)
         view.labelBackgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-        view.labelFont = UIFont(name: "Dosis-Bold", size: fontSize(size: 80)) ?? UIFont(name: "AvenirNext-Bold", size: 25.0)!
+        view.labelFont = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 25.0)
         return view
     }()
     
@@ -78,7 +78,7 @@ class HostGivePointsController : UIViewController {
     private lazy var confirmButton: UIButton = {
         var button = UIButton()
         button.setTitle(NSLocalizedString("CONFIRM", comment: ""), for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
         button.setTitleColor(UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1), for: .normal)
         button.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
         button.layer.cornerRadius = 10.0

@@ -51,7 +51,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lM5-Jl-jSM">
                                         <rect key="frame" x="0.0" y="0.0" width="321" height="183"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-L2-JQI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-L2-JQI" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                                 <rect key="frame" x="70.333333333333343" y="6.3333333333333428" width="180" height="42"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,7 +62,7 @@
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the Host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM6-Pv-lZC">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the Host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM6-Pv-lZC" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                                 <rect key="frame" x="34.333333333333343" y="133.33333333333331" width="252.00000000000003" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="VRd-iw-1M3"/>
@@ -90,7 +90,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3f-Nf-STL">
                                         <rect key="frame" x="0.0" y="191" width="321" height="183"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCH-oc-Jk3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCH-oc-Jk3" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                                 <rect key="frame" x="70.333333333333343" y="34" width="180" height="42"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <nil key="textColor"/>
@@ -122,7 +122,7 @@
                                     <constraint firstItem="E3f-Nf-STL" firstAttribute="centerX" secondItem="JjS-oM-0t8" secondAttribute="centerX" id="YfJ-EH-YMW"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-xD-iG8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwH-xD-iG8" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="124" y="697.33333333333337" width="180" height="56"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -172,7 +172,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktk-W4-AgV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktk-W4-AgV" userLabel="Create Team Button" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="88" y="239.33333333333337" width="252" height="77"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -180,10 +180,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="creatTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="vDf-Co-IWw"/>
+                                    <action selector="createTeamButtonPressed:" destination="MIX-tc-IL7" eventType="touchUpInside" id="vDf-Co-IWw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX2-Lc-Buy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX2-Lc-Buy" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="88" y="446.66666666666669" width="252" height="76.666666666666686"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -212,7 +212,8 @@
                     <navigationItem key="navigationItem" id="3os-qE-uhh"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="creatTeamButton" destination="ktk-W4-AgV" id="Goi-Co-Ghr"/>
+                        <outlet property="createTeamButton" destination="ktk-W4-AgV" id="Goi-Co-Ghr"/>
+                        <outlet property="createTeamButton" destination="ktk-W4-AgV" id="PEY-Xo-MfR"/>
                         <outlet property="joinTeamButton" destination="JX2-Lc-Buy" id="dql-d5-uTk"/>
                         <segue destination="JIl-tV-nZg" kind="show" identifier="goToPF3_1VC" id="tM0-u9-p7X"/>
                         <segue destination="QO4-di-gmo" kind="show" identifier="goToPF3_2VC" id="4MI-aS-g5L"/>
@@ -231,7 +232,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-IQ-mef">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-IQ-mef" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="141.33333333333331" y="122.66666666666667" width="145.33333333333331" height="39.666666666666671"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -242,7 +243,7 @@
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-Ph-z0G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-Ph-z0G" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="128.33333333333331" y="269" width="171.33333333333331" height="40"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -253,13 +254,13 @@
                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team Icon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-AO-KSw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team Icon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-AO-KSw" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="51.333333333333343" y="405.66666666666669" width="325.33333333333326" height="36.666666666666686"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfe-6V-kyF" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="124" y="697.33333333333337" width="180" height="56"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -346,7 +347,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpC-kJ-vii">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Team" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpC-kJ-vii" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="52" y="122.66666666666667" width="324" height="39.666666666666671"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                 <nil key="textColor"/>
@@ -372,7 +373,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Kg-HhG">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Kg-HhG" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="124" y="697.33333333333337" width="180" height="56"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -442,13 +443,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTv-HE-hya">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTv-HE-hya" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="34.333333333333343" y="106.66666666666667" width="359.33333333333326" height="35.666666666666671"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-sP-dTp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-sP-dTp" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="34.333333333333343" y="145.33333333333334" width="359.33333333333326" height="32.333333333333343"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Regular" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
@@ -459,7 +460,7 @@
                                 <rect key="frame" x="34.333333333333343" y="182.66666666666669" width="359.33333333333326" height="596.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb8-ib-KpQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb8-ib-KpQ" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="1" y="1" width="1" height="1"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
@@ -512,7 +513,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhR-xt-DuL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhR-xt-DuL" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="36.666666666666657" y="121.00000000000001" width="355" height="47.666666666666671"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
@@ -555,7 +556,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-qO-Kvn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-qO-Kvn" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="128.33333333333331" y="114.66666666666669" width="171.33333333333331" height="51"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
@@ -641,7 +642,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="lz2-86-c74"/>
-        <segue reference="29y-2J-Hks"/>
+        <segue reference="M4x-Iq-v4s"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MemberButton" width="76" height="76"/>

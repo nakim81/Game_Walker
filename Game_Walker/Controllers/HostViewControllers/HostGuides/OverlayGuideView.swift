@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class OverlayGuideView:UIView {
+class OverlayGuideView: UIView {
     
     var onCloseButtonTapped: (() -> Void)?
     let overlay = UIView()
@@ -105,15 +105,34 @@ class OverlayComponentView:UIView {
             explainLabel.centerXAnchor.constraint(equalTo: component.centerXAnchor),
             explainLabel.centerYAnchor.constraint(equalTo: component.centerYAnchor)
         ])
-        var labelWidth = text.size(withAttributes: [.font: UIFont(name: "GemunuLibre-Medium", size: fontsize) ?? UIFont.systemFont(ofSize: fontsize)]).width
+        var labelWidth = text.size(withAttributes: [.font: getFontForLanguage(font: "GemunuLibre-Medium", size: fontsize) ?? UIFont.systemFont(ofSize: fontsize)]).width
 
         if labelWidth > width{
             while labelWidth > component.frame.width {
                 fontsize -= 2
-                labelWidth = text.size(withAttributes: [.font: UIFont(name: "GemunuLibre-Medium", size: fontsize) ?? UIFont.systemFont(ofSize: fontsize)]).width
+                labelWidth = text.size(withAttributes: [.font: getFontForLanguage(font: "GemunuLibre-Medium", size: fontsize) ?? UIFont.systemFont(ofSize: fontsize)]).width
             }
         }
-        explainLabel.font = UIFont(name: "GemunuLibre-Medium", size: fontsize)
+        explainLabel.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontsize)
         explainLabel.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
     }
+    
+    func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
+        let finalSize = ksize ?? size
+        
+        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
+            if let customFont = UIFont(name: "koverwatch", size: finalSize) {
+                return customFont
+            }
+        }
+        
+        // Fallback to default font for English or other languages
+        if let defaultFont = UIFont(name: font, size: finalSize) {
+            return defaultFont
+        }
+        
+        // If both custom and default fonts are unavailable, return system font
+        return UIFont.systemFont(ofSize: finalSize)
+    }
+
 }

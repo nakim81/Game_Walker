@@ -62,7 +62,7 @@ class PlayerTeamViewController: UIViewController {
     func configureLeaveBtn() {
         let leaveBtn = UIButton()
         leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
-        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 25))
+        leaveBtn.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 25)
         leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(customBackAction(_:)), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
@@ -73,9 +73,9 @@ class PlayerTeamViewController: UIViewController {
         let team = UserData.readTeam("team") ?? Team()
         
         teamNumLbl.text = "TEAM \(String(describing: team.number))"
-        teamNumLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 40))
+        teamNumLbl.font = getFontForLanguage(font: "GemunuLibre-Regular", size: fontSize(size: 40))
         teamNameLbl.text = team.name
-        teamNameLbl.font = UIFont(name: "GemunuLibre-Regular", size: fontSize(size: 30))
+        teamNameLbl.font = getFontForLanguage(font: "GemunuLibre-Regular", size: fontSize(size: 30))
     }
     
     private func configureTableView() {
@@ -126,7 +126,7 @@ class PlayerTeamViewController: UIViewController {
     private func settingRefreshControl() {
         refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
         refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: getFontForLanguage(font: "Dosis-Regular", size: 15)])
     }
 }
 // MARK: - TableView
@@ -198,7 +198,6 @@ extension PlayerTeamViewController {
     
     @objc func customBackAction(_ sender: UIBarButtonItem) {
         self.alert2(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Do you really want to leave your team?", comment: ""), sender: sender)
-
     }
     
     @objc override func infoAction() {

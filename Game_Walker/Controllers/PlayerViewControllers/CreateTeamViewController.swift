@@ -64,9 +64,9 @@ class CreateTeamViewController: UIViewController {
         teamNumberTextField.layer.borderWidth = 3
         teamNumberTextField.layer.borderColor = UIColor(red: 0.176, green: 0.176, blue: 0.208, alpha: 1).cgColor
         teamNumberTextField.keyboardType = .asciiCapableNumberPad
-        teamNameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
-        teamNumberLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
-        chooseLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 30))
+        teamNameLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 30))
+        teamNumberLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 30))
+        chooseLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 30))
         
         createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         createTeamButton.layer.cornerRadius = 8

@@ -221,13 +221,13 @@ extension UIViewController {
             label.frame = CGRect(x: 0, y: 0, width: 127, height: 42)
             let attributedText = NSMutableAttributedString()
             let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
+                .font: getFontForLanguage(font: "GemunuLibre-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13),
                 .foregroundColor: UIColor.black
             ]
             let gameCodeAttributedString = NSAttributedString(string: NSLocalizedString("Game Code", comment: "") + "\n", attributes: gameCodeAttributes)
             attributedText.append(gameCodeAttributedString)
             let numberAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
+                .font: getFontForLanguage(font: "Dosis-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
                 .foregroundColor: UIColor.black
             ]
             let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
@@ -327,6 +327,27 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }
+//MARK: - Language
+extension UIViewController {
+    func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
+        let finalSize = fontSize(size: ksize ?? size)
+                
+        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
+            if let customFont = UIFont(name: "koverwatch", size: finalSize) {
+                return customFont
+            }
+        }
+        
+        // Fallback to default font for English or other languages
+        if let defaultFont = UIFont(name: font, size: finalSize) {
+            return defaultFont
+        }
+        
+        // If both custom and default fonts are unavailable, return system font
+        return UIFont.systemFont(ofSize: finalSize)
+    }
+}
+
 // MARK: - etc
 extension UIViewController {
     func fontSize(size: CGFloat) -> CGFloat {

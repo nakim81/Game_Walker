@@ -29,7 +29,7 @@ class EndGameViewController: UIViewController {
         let view = UILabel()
         view.text = NSLocalizedString("HEADS UP!", comment: "")
         view.backgroundColor = .clear
-        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        view.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 1
@@ -41,7 +41,7 @@ class EndGameViewController: UIViewController {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 24))
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 24))
         label.numberOfLines = 2
         return label
     }()
@@ -49,7 +49,7 @@ class EndGameViewController: UIViewController {
     private lazy var noButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("NO", comment: ""), for: .normal)
         button.setTitleColor(fontColor, for: .normal)
@@ -71,7 +71,7 @@ class EndGameViewController: UIViewController {
     private lazy var yesButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 20))
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
         // enable
         button.setTitle(NSLocalizedString("YES", comment: ""), for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)

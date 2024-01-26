@@ -17,6 +17,8 @@ class MainOverlayViewController: UIViewController {
         return view
     }()
     
+    var customFont: UIFont?
+    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
@@ -47,7 +49,7 @@ class MainOverlayViewController: UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
+            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: 15)            
             explanationLbl.layer.cornerRadius = layerList[i].cornerRadius
             explanationLbl.layer.borderWidth = layerList[i].borderWidth
             explanationLbl.layer.borderColor = layerList[i].borderColor

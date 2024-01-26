@@ -18,7 +18,6 @@ class PlayerTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: 25)
         label.numberOfLines = 0
         return label
     }()
@@ -54,7 +53,7 @@ class PlayerTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: fontSize(size: 20))
         label.numberOfLines = 1
         return label
     }()
@@ -63,7 +62,7 @@ class PlayerTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 15))
+        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 15))
         label.numberOfLines = 1
         return label
     }()
@@ -72,7 +71,7 @@ class PlayerTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 22))
+        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: fontSize(size: 22))
         label.numberOfLines = 1
         return label
     }()
@@ -87,6 +86,10 @@ class PlayerTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    private func configureLabel() {
+        nameLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 25)
     }
     
     override func layoutSubviews() {

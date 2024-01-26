@@ -118,6 +118,9 @@ class ManualAlgorithmViewController: UIViewController {
 
     private func configureButtonVisuals() {
         createGameButton.layer.cornerRadius = 10.0
+        if let originalFont = createGameButton.titleLabel?.font {
+            createGameButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
     }
 
     func fetchHostForAlgorithm() async throws -> Host {
@@ -837,8 +840,6 @@ class ManualAlgorithmViewController: UIViewController {
             roundsLabelImageView.trailingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: -8), // 5 points to the left of collectionView
             roundsLabelImageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
-        
-        
     }
     
     private func setUpButtons() {
@@ -860,10 +861,10 @@ class ManualAlgorithmViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .selected)
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: 20)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: 20)
+        
         var selectedBackgroundImage: UIImage?
         var normalBackgroundImage: UIImage?
 
@@ -909,8 +910,8 @@ class ManualAlgorithmViewController: UIViewController {
             sameRoundDuplicatedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         let fontSize = duplicatedOpponentsButton.titleLabel?.font.pointSize ?? 20.0
-        sameRoundDuplicatedButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
-        duplicatedOpponentsButton.titleLabel?.font = UIFont(name: "GemunuLibre-Medium", size: fontSize)
+        sameRoundDuplicatedButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontSize)
+        duplicatedOpponentsButton.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Medium", size: fontSize)
         
     }
     
@@ -1204,17 +1205,14 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { action in
                     if let numberString = alertController.textFields?.first?.text,
                     let number = Int(numberString) {
-                        
                         if number > self.num_teams {
                             self.alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("The team number is too big. Check again!", comment: ""))
                             return
                         }
-                        
                         cell.numberLabel.text = "\(number)"
                         if number == 0 {
                             cell.makeCellEmpty()
                         }
-    
                         if let indexPath = self.collectionView.indexPath(for: cell) {
                             let section = indexPath.section
                             let item = indexPath.item
@@ -1232,7 +1230,6 @@ extension ManualAlgorithmViewController : UICollectionViewDataSource, UICollecti
                 present(alertController, animated: true, completion: nil)
             }
         }
-    
 }
 
 
@@ -1298,6 +1295,7 @@ extension ManualAlgorithmViewController {
         }
     }
 }
+
 // MARK: - stationListViewController
 class StationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -1317,7 +1315,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
     private lazy var  stationLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Station List", comment: "")
-        label.font = UIFont(name: "GemunuLibre-SemiBold", size: 40)
+        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: 40)
         label.textAlignment = .center
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -1332,7 +1330,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 20)
+        button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
         
         // enable
         button.setTitle("Close", for: .normal)
@@ -1382,7 +1380,6 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
             self?.containerView.isHidden = true
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -1464,6 +1461,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
         return 40
     }
 }
+
 // MARK: - stationTableViewCell
 class StationTableViewCell: UITableViewCell {
     static let identifier = "StationTableViewCell"
@@ -1478,7 +1476,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var indexLbl: UILabel = {
        let label = UILabel()
         label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-        label.font = UIFont(name: "Dosis-Bold", size: 20)
+        label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.clipsToBounds = true
@@ -1490,7 +1488,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var stationLabel: UILabel = {
         let label = UILabel()
          label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-         label.font = UIFont(name: "Dosis-Bold", size: 20)
+         label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
          label.textAlignment = .left
          label.numberOfLines = 1
          label.clipsToBounds = true

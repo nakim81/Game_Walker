@@ -11,7 +11,7 @@ import UIKit
 
 class CreateOrJoinTeamViewController: UIViewController {
     
-    @IBOutlet weak var creatTeamButton: UIButton!
+    @IBOutlet weak var createTeamButton: UIButton!
     @IBOutlet weak var joinTeamButton: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
@@ -30,13 +30,23 @@ class CreateOrJoinTeamViewController: UIViewController {
     }
 
     private func configureBtns(){
-        creatTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
-        creatTeamButton.layer.cornerRadius = 8
+        if let originalFont = createTeamButton.titleLabel?.font {
+            createTeamButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        if let originalFont = joinTeamButton.titleLabel?.font {
+            joinTeamButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
+
+        createTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        createTeamButton.layer.cornerRadius = 8
+
         joinTeamButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         joinTeamButton.layer.cornerRadius = 8
+
     }
     
-    @IBAction func creatTeamButtonPressed(_ sender: UIButton) {
+    @IBAction func createTeamButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
         performSegue(withIdentifier: "goToPF3_1VC", sender: self)
     }

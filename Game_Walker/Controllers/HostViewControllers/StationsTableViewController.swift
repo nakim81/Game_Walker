@@ -239,6 +239,9 @@ extension StationsTableViewController: UITableViewDataSource {
     
     private func configureButtonVisuals() {
         nextButton.layer.cornerRadius = 10.0
+        if let originalFont = nextButton.titleLabel?.font {
+            nextButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
+        }
     }
 
 }

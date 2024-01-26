@@ -41,20 +41,22 @@ class JoinGameViewController: UIViewController {
         gamecodeTextField.translatesAutoresizingMaskIntoConstraints = false
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         gamecodeTextField.keyboardType = .asciiCapableNumberPad
-        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : "gamecode"
-        usernameTextField.placeholder = storedUsername != "" ? storedUsername : "username"
+        gamecodeTextField.placeholder = storedGameCode != "" ? storedGameCode : NSLocalizedString("gamecode", comment: "")
+        usernameTextField.placeholder = storedUsername != "" ? storedUsername : NSLocalizedString("username", comment: "")
         gamecodeTextField.layer.borderWidth = 3
         gamecodeTextField.layer.borderColor = UIColor.black.cgColor
         gamecodeTextField.layer.cornerRadius = 10
         usernameTextField.layer.borderWidth = 3
         usernameTextField.layer.borderColor = UIColor.black.cgColor
         usernameTextField.layer.cornerRadius = 10
-        gamecodeLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
-        usernameLbl.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 40))
-        
+        gamecodeLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+        usernameLbl.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 40))
+                
         nextButton.backgroundColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
         nextButton.layer.cornerRadius = 8
     }
+    
+    
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
