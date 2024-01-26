@@ -1333,7 +1333,7 @@ class StationListViewController: UIViewController, UITableViewDelegate, UITableV
         button.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 20)
         
         // enable
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
         button.setTitleColor(UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)), for: .normal)
         button.setBackgroundImage(UIColor.white.image(), for: .normal)
         
