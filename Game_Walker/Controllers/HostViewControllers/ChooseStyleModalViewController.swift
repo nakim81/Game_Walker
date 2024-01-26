@@ -61,6 +61,7 @@ class ChooseStyleModalViewController: UIViewController {
         }
         UserData.writeGamecode(gc, "gamecode")
         UserData.setStandardStyle(true)
+        UserData.setUserRole("host")
         print("created game. mode is: ", host.standardStyle)
         
         delegate?.didSelectStandardMode()
@@ -80,6 +81,7 @@ class ChooseStyleModalViewController: UIViewController {
         }
         UserData.writeGamecode(gc, "gamecode")
         UserData.setStandardStyle(false)
+        UserData.setUserRole("host")
         print("created game. mode is: ", host.standardStyle)
      
         delegate?.didSelectPointsOnlyMode()

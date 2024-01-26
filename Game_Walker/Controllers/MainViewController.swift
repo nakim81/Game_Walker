@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var testBtn: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
+    private var soundEnabled : Bool = UserData.getUserSoundPreference() ?? true
 
     override func viewDidLoad() {
         if UserData.readUUID() == nil {
@@ -30,15 +31,21 @@ class MainViewController: UIViewController {
         if UserData.isHostConfirmed() == nil || UserData.isHostConfirmed() == false {
             UserData.confirmHost(false)
         }
+        if UserData.getUserSoundPreference() == nil {
+            UserData.setUserSoundPreference(true)
+            soundEnabled = true
+        }
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        configureInfoButton()
+        configureNavButtons()
         configureButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+        if soundEnabled {
+            self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,7 +94,7 @@ class MainViewController: UIViewController {
         UserData.writeUUID(UUID().uuidString)
     }
     
-    private func configureInfoButton() {
+    private func configureNavButtons() {
         print("configuring nav bar items")
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
@@ -95,9 +102,36 @@ class MainViewController: UIViewController {
         infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
         let info = UIBarButtonItem(customView: infoBtn)
 
-        self.navigationItem.rightBarButtonItems = [info]
+        let soundImage = UIImage(named: "sound-icon-on")
+        let soundImageOff = UIImage(named: "sound-icon-off")
+        let soundButton = UIButton()
+        if soundEnabled {
+            soundButton.setImage(soundImage, for: .normal)
+        } else {
+            soundButton.setImage(soundImageOff, for: .normal)
+        }
+        soundButton.addTarget(self, action: #selector(soundButtonTapped), for: .touchUpInside)
+        let sound = UIBarButtonItem(customView: soundButton)
+        self.navigationItem.rightBarButtonItems = [info, sound]
     }
-    
+
+
+    @objc func soundButtonTapped(_ sender: UIButton) {
+        soundEnabled = !soundEnabled
+        UserData.setUserSoundPreference(soundEnabled)
+        if !soundEnabled{
+            sender.setImage(UIImage(named: "sound-icon-off"), for: .normal)
+            if audioPlayerManager.isPlaying() {
+                self.audioPlayerManager.stop()
+            }
+        } else {
+            sender.setImage(UIImage(named: "sound-icon-on"), for: .normal)
+            if !audioPlayerManager.isPlaying() {
+                self.audioPlayerManager.playAudioFile(named: "bgm", withExtension: "wav")
+            }
+        }
+    }
+
     @objc func guide() {
         let componentPositions: [CGRect] = [playerButton.frame, refereeButton.frame, hostButton.frame, gameWalkerImage.frame]
         let layerList: [CALayer] = [playerButton.layer, refereeButton.layer, hostButton.layer]
