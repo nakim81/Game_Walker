@@ -78,9 +78,8 @@
 		DA42139C28B47EDA000A395F /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139228B47EDA000A395F /* PlayerTableViewCell.swift */; };
 		DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139328B47EDA000A395F /* JoinGameViewController.swift */; };
 		DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139428B47EDA000A395F /* CreateTeamViewController.swift */; };
-		DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* TimerViewController.swift */; };
-		DA4ED4852B61EB98005766C0 /* LocalizedFontLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */; };
 		DA42139F28B47EDA000A395F /* PlayerTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* PlayerTimerViewController.swift */; };
+		DA4ED4852B61EB98005766C0 /* LocalizedFontLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */; };
 		DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */; };
 		DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEB2B35FF3E00401C42 /* Main.storyboard */; };
 		DAA78FED2B36153500401C42 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEF2B36153500401C42 /* Player.storyboard */; };
@@ -99,7 +98,6 @@
 		DAC3132D2858632100BECF89 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC3132C2858632100BECF89 /* Team.swift */; };
 		DACDC4CF2ACAB80000533EE9 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDC4CE2ACAB80000533EE9 /* Announcement.swift */; };
 		DAF081512B6320EE0029958A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAF081532B6320EE0029958A /* InfoPlist.strings */; };
-		DAF081562B6326D10029958A /* LocalizedFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF081552B6326D00029958A /* LocalizedFontButton.swift */; };
 		FC02CAF9298624BD00CFEC70 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */; };
 		FC03BA102AAB6DDB005E11BD /* GemunuLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5F72AA0A45A001683EA /* GemunuLibre-Bold.ttf */; };
 		FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FA2AA0A45A001683EA /* GemunuLibre-ExtraBold.ttf */; };
@@ -119,6 +117,7 @@
 		FC3CF4022980BCAE00645204 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CF4012980BCAE00645204 /* MessageViewController.swift */; };
 		FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65B29B76BB10072946F /* HostMessageViewController.swift */; };
 		FC44B65E29B76DB10072946F /* HostAddOrModifyMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */; };
+		FC45C8A22B6374FF00D33720 /* LocalizedFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC45C8A12B6374FF00D33720 /* LocalizedFontButton.swift */; };
 		FC4BCA7E2B5FA0B000D06650 /* koverwatch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4BCA7D2B5FA0A600D06650 /* koverwatch.ttf */; };
 		FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5240A02AF12E6F00999282 /* NotificationNames.swift */; };
 		FC63396E2980D4D8004B02C0 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */; };
@@ -204,9 +203,6 @@
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "Supporting Files/SceneDelegate.swift"; sourceTree = "<group>"; };
-		DA42138C28B47EDA000A395F /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
-		DA42138D28B47EDA000A395F /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
-		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		DA42138C28B47EDA000A395F /* PlayerTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTeamViewController.swift; sourceTree = "<group>"; };
 		DA42138D28B47EDA000A395F /* PlayerRankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerRankingViewController.swift; sourceTree = "<group>"; };
 		DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -216,9 +212,8 @@
 		DA42139228B47EDA000A395F /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		DA42139328B47EDA000A395F /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		DA42139428B47EDA000A395F /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
-		DA42139528B47EDA000A395F /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedFontLabel.swift; sourceTree = "<group>"; };
 		DA42139528B47EDA000A395F /* PlayerTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTimerViewController.swift; sourceTree = "<group>"; };
+		DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedFontLabel.swift; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		DAA78FEA2B35FF3E00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -246,7 +241,6 @@
 		DAF0814D2B630DC00029958A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		DAF081522B6320EE0029958A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAF081542B6321020029958A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DAF081552B6326D00029958A /* LocalizedFontButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocalizedFontButton.swift; path = /Users/paul/Side_Project/gamewalker/Game_Walker/Utils/LocalizedFontButton.swift; sourceTree = "<absolute>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
@@ -259,6 +253,7 @@
 		FC3CF4012980BCAE00645204 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65B29B76BB10072946F /* HostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostMessageViewController.swift; sourceTree = "<group>"; };
 		FC44B65D29B76DB10072946F /* HostAddOrModifyMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAddOrModifyMessageViewController.swift; sourceTree = "<group>"; };
+		FC45C8A12B6374FF00D33720 /* LocalizedFontButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedFontButton.swift; sourceTree = "<group>"; };
 		FC4BCA7D2B5FA0A600D06650 /* koverwatch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = koverwatch.ttf; path = "Supporting Files/Fonts/koverwatch.ttf"; sourceTree = "<group>"; };
 		FC5240A02AF12E6F00999282 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		FC63396D2980D4D8004B02C0 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -675,7 +670,7 @@
 				61C33E30299B2BB300A512E5 /* LaunchScreenController.swift */,
 				FCB13E1E2A97A1FD00F4AE99 /* AudioPlayerManager.swift */,
 				DA4ED4842B61EB98005766C0 /* LocalizedFontLabel.swift */,
-				DAF081552B6326D00029958A /* LocalizedFontButton.swift */,
+				FC45C8A12B6374FF00D33720 /* LocalizedFontButton.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -856,7 +851,6 @@
 				A1A4CD222A371AC700704BF8 /* PlayerDatabase.swift in Sources */,
 				A1A4CD202A371AA100704BF8 /* HostDatabase.swift in Sources */,
 				61E509532988D91400F37E79 /* RefereeTableViewCell.swift in Sources */,
-				DAF081562B6326D10029958A /* LocalizedFontButton.swift in Sources */,
 				A1EBA6A3296F21DF00228501 /* HostGameCodeViewController.swift in Sources */,
 				A1A568A32AF478D700577CFF /* ThirdTabTestViewController.swift in Sources */,
 				FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */,
@@ -894,6 +888,7 @@
 				DA42139F28B47EDA000A395F /* PlayerTimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
+				FC45C8A22B6374FF00D33720 /* LocalizedFontButton.swift in Sources */,
 				FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */,
 				A1E3DDB52880F506008D7060 /* (null) in Sources */,
 				6159252B29694A0700BC6D7F /* WaitingViewController.swift in Sources */,
@@ -1150,8 +1145,6 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
@@ -1186,8 +1179,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96F9ZYF44K;
-				DEVELOPMENT_TEAM = LP65R5LVZ7;
 				DEVELOPMENT_TEAM = 8WZS33QTKD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Game_Walker/Supporting Files/Info.plist";
