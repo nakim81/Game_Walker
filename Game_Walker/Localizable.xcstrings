@@ -721,6 +721,16 @@
         }
       }
     },
+    "Press to sync time with others." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버튼을 눌러서 맞춰주세요."
+          }
+        }
+      }
+    },
     "PVE for goals." : {
       "localizations" : {
         "ko" : {
@@ -1547,6 +1557,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "타이머 & 스테이션 정보"
+          }
+        }
+      }
+    },
+    "Timer may be unsynchronized." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타이머 오차가 있을 수 있습니다."
           }
         }
       }

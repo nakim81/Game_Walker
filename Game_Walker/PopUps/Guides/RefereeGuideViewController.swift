@@ -137,12 +137,6 @@ class RefereeGuideViewController : UIViewController {
                 explanationLbl.widthAnchor.constraint(equalToConstant: 200).isActive = true
             }
             
-//            if positionList[i].y >= tabBarTop {
-//                explanationLbl.widthAnchor.constraint(equalToConstant: 75).isActive = true
-//            } else {
-//                explanationLbl.widthAnchor.constraint(equalToConstant: 200).isActive = true
-//            }
-            
             let circleView = UIView()
             circleView.translatesAutoresizingMaskIntoConstraints = false
             circleView.clipsToBounds = true

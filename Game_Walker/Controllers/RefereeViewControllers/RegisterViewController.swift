@@ -323,6 +323,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 UserData.writeUsername(name, "username")
                                 UserData.writeReferee(newReferee, "referee")
                                 UserData.setUserRole("referee")
+                                //think again
                                 UserDefaults.standard.removeObject(forKey: "max")
                                 UserDefaults.standard.removeObject(forKey: "maxA")
                                 UserDefaults.standard.removeObject(forKey: "maxB")
