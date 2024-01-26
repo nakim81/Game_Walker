@@ -21,7 +21,6 @@ class CreateTeamViewController: UIViewController {
     private var currentPlayer = UserData.readPlayer("player") ?? Player()
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     private var host: Host?
-    private var stationList: [Station] = []
     
     private let audioPlayerManager = AudioPlayerManager()
 
@@ -84,67 +83,120 @@ class CreateTeamViewController: UIViewController {
     }
     
     @IBAction func createTeamButtonPressed(_ sender: UIButton) {
+        
+        let groundView = UIView()
+        groundView.center = view.center
+        groundView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6)
+        groundView.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.size.width, height: view.frame.size.height)
+        view.addSubview(groundView)
+        
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.center = view.center
+        spinner.style = .large
+        spinner.color = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        groundView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        let loadingLabel = UILabel()
+        loadingLabel.text = "Loading..."
+        loadingLabel.textColor = UIColor(red: 0.21, green: 0.67, blue: 0.95, alpha: 1)
+        loadingLabel.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 19))
+        loadingLabel.textAlignment = .center
+        loadingLabel.frame = CGRect(x: spinner.frame.origin.x + ((loadingLabel.frame.size.width - spinner.frame.size.width) / 2), y: spinner.frame.origin.y + spinner.frame.size.height + 10, width: spinner.frame.size.width * 2, height: 20)
+        groundView.addSubview(loadingLabel)
+        
+        func removeLoadingIndicator() {
+            DispatchQueue.main.async {
+                spinner.stopAnimating()
+                spinner.removeFromSuperview()
+                loadingLabel.removeFromSuperview()
+                groundView.removeFromSuperview()
+            }
+        }
+        
         self.audioPlayerManager.playAudioFile(named: "blue", withExtension: "wav")
 
         guard let teamName = teamNameTextField.text, !teamName.isEmpty else {
+            removeLoadingIndicator()
             alert(title: NSLocalizedString("Team Name Error", comment: ""), message: NSLocalizedString("Team name should exist! Fill out the team name box.", comment: ""))
             return
         }
         guard let teamNumber = teamNumberTextField.text, !teamNumber.isEmpty else {
+            removeLoadingIndicator()
             alert(title: NSLocalizedString("Team Number Error", comment: ""), message: NSLocalizedString("Team number should exist! Fill out the team number box.", comment: ""))
             return
         }
+        
         Task { @MainActor in
             do {
-                self.host = try await H.getHost(gameCode)
-                self.stationList = try await S.getStationList(gameCode)
-                guard let standardStyle = self.host?.standardStyle else {return}
-                guard let selectedIconName = selectedIconName else {
-                    alert(title: NSLocalizedString("No Icon Selected", comment: ""), message: NSLocalizedString("Please select a team icon.", comment: ""))
+                async let host = H.getHost(gameCode)
+                async let stationListTask = S.getStationList(gameCode)
+                self.host = try await host
+                let stationList = try await stationListTask
 
+                guard let standardStyle = self.host?.standardStyle else {
+                    removeLoadingIndicator()
                     return
                 }
                 
-                guard let tn = Int(teamNumber) else { return }
-                guard let hn = self.host?.teams else { return }
+                guard let selectedIconName = selectedIconName else {
+                    removeLoadingIndicator()
+                    alert(title: NSLocalizedString("No Icon Selected", comment: ""), message: NSLocalizedString("Please select a team icon.", comment: ""))
+                    return
+                }
+                
+                guard let tn = Int(teamNumber) else {
+                    removeLoadingIndicator()
+                    return
+                }
+                
+                guard let hn = self.host?.teams else {
+                    removeLoadingIndicator()
+                    return
+                }
                 
                 if tn > 0 {
                     if standardStyle {
-                        guard let temp = self.host?.algorithm else { return }
+                        guard let temp = self.host?.algorithm, !temp.isEmpty else {
+                            removeLoadingIndicator()
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game has not started yet. Please try again a few minutes later.", comment: ""))
+                            return
+                        }
                         let algorithm = convert1DArrayTo2D(temp)
-                        print(algorithm)
-                        if !(algorithm.isEmpty ) {
+                        if (!algorithm.isEmpty) {
                             teamNameTextField.resignFirstResponder()
                             
                             if (tn > hn) {
+                                removeLoadingIndicator()
                                 alert(title: NSLocalizedString("Invalid Team Number", comment: ""), message: NSLocalizedString("Please try other team numbers.", comment: ""))
-
                                 return
                             }
                             
                             ///find the order of stations for player's team
-                            let stationOrder = self.getStationOrder(algorithm , tn , self.stationList)
-                            print("stationorder: \(stationOrder)")
+                            let stationOrder = self.getStationOrder(algorithm , tn , stationList)
                             let newTeam = Team(gamecode: gameCode, name: teamName, number: tn , players: [currentPlayer], points: 0, stationOrder: stationOrder, iconName: selectedIconName)
                             UserData.writeTeam(newTeam, "team")
                             UserData.setStandardStyle(standardStyle)
                             Task { @MainActor in
                                 do {
                                     try await T.addTeam(gameCode, newTeam)
+                                    removeLoadingIndicator()
                                     performSegue(withIdentifier: "goToTPF4", sender: self)
                                 } catch GameWalkerError.teamNumberAlreadyExists(let e) {
                                     print(e)
+                                    removeLoadingIndicator()
                                     teamNumberAlert(e)
                                     return
                                 } catch GameWalkerError.serverError(let text){
                                     print(text)
+                                    removeLoadingIndicator()
                                     serverAlert(text)
                                     return
                                 }
                             }
                         } else {
+                            removeLoadingIndicator()
                             alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game has not started yet. Please try again a few minutes later.", comment: ""))
-
                             return
                         }
                     } else {
@@ -154,12 +206,15 @@ class CreateTeamViewController: UIViewController {
                         Task { @MainActor in
                             do {
                                 try await T.addTeam(gameCode, newTeam)
+                                removeLoadingIndicator()
                                 performSegue(withIdentifier: "goToTPF4", sender: self)
                             } catch GameWalkerError.teamNumberAlreadyExists(let e) {
+                                removeLoadingIndicator()
                                 print(e)
                                 teamNumberAlert(e)
                                 return
                             } catch GameWalkerError.serverError(let text){
+                                removeLoadingIndicator()
                                 print(text)
                                 serverAlert(text)
                                 return
@@ -167,14 +222,14 @@ class CreateTeamViewController: UIViewController {
                         }
                     }
                 } else {
+                    removeLoadingIndicator()
                     alert(title: NSLocalizedString("Team Number Error", comment: ""), message: NSLocalizedString("Team number should be greater than 0.", comment: ""))
-
                     return
                 }
             } catch(let e) {
+                removeLoadingIndicator()
                 print(e)
                 alert(title: NSLocalizedString("Connection Error", comment: ""), message: e.localizedDescription)
-
                 return
             }
         }
@@ -216,7 +271,7 @@ extension CreateTeamViewController {
             ///reset search index when moving to the next row
             index = 0
         }
-        print("column order: \(order)")
+        
         let pvp = findNumberOfPVP(stationList) ///number of pvp games
         var actualOrder: [Int] = [] //array of station.numbers
         

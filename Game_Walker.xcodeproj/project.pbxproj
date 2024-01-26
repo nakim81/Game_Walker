@@ -69,16 +69,16 @@
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
-		DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138C28B47EDA000A395F /* TeamViewController.swift */; };
-		DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138D28B47EDA000A395F /* RankingViewController.swift */; };
+		DA42139628B47EDA000A395F /* PlayerTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138C28B47EDA000A395F /* PlayerTeamViewController.swift */; };
+		DA42139728B47EDA000A395F /* PlayerRankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138D28B47EDA000A395F /* PlayerRankingViewController.swift */; };
 		DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */; };
 		DA42139928B47EDA000A395F /* PlayerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42138F28B47EDA000A395F /* PlayerTabBarController.swift */; };
 		DA42139A28B47EDA000A395F /* JoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139028B47EDA000A395F /* JoinTeamViewController.swift */; };
 		DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139128B47EDA000A395F /* CreateOrJoinTeamViewController.swift */; };
-		DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139228B47EDA000A395F /* TeamTableViewCell.swift */; };
+		DA42139C28B47EDA000A395F /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139228B47EDA000A395F /* PlayerTableViewCell.swift */; };
 		DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139328B47EDA000A395F /* JoinGameViewController.swift */; };
 		DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139428B47EDA000A395F /* CreateTeamViewController.swift */; };
-		DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* TimerViewController.swift */; };
+		DA42139F28B47EDA000A395F /* PlayerTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42139528B47EDA000A395F /* PlayerTimerViewController.swift */; };
 		DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */; };
 		DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEB2B35FF3E00401C42 /* Main.storyboard */; };
 		DAA78FED2B36153500401C42 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA78FEF2B36153500401C42 /* Player.storyboard */; };
@@ -201,16 +201,16 @@
 		DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Supporting Files/AppDelegate.swift"; sourceTree = "<group>"; };
 		DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "Supporting Files/SceneDelegate.swift"; sourceTree = "<group>"; };
 		DA28D79D284FF9D300EA1B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
-		DA42138C28B47EDA000A395F /* TeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
-		DA42138D28B47EDA000A395F /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
+		DA42138C28B47EDA000A395F /* PlayerTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTeamViewController.swift; sourceTree = "<group>"; };
+		DA42138D28B47EDA000A395F /* PlayerRankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerRankingViewController.swift; sourceTree = "<group>"; };
 		DA42138E28B47EDA000A395F /* TeamIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamIconCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA42138F28B47EDA000A395F /* PlayerTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTabBarController.swift; sourceTree = "<group>"; };
 		DA42139028B47EDA000A395F /* JoinTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinTeamViewController.swift; sourceTree = "<group>"; };
 		DA42139128B47EDA000A395F /* CreateOrJoinTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOrJoinTeamViewController.swift; sourceTree = "<group>"; };
-		DA42139228B47EDA000A395F /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		DA42139228B47EDA000A395F /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		DA42139328B47EDA000A395F /* JoinGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		DA42139428B47EDA000A395F /* CreateTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
-		DA42139528B47EDA000A395F /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		DA42139528B47EDA000A395F /* PlayerTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTimerViewController.swift; sourceTree = "<group>"; };
 		DA96396F28A33CDA00853F05 /* Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Host.swift; path = Model/Host.swift; sourceTree = "<group>"; };
 		DAA78FE72B35FC4800401C42 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		DAA78FEA2B35FF3E00401C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -620,10 +620,10 @@
 			isa = PBXGroup;
 			children = (
 				DA42138F28B47EDA000A395F /* PlayerTabBarController.swift */,
-				DA42139228B47EDA000A395F /* TeamTableViewCell.swift */,
-				DA42138C28B47EDA000A395F /* TeamViewController.swift */,
-				DA42138D28B47EDA000A395F /* RankingViewController.swift */,
-				DA42139528B47EDA000A395F /* TimerViewController.swift */,
+				DA42139228B47EDA000A395F /* PlayerTableViewCell.swift */,
+				DA42138C28B47EDA000A395F /* PlayerTeamViewController.swift */,
+				DA42138D28B47EDA000A395F /* PlayerRankingViewController.swift */,
+				DA42139528B47EDA000A395F /* PlayerTimerViewController.swift */,
 			);
 			path = TabBarControllers;
 			sourceTree = "<group>";
@@ -851,7 +851,7 @@
 				61C33E31299B2BB300A512E5 /* LaunchScreenController.swift in Sources */,
 				DA42139D28B47EDA000A395F /* JoinGameViewController.swift in Sources */,
 				FC633970298112EE004B02C0 /* RefereeGameInfoViewcontroller.swift in Sources */,
-				DA42139628B47EDA000A395F /* TeamViewController.swift in Sources */,
+				DA42139628B47EDA000A395F /* PlayerTeamViewController.swift in Sources */,
 				DA42139828B47EDA000A395F /* TeamIconCollectionViewCell.swift in Sources */,
 				616EB4742AA708C9001394E7 /* RefereeTimerViewController.swift in Sources */,
 				FCFA80F6298AC74C00F868B3 /* HostRankingTableViewCell.swift in Sources */,
@@ -874,7 +874,7 @@
 				A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */,
 				DA42139B28B47EDA000A395F /* CreateOrJoinTeamViewController.swift in Sources */,
 				A10D18A32AE256B0005DFCF5 /* ChooseStyleModalViewController.swift in Sources */,
-				DA42139F28B47EDA000A395F /* TimerViewController.swift in Sources */,
+				DA42139F28B47EDA000A395F /* PlayerTimerViewController.swift in Sources */,
 				DA42139E28B47EDA000A395F /* CreateTeamViewController.swift in Sources */,
 				FCF6FB44298A9D3D00473FCE /* HostRankingViewcontroller.swift in Sources */,
 				FC5240A12AF12E6F00999282 /* NotificationNames.swift in Sources */,
@@ -898,8 +898,8 @@
 				DABC1E90288BAA8B00C75DC7 /* UIViewControllerExtensions.swift in Sources */,
 				FCEF5E0A2B1E186700B0CD17 /* UITableViewCellExtensions.swift in Sources */,
 				FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */,
-				DA42139728B47EDA000A395F /* RankingViewController.swift in Sources */,
-				DA42139C28B47EDA000A395F /* TeamTableViewCell.swift in Sources */,
+				DA42139728B47EDA000A395F /* PlayerRankingViewController.swift in Sources */,
+				DA42139C28B47EDA000A395F /* PlayerTableViewCell.swift in Sources */,
 				A1FFDC822AD7B959000DF76E /* MultiErrorGuideView.swift in Sources */,
 				FC44B65C29B76BB10072946F /* HostMessageViewController.swift in Sources */,
 				A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */,
@@ -1130,9 +1130,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1165,9 +1163,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

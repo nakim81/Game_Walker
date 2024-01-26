@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TeamViewController: UIViewController {
+class PlayerTeamViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var teamNumLbl: UILabel!
@@ -62,7 +62,7 @@ class TeamViewController: UIViewController {
     func configureLeaveBtn() {
         let leaveBtn = UIButton()
         leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
-        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 25)
+        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: fontSize(size: 25))
         leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(customBackAction(_:)), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
@@ -81,7 +81,7 @@ class TeamViewController: UIViewController {
     private func configureTableView() {
         table.delegate = self
         table.dataSource = self
-        table.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.identifier)
+        table.register(PlayerTableViewCell.self, forCellReuseIdentifier: PlayerTableViewCell.identifier)
         table.backgroundColor = .clear
         table.allowsSelection = false
         table.separatorStyle = .none
@@ -130,9 +130,9 @@ class TeamViewController: UIViewController {
     }
 }
 // MARK: - TableView
-extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlayerTeamViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = table.dequeueReusableCell(withIdentifier: TeamTableViewCell.identifier, for: indexPath) as! TeamTableViewCell
+        let cell = table.dequeueReusableCell(withIdentifier: PlayerTableViewCell.identifier, for: indexPath) as! PlayerTableViewCell
         cell.configureTeamTableViewCell(name: team!.players[indexPath.row].name)
         return cell
     }
@@ -154,7 +154,7 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
         }
 }
 // MARK: - overlay guide
-extension TeamViewController {
+extension PlayerTeamViewController {
     private func showOverlay() {
         let overlayViewController = RorTOverlayViewController()
         overlayViewController.modalPresentationStyle = .overFullScreen // Present it as overlay
@@ -194,7 +194,7 @@ extension TeamViewController {
     }
 }
 // MARK: - @objc
-extension TeamViewController {
+extension PlayerTeamViewController {
     
     @objc func customBackAction(_ sender: UIBarButtonItem) {
         self.alert2(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("Do you really want to leave your team?", comment: ""), sender: sender)

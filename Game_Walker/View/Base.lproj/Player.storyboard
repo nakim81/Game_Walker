@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -435,10 +434,10 @@
             </objects>
             <point key="canvasLocation" x="557" y="1830"/>
         </scene>
-        <!--Team View Controller-->
+        <!--Player Team View Controller-->
         <scene sceneID="mR3-dm-hT8">
             <objects>
-                <viewController id="Zkt-o5-gfj" customClass="TeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zkt-o5-gfj" customClass="PlayerTeamViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="32a-A9-NYs">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,10 +504,10 @@
             </objects>
             <point key="canvasLocation" x="-670.09345794392516" y="2723.9740820734341"/>
         </scene>
-        <!--Ranking View Controller-->
+        <!--Player Ranking View Controller-->
         <scene sceneID="xUu-p3-E8f">
             <objects>
-                <viewController id="dWY-v4-76s" customClass="RankingViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dWY-v4-76s" customClass="PlayerRankingViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xr2-qI-PVm">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -548,10 +547,10 @@
             </objects>
             <point key="canvasLocation" x="1410" y="2724"/>
         </scene>
-        <!--Timer View Controller-->
+        <!--Player Timer View Controller-->
         <scene sceneID="9Ql-4N-5bX">
             <objects>
-                <viewController id="ynI-iC-04s" customClass="TimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ynI-iC-04s" customClass="PlayerTimerViewController" customModule="Game_Walker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZ6-VQ-e23">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

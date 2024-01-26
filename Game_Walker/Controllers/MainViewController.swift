@@ -95,8 +95,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureNavButtons() {
-        print("configuring nav bar items")
-        let infoImage = UIImage(named: "infoIcon")
+        let Image = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
         infoBtn.setImage(infoImage, for: .normal)
         infoBtn.addTarget(self, action: #selector(guide), for: .touchUpInside)
