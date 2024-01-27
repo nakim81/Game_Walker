@@ -23,7 +23,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: 10)
+        label.font = UIFont(name: "Dosis-Regular", size: 10)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -33,7 +33,7 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: 13)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 13)
         label.textAlignment = .center
         return label
     }()
@@ -119,22 +119,4 @@ class TeamIconCollectionViewCell: UICollectionViewCell {
         containerView.layer.borderWidth = 0
     }
     
-    //MARK: - Language
-    func getFontForLanguage(font: String, size: CGFloat, ksize: CGFloat? = nil) -> UIFont {
-        let finalSize = ksize ?? size
-        
-        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
-            if let customFont = UIFont(name: "koverwatch", size: finalSize) {
-                return customFont
-            }
-        }
-        
-        // Fallback to default font for English or other languages
-        if let defaultFont = UIFont(name: font, size: finalSize) {
-            return defaultFont
-        }
-        
-        // If both custom and default fonts are unavailable, return system font
-        return UIFont.systemFont(ofSize: finalSize)
-    }
 }

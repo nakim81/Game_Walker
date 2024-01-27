@@ -50,7 +50,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Remember to choose 'WIN' or 'LOSE' before the round ends!", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -67,7 +67,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Tap to give points to the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
         view.addSubview(label)
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -81,7 +81,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -124,7 +124,7 @@ class RefereeGuideViewController : UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: 15)
+            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
@@ -201,7 +201,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Tap to give points to the Team", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: 13)
+        label.font = UIFont(name: "Dosis-Bold", size: 13)
         return label
     }()
     
@@ -228,7 +228,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -237,7 +237,7 @@ class RefereeGuideViewController : UIViewController {
         label.text = NSLocalizedString("Team's total points", comment: "")
         label.textColor = .white
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 13))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 13))
         return label
     }()
     
@@ -306,7 +306,7 @@ class RefereeGuideViewController : UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 15))
+            explanationLbl.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 15))
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {

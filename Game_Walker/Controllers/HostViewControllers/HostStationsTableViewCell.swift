@@ -14,7 +14,7 @@ class HostStationsTableViewCell: UITableViewCell {
 
     func configureStationCell(stationName: String) {
         stationLabel.text = stationName
-        stationLabel.font = getFontForLanguage(font: stationLabel.font.fontName, size: stationLabel.font.pointSize)
+        stationLabel.font = UIFont(name: stationLabel.font.fontName, size: stationLabel.font.pointSize)
         cellentireview.heightAnchor.constraint(equalTo: cellentireview.widthAnchor, multiplier: 0.23).isActive = true
     }
 }

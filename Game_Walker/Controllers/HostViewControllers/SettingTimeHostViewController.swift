@@ -433,14 +433,6 @@ extension SettingTimeHostViewController: UIPickerViewDataSource, UIPickerViewDel
             nextButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
         }
 
-        if let originalFont = teamcountTextField.font {
-            teamcountTextField.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
-        }
-
-        if let originalFont = roundsTextField.font {
-            roundsTextField.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
-        }
-
         if let originalFont = moveTimeButton.titleLabel?.font {
             moveTimeButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
         }

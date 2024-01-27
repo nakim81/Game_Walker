@@ -61,9 +61,9 @@ class AwardTableViewCell: UITableViewCell {
     }
     
     private func configureLabel(){
-        teamNumLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 25)
-        teamNameLabel.font = getFontForLanguage(font: "Dosis-Regular", size: 15)
-        scoreLabel.font = getFontForLanguage(font: "Dosis-SemiBold", size: 25)
+        teamNumLabel.font = UIFont(name: "Dosis-Regular", size: 25)
+        teamNameLabel.font = UIFont(name: "Dosis-Regular", size: 15)
+        scoreLabel.font = UIFont(name: "Dosis-SemiBold", size: 25)
     }
     
     override func layoutSubviews() {

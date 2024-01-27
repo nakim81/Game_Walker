@@ -53,9 +53,9 @@ class HostGivePointsController : UIViewController {
     private lazy var stepper: GMStepper = {
         var view = GMStepper()
         view.buttonsBackgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-        view.buttonsFont = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 20.0)
+        view.buttonsFont = UIFont(name: "Dosis-Regular", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 20.0)
         view.labelBackgroundColor = UIColor(red: 0.843, green: 0.502, blue: 0.976, alpha: 1)
-        view.labelFont = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 25.0)
+        view.labelFont = UIFont(name: "Dosis-Bold", size: fontSize(size: 80)) ?? getFontForLanguage(font: "AvenirNext-Bold", size: 25.0)
         return view
     }()
     

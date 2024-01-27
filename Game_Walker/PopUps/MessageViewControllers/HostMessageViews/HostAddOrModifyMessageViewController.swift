@@ -34,7 +34,7 @@ class HostAddOrModifyMessageViewController: UIViewController {
         textView.layer.borderWidth = 3
         textView.layer.cornerRadius = 10
         textView.textAlignment = .left
-        textView.font = getFontForLanguage(font: "Dosis-Regular", size: 18)
+        textView.font = UIFont(name: "Dosis-Regular", size: 18)
         textView.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
         return textView

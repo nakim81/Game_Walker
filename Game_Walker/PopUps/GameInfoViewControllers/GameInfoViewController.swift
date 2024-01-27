@@ -95,7 +95,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -110,7 +110,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -125,7 +125,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -140,7 +140,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         
@@ -155,7 +155,7 @@ class GameInfoViewController: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 10
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label

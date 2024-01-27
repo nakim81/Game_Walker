@@ -886,7 +886,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCP-FP-9sr" userLabel="Start Game Button" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="107" y="761" width="200" height="65"/>
+                                <rect key="frame" x="107" y="781" width="200" height="65"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wCP-FP-9sr" secondAttribute="height" multiplier="175:57" id="7Zk-CP-yKb"/>
@@ -1115,9 +1115,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7rv-rP-bSv"/>
-        <segue reference="tce-ii-ly8"/>
-        <segue reference="nWr-2f-mnX"/>
+        <segue reference="OK4-sB-gpM"/>
         <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
