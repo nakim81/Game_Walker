@@ -43,7 +43,7 @@ class GivePointsController: UIViewController {
         var view = UILabel()
         view.text = NSLocalizedString("Give Points", comment: "")
         view.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-        view.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 45))
+        view.font = UIFont(name: "GemunuLibre-SemiBold", size: fontSize(size: 45))
         view.textAlignment = .center
         return view
     }()

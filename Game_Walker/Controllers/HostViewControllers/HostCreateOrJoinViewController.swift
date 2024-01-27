@@ -8,8 +8,8 @@
 import UIKit
 
 class HostCreateOrJoinViewController: UIViewController {
-    @IBOutlet weak var resumeButton: UIButton!
     
+    @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     
     override func viewDidLoad() {

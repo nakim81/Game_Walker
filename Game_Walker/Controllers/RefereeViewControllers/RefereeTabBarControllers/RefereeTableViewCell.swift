@@ -32,7 +32,7 @@ class RefereeTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: fontSize(size: 20))
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 20))
         label.numberOfLines = 1
         return label
         
@@ -42,7 +42,7 @@ class RefereeTableViewCell: UITableViewCell {
        let label = UILabel()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 15))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 15))
         label.numberOfLines = 1
         return label
     }()
@@ -51,7 +51,7 @@ class RefereeTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: fontSize(size: 22))
+        label.font = UIFont(name: "Dosis-SemiBold", size: fontSize(size: 22))
         label.numberOfLines = 0
         return label
     }()
