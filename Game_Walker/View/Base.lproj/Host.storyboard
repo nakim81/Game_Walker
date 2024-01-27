@@ -1009,9 +1009,6 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ranking" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEr-D6-pdY" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
                                 <rect key="frame" x="29.5" y="97" width="355" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="QeA-12-nk2"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1036,6 +1033,7 @@
                             <constraint firstItem="NEr-D6-pdY" firstAttribute="trailing" secondItem="F4M-EA-8mT" secondAttribute="trailing" id="AgS-xV-1YQ"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="width" secondItem="tgv-Dy-rrr" secondAttribute="width" multiplier="0.857488" id="ELI-5y-dNp"/>
                             <constraint firstItem="Z5O-CG-hVP" firstAttribute="height" secondItem="F4M-EA-8mT" secondAttribute="height" multiplier="0.056" id="HVC-ja-ZdW"/>
+                            <constraint firstItem="NEr-D6-pdY" firstAttribute="height" secondItem="tgv-Dy-rrr" secondAttribute="height" multiplier="0.0885" id="KmK-eO-rlm"/>
                             <constraint firstItem="NEr-D6-pdY" firstAttribute="leading" secondItem="F4M-EA-8mT" secondAttribute="leading" id="Na3-XN-1Bd"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="centerY" secondItem="tgv-Dy-rrr" secondAttribute="centerY" multiplier="1.12" id="UUs-hz-hUk"/>
                             <constraint firstItem="F4M-EA-8mT" firstAttribute="centerX" secondItem="tgv-Dy-rrr" secondAttribute="centerX" id="ZwM-qw-uk8"/>
