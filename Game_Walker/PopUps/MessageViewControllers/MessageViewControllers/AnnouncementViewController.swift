@@ -36,7 +36,7 @@ class AnnouncementViewController: UIViewController {
         label.text = self.announcement?.content
         label.backgroundColor = .clear
         label.textAlignment = .left
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 18))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label

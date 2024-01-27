@@ -101,7 +101,7 @@ class HostTimerViewController: UIViewController {
     
     // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
-        let endGamePopUp = EndGameViewController(announcement: NSLocalizedString("Do you really want to end this game?", comment: ""), source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: NSLocalizedString("Do you really want to end this game?\nWinners will be shown to everyone!", comment: ""), source: "", gamecode: gameCode)
         endGamePopUp.delegate = self
         present(endGamePopUp, animated: true)
     }
@@ -227,7 +227,7 @@ class HostTimerViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 55))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 55))
         label.textColor = .black
         label.numberOfLines = 0
         return label
@@ -265,7 +265,7 @@ class HostTimerViewController: UIViewController {
         let totaltimeAttributedString = NSAttributedString(string: NSLocalizedString("TOTAL TIME", comment: "") + "\n", attributes: totaltimeAttributes)
         attributedText.append(totaltimeAttributedString)
         let timeAttributes: [NSAttributedString.Key: Any] = [
-            .font: getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
+            .font: UIFont(name: "Dosis-Regular", size: fontSize(size: 25)) ?? UIFont.systemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         let timeAttributedString = NSAttributedString(string: "00:00", attributes: timeAttributes)

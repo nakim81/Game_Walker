@@ -145,7 +145,7 @@ class RefereePVEController: UIViewController {
     func configureLeaveBtn() {
         let leaveBtn = UIButton()
         leaveBtn.setTitle(NSLocalizedString("LEAVE", comment: ""), for: .normal)
-        leaveBtn.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 25)
+        leaveBtn.titleLabel?.font = UIFont(name: "GemunuLibre-Bold", size: 25)
         leaveBtn.setTitleColor(UIColor(red: 1, green: 0.046, blue: 0.046, alpha: 1), for: .normal)
         leaveBtn.addTarget(self, action: #selector(leaveAction), for: .touchUpInside)
         let leave = UIBarButtonItem(customView: leaveBtn)
@@ -301,7 +301,7 @@ class RefereePVEController: UIViewController {
     private lazy var teamNameLabel: UILabel = {
         let label = UILabel(frame: CGRect())
         label.backgroundColor = .white
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 25))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 25))
         label.text = "\(self.teamOrder[self.round - 1].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
@@ -312,7 +312,7 @@ class RefereePVEController: UIViewController {
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel(frame: CGRect())
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 50))
+        label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 50))
         label.text = "\(self.teamOrder[self.round - 1].points)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.backgroundColor = .white
@@ -521,7 +521,7 @@ class RefereePVEController: UIViewController {
     private lazy var leftTeamNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 18))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.text = "\(self.teamOrder[2 * self.round - 2].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
@@ -556,7 +556,7 @@ class RefereePVEController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let score = "\(self.teamOrder[2 * self.round - 2].points)"
         let scoreAttributes: [NSAttributedString.Key: Any] = [
-            .font: getFontForLanguage(font: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
+            .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
             .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)
@@ -592,7 +592,7 @@ class RefereePVEController: UIViewController {
     private lazy var rightTeamNameLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 45))
         label.backgroundColor = .white
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 18))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
         label.text = "\(self.teamOrder[2 * self.round - 1].name)"
         label.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         label.numberOfLines = 2
@@ -627,7 +627,7 @@ class RefereePVEController: UIViewController {
         let attributedText = NSMutableAttributedString()
         let score = "\(self.teamOrder[self.round].points)"
         let scoreAttributes: [NSAttributedString.Key: Any] = [
-            .font: getFontForLanguage(font: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
+            .font: UIFont(name: "Dosis-Bold", size: 35) ?? UIFont.boldSystemFont(ofSize: 35),
             .foregroundColor: UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
         ]
         let scoreAttributedString = NSAttributedString(string: score, attributes: scoreAttributes)

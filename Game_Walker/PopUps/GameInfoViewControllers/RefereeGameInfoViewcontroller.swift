@@ -84,7 +84,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -98,7 +98,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -112,7 +112,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = 0
         return label
@@ -126,7 +126,7 @@ class RefereeGameInfoViewcontroller: UIViewController {
         label.layer.borderWidth = 3
         label.layer.cornerRadius = 8
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: fontSize(size: 17))
+        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 17))
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         label.numberOfLines = .max
         return label

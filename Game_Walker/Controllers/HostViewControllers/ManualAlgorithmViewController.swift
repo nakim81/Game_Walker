@@ -1476,7 +1476,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var indexLbl: UILabel = {
        let label = UILabel()
         label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
+        label.font = UIFont(name: "Dosis-Bold", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 1
         label.clipsToBounds = true
@@ -1488,7 +1488,7 @@ class StationTableViewCell: UITableViewCell {
     private lazy var stationLabel: UILabel = {
         let label = UILabel()
          label.backgroundColor = UIColor(cgColor: .init(red: 0.843, green: 0.502, blue: 0.976, alpha: 1))
-         label.font = getFontForLanguage(font: "Dosis-Bold", size: 20)
+         label.font = UIFont(name: "Dosis-Bold", size: 20)
          label.textAlignment = .left
          label.numberOfLines = 1
          label.clipsToBounds = true

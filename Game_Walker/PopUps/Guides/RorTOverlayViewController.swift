@@ -55,7 +55,7 @@ class RorTOverlayViewController: UIViewController {
             explanationLbl.numberOfLines = 0
             explanationLbl.textAlignment = .center
             explanationLbl.textColor = .white
-            explanationLbl.font = getFontForLanguage(font: "Dosis-Bold", size: 15)
+            explanationLbl.font = UIFont(name: "Dosis-Bold", size: 15)
             overlayView.addSubview(explanationLbl)
             
             if positionList[i].y >= tabBarTop {
@@ -95,7 +95,7 @@ class RorTOverlayViewController: UIViewController {
             label.numberOfLines = 0
             label.textAlignment = .center
             label.textColor = .white
-            label.font = getFontForLanguage(font: "Dosis-Bold", size: 15)
+            label.font = UIFont(name: "Dosis-Bold", size: 15)
             overlayView.addSubview(label)
             
             let imageView = UIImageView()
@@ -147,7 +147,7 @@ class RorTOverlayViewController: UIViewController {
             label.numberOfLines = 0
             label.textAlignment = .center
             label.textColor = .white
-            label.font = getFontForLanguage(font: "Dosis-Bold", size: fontSize(size: 38))
+            label.font = UIFont(name: "Dosis-Bold", size: fontSize(size: 38))
             overlayView.addSubview(label)
              
             label.layer.cornerRadius = frameList[count].size.width / 2

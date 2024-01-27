@@ -38,7 +38,7 @@ class MultiErrorGuideView : UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.clipsToBounds = true
-        label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: 15)
+        label.font = UIFont(name: "GemunuLibre-Bold", size: 15)
         label.textColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
         label.numberOfLines = 2
         let paragraphStyle = NSMutableParagraphStyle()

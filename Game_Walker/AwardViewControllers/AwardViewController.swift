@@ -47,7 +47,7 @@ class AwardViewController: UIViewController {
     private lazy var firstPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: 20)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 20)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -56,7 +56,7 @@ class AwardViewController: UIViewController {
     private lazy var firstPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: 18)
+        label.font = UIFont(name: "Dosis-Regular", size: 18)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -65,7 +65,7 @@ class AwardViewController: UIViewController {
     private lazy var firstPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: 23)
+        label.font = UIFont(name: "Dosis-Bold", size: 23)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -113,7 +113,7 @@ class AwardViewController: UIViewController {
     private lazy var secondPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: 15)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -122,7 +122,7 @@ class AwardViewController: UIViewController {
     private lazy var secondPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: 13)
+        label.font = UIFont(name: "Dosis-Regular", size: 13)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -131,7 +131,7 @@ class AwardViewController: UIViewController {
     private lazy var secondPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: 18)
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -179,7 +179,7 @@ class AwardViewController: UIViewController {
     private lazy var thirdPlaceTeamNum: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-SemiBold", size: 15)
+        label.font = UIFont(name: "Dosis-SemiBold", size: 15)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -188,7 +188,7 @@ class AwardViewController: UIViewController {
     private lazy var thirdPlaceTeamName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Regular", size: 13)
+        label.font = UIFont(name: "Dosis-Regular", size: 13)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -197,7 +197,7 @@ class AwardViewController: UIViewController {
     private lazy var thirdPlacePoints: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "Dosis-Bold", size: 18)
+        label.font = UIFont(name: "Dosis-Bold", size: 18)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -251,13 +251,13 @@ class AwardViewController: UIViewController {
         label.frame = CGRect(x: 0, y: 0, width: 127, height: 31)
         let attributedText = NSMutableAttributedString()
         let gameCodeAttributes: [NSAttributedString.Key: Any] = [
-            .font: getFontForLanguage(font: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .font: UIFont(name: "Dosis-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15),
             .foregroundColor: UIColor.black
         ]
         let gameCodeAttributedString = NSAttributedString(string: NSLocalizedString("Game Code", comment: "") + "\n", attributes: gameCodeAttributes)
         attributedText.append(gameCodeAttributedString)
         let numberAttributes: [NSAttributedString.Key: Any] = [
-            .font: getFontForLanguage(font: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
+            .font: UIFont(name: "Dosis-Bold", size: 10) ?? UIFont.systemFont(ofSize: 25),
             .foregroundColor: UIColor.black
         ]
         let numberAttributedString = NSAttributedString(string: gameCode, attributes: numberAttributes)
