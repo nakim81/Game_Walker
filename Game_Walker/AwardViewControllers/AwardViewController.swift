@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class AwardViewController: UIViewController {
+    
     private let gameCode = UserData.readGamecode("gamecode") ?? ""
     private var newTeamList: [Team] = []
     
@@ -18,6 +19,11 @@ class AwardViewController: UIViewController {
     private let cellSpacingHeight: CGFloat = 3
     private let audioPlayerManager = AudioPlayerManager()
     private var soundEnabled: Bool = UserData.getUserSoundPreference() ?? true
+    private let role = UserData.getUserRole()
+    
+    private var firstReveal: Bool = false
+    private var secondReveal: Bool = false
+    private var thirdReveal: Bool = false
 
     private let containerView: UIView = {
         let view = UIView()
@@ -71,15 +77,27 @@ class AwardViewController: UIViewController {
         return label
     }()
     
+    private lazy var firstPlaceCoverView: UIView = {
+        let view = UIView()
+        setView(view: view, place: 1)
+        return view
+    }()
+    
     private lazy var firstPlaceView: UIView = {
         let view = UIView()
         view.addSubview(firstPlaceImage)
         view.addSubview(firstPlaceTeamNum)
         view.addSubview(firstPlaceTeamName)
         view.addSubview(firstPlacePoints)
+        view.addSubview(firstPlaceCoverView)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            firstPlaceCoverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            firstPlaceCoverView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            firstPlaceCoverView.topAnchor.constraint(equalTo: view.topAnchor),
+            firstPlaceCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             firstPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             firstPlaceImage.widthAnchor.constraint(equalTo: firstPlaceImage.heightAnchor, multiplier: 1),
             firstPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
@@ -100,6 +118,12 @@ class AwardViewController: UIViewController {
             firstPlacePoints.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.122642),
             NSLayoutConstraint(item: firstPlacePoints, attribute: .top, relatedBy: .equal, toItem: firstPlaceTeamName, attribute: .bottom, multiplier: 1, constant: 0)
         ])
+        return view
+    }()
+    
+    private lazy var secondPlaceCoverView: UIView = {
+        let view = UIView()
+        setView(view: view, place: 2)
         return view
     }()
     
@@ -143,9 +167,15 @@ class AwardViewController: UIViewController {
         view.addSubview(secondPlaceTeamNum)
         view.addSubview(secondPlaceTeamName)
         view.addSubview(secondPlacePoints)
+        view.addSubview(secondPlaceCoverView)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            secondPlaceCoverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            secondPlaceCoverView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            secondPlaceCoverView.topAnchor.constraint(equalTo: view.topAnchor),
+            secondPlaceCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             secondPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             secondPlaceImage.widthAnchor.constraint(equalTo: secondPlaceImage.heightAnchor, multiplier: 1),
             secondPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
@@ -166,6 +196,12 @@ class AwardViewController: UIViewController {
             secondPlacePoints.heightAnchor.constraint(equalTo: secondPlaceImage.heightAnchor, multiplier: 0.230769),
             NSLayoutConstraint(item: secondPlacePoints, attribute: .top, relatedBy: .equal, toItem: secondPlaceTeamName, attribute: .bottom, multiplier: 1, constant: 0)
         ])
+        return view
+    }()
+    
+    private lazy var thirdPlaceCoverView: UIView = {
+        let view = UIView()
+        setView(view: view, place: 3)
         return view
     }()
     
@@ -209,9 +245,15 @@ class AwardViewController: UIViewController {
         view.addSubview(thirdPlaceTeamNum)
         view.addSubview(thirdPlaceTeamName)
         view.addSubview(thirdPlacePoints)
+        view.addSubview(thirdPlaceCoverView)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            thirdPlaceCoverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            thirdPlaceCoverView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            thirdPlaceCoverView.topAnchor.constraint(equalTo: view.topAnchor),
+            thirdPlaceCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             thirdPlaceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             thirdPlaceImage.widthAnchor.constraint(equalTo: thirdPlaceImage.heightAnchor, multiplier: 1),
             thirdPlaceImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.613208),
@@ -328,10 +370,19 @@ class AwardViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        print(H.delegates)
+        if !(role == "host") {
+            H.delegates.append(WeakHostUpdateListener(value: self))
+            H.listenHost(gameCode, onListenerUpdate: listen(_:))
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        if !(role == "host") {
+            H.delegates = H.delegates.filter { $0.value != nil }
+            H.detatchHost()
+        }
     }
     
     override func viewDidLoad() {
@@ -341,6 +392,108 @@ class AwardViewController: UIViewController {
         getTeamList(gameCode)
         if soundEnabled {
             self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+        }
+    }
+    
+    private func setView(view: UIView, place: Int) {
+        switch place {
+        case 1:
+            view.tag = 100
+            break
+        case 2:
+            view.tag = 200
+            break
+        default:
+            view.tag = 300
+        }
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.isUserInteractionEnabled = true
+        addDoubleTapGestureRecognizer(view: view)
+        generateLabelAndImageView(parentView: view, place: place)
+    }
+    
+    private func generateLabelAndImageView(parentView: UIView, place: Int) {
+        let label = UILabel()
+        let imageView = UIImageView()
+        
+        label.text = NSLocalizedString("Double-tap \n to reveal", comment: "")
+        label.textAlignment = .center
+        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 20))
+        label.numberOfLines = 2
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        
+        switch place {
+        case 1:
+            imageView.image = UIImage(named: "1st-hidden")
+            break
+        case 2:
+            imageView.image = UIImage(named: "2nd-hidden")
+            break
+        default:
+            imageView.image = UIImage(named: "3rd-hidden")
+        }
+        
+        parentView.addSubview(imageView)
+        parentView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: parentView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+            
+            label.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+            label.heightAnchor.constraint(equalTo: parentView.heightAnchor, multiplier: 0.5),
+            label.centerYAnchor.constraint(equalTo: parentView.centerYAnchor)
+        ])
+    }
+    
+    private func addDoubleTapGestureRecognizer(view: UIView) {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(doubleTap)
+    }
+
+    @objc private func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
+        print("double tapped!")
+        if let view = recognizer.view {
+            if !view.isHidden {
+                view.isHidden = true
+                if role == "host" {
+                    reveal(tag: view.tag)
+                }
+            }
+        }
+    }
+    
+    private func reveal(tag: Int) {
+        switch tag {
+        case 100:
+            firstReveal = true
+            break
+        case 200:
+            secondReveal = true
+            break
+        default:
+            thirdReveal = true
+        }
+        Task { @MainActor in
+            do {
+                try await H.award_reveal(gameCode, firstReveal, secondReveal, thirdReveal)
+                print("revealed view with tag \(tag)")
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                alert(title: "", message: e)
+                return
+            }
         }
     }
 
@@ -510,6 +663,9 @@ class AwardViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    func listen(_ _ : [String : Any]){
+    }
 }
 // MARK: - tableView
 extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
@@ -532,4 +688,23 @@ extension AwardViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
 }
-
+// MARK: - Host listener
+extension AwardViewController: HostUpdateListener {
+    func updateHost(_ host: Host) {
+        firstReveal = host.firstReveal
+        secondReveal = host.secondReveal
+        thirdReveal = host.thirdReveal
+        
+        if firstReveal {
+            firstPlaceCoverView.isHidden = true
+        }
+        
+        if secondReveal {
+            secondPlaceCoverView.isHidden = true
+        }
+        
+        if thirdReveal {
+            thirdPlaceCoverView.isHidden = true
+        }
+    }
+}

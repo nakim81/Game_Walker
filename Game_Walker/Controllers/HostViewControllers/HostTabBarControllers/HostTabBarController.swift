@@ -11,12 +11,13 @@ import UIKit
 class HostTabBarController: UITabBarController, HostUpdateListener, TeamUpdateListener {
     
     let gameCode = UserData.readGamecode("gamecode") ?? ""
+    private var gameOverCalled = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         H.delegates.append(WeakHostUpdateListener(value: self))
         T.delegates.append(WeakTeamUpdateListener(value: self))
-        addHostListener()
+        addListener()
     }
     
     override func viewDidLoad() {
@@ -29,24 +30,17 @@ class HostTabBarController: UITabBarController, HostUpdateListener, TeamUpdateLi
         navigationController?.setNavigationBarHidden(false, animated: animated)
         H.delegates = H.delegates.filter { $0.value != nil }
         T.delegates = T.delegates.filter { $0.value != nil}
-        removeListeners()
+        H.detatchHost()
     }
     
-    private func addHostListener(){
+    private func addListener(){
         H.listenHost(gameCode, onListenerUpdate: listen(_:))
         T.listenTeams(gameCode, onListenerUpdate: listen(_:))
     }
     
-    private func removeListeners() {
-        H.detatchHost()
-        //T.detatchTeams()
-    }
-    
-    func listen(_ _ : [String : Any]){
-    }
-    
     func updateHost(_ host: Host) {
-        if host.gameover {
+        if host.gameover && !gameOverCalled {
+            gameOverCalled = true
             showAwardPopUp("host")
         }
         
@@ -57,5 +51,8 @@ class HostTabBarController: UITabBarController, HostUpdateListener, TeamUpdateLi
     func updateTeams(_ teams: [Team]) {
         let data: [String:[Team]] = ["teams":teams]
         NotificationCenter.default.post(name: .teamsUpdate, object: nil, userInfo: data)
+    }
+    
+    func listen(_ _ : [String : Any]){
     }
 }

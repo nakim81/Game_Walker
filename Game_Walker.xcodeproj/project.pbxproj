@@ -56,7 +56,6 @@
 		A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69D296F21DF00228501 /* AddStationViewController.swift */; };
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
-		A1F546802B67666700CF02F5 /* multi-error-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */; };
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
 		A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */; };
 		A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */; };
@@ -107,6 +106,7 @@
 		FC03BA152AAB6DEC005E11BD /* GemunuLibre-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FB2AA0A45A001683EA /* GemunuLibre-Regular.ttf */; };
 		FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCF6A5FD2AA0A45A001683EA /* GemunuLibre-SemiBold.ttf */; };
 		FC063B5E2A9DF55E0054B628 /* StartGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */; };
+		FC0CF7472B6783AF00E352B7 /* multi-error-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = FC0CF7462B6783AF00E352B7 /* multi-error-sample.gif */; };
 		FC152E6F29C4C456007A85CA /* CustomSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */; };
 		FC18D25B2A9899E100E6B144 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC18D25A2A9899E100E6B144 /* Assets.xcassets */; };
 		FC18D7F12A9F943B005241D2 /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */; };
@@ -188,7 +188,6 @@
 		A1EBA69D296F21DF00228501 /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
-		A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "multi-error-sample.gif"; path = "../../gamewalker-assets-private/multi-error-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAlgGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedStationGuideView.swift; sourceTree = "<group>"; };
@@ -243,6 +242,7 @@
 		DAF081542B6321020029958A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FC02CAF8298624BD00CFEC70 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
 		FC063B5D2A9DF55E0054B628 /* StartGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameViewController.swift; sourceTree = "<group>"; };
+		FC0CF7462B6783AF00E352B7 /* multi-error-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "multi-error-sample.gif"; path = "Supporting Files/multi-error-sample.gif"; sourceTree = "<group>"; };
 		FC152E6E29C4C456007A85CA /* CustomSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitchButton.swift; sourceTree = "<group>"; };
 		FC18D25A2A9899E100E6B144 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC18D7F02A9F943B005241D2 /* OverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
@@ -641,7 +641,7 @@
 				A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */,
 				A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */,
 				A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */,
-				A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */,
+				FC0CF7462B6783AF00E352B7 /* multi-error-sample.gif */,
 				FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */,
 				FCB13E112A97A04A00F4AE99 /* bgm.wav */,
 				FCB13E0F2A97A04A00F4AE99 /* blue.wav */,
@@ -774,7 +774,7 @@
 				DAA790012B3EF3F700401C42 /* StationRefereeTableViewCell.xib in Resources */,
 				FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */,
 				DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */,
-				A1F546802B67666700CF02F5 /* multi-error-sample.gif in Resources */,
+				FC0CF7472B6783AF00E352B7 /* multi-error-sample.gif in Resources */,
 				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
 				DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */,
 				FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */,
