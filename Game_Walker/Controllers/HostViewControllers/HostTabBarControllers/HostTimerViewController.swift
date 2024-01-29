@@ -101,7 +101,7 @@ class HostTimerViewController: UIViewController {
     
     // MARK: - others
     @IBAction func endBtnPressed(_ sender: Any) {
-        let endGamePopUp = EndGameViewController(announcement: NSLocalizedString("Do you really want to end this game?\nWinners will be shown to everyone!", comment: ""), source: "", gamecode: gameCode)
+        let endGamePopUp = EndGameViewController(announcement: NSLocalizedString("Do you really want to end this game?", comment: ""), source: "", gamecode: gameCode)
         endGamePopUp.delegate = self
         present(endGamePopUp, animated: true)
     }

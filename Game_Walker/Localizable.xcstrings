@@ -171,12 +171,12 @@
         }
       }
     },
-    "Do you really want to end this game?\nWinners will be shown to everyone!" : {
+    "Do you really want to end this game?" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "정말 게임을 끝내실 건가요? 순위가 바로 공개됩니다!"
+            "value" : "정말 게임을 끝내실 건가요?"
           }
         }
       }
