@@ -201,6 +201,9 @@
         }
       }
     },
+    "Double-tap \n to reveal" : {
+
+    },
     "Duplicated Appearance" : {
       "localizations" : {
         "ko" : {
@@ -1100,6 +1103,9 @@
           }
         }
       }
+    },
+    "Something went wrong while revealing Ranking." : {
+
     },
     "Something went wrong while setting Matching Algorithm." : {
       "localizations" : {
