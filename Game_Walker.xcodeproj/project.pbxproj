@@ -56,6 +56,7 @@
 		A1EBA6AB296F21DF00228501 /* AddStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69D296F21DF00228501 /* AddStationViewController.swift */; };
 		A1EBA6AC296F21DF00228501 /* HostCreateOrJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */; };
 		A1EBA6AF296F21DF00228501 /* HostStationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */; };
+		A1F546802B67666700CF02F5 /* multi-error-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */; };
 		A1FFDC782AD7000E000DF76E /* OverlayGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */; };
 		A1FFDC7A2AD7B8DA000DF76E /* FirstAlgGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */; };
 		A1FFDC7C2AD7B90D000DF76E /* DuplicatedStationGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */; };
@@ -65,7 +66,6 @@
 		A1FFDC8C2AD7E92B000DF76E /* duplicated-stations-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */; };
 		A1FFDC8E2AD7F410000DF76E /* sameround-duplicated-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */; };
 		A1FFDC902AD7F6E5000DF76E /* duplicated-opponents-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */; };
-		A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1FFDC912AD80833000DF76E /* multi-error-sample.gif */; };
 		DA13EB8B2858086A00368CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */; };
 		DA28D790284FF9CE00EA1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D78F284FF9CE00EA1B94 /* AppDelegate.swift */; };
 		DA28D792284FF9CE00EA1B94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28D791284FF9CE00EA1B94 /* SceneDelegate.swift */; };
@@ -188,6 +188,7 @@
 		A1EBA69D296F21DF00228501 /* AddStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStationViewController.swift; sourceTree = "<group>"; };
 		A1EBA69E296F21DF00228501 /* HostCreateOrJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostCreateOrJoinViewController.swift; sourceTree = "<group>"; };
 		A1EBA6A1296F21DF00228501 /* HostStationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostStationsTableViewCell.swift; sourceTree = "<group>"; };
+		A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "multi-error-sample.gif"; path = "../../gamewalker-assets-private/multi-error-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC772AD7000E000DF76E /* OverlayGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC792AD7B8DA000DF76E /* FirstAlgGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAlgGuideView.swift; sourceTree = "<group>"; };
 		A1FFDC7B2AD7B90D000DF76E /* DuplicatedStationGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicatedStationGuideView.swift; sourceTree = "<group>"; };
@@ -197,7 +198,6 @@
 		A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "duplicated-stations-sample.gif"; path = "Supporting Files/duplicated-stations-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "sameround-duplicated-sample.gif"; path = "Supporting Files/sameround-duplicated-sample.gif"; sourceTree = "<group>"; };
 		A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "duplicated-opponents-sample.gif"; path = "Supporting Files/duplicated-opponents-sample.gif"; sourceTree = "<group>"; };
-		A1FFDC912AD80833000DF76E /* multi-error-sample.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "multi-error-sample.gif"; path = "Supporting Files/multi-error-sample.gif"; sourceTree = "<group>"; };
 		D29D26F499FC7F6B1DBA45D0 /* Pods-Game_Walker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Game_Walker.release.xcconfig"; path = "Target Support Files/Pods-Game_Walker/Pods-Game_Walker.release.xcconfig"; sourceTree = "<group>"; };
 		DA13EB8A2858086A00368CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Game_Walker/Supporting Files/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA28D78C284FF9CE00EA1B94 /* Game_Walker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game_Walker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -641,7 +641,7 @@
 				A1FFDC8D2AD7F410000DF76E /* sameround-duplicated-sample.gif */,
 				A1FFDC8F2AD7F6E5000DF76E /* duplicated-opponents-sample.gif */,
 				A1FFDC8B2AD7E92B000DF76E /* duplicated-stations-sample.gif */,
-				A1FFDC912AD80833000DF76E /* multi-error-sample.gif */,
+				A1F5467F2B67666700CF02F5 /* multi-error-sample.gif */,
 				FCB13E1C2A97A06700F4AE99 /* LaunchScreenMusic.wav */,
 				FCB13E112A97A04A00F4AE99 /* bgm.wav */,
 				FCB13E0F2A97A04A00F4AE99 /* blue.wav */,
@@ -753,7 +753,6 @@
 				DAF081512B6320EE0029958A /* InfoPlist.strings in Resources */,
 				617745EA2B02FFBF009DBD8A /* timer-warning.wav in Resources */,
 				FC03BA162AAB6DEE005E11BD /* GemunuLibre-SemiBold.ttf in Resources */,
-				A1FFDC922AD80833000DF76E /* multi-error-sample.gif in Resources */,
 				A1A4CD342A371C0500704BF8 /* Dosis-Light.ttf in Resources */,
 				FCB13E1D2A97A06700F4AE99 /* LaunchScreenMusic.wav in Resources */,
 				A1A4CD352A371C0500704BF8 /* Dosis-SemiBold.ttf in Resources */,
@@ -775,6 +774,7 @@
 				DAA790012B3EF3F700401C42 /* StationRefereeTableViewCell.xib in Resources */,
 				FC03BA132AAB6DE7005E11BD /* GemunuLibre-Light.ttf in Resources */,
 				DAA78FE92B35FF3E00401C42 /* Main.storyboard in Resources */,
+				A1F546802B67666700CF02F5 /* multi-error-sample.gif in Resources */,
 				FCB13E1B2A97A04B00F4AE99 /* message.wav in Resources */,
 				DAA78FE82B35FC4800401C42 /* Localizable.xcstrings in Resources */,
 				FC03BA112AAB6DDE005E11BD /* GemunuLibre-ExtraBold.ttf in Resources */,

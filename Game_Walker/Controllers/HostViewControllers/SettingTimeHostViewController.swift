@@ -18,6 +18,8 @@ class SettingTimeHostViewController: UIViewController {
     @IBOutlet weak var roundsTextField: UITextField!
     @IBOutlet weak var teamcountTextField: UITextField!
     
+    @IBOutlet weak var settingsStackview: UIStackView!
+    @IBOutlet weak var settingsLabel: LocalizedFontLabel!
     private var stationList: [Station] = []
     
     var host: Host?
@@ -127,6 +129,7 @@ class SettingTimeHostViewController: UIViewController {
         
         gametimePickerView.translatesAutoresizingMaskIntoConstraints = false
         movetimePickerView.translatesAutoresizingMaskIntoConstraints = false
+        settingsLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             gametimePickerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
