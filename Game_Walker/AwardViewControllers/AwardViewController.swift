@@ -418,7 +418,7 @@ class AwardViewController: UIViewController {
         let label = UILabel()
         let imageView = UIImageView()
         
-        label.text = NSLocalizedString("Double-tap \n to reveal", comment: "")
+        label.text = NSLocalizedString("Double-tap\nto reveal!", comment: "")
         label.textAlignment = .center
         label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 20))
         label.numberOfLines = 2
