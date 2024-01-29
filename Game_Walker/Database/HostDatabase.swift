@@ -178,6 +178,21 @@ struct H {
         }
     }
     
+    static func award_reveal(_ gamecode: String, _ first: Bool, _ second: Bool, _ third: Bool) async throws {
+        let server = db.collection("Servers").document("Gamecode : \(gamecode)")
+        do {
+            try await server.updateData([
+                "firstReveal": first,
+                "secondReveal": second,
+                "thirdReveal": third
+            ])
+            print("Updated revealing Ranking")
+        } catch {
+            print("Error revealing Ranking: \(error).")
+            throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while revealing Ranking.", comment: ""))
+        }
+    }
+    
     //MARK: - Announcment Functions
     
     static func addAnnouncement(_ gamecode: String, _ announcement: Announcement) async throws {
@@ -246,6 +261,9 @@ struct H {
             print("Error removing Announcement: \(error).")
             throw GameWalkerError.serverError(NSLocalizedString("Something went wrong while removing Announcement.", comment: ""))        }
         }
+    
+    
+    
 
     
     //MARK: - Database Functions
