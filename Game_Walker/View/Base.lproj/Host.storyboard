@@ -15,8 +15,8 @@
         <array key="GemunuLibre-Bold.ttf">
             <string>GemunuLibre-Bold</string>
         </array>
-        <array key="GemunuLibre-ExtraLight.ttf">
-            <string>GemunuLibre-ExtraLight</string>
+        <array key="GemunuLibre-Medium.ttf">
+            <string>GemunuLibre-Medium</string>
         </array>
         <array key="GemunuLibre-SemiBold.ttf">
             <string>GemunuLibre-SemiBold</string>
@@ -189,16 +189,16 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standard Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJZ-ys-a2b" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40"/>
+                                                                <rect key="frame" x="98.5" y="0.0" width="111.5" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edr-0Z-bW1" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                                <rect key="frame" x="83.5" y="26" width="141" height="40"/>
+                                                                <rect key="frame" x="72.5" y="25.5" width="163" height="40.5"/>
                                                                 <string key="text">This mode includes all of our features
 (Points, Stations, Matching, Timer, etc)</string>
-                                                                <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-Medium" family="Gemunu Libre" pointSize="12"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -221,14 +221,14 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="66"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdt-89-RkS" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40"/>
+                                                                <rect key="frame" x="111" y="0.0" width="86.5" height="40.5"/>
                                                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="20"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This mode includes points and rankings only" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFs-Tm-uFC" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                                <rect key="frame" x="72.5" y="26" width="163" height="40"/>
-                                                                <fontDescription key="fontDescription" name="GemunuLibre-ExtraLight" family="Gemunu Libre" pointSize="11"/>
+                                                                <rect key="frame" x="60" y="25.5" width="188.5" height="40.5"/>
+                                                                <fontDescription key="fontDescription" name="GemunuLibre-Medium" family="Gemunu Libre" pointSize="12"/>
                                                                 <color key="textColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
