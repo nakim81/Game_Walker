@@ -159,7 +159,7 @@ class CreateTeamViewController: UIViewController {
                     if standardStyle {
                         guard let temp = self.host?.algorithm, !temp.isEmpty else {
                             removeLoadingIndicator()
-                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game has not started yet. Please try again a few minutes later.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game is not created yet.\nPlease try again a few minutes later.", comment: ""))
                             return
                         }
                         let algorithm = convert1DArrayTo2D(temp)
@@ -196,7 +196,7 @@ class CreateTeamViewController: UIViewController {
                             }
                         } else {
                             removeLoadingIndicator()
-                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game has not started yet. Please try again a few minutes later.", comment: ""))
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("The game is not created yet.\nPlease try again a few minutes later.", comment: ""))
                             return
                         }
                     } else {
