@@ -32,6 +32,10 @@ struct Host: Codable {
     var pausedTime: Int = 0
     //announcements
     var announcements: [Announcement] = []
+    //awards
+    var firstReveal: Bool = false
+    var secondReveal: Bool = false
+    var thirdReveal: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case gamecode
@@ -52,6 +56,9 @@ struct Host: Codable {
         case pauseTimestamp
         case pausedTime
         case announcements
+        case firstReveal
+        case secondReveal
+        case thirdReveal
     }
 }
 
