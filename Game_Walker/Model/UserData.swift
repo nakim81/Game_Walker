@@ -14,6 +14,9 @@ class UserData {
     }
 
     static func getUserSoundPreference() -> Bool? {
+        if UserDefaults.standard.object(forKey: "soundpreference") == nil {
+            return nil
+        }
         return UserDefaults.standard.bool(forKey: "soundpreference")
     }
 
