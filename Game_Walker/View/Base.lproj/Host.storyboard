@@ -645,186 +645,194 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="86.5" y="12" width="241" height="54.5"/>
-                                <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
-                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="kHE-Wp-se9" userLabel="Settings Stack View">
-                                <rect key="frame" x="68.5" y="92" width="277" height="554.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="rHh-bs-OCZ">
+                                <rect key="frame" x="67" y="58" width="280" height="637.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8yQ-2P-oGV" userLabel="Station Time View">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="124"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-2H-iJw" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
+                                        <rect key="frame" x="18.5" y="0.0" width="243" height="54.5"/>
+                                        <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="50"/>
+                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="kHE-Wp-se9" userLabel="Settings Stack View">
+                                        <rect key="frame" x="0.0" y="79.5" width="280" height="558"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-Sk-V31" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="70" y="0.0" width="137.5" height="33"/>
-                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
-                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
-                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8yQ-2P-oGV" userLabel="Station Time View">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="125"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
-                                                        <rect key="frame" x="134" y="8.5" width="9" height="66"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
-                                                        <rect key="frame" x="76.5" y="15" width="45" height="53.5"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-Sk-V31" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
+                                                        <rect key="frame" x="71.5" y="0.0" width="137.5" height="33"/>
+                                                        <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
-                                                        <rect key="frame" x="154" y="15" width="45" height="53.5"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
-                                                        <rect key="frame" x="0.0" y="0.0" width="277" height="83"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <connections>
-                                                            <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
-                                                        </connections>
-                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id3-FJ-dYb" userLabel="GametimeView">
+                                                        <rect key="frame" x="0.0" y="41" width="280" height="84"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-Z9-5GC">
+                                                                <rect key="frame" x="135.5" y="9" width="9" height="66"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Sf-8Yj" userLabel="Game Minutes Label">
+                                                                <rect key="frame" x="78" y="15" width="45" height="53.5"/>
+                                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ko8-vf-QFy" userLabel="Game Seconds Label">
+                                                                <rect key="frame" x="156" y="15" width="45" height="53.5"/>
+                                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-dh-1tR" userLabel="Game Time Button">
+                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="84"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="gametimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="0jS-UL-zIf"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="XV6-dh-1tR" secondAttribute="trailing" id="5Rm-27-YLS"/>
+                                                            <constraint firstItem="XV6-dh-1tR" firstAttribute="leading" secondItem="id3-FJ-dYb" secondAttribute="leading" id="BAp-lx-6a8"/>
+                                                            <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerY" secondItem="id3-FJ-dYb" secondAttribute="centerY" id="JHQ-Wx-1Qr"/>
+                                                            <constraint firstItem="Ko8-vf-QFy" firstAttribute="leading" secondItem="IZU-Z9-5GC" secondAttribute="leading" multiplier="1.15" id="NfW-XB-C7X"/>
+                                                            <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerX" secondItem="id3-FJ-dYb" secondAttribute="centerX" id="Pzo-mS-AIm"/>
+                                                            <constraint firstItem="jop-Sf-8Yj" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="Sji-VX-0b9"/>
+                                                            <constraint firstItem="XV6-dh-1tR" firstAttribute="top" secondItem="id3-FJ-dYb" secondAttribute="top" id="ZV0-ae-GYd"/>
+                                                            <constraint firstAttribute="width" secondItem="id3-FJ-dYb" secondAttribute="height" multiplier="200:60" id="hzS-J6-XPc"/>
+                                                            <constraint firstItem="Ko8-vf-QFy" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="mip-mT-svf"/>
+                                                            <constraint firstAttribute="bottom" secondItem="XV6-dh-1tR" secondAttribute="bottom" id="quB-Kw-CEo"/>
+                                                            <constraint firstItem="jop-Sf-8Yj" firstAttribute="trailing" secondItem="IZU-Z9-5GC" secondAttribute="trailing" multiplier="0.85" id="yx1-Kn-fnf"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="XV6-dh-1tR" secondAttribute="trailing" id="5Rm-27-YLS"/>
-                                                    <constraint firstItem="XV6-dh-1tR" firstAttribute="leading" secondItem="id3-FJ-dYb" secondAttribute="leading" id="BAp-lx-6a8"/>
-                                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerY" secondItem="id3-FJ-dYb" secondAttribute="centerY" id="JHQ-Wx-1Qr"/>
-                                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="leading" secondItem="IZU-Z9-5GC" secondAttribute="leading" multiplier="1.15" id="NfW-XB-C7X"/>
-                                                    <constraint firstItem="IZU-Z9-5GC" firstAttribute="centerX" secondItem="id3-FJ-dYb" secondAttribute="centerX" id="Pzo-mS-AIm"/>
-                                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="Sji-VX-0b9"/>
-                                                    <constraint firstItem="XV6-dh-1tR" firstAttribute="top" secondItem="id3-FJ-dYb" secondAttribute="top" id="ZV0-ae-GYd"/>
-                                                    <constraint firstAttribute="width" secondItem="id3-FJ-dYb" secondAttribute="height" multiplier="200:60" id="hzS-J6-XPc"/>
-                                                    <constraint firstItem="Ko8-vf-QFy" firstAttribute="centerY" secondItem="IZU-Z9-5GC" secondAttribute="centerY" id="mip-mT-svf"/>
-                                                    <constraint firstAttribute="bottom" secondItem="XV6-dh-1tR" secondAttribute="bottom" id="quB-Kw-CEo"/>
-                                                    <constraint firstItem="jop-Sf-8Yj" firstAttribute="trailing" secondItem="IZU-Z9-5GC" secondAttribute="trailing" multiplier="0.85" id="yx1-Kn-fnf"/>
+                                                    <constraint firstItem="gxM-Sk-V31" firstAttribute="centerX" secondItem="8yQ-2P-oGV" secondAttribute="centerX" id="LA2-Gm-sa3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="id3-FJ-dYb" secondAttribute="trailing" id="uUo-iw-NyI"/>
+                                                    <constraint firstItem="id3-FJ-dYb" firstAttribute="leading" secondItem="8yQ-2P-oGV" secondAttribute="leading" id="y99-li-kyr"/>
                                                 </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="gxM-Sk-V31" firstAttribute="centerX" secondItem="8yQ-2P-oGV" secondAttribute="centerX" id="LA2-Gm-sa3"/>
-                                            <constraint firstAttribute="trailing" secondItem="id3-FJ-dYb" secondAttribute="trailing" id="uUo-iw-NyI"/>
-                                            <constraint firstItem="id3-FJ-dYb" firstAttribute="leading" secondItem="8yQ-2P-oGV" secondAttribute="leading" id="y99-li-kyr"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-nS-ETV" userLabel="Moving Time Stack View">
-                                        <rect key="frame" x="0.0" y="142" width="277" height="124"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moving Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i75-qV-gy2" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="69.5" y="0.0" width="138.5" height="33"/>
-                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
-                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
-                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-nS-ETV" userLabel="Moving Time Stack View">
+                                                <rect key="frame" x="0.0" y="143" width="280" height="125"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
-                                                        <rect key="frame" x="134" y="8.5" width="9" height="66"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
-                                                        <rect key="frame" x="76.5" y="15" width="45" height="53.5"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moving Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i75-qV-gy2" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
+                                                        <rect key="frame" x="71" y="0.0" width="138.5" height="33"/>
+                                                        <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                                         <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
-                                                        <rect key="frame" x="154" y="15" width="45" height="53.5"/>
-                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
-                                                        <rect key="frame" x="0.0" y="0.0" width="277" height="83"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <connections>
-                                                            <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
-                                                        </connections>
-                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-MN-J2c" userLabel="MovingtimeView">
+                                                        <rect key="frame" x="0.0" y="41" width="280" height="84"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time-tick" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-gO-hPN">
+                                                                <rect key="frame" x="135.5" y="9" width="9" height="66"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-2O-0qr" userLabel="Move Minutes">
+                                                                <rect key="frame" x="78" y="15" width="45" height="53.5"/>
+                                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F64-vA-BnX" userLabel="Move Seconds">
+                                                                <rect key="frame" x="156" y="15" width="45" height="53.5"/>
+                                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKr-I9-Cod" userLabel="Move Time Button">
+                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="84"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="movetimePressed:" destination="KzH-J8-5vd" eventType="touchUpInside" id="njI-EK-hs7"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="RKr-I9-Cod" secondAttribute="trailing" id="Cyb-bJ-Qoy"/>
+                                                            <constraint firstItem="RFd-2O-0qr" firstAttribute="trailing" secondItem="Wz5-gO-hPN" secondAttribute="trailing" multiplier="0.85" id="FFJ-h9-l61"/>
+                                                            <constraint firstAttribute="bottom" secondItem="RKr-I9-Cod" secondAttribute="bottom" id="K87-W0-O5m"/>
+                                                            <constraint firstItem="RKr-I9-Cod" firstAttribute="top" secondItem="sQu-MN-J2c" secondAttribute="top" id="N0b-5f-xsN"/>
+                                                            <constraint firstItem="RKr-I9-Cod" firstAttribute="leading" secondItem="sQu-MN-J2c" secondAttribute="leading" id="N9Y-48-2kU"/>
+                                                            <constraint firstAttribute="width" secondItem="sQu-MN-J2c" secondAttribute="height" multiplier="200:60" id="Zuw-iY-pjt"/>
+                                                            <constraint firstItem="F64-vA-BnX" firstAttribute="leading" secondItem="Wz5-gO-hPN" secondAttribute="leading" multiplier="1.15" id="iJe-9S-dhH"/>
+                                                            <constraint firstItem="RFd-2O-0qr" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="upC-Yd-Qi4"/>
+                                                            <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerX" secondItem="sQu-MN-J2c" secondAttribute="centerX" id="w2x-5d-isB"/>
+                                                            <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerY" secondItem="sQu-MN-J2c" secondAttribute="centerY" id="wXn-3X-Xbq"/>
+                                                            <constraint firstItem="F64-vA-BnX" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="wk1-j0-Nu6"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="RKr-I9-Cod" secondAttribute="trailing" id="Cyb-bJ-Qoy"/>
-                                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="trailing" secondItem="Wz5-gO-hPN" secondAttribute="trailing" multiplier="0.85" id="FFJ-h9-l61"/>
-                                                    <constraint firstAttribute="bottom" secondItem="RKr-I9-Cod" secondAttribute="bottom" id="K87-W0-O5m"/>
-                                                    <constraint firstItem="RKr-I9-Cod" firstAttribute="top" secondItem="sQu-MN-J2c" secondAttribute="top" id="N0b-5f-xsN"/>
-                                                    <constraint firstItem="RKr-I9-Cod" firstAttribute="leading" secondItem="sQu-MN-J2c" secondAttribute="leading" id="N9Y-48-2kU"/>
-                                                    <constraint firstAttribute="width" secondItem="sQu-MN-J2c" secondAttribute="height" multiplier="200:60" id="Zuw-iY-pjt"/>
-                                                    <constraint firstItem="F64-vA-BnX" firstAttribute="leading" secondItem="Wz5-gO-hPN" secondAttribute="leading" multiplier="1.15" id="iJe-9S-dhH"/>
-                                                    <constraint firstItem="RFd-2O-0qr" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="upC-Yd-Qi4"/>
-                                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerX" secondItem="sQu-MN-J2c" secondAttribute="centerX" id="w2x-5d-isB"/>
-                                                    <constraint firstItem="Wz5-gO-hPN" firstAttribute="centerY" secondItem="sQu-MN-J2c" secondAttribute="centerY" id="wXn-3X-Xbq"/>
-                                                    <constraint firstItem="F64-vA-BnX" firstAttribute="centerY" secondItem="Wz5-gO-hPN" secondAttribute="centerY" id="wk1-j0-Nu6"/>
+                                                    <constraint firstItem="i75-qV-gy2" firstAttribute="centerX" secondItem="Rhr-nS-ETV" secondAttribute="centerX" id="9fS-Lz-E3o"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sQu-MN-J2c" secondAttribute="trailing" id="Q3B-oh-wr9"/>
+                                                    <constraint firstItem="sQu-MN-J2c" firstAttribute="leading" secondItem="Rhr-nS-ETV" secondAttribute="leading" id="qt4-Cv-Ktz"/>
                                                 </constraints>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="i75-qV-gy2" firstAttribute="centerX" secondItem="Rhr-nS-ETV" secondAttribute="centerX" id="9fS-Lz-E3o"/>
-                                            <constraint firstAttribute="trailing" secondItem="sQu-MN-J2c" secondAttribute="trailing" id="Q3B-oh-wr9"/>
-                                            <constraint firstItem="sQu-MN-J2c" firstAttribute="leading" secondItem="Rhr-nS-ETV" secondAttribute="leading" id="qt4-Cv-Ktz"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-JK-3fn" userLabel="Rounds StackView">
-                                        <rect key="frame" x="0.0" y="284" width="277" height="128.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-eY-NOH" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="97" y="0.0" width="83" height="33"/>
-                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
-                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
-                                                <rect key="frame" x="0.0" y="45" width="277" height="83.5"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-JK-3fn" userLabel="Rounds StackView">
+                                                <rect key="frame" x="0.0" y="286" width="280" height="129"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounds" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-eY-NOH" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
+                                                        <rect key="frame" x="98.5" y="0.0" width="83" height="33"/>
+                                                        <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-se-9Lv" userLabel="Rounds input">
+                                                        <rect key="frame" x="0.0" y="45" width="280" height="84"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Ug1-se-9Lv" secondAttribute="height" multiplier="200:60" id="ng4-lf-WxO"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Ug1-se-9Lv" secondAttribute="height" multiplier="200:60" id="ng4-lf-WxO"/>
+                                                    <constraint firstItem="Ug1-se-9Lv" firstAttribute="leading" secondItem="y7r-JK-3fn" secondAttribute="leading" id="143-mh-qju"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ug1-se-9Lv" secondAttribute="trailing" id="9tF-af-jeV"/>
+                                                    <constraint firstItem="aqb-eY-NOH" firstAttribute="centerX" secondItem="y7r-JK-3fn" secondAttribute="centerX" id="Z9a-p6-WIO"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Ug1-se-9Lv" firstAttribute="leading" secondItem="y7r-JK-3fn" secondAttribute="leading" id="143-mh-qju"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ug1-se-9Lv" secondAttribute="trailing" id="9tF-af-jeV"/>
-                                            <constraint firstItem="aqb-eY-NOH" firstAttribute="centerX" secondItem="y7r-JK-3fn" secondAttribute="centerX" id="Z9a-p6-WIO"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-8W-jvA" userLabel="Teams StackView">
-                                        <rect key="frame" x="0.0" y="430.5" width="277" height="124"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRB-mk-xpK" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="277" height="33"/>
-                                                <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
-                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
-                                                <rect key="frame" x="0.0" y="41" width="277" height="83"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pV7-8W-jvA" userLabel="Teams StackView">
+                                                <rect key="frame" x="0.0" y="433" width="280" height="125"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRB-mk-xpK" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="33"/>
+                                                        <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fc8-so-AwG" userLabel="Team Count input">
+                                                        <rect key="frame" x="0.0" y="41" width="280" height="84"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="fc8-so-AwG" secondAttribute="height" multiplier="200:60" id="8gQ-ik-dPU"/>
+                                                        </constraints>
+                                                        <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="fc8-so-AwG" secondAttribute="height" multiplier="200:60" id="8gQ-ik-dPU"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fc8-so-AwG" secondAttribute="trailing" id="KD9-Oh-kfb"/>
+                                                    <constraint firstItem="fc8-so-AwG" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="LLq-63-1XW"/>
+                                                    <constraint firstItem="fc8-so-AwG" firstAttribute="leading" secondItem="pV7-8W-jvA" secondAttribute="leading" id="iyx-kG-xUq"/>
+                                                    <constraint firstItem="SRB-mk-xpK" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="vTP-IY-Gkn"/>
                                                 </constraints>
-                                                <color key="textColor" red="0.1764705926" green="0.1764705926" blue="0.20392158630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="42"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="fc8-so-AwG" secondAttribute="trailing" id="KD9-Oh-kfb"/>
-                                            <constraint firstItem="fc8-so-AwG" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="LLq-63-1XW"/>
-                                            <constraint firstItem="fc8-so-AwG" firstAttribute="leading" secondItem="pV7-8W-jvA" secondAttribute="leading" id="iyx-kG-xUq"/>
-                                            <constraint firstItem="SRB-mk-xpK" firstAttribute="centerX" secondItem="pV7-8W-jvA" secondAttribute="centerX" id="vTP-IY-Gkn"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="kHE-Wp-se9" firstAttribute="width" secondItem="Zyi-2H-iJw" secondAttribute="width" multiplier="1.15" id="9ox-yA-Tj5"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0n-80-Fkc" userLabel="Next Button" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="96" y="759" width="222" height="72"/>
+                                <rect key="frame" x="107" y="781" width="200" height="65"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="p0n-80-Fkc" secondAttribute="height" multiplier="175:57" id="MAx-4n-z2k"/>
@@ -842,14 +850,11 @@
                         <viewLayoutGuide key="safeArea" id="bbE-Tk-Afq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kHE-Wp-se9" firstAttribute="top" secondItem="Zyi-2H-iJw" secondAttribute="top" constant="80" id="GCa-vh-Hp6"/>
-                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="Iad-Ve-UeB"/>
-                            <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="55" id="PrQ-Za-4dV"/>
-                            <constraint firstItem="kHE-Wp-se9" firstAttribute="width" secondItem="Zyi-2H-iJw" secondAttribute="width" multiplier="1.15" id="Xh3-x6-rHv"/>
-                            <constraint firstItem="kHE-Wp-se9" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="bA2-ps-aKB"/>
-                            <constraint firstItem="Zyi-2H-iJw" firstAttribute="top" secondItem="bbE-Tk-Afq" secondAttribute="top" constant="12" id="eSW-Ur-jZ2"/>
-                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="kHE-Wp-se9" secondAttribute="width" multiplier="0.8" id="oXy-eZ-Unu"/>
-                            <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="kHE-Wp-se9" secondAttribute="centerX" id="uOb-3p-FDu"/>
+                            <constraint firstItem="bbE-Tk-Afq" firstAttribute="bottom" secondItem="p0n-80-Fkc" secondAttribute="bottom" constant="40" id="3R2-5A-gCX"/>
+                            <constraint firstItem="rHh-bs-OCZ" firstAttribute="centerY" secondItem="bbE-Tk-Afq" secondAttribute="centerY" multiplier="0.85" id="Ejb-dM-bIS"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="RzV-yr-oAz"/>
+                            <constraint firstItem="p0n-80-Fkc" firstAttribute="width" secondItem="Sav-4G-tMH" secondAttribute="width" multiplier="0.483092" id="ehM-DY-BaT"/>
+                            <constraint firstItem="rHh-bs-OCZ" firstAttribute="centerX" secondItem="bbE-Tk-Afq" secondAttribute="centerX" id="igw-d4-VmY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ojA-0m-lks"/>
@@ -862,6 +867,8 @@
                         <outlet property="movingSecondsLabel" destination="F64-vA-BnX" id="fqb-C5-SaW"/>
                         <outlet property="nextButton" destination="p0n-80-Fkc" id="Oj7-wb-Wot"/>
                         <outlet property="roundsTextField" destination="Ug1-se-9Lv" id="ihw-TY-knK"/>
+                        <outlet property="settingsLabel" destination="Zyi-2H-iJw" id="Ck8-cb-YD9"/>
+                        <outlet property="settingsStackview" destination="kHE-Wp-se9" id="rsF-UG-3en"/>
                         <outlet property="teamcountTextField" destination="fc8-so-AwG" id="H2x-S6-il3"/>
                         <segue destination="iWj-Yx-nuv" kind="show" identifier="TempSegue" id="OK4-sB-gpM"/>
                         <segue destination="Vjg-e5-r3Z" kind="show" identifier="ToMatchingSegue" id="so1-dY-HYJ"/>
