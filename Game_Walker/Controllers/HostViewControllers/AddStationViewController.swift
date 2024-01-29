@@ -81,11 +81,6 @@ class AddStationViewController: UIViewController, RefereeListUpdateListener {
         Task { @MainActor in
             do {
                 allReferees = try await R.getRefereeList(gamecode)
-                for referee in allReferees {
-                    if (!referee.assigned) {
-                        availableReferees.append(referee)
-                    }
-                }
                 
                 if stationExists {
                     stationUuid = station!.uuid
