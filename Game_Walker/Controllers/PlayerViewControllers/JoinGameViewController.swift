@@ -109,56 +109,108 @@ class JoinGameViewController: UIViewController {
                 return
             }
         }
-        else
+        else if UserData.getUserRole() == "referee"
         {
-            // user switching from other roles
-            
-            if UserData.getUserRole() == "referee"
-            {
-                UserData.removeReferee()
+            Task { @MainActor in
+                do {
+                    guard let confirmCreated = try await H.getHost(storedGameCode)?.confirmCreated else { return }
+                    
+                    // user switching from referee
+                    
+                    if gamecode.isEmpty && username.isEmpty
+                    {
+                        if !savedGameCode.isEmpty && !savedUserName.isEmpty
+                        {
+                            if !confirmCreated {
+                                createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
+                            } else {
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress", comment: ""))
+                                return
+                            }
+                        }
+                        else
+                        {
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                            return
+                        }
+                    }
+                    else if gamecode == savedGameCode && username == savedUserName
+                    {
+                        if !confirmCreated {
+                            createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
+                        } else {
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
+                            return
+                        }
+                    }
+                    else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty
+                    {
+                        if !confirmCreated {
+                            switchToPlayerFromOtherRoles(savedGameCode, gamecode, savedUserName, username, uuid)
+                        } else {
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
+                            return
+                        }
+                    }
+                    else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName
+                    {
+                        if !confirmCreated {
+                            createPlayerAndJoinGame(savedGameCode, username, uuid)
+                        } else {
+                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
+                            return
+                        }
+                    }
+                    else if savedGameCode.isEmpty && savedUserName.isEmpty
+                    {
+                        createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
+                    }
+                    else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName)
+                    {
+                        createPlayerAndJoinGame(gamecode, savedUserName, uuid)
+                    }
+                    else if gamecode != savedGameCode && username != savedUserName
+                    {
+                        createPlayerAndJoinGame(gamecode, username, uuid)
+                    }
+                    else
+                    {
+                        alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
+                        return
+                    }
+                    
+                } catch GameWalkerError.serverError(let e) {
+                    print(e)
+                    serverAlert(e)
+                    return
+                }
             }
-            
-            UserData.setUserRole("player")
-            
-            if gamecode.isEmpty && username.isEmpty
+        } else if UserData.getUserRole() == "host" {
+            // when host tries to make player object using previous gamecode => deny access
+            if (gamecode.isEmpty && !savedGameCode.isEmpty) || gamecode == savedGameCode
             {
-                if !savedGameCode.isEmpty && !savedUserName.isEmpty
+                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You should manage your game as a host.", comment: ""))
+                return
+            }
+            // can make and join the game as a player with new gamecode
+            else
+            {
+                UserData.setUserRole("player")
+                
+                if username.isEmpty
                 {
-                    createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter usernmae.", comment: ""))
+                    return
+                }
+                else if gamecode.isEmpty
+                {
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter gamecode.", comment: ""))
+                    return
                 }
                 else
                 {
-                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter both gamecode and username.", comment: ""))
+                    createPlayerAndJoinGame(gamecode, username, uuid)
                 }
-            }
-            else if gamecode == savedGameCode && username == savedUserName
-            {
-                createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
-            }
-            else if (!savedGameCode.isEmpty || gamecode == savedGameCode) && savedUserName.isEmpty
-            {
-                switchToPlayerFromOtherRoles(savedGameCode, gamecode, savedUserName, username, uuid)
-            }
-            else if savedGameCode.isEmpty && savedUserName.isEmpty
-            {
-                createNewPlayerAndJoinNewGameWithUserInput(gamecode, username, uuid)
-            }
-            else if (gamecode != savedGameCode) && (username.isEmpty || username == savedUserName)
-            {
-                createPlayerAndJoinGame(gamecode, savedUserName, uuid)
-            }
-            else if (gamecode.isEmpty || gamecode == savedGameCode) && username != savedUserName
-            {
-                createPlayerAndJoinGame(savedGameCode, username, uuid)
-            }
-            else if gamecode != savedGameCode && username != savedUserName
-            {
-                createPlayerAndJoinGame(gamecode, username, uuid)
-            }
-            else
-            {
-                alert(title: "Woops!", message: NSLocalizedString("Invalid Input.", comment: ""))
-                return
             }
         }
     }
@@ -176,6 +228,9 @@ class JoinGameViewController: UIViewController {
     
     private func createPlayerAndJoinGame(_ gamecode: String, _ username: String, _ uuid: String) {
         let player = Player(gamecode: gamecode, name: username)
+        if UserData.getUserRole() == "referee" {
+            UserData.removeReferee()
+        }
         UserData.writePlayer(player, "player")
         UserData.writeGamecode(gamecode, "gamecode")
         UserData.writeUsername(username, "username")
@@ -206,6 +261,9 @@ class JoinGameViewController: UIViewController {
                     UserData.writeGamecode(gamecode, "gamecode")
                     UserData.writeUsername(username, "username")
                     UserData.writePlayer(player, "player")
+                    if UserData.getUserRole() == "referee" {
+                        UserData.removeReferee()
+                    }
                     UserData.setUserRole("player")
                     performSegue(withIdentifier: "goToPF2VC", sender: self)
                 } catch GameWalkerError.invalidGamecode(let message) {
@@ -284,6 +342,9 @@ class JoinGameViewController: UIViewController {
         if let username = usernameTextField.text {
             Task {@MainActor in
                 let player = Player(gamecode: savedGameCode, name: username)
+                if UserData.getUserRole() == "referee" {
+                    UserData.removeReferee()
+                }
                 UserData.writePlayer(player, "player")
                 UserData.writeUsername(username, "username")
                 UserData.writeGamecode(savedGameCode, "gamecode")
