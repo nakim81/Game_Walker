@@ -323,7 +323,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 UserData.writeUsername(name, "username")
                                 UserData.writeReferee(newReferee, "referee")
                                 UserData.setUserRole("referee")
-                                //think again
                                 UserDefaults.standard.removeObject(forKey: "max")
                                 UserDefaults.standard.removeObject(forKey: "maxA")
                                 UserDefaults.standard.removeObject(forKey: "maxB")
@@ -393,12 +392,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             } else {
-                UserDefaults.standard.removeObject(forKey: "player")
-                UserDefaults.standard.removeObject(forKey: "host")
-                UserData.setUserRole("referee")
                 if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
                     if gameCode.isEmpty && name.isEmpty {
                         if !storedGameCode.isEmpty && !storedRefereeName.isEmpty {
+                            print("A")
                             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                                 do {
                                     host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -428,27 +425,37 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
-                                let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
-                                Task { @MainActor in
-                                    do {
-                                        try await R.addReferee(storedGameCode, newReferee, refereeUserID)
-                                    } catch GameWalkerError.invalidGamecode(let message) {
-                                        print(message)
-                                        gamecodeAlert(message)
+                                if UserData.getUserRole() == "host" {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    return
+                                } else {
+                                    if host.confirmCreated {
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                         return
-                                    } catch GameWalkerError.serverError(let message) {
-                                        print(message)
-                                        serverAlert(message)
-                                        return
+                                    } else  {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(storedGameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(storedGameCode, "gamecode")
+                                            UserData.writeUsername(newReferee.name, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
                                     }
-                                    UserData.writeGamecode(gameCode, "gamecode")
-                                    UserData.writeUsername(newReferee.name, "username")
-                                    UserData.writeReferee(newReferee, "referee")
-                                    UserData.setUserRole("referee")
-                                    UserDefaults.standard.removeObject(forKey: "max")
-                                    UserDefaults.standard.removeObject(forKey: "maxA")
-                                    UserDefaults.standard.removeObject(forKey: "maxB")
-                                    performSegue(withIdentifier: "goToWait", sender: self)
                                 }
                             }
                         } else {
@@ -485,11 +492,21 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
-                            let oldReferee = UserData.readReferee("referee")!
-                            if oldReferee.assigned {
-                                performSegue(withIdentifier: "toPVE", sender: self)
+                            if UserData.getUserRole() == "host" {
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                return
                             } else {
-                                performSegue(withIdentifier: "goToWait", sender: self)
+                                if host.confirmCreated {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    return
+                                } else  {
+                                    let oldReferee = UserData.readReferee("referee")!
+                                    if oldReferee.assigned {
+                                        performSegue(withIdentifier: "toPVE", sender: self)
+                                    } else {
+                                        performSegue(withIdentifier: "goToWait", sender: self)
+                                    }
+                                }
                             }
                         }
                     } else if (!storedGameCode.isEmpty || gameCode == storedGameCode) && storedRefereeName.isEmpty {
@@ -526,27 +543,67 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
-                                let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                                Task { @MainActor in
-                                    do {
-                                        try await R.addReferee(gameCode, newReferee, refereeUserID)
-                                    } catch GameWalkerError.invalidGamecode(let message) {
-                                        print(message)
-                                        gamecodeAlert(message)
+                                if UserData.getUserRole() == "host" {
+                                    if gameCode.isEmpty {
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                         return
-                                    } catch GameWalkerError.serverError(let message) {
-                                        print(message)
-                                        serverAlert(message)
-                                        return
+                                    } else {
+                                        if storedGameCode != gameCode {
+                                            let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                            Task { @MainActor in
+                                                do {
+                                                    try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                                } catch GameWalkerError.invalidGamecode(let message) {
+                                                    print(message)
+                                                    gamecodeAlert(message)
+                                                    return
+                                                } catch GameWalkerError.serverError(let message) {
+                                                    print(message)
+                                                    serverAlert(message)
+                                                    return
+                                                }
+                                                UserData.writeGamecode(gameCode, "gamecode")
+                                                UserData.writeUsername(newReferee.name, "username")
+                                                UserData.writeReferee(newReferee, "referee")
+                                                UserData.setUserRole("referee")
+                                                UserDefaults.standard.removeObject(forKey: "max")
+                                                UserDefaults.standard.removeObject(forKey: "maxA")
+                                                UserDefaults.standard.removeObject(forKey: "maxB")
+                                                performSegue(withIdentifier: "goToWait", sender: self)
+                                            }
+                                        } else {
+                                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                            return
+                                        }
                                     }
-                                    UserData.writeGamecode(gameCode, "gamecode")
-                                    UserData.writeUsername(newReferee.name, "username")
-                                    UserData.writeReferee(newReferee, "referee")
-                                    UserData.setUserRole("referee")
-                                    UserDefaults.standard.removeObject(forKey: "max")
-                                    UserDefaults.standard.removeObject(forKey: "maxA")
-                                    UserDefaults.standard.removeObject(forKey: "maxB")
-                                    performSegue(withIdentifier: "goToWait", sender: self)
+                                } else {
+                                    if host.confirmCreated {
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        return
+                                    } else  {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(gameCode, "gamecode")
+                                            UserData.writeUsername(newReferee.name, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -581,27 +638,62 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                                 return
                             } else {
-                                let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                                Task { @MainActor in
-                                    do {
-                                        try await R.addReferee(gameCode, newReferee, refereeUserID)
-                                    } catch GameWalkerError.invalidGamecode(let message) {
-                                        print(message)
-                                        gamecodeAlert(message)
-                                        return
-                                    } catch GameWalkerError.serverError(let message) {
-                                        print(message)
-                                        serverAlert(message)
+                                if UserData.getUserRole() == "host" {
+                                    if storedGameCode != gameCode {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(gameCode, "gamecode")
+                                            UserData.writeUsername(name, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
+                                    } else {
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                         return
                                     }
-                                    UserData.writeGamecode(gameCode, "gamecode")
-                                    UserData.writeUsername(name, "username")
-                                    UserData.writeReferee(newReferee, "referee")
-                                    UserData.setUserRole("referee")
-                                    UserDefaults.standard.removeObject(forKey: "max")
-                                    UserDefaults.standard.removeObject(forKey: "maxA")
-                                    UserDefaults.standard.removeObject(forKey: "maxB")
-                                    performSegue(withIdentifier: "goToWait", sender: self)
+                                } else {
+                                    if host.confirmCreated {
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        return
+                                    } else  {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(gameCode, "gamecode")
+                                            UserData.writeUsername(name, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
+                                    }
                                 }
                             }
                         } else {
@@ -609,6 +701,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             return
                         }
                     } else if (gameCode != storedGameCode ) && (name.isEmpty || name == storedRefereeName) {
+                        print("E")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -638,30 +731,66 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
-                            let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
-                            Task { @MainActor in
-                                do {
-                                    try await R.addReferee(gameCode, newReferee, refereeUserID)
-                                } catch GameWalkerError.invalidGamecode(let message) {
-                                    print(message)
-                                    gamecodeAlert(message)
-                                    return
-                                } catch GameWalkerError.serverError(let message) {
-                                    print(message)
-                                    serverAlert(message)
+                            if UserData.getUserRole() == "host" {
+                                if storedGameCode != gameCode {
+                                    let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
+                                    Task { @MainActor in
+                                        do {
+                                            try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                        } catch GameWalkerError.invalidGamecode(let message) {
+                                            print(message)
+                                            gamecodeAlert(message)
+                                            return
+                                        } catch GameWalkerError.serverError(let message) {
+                                            print(message)
+                                            serverAlert(message)
+                                            return
+                                        }
+                                        UserData.writeGamecode(gameCode, "gamecode")
+                                        UserData.writeUsername(storedRefereeName, "username")
+                                        UserData.writeReferee(newReferee, "referee")
+                                        UserData.setUserRole("referee")
+                                        UserDefaults.standard.removeObject(forKey: "max")
+                                        UserDefaults.standard.removeObject(forKey: "maxA")
+                                        UserDefaults.standard.removeObject(forKey: "maxB")
+                                        performSegue(withIdentifier: "goToWait", sender: self)
+                                    }
+                                } else {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                     return
                                 }
-                                UserData.writeGamecode(gameCode, "gamecode")
-                                UserData.writeUsername(storedRefereeName, "username")
-                                UserData.writeReferee(newReferee, "referee")
-                                UserData.setUserRole("referee")
-                                UserDefaults.standard.removeObject(forKey: "max")
-                                UserDefaults.standard.removeObject(forKey: "maxA")
-                                UserDefaults.standard.removeObject(forKey: "maxB")
-                                performSegue(withIdentifier: "goToWait", sender: self)
+                            } else {
+                                if host.confirmCreated {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    return
+                                } else  {
+                                    let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
+                                    Task { @MainActor in
+                                        do {
+                                            try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                        } catch GameWalkerError.invalidGamecode(let message) {
+                                            print(message)
+                                            gamecodeAlert(message)
+                                            return
+                                        } catch GameWalkerError.serverError(let message) {
+                                            print(message)
+                                            serverAlert(message)
+                                            return
+                                        }
+                                        UserData.writeGamecode(gameCode, "gamecode")
+                                        UserData.writeUsername(storedRefereeName, "username")
+                                        UserData.writeReferee(newReferee, "referee")
+                                        UserData.setUserRole("referee")
+                                        UserDefaults.standard.removeObject(forKey: "max")
+                                        UserDefaults.standard.removeObject(forKey: "maxA")
+                                        UserDefaults.standard.removeObject(forKey: "maxB")
+                                        performSegue(withIdentifier: "goToWait", sender: self)
+                                    }
+                                }
                             }
                         }
                     } else if (gameCode.isEmpty || gameCode == storedGameCode ) && name != storedRefereeName {
+                        print("F")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -691,30 +820,66 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
-                            let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: "", assigned: false)
-                            Task { @MainActor in
-                                do {
-                                    try await R.addReferee(storedGameCode, newReferee, refereeUserID)
-                                } catch GameWalkerError.invalidGamecode(let message) {
-                                    print(message)
-                                    gamecodeAlert(message)
+                            if UserData.getUserRole() == "host" {
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                return
+                            } else {
+                                if host.confirmCreated {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                     return
-                                } catch GameWalkerError.serverError(let message) {
-                                    print(message)
-                                    serverAlert(message)
-                                    return
+                                } else  {
+                                    if name.isEmpty {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(storedGameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(storedGameCode, "gamecode")
+                                            UserData.writeUsername(storedRefereeName, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
+                                    } else {
+                                        let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: name, stationName: "", assigned: false)
+                                        Task { @MainActor in
+                                            do {
+                                                try await R.addReferee(storedGameCode, newReferee, refereeUserID)
+                                            } catch GameWalkerError.invalidGamecode(let message) {
+                                                print(message)
+                                                gamecodeAlert(message)
+                                                return
+                                            } catch GameWalkerError.serverError(let message) {
+                                                print(message)
+                                                serverAlert(message)
+                                                return
+                                            }
+                                            UserData.writeGamecode(storedGameCode, "gamecode")
+                                            UserData.writeUsername(name, "username")
+                                            UserData.writeReferee(newReferee, "referee")
+                                            UserData.setUserRole("referee")
+                                            UserDefaults.standard.removeObject(forKey: "max")
+                                            UserDefaults.standard.removeObject(forKey: "maxA")
+                                            UserDefaults.standard.removeObject(forKey: "maxB")
+                                            performSegue(withIdentifier: "goToWait", sender: self)
+                                        }
+                                    }
                                 }
-                                UserData.writeGamecode(storedGameCode, "gamecode")
-                                UserData.writeUsername(name, "username")
-                                UserData.writeReferee(newReferee, "referee")
-                                UserData.setUserRole("referee")
-                                UserDefaults.standard.removeObject(forKey: "max")
-                                UserDefaults.standard.removeObject(forKey: "maxA")
-                                UserDefaults.standard.removeObject(forKey: "maxB")
-                                performSegue(withIdentifier: "goToWait", sender: self)
                             }
                         }
                     } else if gameCode != storedGameCode  && name != storedRefereeName {
+                        print("G")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -744,27 +909,62 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
                             return
                         } else {
-                            let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
-                            Task { @MainActor in
-                                do {
-                                    try await R.addReferee(gameCode, newReferee, refereeUserID)
-                                } catch GameWalkerError.invalidGamecode(let message) {
-                                    print(message)
-                                    gamecodeAlert(message)
-                                    return
-                                } catch GameWalkerError.serverError(let message) {
-                                    print(message)
-                                    serverAlert(message)
+                            if UserData.getUserRole() == "host" {
+                                if storedGameCode != gameCode {
+                                    let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                    Task { @MainActor in
+                                        do {
+                                            try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                        } catch GameWalkerError.invalidGamecode(let message) {
+                                            print(message)
+                                            gamecodeAlert(message)
+                                            return
+                                        } catch GameWalkerError.serverError(let message) {
+                                            print(message)
+                                            serverAlert(message)
+                                            return
+                                        }
+                                        UserData.writeGamecode(gameCode, "gamecode")
+                                        UserData.writeUsername(name, "username")
+                                        UserData.writeReferee(newReferee, "referee")
+                                        UserData.setUserRole("referee")
+                                        UserDefaults.standard.removeObject(forKey: "max")
+                                        UserDefaults.standard.removeObject(forKey: "maxA")
+                                        UserDefaults.standard.removeObject(forKey: "maxB")
+                                        performSegue(withIdentifier: "goToWait", sender: self)
+                                    }
+                                } else {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
                                     return
                                 }
-                                UserData.writeGamecode(gameCode, "gamecode")
-                                UserData.writeUsername(name, "username")
-                                UserData.writeReferee(newReferee, "referee")
-                                UserData.setUserRole("referee")
-                                UserDefaults.standard.removeObject(forKey: "max")
-                                UserDefaults.standard.removeObject(forKey: "maxA")
-                                UserDefaults.standard.removeObject(forKey: "maxB")
-                                performSegue(withIdentifier: "goToWait", sender: self)
+                            } else {
+                                if host.confirmCreated {
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    return
+                                } else  {
+                                    let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
+                                    Task { @MainActor in
+                                        do {
+                                            try await R.addReferee(gameCode, newReferee, refereeUserID)
+                                        } catch GameWalkerError.invalidGamecode(let message) {
+                                            print(message)
+                                            gamecodeAlert(message)
+                                            return
+                                        } catch GameWalkerError.serverError(let message) {
+                                            print(message)
+                                            serverAlert(message)
+                                            return
+                                        }
+                                        UserData.writeGamecode(gameCode, "gamecode")
+                                        UserData.writeUsername(name, "username")
+                                        UserData.writeReferee(newReferee, "referee")
+                                        UserData.setUserRole("referee")
+                                        UserDefaults.standard.removeObject(forKey: "max")
+                                        UserDefaults.standard.removeObject(forKey: "maxA")
+                                        UserDefaults.standard.removeObject(forKey: "maxB")
+                                        performSegue(withIdentifier: "goToWait", sender: self)
+                                    }
+                                }
                             }
                         }
                     } else {

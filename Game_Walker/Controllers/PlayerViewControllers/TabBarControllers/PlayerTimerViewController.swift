@@ -148,7 +148,7 @@ class PlayerTimerViewController: UIViewController {
     
     func configureRefreshButton() {
         let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
-        Button.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
+        Button.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     

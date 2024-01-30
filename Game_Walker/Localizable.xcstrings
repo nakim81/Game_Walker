@@ -1703,11 +1703,15 @@
         }
       }
     },
-    "You cannot change roles while the game is in progress" : {
-
-    },
-    "You cannot change roles while the game is in progress." : {
-
+    "You are not allowed to change your role." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "역할을 변경할 수 없습니다."
+          }
+        }
+      }
     },
     "You don't have enough teams to start the game." : {
       "localizations" : {
