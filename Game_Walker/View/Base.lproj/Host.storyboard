@@ -116,7 +116,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U83-h1-qtH" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="107" y="720.5" width="200" height="65"/>
+                                <rect key="frame" x="107" y="781" width="200" height="65"/>
                                 <color key="backgroundColor" red="0.79607844350000001" green="0.5176470876" blue="0.94901967050000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="U83-h1-qtH" secondAttribute="height" multiplier="175:57" id="1g7-As-aRW"/>
@@ -142,12 +142,12 @@
                         <constraints>
                             <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="3Jh-Be-tPN"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="6Oh-iN-Kxl"/>
+                            <constraint firstItem="hB5-b1-9hu" firstAttribute="bottom" secondItem="U83-h1-qtH" secondAttribute="bottom" constant="40" id="6iD-8D-UTc"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="width" secondItem="hB5-b1-9hu" secondAttribute="width" multiplier="0.483092" id="JkU-5b-d8C"/>
                             <constraint firstItem="U83-h1-qtH" firstAttribute="centerX" secondItem="hB5-b1-9hu" secondAttribute="centerX" id="KYx-IJ-e3n"/>
                             <constraint firstItem="CTP-o1-Ip2" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="0.75" id="iJr-OO-NFh"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="top" secondItem="CTP-o1-Ip2" secondAttribute="bottom" constant="10" id="oCA-dn-QzG"/>
                             <constraint firstItem="8bU-vL-2hU" firstAttribute="width" secondItem="CTP-o1-Ip2" secondAttribute="width" multiplier="1.5" id="pgt-qc-0n6"/>
-                            <constraint firstItem="U83-h1-qtH" firstAttribute="centerY" secondItem="hB5-b1-9hu" secondAttribute="centerY" multiplier="1.7" id="xpK-2x-qZS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pm3-a2-OBC"/>
@@ -1120,7 +1120,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OK4-sB-gpM"/>
+        <segue reference="nWr-2f-mnX"/>
         <segue reference="D0i-05-1lI"/>
     </inferredMetricsTieBreakers>
     <resources>
