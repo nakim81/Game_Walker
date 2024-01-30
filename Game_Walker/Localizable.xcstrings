@@ -321,6 +321,9 @@
         }
       }
     },
+    "Host will \n reveal soon!" : {
+
+    },
     "Invalid Host." : {
       "localizations" : {
         "ko" : {
@@ -382,14 +385,7 @@
       }
     },
     "LEAVE" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "나가기"
-          }
-        }
-      }
+
     },
     "long-tap." : {
       "localizations" : {
@@ -631,6 +627,9 @@
         }
       }
     },
+    "Please enter gamecode." : {
+
+    },
     "Please enter the station name." : {
       "localizations" : {
         "ko" : {
@@ -650,6 +649,9 @@
           }
         }
       }
+    },
+    "Please enter usernmae." : {
+
     },
     "Please select a referee." : {
       "localizations" : {
@@ -1730,6 +1732,9 @@
           }
         }
       }
+    },
+    "You should manage your game as a host." : {
+
     }
   },
   "version" : "1.0"
