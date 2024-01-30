@@ -102,7 +102,7 @@ class PlayerTeamViewController: UIViewController {
     
     private func alert2(title: String, message: String, sender: AnyObject) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Leave!", style: .destructive, handler: { [self]action in
+        let action = UIAlertAction(title: NSLocalizedString("Leave", comment: ""), style: .destructive, handler: { [self]action in
             Task { @MainActor in
                 do {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
@@ -121,7 +121,7 @@ class PlayerTeamViewController: UIViewController {
             }
         })
         alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Stay!", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Stay", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     

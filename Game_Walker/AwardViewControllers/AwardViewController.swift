@@ -422,9 +422,9 @@ class AwardViewController: UIViewController {
         let imageView = UIImageView()
         
         if role == "host" {
-            label.text = NSLocalizedString("Double-tap \n to reveal!", comment: "")
+            label.text = NSLocalizedString("Double-tap\nto reveal!", comment: "")
         } else {
-            label.text = NSLocalizedString("Host will \n reveal soon!", comment: "")
+            label.text = NSLocalizedString("Host will\nreveal soon!", comment: "")
         }
         label.textAlignment = .center
         label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 20))

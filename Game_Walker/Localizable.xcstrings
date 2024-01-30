@@ -201,8 +201,15 @@
         }
       }
     },
-    "Double-tap \n to reveal!" : {
-
+    "Double-tap\nto reveal!" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "더블 탭 해서 공개하세요!"
+          }
+        }
+      }
     },
     "Duplicated Appearance" : {
       "localizations" : {
@@ -363,6 +370,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "팀원으로 게임에 참여"
+          }
+        }
+      }
+    },
+    "Leave" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나가기"
           }
         }
       }
@@ -1114,7 +1131,14 @@
       }
     },
     "Something went wrong while revealing Ranking." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Something went wrong while setting Matching Algorithm." : {
       "localizations" : {
@@ -1272,6 +1296,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "스테이션 방식 미정"
+          }
+        }
+      }
+    },
+    "Stay" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         }
       }
@@ -1466,12 +1500,12 @@
         }
       }
     },
-    "The game has not started yet. Please try again a few minutes later." : {
+    "The game is not created yet.\nPlease try again a few minutes later." : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게임이 아직 시작 안했습니다. 잠시 후 다시 시도해주세요."
+            "value" : "게임이 아직 생성 중 입니다. 잠시 후 다시 시도해주세요."
           }
         }
       }
