@@ -14,6 +14,7 @@ class RefereePVEController: UIViewController {
     private let readAll = UIImage(named: "messageIcon")
     private let unreadSome = UIImage(named: "unreadMessage")
     
+    private var gameStart: Bool = false
     private var teamOrderSet: Bool = false
     
     private var max : String = ""
@@ -115,7 +116,7 @@ class RefereePVEController: UIViewController {
                     loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 }
             }
-            if host.algorithm != [] && host.teams == teams.count {
+            if host.algorithm != [] && host.teams == teams.count && host.gameStart {
                 setTeamOrder()
                 if pvp {
                     combineSubviewsPVP()
@@ -1009,6 +1010,13 @@ extension RefereePVEController {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
         }
+        if !self.gameStart {
+            if host.gameStart {
+                setTeamOrder()
+                self.teamOrderSet = true
+                self.gameStart = true
+            }
+        }
         if (self.round != host.currentRound) && (host.currentRound <= host.rounds) {
             roundLabel.text = NSLocalizedString("Round", comment: "") + " \(host.currentRound)"
             if pvp {
@@ -1072,10 +1080,6 @@ extension RefereePVEController {
         guard let teams = notification.userInfo?["teams"] as? [Team] else { return }
         
         count = teams.count
-        if teams.count == self.number && !teamOrderSet {
-            teamOrderSet = true
-            setTeamOrder()
-        }
         for old_team in self.teamOrder {
             for team in teams {
                 if old_team.number == team.number && old_team.points != team.points {

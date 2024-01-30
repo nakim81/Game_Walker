@@ -208,7 +208,7 @@ class RefereeTimerViewController: UIViewController {
     
     func configureRefreshButton() {
         let Button = UIBarButtonItem(image: UIImage(named: "refresh button")?.withRenderingMode(.alwaysTemplate) , style: .plain, target: self, action: #selector(RefreshPressed))
-        Button.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.21, alpha: 1)
+        Button.tintColor = UIColor(red: 0.157, green: 0.82, blue: 0.443, alpha: 1)
         navigationItem.leftBarButtonItem = Button
     }
     

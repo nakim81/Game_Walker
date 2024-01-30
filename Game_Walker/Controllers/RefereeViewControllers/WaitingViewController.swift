@@ -24,6 +24,7 @@ class WaitingViewController: UIViewController {
     
     override func viewDidLoad() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        configureTitleLabel()
         configureNavItem()
         callProtocols()
         addSubviews()
@@ -38,6 +39,7 @@ class WaitingViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         R.delegates = R.delegates.filter { $0.value != nil }
+        self.timer?.invalidate()
     }
     
     private func configureNavItem() {
@@ -49,9 +51,6 @@ class WaitingViewController: UIViewController {
     }
     
     @objc override func onBackPressed() {
-        R.removeReferee(gameCode, referee.uuid)
-        UserDefaults.standard.removeObject(forKey: "gamecode")
-        UserDefaults.standard.removeObject(forKey: "username")
         performSegue(withIdentifier: "toRegister", sender: self)
     }
     
