@@ -25,6 +25,17 @@ class PlayerTeamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        Task { @MainActor in
+            do {
+                self.team = try await T.getTeam(gameCode, teamName)
+                table.reloadData()
+            } catch {
+                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
+
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(readAll(notification:)), name: .readNotification, object: nil)
         
         if PlayerTabBarController.unread {
@@ -87,15 +98,6 @@ class PlayerTeamViewController: UIViewController {
         table.separatorStyle = .none
         table.refreshControl = refreshController
         settingRefreshControl()
-        Task { @MainActor in
-            do {
-                self.team = try await T.getTeam(gameCode, teamName)
-                table.reloadData()
-            } catch {
-                alert(title: NSLocalizedString("Connection Error", comment: ""), message: NSLocalizedString("Swipe down your screen to see your team members.", comment: ""))
-
-            }
-        }
     }
     
     private func alert2(title: String, message: String, sender: AnyObject) {

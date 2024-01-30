@@ -393,6 +393,7 @@ class AwardViewController: UIViewController {
         if soundEnabled {
             self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
         }
+        setIsRevealed()
     }
     
     private func setView(view: UIView, place: Int) {
@@ -410,7 +411,9 @@ class AwardViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.isUserInteractionEnabled = true
-        addDoubleTapGestureRecognizer(view: view)
+        if role == "host" {
+            addDoubleTapGestureRecognizer(view: view)
+        }
         generateLabelAndImageView(parentView: view, place: place)
     }
     
@@ -418,7 +421,11 @@ class AwardViewController: UIViewController {
         let label = UILabel()
         let imageView = UIImageView()
         
-        label.text = NSLocalizedString("Double-tap\nto reveal!", comment: "")
+        if role == "host" {
+            label.text = NSLocalizedString("Double-tap\nto reveal!", comment: "")
+        } else {
+            label.text = NSLocalizedString("Host will\nreveal soon!", comment: "")
+        }
         label.textAlignment = .center
         label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 20))
         label.numberOfLines = 2
@@ -516,6 +523,21 @@ class AwardViewController: UIViewController {
             sender.setImage(UIImage(named: "sound-icon-on"), for: .normal)
             if !audioPlayerManager.isPlaying() {
                 self.audioPlayerManager.playAudioFile(named: "congrats_ending", withExtension: "wav")
+            }
+        }
+    }
+    
+    private func setIsRevealed() {
+        Task { @MainActor in
+            do {
+                guard let host = try await H.getHost(gameCode) else { return }
+                firstPlaceCoverView.isHidden = host.firstReveal
+                secondPlaceCoverView.isHidden = host.secondReveal
+                thirdPlaceCoverView.isHidden = host.thirdReveal
+            } catch GameWalkerError.serverError(let e) {
+                print(e)
+                serverAlert(e)
+                return
             }
         }
     }

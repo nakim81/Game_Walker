@@ -321,6 +321,9 @@
         }
       }
     },
+    "Host will \n reveal soon!" : {
+
+    },
     "Invalid Host." : {
       "localizations" : {
         "ko" : {
@@ -624,6 +627,9 @@
         }
       }
     },
+    "Please enter gamecode." : {
+
+    },
     "Please enter the station name." : {
       "localizations" : {
         "ko" : {
@@ -643,6 +649,9 @@
           }
         }
       }
+    },
+    "Please enter usernmae." : {
+
     },
     "Please select a referee." : {
       "localizations" : {
@@ -1694,6 +1703,12 @@
         }
       }
     },
+    "You cannot change roles while the game is in progress" : {
+
+    },
+    "You cannot change roles while the game is in progress." : {
+
+    },
     "You don't have enough teams to start the game." : {
       "localizations" : {
         "ko" : {
@@ -1713,6 +1728,9 @@
           }
         }
       }
+    },
+    "You should manage your game as a host." : {
+
     }
   },
   "version" : "1.0"
