@@ -382,14 +382,7 @@
       }
     },
     "LEAVE" : {
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "나가기"
-          }
-        }
-      }
+
     },
     "long-tap." : {
       "localizations" : {

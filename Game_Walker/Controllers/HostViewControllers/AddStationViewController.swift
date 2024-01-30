@@ -77,7 +77,7 @@ class AddStationViewController: UIViewController, RefereeListUpdateListener {
         refereeTableView.delegate = self
         refereeTableView.dataSource = self
         rulesTextfield.textContainerInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        
+        addSwipeDownMotion()
         Task { @MainActor in
             do {
                 allReferees = try await R.getRefereeList(gamecode)
@@ -137,7 +137,14 @@ class AddStationViewController: UIViewController, RefereeListUpdateListener {
         guard let sender = sender as? StationsTableViewController else { return }
         stationsTableViewController = sender
     }
-    
+    private func addSwipeDownMotion() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissViewController))
+                swipeDown.direction = .down
+                view.addGestureRecognizer(swipeDown)
+    }
+    @objc private func dismissViewController() {
+            dismiss(animated: true, completion: nil)
+        }
     func findRefereeWithUuid(refereeList: [Referee], uuidToCheck: String) -> Referee? {
         for referee in refereeList {
             if referee.uuid == uuidToCheck {

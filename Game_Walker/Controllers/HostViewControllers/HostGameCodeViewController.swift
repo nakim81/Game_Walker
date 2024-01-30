@@ -57,6 +57,11 @@ class HostGameCodeViewController: UIViewController {
         guard let userGamecodeInput = gameCodeInput.text else {
             return
         }
+        var isHost = false
+
+        if UserData.getUserRole() == "host" {
+            isHost = true
+        }
 
         // Check if storedgamecode is nil or empty
         if let storedGamecode = gamecode, !storedGamecode.isEmpty || !usestoredcode {
@@ -67,16 +72,24 @@ class HostGameCodeViewController: UIViewController {
                     gameDidEnd = hostTemp?.gameover ?? false
 
                     if !isStandard {
-                        UserData.writeGamecode(storedGamecode, "gamecode")
-                        performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
-                        return
+                        if isHost {
+                            UserData.writeGamecode(storedGamecode, "gamecode")
+                            performSegue(withIdentifier: "GameAlreadyStartedSegue", sender: self)
+                            return
+                        } else {
+                            alert(title: "", message: NSLocalizedString("Invalid Host.", comment: ""))
+                        }
                     }
 
                     if !(hostTemp?.confirmCreated ?? true) {
-                        UserData.writeGamecode(storedGamecode, "gamecode")
-                        performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                        if isHost {
+                            UserData.writeGamecode(storedGamecode, "gamecode")
+                            performSegue(withIdentifier: "HostJoinSegue", sender: self)
+                        } else{
+                            alert(title: "", message: NSLocalizedString("Invalid Host.", comment: ""))
+                        }
                     } else {
-                        if UserData.isHostConfirmed() ?? false {
+                        if (UserData.isHostConfirmed() ?? false) && isHost {
                             UserData.writeGamecode(storedGamecode, "gamecode")
                             if gameDidEnd {
                                 self.showAwardPopUp("host")
