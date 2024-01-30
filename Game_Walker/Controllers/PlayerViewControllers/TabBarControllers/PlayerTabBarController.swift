@@ -11,6 +11,7 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     
     var standardStyle: Bool = true // Default value is true
     let gameCode = UserData.readGamecode("gamecode") ?? ""
+    private var gameOverCalled = false
     
     static var localMessages: [Announcement] = []
     
@@ -42,8 +43,6 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
             }
         }
         
-        print("tabbar prints: \(H.delegates.count)")
-        
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
             guard let strongSelf = self else {
                 return
@@ -65,13 +64,8 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
         timer.invalidate()
         H.delegates = H.delegates.filter { $0.value != nil }
         T.delegates = T.delegates.filter { $0.value != nil}
-        removeListeners()
-    }
-    
-    private func removeListeners() {
         H.detatchHost()
     }
-    
     
     private func customizeTimerTabBarItem() {
         if let viewControllers = viewControllers, viewControllers.count > 2 {
@@ -94,7 +88,8 @@ class PlayerTabBarController: UITabBarController, HostUpdateListener, TeamUpdate
     }
     
     func updateHost(_ host: Host) {
-        if host.gameover {
+        if host.gameover && !gameOverCalled {
+            gameOverCalled = true
             showAwardPopUp("player")
         }
         

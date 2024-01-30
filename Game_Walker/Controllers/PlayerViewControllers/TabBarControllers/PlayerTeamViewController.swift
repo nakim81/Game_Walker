@@ -100,7 +100,7 @@ class PlayerTeamViewController: UIViewController {
     
     private func alert2(title: String, message: String, sender: AnyObject) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Leave!", style: .destructive, handler: { [self]action in
+        let action = UIAlertAction(title: NSLocalizedString("Leave", comment: ""), style: .destructive, handler: { [self]action in
             Task { @MainActor in
                 do {
                     try await T.leaveTeam(self.gameCode, self.teamName, self.currentPlayer)
@@ -119,14 +119,14 @@ class PlayerTeamViewController: UIViewController {
             }
         })
         alert.addAction(action)
-        alert.addAction(UIAlertAction(title: "Stay!", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Stay", comment: ""), style: .cancel, handler: nil))
         present(alert, animated: true)
     }
     
     private func settingRefreshControl() {
         refreshController.addTarget(self, action: #selector(self.refreshFunction), for: .valueChanged)
         refreshController.tintColor = UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1)
-        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)])
+        refreshController.attributedTitle = NSAttributedString(string: "reloading,,,", attributes: [ NSAttributedString.Key.foregroundColor: UIColor(red: 0.208, green: 0.671, blue: 0.953, alpha: 1) , NSAttributedString.Key.font: UIFont(name: "Dosis-Regular", size: 15)!])
     }
 }
 // MARK: - TableView

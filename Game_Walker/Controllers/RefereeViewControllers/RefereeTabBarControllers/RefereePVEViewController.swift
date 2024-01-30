@@ -15,7 +15,6 @@ class RefereePVEController: UIViewController {
     private let unreadSome = UIImage(named: "unreadMessage")
     
     private var teamOrderSet: Bool = false
-    private var isSeguePerformed : Bool = false
     
     private var max : String = ""
     private var team : Team = Team()

@@ -11,6 +11,8 @@ class RefereeTabBarController: UITabBarController, RefereeUpdateListener, HostUp
     
     private var gameCode = UserData.readGamecode("gamecode") ?? ""
     
+    private var gameOverCalled = false
+    
     static var localMessages: [Announcement] = []
     
     private var timer = Timer()
@@ -66,6 +68,7 @@ class RefereeTabBarController: UITabBarController, RefereeUpdateListener, HostUp
         H.delegates = H.delegates.filter { $0.value != nil }
         T.delegates = T.delegates.filter { $0.value != nil }
         R.delegates = R.delegates.filter { $0.value != nil }
+        H.detatchHost()
     }
     
     private func addListener(){
@@ -86,7 +89,8 @@ class RefereeTabBarController: UITabBarController, RefereeUpdateListener, HostUp
     }
     
     func updateHost(_ host: Host) {
-        if host.gameover {
+        if host.gameover && !gameOverCalled {
+            gameOverCalled = true
             showAwardPopUp("referee")
         } else {
             let data: [String:Host] = ["host":host]
