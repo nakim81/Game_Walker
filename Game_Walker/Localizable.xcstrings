@@ -1101,6 +1101,9 @@
         }
       }
     },
+    "Something went wrong while revealing Ranking." : {
+
+    },
     "Something went wrong while setting Matching Algorithm." : {
       "localizations" : {
         "ko" : {
