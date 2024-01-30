@@ -124,7 +124,7 @@ class JoinGameViewController: UIViewController {
                             if !confirmCreated {
                                 createPlayerAndJoinGame(savedGameCode, savedUserName, uuid)
                             } else {
-                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress", comment: ""))
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                 return
                             }
                         }
@@ -199,7 +199,7 @@ class JoinGameViewController: UIViewController {
                 
                 if username.isEmpty
                 {
-                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter usernmae.", comment: ""))
+                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("Please enter username.", comment: ""))
                     return
                 }
                 else if gamecode.isEmpty
