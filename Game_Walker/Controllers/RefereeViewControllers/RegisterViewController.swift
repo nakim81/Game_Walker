@@ -426,11 +426,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 return
                             } else {
                                 if UserData.getUserRole() == "host" {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 } else {
                                     if host.confirmCreated {
-                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                         return
                                     } else  {
                                         let newReferee = Referee(uuid: refereeUserID, gamecode: storedGameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -493,11 +493,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
-                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                 return
                             } else {
                                 if host.confirmCreated {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 } else  {
                                     let oldReferee = UserData.readReferee("referee")!
@@ -545,7 +545,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             } else {
                                 if UserData.getUserRole() == "host" {
                                     if gameCode.isEmpty {
-                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                         return
                                     } else {
                                         if storedGameCode != gameCode {
@@ -572,13 +572,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                                 performSegue(withIdentifier: "goToWait", sender: self)
                                             }
                                         } else {
-                                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                            alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                             return
                                         }
                                     }
                                 } else {
                                     if host.confirmCreated {
-                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                         return
                                     } else  {
                                         let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -663,12 +663,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                             performSegue(withIdentifier: "goToWait", sender: self)
                                         }
                                     } else {
-                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                         return
                                     }
                                 } else {
                                     if host.confirmCreated {
-                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                        alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                         return
                                     } else  {
                                         let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -756,12 +756,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                         performSegue(withIdentifier: "goToWait", sender: self)
                                     }
                                 } else {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 }
                             } else {
                                 if host.confirmCreated {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 } else  {
                                     let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -821,11 +821,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
-                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                 return
                             } else {
                                 if host.confirmCreated {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 } else  {
                                     if name.isEmpty {
@@ -934,12 +934,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                         performSegue(withIdentifier: "goToWait", sender: self)
                                     }
                                 } else {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 }
                             } else {
                                 if host.confirmCreated {
-                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You are not allowed to change your role.", comment: ""))
+                                    alert(title: NSLocalizedString("Woops!", comment: ""), message: NSLocalizedString("You cannot change roles while the game is in progress.", comment: ""))
                                     return
                                 } else  {
                                     let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)

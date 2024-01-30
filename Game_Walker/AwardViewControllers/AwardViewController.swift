@@ -427,7 +427,7 @@ class AwardViewController: UIViewController {
             label.text = NSLocalizedString("Host will\nreveal soon!", comment: "")
         }
         label.textAlignment = .center
-        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 20))
+        label.font = getFontForLanguage(font: "GemunuLibre-SemiBold", size: fontSize(size: 15))
         label.numberOfLines = 2
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
