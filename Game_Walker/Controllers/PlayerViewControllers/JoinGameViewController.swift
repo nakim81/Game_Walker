@@ -286,13 +286,8 @@ class JoinGameViewController: UIViewController {
     private func joinNewGameWithSavedUsername(_ savedGameCode: String, _ player: Player, _ uuid: String, _ gamecode:String, _ savedUserName: String) {
         Task { @MainActor in
             if let team = UserData.readTeam("team") {
-                do {
-                    try await T.leaveTeam(savedGameCode, team.name, player)
-                } catch GameWalkerError.serverError(let message) {
-                    print(message)
-                    serverAlert(message)
-                    return
-                }
+                print(team)
+                UserData.clearMyTeam("team")
             }
             P.removePlayer(savedGameCode, uuid)
             let newPlayer = Player(gamecode: gamecode, name: savedUserName)
@@ -370,13 +365,7 @@ class JoinGameViewController: UIViewController {
     private func transitionToNewGameWithNewUsername(_ savedGameCode: String, _ gamecode: String, _ player: Player, _ uuid: String, _ username: String ) {
         Task {@MainActor in
             if let team = UserData.readTeam("team") {
-                do {
-                    try await T.leaveTeam(savedGameCode, team.name, player)
-                } catch GameWalkerError.serverError(let message) {
-                    print(message)
-                    serverAlert(message)
-                    return
-                }
+                UserData.clearMyTeam("team")
             }
             P.removePlayer(savedGameCode, uuid)
             let newPlayer = Player(gamecode: gamecode, name: username)

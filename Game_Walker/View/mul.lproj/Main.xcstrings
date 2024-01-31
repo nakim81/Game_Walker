@@ -21,7 +21,7 @@
     },
     "8LZ-JG-2fJ.configuration.title" : {
       "comment" : "Class = \"UIButton\"; configuration.title = \"UserData Reset\"; ObjectID = \"8LZ-JG-2fJ\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -39,7 +39,7 @@
     },
     "8LZ-JG-2fJ.normalTitle" : {
       "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"8LZ-JG-2fJ\";",
-      "extractionState" : "extracted_with_value",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
