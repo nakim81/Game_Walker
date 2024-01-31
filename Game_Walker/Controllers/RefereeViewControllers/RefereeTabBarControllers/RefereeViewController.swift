@@ -116,7 +116,7 @@ class RefereePVEController: UIViewController {
                     loseButton.layer.backgroundColor = UIColor(red: 0.721, green: 0.721, blue: 0.721, alpha: 1).cgColor
                 }
             }
-            if host.algorithm != [] && host.teams == teams.count && host.gameStart {
+            if host.algorithm != [] && host.teams == teams.count && host.gameStart && !host.gameover {
                 setTeamOrder()
                 if pvp {
                     combineSubviewsPVP()
@@ -1010,7 +1010,7 @@ extension RefereePVEController {
             self.algorithm = convert1DArrayTo2D(host.algorithm)
             self.number = host.teams
         }
-        if !self.gameStart {
+        if !self.gameStart && !host.gameover {
             if host.gameStart {
                 setTeamOrder()
                 self.teamOrderSet = true

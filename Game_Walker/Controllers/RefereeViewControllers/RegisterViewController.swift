@@ -395,7 +395,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 if let gameCode = gamecodeTextField.text, let name = usernameTextField.text {
                     if gameCode.isEmpty && name.isEmpty {
                         if !storedGameCode.isEmpty && !storedRefereeName.isEmpty {
-                            print("A")
                             if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                                 do {
                                     host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -701,7 +700,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             return
                         }
                     } else if (gameCode != storedGameCode ) && (name.isEmpty || name == storedRefereeName) {
-                        print("E")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -790,7 +788,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                     } else if (gameCode.isEmpty || gameCode == storedGameCode ) && name != storedRefereeName {
-                        print("F")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
@@ -879,7 +876,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                     } else if gameCode != storedGameCode  && name != storedRefereeName {
-                        print("G")
                         if gamecodeTextField.text! == "" && gamecodeTextField.placeholder! != "" {
                             do {
                                 host = try await H.getHost(gamecodeTextField.placeholder!) ?? Host()
