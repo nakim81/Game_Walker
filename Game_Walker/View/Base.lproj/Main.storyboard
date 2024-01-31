@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQ3-DA-Yqf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQ3-DA-Yqf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -74,20 +74,6 @@
                                     <action selector="hostBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="An1-ks-cJP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LZ-JG-2fJ">
-                                <rect key="frame" x="84.5" y="759" width="245" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Gnc-d8-J4Z"/>
-                                    <constraint firstAttribute="width" constant="245" id="gXg-Qr-v71"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="UserData Reset">
-                                    <fontDescription key="titleFontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="36"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="testBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Csj-iv-5Nk"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -96,11 +82,9 @@
                             <constraint firstItem="fHc-CG-zIU" firstAttribute="top" secondItem="3tL-zp-Xl0" secondAttribute="bottom" constant="35" id="BEW-gn-VaO"/>
                             <constraint firstItem="h4J-RS-OY5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="H8A-i2-aq4"/>
                             <constraint firstItem="3tL-zp-Xl0" firstAttribute="top" secondItem="15D-kC-3Ti" secondAttribute="bottom" constant="35" id="Jdw-h1-RRg"/>
-                            <constraint firstItem="8LZ-JG-2fJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KrY-Oa-eAa"/>
                             <constraint firstItem="fHc-CG-zIU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WgB-44-q3t"/>
                             <constraint firstItem="15D-kC-3Ti" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="X1D-Ba-qoo"/>
                             <constraint firstItem="3tL-zp-Xl0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="h3d-Tx-N5z"/>
-                            <constraint firstItem="8LZ-JG-2fJ" firstAttribute="top" secondItem="fHc-CG-zIU" secondAttribute="bottom" constant="43" id="rLg-Tf-n6t"/>
                             <constraint firstItem="15D-kC-3Ti" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.935" id="tbW-Cp-MdQ"/>
                         </constraints>
                     </view>
@@ -110,7 +94,6 @@
                         <outlet property="hostButton" destination="fHc-CG-zIU" id="sBJ-NS-ad9"/>
                         <outlet property="playerButton" destination="15D-kC-3Ti" id="BXB-Kn-tkm"/>
                         <outlet property="refereeButton" destination="3tL-zp-Xl0" id="UZh-MX-wAI"/>
-                        <outlet property="testBtn" destination="8LZ-JG-2fJ" id="nvc-7p-xHg"/>
                         <segue destination="4v7-Xy-ueZ" kind="show" identifier="goToPlayer" id="2Dv-lL-Xdg"/>
                         <segue destination="277-9Q-Dbb" kind="show" identifier="goToReferee" id="sNu-HP-ufo"/>
                         <segue destination="GeJ-fL-EuW" kind="show" identifier="goToHost" id="AR9-Cf-Gz1"/>

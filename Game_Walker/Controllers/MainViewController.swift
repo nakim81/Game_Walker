@@ -19,7 +19,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var refereeButton: UIButton!
     @IBOutlet weak var hostButton: UIButton!
-    @IBOutlet weak var testBtn: UIButton!
     
     private let audioPlayerManager = AudioPlayerManager()
     private var soundEnabled : Bool = UserData.getUserSoundPreference() ?? true
@@ -76,11 +75,6 @@ class MainViewController: UIViewController {
         if let originalFont = hostButton.titleLabel?.font {
             hostButton.titleLabel?.font = getFontForLanguage(font: originalFont.fontName, size: originalFont.pointSize)
         }
-
-        
-        testBtn.layer.cornerRadius = 10
-        testBtn.layer.borderWidth = 3
-        testBtn.layer.borderColor = UIColor.systemBlue.cgColor
     }
         
     
@@ -98,17 +92,7 @@ class MainViewController: UIViewController {
         self.audioPlayerManager.playAudioFile(named: "purple", withExtension: "wav")
         performSegue(withIdentifier: "goToHost", sender: self)
     }
-    
-    @IBAction func testBtnPressed(_ sender: UIButton) {
-        UserDefaults.standard.removeObject(forKey: "gamecode")
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.removeObject(forKey: "referee")
-        UserDefaults.standard.removeObject(forKey: "player")
-        UserDefaults.standard.removeObject(forKey: "team")
-        UserDefaults.standard.removeObject(forKey: "standardstyle")
-        UserData.writeUUID(UUID().uuidString)
-    }
-    
+
     private func configureNavButtons() {
         let infoImage = UIImage(named: "infoIcon")
         let infoBtn = UIButton()
