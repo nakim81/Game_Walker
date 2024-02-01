@@ -6,6 +6,8 @@ Welcome to **Game Walker** - Your Ultimate Gaming Companion!
 
 Game Walker is a powerful application designed to enhance and streamline your gaming experience. Whether you're organizing church retreats, company workshops, youth groups, or any other event involving games, **Game Walker** has got you covered. This app offers a user-friendly interface with features tailored for players, referees, and hosts.
 
+<br>
+
 ## Features:
 
 ### For Players:
@@ -21,6 +23,8 @@ Game Walker is a powerful application designed to enhance and streamline your ga
 
 - **Organize the Entire Event:** Take control of the entire gaming event, from managing teams to overseeing different games and ensuring a smooth flow.
 - **Customizable Matchmaking:** Tailor the matchmaking process according to your event's requirements, saving time and ensuring a well-organized experience.
+
+<br>
 
 ## Getting Started:
 
@@ -38,6 +42,8 @@ Game Walker is a powerful application designed to enhance and streamline your ga
 
 5. **Host Instructions:**
    - Organize the entire event with customizable matchmaking, ensuring a memorable and well-coordinated gaming experience.
+  
+<br>
 
 ## Why **Game Walker**?
 
@@ -45,11 +51,31 @@ Game Walker is a powerful application designed to enhance and streamline your ga
 - **Real-Time Updates:** Stay informed with real-time updates on game progress, ensuring timely decisions and a dynamic gaming environment.
 - **Ideal for Various Events:** Whether it's a church retreat, company workshop, or youth group gathering, **Game Walker** is your ideal companion.
 
+<br>
+
 ## Let the Games with **Game Walker** Begin!
 
 Experience the next level of gaming organization and enjoyment with **Game Walker**. Download now and make your events unforgettable!
+
+<br>
+
+## Tech Stack
+
+| <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/swift-original-wordmark.svg" alt="Swift" height="50" /> | <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/firebase.png" alt="Firebase" height="50" /> | <img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg" alt="Git" height="50" /> |
+| :---: | :---: | :---: |
+| Swift | Firebase | Github |
+
+<br>
+
+## Team Introduction
+
+| <image src="https://avatars.githubusercontent.com/u/32149852?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/101173292?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/67286328?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/67381123?v=4" width="100px" height="100px"> |  |
+| :---: | :---: | :---: | :---: | :---: |
+| [Sungjin Yi](https://github.com/ipaule) <br>iOS Developer | [Noah Kim](https://github.com/nakim81) <br>iOS Developer | [Jin Kim](https://github.com/charJin) <br>iOS Developer | [Hyunsik Kim](https://github.com/Hyunsik-kim-44) <br>iOS Developer | Claire Kang <br>Designer |
  
  ___
+
+<br>
 
 ## Privacy Policy
 
