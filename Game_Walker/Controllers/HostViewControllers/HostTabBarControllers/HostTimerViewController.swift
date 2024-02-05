@@ -54,7 +54,6 @@ class HostTimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
-        configureRefreshButton()
         Task {
             UserDefaults.standard.set(false, forKey: "readyKey")
             titleLabel.textColor = UIColor(red: 0.176, green: 0.176, blue: 0.208 , alpha: 1)
@@ -67,14 +66,26 @@ class HostTimerViewController: UIViewController {
                     ready = true
                 }
                 if UserData.isStandardStyle() {
+                    configureRefreshButton()
                     configureTimerLabel()
                 } else {
                     pauseOrPlayButton.isHidden = true
+                    let label = UILabel()
+                    label.text = NSLocalizedString("There is no Timer in points only mode.", comment: "")
+                    label.textAlignment = .center
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    label.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 25))
+                    label.textColor = .black
+                    label.numberOfLines = 1
+                    label.translatesAutoresizingMaskIntoConstraints = false
                     endGameBtn.titleLabel?.font = getFontForLanguage(font: "GemunuLibre-Bold", size: fontSize(size: 20))
                     endGameBtn.backgroundColor = UIColor(red: 1, green: 0.05, blue: 0.05, alpha: 1)
                     endGameBtn.layer.cornerRadius = 6
+                    self.view.addSubview(label)
                     NSLayoutConstraint.activate([
                         titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.076),
+                        label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                        label.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.2),
                         endGameBtn.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.506)
                     ])
                 }
@@ -160,6 +171,10 @@ class HostTimerViewController: UIViewController {
         self.round = host.currentRound
         self.gameStart = host.gameStart
         self.gameOver = host.gameover
+    }
+    
+    func configureNoTimerLabel() {
+        
     }
     
     
@@ -504,7 +519,9 @@ extension HostTimerViewController {
     }
     
     @objc override func infoAction() {
-        showOverlay()
+        if UserData.isStandardStyle() {
+            showOverlay()
+        }
     }
     
     @objc func updateTeamsInfo(notification: Notification) {

@@ -116,7 +116,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                                 return
                             } else {
                                 let oldReferee = UserData.readReferee("referee")!
@@ -157,7 +157,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             let oldReferee = UserData.readReferee("referee")!
@@ -195,7 +195,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                                 return
                             } else {
 
@@ -253,7 +253,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: storedRefereeName, stationName: "", assigned: false)
@@ -306,7 +306,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             let oldReferee = UserData.readReferee("referee")!
@@ -360,7 +360,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             let newReferee = Referee(uuid: refereeUserID, gamecode: gameCode, name: name, stationName: "", assigned: false)
@@ -421,7 +421,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                                 return
                             } else {
                                 if UserData.getUserRole() == "host" {
@@ -488,7 +488,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
@@ -539,7 +539,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                                 return
                             } else {
                                 if UserData.getUserRole() == "host" {
@@ -634,7 +634,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                             if host.standardStyle == false {
-                                alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                                alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                                 return
                             } else {
                                 if UserData.getUserRole() == "host" {
@@ -726,7 +726,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
@@ -814,7 +814,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
@@ -902,7 +902,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                         if host.standardStyle == false {
-                            alert(title: NSLocalizedString("Point Style", comment: ""), message: NSLocalizedString("There is no Referee in point style.", comment: ""))
+                            alert(title: NSLocalizedString("Points Only Mode", comment: ""), message: NSLocalizedString("There is no Referee in points only mode.", comment: ""))
                             return
                         } else {
                             if UserData.getUserRole() == "host" {
