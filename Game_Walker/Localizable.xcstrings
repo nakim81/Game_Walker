@@ -1566,7 +1566,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "점수 방식 모드에는 심판이 없습니다."
+            "value" : "포인트 모드에는 심판이 없습니다."
           }
         }
       }
@@ -1577,6 +1577,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "아직 팀 생성 중입니다."
+          }
+        }
+      }
+    },
+    "There is no Timer in points only mode." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "포인트 모드에는 타이머가 없습니다."
           }
         }
       }
