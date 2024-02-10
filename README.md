@@ -2,7 +2,7 @@
 
 Welcome to **Game Walker** - Your Ultimate Gaming Companion!
 <br>
-Click this [link](https://apps.apple.com/kr/app/game-walker/id6476948969) to download!
+Click [here](https://apps.apple.com/kr/app/game-walker/id6476948969) to download!
 
 ## Overview:
 
