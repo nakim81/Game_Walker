@@ -1,3 +1,5 @@
+<image src="images/BannerImage.jpg" width="1100px" height="180px">
+
 # Game Walker
 
 Welcome to **Game Walker** - Your Ultimate Gaming Companion!
