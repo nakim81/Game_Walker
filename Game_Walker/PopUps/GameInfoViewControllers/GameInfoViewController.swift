@@ -147,18 +147,19 @@ class GameInfoViewController: UIViewController {
         return label
     }()
     
-    private lazy var gameRuleLabel1: UILabel = {
-        let label = UILabel()
-        label.text = self.gameRule
-        label.backgroundColor = .clear
-        label.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-        label.layer.borderWidth = 3
-        label.layer.cornerRadius = 10
-        label.textAlignment = .center
-        label.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 20))
-        label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        label.numberOfLines = .max
-        return label
+    private lazy var gameRuleTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = self.gameRule
+        textView.backgroundColor = .clear
+        textView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+        textView.layer.borderWidth = 3
+        textView.layer.cornerRadius = 10
+        textView.textAlignment = .center
+        textView.font = UIFont(name: "Dosis-Regular", size: fontSize(size: 18))
+        textView.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        textView.isScrollEnabled = true
+        textView.isEditable = false
+        return textView
     }()
     
     private lazy var buttonView: UIView = {
@@ -247,7 +248,7 @@ class GameInfoViewController: UIViewController {
         containerView.addSubview(refereeNameLabel)
         containerView.addSubview(refereeNameLabel1)
         containerView.addSubview(gameRuleLabel)
-        containerView.addSubview(gameRuleLabel1)
+        containerView.addSubview(gameRuleTextView)
         containerView.addSubview(buttonView)
         self.view.backgroundColor = .black.withAlphaComponent(0.2)
     }
@@ -264,7 +265,7 @@ class GameInfoViewController: UIViewController {
         refereeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         refereeNameLabel1.translatesAutoresizingMaskIntoConstraints = false
         gameRuleLabel.translatesAutoresizingMaskIntoConstraints = false
-        gameRuleLabel1.translatesAutoresizingMaskIntoConstraints = false
+        gameRuleTextView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -323,10 +324,10 @@ class GameInfoViewController: UIViewController {
             gameRuleLabel.heightAnchor.constraint(equalTo: gameRuleLabel.widthAnchor, multiplier: 0.5),
             gameRuleLabel.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
-            gameRuleLabel1.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
-            gameRuleLabel1.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor),
-            gameRuleLabel1.heightAnchor.constraint(equalTo: gameRuleLabel1.widthAnchor, multiplier: 0.25),
-            gameRuleLabel1.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
+            gameRuleTextView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.82),
+            gameRuleTextView.topAnchor.constraint(equalTo: gameRuleLabel.bottomAnchor),
+            gameRuleTextView.heightAnchor.constraint(equalTo: gameRuleTextView.widthAnchor, multiplier: 0.33),
+            gameRuleTextView.leadingAnchor.constraint(equalTo: gameNameLabel1.leadingAnchor),
             
             buttonView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.3876923077),
             buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.3253968254),
