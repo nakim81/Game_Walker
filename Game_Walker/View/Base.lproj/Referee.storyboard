@@ -43,24 +43,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-A0-pld">
-                                <rect key="frame" x="53.666666666666657" y="151.99999999999997" width="322.66666666666674" height="433.33333333333326"/>
+                                <rect key="frame" x="53.666666666666657" y="181.33333333333334" width="322.66666666666674" height="388.66666666666663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXG-KM-GNL">
-                                        <rect key="frame" x="0.0" y="0.0" width="322.66666666666669" height="212.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="322.66666666666669" height="190.33333333333334"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjd-te-ado" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="70.999999999999986" y="4.3333333333333464" width="180.66666666666663" height="55.333333333333343"/>
+                                                <rect key="frame" x="56.666666666666671" y="3.6666666666666572" width="209.33333333333331" height="49.666666666666664"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="gamecode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OgJ-vk-kS2">
-                                                <rect key="frame" x="35.000000000000014" y="59.66666666666665" width="252.66666666666669" height="89.333333333333314"/>
+                                                <rect key="frame" x="35.000000000000014" y="53.333333333333321" width="252.66666666666669" height="79.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="※ Game Code will be provided by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-0k-oAn" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="35.000000000000014" y="157" width="252.66666666666669" height="17"/>
+                                                <rect key="frame" x="35.000000000000014" y="140.99999999999997" width="252.66666666666669" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="vB5-KN-MhC"/>
                                                 </constraints>
@@ -73,7 +73,7 @@
                                         <constraints>
                                             <constraint firstItem="OgJ-vk-kS2" firstAttribute="width" secondItem="JXG-KM-GNL" secondAttribute="width" multiplier="0.784219" id="DmY-UM-wkD"/>
                                             <constraint firstItem="Jjd-te-ado" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="Dnu-7d-1Xg"/>
-                                            <constraint firstItem="Jjd-te-ado" firstAttribute="width" secondItem="JXG-KM-GNL" secondAttribute="width" multiplier="0.56" id="R9H-jo-4mb"/>
+                                            <constraint firstItem="Jjd-te-ado" firstAttribute="width" secondItem="JXG-KM-GNL" secondAttribute="width" multiplier="0.65" id="R9H-jo-4mb"/>
                                             <constraint firstItem="Jjd-te-ado" firstAttribute="centerY" secondItem="JXG-KM-GNL" secondAttribute="centerY" multiplier="0.3" id="RGf-Yz-I00"/>
                                             <constraint firstItem="eNX-0k-oAn" firstAttribute="centerX" secondItem="JXG-KM-GNL" secondAttribute="centerX" id="afj-fp-Xod"/>
                                             <constraint firstItem="OgJ-vk-kS2" firstAttribute="top" secondItem="Jjd-te-ado" secondAttribute="bottom" id="e31-5K-Ye4"/>
@@ -85,16 +85,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU8-ER-OXw">
-                                        <rect key="frame" x="0.0" y="220.66666666666669" width="322.66666666666669" height="212.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="198.33333333333331" width="322.66666666666669" height="190.33333333333331"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpM-Jf-UvV" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="70.999999999999986" y="36.333333333333314" width="180.66666666666663" height="55.333333333333343"/>
+                                                <rect key="frame" x="70.999999999999986" y="32.333333333333314" width="180.66666666666663" height="49.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL6-IT-kne">
-                                                <rect key="frame" x="35.000000000000014" y="91.666666666666629" width="252.66666666666669" height="89.333333333333314"/>
+                                                <rect key="frame" x="35.000000000000014" y="81.666666666666629" width="252.66666666666669" height="80"/>
                                                 <fontDescription key="fontDescription" name="Dosis-Regular" family="Dosis" pointSize="36"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -120,7 +120,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3c-FJ-oOM" customClass="LocalizedFontButton" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="124.66666666666667" y="719" width="180.66666666666663" height="64.666666666666629"/>
+                                <rect key="frame" x="124.66666666666667" y="736.33333333333337" width="180.66666666666663" height="58"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-Bold" family="Gemunu Libre" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="JOIN">
@@ -339,8 +339,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qww-74-glH"/>
-        <segue reference="nu7-bb-fST"/>
-        <segue reference="s6S-2S-uEn"/>
+        <segue reference="ylf-AR-8el"/>
         <segue reference="KeI-Qk-QLQ"/>
     </inferredMetricsTieBreakers>
     <resources>

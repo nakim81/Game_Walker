@@ -146,7 +146,7 @@ class GivePointsController: UIViewController {
             containerView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             
-            givePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.620),
+            givePointsLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.680),
             givePointsLabel.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.13),
             givePointsLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             givePointsLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25/812 * UIScreen.main.bounds.size.height),

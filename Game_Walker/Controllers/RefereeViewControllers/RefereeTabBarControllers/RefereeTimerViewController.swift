@@ -251,8 +251,8 @@ class RefereeTimerViewController: UIViewController {
             
             totalTimeLabel.centerXAnchor.constraint(equalTo: timerCircle.layoutMarginsGuide.centerXAnchor),
             totalTimeLabel.topAnchor.constraint(equalTo: self.roundLabel.bottomAnchor, constant: UIScreen.main.bounds.height * 0.01),
-            totalTimeLabel.widthAnchor.constraint(equalTo: timerCircle.widthAnchor, multiplier: 0.53),
-            totalTimeLabel.heightAnchor.constraint(equalTo: timerCircle.heightAnchor, multiplier: 0.27),
+            totalTimeLabel.widthAnchor.constraint(equalTo: timerCircle.widthAnchor, multiplier: 0.65),
+            totalTimeLabel.heightAnchor.constraint(equalTo: timerCircle.heightAnchor, multiplier: 0.35),
             
             currentStationInfoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             currentStationInfoButton.topAnchor.constraint(equalTo: timerCircle.bottomAnchor, constant: UIScreen.main.bounds.size.height * 0.05),
