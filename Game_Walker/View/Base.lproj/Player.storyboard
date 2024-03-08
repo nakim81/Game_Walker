@@ -53,7 +53,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="321" height="199.66666666666666"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-L2-JQI" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                                <rect key="frame" x="70.333333333333343" y="5" width="180" height="50"/>
+                                                <rect key="frame" x="56.000000000000014" y="5" width="208.66666666666669" height="50"/>
                                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="40"/>
                                                 <color key="textColor" red="0.17599999999999999" green="0.17599999999999999" blue="0.20799999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                                             <constraint firstItem="b0T-xa-Ha7" firstAttribute="height" secondItem="lM5-Jl-jSM" secondAttribute="height" multiplier="0.42" id="Ik6-Kf-S6z"/>
                                             <constraint firstItem="s9S-L2-JQI" firstAttribute="height" secondItem="lM5-Jl-jSM" secondAttribute="height" multiplier="0.25" id="JDx-5H-6v4"/>
                                             <constraint firstItem="b0T-xa-Ha7" firstAttribute="top" secondItem="s9S-L2-JQI" secondAttribute="bottom" id="Qo8-7O-8Mx"/>
-                                            <constraint firstItem="s9S-L2-JQI" firstAttribute="width" secondItem="lM5-Jl-jSM" secondAttribute="width" multiplier="0.56" id="U5o-iy-FYt"/>
+                                            <constraint firstItem="s9S-L2-JQI" firstAttribute="width" secondItem="lM5-Jl-jSM" secondAttribute="width" multiplier="0.65" id="U5o-iy-FYt"/>
                                             <constraint firstItem="mM6-Pv-lZC" firstAttribute="width" secondItem="b0T-xa-Ha7" secondAttribute="width" id="Wcg-KE-os1"/>
                                             <constraint firstItem="s9S-L2-JQI" firstAttribute="centerY" secondItem="lM5-Jl-jSM" secondAttribute="centerY" multiplier="0.3" id="fgE-ND-gu6"/>
                                             <constraint firstItem="mM6-Pv-lZC" firstAttribute="centerX" secondItem="lM5-Jl-jSM" secondAttribute="centerX" id="ia7-82-hXb"/>
@@ -233,7 +233,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-IQ-mef" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="141.33333333333331" y="116.99999999999999" width="145.33333333333331" height="43.333333333333329"/>
+                                <rect key="frame" x="117.66666666666667" y="116.99999999999999" width="192.66666666666663" height="43.333333333333329"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -244,7 +244,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-Ph-z0G" customClass="LocalizedFontLabel" customModule="Game_Walker" customModuleProvider="target">
-                                <rect key="frame" x="128.33333333333331" y="271.66666666666669" width="171.33333333333331" height="43.333333333333314"/>
+                                <rect key="frame" x="117.66666666666667" y="271.66666666666669" width="192.66666666666663" height="43.333333333333314"/>
                                 <fontDescription key="fontDescription" name="GemunuLibre-SemiBold" family="Gemunu Libre" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -300,7 +300,7 @@
                             <constraint firstItem="lOP-IQ-mef" firstAttribute="centerY" secondItem="wCW-Pj-Rj4" secondAttribute="centerY" multiplier="0.32" id="6pQ-dC-0Xe"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="centerX" secondItem="wCW-Pj-Rj4" secondAttribute="centerX" id="78j-PS-xu0"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.595" id="9p5-hg-lQY"/>
-                            <constraint firstItem="PcH-Ph-z0G" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.4" id="9sh-ht-zZD"/>
+                            <constraint firstItem="PcH-Ph-z0G" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.45" id="9sh-ht-zZD"/>
                             <constraint firstItem="hLd-VR-hmI" firstAttribute="top" secondItem="PcH-Ph-z0G" secondAttribute="bottom" id="A6F-Ey-Hnf"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.065" id="BqX-xH-Nck"/>
                             <constraint firstItem="hLd-VR-hmI" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.595" id="ChI-TN-gs8"/>
@@ -319,7 +319,7 @@
                             <constraint firstItem="jdC-AO-KSw" firstAttribute="top" secondItem="hLd-VR-hmI" secondAttribute="bottom" constant="45" id="qlw-ey-alR"/>
                             <constraint firstItem="PcH-Ph-z0G" firstAttribute="height" secondItem="wCW-Pj-Rj4" secondAttribute="height" multiplier="0.05" id="uGg-r1-kvx"/>
                             <constraint firstItem="aTU-Td-471" firstAttribute="leading" secondItem="jdC-AO-KSw" secondAttribute="leading" id="xqX-UP-J8f"/>
-                            <constraint firstItem="lOP-IQ-mef" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.34" id="zEJ-1x-sM1"/>
+                            <constraint firstItem="lOP-IQ-mef" firstAttribute="width" secondItem="wCW-Pj-Rj4" secondAttribute="width" multiplier="0.45" id="zEJ-1x-sM1"/>
                             <constraint firstItem="eq1-L3-5lr" firstAttribute="top" secondItem="lOP-IQ-mef" secondAttribute="bottom" id="zGl-zx-DZ7"/>
                         </constraints>
                     </view>
@@ -642,7 +642,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="NyH-V6-DS8"/>
-        <segue reference="qEi-jd-It5"/>
+        <segue reference="29y-2J-Hks"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MemberButton" width="76" height="76"/>
