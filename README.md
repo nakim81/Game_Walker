@@ -73,9 +73,9 @@ Experience the next level of gaming organization and enjoyment with **Game Walke
 
 ## Team Introduction
 
-| <image src="https://avatars.githubusercontent.com/u/32149852?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/101173292?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/67286328?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/67381123?v=4" width="100px" height="100px"> |  |
+| <image src="https://avatars.githubusercontent.com/u/67381123?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/67286328?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/101173292?v=4" width="100px" height="100px"> | <image src="https://avatars.githubusercontent.com/u/32149852?v=4" width="100px" height="100px"> |  |
 | :---: | :---: | :---: | :---: | :---: |
-| [Sungjin Yi](https://github.com/ipaule) <br>iOS Developer | [Noah Kim](https://github.com/nakim81) <br>iOS Developer | [Jin Kim](https://github.com/charJin) <br>iOS Developer | [Hyunsik Kim](https://github.com/Hyunsik-kim-44) <br>iOS Developer | Claire Kang <br>Designer |
+| [Hyunsik Kim](https://github.com/Hyunsik-kim-44) <br>iOS Developer | [Jin Kim](https://github.com/charJin) <br>iOS Developer | [Noah Kim](https://github.com/nakim81) <br>iOS Developer | [Sungjin Yi](https://github.com/ipaule) <br>iOS Developer | Claire Kang <br>Designer |
  
  ___
 
